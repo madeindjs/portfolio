@@ -1,0 +1,9 @@
+---
+layout: main
+---
+{% for post in site.posts %}
+  <div class="col-xs-12">
+    <h2>{{ post.title }}</h2>
+    <p class="text-justify">{{ post.excerpt }}</p>
+  </div>
+{% endfor %}
