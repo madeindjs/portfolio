@@ -2,23 +2,10 @@
 <html lang="fr_FR">
   {% include head.html %}
   <body>
-  <div class="container">
-    {{ content }}
+    <div class="container">
+      {{ content }}
+      {% include footer.html %}
+    </div>
     {% include footer.html %}
-    
-  </div>
-    
-    
-    <!-- /.banner -->
-    <!-- Footer -->
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/10.0.1/lazyload.min.js"></script>
-    <script src="js/smooth-scrolling.js"></script>
-    <script src="js/piwik.js"></script>
-    <script type="text/javascript">
-      var myLazyLoad = new LazyLoad();
-    </script>
   </body>
 </html>

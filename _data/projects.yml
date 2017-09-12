@@ -1,5 +1,35 @@
 - name: Raspberry Cook
   description: Un site de partage de recette de cuisine
+  website: http://raspberry-cook.fr
+  github: https://github.com/RaspberryCook/website
+  picture: img/projects/raspberry-cook.png
+  tags:
+    - Ruby on Rails
+    - JQuery
+    - Bootstrap
+
 - name: Fooder
   description: Un CMS pour les restaurants
+  website: http://fooder.pro
+  github: https://github.com/madeindjs/fooder
+  picture: img/projects/fooder.png
+  tags:
+    - Ruby on Rails
+    - JQuery
+    - Bootstrap
+
+- name: Nature Coiffure Martine
+  description: Site vitrine pour un salon de coiffure
+  website: http://nature-coiffure-lyon.fr
+  github: https://github.com/madeindjs/nature_coiffure
+  picture: img/projects/nature-coiffure.png
+  tags:
+    - Ruby
+    - Jekyll
+
 - name: Cristagiri
+  description: Parseur HTML open-source compilé
+  github: https://github.com/madeindjs/Crystagiri
+  picture: img/projects/html.jpg
+  tags:
+    - Crystal
