@@ -1,8 +1,15 @@
 <footer>
-  <div class="container text-muted">
-    <address>
-      <strong>Twitter, Inc.</strong> 1355 Market St, Suite 900 San Francisco, CA 94103 <abbr title="Phone">P:</abbr> (123) 456-7890
-    </address>
-    <p class="copyright small">Copyright © Rousseau Alexandre 2017. All Rights Reserved</p>
-  </div>
+	<div class="container text-muted text-center">
+		<address>
+			<strong>{{ site.data.profil.firstname }} {{ site.data.profil.lastname }}</strong><br/>
+			{{ site.data.profil.address }}
+		</address>
+		<ul class="list-inline">
+			<li class="list-inline-item"><a href="{{site.data.profil.phone}}"><img src="img/ionicons/ios-telephone.svg" height="50" /></a></li>
+			<li class="list-inline-item"><a href="{{site.data.profil.email}}"><img src="img/ionicons/email.svg" height="50" /></a></li>
+			<li class="list-inline-item"><a href="{{site.data.profil.linkedin}}"><img src="img/ionicons/social-linkedin.svg" height="50" /></a></li>
+			<li class="list-inline-item"><a href="{{site.data.profil.github}}"><img src="img/ionicons/social-github.svg" height="50" /></a></li>
+		</ul>
+		<p class="row copyright small">Copyright © Rousseau Alexandre 2017. All Rights Reserved</p>
+	</div>
 </footer>
