@@ -2,13 +2,10 @@
 <html lang="fr_FR">
   {% include head.html %}
   <body>
+	{% include navbar.html %}
     <div class="container">
-    	<header class="header clearfix">
-    		
-      		{% include navbar.html %}
-    	</header>
       {{ content }}
-      {% include footer.html %}
     </div>
+  	{% include footer.html %}
   </body>
 </html>
