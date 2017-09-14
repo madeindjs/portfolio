@@ -1,16 +1,23 @@
 ---
 layout: main
 ---
-
 <div class="row">
 	<div class="col">
-		<p class="lead">Proident eu sed ex consectetur exercitation deserunt minim nisi consectetur deserunt consectetur ut pariatur in irure minim enim veniam proident minim amet in irure qui qui quis ut proident ad ut esse duis ea.</p>
+		
+		<h1>Rousseau Alexandre</h1>
+		<ul class="nav nav-fill">
+			{% include nav-items.html %}
+		</ul>
 	</div>
 </div>
-
+<div class="row">
+	<div class="col">
+		<p class="lead">{{ site.data.profil.description.multiline }}</p>
+	</div>
+</div>
 <div class="row">
 	<div class="col">
 		<h2>Mes projets</h2>
-    	{% include projects.html %}
+		{% include projects.html %}
 	</div>
 </div>

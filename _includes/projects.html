@@ -1,9 +1,9 @@
 <div class="row">
   {% for project in site.data.projects %}
     <div class="col-xs-12 col-sm-6 col-lg-8">
-      <div class="pb-3">
+      <div class="pb-3 pt-3">
         
-        <h4><a href="{{ project.website }}">{{ project.name }}</a></h4>
+        <h3><a href="{{ project.website }}">{{ project.name }}</a></h3>
         <p>
           {% for tag in project.tags %}
             <span class="badge badge-secondary">{{ tag }}</span>
@@ -11,12 +11,27 @@
         </p>
         <p>{{ project.description }}</p>
         {% if project.github %}
-          <a href="{{ project.github }}" class="btn btn-primary">code source</a>
+          <a href="{{ project.github }}" class="btn btn-secondary">code source</a>
         {% endif %}
       </div>
     </div>
     <div class="col-xs-12 col-sm-6 col-lg-4">
-      <img class="img-fluid" src="{{ project.picture }}" alt="Card image cap">
+      <div class="pb-3 pt-3">
+        <img class="img-fluid" src="{{ project.picture }}" alt="Card image cap">
+      </div>
     </div>
+    <!-- <div class="col p-0">
+      
+      <div class="card">
+        <img class="card-img-top" src="{{ project.picture }}" alt="Card image cap">
+        <div class="card-body">
+          <h4 class="card-title"><a href="{{ project.website }}">{{ project.name }}</a></h4>
+          <p class="card-text">{{ project.description }}</p>
+          {% if project.github %}
+            <a href="{{ project.github }}" class="btn btn-secondary">code source</a>
+          {% endif %}
+        </div>
+      </div>
+    </div> -->
   {% endfor %}
 </div>
