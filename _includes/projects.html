@@ -1,31 +1,22 @@
 <div class="row">
   {% for project in site.data.projects %}
-      <div class="card" style="width: 300px">
-        <div class="card-body">
-          <!-- picture -->
-          {% if project.picture %}
-            <img class="card-img-bottom" src="{{ project.picture }}" alt="Card image cap">
-          {% else %}
-            <!-- <img class="card-img-bottom" src="http://lorempixel.com/400/200/technics" alt="Card image cap"> -->
-          {% endif %}
-          <!-- title -->
-          <h4 class="card-title">{{ project.name }}</h4>
-          <!-- tags -->
-          <p class="card-text">
-            {% for tag in project.tags %}
-              <span class="badge badge-secondary">{{ tag }}</span>
-            {% endfor %}
-          </p>
-          <!-- description -->
-          <p class="card-text">{{ project.description }}</p>
-          {% if project.github %}
-            <a href="{{ project.github }}" class="btn btn-default">code source</a>
-          {% endif %}
-          <!-- links -->
-          {% if project.website %}
-            <a href="{{ project.website }}" class="btn btn-primary">voir le site</a>
-          {% endif %}
-        </div>
+    <div class="col-xs-12 col-sm-6 col-lg-8">
+      <div class="pb-3">
+        
+        <h4><a href="{{ project.website }}">{{ project.name }}</a></h4>
+        <p>
+          {% for tag in project.tags %}
+            <span class="badge badge-secondary">{{ tag }}</span>
+          {% endfor %}
+        </p>
+        <p>{{ project.description }}</p>
+        {% if project.github %}
+          <a href="{{ project.github }}" class="btn btn-primary">code source</a>
+        {% endif %}
       </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-lg-4">
+      <img class="img-fluid" src="{{ project.picture }}" alt="Card image cap">
+    </div>
   {% endfor %}
 </div>
