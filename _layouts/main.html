@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr_FR">
-  {% include head.html %}
-  <body>
-    <div container>
-		{% include navbar.html %}
-      	{{ content }}
-  		{% include footer.html %}
-    </div>
-  </body>
+	{% include head.html %}
+	<body container>
+		<div grid>
+			<div column>
+				<h1><a href="/">{{ site.title }}</a></h1>
+				<p>{{site.data.profil.description.oneline}}</p>
+			</div>
+			<div column>
+				<ul>
+					<li><a href="/resume">Résumé</a></li>
+					<li><a href="/blog">Blog</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		{{ content }}
+		<footer grid>
+			<div column>
+				<address>
+					<strong>{{ site.data.profil.firstname }} {{ site.data.profil.lastname }}</strong><br/>
+					{{ site.data.profil.address }}
+				</address>
+			</div>
+		</footer>
+		<div grid>
+			<div column>
+				<ul>
+					<li class="_inline"><a href="{{site.data.profil.phone}}">{{site.data.profil.phone}}</a></li>
+					<li class="_inline"><a href="{{site.data.profil.email}}">{{site.data.profil.email}}</a></li>
+					<li class="_inline"><a href="{{site.data.profil.linkedin}}">Linkedin</a></li>
+					<li class="_inline"><a href="{{site.data.profil.github}}">Github</a></li>
+				</ul>
+			</div>
+		</div>
+		<p class="row copyright small">Copyright © Rousseau Alexandre 2017. All Rights Reserved</p>
+	</body>
 </html>
