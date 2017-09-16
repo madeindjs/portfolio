@@ -2,4 +2,6 @@
 # this ensures Jekyll reads the file to be transformed into CSS later
 # only Main files contain this front matter, not partials.
 ---
-@import "concise";
+@import "concise.css/concise";
+@import "concise-utils/concise-utils";
+@import 'concise-ui/concise-ui';

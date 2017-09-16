@@ -23,7 +23,7 @@ github_username:  madeindjs
 sass:
   # loading path from site root
   # default to _sass
-  sass_dir: /home/arousseau/dev/html/portfolio/node_modules/concise.css/
+  sass_dir: node_modules
 
 # Build settings
 # markdown: kramdown
