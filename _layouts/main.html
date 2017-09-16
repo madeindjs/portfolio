@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr_FR">
 	{% include head.html %}
-	<body container>
-		<div grid>
+	<body>
+		<header grid>
 			<div column>
 				<h1><a href="/">{{ site.title }}</a></h1>
 				<p>{{site.data.profil.description.oneline}}</p>
@@ -14,8 +14,10 @@
 					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</div>
+		</header>
+		<div container>
+			{{ content }}
 		</div>
-		{{ content }}
 		<footer grid>
 			<div column>
 				<address>
@@ -35,5 +37,7 @@
 			</div>
 		</div>
 		<p class="row copyright small">Copyright © Rousseau Alexandre 2017. All Rights Reserved</p>
+		<script src="js/smooth-scrolling.js"></script>
+		<script src="js/piwik.js"></script>
 	</body>
 </html>
