@@ -1,5 +1,5 @@
 - name: Raspberry Cook
-  description: Un site de partage de recette de cuisine
+  description: Application web de stockage / partage de recettes de cuisine auto-hébergé sur un Raspberry Pi
   website: http://raspberry-cook.fr
   github: https://github.com/RaspberryCook/website
   picture: img/projects/raspberry-cook.png
@@ -9,10 +9,9 @@
     - Bootstrap
 
 - name: Fooder
-  description: Un CMS pour les restaurants
+  description: Application web pour créer un site web dynamique à destination des restaurateurs.
   website: http://fooder.pro
   github: https://github.com/madeindjs/fooder
-  picture: img/projects/fooder.png
   tags:
     - Ruby on Rails
     - JQuery
@@ -22,14 +21,20 @@
   description: Site vitrine pour un salon de coiffure
   website: http://nature-coiffure-lyon.fr
   github: https://github.com/madeindjs/nature_coiffure
-  picture: img/projects/nature-coiffure.png
   tags:
     - Ruby
     - Jekyll
 
 - name: Cristagiri
-  description: Parseur HTML open-source compilé
+  description: Bibliothèque pour parser des documents HTML avec le langage compilé Crystal
   github: https://github.com/madeindjs/Crystagiri
-  picture: img/projects/html.jpg
   tags:
     - Crystal
+
+- name: Super-Markdown
+  description: Utilitaire Python pour convertir des fichiers Markdown en documents HTML tout-en-un. 
+  github: https://github.com/madeindjs/Super-Markdown
+  tags:
+    - Python
+
+    

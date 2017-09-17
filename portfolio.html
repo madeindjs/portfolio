@@ -1,0 +1,28 @@
+---
+layout: main
+---
+<div class="row">
+	<div class="col">
+		<h2>Portfolio</h2>
+		<p class="lead text-justify">J'aime apprendre de nouvelle technologies et mes projets personnels sont en quelque sortes mes bacs à sable. En voici quelques un</p>
+	</div>
+</div>
+<div class="row pt-5">
+	{% for project in site.data.projects %}
+		<div class="col col-xs-12 col-sm-6 col-lg-4 p-2">
+			<p class="lead">
+				<strong><a href="{{ project.website }}">{{ project.name }}</a></strong>
+			</p>
+			<p class="text-justify">{{ project.description }}<br/>
+				{% for tag in project.tags %}
+					<span class="badge badge-light">{{ tag }}</span>
+				{% endfor %}
+			</p>
+			<ul class="list-inline">
+				{% if project.github %}
+					<li><a href="{{ project.github }}">code source</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	{% endfor %}
+</div>

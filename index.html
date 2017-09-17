@@ -3,20 +3,18 @@ layout: main
 ---
 <div class="row">
 	<div class="col">
-		<div class="p-5">
-			
-		<h1 class="text-center">{{ site.data.profil.description.oneline }}</h1>
-		</div>
+		<h1>Bonjour,</h1>	
 	</div>
 </div>
 <div class="row">
 	<div class="col">
-		<p class="lead">{{ site.data.profil.description.multiline }}</p>
+		{% for desc in site.data.profil.description.multiline %}
+			<p class="lead">{{ desc }}</p>
+		{% endfor %}
 	</div>
 </div>
 <div class="row">
 	<div class="col">
-		<h2>Mes projets</h2>
-		{% include projects.html %}
+		<p class="lead"></p>
 	</div>
 </div>
