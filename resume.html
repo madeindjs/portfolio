@@ -9,26 +9,57 @@ layout: main
 	</div>
 </div>
 <div class="row">
+	<!-- experiences -->
 	<div class="col">
 		<h2 class="mb-5">Experience</h2>
 		{% for experience in site.data.experiences %}
-			<p class="lead"><strong>{{ experience.title }}</strong> @ <a href="{{ experience.company.url }}">{{ experience.company.name }}</a><br/>
-				<small>
-	            {% for tag in experience.tags %}
-	              <span class="badge badge-light">{{ tag }}</span>
-	            {% endfor %}
-					
-				</small>
-          	</p>
-          	<ul class="list-unstyled">
-          		{% for task in experience.tasks %}
-	              <li>{{ task }}</li>
-	            {% endfor %}
-          	</ul>
+			<div class="mb-2 mt-2">
+				<p class="lead">
+					<strong>{{ experience.title }}</strong> @ <i><a href="{{ experience.company.url }}">{{ experience.company.name }}</a></i><br/>
+					<small>
+						<span class="badge badge-light">{{ experience.date.start }}</span>
+						<span class="badge badge-light">{{ experience.date.end }}</span>
+					</small>
+				</p>
+				<ul class="list-unstyled text-justify">
+					{% for task in experience.tasks %}
+						<li>{{ task }}</li>
+					{% endfor %}
+				</ul>
+			</div>
 		{% endfor %}
 	</div>
+	<!-- projects -->
 	<div class="col">
 		<h2 class="mb-5">Projets</h2>
-		{% include projects.html %}
+		{% for project in site.data.projects %}
+			<div class="pt-3 pb-3">
+				<p class="lead">
+					<strong><a href="{{ project.website }}">{{ project.name }}</a></strong>
+				</p>
+				<p class="text-justify">
+					{{ project.description }}
+					{% if project.github %}
+						- <i><a href="{{ project.github }}">voir code source</a></i>
+					{% endif %}
+					<br/>
+					{% for tag in project.tags %}
+						<span class="badge badge-light">{{ tag }}</span>
+					{% endfor %}
+				</p>
+			</div>
+		{% endfor %}
+	</div>
+	<!-- qualification -->
+	<div class="col">
+		<h2 class="mb-5">Etudes</h2>
+		{% for qualification in site.data.qualifications %}
+			<div class="pt-3 pb-3">
+				<p class="lead">
+					<strong>{{ qualification.title }}</strong> @ <i>{{ qualification.place }}</i><br/>
+				</p>
+				<p class="text-justify">{{ qualification.description }}</p>
+			</div>
+		{% endfor %}
 	</div>
 </div>

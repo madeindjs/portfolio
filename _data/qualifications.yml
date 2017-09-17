@@ -1,9 +1,14 @@
+- title: Master Développeur Fullstack
+  date: 2017-09-01
+  place: IT-Akademy, Villeurbanne
+  description: Un développeur full stack est capable de réaliser des tâches à n'importe quel niveau technique qui constituent une application informatique.
+
 - title: BTS Fluides, énergies et environnement
-  date: '2013-08-31'
-  place: La Martinière Monplaisir à Lyon 8e
-  kind: Diplomas
+  date: 2013-08-31
+  place: La Martinière Monplaisir, Lyon 8e
+  description: Technicien supérieur dans le froid industriel, commercial et au conditionnement de l’air industriel.
 
 - title: Bac STI Génie Energétique
-  date: '2011-08-31'
-  place: La Martinière Monplaisir à Lyon 8e
-  kind: Diplomas
+  date: 2011-08-31
+  place: La Martinière Monplaisir, Lyon 8e
+  description: Domaines de la production, de la distribution et de l'utilisation de l'énergie.

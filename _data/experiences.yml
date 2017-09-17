@@ -3,7 +3,8 @@
   company: 
     name: GAC Technology
     url: https://gac-technology.com/
-  begin: '2017-01-09'
+  date:
+    start: 2017-01-09
   tags:
   - PHP
   - Zend Framework
@@ -16,28 +17,30 @@
   company:
     name: Carrier
     url: https://www.carrier.com/commercial-refrigeration/en/eu/
-  begin: '2013-09-01'
-  end: '2017-01-06'
+  date:
+    start: 2013-09-01
+    end: 2017-01-06
   tags:
   - AutoCad
   - Sketchup
   - Ruby
   - ASP.NET MVC
   tasks:
-  - Analyse des processus techniques et développement d'outils d'amélioration ( plate-forme Web sous C# / ASP.NET MVC)
-  - Développement d'une solution commerciale de dessin 3D sous Sketchup avec intégration d'un plugin écrit en Ruby. Formation internes des commerciaux européens sur cet outil (DL, CZ, DK)
-  - Bureau d'étude techniques pour les client d'Afrique du Nord (calculs et dessins des plans d'exécution sous AutoCAD)
+  - Analyse des processus techniques et développement d'outils d'amélioration (C# / ASP.NET MVC)
+  - Développement solution marketing de dessin 3D sous Sketchup avec un plugin écrit en Ruby. 
+  - Formations européenes des commerciaux sur Sketchup
+  - Bureau d'étude techniques (calculs et dessins des plans d'exécution sous AutoCAD)
 
 - title: Apprentis
   company:
     name: Carrier
     url: https://www.carrier.com/commercial-refrigeration/en/eu/
-  begin: '2011-09-01'
-  end: '2013-08-31'
+  date:
+    start: 2011-09-01
+    end: 2013-08-31
   tags:
   - Excel
   - AutoCad
   tasks:
-  - Soutien du chargé d'affaire pour nos clients d'Afrique du Nord
-  - Dessin des plans d'executions
+  - Bureau d'étude techniques (calculs et dessins des plans d'exécution sous AutoCAD)
 
