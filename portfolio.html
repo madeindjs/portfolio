@@ -10,19 +10,21 @@ layout: main
 <div class="row pt-5">
 	{% for project in site.data.projects %}
 		<div class="col col-xs-12 col-sm-6 col-lg-4 p-2">
-			<p class="lead">
-				<strong><a href="{{ project.website }}">{{ project.name }}</a></strong>
-			</p>
-			<p class="text-justify">{{ project.description }}<br/>
-				{% for tag in project.tags %}
-					<span class="badge badge-light">{{ tag }}</span>
-				{% endfor %}
-			</p>
-			<ul class="list-inline">
-				{% if project.github %}
-					<li><a href="{{ project.github }}">code source</a></li>
-				{% endif %}
-			</ul>
+			<div class="item">
+				<h3 class="h5">
+					<a href="{{ project.website }}">{{ project.name }}</a>
+				</h3>
+				<p>
+					{% for tag in project.tags %}
+						<span class="badge badge-dark">{{ tag }}</span>
+					{% endfor %}
+				</p>
+				<p class="text-justify">{{ project.description }}
+					{% if project.github %}
+						<a href="{{ project.github }}"><img src="/img/github-logo.svg" alt="Github" height="25"></a>
+					{% endif %}
+				</p>
+			</div>
 		</div>
 	{% endfor %}
 </div>
