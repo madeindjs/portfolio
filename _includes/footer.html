@@ -1,0 +1,10 @@
+<footer class="row">
+	<div class="col text-muted text-center">
+		<ul class="list-inline">
+			<li class="list-inline-item"><a href="mailto:{{site.data.profil.email}}">{{site.data.profil.email}}</a></li>
+			{% for links in site.data.profil.links %}
+				<li class="list-inline-item"><a href="{{links.url}}">{{links.name}}</li>
+			{% endfor %}
+		</ul>
+	</div>
+</footer>
