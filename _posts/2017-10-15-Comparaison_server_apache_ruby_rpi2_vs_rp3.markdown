@@ -6,12 +6,16 @@ date:   2017-10-15 12:00:00 +0200
 tags: benchmark raspberry apache ruby
 categories: network
 ---
-L’occasion de la migration de mon serveur Apache depuis mon **Raspberry PI 2 B+** vers mon **Raspberry PI 3** est l'occasion de mettre ma pierre à l'édifice des *Benchmarks* existants. Je n'ai pas la prétention d'apporter un comparatif complet mais juste de proposer mes résultats
 
+![Interface de redirection des ports de TP Link](/img/blog/RPI2_vs_RPI3.png)
+
+L’occasion de la migration de mon serveur Apache depuis mon **Raspberry PI 2 B+** vers mon **Raspberry PI 3** est l'occasion de mettre ma pierre à l'édifice des *Benchmarks* existants. Je n'ai pas la prétention d'apporter un comparatif complet mais juste de proposer mes résultats.
+
+Sortie à un an d'intervalle, la principale amélioration du RPI3 est d'amener une arcitecture 64 bits.
 
 ## Ma configuration
 
-Cette comparaison ne se base pas uniquement sur le Hardware car les software installé sur l'un ou sur l’autre sont différent *(notamment pour la base de donnés dont l'un est sur **MySQL** et l'autre sur **MariaDB**)*. Sinon tout les deux sont des serveur *Apache* faisant tourner des applications web **Ruby on Rails** avec [**RVM**](https://rvm.io/) *(gestionnaire de version Ruby)* & [**Passenger**](https://www.phusionpassenger.com/) *(bibliothèque permettant de faire fonctionner des application Ruby sous Apache)*.
+Cette comparaison ne se base pas uniquement sur le Hardware car les software installés sur l'un ou sur l’autre sont différents *(notamment pour la base de donnés dont l'un est sur **MySQL** et l'autre sur **MariaDB**)*. Sinon tous les deux sont des serveurs *Apache* faisant tourner des applications web **Ruby on Rails** avec [**RVM**](https://rvm.io/) *(gestionnaire de version Ruby)* & [**Passenger**](https://www.phusionpassenger.com/) *(bibliothèque permettant de faire fonctionner des applications Ruby sous Apache)*.
 
 * **Raspberry PI 2 B+**
     * Raspbian GNU/Linux 8.0 (jessie)
