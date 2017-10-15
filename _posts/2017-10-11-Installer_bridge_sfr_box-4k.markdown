@@ -2,16 +2,16 @@
 layout: post
 title:  J'ai tenté de créer un bridge avec ma Box SFR (spoiler, j'ai reussi!)
 description:  Participez au développement de votre navigateur preéferé
-date:   2017-09-22 12:00:00 +0200
+date:   2017-10-11 12:00:00 +0200
 tags: networking routing sfr
 categories: network
 ---
 
-![](/img/blog/network_router_pi_sfr.png)
+![Le materiel nécessaire pour mon bridge](/img/blog/network_router_pi_sfr.png)
 
-Récement, j'ai acheté un deuxièmme Raspberry PI pour transférer une partie de mes sites dessus. L'idée était de partager une partie de sites sur l'un et l'autre.
+Récemment, j'ai acheté un deuxième Raspberry PI pour transférer une partie de mes sites dessus. L'idée était de partager une partie de sites sur l'un et l'autre.
 
-La Box SFR 4K étant ~~une vraie merde~~ un peu limitée, j'ai investis dans un [routeur TP Link](http://www.tp-link.com/ca/products/details/Archer-C2.html) *(je ne touche pas dargent pour ce placement de produit :( )* pour une quarantaine d'euros et j'ai voulu passer ma Box en mode **Bridge**.
+La Box SFR 4K étant ~~une vraie merde~~ un peu limitée, j'ai investis dans un [routeur TP Link](http://www.tp-link.com/ca/products/details/Archer-C2.html) *(je ne touche pas d’argent pour ce placement de produit :( )* pour une quarantaine d'euros et j'ai voulu passer ma Box en mode **Bridge**.
 
 L'idée est la suivante:
 
@@ -36,7 +36,7 @@ Rien de bien sorcier, on suit la notice:
 
 ## La partie sur ~~le routeur de merde~~ la boxe SFR
 
-On se connecte à l'interface d'administration de la box via le navigateur en accédant à [http://192.168.0.1](http://192.168.0.1). Ensuite on va sur l'onglet *Réseau > Paramètre de base > Mon réseau local* et on note l'addresse IP et l'addresse MAC du routeur
+On se connecte à l'interface d'administration de la box via le navigateur en accédant à [http://192.168.0.1](http://192.168.0.1). Ensuite on va sur l'onglet *Réseau > Paramètre de base > Mon réseau local* et on note l’adresse IP et l’adresse MAC du routeur
 
 {% highlight plain %}
 Router
@@ -50,9 +50,9 @@ Il suffit ensuite de se rendre sur l'onglet *Paramètres avancés > Routeur - Br
 
 ## La partie sur les Raspberry PI
 
-Le but ici est de spécifier des addresses IP spécifiques à nos Raspberry PI. L'intéret est qu'en cas de redémarage du routeur, les addresse IP des serveurs ne change pas et que les redirections non plus.
+Le but ici est de spécifier des adresses IP spécifiques à nos Raspberry PI. L’intérêt est qu'en cas de redémarrage du routeur, les adresses IP des serveurs ne changent pas et les redirections restent correctes.
 
-Ne bougez pas de votre ordi, on fait tout via notre ordinateur.
+Ne sortez pas le câble HDMI de votre Raspberry, on fait tout via **SSH**.
 
 On commence par trouver les Raspberry Pi avec un bon vieux **nmap**
 
@@ -68,7 +68,7 @@ Il nous suffit donc de se connecter au Raspberry PI via **SSH**:
 $ ssh pi@192.168.1.101
 {% endhighlight %}
 
-Et on edite le fichier de configuration réseau
+Et on édite le fichier de configuration réseau
 
 {% highlight bash %}
 $ sudo vi /etc/network/interfaces
@@ -81,7 +81,7 @@ iface eth0 inet static
     gateway 192.168.1.1 # l'addresse IP du routeur
 {% endhighlight %}
 
-On fait la même chose pour le Raspberry PI 3 *(et changeant l'address IP bien sûr)*.
+On fait la même chose pour le Raspberry PI 3 *(et changeant l’adresse IP bien sûr)*.
 
 ## La partie sur le routeur TP Link
 
@@ -100,7 +100,7 @@ A partir de maintenant, le site [rousseau-alexandre.fr](http://rousseau-alexandr
 
 Maintenant que notre réseau est prêt, nous allons mettre en place une redirection de proxy Apache à l'aide du module [`mod_proxy_http`](https://httpd.apache.org/docs/2.4/fr/mod/mod_proxy_http.html).
 
-Le principe est simple: tous les paquet passeront par le RPI2 et les rediregera vers le RPI3 en fonction du domaine demandé.
+Le principe est simple: tous les paquet passeront par le RPI2 et les redirigera vers le RPI3 en fonction du domaine demandé.
 
 Pour se faire, on active les modules qui vont bien sur le RPI2:
 
@@ -127,7 +127,7 @@ $ sudo vi /etc/apache2/site-available/raspberry-cook.fr.conf
 </VirtualHost>
 {% endhighlight %}
 
-Et on termine par activer le site & redemarrer Apache
+Et on termine par activer le site & redémarrer Apache
 
 {% highlight bash %}
 $ sudo a2ensite raspberry-cook.fr
