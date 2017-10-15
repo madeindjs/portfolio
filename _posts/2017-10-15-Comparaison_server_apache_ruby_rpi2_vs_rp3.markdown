@@ -1,13 +1,12 @@
 ---
 layout: post
 title:  Benchmark d'un serveur Web Raspberry PI 2 B+ vs Raspberry PI 3 
-description:  Soyez le roi des redirection
+description:  l'occasion de mettre ma pierre à l'édifice des Benchmarks existants
 date:   2017-10-15 12:00:00 +0200
 tags: benchmark raspberry apache ruby
 categories: network
+thumbnail: /img/blog/RPI2_vs_RPI3.png
 ---
-
-![Interface de redirection des ports de TP Link](/img/blog/RPI2_vs_RPI3.png)
 
 L’occasion de la migration de mon serveur Apache depuis mon **Raspberry PI 2 B+** vers mon **Raspberry PI 3** est l'occasion de mettre ma pierre à l'édifice des *Benchmarks* existants. Je n'ai pas la prétention d'apporter un comparatif complet mais juste de proposer mes résultats.
 
@@ -87,4 +86,4 @@ Avg: .39532
 
 Je ne m'attendais pas à une différence aussi importante. Dans mon cas, **le RPI3 répond 1,7 fois plus rapidement que le RPI2**!
 
-Néanmoins, ces résultats ne sont pas uniquement dus à la différence au niveau du matériel mais aussi à la différence logicielle.
+Néanmoins, ces résultats ne sont pas uniquement dus à la différence au niveau du matériel mais aussi à la différence des logiciels installés.

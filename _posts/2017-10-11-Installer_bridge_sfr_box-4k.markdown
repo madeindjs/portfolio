@@ -5,9 +5,8 @@ description:  Participez au développement de votre navigateur preéferé
 date:   2017-10-11 12:00:00 +0200
 tags: networking routing sfr
 categories: network
+tumbnail: /img/blog/network_router_pi_sfr.png
 ---
-
-![Le materiel nécessaire pour mon bridge](/img/blog/network_router_pi_sfr.png)
 
 Récemment, j'ai acheté un deuxième Raspberry PI pour transférer une partie de mes sites dessus. L'idée était de partager une partie de sites sur l'un et l'autre.
 
