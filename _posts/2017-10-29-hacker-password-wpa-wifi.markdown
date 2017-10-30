@@ -7,7 +7,13 @@ tags: hack kali wifi wpa
 categories: hacking
 ---
 
-Le principe est le suivant:
+Afin de tester, j'ai voulu cracker mon [routeur récement installé](/network/2017/10/11/Installer_bridge_sfr_box-4k.html). Et c'est impressionnat de facilité!
+
+## Le principe
+
+Afin de réalisé le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux mais avec des outils de pénetration réseaux pré-installé. Je l'ai installé en dual-boot mais il possible d'utiliser une machine virtuelle comme [Virtual Bow](https://www.virtualbox.org/).
+
+"L'attaque" se déroule en plusieurs phases:
 
 * **Analyse** du wifi cible
 * **Capture** un **WPA handshake** *(une connexion au réseau Wifi)* en déconnectant un périphérique sur le Wifi
