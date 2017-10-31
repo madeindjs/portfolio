@@ -144,5 +144,15 @@ Et au bout de quelques temps:
 
 ![/img/blog/crack_wpa.png]
 
+## Conclusion
 
+A travers ce petit test on voit qu'il est très facile de "craquer" un wifi avec un mot de passe WPA. Les outils mis à notre disposition sont facile d'accès et aucun matériel spécifique n'est requis. Cependant en appliquant quelques règles simple on peut éviter ce genre de risque.
+
+Rappelez vous, le mot de passe utilisé n'était que de 8 caractères numériques. Le nombre de combinaisons tenais dans un fichier de 380 mo. Si le mot de passe avait inclus des caractères alphabétiques, le dictionnaire aurait dépassé le terra-octet. Le bruteforce aurait certainement duré plusieurs semaines.
+
+En appliquant un mot de passe plus complexe, nous diminuons donc le risque. En le changeant régulièrement, il n'est pas possible de craquer la combinaison assez rapidement.
+
+De plus il est possible d'adapter le signal du wi-fi pour qu'il ne soit pas visible dans tout l'immeuble.
+
+Préferez dès que possible le câble Ethernet qui reste malgré tout la solution la plus sécurisée.
 
