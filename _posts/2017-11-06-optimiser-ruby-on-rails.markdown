@@ -7,23 +7,98 @@ tags: ruby rails
 categories: development
 ---
 
-Récement, j'ai remarqué que la page principe de mon site https://raspberry-cook.fr/recipes répondait en 1,30 seconde! L'impacte sur le **réferencement** est gravissime.
+Récement, j'ai remarqué que la page principale de mon site [https://raspberry-cook.fr/recipes](https://raspberry-cook.fr/recipes) répondait en 1,30 seconde! L'impacte sur le réferencement est **gravissime**.
+
+> Le temps de réponse de votre serveur ne devrait pas dépasser 200 ms. *Google - [PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/)*
 
 ![Capture d'écran de l'outil SpeedInsight de Google](/img/blog/pagespeedinsights_raspberry_cook.png)
 
-> Le temps de réponse de votre serveur ne devrait pas dépasser 200 ms. *Google - PageSpeed Tools*
+C'est bien connu: **Ruby on Rails est lent**! Ceci nottament à cause de:
 
-C'est bien connu: **Ruby on Rails est lent**! Mais si [Github](https://github.com/), [Airbnb](https://airbnb.fr) et [Soundcloud](https://soundcloud.com) arrivent à utiliser Rails, c'est bien qu'il est possible de l'utiliser sans saccrifier les performances.
+* **Ruby** qui un langage **interprété** dynamiquement & faiblement typé. Donc lent
+* **Ruby on Rails** qui gère beaucoup de choses pour nous en sacrifiants les performances
+
+Mais si [Github](https://github.com/), [Airbnb](https://airbnb.fr) et [Soundcloud](https://soundcloud.com) arrivent à utiliser Rails, c'est bien qu'il est possible de l'utiliser sans sacrifier les performances.
 
 J'ai donc commencé ma quête d'optimisation des performances (spoiler: Apache est votre ami).
 
---- Content Here
 
-Cette fonction était appelée 20 fois sur la page. Cette modification m'a fait gagner 200ms.
+## Les requêtes N+1
+
+> T'inquiètes pas, je m'occuppe de tout. *Active Record*
+
+Active Record est formidable et gère tout pour nous. Maleuresement, il lance une requête SQL à chaque utilisation dynamique des liaisons. Et comme disait ma grand-mère:
+
+> Une grosse requête SQL vaut mieux que plusieurs petites. 
+
+Voici un exemple ou l'on veut récupérer tous les utilisateurs qui on déjà crée une recette. Sans réfléchir, on serait tenté de faire plus ou moins comme ça:
+
+~~~ruby
+users = Recipe.all.map{|recipe| recipe.user}
+~~~
+
+Mine de rien, ce petit bout de code va génerer un nombre impressionant de requêtes:
+
+* `Recipe.all` = 1 * `SELECT "recipes".* FROM "recipes"`
+* `recipe.user` = qty_recette * `SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]`
+
+C'est là que `includes` vient à la rescousse en préchargeant les liaisons pour nous
+
+~~~ruby
+users = Recipe.includes(:user).all.map{|recipe| recipe.user}
+# SELECT "recipes".* FROM "recipes"
+# SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)
+~~~
+
+Et voilà:
+
+* `Recipe.all` = 1 * `SELECT "recipes".* FROM "recipes"`
+* `recipe.user` = 1 *  * `SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)`
+
+## La consommation mémoire
+
+Ici il n'y pas de règle particulière mais il faut éviter le chargement d'ojets Active Record pour rien.
+
+
+Ma classe `Recipe` représente une recette qui peut-être notée par des commentaires (= `Comment`). J'ai implémenté une fonction `rate` qui calcule la moyenne des notes.
+Un peu naif, j'ai utilisé toute la puissance d' *Active Record* et je chargeai toutes le liaisons:
+
+~~~ruby
+class Recipe
+  has_many :comments
+
+  def rate
+    rates = []
+    self.comments.each{|com| rates.append com.rate}
+    return rates.size > 0 ? rates.reduce(:+) / rates.size.to_f : 0
+  end
+
+end
+~~~
+
+Ca fonctionne bien et le code est *(assez)* parlant. Le problème est que:
+
+* On fait du N+1 (voir plus haut)
+* On récupère beaucoup d'objets juste pour faire une moyenne
+
+Le chargment des objets va créer des variables pour stocker **toutes** les informations des commentaires (`name`, `content`, `user_id`, `recipe_id`, etc...). Nous n'avons pas besoin de tout cela. Ici nous pouvons nous contenter d'utiliser la fonction SQL [`AVG`](http://sql.sh/fonctions/agregation/avg) qui fait la moyenne pour nous.
+
+
+~~~ruby
+def rate
+  sql = "SELECT AVG(rate) as rate FROM comments WHERE recipe_id = :recipe_id"
+  statement  = ActiveRecord::Base.connection.raw_connection.prepare sql
+  results = statement.execute({recipe_id: self.id})
+  average = results.first['rate'].to_i
+  statement.close
+  return average
+end
+~~~
+
+
+OK, c'est moins sexy. Mais cela nous évite de charger X objets `Comment`. Cette fonction était appelée plus de 20 fois sur la page. Cette modification m'a fait **gagner 200ms**.
 
 ## Utiliser Apache pour servir les fichiers Statiques
-
-### La distribution
 
 On sait que **Ruby On Rails** n'est pas réputé pour sa rapidité donc autant éviter de l'utiliser pour servir les fichiers statiques (images, css, javascript, etc..).
 
@@ -43,7 +118,7 @@ Alias / "/var/www/raspberry_cook/current/public/"
 </Directory>
 ~~~
 
-### La mise en cache
+## Utiliser Apache pour cacher les fichiers Statiques
 
 On continue d'exploiter au maximum Apache et on active la mise en cache des images servies. On commence par activer deux modules:
 
