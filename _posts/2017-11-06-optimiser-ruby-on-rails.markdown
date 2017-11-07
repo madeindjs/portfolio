@@ -118,26 +118,6 @@ Alias / "/var/www/raspberry_cook/current/public/"
 </Directory>
 ~~~
 
-## Utiliser Apache pour cacher les fichiers Statiques
-
-On continue d'exploiter au maximum Apache et on active la mise en cache des images servies. On commence par activer deux modules:
-
-~~~bash
-$ sudo a2enmod expires
-$ sudo a2enmod headers
-~~~
-
-Et on rajoute une directive de cache pour les images.
-
-~~~conf
-<FilesMatch "\.(jpg|jprg|png|gif)$">
-  ExpireActive on
-  ExpireDefault "modification plus 1 seconde"
-
-  Header set Cache-Control "max-age=604800, public"
-  FileETag All
-</FilesMatch>
-~~~
 
 ## Utiliser la bonne version de Ruby
 
