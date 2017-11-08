@@ -7,14 +7,26 @@ tags: ruby rails
 categories: development
 ---
 
-## Créer un container (Optionnel) 
+Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de part de marché](https://www.developpez.com/actu/129511/Serveurs-Web-Nginx-detient-desormais-un-tiers-des-parts-de-marche-tandis-qu-Apache-chute-en-dessous-des-50-pourcent-d-apres-W3Tech/) c'est un des serveur web les plus populaire.
+
+Ses avantages sont:
+
+* **open-source** et gratuit
+* énormément de **ressources** disponnibles sur internet
+* **dsiponnible** partout, sur toutes les plateformes
+
+
+Voici donc quelques étapes pour apprendre à blabla
+
+
+## Créer un container *(Optionnel)* 
 
 Afin de realiser mes tests, j'ai crée un container à l'aide de [LXC](https://linuxcontainers.org/fr/) (**L**inu**x** **C**ontainer). Cela permet de créer un evinronnement indépendant de notre système afin de réaliser nos tests. On peut tout casser dessus sans crainte.
 
 LXC s'installe très facilement avec un petit `apt install`
 
 ~~~bash
-$ apt install lxc lxc-templates
+$ apt install lxc lxc-templates debootstrap
 ~~~
 
 Ensuite, on crée un container basé sur Debian:
@@ -37,14 +49,14 @@ Nous voilà dans notre container ou nous ne risquont plus de casser quelque chos
 Rien de bien sorcier, un petit `apt install` et c'est plié:
 
 ~~~bash
-# apt install apache2
+$ apt install apache2
 ~~~
 
-Afin de connaitre l'addresse IP de notre machine on lance un `ìfconfig` et on se rend sur l'adresse IP affiché et on obtient la page par défaut. On ouvre donc notre navigateur et on tape directement _http://<mon-ip>_. Une page d'acceuil apparait.
+Afin de connaitre l'addresse IP de notre machine on lance un `ìfconfig`. On ouvre donc notre navigateur et on tape directement _http://mon-ip_. La page d'acceuil par défaut apparait!
 
 ![Page par défaut d'Apache](/img/blog/debian_apache_works.png)
 
-Ce n'est pas de la magie, cette page par défaut est situé ici. 
+Ce n'est pas de la magie, la page par défaut est située ici. 
 
 ~~~plain
 /var/www/
@@ -55,24 +67,35 @@ Ce n'est pas de la magie, cette page par défaut est situé ici.
 
 ## Création de notre projet
 
-Nous savons donc que nos projets doivent être stockées dans dans _/var/www_. On crée notre projet _test.fr_ dans ce dossier avec une page d'acceuil _index.html_. On met le fichier dans un dossier _public_ pour séparer ce qui sera accessible /innaccessible  à tout le monde (c'est une bonne pratique). 
+Nous savons donc que nos projets doivent être stockées dans dans **/var/www**. Nous allons créer notre projet _test.fr_ directement dans ce dans ce dossier. 
 
 ~~~bash
 $ mkdir -p /var/www/test.fr/public
+~~~
+
+> Nous créeons un dossier _public_ pour séparer ce qui sera accessible de ce qui sera innaccessible à tout le monde. C'est une bonne pratique 
+
+Maintenant on crée le fichier _index.html_. 
+
+~~~bash
 $ echo '<h1>Hello world</h1>' > /var/www/test.fr/public/index.html
 ~~~
 
-Récupérons aussi la dernière version de [Twitter Bootstrap](http://getbootstrap.com) avec `curl`.
+Et afin d'avoir du CSS, on rajoute la dernière version de [Twitter Bootstrap](http://getbootstrap.com) en utilisant `curl`.
 
 ~~~bash
 $ apt install curl
 $ curl https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.css > /var/www/test.fr/public/twitter-bootstrap.css
+$ echo '<link rel="stylesheet" href="twitter-bootstrap.css">' >> /var/www/test.fr/public/index.html
 ~~~
 
-Et on charge le CSS dans notre _index.html
+Si tout c'est bien déroulé (il n'y a pas de raison), vous devez avoir ça:
 
-~~~bash
-$ echo '<link rel="stylesheet" href="twitter-bootstrap.css">' >> /var/www/test.fr/public/index.html
+~~~plain
+/var/www/test.fr/
+└── public
+    ├── index.html
+    └── twitter-bootstrap.css
 ~~~
 
 ## Le Virtual Host
