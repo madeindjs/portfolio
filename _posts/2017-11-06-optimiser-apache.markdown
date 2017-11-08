@@ -169,7 +169,29 @@ L'inspecteur nous inqique que sur 155,54 ko, **21,31 ko ont été transférés**
 
 ## La mise en cache
 
-Quoi de mieux que de réduire la taille des fichiers? Utiliser le cache du navigateur pour ne pas les envoyer! Apache utilise deux modules pour ça.
+Quoi de mieux que de réduire la taille des fichiers? Utiliser le cache du navigateur pour ne pas les envoyer! 
+
+Nous allons utiliser [PHP](http://php.net/) pour simuler une charge serveur. On commence par l'installer:
+
+~~~bash
+$ apt install php libapache2-mod-php
+$ a2enmod php7.0
+$ systemctl reload apache2
+~~~
+
+> La verison de PHP à activer peut différer en fonction de celle qui a été installée
+
+Et on crée un petit script qui va retarder l'affichage de la page:
+
+~~~bash
+$ echo '<?php sleep(2); echo "loaded" ?>' > /var/www/test.fr/public/load.php
+~~~
+
+On se rend sur [http://test.fr/load.php](http://test.fr/load.php). La page met plus de deux secondes à s'afficher
+
+![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_without_cache.png)
+
+Maintenant, essayons de mettre en cache cette page. Apache utilise deux modules pour ça.
 
 * `headers` qui permet de modifier l'en-tête des réponses
 * `expires` qui ajoute l'entête expires
@@ -195,3 +217,12 @@ Tout d'abord  ilf faut rajouter la directive `ExpiresActive on` pour activer l'o
 </IfModule>
 ~~~
 
+On redmarre Apache
+
+~~~bash
+$ systemctl reload apache2
+~~~
+
+Et lorsqu'on rafraichis notre navigateur, la différence est flagrante!
+
+![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_with_cache.png)
