@@ -7,6 +7,8 @@ tags: apache linux lxc
 categories: tutorial
 ---
 
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Apache_HTTP_server_logo_%282016%29.svg/1280px-Apache_HTTP_server_logo_%282016%29.svg.png)
+
 Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de part de marché](https://www.developpez.com/actu/129511/Serveurs-Web-Nginx-detient-desormais-un-tiers-des-parts-de-marche-tandis-qu-Apache-chute-en-dessous-des-50-pourcent-d-apres-W3Tech/) c'est un des serveur web les plus populaire.
 
 Ses avantages sont:
@@ -258,3 +260,36 @@ $ systemctl reload apache2
 Et lorsqu'on rafraichis notre navigateur, la différence est flagrante!
 
 ![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_with_cache.png)
+
+## La mise en cache *(côté serveur)*
+
+La mise en cache côté serveur permet de stocker les pages génerées sur le dsque dur (ou dans la mémoire) afin de les servir sans passer par PHP (ou autre). Pour cela nous utilisons [`mod_cache_disk`](http://httpd.apache.org/docs/2.4/fr/mod/mod_cache_disk.html). Celui-ci s'appuie sur plusieurs élements pour définir si une requête est iddentique (nom d'hôte, protocole, port, chemin, paramètres). 
+
+Commençons par l'installer  
+
+Mettont de côté le cache côté client
+
+
+~~~bash
+$ a2dismod expires headers
+~~~
+
+
+~~~bash
+$ a2enmod mod_cache_disk
+~~~
+
+
+
+```apache
+EnableSendfile On
+# mise en cache côté serveur
+<IfModule mod_cache_disk.c>
+  # définit la taille maximale d'un document (en octets)
+  CacheMaxFileSize 64000
+  # définit le temps minimum qui doit s'écouler avant d'essayer d'envoyer des données au client
+  CacheReadTime 1000
+  # dossier qui contiendra le cache
+  CacheRoot /tmp/apache
+</IfModule>
+```
