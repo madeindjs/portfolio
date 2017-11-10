@@ -7,8 +7,6 @@ tags: apache linux lxc
 categories: tutorial
 ---
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Apache_HTTP_server_logo_%282016%29.svg/1280px-Apache_HTTP_server_logo_%282016%29.svg.png)
-
 Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de part de marché](https://www.developpez.com/actu/129511/Serveurs-Web-Nginx-detient-desormais-un-tiers-des-parts-de-marche-tandis-qu-Apache-chute-en-dessous-des-50-pourcent-d-apres-W3Tech/) c'est un des serveur web les plus populaire.
 
 Ses avantages sont:
@@ -23,9 +21,9 @@ Voici donc quelques étapes pour apprendre à blabla
 
 ## Créer un container *(Optionnel)* 
 
-Afin de realiser mes tests, j'ai crée un container à l'aide de [LXC](https://linuxcontainers.org/fr/) (**L**inu**x** **C**ontainer). Cela permet de créer un evinronnement indépendant de notre système afin de réaliser nos tests. On peut tout casser dessus sans crainte.
+Afin de realiser mes tests, j'ai crée un container à l'aide de [LXC][LXC] *(**L**inu**x** **C**ontainer)*. Cela permet de créer un evinronnement indépendant de notre système afin de réaliser nos tests. On peut tout casser dessus sans crainte.
 
-LXC s'installe très facilement avec un petit `apt install`
+[LXC][LXC] s'installe très facilement avec un petit `apt install`
 
 ~~~bash
 $ apt install lxc lxc-templates debootstrap
@@ -105,9 +103,12 @@ Si tout c'est bien déroulé (il n'y a pas de raison), vous devez avoir ça:
 
 Pour accéder à notre site, nous allons créer un **Virtual Host** (= Vhost). Le **Vhost** nous permet d' **héberger plusieurs sites** sur un même serveur.
 
-Pour cela, il suffit de créer une nouvelle configuration dans le dossier _/etc/apache2/sites-availables_. Ce dossier contient les configurations des sites disponnibles tandis que le dossier _/etc/apache2/sites-**enabled**_ contient les sites activées.
+Pour cela, il suffit de créer une nouvelle configuration dans le dossier _/etc/apache2_. Deux dossiers existent:
 
-Nous ajoutons donc notre configuration:
+* _sites-availables_ contient les configurations des sites disponnibles
+* _sites-enabled_ contient les **liens symboliques** des configurations des sites activées 
+
+Nous ajoutons donc notre configuration dans _sites-availables_:
 
 ~~~bash
 $ vi /etc/apache2/sites-availables/test.fr.conf
@@ -128,11 +129,12 @@ $ vi /etc/apache2/sites-availables/test.fr.conf
 
 Nous ne possédons pas le nom de domaine _test.fr_ mais on peut le simuler très facilement. Sur le PC client (celui qui visite le site), on va ajouter une entrée DNS au fichier _/etc/hosts_:
 
+> Une entrée DNS fait correspondre un nom de domaine à une addresse IP
+
 ~~~bash
 $ echo '10.0.3.146 test.fr' | sudo tee --append /etc/hosts
 ~~~
 
-> en remplaçant bien évidement par votre adress IP
 
 
 On termine par activer notre configuration. On utilise `a2ensite` qui va s'occuper de créer un **lien symbolique** de notre fichier de configuration dans le dossier *sites-enabled*.
@@ -153,7 +155,7 @@ Et de se rendre sur [http://test.fr](http://test.fr).
 
 ## La compression
 
-La compression permet d'économiser de la bande passante en comprimmant les données (HTML, CSS, Javascript, etc..). L'bjectif est de compresser les données avant de les envoyer. Le navigateur du client s'occupera de les décompresser avant de les interpréter.
+La compression permet d'économiser de la bande passante en comprimmant les données (HTML, CSS, Javascript, etc..). L'ojectif est de réduire la taille des données avant de les envoyer. Le navigateur du client s'occupera de les décompresser avant de les interpréter.
 
 Cette fonctionnalité demande l'activation du module [mod_deflate](http://httpd.apache.org/docs/2.0/mod/mod_deflate.html). Pour cela on utilise `a2enmod`:
 
@@ -293,3 +295,5 @@ EnableSendfile On
   CacheRoot /tmp/apache
 </IfModule>
 ```
+
+[LXC]: https://linuxcontainers.org/fr/

@@ -9,7 +9,9 @@ categories: development
 
 Récement, j'ai remarqué que la page principale de mon site [https://raspberry-cook.fr/recipes](https://raspberry-cook.fr/recipes) répondait en 1,30 seconde! L'impacte sur le réferencement est **gravissime**.
 
-> Le temps de réponse de votre serveur ne devrait pas dépasser 200 ms. *Google - [PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/)*
+> Le temps de réponse de votre serveur ne devrait pas dépasser 200 ms.
+> 
+> *Google - [PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/)*
 
 ![Capture d'écran de l'outil SpeedInsight de Google](/img/blog/pagespeedinsights_raspberry_cook.png)
 
@@ -25,7 +27,9 @@ J'ai donc commencé ma quête d'optimisation des performances (spoiler: Apache e
 
 ## Les requêtes N+1
 
-> T'inquiètes pas, je m'occuppe de tout. *Active Record*
+> T'inquiètes pas, je m'occuppe de tout.
+> 
+> *Active Record*
 
 Active Record est formidable et gère tout pour nous. Maleuresement, il lance une requête SQL à chaque utilisation dynamique des liaisons. Et comme disait ma grand-mère:
 
@@ -39,8 +43,8 @@ users = Recipe.all.map{|recipe| recipe.user}
 
 Mine de rien, ce petit bout de code va génerer un nombre impressionant de requêtes:
 
-* `Recipe.all` = 1 * `SELECT "recipes".* FROM "recipes"`
-* `recipe.user` = qty_recette * `SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]`
+* `Recipe.all` = 1 requête `SELECT "recipes".* FROM "recipes"`
+* `recipe.user` = 1 requête `SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]` par recette
 
 C'est là que `includes` vient à la rescousse en préchargeant les liaisons pour nous
 
@@ -52,8 +56,8 @@ users = Recipe.includes(:user).all.map{|recipe| recipe.user}
 
 Et voilà:
 
-* `Recipe.all` = 1 * `SELECT "recipes".* FROM "recipes"`
-* `recipe.user` = 1 *  * `SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)`
+* `Recipe.all` = 1 requête `SELECT "recipes".* FROM "recipes"`
+* `recipe.user` = 1 requête `SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)`
 
 ## La consommation mémoire
 
@@ -98,24 +102,38 @@ end
 
 OK, c'est moins sexy. Mais cela nous évite de charger X objets `Comment`. Cette fonction était appelée plus de 20 fois sur la page. Cette modification m'a fait **gagner 200ms**.
 
-## Utiliser Apache pour servir les fichiers Statiques
+## Les images
 
 On sait que **Ruby On Rails** n'est pas réputé pour sa rapidité donc autant éviter de l'utiliser pour servir les fichiers statiques (images, css, javascript, etc..).
 
-Pour cela on éditer la configuration de notre application Rails:
+### Utiliser Apache pour servir les fichiers Statiques
+
+La première optimisation est d'utiliser les serveur pour servir les fichiers statiques. Pour **Apache** on édite la configuration de notre application Rails:
 
 ~~~ruby
 # config/environments/production.rb
 config.serve_static_files = false
 ~~~
 
-Et on modifie notre **Vhost Apache** et ajoutant la directive suivante
+Et on modifie notre **Vhost** en ajoutant la directive suivante
 
-~~~conf
+~~~apache
 Alias / "/var/www/raspberry_cook/current/public/"
 <Directory "/var/www/raspberry_cook/current/public/">
   Options FollowSymLinks
 </Directory>
+~~~
+
+
+### Le lazy-loader
+
+Il est possible d'utiliser un **LazyLoader** javascript. Celui va s'occuper de charger les images uniquement lorsqu'elles sont visibles par le navigateur. Dans nos balises `<img />` Nous définissons un attribut `data-src` qui sera définit comme source de l'image sera affichée.
+
+Le gem [**lazyload-rails**](https://github.com/jassa/lazyload-rails) vous simplifie la vie. Quelques secondes suffisent pour l'nstaller et il suffit d'activer l'option `lazy`.
+
+~~~ruby
+image_tag "kittenz.png", alt: "OMG a cat!", lazy: true
+# <img alt="OMG a cat!" data-original="/images/kittenz.png" src="http://www.appelsiini.net/projects/lazyload/img/grey.gif">
 ~~~
 
 
@@ -139,7 +157,7 @@ $ passenger-install-apache2-module
 
 Quelques minutes plus tard, vous obtenez quelques lignes à ajouter à votre fichier _/etc/apache2/apache2.conf_
 
-~~~bash
+~~~apache
 LoadModule passenger_module /home/pi/.rvm/gems/ruby-2.0.2/gems/passenger-5.1.11/buildout/apache2/mod_passenger.so
 <IfModule mod_passenger.c>
   PassengerRoot /home/pi/.rvm/gems/ruby-2.0.2/gems/passenger-5.1.11
@@ -147,12 +165,8 @@ LoadModule passenger_module /home/pi/.rvm/gems/ruby-2.0.2/gems/passenger-5.1.11/
 </IfModule>
 ~~~
 
-Et on r
+Et on redemarre Apache
 
 ~~~bash
-$ rvm install 2.0
-$ gem install bundler
-$ bundle install
-$ gem install passenger
-$ passenger-install-apache2-module
+$ sudo /etc/init.d/apache restart
 ~~~
