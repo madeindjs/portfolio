@@ -3,25 +3,95 @@ layout: post
 title:  Optimiser Apache
 description:  Participez au développement de votre navigateur préféré
 date:   2017-11-06 12:00:00 +0200
-tags: apache linux lxc
+tags: apache linux lxc ceo
 categories: tutorial
 ---
 
-Apache est un serveur HTTP distribué sous licence libre. Avec quasiment
-[50% de part de marché][MarketShareApache] c'est un des serveur web les plus
-populaire.
+Dans mon précédent article je vous expliquait comment installer un serveur
+[Apache][Apache] dans un container [LXC][LXC].
 
-Ses avantages sont:
+La configuration de base est d'[Apache][Apache] est souvent suffisante mais une
+configuration plus pointu peut vous économiser de la bande passante et de la
+ressource. Vous serez donc en mesure de tenir une charge plus importante et
+améliorer votre temps de réponse. De plus, en respectant les
+[conseils Google][GoogleGuidelines] vous améliorerez aussi votre réferencement.
 
-* **communauté** imposantes et donc beaucoup de ressources disponibles
-* **modules** qui permettent de prendre en charge de nombreux langages (PHP,
-  Python, Ruby, etc..) et de personnaliser [Apache][Apache]
-* **open-source** et maintenu par la [fondation Apache][FondationApache]
-* **disponible** sur toutes les plate-formes
 
-Beaucoup de tutoriels existent pour installer [Apache][Apache] mais voici les
-informations que j'aurais aimé avoir sous la mains à mes débuts.
+## La mise en cache
 
+Quoi de mieux que de réduire la taille des fichiers? Ne pas les envoyer!
+
+Il s'agit du principe de la **mise en cache**. Lors de la première requête, nous
+spécifions un [en-tête HTTP][http_headers] qui définit une **date d'expiration**
+de la page. La page est stockée dans un fichier par le navigateur jusqu'à cette
+date. Lors de la prochaine visite, si la date est toujours valide, le navigateur
+utilisera cette page sans passer par le serveur.
+
+Nous allons utiliser [PHP][php] pour simuler un temps de chargement
+assez long. On commence par l'installer:
+
+~~~bash
+$ apt install php libapache2-mod-php
+$ a2enmod php7.0
+$ systemctl reload apache2
+~~~
+
+> La version de PHP à activer peut différer en fonction de celle qui a été
+installée
+
+On crée un petit script qui va retarder l'affichage de la page grâce à la
+fonction [`sleep`][php_sleep]:
+
+~~~bash
+$ echo '<?php sleep(2); echo "loaded" ?>' > /var/www/test.fr/public/load.php
+~~~
+
+On se rend sur <http://test.fr/load.php>. La page met plus de deux secondes à
+s'afficher (normal):
+
+![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_without_cache.png)
+
+Mettons maintenant en place ce cache. [Apache][Apache] utilise deux modules pour
+ça: `headers` qui permet de modifier l'en-tête des réponses et `expires` qui
+ajoute l'entête `expires`. On commence par les activer:
+
+~~~bash
+$ a2enmod expires headers
+~~~
+
+On rajoute la directive `ExpiresActive on` pour activer l'option et on utilise
+`ExpireDefault` pour spécifier le temps de mise en cache. `ExpireDefault`
+utilise en argument le temps de mise en cache. Ce temps s'exprime avec:
+
+* **une lettre**: `A` pour *Access* (dernière visite) et `M` pour *Modification*
+* **un chiffre**: désignant le temps de secondes de mise en cache
+
+Par exemple `A10` pour le garder 10 secondes après le dernier accès ou `M60`
+pour le garder 1 minutes après la dernière modification.
+
+ Et on rajoute une directive de cache pour les images.
+
+~~~apache
+# active la mise en cache
+<IfModule mod_header.c>
+  Header append Cache-Control public
+</IfModule>
+# définis un cache d'une heure après la dernier accès
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresDefault A3600
+</IfModule>
+~~~
+
+On redémarre Apache
+
+~~~bash
+$ systemctl reload apache2
+~~~
+
+Et lorsqu'on rafraîchis notre navigateur, la différence est flagrante!
+
+![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_with_cache.png)
 
 
 ## La compression
@@ -74,85 +144,29 @@ L'inspecteur nous inique que sur 155,54 ko, **21,31 ko ont été transférés**!
 s'agit donc d'un gain à ne pas négliger car il fera la différence pour les
 petites connections.
 
-## La mise en cache
 
-Quoi de mieux que de réduire la taille des fichiers? Ne pas les envoyer!
 
-Il s'agit du principe de la **mise en cache**. Lors de la première requête, nous
-spécifions un [en-tête HTTP](https://developer.mozilla.org/fr/docs/HTTP/Headers)
-qui définit une **date d'expiration** de la page. La page est stockée dans un
-fichier par le navigateur jusqu'à cette date. Lors de la prochaine visite, si la
-date est toujours valide, le navigateur utilisera cette page sans passer par le
-serveur.
+## Supprimer les modules inutiles
 
-Nous allons utiliser [PHP](http://php.net/) pour simuler un temps de chargement
-assez long. On commence par l'installer:
+Certains modules sont activés par défaut lors de l'instalation. Ceux-ci:
 
-~~~bash
-$ apt install php libapache2-mod-php
-$ a2enmod php7.0
-$ systemctl reload apache2
-~~~
+* nous prennent de la **place sur le serveur**
+* sont potentiellement une **faille de sécurité**
+* utilise éventuellement une partie des **ressource**
 
-> La version de PHP à activer peut différer en fonction de celle qui a été
-installée
+Il convient donc de les supprimer.
 
-Et on crée un petit script qui va retarder l'affichage de la page:
+Pour les connaitres, il suffit de lister les fichiers contenu dans le dossier
+*/etc/apache2/mods-enabled*:
 
 ~~~bash
-$ echo '<?php sleep(2); echo "loaded" ?>' > /var/www/test.fr/public/load.php
+$ ls /etc/apache2/mods-enabled/
 ~~~
 
-On se rend sur [http://test.fr/load.php](http://test.fr/load.php). La page met
-plus de deux secondes à s'afficher
+Ensuite, il suffit d'utiliser `a2dismod` pour les désactiver (attention à tester
+sur un serveur de test avant de le faire en production).
 
-![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_without_cache.png)
-
-Mettons en place ce cache. Apache utilise deux modules pour ça:
-
-* `headers` qui permet de modifier l'en-tête des réponses
-* `expires` qui ajoute l'entête expires
-
-On commence par les activer:
-
-~~~bash
-$ a2enmod expires headers
-~~~
-
-On rajoute la directive `ExpiresActive on` pour activer l'option et on utilise
-`ExpireDefault` pour spécifier le temps de mise en cache. `ExpireDefault`
-utilise en argument le temps de mise en cache. Ce temps s'exprime avec:
-
-* **une lettre**: `A` pour *Access* (dernière visite) et `M` pour *Modification*
-* **un chiffre**: désignant le temps de secondes de mise en cache
-
-Par exemple `A10` pour le garder 10 secondes après le dernier accès ou `M60`
-pour le garder 1 minutes après la dernière modification.
-
- Et on rajoute une directive de cache pour les images.
-
-~~~apache
-# active la mise en cache
-<IfModule mod_header.c>
-  Header append Cache-Control public
-</IfModule>
-# définis un cache d'une heure après la dernier accès
-<IfModule mod_expires.c>
-  ExpiresActive on
-  ExpiresDefault A3600
-</IfModule>
-~~~
-
-On redémarre Apache
-
-~~~bash
-$ systemctl reload apache2
-~~~
-
-Et lorsqu'on rafraîchis notre navigateur, la différence est flagrante!
-
-![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_with_cache.png)
-
+_________todo: trouver un exemple
 
 ## Désactiver les logs d'accès
 
@@ -195,9 +209,9 @@ Protocols h2 http/1.1
 SSLEngine on
 ~~~
 
-## Désactiver les modules qui ne vous servent pas
-
-
+> Malheursement nous ne pouvons pas tester sur notre environnement local car nous
+  ne possédons pas le nom de domaine _test.fr_. Il faudra faire la manipulation
+  directement sur votre environnement de production.
 
 
 
@@ -207,7 +221,7 @@ SSLEngine on
 
 [`HostnameLookups`][hostnamelookups] permet de rechercher le nom de domaine du
 visiteur afin de le logger. Le problème est qu'une recherche DNS est effectuée à
-chaque visite. On peut désactiver cette options avec
+chaque visite. On peut désactiver cette options simplement dans notre **Vhost**:
 
 ~~~apache
 HostnameLookups off
@@ -215,19 +229,23 @@ HostnameLookups off
 
 ### *.htaccess*
 
-Si vous n'utilisez pas de fichiers *.htaccess* dans votre projet vous pouvez
-désactiver l'option `AllowOverride`. Ceci permet d'éviter une requête à
-[Apache][Apache] pour vérifier qu'un fichier *.htaccess* existe ou non.
+Les fichiers *.htaccess* permettent d'écraser les options renseignées dans le
+fichier de configuration [Apache][Apache]. Un appel système est effectué pour
+vérifier qu'un fichier *.htaccess* existe ou non. Si votre projet n'utilise pas
+de ces fichiers, vous pouvez les désactiver l'option `AllowOverride`:
 
 ~~~apache
-AllowOverride None
+<Directory "public/">
+  AllowOverride None
+</Directory>
 ~~~
 
 ### Durée de vie d'une connexion TCP
 
 [`KeepAliveTimeout`][keepalivetimeout] détermine la durée d'attente de la
-prochaine requête. Par défaut la valeur est fixée à 5 secondes mais elle peut
-être abaissée jusqu'à 2 secondes.
+prochaine requête. Par défaut la valeur est fixée à 5 secondes ce qui signifie
+qu'un processus attendra 5 secondes maximum avant de se fermer. Nous pouvons l'
+abaisser à 2 secondes. Il suffit d'ajouter la directive à notre **Vhost**.
 
 ~~~apache
 KeepAliveTimeout 2
@@ -235,7 +253,17 @@ KeepAliveTimeout 2
 
 ### Les liens symboliques
 
+L'option `FollowSymLinks` autorise [Apache][Apache] à traverser les liens
+symbolique pour récupérer des ressources (des images par exemple). Lorsque cette
+option est désactivée, un appel système est effectuée pour vérifier que le
+dossier n'est pas un lien symbolique. Donc autant activer l'option si cela est
+possible. Dans votre **Vhost**, ajouter la directive suivante:
 
+~~~apache
+<Directory "public/">
+  Options FollowSymLinks
+</Directory>
+~~~
 
 
 ## Liens intéressants
@@ -249,11 +277,17 @@ KeepAliveTimeout 2
 [Apache]:            https://fr.wikipedia.org/wiki/Apache_HTTP_Server
 [FondationApache]:   https://fr.wikipedia.org/wiki/Fondation_Apache
 [MarketShareApache]: https://www.developpez.com/actu/129511/Serveurs-Web-Nginx-detient-desormais-un-tiers-des-parts-de-marche-tandis-qu-Apache-chute-en-dessous-des-50-pourcent-d-apres-W3Tech/
+[http_headers]:      https://developer.mozilla.org/fr/docs/HTTP/Headers
 
 [letsencrypt]:       https://letsencrypt.org
 [certbot]:           https://certbot.eff.org
 [certbot-doc]:       https://certbot.eff.org/docs/
 
+[php]:               http://php.net/
+[php_sleep]:         http://php.net/manual/fr/function.sleep.php
+
 [mod_deflate]:       https://httpd.apache.org/docs/current/fr/mod/mod_deflate.html
 [hostnamelookups]:   https://httpd.apache.org/docs/current/fr/mod/core.html#hostnamelookups
 [keepalivetimeout]:  https://httpd.apache.org/docs/current/fr/mod/core.html#keepalivetimeout
+
+[GoogleGuidelines]: https://developers.google.com/speed/docs/insights/v2/reference/
