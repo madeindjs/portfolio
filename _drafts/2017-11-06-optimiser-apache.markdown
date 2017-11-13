@@ -14,7 +14,7 @@ La configuration de base est d'[Apache][Apache] est souvent suffisante mais une
 configuration plus pointu peut vous économiser de la bande passante et de la
 ressource. Vous serez donc en mesure de tenir une charge plus importante et
 améliorer votre temps de réponse. De plus, en respectant les
-[conseils Google][GoogleGuidelines] vous améliorerez aussi votre réferencement.
+[conseils Google][GoogleGuidelines] vous améliorerez aussi votre référencement.
 
 
 ## La mise en cache
@@ -148,7 +148,7 @@ petites connections.
 
 ## Supprimer les modules inutiles
 
-Certains modules sont activés par défaut lors de l'instalation. Ceux-ci:
+Certains modules sont activés par défaut lors de l'installation. Ceux-ci:
 
 * nous prennent de la **place sur le serveur**
 * sont potentiellement une **faille de sécurité**
@@ -156,7 +156,7 @@ Certains modules sont activés par défaut lors de l'instalation. Ceux-ci:
 
 Il convient donc de les supprimer.
 
-Pour les connaitres, il suffit de lister les fichiers contenu dans le dossier
+Pour les connaître, il suffit de lister les fichiers contenu dans le dossier
 */etc/apache2/mods-enabled*:
 
 ~~~bash
@@ -209,7 +209,7 @@ Protocols h2 http/1.1
 SSLEngine on
 ~~~
 
-> Malheursement nous ne pouvons pas tester sur notre environnement local car nous
+> Malheureusement nous ne pouvons pas tester sur notre environnement local car nous
   ne possédons pas le nom de domaine _test.fr_. Il faudra faire la manipulation
   directement sur votre environnement de production.
 
