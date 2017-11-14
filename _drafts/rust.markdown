@@ -168,41 +168,9 @@ La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la 
 ~~~
 
 
-## [Ownership][ownership]
+## [Ownership][ownership] et réfernce
 
-
-~~~rust
-fn main() {
-    // create a simple word
-    let word: String = String::from("hello");
-    // try to copy it
-    let word_copy = word;
-    println!("{:?}", word_copy);
-}
-~~~
-
-Ce code génerera une erreur
-
-> use of moved value: `word`
-
-Pour que ce code fonctionne nous devons utiliser la méthode `clone` qui va créer une copie.
-
-~~~rust
-fn main() {
-    // create a simple word
-    let word: String = String::from("hello");
-    // copy it
-    let word_copy = word.clone();
-    println!("{:?}", word_copy);
-}
-~~~
-
-
-## Reference
-
-Comme tous les langages bas niveaux, Rust utilise beaucoup de **pointeurs**. Au lieu de copier la variable, nous travaillons directement sur une **réference** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
-
-Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+Comme tous les langages bas niveaux, Rust utilise les **pointeurs**. Au lieu de copier la variable, nous travaillons directement sur une **réference** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
 
 ~~~rust
 let mut hello = "Bonjour";
@@ -212,7 +180,13 @@ hello = "Holla";
 println!("{:?}", &hello);// => "Holla"
 ~~~
 
-Ceci à l'avantage d'économiser une variable. Il serait facile de faire des pointeurs qui pointent sur une valeur vide ([Dangling References][dangling]). Prenont l'exemple suivant
+Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+
+### Dandling pointers
+
+L'un des plus gros problèmes des pointers sont les *Dandling pointers*. Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope (function, if, etc..) cette variable est libérée. Nous obtenons donc un pointer vers une réference nulle et donc une fuite de mémoire car nous utilisons plus de mémoire que besoin.
+
+Voici un exemple écris en Rust
 
 ~~~rust
 fn main() {
@@ -228,12 +202,9 @@ fn dangle() -> &String {
 }
 ~~~
 
-Mais le formidable compilateur ne laisse rien passer et ce code ne compilera pas:
+Le gros point fort de Rust est qu'il ne vous laissera pas compiller cela.
 
 > missing lifetime specifier
-
-
-Rust permet un moyen simple
 
 
 ## Structure
