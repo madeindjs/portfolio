@@ -6,7 +6,37 @@ date:   2017-11-06 12:00:00 +0200
 tags: rust
 categories: tutorial
 ---
+
+## Sommaire
+
+* TOC
+{:toc}
+
+## Pourquoi Rust?
+
+    orientation bas niveau, avec la possibilité de choisir la gestion de la mémoire adaptée au programme : pile, tas (unique_ptr, shared_ptr) ;
+    gestion de la concurrence intégrée dans le langage ;
+    sûr par défaut, avec la possibilité de contourner cette sûreté dans les blocs unsafe :
+        typage statique sans conversions implicites,
+        accès mémoire validés statiquement par le compilateur,
+        variables immuables par défaut,
+        passage de messages entre tâches concurrentes pour éviter des erreurs liées aux accès concurrents à la mémoire ;
+    inférence de types ;
+    filtrage par motif ;
+    généricité.
+
+
 Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en prgramation.
+
+
+> Rust est un langage de programmation compilé multi-paradigme conçu et développé par Mozilla. Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
+>
+> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
+
+Concrètement cela signifie:
+
+* Les performances du C sans la gestion de la mémoire
+* protection contre les fuites de mémoire
 
 ## Instalation
 
@@ -32,9 +62,11 @@ $ ./main
 
 Si tout fonctionne, vous obtenez un magnifique
 
-> Hello, world!
+    Hello, world!
 
-## Les variables
+## Les bases
+
+### Les variables
 
 Les varibales s'instancies avec `let`:
 
@@ -42,9 +74,25 @@ Les varibales s'instancies avec `let`:
 let message = "hello world";
 ~~~
 
-Elles sont **typées** et si aucun type n'est spécifié, Rust devine le type lors de la compilation.
+Elles sont **typées**. Nous pouvons forcer le type 
 
-### types de base
+~~~rust
+let message : i8 = 5;
+// ou
+let message = 5i8;
+~~~
+
+Si aucun type n'est spécifié, Rust le devine pour vous lors de la compilation.
+
+Pour les **constantes** on utilise `const` mais le type **doit être définit**:
+
+~~~rust
+const MAX_POINTS: u32 = 100_000;
+~~~
+
+### Les types
+
+On retrouve les **types de base**:
 
 * Entier
   * *unsigned*: `i8`, `i16`, `i32`, `i64`, `isize` (ne peut être négatif)
@@ -53,26 +101,21 @@ Elles sont **typées** et si aucun type n'est spécifié, Rust devine le type lo
 * booléen: `bool`
 * caractère: instancé avec des `'`
 
-### types pour grouper
+Pour les **types pour grouper**, il existe deux types:
 
-* **Tuples**: Tableau sans limite de taille ni contrainte de type
+* les **Tuples**: Tableau sans limite de taille ni contrainte de type
 ~~~rust
 let tup: (i32, f64, u8) = (500, 6.4, 1);
 let first_element = tup.1;// => 6.4
 ~~~
-* **Array**: Tableau avec taille fixe et les élements doivent être de la même famille
+* les **Array**: Tableau avec taille fixe et les élements doivent être de la même famille
 ~~~rust
-let array = ['a', 'b', 'c'];
-let first_element = array[0];// => 6.4
+let array            = ['a', 'b', 'c'];
+// s'écrit aussi
+let array [String;3] = ['a', 'b', 'c'];
+let first_element    = array[0];// => 6.4
 ~~~
 
-### Constantes
-
-On utilise `const` pour spécifier une constante et le type doit être définit:
-
-~~~rust
-const MAX_POINTS: u32 = 100_000;
-~~~
 
 ### Mutabilité
 
@@ -83,7 +126,7 @@ let x = 1;
 x = x + 1;
 ~~~
 
-> re-assignment of immutable variable `x`
+    re-assignment of immutable variable `x`
 
 Il faut déclarer la variable comme mutable avec le mot clé `mut`:
 
@@ -92,14 +135,16 @@ let mut x = 1;
 x = x + 1;
 ~~~
 
-Un autre moyen consiste à utiliser le **shadowing** (je n'ai pas trouvé de traduction à ce terme). Cela consite à redéfinir la variable avec `let`. Ceci, à la différence du `mut` permet de réfinir le type de la variable.
+Un autre moyen consiste à utiliser le **shadowing** (je n'ai pas trouvé de traduction à ce terme). Cela consite à redéfinir la variable avec `let`. Ceci, à la différence du `mut`, permet de réfinir le type de la variable.
 
 ~~~rust
 let mut x = 1;
 let x = x + 1;
 ~~~
 
-## Logique
+### Logique
+
+Ici rien de spécifique à Rust, on retrouve le `if`, `else` et le `else if`. Cependant, contrairement à d'autres languages, la condition ne s'entoure pas de parenthèses
 
 ~~~rust
 let number = 3;
@@ -124,9 +169,9 @@ let number = if condition {
 };
 ~~~
 
-## Boucles
+### Boucles
 
-On peut utiliser `while`.
+Là aussi, pas de différence. Nous pouvons utiliser le `while`:
 
 ~~~rust
 let mut number = 3;
@@ -138,7 +183,7 @@ while number != 0 {
 }
 ~~~
 
-ou la boucle `for`
+... ou la boucle `for`:
 
 ~~~rust
 let a = [10, 20, 30, 40, 50];
@@ -148,7 +193,7 @@ for element in a.iter() {
 }
 ~~~
 
-## Les fonctions
+### Les fonctions
 
 Définies par le mot clé `fn`, les paramètres et la valeur de retour sont **typés**.
 
@@ -160,7 +205,7 @@ fn multiply(a: i8, b: i8) -> i8 {
 
 La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la fin. Pour plus de lisibilté, on peut utiliser le mot clé `return`.
 
-## Documentation
+### Documentation
 
 ~~~rust
 /// Generate library docs for the following item.
@@ -168,9 +213,15 @@ La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la 
 ~~~
 
 
-## [Ownership][ownership] et réfernce
+## Un peu plus loin
 
-Comme tous les langages bas niveaux, Rust utilise les **pointeurs**. Au lieu de copier la variable, nous travaillons directement sur une **réference** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
+Maintenant qu'on a les bases, nous pouvons nous attaquer aux notions plus avancées (et il y en a!).
+
+### [Ownership][ownership] et réference
+
+Comme le **C** ou bien le **C++**, Rust utilise les **pointeurs**.
+
+Au lieu de copier la variable, nous travaillons directement sur une **réference** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
 
 ~~~rust
 let mut hello = "Bonjour";
@@ -184,33 +235,35 @@ Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui
 
 ### Dandling pointers
 
-L'un des plus gros problèmes des pointers sont les *Dandling pointers*. Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope (function, if, etc..) cette variable est libérée. Nous obtenons donc un pointer vers une réference nulle et donc une fuite de mémoire car nous utilisons plus de mémoire que besoin.
+L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
 
-Voici un exemple écris en Rust
+Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope *(`fn`, `if`, etc..)* cette variable est libérée. Nous obtenons donc un pointer vers une **réference nulle**. Ceci augmente la mémoire utilisée par votre progremme et crée une **fuite de mémoire**.
+
+Voici un exemple avec Rust.
 
 ~~~rust
+// Fonction qui va créer un dangling pointer
+fn dangle() -> &String {
+    // on crée une variable limitée au scope de la fonction
+    let s = String::from("hello");
+    // on renvoie une réference qui pointe sur la variable
+    // limitée au scope de la fonction
+    &s
+}
 fn main() {
     let reference_to_nothing = dangle();
 }
-// va créer une dangling reference
-fn dangle() -> &String {
-    let s = String::from("hello");
-    // on renvoie une réference qui pointe sur une valeur qui
-    // est limité au scope de la fonction, donc il sera vidé à la fin
-    // de la fonction
-    &s
-}
 ~~~
 
-Le gros point fort de Rust est qu'il ne vous laissera pas compiller cela.
+Une des plus grande force de Rust est qu'il ne vous **laissera pas compiller** ce code.
 
-> missing lifetime specifier
-
-
-## Structure
+    missing lifetime specifier
 
 
-## Enum
+### Structure
+
+
+### Enum
 
 ~~~rust
 #[derive(Debug)]
