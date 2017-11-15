@@ -8,58 +8,38 @@ categories: tutorial
 ---
 
 
-Rust est un language de programation **compilé** qui se veut **sûr** et **rapide**. Il est édité par Mozilla et il est utilisé nottament par Firefox 57.
-
-
-Rust est un langage de programmation système ultra-rapide, qui prévient les erreurs de segmentation et garantit la sûreté entre threads.
-
-
-
-    abstractions sans coût
-    sémantique de mouvement
-    garantie de sûreté de la mémoire
-    fils d’exécution sans accès concurrent
-    généricité avec les traits
-    filtrage par motif
-    inférence de type
-    environnement d’exécution minimal
-    bindings C efficaces
-
-
-
+Rust est un language de programation **compilé** qui se veut **sûr** et **ultra-rapide**. Il est édité par la [fondation Mozilla][Mozilla] et il est utilisé nottament par Firefox qui l'utilise dans son moteur de rendu [Servo][Servo] .
 
 ## Sommaire
 
 * TOC
 {:toc}
 
-## Pourquoi Rust?
 
-Rust est
-> Rust est un langage de programmation compilé multi-paradigme conçu et développé par Mozilla. Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
+## Introduction
+
+### Pourquoi utiliser Rust?
+
+Rust bénéficie d'une grande communauté et à d'ailleur été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)).
+
+> Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
 >
 > [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
 
-    orientation bas niveau, avec la possibilité de choisir la gestion de la mémoire adaptée au programme : pile, tas (unique_ptr, shared_ptr) ;
-    gestion de la concurrence intégrée dans le langage ;
-    sûr par défaut, avec la possibilité de contourner cette sûreté dans les blocs unsafe :
-        typage statique sans conversions implicites,
-        accès mémoire validés statiquement par le compilateur,
-        variables immuables par défaut,
-        passage de messages entre tâches concurrentes pour éviter des erreurs liées aux accès concurrents à la mémoire ;
-    inférence de types ;
-    filtrage par motif ;
-    généricité.
-
-
-Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en prgramation.
-
-
-
-Concrètement cela signifie:
+A l'inverse du **C** et du **C++**, Rust simplifie grandement de la **libération de la mémoire** avec son système d'apartenance. Concrètement cela signifie:
 
 * Les performances du C sans la gestion de la mémoire
 * protection contre les fuites de mémoire
+
+Bénéficiant des même performances que le **C**, vous pouvez tout à fait développer votre nouvelle librairie en Rust.
+
+
+### Pourquoi ne pas utiliser Rust?
+
+Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en programation.
+
+Si vous cherchez un boulot .......
+
 
 ## Instalation
 
@@ -89,7 +69,17 @@ Si tout fonctionne, vous obtenez un magnifique
 
 ## Les bases
 
-### Les variables
+
+### Les variables & les types
+
+On retrouve tous les **types de base**:
+
+* Entier
+  * *unsigned*: `i8`, `i16`, `i32`, `i64`, `isize` (ne peut être négatif)
+  * *signed*: `u8`, `u16`, `u32`, `u64`, `usize`
+* Décimal `f32` et `f64`
+* booléen: `bool`
+* caractère: instancié avec des `'`
 
 Les varibales s'instancies avec `let`:
 
@@ -97,15 +87,13 @@ Les varibales s'instancies avec `let`:
 let message = "hello world";
 ~~~
 
-Elles sont **typées**. Nous pouvons forcer le type
+Elles sont **typées**.
 
 ~~~rust
-let message : i8 = 5;
-// ou
-let message = 5i8;
+let number = 5;// un nombre entier
+let number : i8 = 5;// un entier de 8 bytes
+let number = 5i8;// un entier de 8 bytes
 ~~~
-
-Si aucun type n'est spécifié, Rust le devine pour vous lors de la compilation.
 
 Pour les **constantes** on utilise `const` mais le type **doit être définit**:
 
@@ -113,22 +101,9 @@ Pour les **constantes** on utilise `const` mais le type **doit être définit**:
 const MAX_POINTS: u32 = 100_000;
 ~~~
 
-### Les types
-
-### Base
-
-On retrouve les **types de base**:
-
-* Entier
-  * *unsigned*: `i8`, `i16`, `i32`, `i64`, `isize` (ne peut être négatif)
-  * *signed*: `u8`, `u16`, `u32`, `u64`, `usize`
-* Décimal `f32` et `f64`
-* booléen: `bool`
-* caractère: instancé avec des `'`
-
 ### types pour grouper
 
-Les **Tuples** sont des tableaux sans limite de taille ni contrainte de type
+Les **Tuples** sont des tableaux **sans limite de taille** et **sans contrainte de type**
 
 ~~~rust
 let tup: (i32, f64, u8) = (500, 6.4, 1);
@@ -165,14 +140,14 @@ println!("{:?}", &vector[2..3]);//[3]
 
 ### Mutabilité
 
-Toutes les variables sont imutables. Par exemple ce code ne pourra pas être compilé
+Toutes les variables sont **immutables** par défaut. Si vous ne le spécifiez pas, elles ne pourrons être modifiés. Par exemple ce code ne pourra pas être compilé
 
 ~~~rust
 let x = 1;
 x = x + 1;
+// => re-assignment of immutable variable `x`
 ~~~
 
-    re-assignment of immutable variable `x`
 
 Il faut déclarer la variable comme mutable avec le mot clé `mut`:
 
@@ -188,7 +163,7 @@ let mut x = 1;
 let x = x + 1;
 ~~~
 
-### Logique
+### Les conditions
 
 Ici rien de spécifique à Rust, on retrouve le `if`, `else` et le `else if`. Cependant, contrairement à d'autres languages, la condition ne s'entoure pas de parenthèses
 
@@ -227,9 +202,7 @@ match number {
 }
 ~~~
 
-
-
-### Boucles
+### Les boucles
 
 Là aussi, pas de différence. Nous pouvons utiliser le `while`:
 
@@ -255,7 +228,7 @@ for element in a.iter() {
 
 ### Les fonctions
 
-Définies par le mot clé `fn`, les paramètres et la valeur de retour sont **typés**.
+Définies par le mot clé `fn`, les paramètres et la valeur de retour sont **typés**. La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la fin. Pour plus de lisibilté, on peut utiliser le mot clé `return`.
 
 ~~~rust
 fn multiply(a: i8, b: i8) -> i8 {
@@ -263,7 +236,8 @@ fn multiply(a: i8, b: i8) -> i8 {
 }
 ~~~
 
-La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la fin. Pour plus de lisibilté, on peut utiliser le mot clé `return`.
+
+### Les macros
 
 ### Documentation
 
@@ -275,7 +249,61 @@ La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la 
 
 ## Un peu plus loin
 
-Maintenant qu'on a les bases, nous pouvons nous attaquer aux notions plus avancées (et il y en a!).
+Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
+
+### Structure
+
+### Gestion des erreurs
+
+Considérons l'exemple suivant: un `Human` peut avoir un `Sex` ou non (c'est une `Option`). `
+
+~~~rust
+// les sexes disponnibles
+enum Sex { Male, Femmale }
+
+// une structure basique pour un humain
+// avec un sexe optionnel
+struct Human {
+    sex: Option<Sex>,
+}
+
+impl Human {
+    // création d'un humain sans sexe
+    pub fn new() -> Human {
+        Human { sex: None }
+    }
+}
+~~~
+
+Une fonction permet de savoir à tout moment s'il possède un `Sex` ou non. La ou dans la majorité des languages on test le résultat renvoyé par la fonction, avec Rust on utilise le **pattern matching** avec `match`. Voici l'implémentation:
+
+~~~rust
+impl Human {
+    // affichage du sexe
+    pub fn print_my_sex(&self) {
+        match self.sex {
+            Some(ref _sex) => println!("J'ai un sexe :)"),
+            None => println!("Je n'ai pas de sexe :'("),
+        }
+    }
+}
+~~~
+
+Maintenant on teste la fonction
+
+~~~rust
+fn main() {
+    let mut alex = Human::new();
+    alex.print_my_sex();// => "Je n'ai pas de sexe :'("
+    // maintenant, on lui définit un sexe
+    alex.sex = Some(Sex::Male);
+    alex.print_my_sex();// => "J'ai un sexe :)"
+}
+~~~
+
+
+On voit que qu'importe la situation, notre code gère la situation. Cette méthode peut sembler lourde mais ainsi notre code est **bulletproof**!
+
 
 ### [Ownership][ownership] et réference
 
@@ -312,16 +340,11 @@ fn dangle() -> &String {
 }
 fn main() {
     let reference_to_nothing = dangle();
+    // => missing lifetime specifier
 }
 ~~~
 
 Une des plus grande force de Rust est qu'il ne vous **laissera pas compiller** ce code.
-
-    missing lifetime specifier
-
-
-### Structure
-
 
 ### Enum
 
@@ -426,8 +449,16 @@ fn main() {
 }
 ~~~
 
+
+## Liens utiles
+
+* <https://blog.guillaume-gomez.fr/Rust>
+
 [Rust]: https://www.rust-lang.org/
+[Mozilla]: https://www.mozilla.org/fr/
+[Servo]: https://fr.wikipedia.org/wiki/Servo_(moteur_de_rendu)
 
 [ownership]: https://doc.rust-lang.org/book/second-edition/ch04-01-what-is-ownership.html
 [dangling]: https://doc.rust-lang.org/book/second-edition/ch04-02-references-and-borrowing.html#dangling-references
 
+[Result]: https://doc.rust-lang.org/stable/std/io/type.Result.html
