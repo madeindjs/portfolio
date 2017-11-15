@@ -7,12 +7,38 @@ tags: rust
 categories: tutorial
 ---
 
+
+Rust est un language de programation **compilé** qui se veut **sûr** et **rapide**. Il est édité par Mozilla et il est utilisé nottament par Firefox 57.
+
+
+Rust est un langage de programmation système ultra-rapide, qui prévient les erreurs de segmentation et garantit la sûreté entre threads.
+
+
+
+    abstractions sans coût
+    sémantique de mouvement
+    garantie de sûreté de la mémoire
+    fils d’exécution sans accès concurrent
+    généricité avec les traits
+    filtrage par motif
+    inférence de type
+    environnement d’exécution minimal
+    bindings C efficaces
+
+
+
+
 ## Sommaire
 
 * TOC
 {:toc}
 
 ## Pourquoi Rust?
+
+Rust est
+> Rust est un langage de programmation compilé multi-paradigme conçu et développé par Mozilla. Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
+>
+> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
 
     orientation bas niveau, avec la possibilité de choisir la gestion de la mémoire adaptée au programme : pile, tas (unique_ptr, shared_ptr) ;
     gestion de la concurrence intégrée dans le langage ;
@@ -29,9 +55,6 @@ categories: tutorial
 Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en prgramation.
 
 
-> Rust est un langage de programmation compilé multi-paradigme conçu et développé par Mozilla. Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
->
-> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
 
 Concrètement cela signifie:
 
@@ -74,7 +97,7 @@ Les varibales s'instancies avec `let`:
 let message = "hello world";
 ~~~
 
-Elles sont **typées**. Nous pouvons forcer le type 
+Elles sont **typées**. Nous pouvons forcer le type
 
 ~~~rust
 let message : i8 = 5;
@@ -92,6 +115,8 @@ const MAX_POINTS: u32 = 100_000;
 
 ### Les types
 
+### Base
+
 On retrouve les **types de base**:
 
 * Entier
@@ -101,14 +126,17 @@ On retrouve les **types de base**:
 * booléen: `bool`
 * caractère: instancé avec des `'`
 
-Pour les **types pour grouper**, il existe deux types:
+### types pour grouper
 
-* les **Tuples**: Tableau sans limite de taille ni contrainte de type
+Les **Tuples** sont des tableaux sans limite de taille ni contrainte de type
+
 ~~~rust
 let tup: (i32, f64, u8) = (500, 6.4, 1);
 let first_element = tup.1;// => 6.4
 ~~~
-* les **Array**: Tableau avec taille fixe et les élements doivent être de la même famille
+
+Les **Array** sont des tableaux avec **taille fixe** et les élements doivent être de la **même famille**
+
 ~~~rust
 let array            = ['a', 'b', 'c'];
 // s'écrit aussi
@@ -116,10 +144,28 @@ let array [String;3] = ['a', 'b', 'c'];
 let first_element    = array[0];// => 6.4
 ~~~
 
+Les **slices** sont des **pointeurs** vers une **zone** d'un array:
+
+~~~rust
+let array = ['a', 'b', 'c'];
+println!("{:?}", &array[1..3]);// => ['b', 'c']
+~~~
+
+Les **vecteur** sont des tableaux d'élements de la **même famille** mais sans contrainte de taille.
+
+~~~rust
+let mut vector: Vec<i8> = Vec::new();
+vector.push(1);
+vector.push(2);
+vector.push(3);
+println!("{:?}", vector);//[1, 2, 3]
+println!("{:?}", &vector[2..3]);//[3]
+~~~
+
 
 ### Mutabilité
 
-Ruste casse la convention et par défault les variables sont imutables. Par exemple ce code ne pourra pas être compilé
+Toutes les variables sont imutables. Par exemple ce code ne pourra pas être compilé
 
 ~~~rust
 let x = 1;
@@ -168,6 +214,20 @@ let number = if condition {
     6
 };
 ~~~
+
+Pour lier plusieurs conditions, on peut utiliser le `match`:
+
+~~~rust
+let number = 3i8;
+
+match number {
+    10...100 => println!("La variable est entre 10 et 100 (inclus)"),
+    5 | 8    => println!("Egal à 5 ou 8"),
+    _ => println!("I don't know"),
+}
+~~~
+
+
 
 ### Boucles
 
@@ -281,7 +341,7 @@ struct Car{
 
 fn main() {
     let my_car = Car{
-        brand: CarBrand::Smart, 
+        brand: CarBrand::Smart,
         model:  String::from("Roaster")
     };
 
@@ -361,7 +421,7 @@ impl Sentence {
 
 fn main() {
     let lorem_string = String::from("Lorem ipsum dolor sit amet, consectetur adipisicing elit");
-    let sentence = Sentence{content: lorem_string}; 
+    let sentence = Sentence{content: lorem_string};
     println!("First word is {:?}", sentence.first_word());
 }
 ~~~
@@ -370,3 +430,4 @@ fn main() {
 
 [ownership]: https://doc.rust-lang.org/book/second-edition/ch04-01-what-is-ownership.html
 [dangling]: https://doc.rust-lang.org/book/second-edition/ch04-02-references-and-borrowing.html#dangling-references
+
