@@ -2,7 +2,7 @@
 layout: post
 title:  Installer Apache dans un container LXC
 description:  Participez au développement de votre navigateur preéferé
-date:   2017-11-06 12:00:00 +0200
+date:   2017-11-16 08:00:00 +0200
 tags: apache linux lxc
 categories: tutorial
 ---
@@ -152,6 +152,7 @@ Et de se rendre sur [http://test.fr](http://test.fr).
 ![Page d'acceuil de test.fr](/img/blog/debian_apache_hello_world.png)
 
 
+Dans un prochain article on verra comment améliorer la configuration de base d'[Apache][Apache]
 
 [LXC]: https://linuxcontainers.org/fr/
 [Apache]: https://fr.wikipedia.org/wiki/Apache_HTTP_Server
