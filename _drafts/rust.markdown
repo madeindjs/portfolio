@@ -253,13 +253,102 @@ Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beau
 
 ### Structure
 
+Si vous venez d'un langage orienté objet (Ruby, PHP, Java, etc..), les **structures** correspondent un peu aux **classes**.
+
+Prenons une `Human` qui possède un `name` et un `sex` (jusque là ça se tient).
+
+~~~rust
+#[derive(Debug)]
+struct Human {
+    name: String,
+    sex: String,
+}
+
+fn main() {
+    let alex = Human {
+        name: String::from("Alexandre"),
+        sex: String::from("Big"),
+    };
+    println!("{:?}", alex);
+    // => Human { name: "Alexandre", sex: "Big" }
+}
+~~~
+
+Comme en POO, nous pouvons ajouter des **méthodes** sur ces structures avec les **implémentation**. Pour cela on utilise `impl`. Pour les fonctions, si elle prennent en paramètre `&self`, ce sont des **méthodes d'instances**. Si elle ne prennent pas en paramètre `&self`, ce sont des **métodes statiques**.
+
+Essayons ça avec une une méthode `describe` aqui permet d'afficher les informations
+
+~~~rust
+struct Human {
+    name: String,
+    sex: String,
+}
+
+impl Human {
+    fn describe(&self) {
+        println!("My name is {} and my sex is {}", self.name, self.sex);
+    }
+}
+
+
+fn main() {
+    let alex = Human {
+        name: String::from("Alexandre"),
+        sex: String::from("Big"),
+    };
+    alex.describe();
+    // => My name is Alexandre and my sex is Big
+}
+~~~
+
+### Les `enum`
+
+`alex` est bien sympa, mais au lieu de remplir le champs `sex` par `Male` ou `Femmale`, il a mis "big" (le con!).
+
+Pour parrer à ça, nous pouvons forcer le choix à des types définis avec un `enum` ressamblant à cela
+
+~~~rust
+#[derive(Debug)]
+enum Sex {
+	Male,
+	Femmale
+}
+~~~
+
+Et pour implémenter l'`enum` à notre classe, il suffit de changer le type de l'attribut `sex`:
+
+~~~rust
+struct Human {
+    name: String,
+    sex: Sex,
+}
+
+impl Human {
+    fn describe(&self) {
+        println!("My name is {} and my sex is {:?}", self.name, self.sex);
+    }
+}
+~~~
+
+Et maintenant l'instanciation de notre `alex` ne peut plus choisir autre chose que les deux sexes proposé:
+
+~~~rust
+fn main() {
+    let alex = Human {
+        name: String::from("Alexandre"),
+        sex: Sex::Male,
+    };
+    alex.describe();
+    // => My name is Alexandre and my sex is Male
+}
+~~~
+
 ### Gestion des erreurs
 
 Considérons l'exemple suivant: un `Human` peut avoir un `Sex` ou non (c'est une `Option`). `
 
 ~~~rust
 // les sexes disponnibles
-enum Sex { Male, Femmale }
 
 // une structure basique pour un humain
 // avec un sexe optionnel
