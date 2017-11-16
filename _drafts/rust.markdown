@@ -8,7 +8,7 @@ categories: tutorial
 ---
 
 
-Rust est un language de programation **compilé** qui se veut **sûr** et **ultra-rapide**. Il est édité par la [fondation Mozilla][Mozilla] et il est utilisé nottament par Firefox qui l'utilise dans son moteur de rendu [Servo][Servo] .
+Rust est un langage de programmation **compilé** qui se veut **sûr** et **ultra-rapide**. Il est édité par la [fondation Mozilla][Mozilla] et il est utilisé notamment par Firefox qui l'utilise dans son moteur de rendu [Servo][Servo] .
 
 ## Sommaire
 
@@ -20,13 +20,13 @@ Rust est un language de programation **compilé** qui se veut **sûr** et **ultr
 
 ### Pourquoi utiliser Rust?
 
-Rust bénéficie d'une grande communauté et à d'ailleur été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)).
+Rust bénéficie d'une grande communauté et à d’ailleurs été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)).
 
 > Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
 >
 > [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
 
-A l'inverse du **C** et du **C++**, Rust simplifie grandement de la **libération de la mémoire** avec son système d'apartenance. Concrètement cela signifie:
+A l'inverse du **C** et du **C++**, Rust simplifie grandement de la **libération de la mémoire** avec son système d’appartenance. Concrètement cela signifie:
 
 * Les performances du C sans la gestion de la mémoire
 * protection contre les fuites de mémoire
@@ -36,12 +36,12 @@ Bénéficiant des même performances que le **C**, vous pouvez tout à fait dév
 
 ### Pourquoi ne pas utiliser Rust?
 
-Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en programation.
+Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en programmation.
 
 Si vous cherchez un boulot .......
 
 
-## Instalation
+## Installation
 
 ~~~bash
 curl https://sh.rustup.rs -sSf | sh
@@ -56,7 +56,7 @@ fn main() {
 }
 ~~~
 
-On compile et on execute:
+On compile et on exécute:
 
 ~~~bash
 $ rustc main.rs
@@ -81,7 +81,7 @@ On retrouve tous les **types de base**:
 * booléen: `bool`
 * caractère: instancié avec des `'`
 
-Les varibales s'instancies avec `let`:
+Les variables s’instancie avec `let`:
 
 ~~~rust
 let message = "hello world";
@@ -110,7 +110,7 @@ let tup: (i32, f64, u8) = (500, 6.4, 1);
 let first_element = tup.1;// => 6.4
 ~~~
 
-Les **Array** sont des tableaux avec **taille fixe** et les élements doivent être de la **même famille**
+Les **Array** sont des tableaux avec **taille fixe** et les éléments doivent être de la **même famille**
 
 ~~~rust
 let array            = ['a', 'b', 'c'];
@@ -126,7 +126,7 @@ let array = ['a', 'b', 'c'];
 println!("{:?}", &array[1..3]);// => ['b', 'c']
 ~~~
 
-Les **vecteur** sont des tableaux d'élements de la **même famille** mais sans contrainte de taille.
+Les **vecteur** sont des tableaux d’éléments de la **même famille** mais sans contrainte de taille.
 
 ~~~rust
 let mut vector: Vec<i8> = Vec::new();
@@ -156,7 +156,7 @@ let mut x = 1;
 x = x + 1;
 ~~~
 
-Un autre moyen consiste à utiliser le **shadowing** (je n'ai pas trouvé de traduction à ce terme). Cela consite à redéfinir la variable avec `let`. Ceci, à la différence du `mut`, permet de réfinir le type de la variable.
+Un autre moyen consiste à utiliser le **shadowing** (je n'ai pas trouvé de traduction à ce terme). Cela consiste à redéfinir la variable avec `let`. Ceci, à la différence du `mut`, permet de définir le type de la variable.
 
 ~~~rust
 let mut x = 1;
@@ -165,7 +165,7 @@ let x = x + 1;
 
 ### Les conditions
 
-Ici rien de spécifique à Rust, on retrouve le `if`, `else` et le `else if`. Cependant, contrairement à d'autres languages, la condition ne s'entoure pas de parenthèses
+Ici rien de spécifique à Rust, on retrouve le `if`, `else` et le `else if`. Cependant, contrairement à d'autres langages, la condition ne s'entoure pas de parenthèses
 
 ~~~rust
 let number = 3;
@@ -228,7 +228,7 @@ for element in a.iter() {
 
 ### Les fonctions
 
-Définies par le mot clé `fn`, les paramètres et la valeur de retour sont **typés**. La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la fin. Pour plus de lisibilté, on peut utiliser le mot clé `return`.
+Définies par le mot clé `fn`, les paramètres et la valeur de retour sont **typés**. La **valeur de retour** est la dernière ligne qui ne comporte pas de `;` à la fin. Pour plus de lisibilité, on peut utiliser le mot clé `return`.
 
 ~~~rust
 fn multiply(a: i8, b: i8) -> i8 {
@@ -236,20 +236,53 @@ fn multiply(a: i8, b: i8) -> i8 {
 }
 ~~~
 
-
 ### Les macros
 
-### Documentation
 
-~~~rust
-/// Generate library docs for the following item.
-//! Generate library docs for the enclosing item.
-~~~
-
-
-## Un peu plus loin
+## Un peu plus loin dans le langage
 
 Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
+
+### [Ownership][ownership] et référence
+
+Comme le **C** ou bien le **C++**, Rust utilise les **pointeurs**.
+
+Au lieu de copier la variable, nous travaillons directement sur une **référence** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
+
+~~~rust
+let mut hello = "Bonjour";
+println!("{:?}", hello); // => "Bonjour"
+println!("{:?}", &hello);// => "Bonjour"
+hello = "Holla";
+println!("{:?}", &hello);// => "Holla"
+~~~
+
+Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+
+### Dandling pointers
+
+L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
+
+Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope *(`fn`, `if`, etc..)* cette variable est libérée. Nous obtenons donc un pointer vers une **référence nulle**. Ceci augmente la mémoire utilisée par votre programme et crée une **fuite de mémoire**.
+
+Voici un exemple avec Rust.
+
+~~~rust
+// Fonction qui va créer un dangling pointer
+fn dangle() -> &String {
+    // on crée une variable limitée au scope de la fonction
+    let s = String::from("hello");
+    // on renvoie une réference qui pointe sur la variable
+    // limitée au scope de la fonction
+    &s
+}
+fn main() {
+    let reference_to_nothing = dangle();
+    // => missing lifetime specifier
+}
+~~~
+
+Une des plus grande force de Rust est qu'il ne vous **laissera pas compiller** ce code.
 
 ### Structure
 
@@ -305,13 +338,13 @@ fn main() {
 
 `alex` est bien sympa, mais au lieu de remplir le champs `sex` par `Male` ou `Femmale`, il a mis "big" (le con!).
 
-Pour parrer à ça, nous pouvons forcer le choix à des types définis avec un `enum` ressamblant à cela
+Pour parer à ça, nous pouvons forcer le choix à des types définis avec un `enum` rassemblant à cela
 
 ~~~rust
 #[derive(Debug)]
 enum Sex {
-	Male,
-	Femmale
+    Male,
+    Femmale
 }
 ~~~
 
@@ -343,28 +376,33 @@ fn main() {
 }
 ~~~
 
-### Gestion des erreurs
+### Les options
 
-Considérons l'exemple suivant: un `Human` peut avoir un `Sex` ou non (c'est une `Option`). `
+Imaginons qu'un `Human` puisse ne pas avoir de `sex` (pourquoi pas?). Rust implémente la notions d'`Option`
 
-~~~rust
-// les sexes disponnibles
-
-// une structure basique pour un humain
-// avec un sexe optionnel
+```rust
 struct Human {
+    name: String,
     sex: Option<Sex>,
 }
+```
 
-impl Human {
-    // création d'un humain sans sexe
-    pub fn new() -> Human {
-        Human { sex: None }
-    }
+Maintenant que le `sex` est optionnel, nous pouvons créer `alex` sans `sex`:
+
+```rust
+fn main() {
+    let alex = Human {
+        name: String::from("Alexandre"), 
+        sex: None
+    };
+    alex.describe();
+    // => My name is Alexandre and my sex is None
 }
-~~~
+```
 
-Une fonction permet de savoir à tout moment s'il possède un `Sex` ou non. La ou dans la majorité des languages on test le résultat renvoyé par la fonction, avec Rust on utilise le **pattern matching** avec `match`. Voici l'implémentation:
+### pattern matching & Gestion des erreurs
+
+Reprenons l'exemple précédent. Nous voulons implémenter une fonction d'instance `print_my_sex` afin de savoir à tout moment si l'`Human` possède un `Sex` ou non. Là ou dans la majorité des langages on test le résultat renvoyé par la fonction, avec Rust on utilise le **pattern matching** avec `match`. Voici l'implémentation:
 
 ~~~rust
 impl Human {
@@ -390,154 +428,31 @@ fn main() {
 }
 ~~~
 
+Qu'importe la situation, notre code gère la situation. Cette méthode peut sembler lourde mais ainsi notre code est **bulletproof**!
 
-On voit que qu'importe la situation, notre code gère la situation. Cette méthode peut sembler lourde mais ainsi notre code est **bulletproof**!
+### Le module
 
+Essayons maintenant de créer un **Crate** afin que notre `Human` soit utilisable dans nos futurs projets. Pour cela on utilise **Cargo**, le **gestionnaire de dépendance** de Rust.
 
-### [Ownership][ownership] et réference
-
-Comme le **C** ou bien le **C++**, Rust utilise les **pointeurs**.
-
-Au lieu de copier la variable, nous travaillons directement sur une **réference** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
-
-~~~rust
-let mut hello = "Bonjour";
-println!("{:?}", hello); // => "Bonjour"
-println!("{:?}", &hello);// => "Bonjour"
-hello = "Holla";
-println!("{:?}", &hello);// => "Holla"
+~~~bash
+$ cargo new human
 ~~~
 
-Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+Cargo nous crée un **module** avec une arborescence de ce type
 
-### Dandling pointers
-
-L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
-
-Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope *(`fn`, `if`, etc..)* cette variable est libérée. Nous obtenons donc un pointer vers une **réference nulle**. Ceci augmente la mémoire utilisée par votre progremme et crée une **fuite de mémoire**.
-
-Voici un exemple avec Rust.
-
-~~~rust
-// Fonction qui va créer un dangling pointer
-fn dangle() -> &String {
-    // on crée une variable limitée au scope de la fonction
-    let s = String::from("hello");
-    // on renvoie une réference qui pointe sur la variable
-    // limitée au scope de la fonction
-    &s
-}
-fn main() {
-    let reference_to_nothing = dangle();
-    // => missing lifetime specifier
-}
+~~~
+Human/
+├── Cargo.toml
+└── src
+    └── lib.rs
 ~~~
 
-Une des plus grande force de Rust est qu'il ne vous **laissera pas compiller** ce code.
-
-### Enum
-
-~~~rust
-#[derive(Debug)]
-enum CarBrand {
-    Smart,
-    Renault,
-    Peugeot
-}
-
-#[derive(Debug)]
-struct Car{
-    brand: CarBrand,
-    model: String
-}
-
-fn main() {
-    let my_car = Car{
-        brand: CarBrand::Smart,
-        model:  String::from("Roaster")
-    };
-
-    println!("My car is a {:?}", my_car);
-    // => My car is a Car { brand: Smart, model: "Roaster" }
-}
-~~~
-
-Ceci peut être d'ailleur simplifié en faisant dirrectement
-
-~~~rust
-#[derive(Debug)]
-enum Car {
-    Smart{model: String},
-    Renault,
-    Peugeot
-}
-
-fn main() {
-    let my_car = Car::Smart{
-        model:  String::from("Roaster")
-    };
-
-    println!("My car is a {:?}", my_car);
-    // => My car is a Smart { model: "Roaster" }
-}
-~~~
+...........
 
 
+## Conclusion
 
-## Exemple
-
-~~~rust
-fn first_word(s: &String) -> &str {
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
-
-    &s[..]
-}
-fn main() {
-    let lorem = String::from("Lorem ipsum dolor sit amet, consectetur adipisicing elit");
-    println!("First word is {:?}", first_word(&lorem));
-}
-~~~
-
-
-Avec les
-
-~~~rust
-struct Sentence {
-    content: String
-}
-
-impl Sentence {
-    // add code here
-    // return the first word
-    fn first_word(&self) -> &str{
-        // renvoie un tableau des bytes
-        let bytes = &self.content.as_bytes();
-        // enumerate renvoie l'iterable avec l'index associé
-        for (i, &item) in bytes.iter().enumerate() {
-            // si la valeur est un espace, c'est qu'on vient de passer le 1er mot
-            if item == b' ' {
-                return &self.content[0..i];
-            }
-        }
-        // on n'as pas trouvé d'espaces, on renvoie donc toute le string sous forme
-        // de slice
-        &self.content[..]
-    }
-}
-
-fn main() {
-    let lorem_string = String::from("Lorem ipsum dolor sit amet, consectetur adipisicing elit");
-    let sentence = Sentence{content: lorem_string};
-    println!("First word is {:?}", sentence.first_word());
-}
-~~~
-
+Le compilateur Rust nous protège **vraiment** des *runtime* erreurs en empêchant la compilation.
 
 ## Liens utiles
 
