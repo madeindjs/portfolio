@@ -259,6 +259,15 @@ println!("{:?}", &hello);// => "Holla"
 
 Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
 
+~~~rust
+if true {
+    let me = "Alex";
+}
+println!("{:?}", alex);
+// => cannot find value `alex` in this scope
+~~~
+
+
 ### Dandling pointers
 
 L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
@@ -430,25 +439,78 @@ fn main() {
 
 Qu'importe la situation, notre code gère la situation. Cette méthode peut sembler lourde mais ainsi notre code est **bulletproof**!
 
-### Le module
+## Notre première librairie
 
-Essayons maintenant de créer un **Crate** afin que notre `Human` soit utilisable dans nos futurs projets. Pour cela on utilise **Cargo**, le **gestionnaire de dépendance** de Rust.
+Notre `Human` nous servira **très certainement** dans nos futurs projets.
+
+Essayons maintenant de créer un **Crate** afin que notre `Human` soit ré-utilisable. Pour cela on utilise **Cargo**, le **gestionnaire de dépendance** de Rust.
 
 ~~~bash
 $ cargo new human
 ~~~
 
-Cargo nous crée un **module** avec une arborescence de ce type
+Cargo nous crée un **dossier** *human* avec une arborescence de ce type
 
 ~~~
-Human/
+human/
 ├── Cargo.toml
 └── src
     └── lib.rs
 ~~~
 
-...........
+* *Cargo.toml* contient les informations et les dépendances de notre librairie
+* *src/lib.rs* contient 
 
+Voyons de plus près:
+
+~~~bash
+$ cd human
+~~~
+
+On commence par créer un ficier *main.rs* dans le dossier *src*.
+
+~~~rust
+// src/main.rs
+fn main() {
+    println!("My first crate");
+}
+~~~
+
+Plus besoin de compiler nos fichier à la main, Cargo s'en charge pour nous
+
+~~~bash
+$ cargo run
+~~~
+
+> My first crate
+
+### Le module
+
+Maintenant nous allons créer un nouveau fichier pour notre `Human`. Il suffit de créer notre nouveau fichier *human.rs* dans la dossier *src*.
+
+~~~rust
+// src/human.rs
+#[derive(Debug)]
+pub struct Human {
+    pub name: String,
+}
+~~~
+
+Je n'ai pas parlé des `pub`. Ils signifie que la définition est **publique** et donc qu'elle peut être utilisée en dehors du fichier. On modifie un peu notre *main.rs* pour utiliser notre `Human`.
+
+~~~rust
+// src/main.rs
+mod human;
+
+fn main() {
+    let alex = human::Human { name: String::from("Alexandre") };
+    println!("My first human: {:?}", alex);
+}
+~~~
+
+Le `mod` nous permet d'importer le **module** `human` (sans majuscule). Ce module est automatiquement crée par le fichier *human.rs*. Pour utiliser `Human` nous devons le **préfixer** du module comme ceci `human::Human`.
+
+Facile?
 
 ## Conclusion
 
