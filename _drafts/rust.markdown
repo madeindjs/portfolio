@@ -7,39 +7,41 @@ tags: rust
 categories: tutorial
 ---
 
+Récemment je me suis interéssé au langage [Rust][Rust]. Il est édité par la [fondation Mozilla][Mozilla] et il est utilisé notamment par Firefox qui l'utilise dans son moteur de rendu [Servo][Servo]. Voici donc une courte introduction pour vous faire découvrir ce **langage innovant**.
 
-Rust est un langage de programmation **compilé** qui se veut **sûr** et **ultra-rapide**. Il est édité par la [fondation Mozilla][Mozilla] et il est utilisé notamment par Firefox qui l'utilise dans son moteur de rendu [Servo][Servo] .
+> Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
+>
+> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
+
+[Rust][Rust] est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancées en programmation.
 
 ## Sommaire
 
 * TOC
 {:toc}
 
-
 ## Introduction
+
+[Rust][Rust] est un langage de programmation qui se veut **sûr** et **ultra-rapide**. C'est un langage:
+
+* **Compilé**, il faut donc passer par une étape de compilation
+* Avec un **typage fort & statique**
+* orienté **bas niveau**
 
 ### Pourquoi utiliser Rust?
 
-Rust bénéficie d'une grande communauté et à d’ailleurs été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)).
+[Rust][Rust] bénéficie d'une grande communauté et à d’ailleurs été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)) par le sondage de [Stackoverflow](https://stackoverflow.com/).
 
-> Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
->
-> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
-
-A l'inverse du **C** et du **C++**, Rust simplifie grandement de la **libération de la mémoire** avec son système d’appartenance. Concrètement cela signifie:
+A l'inverse du **C** et du **C++**, [Rust][Rust] simplifie grandement de la **libération de la mémoire** avec son système d’appartenance. Concrètement cela signifie:
 
 * Les performances du C sans la gestion de la mémoire
 * protection contre les fuites de mémoire
 
-Bénéficiant des même performances que le **C**, vous pouvez tout à fait développer votre nouvelle librairie en Rust.
-
+Bénéficiant de performances proche du **C**, pourquoi s'en priver?.
 
 ### Pourquoi ne pas utiliser Rust?
 
-Rust est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancée en programmation.
-
-Si vous cherchez un boulot .......
-
+[Rust][Rust] est encore un langage très jeune et peu utilisé dans le monde proffessionnel. Si vous recherchez un language afin de trouver un boulot, [Rust][Rust] n'est pas, actuellement, un bon choix.
 
 ## Installation
 
@@ -60,6 +62,11 @@ On compile et on exécute:
 
 ~~~bash
 $ rustc main.rs
+~~~
+
+Qui va nous créer un fichier binaire executable *main*. 
+
+~~~bahs
 $ ./main
 ~~~
 
@@ -68,7 +75,6 @@ Si tout fonctionne, vous obtenez un magnifique
     Hello, world!
 
 ## Les bases
-
 
 ### Les variables & les types
 
@@ -84,15 +90,15 @@ On retrouve tous les **types de base**:
 Les variables s’instancie avec `let`:
 
 ~~~rust
-let message = "hello world";
+let name = "alexandre";
 ~~~
 
 Elles sont **typées**.
 
 ~~~rust
-let number = 5;// un nombre entier
-let number : i8 = 5;// un entier de 8 bytes
-let number = 5i8;// un entier de 8 bytes
+let age = 5;// un nombre entier
+let age : i8 = 5;// un entier de 8 bytes
+let age = 5i8;// un entier de 8 bytes
 ~~~
 
 Pour les **constantes** on utilise `const` mais le type **doit être définit**:
@@ -137,7 +143,6 @@ println!("{:?}", vector);//[1, 2, 3]
 println!("{:?}", &vector[2..3]);//[3]
 ~~~
 
-
 ### Mutabilité
 
 Toutes les variables sont **immutables** par défaut. Si vous ne le spécifiez pas, elles ne pourrons être modifiés. Par exemple ce code ne pourra pas être compilé
@@ -147,7 +152,6 @@ let x = 1;
 x = x + 1;
 // => re-assignment of immutable variable `x`
 ~~~
-
 
 Il faut déclarer la variable comme mutable avec le mot clé `mut`:
 
@@ -245,7 +249,7 @@ Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beau
 
 ### [Ownership][ownership] et référence
 
-Comme le **C** ou bien le **C++**, Rust utilise les **pointeurs**.
+Comme le **C** ou bien le **C++**, [Rust][Rust] utilise les **pointeurs**.
 
 Au lieu de copier la variable, nous travaillons directement sur une **référence** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
 
@@ -257,7 +261,7 @@ hello = "Holla";
 println!("{:?}", &hello);// => "Holla"
 ~~~
 
-Rust gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
 
 ~~~rust
 if true {
@@ -291,7 +295,7 @@ fn main() {
 }
 ~~~
 
-Une des plus grande force de Rust est qu'il ne vous **laissera pas compiller** ce code.
+Une des plus grande force de [Rust][Rust] est qu'il ne vous **laissera pas compiller** ce code.
 
 ### Structure
 
@@ -387,7 +391,7 @@ fn main() {
 
 ### Les options
 
-Imaginons qu'un `Human` puisse ne pas avoir de `sex` (pourquoi pas?). Rust implémente la notions d'`Option`
+Imaginons qu'un `Human` puisse ne pas avoir de `sex` (pourquoi pas?). [Rust][Rust] implémente la notions d'`Option`
 
 ```rust
 struct Human {
@@ -411,7 +415,7 @@ fn main() {
 
 ### pattern matching & Gestion des erreurs
 
-Reprenons l'exemple précédent. Nous voulons implémenter une fonction d'instance `print_my_sex` afin de savoir à tout moment si l'`Human` possède un `Sex` ou non. Là ou dans la majorité des langages on test le résultat renvoyé par la fonction, avec Rust on utilise le **pattern matching** avec `match`. Voici l'implémentation:
+Reprenons l'exemple précédent. Nous voulons implémenter une fonction d'instance `print_my_sex` afin de savoir à tout moment si l'`Human` possède un `Sex` ou non. Là ou dans la majorité des langages on test le résultat renvoyé par la fonction, avec [Rust][Rust] on utilise le **pattern matching** avec `match`. Voici l'implémentation:
 
 ~~~rust
 impl Human {
@@ -490,31 +494,58 @@ Maintenant nous allons créer un nouveau fichier pour notre `Human`. Il suffit d
 
 ~~~rust
 // src/human.rs
-#[derive(Debug)]
+
+pub struct Size{
+    pub length: i8
+}
+
+pub enum Sex{
+    Male(Size),
+    Femmale
+}
+
 pub struct Human {
     pub name: String,
+    pub sex: Option<Sex>,
+}
+
+impl Human {
+
+    pub fn print_my_sex(&self) {
+        match self.sex {
+            Some(ref _sex) => println!("J'ai un sexe :)"),
+            None => println!("Je n'ai pas de sexe :'("),
+        }
+    }
 }
 ~~~
 
 Je n'ai pas parlé des `pub`. Ils signifie que la définition est **publique** et donc qu'elle peut être utilisée en dehors du fichier. On modifie un peu notre *main.rs* pour utiliser notre `Human`.
 
+Pour importer notre fichier *human.rs* dans notre *main.rs*, il suffit alors d'utiliser `mod`. Dans le fichier *main.rs*, pour utiliser `Human` nous devons le **préfixer** du module. Comme ceci `human::Human`.
+
 ~~~rust
 // src/main.rs
+
 mod human;
 
 fn main() {
-    let alex = human::Human { name: String::from("Alexandre") };
-    println!("My first human: {:?}", alex);
+
+    let size = human::Size{length: 8};
+
+    let alex = human::Human {
+        name: String::from("Alexandre"),
+        sex: Some(human::Sex::Male(size))
+    };
+    alex.print_my_sex();// => "J'ai un sexe :)"
 }
 ~~~
 
-Le `mod` nous permet d'importer le **module** `human` (sans majuscule). Ce module est automatiquement crée par le fichier *human.rs*. Pour utiliser `Human` nous devons le **préfixer** du module comme ceci `human::Human`.
-
-Facile?
+Et voilà. Il suffit 
 
 ## Conclusion
 
-Le compilateur Rust nous protège **vraiment** des *runtime* erreurs en empêchant la compilation.
+Le compilateur [Rust][Rust] nous protège **vraiment** des *runtime* erreurs en empêchant la compilation.
 
 ## Liens utiles
 
