@@ -245,13 +245,11 @@ fn multiply(a: i8, b: i8) -> i8 {
 
 Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
 
-### référence
+### Référence
 
-Il s'agit là d'une des plus grande force de [Rust][Rust].
+Comme le **C** ou bien le **C++**, [Rust][Rust] utilise les **pointeurs**. Au lieu de copier la variable, nous travaillons directement sur une **référence** de celle-ci.
 
-Comme le **C** ou bien le **C++**, [Rust][Rust] utilise les **pointeurs**.
-
-Au lieu de copier la variable, nous travaillons directement sur une **référence** de celle-ci. Pour créer une référence, il suffit de préfixer la variable d'un `&`.
+Pour créer une référence, il suffit de préfixer la variable d'un `&`.
 
 ~~~rust
 let mut hello = "Bonjour";
@@ -261,7 +259,7 @@ hello = "Holla";
 println!("{:?}", &hello);// => "Holla"
 ~~~
 
-[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libéré la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libérer la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
 
 ~~~rust
 if true {
@@ -273,7 +271,7 @@ println!("{:?}", alex);
 
 ### Dandling pointers
 
-L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
+Il s'agit là d'une des plus grande force de [Rust][Rust]. L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
 
 Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope *(`fn`, `if`, etc..)* cette variable est libérée. Nous obtenons donc un pointer vers une **référence nulle**. Ceci augmente la mémoire utilisée par votre programme et crée une **fuite de mémoire**.
 
@@ -451,7 +449,7 @@ fn main() {
 }
 ```
 
-### pattern matching & Gestion des erreurs
+### Pattern matching & Gestion des erreurs
 
 Reprenons l'exemple précédent. Nous voulons implémenter une fonction d'instance `print_my_sex` afin de savoir à tout moment si l'`Human` possède un `Sex` ou non. Là ou dans la majorité des langages on test le résultat renvoyé par la fonction, avec [Rust][Rust] on utilise le **pattern matching** avec `match`. Voici l'implémentation:
 
