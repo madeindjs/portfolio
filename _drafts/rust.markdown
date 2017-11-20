@@ -240,14 +240,14 @@ fn multiply(a: i8, b: i8) -> i8 {
 }
 ~~~
 
-### Les macros
-
 
 ## Un peu plus loin dans le langage
 
 Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
 
-### [Ownership][ownership] et référence
+### référence
+
+Il s'agit là d'une des plus grande force de [Rust][Rust].
 
 Comme le **C** ou bien le **C++**, [Rust][Rust] utilise les **pointeurs**.
 
@@ -270,7 +270,6 @@ if true {
 println!("{:?}", alex);
 // => cannot find value `alex` in this scope
 ~~~
-
 
 ### Dandling pointers
 
@@ -296,6 +295,45 @@ fn main() {
 ~~~
 
 Une des plus grande force de [Rust][Rust] est qu'il ne vous **laissera pas compiller** ce code.
+
+
+### [Le sysème d'appartenance][ownership]
+
+Voici un autre gros point fort de [Rust][Rust]. **Une fonction ne peut pas modifier un pointeur qui ne lui appartient pas**.
+
+Prenons cet exemple. Un fonction `change` permet d'ajouter le text *", world"* à la fin d'un text donné en paramètre. Nous utilisons un pointeur vers le texte qui sera modifié.
+
+~~~rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&s);
+}
+
+fn change(some_string: &String) {
+    some_string.push_str(", world");
+}
+~~~
+
+Le problème est que [Rust][Rust] refusera de compiler ce code.
+
+> cannot borrow immutable borrowed content `*some_string` as mutable
+
+Pour que ce code compile, il faut spécifier que la valeur pourra être modifiée par la fonction avec la mention `&mut`. 
+
+~~~rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+~~~
+
+
 
 ### Structure
 
