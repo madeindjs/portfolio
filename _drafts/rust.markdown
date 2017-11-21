@@ -7,13 +7,13 @@ tags: rust
 categories: tutorial
 ---
 
-Récemment je me suis interéssé au langage [Rust][Rust]. Il est édité par la [fondation Mozilla][Mozilla] et il est utilisé notamment par Firefox qui l'utilise dans son moteur de rendu [Servo][Servo]. Voici donc une courte introduction pour vous faire découvrir ce **langage innovant**.
+Récemment je me suis intéressé au langage [Rust][Rust]. Il est édité par la [fondation **Mozilla**][Mozilla] qui l'utilise à travers le moteur de rendu [Servo][Servo] de Firefox.
 
-> Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnel, procédural et orienté objet.
->
-> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
+Voici donc une courte introduction pour vous faire découvrir ce **langage innovant**.
 
-[Rust][Rust] est un langage avancé, je vous déconseille de suivre ce tutoriel si vous n'avez pas de notions avancées en programmation.
+Dans ce tutoriel, je pars du principe que vous avez de solides notions en programmation. 
+
+Ce tutoriel est loin d'être complet.
 
 ## Sommaire
 
@@ -28,11 +28,15 @@ Récemment je me suis interéssé au langage [Rust][Rust]. Il est édité par la
 * Avec un **typage fort & statique**
 * orienté **bas niveau**
 
+> Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnels, procéduraux et orientés objet.
+>
+> [Wikipedia](https://fr.wikipedia.org/wiki/Rust_(langage))
+
 ### Pourquoi utiliser Rust?
 
-[Rust][Rust] bénéficie d'une grande communauté et à d’ailleurs été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)) par le sondage de [Stackoverflow](https://stackoverflow.com/).
+[Rust][Rust] bénéficie d'une grande communauté et a d’ailleurs été élu le [langage le plus apprécié des développeurs en 2016](https://insights.stackoverflow.com/survey/2016#technology-most-loved-dreaded-and-wanted) et même en [2017]((https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted)) par le sondage de [Stackoverflow](https://stackoverflow.com/).
 
-A l'inverse du **C** et du **C++**, [Rust][Rust] simplifie grandement de la **libération de la mémoire** avec son système d’appartenance. Concrètement cela signifie:
+A l'inverse du **C** et du **C++**, [Rust][Rust] simplifie grandement la **libération de la mémoire** avec son système d’appartenance. Concrètement cela signifie:
 
 * Les performances du C sans la gestion de la mémoire
 * protection contre les fuites de mémoire
@@ -41,15 +45,19 @@ Bénéficiant de performances proche du **C**, pourquoi s'en priver?.
 
 ### Pourquoi ne pas utiliser Rust?
 
-[Rust][Rust] est encore un langage très jeune et peu utilisé dans le monde proffessionnel. Si vous recherchez un language afin de trouver un boulot, [Rust][Rust] n'est pas, actuellement, un bon choix.
+[Rust][Rust] est un langage encore **très jeune** et peu utilisé dans le monde professionnel. Si vous recherchez un langage à mettre en avant dans une recherche d'emploi, ce n'est actuellement pas le meilleur choix.
+
+<!-- De plus, [Rust][Rust] est un langage difficile à maîtriser. -->
 
 ## Installation
+
+L’installation se fait très facilement. Sur Linux, une ligne de commande suffit:
 
 ~~~bash
 curl https://sh.rustup.rs -sSf | sh
 ~~~
 
-Ensuite pour vérifier que tout fonctionne on créée un Hello World
+Ensuite pour vérifier que tout fonctionne on crée un Hello World
 
 ~~~rust
 // hello_world.rs
@@ -58,21 +66,19 @@ fn main() {
 }
 ~~~
 
-On compile et on exécute:
+Pour compiler on utilise `rustc`:
 
 ~~~bash
-$ rustc main.rs
+$ rustc hello_world.rs
 ~~~
 
-Qui va nous créer un fichier binaire executable *main*. 
+Cela va nous créer un fichier binaire exécutable *hello_world* qu'il suffit d’exécuter. 
 
-~~~bahs
-$ ./main
+~~~bash
+$ ./hello_world
+Hello, world!
 ~~~
 
-Si tout fonctionne, vous obtenez un magnifique
-
-    Hello, world!
 
 ## Les bases
 
@@ -81,13 +87,13 @@ Si tout fonctionne, vous obtenez un magnifique
 On retrouve tous les **types de base**:
 
 * Entier
-  * *unsigned*: `i8`, `i16`, `i32`, `i64`, `isize` (ne peut être négatif)
+  * *unsigned*: `i8`, `i16`, `i32`, `i64`, `isize` (ne peut pas être négatif)
   * *signed*: `u8`, `u16`, `u32`, `u64`, `usize`
 * Décimal `f32` et `f64`
 * booléen: `bool`
 * caractère: instancié avec des `'`
 
-Les variables s’instancie avec `let`:
+Les variables s’instancient avec `let`:
 
 ~~~rust
 let name = "alexandre";
@@ -101,13 +107,13 @@ let age : i8 = 5;// un entier de 8 bytes
 let age = 5i8;// un entier de 8 bytes
 ~~~
 
-Pour les **constantes** on utilise `const` mais le type **doit être définit**:
+Pour les **constantes** on utilise `const` mais le type **doit être défini**:
 
 ~~~rust
 const MAX_POINTS: u32 = 100_000;
 ~~~
 
-### types pour grouper
+### Types pour grouper
 
 Les **Tuples** sont des tableaux **sans limite de taille** et **sans contrainte de type**
 
@@ -145,7 +151,7 @@ println!("{:?}", &vector[2..3]);//[3]
 
 ### Mutabilité
 
-Toutes les variables sont **immutables** par défaut. Si vous ne le spécifiez pas, elles ne pourrons être modifiés. Par exemple ce code ne pourra pas être compilé
+Toutes les variables sont **immutables** par défaut. Si vous ne le spécifiez pas, elles ne pourront être modifiées. Par exemple ce code ne pourra pas être compilé.
 
 ~~~rust
 let x = 1;
@@ -243,7 +249,7 @@ fn multiply(a: i8, b: i8) -> i8 {
 
 ## Un peu plus loin dans le langage
 
-Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avais beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
+Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avait beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
 
 ### Référence
 
@@ -259,7 +265,7 @@ hello = "Holla";
 println!("{:?}", &hello);// => "Holla"
 ~~~
 
-[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libérer la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libéré au fur et à mesure.
+[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libérer la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libérée au fur et à mesure.
 
 ~~~rust
 if true {
@@ -271,7 +277,7 @@ println!("{:?}", alex);
 
 ### Dandling pointers
 
-Il s'agit là d'une des plus grande force de [Rust][Rust]. L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
+Il s'agit là d'une des plus grandes forces de [Rust][Rust]. L'un des plus gros problèmes des pointers sont les **Dandling pointers**.
 
 Imaginez que vous utilisez un pointer vers une variable **définie dans un scope**. Nous avons vu qu'en sortant du scope *(`fn`, `if`, etc..)* cette variable est libérée. Nous obtenons donc un pointer vers une **référence nulle**. Ceci augmente la mémoire utilisée par votre programme et crée une **fuite de mémoire**.
 
@@ -292,14 +298,14 @@ fn main() {
 }
 ~~~
 
-Une des plus grande force de [Rust][Rust] est qu'il ne vous **laissera pas compiller** ce code.
+Une des plus grandes forces de [Rust][Rust] est qu'il ne vous **laissera pas compiller** ce code.
 
 
-### [Le sysème d'appartenance][ownership]
+### [Le système d'appartenance][ownership]
 
 Voici un autre gros point fort de [Rust][Rust]. **Une fonction ne peut pas modifier un pointeur qui ne lui appartient pas**.
 
-Prenons cet exemple. Un fonction `change` permet d'ajouter le text *", world"* à la fin d'un text donné en paramètre. Nous utilisons un pointeur vers le texte qui sera modifié.
+Prenons cet exemple. Une fonction `change` permet d'ajouter le text *", world"* à la fin d'un texte donné en paramètre. Nous utilisons un pointeur vers le texte qui sera modifié.
 
 ~~~rust
 fn main() {
@@ -356,9 +362,9 @@ fn main() {
 }
 ~~~
 
-Comme en POO, nous pouvons ajouter des **méthodes** sur ces structures avec les **implémentation**. Pour cela on utilise `impl`. Pour les fonctions, si elle prennent en paramètre `&self`, ce sont des **méthodes d'instances**. Si elle ne prennent pas en paramètre `&self`, ce sont des **métodes statiques**.
+Comme en POO, nous pouvons ajouter des **méthodes** sur ces structures avec les **implémentations**. Pour cela on utilise `impl`. Pour les fonctions, si elle prennent en paramètre `&self`, ce sont des **méthodes d'instances**. Si elle ne prennent pas en paramètre `&self`, ce sont des **métodes statiques**.
 
-Essayons ça avec une une méthode `describe` aqui permet d'afficher les informations
+Essayons ça avec une une méthode `describe` qui permet d'afficher les informations.
 
 ~~~rust
 struct Human {
@@ -387,7 +393,7 @@ fn main() {
 
 `alex` est bien sympa, mais au lieu de remplir le champs `sex` par `Male` ou `Femmale`, il a mis "big" (le con!).
 
-Pour parer à ça, nous pouvons forcer le choix à des types définis avec un `enum` rassemblant à cela
+Pour parer à cela, nous pouvons forcer le choix à des types définis avec un `enum` ressemblant à cela
 
 ~~~rust
 #[derive(Debug)]
@@ -427,7 +433,7 @@ fn main() {
 
 ### Les options
 
-Imaginons qu'un `Human` puisse ne pas avoir de `sex` (pourquoi pas?). [Rust][Rust] implémente la notions d'`Option`
+Imaginons qu'un `Human` puisse ne pas avoir de `sex` (pourquoi pas?). [Rust][Rust] implémente la notion d'`Option`
 
 ```rust
 struct Human {
@@ -451,7 +457,7 @@ fn main() {
 
 ### Pattern matching & Gestion des erreurs
 
-Reprenons l'exemple précédent. Nous voulons implémenter une fonction d'instance `print_my_sex` afin de savoir à tout moment si l'`Human` possède un `Sex` ou non. Là ou dans la majorité des langages on test le résultat renvoyé par la fonction, avec [Rust][Rust] on utilise le **pattern matching** avec `match`. Voici l'implémentation:
+Reprenons l'exemple précédent. Nous voulons implémenter une fonction d'instance `print_my_sex` afin de savoir à tout moment si l'`Human` possède un `Sex` ou non. Là où dans la majorité des langages on teste le résultat renvoyé par la fonction, avec [Rust][Rust] on utilise le **pattern matching** avec `match`. Voici l'implémentation:
 
 ~~~rust
 impl Human {
@@ -507,7 +513,7 @@ Voyons de plus près:
 $ cd human
 ~~~
 
-On commence par créer un ficier *main.rs* dans le dossier *src*.
+On commence par créer un fichier *main.rs* dans le dossier *src*.
 
 ~~~rust
 // src/main.rs
@@ -516,7 +522,7 @@ fn main() {
 }
 ~~~
 
-Plus besoin de compiler nos fichier à la main, Cargo s'en charge pour nous
+Plus besoin de compiler nos fichiers à la main, Cargo s'en charge pour nous
 
 ~~~bash
 $ cargo run
@@ -556,7 +562,7 @@ impl Human {
 }
 ~~~
 
-Je n'ai pas parlé des `pub`. Ils signifie que la définition est **publique** et donc qu'elle peut être utilisée en dehors du fichier. On modifie un peu notre *main.rs* pour utiliser notre `Human`.
+Je n'ai pas parlé des `pub`. Ils signifient que la définition est **publique** et donc qu'elle peut être utilisée en dehors du fichier. On modifie un peu notre *main.rs* pour utiliser notre `Human`.
 
 Pour importer notre fichier *human.rs* dans notre *main.rs*, il suffit alors d'utiliser `mod`. Dans le fichier *main.rs*, pour utiliser `Human` nous devons le **préfixer** du module. Comme ceci `human::Human`.
 
