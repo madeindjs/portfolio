@@ -5,6 +5,7 @@ description:  Participez au développement de votre navigateur preéferé
 date:   2017-09-22 12:00:00 +0200
 tags: linux firefox
 categories: software
+comments: true
 ---
 > Êtes-vous un utilisateur avancé, à l’aise avec l’installation de logiciels pré-alpha ? Installez Nightly et aidez-nous à améliorer la qualité de Firefox, à débusquer les plantages et les régressions, et à tester les nouvelles fonctionnalités dès leur création !
 

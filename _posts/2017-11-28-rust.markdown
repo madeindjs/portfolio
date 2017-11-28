@@ -5,6 +5,7 @@ description:  Apprenez les bases du langage de Mozilla. Un langage performant & 
 date:   2017-11-28 08:00:00 +0200
 tags: rust
 categories: tutorial
+comments: true
 ---
 
 Récemment je me suis intéressé au langage [Rust][Rust]. Il est édité par la [fondation **Mozilla**][Mozilla] qui l'utilise à travers le moteur de rendu [Servo][Servo] de Firefox.

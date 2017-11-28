@@ -5,6 +5,7 @@ description: Utilisez Kali Linux pour hacker un Wifi protégé par WPA/WPA2
 date:   2017-10-31 20:00:00 +0200
 tags: hack kali wifi wpa
 categories: hacking
+comments: true
 ---
 
 Afin de tester, j'ai voulu cracker mon [routeur récemment installé](/network/2017/10/11/Installer_bridge_sfr_box-4k.html). Et c'est impressionnant de facilité!

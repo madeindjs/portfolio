@@ -6,6 +6,7 @@ date:   2017-10-15 12:00:00 +0200
 tags: benchmark raspberry apache ruby
 categories: network
 thumbnail: /img/blog/RPI2_vs_RPI3.png
+comments: true
 ---
 
 L’occasion de la migration de mon serveur Apache depuis mon **Raspberry PI 2 B+** vers mon **Raspberry PI 3** est l'occasion de mettre ma pierre à l'édifice des *Benchmarks* existants. Je n'ai pas la prétention d'apporter un comparatif complet mais juste de proposer mes résultats.

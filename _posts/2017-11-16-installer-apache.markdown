@@ -5,6 +5,7 @@ description:  Participez au développement de votre navigateur preéferé
 date:   2017-11-16 08:00:00 +0200
 tags: apache linux lxc
 categories: tutorial
+comments: true
 ---
 
 Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de part de marché](https://www.developpez.com/actu/129511/Serveurs-Web-Nginx-detient-desormais-un-tiers-des-parts-de-marche-tandis-qu-Apache-chute-en-dessous-des-50-pourcent-d-apres-W3Tech/) c'est un des serveur web les plus populaire.

@@ -58,6 +58,9 @@
 					<div class="text-justify">
 						{{ content }}
 					</div>
+					{% if page.comments %}
+						{% include disqus.html %}
+					{% endif %}
 				</div>
 			</div>
 			{% include footer.html %}
