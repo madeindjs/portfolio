@@ -8,13 +8,11 @@ categories: tutorial
 comments: true
 ---
 
-Récemment je me suis intéressé au langage [Rust][Rust]. Il est édité par la [fondation **Mozilla**][Mozilla] qui l'utilise à travers le moteur de rendu [Servo][Servo] de Firefox.
+Récemment je me suis intéressé au langage [Rust][Rust]. Il est édité par la [fondation **Mozilla**][Mozilla] qui l'utilise à travers le moteur de rendu [Servo][Servo] de Firefox 57. Cette utilisation leur a permis de doubler la rapidité du chargement des pages tout en consommant moins de ressource. 
 
 Voici donc une courte introduction pour vous faire découvrir ce **langage innovant**.
 
-Dans ce tutoriel, je pars du principe que vous avez de solides notions en programmation. 
-
-Ce tutoriel est loin d'être complet.
+Dans ce tutoriel (loin d'être complet), je pars du principe que vous avez de solides notions en programmation. 
 
 ## Sommaire
 
@@ -23,10 +21,10 @@ Ce tutoriel est loin d'être complet.
 
 ## Introduction
 
-[Rust][Rust] est un langage de programmation qui se veut **sûr** et **ultra-rapide**. C'est un langage:
+[Rust][Rust] est un langage de programmation qui se veut **sûr** et **ultra-rapide**. Il est:
 
-* **Compilé**, il faut donc passer par une étape de compilation
-* Avec un **typage fort & statique**
+* **compilé**, il faut donc passer par une étape de compilation
+* avec un **typage fort & statique**
 * orienté **bas niveau**
 
 > Il a été conçu pour être "un langage sécurisé, concurrent, pratique", supportant les styles de programmation purement fonctionnels, procéduraux et orientés objet.
@@ -42,7 +40,7 @@ A l'inverse du **C** et du **C++**, [Rust][Rust] simplifie grandement la **libé
 * Les performances du C sans la gestion de la mémoire
 * protection contre les fuites de mémoire
 
-Bénéficiant de performances proche du **C**, pourquoi s'en priver?.
+Bénéficiant de performances proche du **C**, pourquoi s'en priver?
 
 ### Pourquoi ne pas utiliser Rust?
 
@@ -52,6 +50,10 @@ De plus, [Rust][Rust] est un langage bas niveau qui est, pour l'instant, peu ada
 
 De plus, [Rust][Rust] est encore peu utilisé dans le **monde professionnel**. Si vous recherchez un langage à mettre en avant dans une recherche d'emploi, ce n'est actuellement pas le meilleur choix.
 
+<<<<<<< HEAD:_posts/2017-11-28-rust.markdown
+=======
+C'est aussi un langage **difficile** à maîtriser et bas niveau. Il n'est pas dédié au web ou bien au scripting (même s'il en est capable).
+>>>>>>> dcc0de8ca3e3150e7be191d278d3cd05c1936d54:_drafts/rust.markdown
 
 ## Installation
 
@@ -106,15 +108,15 @@ let name = "alexandre";
 Elles sont **typées**.
 
 ~~~rust
-let age = 5;// un nombre entier
-let age : i8 = 5;// un entier de 8 bytes
-let age = 5i8;// un entier de 8 bytes
+let age = 25;// un nombre entier
+let age : i8 = 25;// un entier de 8 bytes
+let age = 25i8;// un entier de 8 bytes
 ~~~
 
 Pour les **constantes** on utilise `const` mais le type **doit être défini**:
 
 ~~~rust
-const MAX_POINTS: u32 = 100_000;
+const MAX_AGE: u32 = 100_000;
 ~~~
 
 ### Types pour grouper
@@ -129,28 +131,28 @@ let first_element = tup.1;// => 6.4
 Les **Array** sont des tableaux avec **taille fixe** et les éléments doivent être de la **même famille**
 
 ~~~rust
-let array            = ['a', 'b', 'c'];
-// s'écrit aussi
-let array [String;3] = ['a', 'b', 'c'];
-let first_element    = array[0];// => 6.4
+let girlfriends            = ["Pamela", "Clara", "Roger"];
+// s"écrit aussi
+let girlfriends [String;3] = ["Pamela", "Clara", "Roger"];
+let first_element    = girlfriends[0];// => "Pamela"
 ~~~
 
-Les **slices** sont des **pointeurs** vers une **zone** d'un array:
+Les **slices** sont des **pointeurs** vers une **zone** d'un girlfriends:
 
 ~~~rust
-let array = ['a', 'b', 'c'];
-println!("{:?}", &array[1..3]);// => ['b', 'c']
+let girlfriends = ["Pamela", "Clara", "Roger"];
+println!("{:?}", &girlfriends[1..3]);// => ["Clara", "Roger"]
 ~~~
 
 Les **vecteur** sont des tableaux d’éléments de la **même famille** mais sans contrainte de taille.
 
 ~~~rust
-let mut vector: Vec<i8> = Vec::new();
-vector.push(1);
-vector.push(2);
-vector.push(3);
-println!("{:?}", vector);//[1, 2, 3]
-println!("{:?}", &vector[2..3]);//[3]
+let mut vector: Vec<String> = Vec::new();
+vector.push("Pamela");
+vector.push("Clara");
+vector.push("Roger");
+println!("{:?}", vector);//["Pamela", "Clara", "Roger"]
+println!("{:?}", &vector[2..3]);//["Roger"]
 ~~~
 
 ### Mutabilité
@@ -158,23 +160,23 @@ println!("{:?}", &vector[2..3]);//[3]
 Toutes les variables sont **immutables** par défaut. Si vous ne le spécifiez pas, elles ne pourront être modifiées. Par exemple ce code ne pourra pas être compilé.
 
 ~~~rust
-let x = 1;
-x = x + 1;
-// => re-assignment of immutable variable `x`
+let age = 25;
+age = age + 25;
+// => re-assignment of immutable variable `age`
 ~~~
 
 Il faut déclarer la variable comme mutable avec le mot clé `mut`:
 
 ~~~rust
-let mut x = 1;
-x = x + 1;
+let mut age = 25;
+age = age + 25;
 ~~~
 
 Un autre moyen consiste à utiliser le **shadowing** (je n'ai pas trouvé de traduction à ce terme). Cela consiste à redéfinir la variable avec `let`. Ceci, à la différence du `mut`, permet de définir le type de la variable.
 
 ~~~rust
-let mut x = 1;
-let x = x + 1;
+let age = 25;
+let age = age + 1;
 ~~~
 
 ### Les conditions
@@ -182,14 +184,14 @@ let x = x + 1;
 Ici rien de spécifique à Rust, on retrouve le `if`, `else` et le `else if`. Cependant, contrairement à d'autres langages, la condition ne s'entoure pas de parenthèses
 
 ~~~rust
-let number = 3;
+let age = 25;
 
-if number < 5 {
-    println!("superior to 5");
-} else if number == 3  {
-    println!("equals to 3");
+if age < 20 {
+    println!("You are too young!");
+} else if age == 25  {
+    println!("Seem perfect");
 } else {
-    println!("something else");
+    println!("I don't care");
 }
 ~~~
 
@@ -197,7 +199,7 @@ Il est possible d'utiliser des valeurs de retour pour les conditions
 
 ~~~rust
 let condition = true;
-let number = if condition {
+let age = if condition {
     5
 } else {
     6
@@ -207,12 +209,12 @@ let number = if condition {
 Pour lier plusieurs conditions, on peut utiliser le `match`:
 
 ~~~rust
-let number = 3i8;
+let age = 25i8;
 
-match number {
-    10...100 => println!("La variable est entre 10 et 100 (inclus)"),
-    5 | 8    => println!("Egal à 5 ou 8"),
-    _ => println!("I don't know"),
+match age {
+    10...100 => println!("You seem alive"),
+    5 | 8    => println!("5 or 8 year is too young!!"),
+    _ => println!("I don't care"),
 }
 ~~~
 
@@ -253,13 +255,14 @@ fn multiply(a: i8, b: i8) -> i8 {
 
 ## Un peu plus loin dans le langage
 
-Nous avons vu toutes **les notions de base** de Rust. Jusqu'ici, il y avait beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
+Nous avons vu toutes **les notions de base** de [Rust][Rust]. Jusqu'ici, il y avait beaucoup de similitudes par rapport au **C**. Attaquons les notions plus avancées (et il y en a!).
+
 
 ### Référence
 
 Comme le **C** ou bien le **C++**, [Rust][Rust] utilise les **pointeurs**. Au lieu de copier la variable, nous travaillons directement sur une **référence** de celle-ci.
 
-Pour créer une référence, il suffit de préfixer la variable d'un `&`.
+Pour utiliser une référence, il suffit de préfixer la variable d'un `&`.
 
 ~~~rust
 let mut hello = "Bonjour";
@@ -269,7 +272,9 @@ hello = "Holla";
 println!("{:?}", &hello);// => "Holla"
 ~~~
 
-[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de libérer la mémoire. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libérée au fur et à mesure.
+### Gestion de la mémoire
+
+[Rust][Rust] gère la mémoire pour nous mais n'utilise pas de **garbage collector** qui passe afin de **libérer la mémoire**. Il utilise un système d'[Ownership][ownership]. Les variables "vivent" dans un *scope* limité et la mémoire est libérée au fur et à mesure.
 
 ~~~rust
 if true {
@@ -307,9 +312,9 @@ Une des plus grandes forces de [Rust][Rust] est qu'il ne vous **laissera pas com
 
 ### [Le système d'appartenance][ownership]
 
-Voici un autre gros point fort de [Rust][Rust]. **Une fonction ne peut pas modifier un pointeur qui ne lui appartient pas**.
+Un autre gros point fort de [Rust][Rust] est le sysème d'appartenance. Nous avons vu que gràace à celui-ci, la mémoire est libérée au fur à mesure. Le système d'appartenance nous protège aussi contre les comportement innatendu. Aunsi une fonction **ne peut pas modifier un pointeur** sans que cela soit explicitement indiqué.
 
-Prenons cet exemple. Une fonction `change` permet d'ajouter le text *", world"* à la fin d'un texte donné en paramètre. Nous utilisons un pointeur vers le texte qui sera modifié.
+Prenons cet exemple. Une fonction `change` permet d'ajouter le text `", world"` à la fin d'un texte donné en paramètre. Nous utilisons un pointeur vers le texte qui sera modifié.
 
 ~~~rust
 fn main() {
@@ -323,7 +328,7 @@ fn change(some_string: &String) {
 }
 ~~~
 
-Le problème est que [Rust][Rust] refusera de compiler ce code.
+[Rust][Rust] refusera de compiler ce code car la fonction modfie le contenu de `some_string` sans que cela soit indiqué.
 
 > cannot borrow immutable borrowed content `*some_string` as mutable
 
@@ -341,11 +346,11 @@ fn change(some_string: &mut String) {
 }
 ~~~
 
-
+Avec [Rust][Rust], vous vous baterez souvent contre le compilateur mais celui ci vous protégera d'une pmajorité des *Runtime Errors* 
 
 ### Structure
 
-Si vous venez d'un langage orienté objet (Ruby, PHP, Java, etc..), les **structures** correspondent un peu aux **classes**.
+Si vous venez d'un langage orienté objet *(Ruby, PHP, Java, etc..)*, les **structures** correspondent un peu aux **classes**.
 
 Prenons une `Human` qui possède un `name` et un `sex` (jusque là ça se tient).
 
