@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  Introduction à Rust
-description:  Participez au développement de votre navigateur préféré
-date:   2017-11-06 12:00:00 +0200
+description:  Apprenez les bases du langage de Mozilla. Un langage performant & innovant
+date:   2017-11-28 08:00:00 +0200
 tags: rust
 categories: tutorial
 ---
@@ -45,9 +45,12 @@ Bénéficiant de performances proche du **C**, pourquoi s'en priver?.
 
 ### Pourquoi ne pas utiliser Rust?
 
-[Rust][Rust] est un langage encore **très jeune** et peu utilisé dans le monde professionnel. Si vous recherchez un langage à mettre en avant dans une recherche d'emploi, ce n'est actuellement pas le meilleur choix.
+De plus, [Rust][Rust] est un langage bas niveau qui est, pour l'instant, peu adapté au développement web par exemple.
 
-<!-- De plus, [Rust][Rust] est un langage difficile à maîtriser. -->
+[Rust][Rust] est un langage encore **très jeune**. Du fait qu'il soit jeune, les librairies existantes sont souvent **peu documentées** et il faut souvent mettre les mains dans le code pour comprendre le fonctionnement de celles-ci. 
+
+De plus, [Rust][Rust] est encore peu utilisé dans le **monde professionnel**. Si vous recherchez un langage à mettre en avant dans une recherche d'emploi, ce n'est actuellement pas le meilleur choix.
+
 
 ## Installation
 
@@ -583,15 +586,24 @@ fn main() {
 }
 ~~~
 
-Et voilà. Il suffit 
+Et voilà. Il suffira d'ajouter ce **crate** à votre projet et de l'appeler en faisant
+
+~~~rust
+extern crate human;
+~~~ 
 
 ## Conclusion
 
-Le compilateur [Rust][Rust] nous protège **vraiment** des *runtime* erreurs en empêchant la compilation.
+Le gros avantage de [Rust][Rust] est bien évidement son **compilateur** qui nous protège **vraiment** des *runtime* erreurs en empêchant la compilation en amont. Il nous apporte des performances proche du **C** ce qui en fait un excellent choix pour les projets nécessitants de **bonne performances** (embarqué, jeux-vidéos, etc..). 
+
+De plus, le code écris en [Rust][Rust] est réutilisable et portable car le compilateur peut même être installé sur des architecture ARM (Raspberry PI).
 
 ## Liens utiles
 
+* <https://rustbyexample.com/>
+* <https://doc.rust-lang.org/nomicon/>
 * <https://blog.guillaume-gomez.fr/Rust>
+* <https://doc.rust-lang.org/book/second-edition/>
 
 [Rust]: https://www.rust-lang.org/
 [Mozilla]: https://www.mozilla.org/fr/
