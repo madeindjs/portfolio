@@ -1,18 +1,18 @@
 ---
 layout: post
 title:  Optimiser Apache
-description:  Participez au développement de votre navigateur préféré
-date:   2017-11-06 12:00:00 +0200
-tags: apache linux lxc ceo
+description:  Optimisation des performances d'Apache
+date:   2018-01-22 18:00:00 +0200
+tags: apache linux seo
 categories: tutorial
 ---
 
-Dans mon précédent article je vous expliquait comment installer un serveur
-[Apache][Apache] dans un container [LXC][LXC].
+Dans mon [précédent article](/tutorial/2017/11/16/installer-apache.html) je vous 
+expliquait comment installer un serveur[Apache][Apache] dans un container [LXC][LXC].
 
 La configuration de base est d'[Apache][Apache] est souvent suffisante mais une
-configuration plus pointu peut vous économiser de la bande passante et de la
-ressource. Vous serez donc en mesure de tenir une charge plus importante et
+configuration plus pointue peut vous économiser de la bande passante et de la
+ressource. Vous serez donc en mesure de tenir une charge plus importante et aussi d'
 améliorer votre temps de réponse. De plus, en respectant les
 [conseils Google][GoogleGuidelines] vous améliorerez aussi votre référencement.
 
@@ -166,8 +166,6 @@ $ ls /etc/apache2/mods-enabled/
 Ensuite, il suffit d'utiliser `a2dismod` pour les désactiver (attention à tester
 sur un serveur de test avant de le faire en production).
 
-_________todo: trouver un exemple
-
 ## Désactiver les logs d'accès
 
 Les logs d'accès sont définit dans votre **Vhost** avec la directive
@@ -183,7 +181,6 @@ $ a2disconf other-vhosts-access-log
 ~~~
 
 > Pensez bien à supprimer la directive de votre *Vhost*
-
 
 ## HTTP2
 
@@ -212,8 +209,6 @@ SSLEngine on
 > Malheureusement nous ne pouvons pas tester sur notre environnement local car nous
   ne possédons pas le nom de domaine _test.fr_. Il faudra faire la manipulation
   directement sur votre environnement de production.
-
-
 
 ## D'autres paramètres en vrac
 
