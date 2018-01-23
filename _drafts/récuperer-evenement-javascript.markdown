@@ -28,5 +28,5 @@ Et pour l'imprimmer il suffit d'utiliser la propriété `handler` et de lui conc
 
 ~~~javascript
 console.log(event.handler + '');
-// => function(){console.log('hello')}
+// => () => {console.log('hello')}
 ~~~
