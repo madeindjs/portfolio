@@ -2,16 +2,18 @@
 layout: post
 title: Un Crawler en Rust
 description: Créez votre premier crate en Rust
-date:   2018-02-01 12:00:00 +0200
+date:   2018-02-07 12:00:00 +0200
 tags: rust crate crawler
 categories: tutorial
 ---
 
-Le but est de faire un **crawler** en [Rust][rust]. Un crawler est un script qui va naviguer sur un site donné. Cela permet de faire des analyses de SEO ou bien de repérer les pages qui mettent du temps à charger ou qui ne fonctionne pas (code 404 ou même 500).
+Le but est de faire un **crawler** en [Rust][rust]. Un crawler est un script qui va **naviguer** sur un site donné. Cela permet de faire des **analyses de SEO** ou bien de repérer les pages qui mettent du temps à charger ou qui ne fonctionne pas (code 404, 500, etc..).
 
 Le principe est assez simple. Le crawler possède une file d’attente d'URL à **scraper** (= analyser le contenu HTML). Lorsqu'il **scrape** une page, il va chercher toutes les autres URLs du même nom de domaine sur cette page et les ajouter à sa **liste d'attente**. Une fois que la liste d'attente est vide, le crawler s'arrête.
 
 Un langage performant n'est pas nécessairement un bon critère ici, car le crawler passe la majorité de son temps à **attendre** la page du serveur. Le **multi-threading** est un des critères les plus importants. Vu qu'il s'agit d'un point fort de [Rust][rust] (et que je fais ce que je veux vu que c'est mon post), j'ai choisi ce langage.
+
+> Si vous ne connaissez pas encore [Rust][rust], je vous invite à lire mon article sur [l'introduction à Rust](/tutorial/2017/11/28/rust.html).
 
 ## Sommaire
 
@@ -20,7 +22,9 @@ Un langage performant n'est pas nécessairement un bon critère ici, car le craw
 
 ## Création projet
 
-### Initialisation du projet
+Afin de pouvoir utiliser notre **Crawler** dans nos future projet, nous utiliserons **Cargo**. Cargo est le gestionnaire de dépendances de [Rust][rust].
+
+### Importer les librairies
 
 On commence donc par utiliser **Cargo** pour initialiser notre nouveau projet. 
 
@@ -40,31 +44,48 @@ spider/
 
 On aura besoin de quelques librairies afin de de réaliser notre crawler:
 
-- [reqwest][reqwest] afin de récupérer les pages web
+- [reqwest][reqwest] afin de **récupérer** les pages web
 - [scraper][scraper] afin de **scraper** les pages HTML
 
 On les ajoutes donc au fichier _Cargo.toml_
 
 ~~~toml
+# Cargo.toml
+
+# ...
+
+[dependencies]
 reqwest = "0.8.2"
 scraper = "0.4.0"
 ~~~
 
-Nous allons créer deux nouveaux fichier:
-
-- _src/website.rs_ qui sera en quelque sorte le **crawler**
-- _src/page.rs_ qui sera en quelque sorte le **scraper**
-
-Nous les chargeons donc dans le fichier _lib.rs_.
+Pour les utiliser, nous devons les charger dans le fichier _lib.rs_.
 
 ~~~rust
 // src/lib.rs
 extern crate reqwest;
 extern crate scraper;
+~~~
+
+### Structure du projet
+
+De plus, nous aurons besoin de deux nouveaux fichiers:
+
+- _src/website.rs_ qui sera en quelque sorte le **crawler**
+- _src/page.rs_ qui sera en quelque sorte le **scraper**
+
+Pour les charger, il faut les importer dans le fichier _lib.rs_ grâce au mot clé `pub mod` (`mod` charge le fichier et `pub` le rend publique). 
+
+~~~rust
+// src/lib.rs
+
+// ...
 
 pub mod website;
 pub mod page;
 ~~~
+
+## Le code
 
 ### Le scraper
 
@@ -83,7 +104,7 @@ pub struct Page {
 }
 ~~~
 
-On implémente donc les méthodes pour notre scraper. La méthode `new` permettra de créer une  récupérer le contenu HTML de la page avec **reqwest**. Lors de l'appel, nous récupérerons le contenu de la page et nous parerons le résultat avec la méthode `visit`.
+On implémente donc les **méthodes** pour notre scraper. La méthode `new` permettra de créer une  récupérer le contenu HTML de la page avec **reqwest**. Lors de l'appel, nous récupérerons le contenu de la page et nous parserons le résultat avec la méthode `visit`.
 
 ~~~rust
 // src/page.rs
@@ -94,17 +115,15 @@ use std::io::Read;
 pub struct Page {/* ... */}
 
 impl Page {
-    /// Instanciate a new page a start to scrape it.
-    pub fn new(url: &str) -> Self {
-        let html = Self::visit(url);
 
+    pub fn new(url: &str) -> Self {
         Self {
             url: url.to_string(),
-            html: html,
+            html: Self::visit(url)
         }
     }
 
-    /// Get HTML page from server & parse document
+    /// Récupère le contenu HTML et le parse
     fn visit(url: &str) -> Html {
         let mut res = reqwest::get(url).unwrap();
         let mut body = String::new();
@@ -155,7 +174,7 @@ impl Page {
 
 Pour tester que tout fonctionne, il suffit de **créer un test**. La particularité de [Rust][rust] est que les tests ne sont pas forcément séparé de notre fichier testé.
 
-Le test va simplement `assert!` qu'un lien donné à bien été trouvé parmi ceux scrapés. 
+Le test va simplement `assert!` qu'un lien donné a bien été trouvé parmi ceux scrapés. 
 
 ~~~rust
 // src/page.rs
@@ -291,13 +310,13 @@ fn crawl() {
 $ cargo test
 ~~~
 
+Notre librairie est donc complète!
+
 ## Le publier sur [crates.io][crates.io]
 
-[Crates.io][crates.io] répertorie tous les librairies les plus utilisée et permet d'importer la librairie très simplement à l'aide de **Cargo**.
+[Crates.io][crates.io] répertorie tous les librairies les plus utilisées et permet d'importer la librairie très simplement à l'aide de **Cargo**.
 
-### Paramétrer notre paquet
-
-Une [liste d'attributs][cargo_publishing_list] est disponible pour notre fichier _Cargo.toml_ afin d'ajouter des informations complémentaires à notre librairies
+Une [liste d'attributs][cargo_publishing_list] est disponible pour notre fichier _Cargo.toml_ afin d'ajouter des informations complémentaires à notre librairie.
 
 ~~~toml
 # Cargo.toml
@@ -381,7 +400,9 @@ Tout fonctionne parfaitement. D'autres paramètre sont possibles, si vous voulez
 
 ## Conclusion
 
-Le code complet est disponible sur ce [mon dépôt Github][spider_1.0.3]
+Cargo permet facilement de créer des **petites librairie**. Cela permet de partager des **petits composants** utilisables dans de plus gros projets. Cela nous permet d'éviter de "réinventer la roue" en utilisant d'autres composants partagés par d'autres *rustaceans*! 
+
+N’hésitez pas à consulter / forker le dépôt complet sur ce [mon dépôt Github][spider_1.0.3].
 
 [spider_1.0.3]: https://github.com/madeindjs/spider/tree/1.0.3
 [rust]: https://www.rust-lang.org/

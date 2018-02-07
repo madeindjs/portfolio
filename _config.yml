@@ -31,6 +31,10 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-mermaid
+
+mermaid:
+  src: https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
