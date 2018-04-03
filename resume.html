@@ -3,6 +3,7 @@ layout: main
 title: Résumé
 description: Mon experiences et les études que j'ai réalisé 
 ---
+
 <!-- <div class="row pt-2 pb-5">
 	<div class="col">
 		<p class="lead text-justify">{{ site.data.profil.description.multiline }}</p>
@@ -11,54 +12,33 @@ description: Mon experiences et les études que j'ai réalisé
 <div class="row">
 	<!-- experiences -->
 	<div class="col-xs-12 col-sm-12 col-md-6">
-		<h2 class="mb-5">Experience</h2>
+		<h2>Experience</h2>
 		{% for experience in site.data.experiences %}
 			<div class="item">
+				<p class="mb-0"><small>{{ experience.date.start | date: "%m-%Y" }} ~ {{ experience.date.end | date: "%m-%Y" }}</small></p>
 				<h3 class="h5">{{ experience.title }} @ <i><a href="{{ experience.company.url }}">{{ experience.company.name }}</a></i></h3>
-				<p>
-					<span class="badge badge-dark">{{ experience.date.start }}</span>
-					<span class="badge badge-dark">{{ experience.date.end }}</span>
+				<p class="mt-1">
 					{% for tag in experience.tags %}
 						<span class="badge badge-dark">{{ tag }}</span>
 					{% endfor %}
 				</p>
-				<ul class="list-unstyled text-justify">
-					{% for task in experience.tasks %}
-						<li>{{ task }}</li>
-					{% endfor %}
-				</ul>
+				{% for task in experience.tasks %}
+					<p class="my-1">{{ task }}</p>
+				{% endfor %}
 			</div>
 		{% endfor %}
 	</div>
-	<!-- projects -->
-	<!-- <div class="col-xs-12 col-sm-12 col-md-6">
-		<h2 class="mb-5">Projets</h2>
-		{% for project in site.data.projects %}
-			<div class="item">
-				<h3 class="h5"><a href="{{ project.website }}">{{ project.name }}</a></h3>
-				<p>
-					{% for tag in project.tags %}
-						<span class="badge badge-dark">{{ tag }}</span>
-					{% endfor %}
-				</p>
-				<p class="text-justify">
-					{{ project.description }}
-					{% if project.github %}
-						<a href="{{ project.github }}"><img src="/img/github-logo.svg" alt="Github" height="25"></a>
-					{% endif %}
-				</p>
-			</div>
-		{% endfor %}
-	</div> -->
 	<!-- qualification -->
 	<div class="col-xs-12 col-sm-12 col-md-6">
-		<h2 class="mb-5">Etudes</h2>
+		<h2>Etudes</h2>
 		{% for qualification in site.data.qualifications %}
 			<div class="item">
+				<p class="mb-0"><small>{{ qualification.date.start | date: "%m-%Y" }} ~ {{ qualification.date.end | date: "%m-%Y" }}</small></p>
 				<h3 class="h5">{{ qualification.title }} @ <i>{{ qualification.place }}</i></h3>
-				<p>
-					<span class="badge badge-dark">{{ qualification.date.start }}</span>
-					<span class="badge badge-dark">{{ qualification.date.end }}</span>
+				<p class="mt-1">
+					{% for tag in experience.tags %}
+						<span class="badge badge-dark">{{ tag }}</span>
+					{% endfor %}
 				</p>
 				<p class="text-justify">{{ qualification.description }}</p>
 			</div>
