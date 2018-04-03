@@ -1,14 +1,23 @@
 ---
 layout: post
 title: Améliorer notre Crawler en Rust
-description: Créez votre premier crate en Rust
+description: nous allons pousser notre Crawler afin qu'il soit Mult-threadé 
 date:   2018-02-08 12:00:00 +0200
 tags: rust crate crawler thread
 categories: tutorial
 ---
-## base
 
-Un exemple basique. Nous créons un **pool de workers**. Chaque **worker** travaillera en parallèle. Pour simuler une charge de travail, nous utiliserons `thread::sleep` qui stoppera l’exécution du processus pendant une seconde.
+Dans un [précédent article][crawler_rust], nous avions crée un [Crawler en Rust][spider]. Dans cet article, nous allons pousser notre Crawler afin qu'il soit Multi-threadé
+
+>  l'utilisation de plusieurs threads permet de paralléliser le traitement, ce qui, sur les machines multiprocesseur, permet de l'effectuer bien plus rapidement. [Wikipedia][thread_wikipedia]
+
+Dans notre cas, nous allons gagner un temps considérable lorsque notre Crawler effectue des requêtes HTTP. Lorsqu'il attendra une réponse de la requête HTTP, un autre **worker** effectuera une autre requête HHTP en parrallèle
+
+## Implémentation basique
+
+Nous créons un **pool de workers**. Chaque **worker** travaillera en parallèle. Pour simuler une charge de travail, nous utiliserons `thread::sleep` qui stoppera l’exécution du processus pendant une seconde.
+
+Tout ce joue dans la méthode `thread::spawn` qui va s'occuper de lancer la fonction sur un processeur différent. `worker.join()` va s'occuper d'attendre que tous les workers aient finis leur travail.
 
 ~~~rust
 // src/main.rs
@@ -58,9 +67,10 @@ Voici le retour du script.
 
 ## Utilisation des `struct`
 
-Reprenons le [précédent tutoriel](azaz)
+Reprenons le [précédent tutoriel][crawler_rust] et appliquons notre code aux structures.
 
-Simulons une page qui va mettre une seconde à être récupérée
+Nous reprenons donc notre `struct Page`. La méthode `new` s'occuppera de faire la requête HTTP. Dans notre cas, afin de garder une simplicité, on déplace juste `thread::sleep(one_second)` afin de simuler le temps de chargement. 
+
 
 ~~~rust
 // src/main.rs
@@ -86,7 +96,7 @@ impl Page {
 
 ~~~
 
-Mainteant simulons une page web qui comporte quelques URLs à crawler:
+Mainteant, le système reste le même que la version précédente. Le code devient un peu plus long mais il est mieux découpé.
 
 ~~~rust
 // src/main.rs
@@ -148,10 +158,12 @@ Pour l'instant tout fonctionne correctement, on voit bien que les pages ne sont 
     fetching... http://rousseau-alexandre.fr/contact
 
 
-## Amélioration de notre script
+On a donc vu que Rust nous permet de mettre en place un script multi-thread très rapidement et très facilement. 
+
+Si vous souhaitez voir l'implémentation réele sur notre [précédent crawler][crawler_rust], jettez un coup d'oeuil au [commit][multithread_commit].
 
 
-J'avais initialement stocké directement le `scraper::Html`
-
+[spider]: https://github.com/madeindjs/spider
 [multithread_commit]: https://github.com/madeindjs/spider/commit/5f20d73651530a83b4a7a68fbb588c458e098fbf
 [crawler_rust]: /2018/02/07/rust-web-spider-crate.html
+[thread_wikipedia]: https://fr.wikipedia.org/wiki/Thread_(informatique)
