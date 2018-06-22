@@ -7,7 +7,7 @@ thumbnail: /img/blog/n1query.png
 categories: tutorial
 ---
 
-Les **requêtes N+1** sont une plaies qui peuvent avoir un **impacte énorme sur les performances** d'une application. Ce phénomène se produit souvent lorsqu'on utilise un **ORM**. 
+Les **requêtes N+1** sont une plaie qui peuvent avoir un **impact énorme sur les performances** d'une application. Ce phénomène se produit souvent lorsqu'on utilise un **ORM**. 
 
 > T'inquiètes pas, je m’occupe de tout.
 > 
@@ -17,7 +17,7 @@ L'ORM génère **automatiquement** les requêtes SQL et nous évite ainsi de les
 
 ## Exemple
 
-Voici un exemple ou l'on veut récupérer tous les utilisateurs qui ont déjà crée une recette. Sans réfléchir, on serait tenté de faire plus ou moins comme ça:
+Voici un exemple où l'on veut récupérer tous les utilisateurs qui ont déjà créé une recette. Sans réfléchir, on serait tenté de faire plus ou moins comme ça:
 
 ~~~ruby
 users = Recipe.all.map{|recipe| recipe.user}
@@ -38,7 +38,7 @@ Donc, si nous avons **1000 recettes** en base, nous générons **1001 requêtes 
 
 ## Comment corriger?
 
-C'est là qu'intervient `includes`. `includes` va **pré-charger** les objets enfants dans une seule requête. Sont utilisation est très facile. Si on reprend l'exemple précédent
+C'est là qu'intervient `includes`. `includes` va **pré-charger** les objets enfants dans une seule requête. Son utilisation est très facile. Si on reprend l'exemple précédent
 
 ~~~ruby
 users = Recipe.includes(:user).all.map{|recipe| recipe.user}
@@ -51,7 +51,7 @@ Et voilà:
 * `Recipe.all` = 1 requête `SELECT "recipes".* FROM "recipes"`
 * `recipe.user` = 1 requête `SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)`
 
-`includes` ne s'arrête pas là et nous permet même de précharger les sous-liaisons très facilement
+`includes` ne s'arrête pas là et nous permet même de précharger les sous-liaisons très facilement:
 
 ~~~ruby
 Recipe.includes(comments: :user)
@@ -61,9 +61,9 @@ Active Record est **magique**!
 
 ## Comment prévenir?
 
-Nous avons vu qu'il est malheureusement **très facile** de faire créer une requête N+1. Heureusement, il existe une _gem_ qui permet de nous **alerter** lorsque se genre de situation arrive: [Bullet][bullet]. [Bullet][bullet] va nous prévenir (par mail, [notification growl](http://growl.info/), console, etc..) lorsqu’il trouve une requête N+1.
+Nous avons vu qu'il est malheureusement **très facile** de créer une requête N+1. Heureusement, il existe une _gem_ qui permet de nous **alerter** lorsque ce genre de situation arrive: [Bullet][bullet]. [Bullet][bullet] va nous prévenir (par mail, [notification growl](http://growl.info/), console, etc..) lorsqu’il trouve une requête N+1.
 
-Pour l'installer, on ajouter la _gem_ au GemFile
+Pour l'installer, on ajoute la _gem_ au _GemFile_
 
 ~~~ruby
 # Gemfile
@@ -86,9 +86,7 @@ end
 
 > Changer la configuration nécessite le redémarrage du serveur
 
-Ici j'ai seulement activé une [`window.alert`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert) JavaScript
-
-Il suffit ensuite d'utiliser l'application normalement et lorsque l'on rencontrera une requête N+1
+Ici j'ai seulement activé une [`window.alert`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert) JavaScript. Il suffit ensuite d'utiliser l'application normalement et lorsque l'on rencontrera une requête N+1:
 
 ![Affichage de test.fr/load.php sans mise en cache](/img/blog/bullet_notification.png)
 
