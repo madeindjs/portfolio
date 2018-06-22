@@ -6,7 +6,7 @@ tags: php sympony vagrant
 categories: tutorial
 ---
 
-[Symphony][symphony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/). 
+[Symphony][symphony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre et se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/). 
 
 ## Vagrant
 
@@ -14,14 +14,14 @@ categories: tutorial
 
 [Vagrant][vagrant] est un outil qui permet de configurer et ainsi de reproduire facilement des **machines virtuelles**. L'environnement est exactement le même pour tous les développeurs, quel que soit le système d'exploitation de la machine hôte.
 
-[Vagrant][vagrant] utilise [Virtual Box][virtual_box]. Il faut donc commencer par installer les deux outils via leurs site officiels. Voici un exemple pour l'OS **Ubuntu 18.04**.
+[Vagrant][vagrant] utilise [Virtual Box][virtual_box]. Il faut donc commencer par installer les deux outils via leurs sites officiels. Voici un exemple pour l'OS **Ubuntu 18.04**.
 
 - installation de [Virtual Box][virtual_box]
 ~~~bash
 $ wget https://download.virtualbox.org/virtualbox/5.2.12/virtualbox-5.2_5.2.12-122591~Ubuntu~bionic_amd64.deb
 $ dpkg -i virtualbox-5.2_5.2.12-122591~Ubuntu~bionic_amd64.deb
 ~~~
-- instalation de [Vagrant][vagrant]
+- installation de [Vagrant][vagrant]
 ~~~bash
 $ wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
 $ dpkg -i vagrant_2.1.1_x86_64.deb
@@ -119,14 +119,14 @@ Il suffit ensuite de se rendre à l'adresse [192.168.33.10](http://192.168.33.10
 
 ## Prise en main de [Symphony][symphony]
 
-Imaginons une application web permettant de louers des salles `Room` à des utilisateurs `User`.
+Imaginons une application web permettant de louer des salles `Room` à des utilisateurs `User`.
 
 ### Gestion des utilisateurs
 
 [Symphony][symphony] utilise des **bundle** qui sont des "morceaux d'applications" utilisables dans d'autres projets. Dans notre cas, au lieu de partir de zéro, nous utiliserons [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/). Ce **Bundle** gère
 
 - la **création** d'utilisateur
-- la **confirmation** de son addresse mail
+- la **confirmation** de son adresse mail
 - la **connexion** de l'utilisateur
 
 Pour l'installer il suffit de suivre les indications de la [documentation officielle](http://symfony.com/doc/current/bundles/FOSUserBundle/index.html).
@@ -135,7 +135,7 @@ Pour l'installer il suffit de suivre les indications de la [documentation offici
 
 #### Création du modèle
 
-Nous allons ici créer notre modèle `Room` et créer les actions CRUD. Dans un premier temps, il faut **créer notre entité**. Pour cela on utilise la commande `doctrine:generate:entities`
+Nous allons ici créer notre modèle `Room` et créer les actions _CRUD_. Dans un premier temps, il faut **créer notre entité**. Pour cela on utilise la commande `doctrine:generate:entities`
 
 ```bash
 $ php bin/console doctrine:generate:entities Room
@@ -163,7 +163,7 @@ $ php bin/console doctrine:migration:migrate
 
 #### Création de tout le reste
 
-Il suffit ensuite d'utiliser `make:crud` afin de **générer automatiquement** le _controller_, le formulaire et les vue en **fonction de notre modèle**:
+Il suffit ensuite d'utiliser `make:crud` afin de **générer automatiquement** le _controller_, le formulaire et les vues en **fonction de notre modèle**:
 
 ```bash
 $ php bin/console make:crud Room
@@ -273,7 +273,7 @@ public function up(Schema $schema) : void
 }
 ~~~
 
-Pour modifier notre base données, il faut lancer la commande
+Pour modifier notre base de données, il faut lancer la commande
 
 ~~~bash
 $ php bin/console doctrine:migrations:migrate
@@ -323,7 +323,7 @@ class RoomController extends Controller
 }
 ~~~
 
-Afin de restrintes les actions `edit` et `destroy` à l'utilisateur qui possède
+Afin de restreindre les actions `edit` et `destroy` à l'utilisateur qui possède
 
 ~~~php
 <?php
