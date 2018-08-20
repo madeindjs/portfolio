@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Implémenter Phinx dans une application PHP
-date:   2017-11-06 12:00:00 +0200
+date:   2018-08-03 12:00:00 +0200
 tags: php phinx sql
 categories: tutorial
 ---
