@@ -1,22 +1,26 @@
 ---
 layout: post
 title: Synchroniser ses fichier avec Syncthing
-date:   2018-08-27 12:00:00 +0200
-tags: sync rails
-categories: development
+date:   2018-08-28 12:00:00 +0200
+tags: sync selfhosted
+categories: tutorial
 ---
 
 Récemment j'ai voulu trouver une solution pour synchroniser mes documents vers plusieurs PC. Par exemple, lorsque j'ajoute une musique sur mon ordinateur personnel, elle s'ajoute automatiquement sur mon smartphone et mon ordinateur du boulot.
 
 Cela se fait très facilement avec [Dropbox][dropbox] mais ça coûte [10€/mois](https://www.dropbox.com/buy) et puis Dropbox c'est déjà [fait pirater en 2016](https://motherboard.vice.com/en_us/article/nz74qb/hackers-stole-over-60-million-dropbox-accounts). De plus, c'est toujours intéressant d'auto-héberger ses services.
 
-## Présentation de [Syncthing][syncthing]
+J'ai donc choisis d'utiliser [**Syncthing**][syncthing] sur mon Raspberry PI.
 
-J'ai donc choisis d'utiliser [**Syncthing**][syncthing] sur mon Raspberry PI. Ses avantages sont:
+![Logo de Syncthing](https://syncthing.net/images/logo-horizontal.svg)
+
+
+Ses avantages sont:
 
 - **Open-source**: le code est disponible [sur Github](https://github.com/syncthing/syncthing)
 - **Décentralisé**: chaque **nœud** possède sa propre copie du dossier partagé. Si un disque dur casse, tous les fichiers sont présents sur les autres nœuds
 - **Sûr et privé**: [Syncthing][syncthing] utilise le Peer-to-peer et donc toutes vos données ne résident pas sur d'autres serveur. Toutes les communications sont chiffrées de bout en bout.
+- **Multi-plateforme**: Disponnible pour [Windows](https://github.com/canton7/SyncTrayzor/releases/latest), [Mac](https://github.com/syncthing/syncthing-macos/releases/latest), [Linux](https://github.com/syncthing/syncthing-gtk/releases/latest) et même [Android](https://github.com/syncthing/syncthing-android)
 
 ## Installation
 
@@ -96,13 +100,6 @@ Et un autre popup nous signale qu'il est possible de synchroniser un dossier en 
 
 ![la synchronisation commence](/img/blog/syncthing_syncing.png)
 
-
-
-> Attention à ne pas oublier de le signaler en partageable avec les autres nœuds.
-
-
-
-## Conclusion
 
 [syncthing]: https://syncthing.net/
 [dropbox]: https://www.dropbox.com/h
