@@ -1,49 +1,48 @@
 ---
 layout: post
-title: Synchroniser ses fichier avec Syncthing
+title: Synchroniser ses fichiers avec Syncthing
 date:   2018-08-28 12:00:00 +0200
 tags: sync selfhosted
 categories: tutorial
 ---
 
-Récemment j'ai voulu trouver une solution pour synchroniser mes documents vers plusieurs PC. Par exemple, lorsque j'ajoute une musique sur mon ordinateur personnel, elle s'ajoute automatiquement sur mon smartphone et mon ordinateur du boulot.
+Récemment j'ai voulu trouver une solution pour synchroniser mes documents vers plusieurs PC. Par exemple, lorsque j'ajoute une musique sur mon ordinateur personnel, je veux qu'elle s'ajoute automatiquement sur mon smartphone et mon ordinateur professionnel.
 
-Cela se fait très facilement avec [Dropbox][dropbox] mais ça coûte [10€/mois](https://www.dropbox.com/buy) et puis Dropbox c'est déjà [fait pirater en 2016](https://motherboard.vice.com/en_us/article/nz74qb/hackers-stole-over-60-million-dropbox-accounts). De plus, c'est toujours intéressant d'auto-héberger ses services.
+[Dropbox][dropbox] fait ça très bien mais:
 
-J'ai donc choisis d'utiliser [**Syncthing**][syncthing] sur mon Raspberry PI.
+- ça coûte [10€/mois](https://www.dropbox.com/buy)
+- il s'est déjà [fait pirater en 2016](https://motherboard.vice.com/en_us/article/nz74qb/hackers-stole-over-60-million-dropbox-accounts)
+- c'est toujours intéressant d'auto-héberger ses services.
+
+J'ai donc cherché une alternative et je suis tombé sur [**Syncthing**][syncthing].
 
 ![Logo de Syncthing](https://syncthing.net/images/logo-horizontal.svg)
 
+[Syncthing][syncthing] est un projet **Open-source** (le code est disponible [sur Github](https://github.com/syncthing/syncthing)) écrit principalement en [Go](https://golang.org/). Son principal avantage est qu'il est **Décentralisé**. Chaque **nœud** possède sa propre copie du dossier partagé. Si un disque dur casse, tous les fichiers sont présents sur les autres nœuds.
 
-Ses avantages sont:
+[Syncthing][syncthing] utilise donc la méthode du **Peer-to-peer**. Toutes vos données ne résident pas sur d'autres serveur. Toutes les communications sont chiffrées de bout en bout.
 
-- **Open-source**: le code est disponible [sur Github](https://github.com/syncthing/syncthing)
-- **Décentralisé**: chaque **nœud** possède sa propre copie du dossier partagé. Si un disque dur casse, tous les fichiers sont présents sur les autres nœuds
-- **Sûr et privé**: [Syncthing][syncthing] utilise le Peer-to-peer et donc toutes vos données ne résident pas sur d'autres serveur. Toutes les communications sont chiffrées de bout en bout.
-- **Multi-plateforme**: Disponnible pour [Windows](https://github.com/canton7/SyncTrayzor/releases/latest), [Mac](https://github.com/syncthing/syncthing-macos/releases/latest), [Linux](https://github.com/syncthing/syncthing-gtk/releases/latest) et même [Android](https://github.com/syncthing/syncthing-android)
+Cerise sur le gateau, [Syncthing][syncthing] est **Multi-plateforme**. Il est disponible pour [Windows](https://github.com/canton7/SyncTrayzor/releases/latest), [Mac](https://github.com/syncthing/syncthing-macos/releases/latest), [Linux](https://github.com/syncthing/syncthing-gtk/releases/latest) et même [Android](https://github.com/syncthing/syncthing-android).
 
 ## Installation
 
 ### Ordinateur local
 
-[Syncthing][syncthing] est disponible dans les packets Debian. Du coup, pour l'installer il suffit de
+[Syncthing][syncthing] est disponible dans les packets Debian. Du coup on l'installer facilement avec `apt`
 
 ~~~bash
 $ sudo apt install syncthing
 ~~~
 
-Et pour le démarrer il suffit d'utiliser la commande `syncthing` en tâche de fond (avec le `&`).
+Et pour le démarrer il suffit d'utiliser la commande `syncthing`.
 
 ~~~bash
-$ syncthing &
+$ syncthing
 ~~~
 
 Il suffit ensuite de se connecter à l'interface web <http://localhost:8384>.
 
-~~~bash
-$ ssh  ftp
-$ syncthing &
-~~~
+![Interface principale de Syncthing](/img/blog/syncthing_pi_home.png)
 
 ### Raspberry PI
 
@@ -57,11 +56,9 @@ $ sudo apt install syncthing
 $ syncthing &
 ~~~
 
-Il est aussi possible d'accéder à une interface web.
+> le `&` permet de lancer Syncthing en tâche de fond et donc de fermer la connexion SSH sans mettre fin au processus
 
-> Access the GUI via the following URL: http://127.0.0.1:41689/
-
-Malheureusement ma Box SFR bloque la connection, je crée donc un [tunnel SSH ](https://wiki.korben.info/Tunnel_SSH) afin d'avoir le port 41689 sur mon desktop.
+Ici, l'url de l'interface de l'administration est <http://127.0.0.1:41689>. Malheureusement ma Box SFR bloque la connexion, je crée donc un [tunnel SSH ](https://wiki.korben.info/Tunnel_SSH) afin d'avoir le port 41689 sur mon desktop.
 
 ~~~bash
 $ ssh ftp -L 41689:127.0.0.1:41689 -N
@@ -69,11 +66,9 @@ $ ssh ftp -L 41689:127.0.0.1:41689 -N
 
 ## Configuration
 
-Maintenant que nous avons installé nos paquet, il suffit de les configurer ensemble. Pour cela, il faut accéder aux interface de chaque nœuds:
+Maintenant que nous avons installé Syncthing sur nos deux poste, il suffit de les configurer ensemble. Pour cela, il faut accéder aux interfaces de chaque nœuds:
 
-![Interface principale de Syncthing](/img/blog/syncthing_pi_home.png)
-
- Le plus simple est d'ouvrir deux onglets:
+Le plus simple est d'ouvrir deux onglets:
 
 - <http://localhost:8384>: l'interface de mon desktop
 - <http://localhost:41689>: l'interface du Raspberry PI
@@ -99,6 +94,12 @@ Quelques secondes plus tard, sur le nœud remote, un pop-up apparaît
 Et un autre popup nous signale qu'il est possible de synchroniser un dossier en spécifiant l'URL du dossier à créer. Quelques secondes plus tard, la synchronisation commence.
 
 ![la synchronisation commence](/img/blog/syncthing_syncing.png)
+
+## Conclusion
+
+[Syncthing][syncthing] permet de se passer très simplement de [Dropbox][dropbox]. La configuration est très simple mais son fonctionnement n'en reste pas moins très puissant.
+
+Pour mon usage personnel je synchronise sans problèmes toutes mes musiques (+ 40 GO) et mes documents (> 1 GO) vers 4 nœuds (2 PC, 1 RPI & mon smartphone)!
 
 
 [syncthing]: https://syncthing.net/
