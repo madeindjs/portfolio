@@ -22,9 +22,11 @@ description: Mon experiences et les études que j'ai réalisé
 						<span class="badge badge-dark">{{ tag }}</span>
 					{% endfor %}
 				</p>
+				<ul>
 				{% for task in experience.tasks %}
-					<p class="my-1">{{ task }}</p>
+					<li>{{ task }}</li>
 				{% endfor %}
+				</ul>
 			</div>
 		{% endfor %}
 	</div>
