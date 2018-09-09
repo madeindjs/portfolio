@@ -1,40 +1,36 @@
 - name: Raspberry Cook
-  description: Application web de stockage / partage de recettes de cuisine auto-hébergé sur un Raspberry Pi
-  website: http://raspberry-cook.fr
-  github: https://github.com/RaspberryCook/website
+  quote: Ce projet m'a permis de décourvir et m'auto-former sur <mark>Ruby on Rails</mark> et de créer un serveur sur un Raspberry PI.
+  description: Application web de stockage et partage de recettes de cuisine orienté sur la protection des données.
+  link: http://raspberry-cook.fr
+  github: RaspberryCook/website
   picture: img/projects/raspberry-cook.png
-  tags:
-    - Ruby on Rails
-    - JQuery
-    - Bootstrap
 
-- name: Fooder
-  description: Application web pour créer un site web dynamique à destination des restaurateurs.
-  website: http://fooder.pro
-  github: https://github.com/madeindjs/fooder
-  tags:
-    - Ruby on Rails
-    - JQuery
-    - Bootstrap
+# - name: Fooder
+#   description: Application web pour créer un site web dynamique à destination des restaurateurs.
+#   link: http://fooder.pro
+#   github: https://github.com/madeindjs/fooder
+#   tags:
+#     - Ruby on Rails
+#     - JQuery
+#     - Bootstrap
 
 - name: Nature Coiffure Martine
-  description: Site vitrine pour un salon de coiffure
-  website: http://nature-coiffure-lyon.fr
+  description: Site vitrine pour un salon de coiffure crée avec <mark>Jekyll</mark>. J'assure l'hébergement moi même avec un Raspberry PI branché à ma box internet. 
+  link: http://nature-coiffure-lyon.fr
   github: https://github.com/madeindjs/nature_coiffure
-  tags:
-    - Ruby
-    - Jekyll
 
 - name: Cristagiri
-  description: Bibliothèque pour parser des documents HTML avec le langage compilé Crystal
-  github: https://github.com/madeindjs/Crystagiri
-  tags:
-    - Crystal
+  quote: Ce projet n'étais qu'une excuse pour apprendre le language <mark>Crystal</mark>. Maintenant il est suivit par plus de 80 personnes sur Github.
+  description: Bibliothèque pour parser des documents HTML avec le langage compilé <mark>Crystal</mark>
+  github: madeindjs/Crystagiri
 
-- name: Super-Markdown
-  description: Utilitaire Python pour convertir des fichiers Markdown en documents HTML tout-en-un. 
-  github: https://github.com/madeindjs/Super-Markdown
-  tags:
-    - Python
+# - name: Super-Markdown
+#   description: Utilitaire Python pour convertir des fichiers Markdown en documents HTML tout-en-un. 
+#   github: https://github.com/madeindjs/Super-Markdown
+
+- name: Walking Dead
+  github: madeindjs/WalkingDead
+  quote: Ce projet m'a permis d'utiliser <mark>Java</mark> et de (tenter) d'étudier le comportement du Garbage Collector. 
+  description: Création d'un outil de simulation pour connaitre mon éspérance de vie lors d'une invasion de zombie.
 
     
