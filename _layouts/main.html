@@ -4,9 +4,9 @@
 		{% include head.html %}
 	</head>
 	<body>
-		<div class="container">
+		{% include header.html %}
+		<div class="container my-5">
 			<!-- header & navigation -->
-			{% include header.html %}
 			{{ content }}
 			{% include footer.html %}
 		</div>

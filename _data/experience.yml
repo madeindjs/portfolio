@@ -1,0 +1,32 @@
+- job_title: Directeur Technique
+  company: iSignif
+  link: https://isignif.fr/
+  dates: Mai 2018 à aujourd'hui
+  quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
+  description:
+    - Au sein de l'équipe, je suis chargé de mettre en place une plateforme web dans le but de mettre en relation des avocats et des huissiers.
+    - Afin d'être réactif, j'ai choisi d'utiliser le (formidable) framework <mark>Ruby on Rails</mark>. Je travaille aussi avec un Web-designer à distance qui réalise l'intégration du site.
+
+
+- job_title: Developpeur PHP
+  company: GAC Technology
+  link: https://gac-technology.com/
+  dates: Janvier 2017 à aujourd'hui
+  quote: GAC Technology est une Scale-Up qui m'a appri à manipuler des grandes quantité de données. 
+  description:
+    - Dans mon métier, je suis ammené à comprendre le besoin du client afin de retrasncrire en solution technique perenne.
+    - Au sein de cet entreprise, je suis développeur back-end <mark>PHP</mark>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés, nous utilisons des outils tel que <mark>MySQL</mark>, <mark>Elastic Search</mark> et <mark>Redis</mark>.
+
+
+- job_title: Pilote qualité process - Chef de projet - Développeur
+  company: Carrier
+  link: https://www.carrier.com/commercial-refrigeration/
+  dates: Septembre 2011 à janvier 2017 
+  quote: Au sein de Carrier, j'ai eu la formidable experience de former des personnes dans toute l'europe sur un projet que j'ai mis en place.
+  description:
+    - Chez Carrier, j'ai eu l'opportunité de me diversifier dans mon travail
+    - En tant Chef de projet, j'ai développé une solution marketing de dessin 3D avec <mark>Sketchup</mark> et l'API <mark>Ruby</mark>.
+    - En tant que Pilote qualité process, j'ai réalisé une application web avec <mark>C#</mark> & <mark>ASP.NET MVC</mark> afin de suivre les interventions techniques.  
+    - En tant que bureau d'étude, je réalisais les calculs de dimensionnement des instalations et le dessin des plans d'execution sous <mark>AutoCad</mark>.
+
+

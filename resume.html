@@ -16,7 +16,7 @@ description: Mon experiences et les études que j'ai réalisé
 		{% for experience in site.data.experiences %}
 			<div class="item">
 				<p class="mb-0"><small>{{ experience.date.start | date: "%m-%Y" }} ~ {{ experience.date.end | date: "%m-%Y" }}</small></p>
-				<h3 class="h5">{{ experience.title }} @ <i><a href="{{ experience.company.url }}">{{ experience.company.name }}</a></i></h3>
+				<h3 class="h5">{{ experience.job_title }} @ <i><a href="{{ experience.company.url }}">{{ experience.company.name }}</a></i></h3>
 				<p class="mt-1">
 					{% for tag in experience.tags %}
 						<span class="badge badge-dark">{{ tag }}</span>
