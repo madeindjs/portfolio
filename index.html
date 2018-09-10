@@ -4,70 +4,110 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 ---
 
 
-<div class="row">
-	<div class="col">
-		<h1 class="d-none">A propos de moi</h1>
-
-    {% for desc in site.data.profil.description.multiline %}
-      <p class="lead text-justify">{{ desc }}</p>
-    {% endfor %}
+<div class="row my-5">
+	<div class="col-md-4">
+		<img src="http://lorempicsum.com/futurama/300/300/2" alt="" class="img-fluid rounded-circle"
+		/>
 	</div>
-</div>
-
-<div class="row mt-5">
-  
-  <div class="col">
-    <h2>mes experiences</h2>
-  </div>
-
-</div>
-
-
-{% for experience in site.data.experience %}
-    
-  <div class="row py-4">
-    <div class="col-sm-3">
-      <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
-      <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
-    </div>
-    <div class="col-sm-9 border-left">
-      
-      <blockquote class="blockquote">
-        <p class="mb-0">{{ experience.quote }}</p>
-      </blockquote>
-      {% for task in experience.description %}
-        <p>{{ task }}</p>
-      {% endfor %}
-    </div>
-  </div>
+		<div class="col-md-8">
+			<div class="align-middle">
+				<h1 class="d-none">A propos de moi</h1>
+				{% for desc in site.data.profil.description.multiline %}
+				<p class="lead text-justify">{{ desc }}</p>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 
 
-{% endfor %}
+	<!-- separator -->
+	<div class="row">
+		<div class="col">
+			<hr>
+		</div>
+	</div>
+
+	<div class="row mt-5">
+		<div class="col-12">
+			<h2>Portfolio</h2>
+		</div>
+	</div>
 
 
-<div class="row">
-  <div class="col">
-    <h2>Portfolio</h2>
-  </div>
-</div>
-<div class="row pt-5">
-  {% for project in site.data.projects %}
-    <div class="col-sm-6 col-lg-4">
-      <div class="item">
-        <h3 class="h5 mb-1">
-          <a href="{{ project.website }}">{{ project.name }}</a>
-        </h3>
-        <blockquote class="blockquote">
-        <p class="mb-0">{{ project.quote }}</p>
-      </blockquote>
-        <p class="text-justify">{{ project.description }}</p>
-        <p>
-          {% if project.github %}
-            <a href="{{ project.github }}" class="btn btn-xs btn-light">Github</a>
-          {% endif %}
-          <a href="{{ project.website }}" class="btn btn-xs btn-light">Site</a>
-        </p>
-      </div>
-    </div>
-  {% endfor %}
-</div>
+	<div class="card-deck">
+		{% for project in site.data.projects %}
+		<div class="card border-light">
+			<div class="card-body">
+				<h3 class="card-title h5">{{ project.name }}</h3>
+				{% if project.quote %}
+				<p class="card-text alert alert-light text-justify">{{ project.quote }}</p>
+				{% endif %}
+				<p class="card-text text-justify">{{ project.description }}</p>
+				{% if project.github %}
+				<a href="https://github.com/{{ project.github }}" class="card-link"><img src="/img/github-logo.svg" width="20px" height="20px"></a>
+				{% endif %}
+				{% if project.link %}
+				<a href="{{ project.link }}" class="card-link">Site web</a>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+
+	<!-- separator -->
+	<div class="row">
+		<div class="col">
+			<hr>
+		</div>
+	</div>
+
+	<div class="row mt-5">
+		<div class="col">
+			<h2>Mes experiences</h2>
+		</div>
+	</div>
+
+	{% for experience in site.data.experience %}
+	<div class="row py-4">
+		<div class="col-sm-3">
+			<h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
+			<p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
+		</div>
+		<div class="col-sm-9 border-left">
+
+			<p class="alert alert-light text-justify">{{ experience.quote }}</p>
+			{% for task in experience.description %}
+			<p class="text-justify">{{ task }}</p>
+			{% endfor %}
+		</div>
+	</div>
+	{% endfor %}
+
+	<!-- separator -->
+	<div class="row">
+		<div class="col">
+			<hr>
+		</div>
+	</div>
+
+
+	<div class="row mt-5">
+		<div class="col">
+			<h2>Mes diplômes</h2>
+		</div>
+	</div>
+
+	{% for education in site.data.education %}
+	<div class="row py-4">
+		<div class="col-sm-3">
+			<h3 class="h5">{{ education.qualification }}</h3>
+			<p class="my-0 pt-0"><small>{{ education.dates }} @ {{ education.name }}</small></p>
+		</div>
+
+		<div class="col-sm-9 border-left">
+			<p class="alert alert-light text-justify">{{ education.quote }}</p>
+			<p class="text-justify">{{ education.description }}</p>
+		</div>
+	</div>
+	{% endfor %}
