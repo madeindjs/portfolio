@@ -4,6 +4,7 @@ birth_date: 1992-12-28
 address: 73c avenue de Bohlen, 69120, Vaulx-en-Velin
 phone: "+33663549581"
 email: contact@rousseau-alexandre.com
+picture: https://avatars3.githubusercontent.com/u/11815139?s=300&v=4
 
 birth_date: '1992-12-28'
 town_birth: Toulouse
@@ -22,16 +23,10 @@ description:
   oneline: Développeur passionné auto-didacte
   multiline:
   - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
-  - Le jour, j'aime traduire des problème complexe en solution technique simple.
-  - La nuit, j'aime découvrir de nouvelle technologie tel que Rust
+  - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelle technologie tel que <mark>Rust</mark> / <mark>Elexir</mark>
 
 
-interest_points:
-- Course à pied
-- Cross-fit
-- Linux
-- Open-source
-- Nouvelles technologies
+interest_points: ma copine, <mark>Ruby on Rails</mark>, la course à pied et rédiger des documents en LaTeX
 
 spoken_langages:
   anglais:
