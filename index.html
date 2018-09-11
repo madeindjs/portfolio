@@ -7,7 +7,7 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 <div class="row my-5">
 	{% if site.data.profil.picture %}
 	<div class="col-md-4">
-		<img src="{{ site.data.profil.picture }}" style="filter: grayscale(100%)" class="img-fluid rounded-circle"
+		<img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle"
 		/>
 	</div>
 		<div class="col-md-8">
@@ -105,7 +105,7 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 				<div class="card-deck">
 					{% for education in site.data.education %}
 					<div class="card border-light">
-						<div class="card-header">{{ education.dates }} @ {{ education.name }</div>
+						<!-- <div class="card-header">{{ education.dates }} @ {{ education.name }}</div> -->
 						<div class="card-body">
 							<h3 class="card-title h5">{{ education.qualification }}</h3>
 							{% if education.quote %}
