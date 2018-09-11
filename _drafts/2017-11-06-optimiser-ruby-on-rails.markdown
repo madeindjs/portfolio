@@ -7,15 +7,15 @@ tags: ruby rails
 categories: development
 ---
 
-Récement, j'ai remarqué que la page principale de mon site [https://raspberry-cook.fr/recipes](https://raspberry-cook.fr/recipes) répondait en 1,30 seconde! L'impacte sur le réferencement est **gravissime**.
+Récemment, j'ai remarqué que la page principale de mon site [https://raspberry-cook.fr/recipes](https://raspberry-cook.fr/recipes) répondait en 1,30 seconde! L'impacte sur le référencement est **gravissime**.
 
 > Le temps de réponse de votre serveur ne devrait pas dépasser 200 ms.
-> 
+>
 > *Google - [PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/)*
 
 ![Capture d'écran de l'outil SpeedInsight de Google](/img/blog/pagespeedinsights_raspberry_cook.png)
 
-C'est bien connu: **Ruby on Rails est lent**! Ceci nottament à cause de:
+C'est bien connu: **Ruby on Rails est lent**! Ceci notamment à cause de:
 
 * **Ruby** qui un langage **interprété** dynamiquement & faiblement typé. Donc lent
 * **Ruby on Rails** qui gère beaucoup de choses pour nous en sacrifiants les performances
@@ -27,41 +27,12 @@ J'ai donc commencé ma quête d'optimisation des performances (spoiler: Apache e
 
 ## Les requêtes N+1
 
-> T'inquiètes pas, je m'occuppe de tout.
-> 
-> *Active Record*
+Déja fait ;)
 
-Active Record est formidable et gère tout pour nous. Maleuresement, il lance une requête SQL à chaque utilisation dynamique des liaisons. Et comme disait ma grand-mère:
-
-> Une grosse requête SQL vaut mieux que plusieurs petites. 
-
-Voici un exemple ou l'on veut récupérer tous les utilisateurs qui on déjà crée une recette. Sans réfléchir, on serait tenté de faire plus ou moins comme ça:
-
-~~~ruby
-users = Recipe.all.map{|recipe| recipe.user}
-~~~
-
-Mine de rien, ce petit bout de code va génerer un nombre impressionant de requêtes:
-
-* `Recipe.all` = 1 requête `SELECT "recipes".* FROM "recipes"`
-* `recipe.user` = 1 requête `SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]` par recette
-
-C'est là que `includes` vient à la rescousse en préchargeant les liaisons pour nous
-
-~~~ruby
-users = Recipe.includes(:user).all.map{|recipe| recipe.user}
-# SELECT "recipes".* FROM "recipes"
-# SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)
-~~~
-
-Et voilà:
-
-* `Recipe.all` = 1 requête `SELECT "recipes".* FROM "recipes"`
-* `recipe.user` = 1 requête `SELECT "users".* FROM "users" WHERE "users"."id" IN (1, 2)`
 
 ## La consommation mémoire
 
-Ici il n'y pas de règle particulière mais il faut éviter le chargement d'ojets Active Record pour rien.
+Ici il n'y pas de règle particulière mais il faut éviter le chargement d’objets Active Record pour rien.
 
 
 Ma classe `Recipe` représente une recette qui peut-être notée par des commentaires (= `Comment`). J'ai implémenté une fonction `rate` qui calcule la moyenne des notes.
@@ -85,7 +56,7 @@ Ca fonctionne bien et le code est *(assez)* parlant. Le problème est que:
 * On fait du N+1 (voir plus haut)
 * On récupère beaucoup d'objets juste pour faire une moyenne
 
-Le chargment des objets va créer des variables pour stocker **toutes** les informations des commentaires (`name`, `content`, `user_id`, `recipe_id`, etc...). Nous n'avons pas besoin de tout cela. Ici nous pouvons nous contenter d'utiliser la fonction SQL [`AVG`](http://sql.sh/fonctions/agregation/avg) qui fait la moyenne pour nous.
+Le chargement des objets va créer des variables pour stocker **toutes** les informations des commentaires (`name`, `content`, `user_id`, `recipe_id`, etc...). Nous n'avons pas besoin de tout cela. Ici nous pouvons nous contenter d'utiliser la fonction SQL [`AVG`](http://sql.sh/fonctions/agregation/avg) qui fait la moyenne pour nous.
 
 
 ~~~ruby
@@ -127,9 +98,9 @@ Alias / "/var/www/raspberry_cook/current/public/"
 
 ### Le lazy-loader
 
-Il est possible d'utiliser un **LazyLoader** javascript. Celui va s'occuper de charger les images uniquement lorsqu'elles sont visibles par le navigateur. Dans nos balises `<img />` Nous définissons un attribut `data-src` qui sera définit comme source de l'image sera affichée.
+Il est possible d'utiliser un **LazyLoader** JavaScript. Celui va s'occuper de charger les images uniquement lorsqu'elles sont visibles par le navigateur. Dans nos balises `<img />` Nous définissons un attribut `data-src` qui sera définit comme source de l'image sera affichée.
 
-Le gem [**lazyload-rails**](https://github.com/jassa/lazyload-rails) vous simplifie la vie. Quelques secondes suffisent pour l'nstaller et il suffit d'activer l'option `lazy`.
+Le gem [**lazyload-rails**](https://github.com/jassa/lazyload-rails) vous simplifie la vie. Quelques secondes suffisent pour l'installer et il suffit d'activer l'option `lazy`.
 
 ~~~ruby
 image_tag "kittenz.png", alt: "OMG a cat!", lazy: true
@@ -139,7 +110,7 @@ image_tag "kittenz.png", alt: "OMG a cat!", lazy: true
 
 ## Utiliser la bonne version de Ruby
 
-Lors de la [migration de mon application vers mon Raspberry PI 3](http://rousseau-alexandre.fr/development/2017/09/22/Migrer-une-application-Rails-vers-MariaDB.html), j'ai utilisé [RVM](https://rvm.io/) pour installer Ruby. Sans trop réflechir, j'ai installé la dernière version de Ruby, c'est à dire la 2.4.J'ai observé d'énorme latences sur mon environnement de développement. Le moinde `rake -T` met quelques secondes à s'afficher...
+Lors de la [migration de mon application vers mon Raspberry PI 3](http://rousseau-alexandre.fr/development/2017/09/22/Migrer-une-application-Rails-vers-MariaDB.html), j'ai utilisé [RVM](https://rvm.io/) pour installer Ruby. Sans trop réfléchir, j'ai installé la dernière version de Ruby, c'est à dire la 2.4.J'ai observé d'énorme latences sur mon environnement de développement. Le moindre `rake -T` met quelques secondes à s'afficher...
 
 La Documentation est très claire sur la version à utiliser.
 
@@ -165,7 +136,7 @@ LoadModule passenger_module /home/pi/.rvm/gems/ruby-2.0.2/gems/passenger-5.1.11/
 </IfModule>
 ~~~
 
-Et on redemarre Apache
+Et on redémarre Apache
 
 ~~~bash
 $ sudo /etc/init.d/apache restart

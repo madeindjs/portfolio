@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Création d'un projet sous Symphony 4 avec Vagrant
+title: Création d'un projet sous Symfony 4 avec Vagrant
 date:   2018-06-20 19:00:00 +0200
-tags: php sympony vagrant
+tags: php symfony vagrant
 categories: tutorial
 ---
 
-[Symphony][symphony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre et se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/). 
+[Symfony][symfony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre et se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/). 
 
 ## Vagrant
 
@@ -100,7 +100,7 @@ $ vagrant up
 
 Cette commande va télécharger notre machine virtuelle et la démarrer.
 
-### Sympony
+### Symfony
 
 On initialise le projet avec **composer**. Pour cela, on se connecte à la machine virtuelle avec `vagrant ssh`
 
@@ -117,13 +117,13 @@ $ composer install
 
 Il suffit ensuite de se rendre à l'adresse [192.168.33.10](http://192.168.33.10) et la page d’accueil s'affiche!!
 
-## Prise en main de [Symphony][symphony]
+## Prise en main de [Symfony][symfony]
 
 Imaginons une application web permettant de louer des salles `Room` à des utilisateurs `User`.
 
 ### Gestion des utilisateurs
 
-[Symphony][symphony] utilise des **bundle** qui sont des "morceaux d'applications" utilisables dans d'autres projets. Dans notre cas, au lieu de partir de zéro, nous utiliserons [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/). Ce **Bundle** gère
+[Symfony][symfony] utilise des **bundle** qui sont des "morceaux d'applications" utilisables dans d'autres projets. Dans notre cas, au lieu de partir de zéro, nous utiliserons [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle/). Ce **Bundle** gère
 
 - la **création** d'utilisateur
 - la **confirmation** de son adresse mail
@@ -373,5 +373,5 @@ class RoomController extends Controller
 
 [vagrant]: https://www.vagrantup.com/
 [virtual_box]: https://www.virtualbox.org/
-[symphony]: https://symfony.com/
+[symfony]: https://symfony.com/
 [bootstrap]: http://getbootstrap.com/
