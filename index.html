@@ -6,14 +6,13 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 <div class="row my-5">
   {% if site.data.profil.picture %}
-  <div class="col-md-4 text-center">
-    <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle"
-    />
-  </div>
-  <div class="col-md-8">
-    {% else %}
+    <div class="col-md-4 text-center">
+      <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
+    </div>
+    <div class="col-md-8">
+  {% else %}
     <div class="col">
-      {% endif %}
+  {% endif %}
       <div class="align-middle">
         <h1 class="d-none">A propos de moi</h1>
         {% for desc in site.data.profil.description.multiline %}
@@ -22,7 +21,6 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
         <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
       </div>
     </div>
-  </div>
 
 </div>
 
