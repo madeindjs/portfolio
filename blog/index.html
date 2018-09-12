@@ -1,0 +1,74 @@
+---
+layout: main
+title: Blog
+description: Mes idées et mes diverses divagations
+---
+<div class="row">
+  <div class="col-12">
+    <h1>Blog</h1>
+  </div>
+
+  
+
+  {% for post in paginator.posts %}
+    <div class="col-md-6 col-lg-4 col-xl-3 my-2">
+      <div class="card">
+        <!-- {% if post.thumbnail %}
+        <img class="card-img-top" src="{{ post.thumbnail }}" alt="Card image cap">
+        {% endif %} -->
+        <div class="card-body">
+          <h2 class="card-title h5 mb-0"><a class="text-dark" href="{{ post.url }}">{{ post.title }}</a></h2>
+          <p class="card-text ">
+            {% for tag in post.tags %}
+            <span class="badge badge-light">{{ tag }}</span>
+            {% endfor %}
+          </p>
+          <p class="card-text text-justify">{{ post.excerpt }}</p>
+          <!-- <a class="card-link" href="{{ post.url }}">voir plus</a> -->
+        </div>
+        <div class="card-footer text-muted">{{ post.date | date: "%d/%m/%Y" }}</div>
+      </div>
+    </div>
+  {% endfor %}
+
+
+
+
+
+</div>
+
+<!-- Pagination links -->
+<nav aria-label="Search results pages">
+  <ul class="pagination">
+    {% if paginator.previous_page %}
+      <li class="page-item">
+        <a href="{{ paginator.previous_page_path }}" class="page-link">Précédent</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Précédent</span></li>
+    {% endif %}
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <li class="page-item active">
+          <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
+        </li>
+      {% elsif page == 1 %}
+
+        <li class="page-item">
+          <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if paginator.next_page %}
+      <li class="page-item">
+        <a href="{{ paginator.next_page_path }}" class="page-link">Suivant</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">Suivant</span></li>
+    {% endif %}
+  </ul>
+</nav>

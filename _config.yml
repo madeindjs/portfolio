@@ -32,6 +32,10 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-mermaid
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/blog/page/:num/"
 
 mermaid:
   src: https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js
