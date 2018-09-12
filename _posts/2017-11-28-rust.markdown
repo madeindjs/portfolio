@@ -50,10 +50,7 @@ De plus, [Rust][Rust] est un langage bas niveau qui est, pour l'instant, peu ada
 
 De plus, [Rust][Rust] est encore peu utilisé dans le **monde professionnel**. Si vous recherchez un langage à mettre en avant dans une recherche d'emploi, ce n'est actuellement pas le meilleur choix.
 
-<<<<<<< HEAD:_posts/2017-11-28-rust.markdown
-=======
 C'est aussi un langage **difficile** à maîtriser et bas niveau. Il n'est pas dédié au web ou bien au scripting (même s'il en est capable).
->>>>>>> dcc0de8ca3e3150e7be191d278d3cd05c1936d54:_drafts/rust.markdown
 
 ## Installation
 
