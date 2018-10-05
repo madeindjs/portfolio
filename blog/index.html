@@ -8,11 +8,11 @@ description: Mes idées et mes diverses divagations
     <h1>Blog</h1>
   </div>
 
-  
+
 
   {% for post in paginator.posts %}
-    <div class="col-md-6 col-lg-4 col-xl-3 my-2">
-      <div class="card">
+    <div class="col-md-6 col-lg-4 col-xl-4 my-2">
+      <div class="card border-light">
         <!-- {% if post.thumbnail %}
         <img class="card-img-top" src="{{ post.thumbnail }}" alt="Card image cap">
         {% endif %} -->
@@ -23,10 +23,11 @@ description: Mes idées et mes diverses divagations
             <span class="badge badge-light">{{ tag }}</span>
             {% endfor %}
           </p>
-          <p class="card-text text-justify">{{ post.excerpt }}</p>
+          <p class="card-text text-justify m-0">{{ post.excerpt | strip_html | strip_newlines | truncate: 126 }}</p>
+          <p class="card-text text-muted text-right m-0"><small>{{ post.date | date: "%d/%m/%Y" }}</small></p>
           <!-- <a class="card-link" href="{{ post.url }}">voir plus</a> -->
         </div>
-        <div class="card-footer text-muted">{{ post.date | date: "%d/%m/%Y" }}</div>
+        <!-- <div class="card-footer text-muted bg-light border-light"><small>{{ post.date | date: "%d/%m/%Y" }}</small></div> -->
       </div>
     </div>
   {% endfor %}
