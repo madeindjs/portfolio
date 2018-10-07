@@ -3,13 +3,21 @@ title: Premiers pas avec Metasploit
 layout: post
 ---
 
-[Metasploit Framework][metasploit] est un logiciel écrit en Ruby permettant le développement et l’utilisation d'_exploit_. Les _exploits_ sont des vulnérabilités qui permettent d’exécuter du code sur une machine distante (idéalement sans que l'hôte ne le sache évidement).
+[Metasploit Framework][metasploit] est un logiciel écrit en Ruby permettant le développement et l’utilisation d'_exploit_. Les _exploits_ sont des vulnérabilités qui permettent d’exécuter du code sur une machine distante (sans que l'hôte ne le sache, c'est mieux).
+
+J'ai donc décidé de prendre en mains l'outil afin de faire moi même un audit de sécurité sur mon serveur.
 
 ## Configuration de l'environnement
 
-### Metasploitable
+Ici nous allons mettre en place un environnement permettant de faire des tests avec deux machines virtuelles.
 
-Lorsqu'on veut faire des tests d'intrusions, mieux vaut le faire sur une **machine virtuelle**. Mestasploit met à disposition une machine virtuelle spécifiquement prévue à cet effet: **Mestasploitable**. Il s'agit d'une version Ubuntu 14.04 qui contient volontairement plusieurs failles de sécurités sur des logiciels bien connu comme:
+### La cible
+
+Lorsqu'on veut faire des tests d'intrusions, mieux vaut le faire sur une **machine virtuelle**. En effet, les tests de vulnérabilité sont illégal sur une machine qui ne vous appartiennent pas.
+
+C'est ici qu'arrive **Metasploitable**.
+
+**Mestasploitable** est une machine virtuelle proposée par Metasploit afin de vous entraîner. Il s'agit d'une version Ubuntu 14.04 qui contient volontairement plusieurs failles de sécurités sur des logiciels bien connu comme:
 
 - le serveur d'intégration continue **Jenkins**
 - Des serveur de base de données **ElasticSearch** ou **MySQL**
@@ -37,23 +45,38 @@ $ curl -O https://raw.githubusercontent.com/rapid7/metasploitable3/master/Vagran
 - user: `vagrant`
 - password: `vagrant`
 
-## Utiliser [Metasploit][metasploit]
+### Installer [Metasploit][metasploit]
 
 Il est possible d'installer [Metasploit][metasploit] sur votre OS mais de mon côté je préfère utiliser [Kali Linux][kali] dans une machine virtuelle. [Kali Linux][kali] est une distribution Linux basée sur Debian qui intègre de base qui apporte des outils de “hacking” pré-installé.
 
+![Logo de Kali Linux](https://docs.kali.org/wp-content/uploads/2015/02/kali-logo.png)
+
 Si vous voulez faire comme quoi, suivez mon tutoriel pour [installer Kali Linux dans une machine virtuelle avec KVM](/tutorial/2018/10/02/kvm.html).
 
-### La reconnaissance
+---
 
-Nous sommes donc dans la première partie qui est la **reconnaissance** de la cible. Cette étape cruciale consiste à obtenir le maximum d'informations sur la victime.
+## Le hacking
 
-Pour cela on utilise `nmap`, un scanner de port. Les ports sont en quelques sortent des portes qui sont ouvertes sur le résaux. Une porte correspond souvent à un logiciel utilisée sur la machine:
+Les étapes d'un "hack" bien réussi sont les suivantes:
+
+- Collecte d’**informations** comme l'adresse IP, les services activé, le système d'exploitation, etc..
+- **Repérage** des failles de sécurités sur les logiciels installés
+- **Exploitation** d’une faille
+<!-- - Compromission -->
+- Installation d’une **porte dérobée** pour facilité l'accès plus tard
+- **Nettoyage** des traces que l'on a laissé
+
+### Collecte d’informations
+
+Nous sommes donc dans la première partie qui est la **reconnaissance** de la cible. Cette étape cruciale consiste à obtenir le maximum d'informations sur la victime. Nous devons idéalement passer le plus de temps possible sur cette étape.
+
+Ici, nous allons seulement effectuer un scan des ports ouverts avec `nmap`, **un scanner de port**. Les ports sont en quelques sortent des portes qui sont ouvertes sur le réseaux. Une porte correspond souvent à un **type de logiciel** utilisé sur la machine:
 
 - 22 pour un serveur SSH
 - 80 pour un serveur web (Apache par exemple)
 - 3306 pour un serveur SQL
 
-Ces "portes ouvertes" nous donne donc beaucoup d'indications sur la machines et sur son utilisation. Le scan de port est d'ailleurs [tout à fait légal](http://www.infond.fr/2010/09/legalite-du-scan-de-port.html)
+Ces "portes ouvertes" nous donne donc beaucoup d'indications sur la machines et sur **son utilisation**. Malgré sur ce qu'on peut lire, le scan de port est d'ailleurs [tout à fait légal](http://www.infond.fr/2010/09/legalite-du-scan-de-port.html)
 
 `nmap` possède beaucoup d'options, mais nous pouvons utiliser la version la plus simple
 
@@ -78,9 +101,13 @@ MAC Address: 08:00:27:0E:30:35 (Oracle VirtualBox virtual NIC)
 Nmap done: 1 IP address (1 host up) scanned in 5.17 seconds
 ~~~
 
-> Attantion car NMAP
+> L'utilisation de `sudo` donne plus de liberté à `nmap` et ainsi nous donne plus d'information. Attention néanmoins car le scan de port est facilement détectable.
 
-### Le scan de vulnérabilités
+Ici nous voyons donc que pas mal de ports sont ouverts. Dans la vrai vie vivante, il s'agit plutôt d'une **mauvaise pratique** car les ports peuvent être au **filtrés**. Nous pouvons aussi changer le port par défaut de SSH par exemple et ainsi brouiller les pistes.
+
+Mais ici c'est normal car
+
+### Repérage des failles
 
 [OpenVAS][openvas] est un **scanner de vulnérabilités**. Il est issu d'un fork de Nessus qui est passé sous licence propriétaire à partir de la version 3 en 2005. C'est donc un logiciel très complet qui permet de scanner les vulnérabilité d'une machine. Il s'utilise d’ailleurs très bien sans Metasploit.
 
@@ -90,16 +117,23 @@ Nmap done: 1 IP address (1 host up) scanned in 5.17 seconds
 $ sudo  apt install openvas
 ~~~
 
-Une fois installé, il nous pouvons effectuer la configuration automatique avec `openvas-setup`:
+Une fois installé, il nous pouvons effectuer la configuration automatique avec `openvas-setup`. Cette commande va s'occupper de mettre à jour la base de données des failles que Open
 
 ~~~bash
 $ sudo openvas-setup
 ~~~
 
-Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start`. Ce service va automatiquement démarrer et écouter sur le port 9390 & 9391.
+> **Attention**, à la fin `openvas-setup` va créer un compte admin avec un **mot de passe aléatoire** qu'il faudra noter.
+
+
+Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start`. Ce service va automatiquement démarrer et écouter sur le port 9390 & 9391. On se rend donc sur <https://localhost:9390> et on accède à l'interface d'administration:
+
+![interface d'administration d'OpenVAS](/img/kali_msf_openvas.png)
+
 
 Et c'est ici qu'on commence à utiliser Metasploit.
 
+### Exploitation d’une faille
 
 ## Liens
 
