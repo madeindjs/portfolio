@@ -5,7 +5,7 @@ layout: post
 
 [Metasploit Framework][metasploit] est un logiciel écrit en Ruby permettant le développement et l’utilisation d'_exploit_. Les _exploits_ sont des vulnérabilités qui permettent d’exécuter du code sur une machine distante (sans que l'hôte ne le sache, c'est mieux).
 
-J'ai donc décidé de prendre en mains l'outil afin de faire moi même un audit de sécurité sur mon serveur.
+J'ai donc décidé de prendre en main l'outil afin de faire moi même un audit de sécurité sur mon serveur.
 
 ## Configuration de l'environnement
 
@@ -48,8 +48,6 @@ $ curl -O https://raw.githubusercontent.com/rapid7/metasploitable3/master/Vagran
 ### Installer [Metasploit][metasploit]
 
 Il est possible d'installer [Metasploit][metasploit] sur votre OS mais de mon côté je préfère utiliser [Kali Linux][kali] dans une machine virtuelle. [Kali Linux][kali] est une distribution Linux basée sur Debian qui intègre de base qui apporte des outils de “hacking” pré-installé.
-
-![Logo de Kali Linux](https://docs.kali.org/wp-content/uploads/2015/02/kali-logo.png)
 
 Si vous voulez faire comme quoi, suivez mon tutoriel pour [installer Kali Linux dans une machine virtuelle avec KVM](/tutorial/2018/10/02/kvm.html).
 
@@ -109,6 +107,10 @@ Mais ici c'est normal car
 
 ### Repérage des failles
 
+Ici nous allons scanner les vulnérabilités. Attention cette action est illégale sur un serveur qui ne vous appartient pas. Si vous voulez le faire sur un serveur d'un tiers, il faut son accord.
+
+#### Installer OpenVAS
+
 [OpenVAS][openvas] est un **scanner de vulnérabilités**. Il est issu d'un fork de Nessus qui est passé sous licence propriétaire à partir de la version 3 en 2005. C'est donc un logiciel très complet qui permet de scanner les vulnérabilité d'une machine. Il s'utilise d’ailleurs très bien sans Metasploit.
 
 [OpenVAS][openvas] est disponible dans les paquets Debian donc il s'installe très facilement.
@@ -128,10 +130,75 @@ $ sudo openvas-setup
 
 Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start`. Ce service va automatiquement démarrer et écouter sur le port 9390 & 9391. On se rend donc sur <https://localhost:9390> et on accède à l'interface d'administration:
 
-![interface d'administration d'OpenVAS](/img/kali_msf_openvas.png)
+![interface d'administration d'OpenVAS](/img/blog/kali_msf_openvas.png)
+
+Cela nous indique que l’installation c'est bien passée. Nous n'allons cependant pas utiliser cette interface car Metasploit permet d'utiliser OpenVAS via notre outils
+
+C'est ici qu'on ouvre Metasploit.
+
+#### Utiliser Metasploit avec OpenVAS
+
+##### Connexion au serveur OpenVAS
+
+Metasploit possède plusieurs interfaces. Nous allons utiliser **Msfcli**, l'interface en console. Cette interface à l'avantage d'être gratuite et elle permet de comprendre nos actions.
+
+![Les différentes interfaces de Metasploit](/img/blog/kali_msf_interfaces.jpg)
+
+On ouvre donc la console avec `msfconsole`. Ceci va nous ouvrir un mode interactif pour interagir directement avec Metasploit:
+
+~~~bash
+$ msfconsole
+msf >
+~~~
+
+On charge donc le module d'OpenVAS dans Matasploit avec la commande `load`
+
+~~~bash
+msf > load openvas
+~~~
+
+Il faut donc se connecter à notre serveur OpenVAS avec la commande `openvas_connect` _(si le serveur OpenVAS n'est pas démarré, il faut utiliser `openvas-start`)_.
+
+~~~bash
+msf > openvas_target_create admin <password> 127.0.0.1 9390
+~~~
+
+##### Création de la cible
+
+Maintenant que nous sommes connecté à OpenVAS, nous allons créer une **target** ("cible" pour les puristes). Il s'agit de la cible pour notre scan. On utilise la commande `openvas_target_create` qui prend en paramètre:
+
+- le nom de la cible (on met ce que l'on veut)
+- l'adresse IP de la cible
+- un commentaire (obligatoire)
+
+~~~bash
+msf > openvas_target_create "Metasploitable" 192.168.70.128 "This is Metasploitable"
+~~~
+
+La commande nous retournes une **liste des cibles** existantes (une seule si c'est votre première cible).
+
+##### Création de la tâche
 
 
-Et c'est ici qu'on commence à utiliser Metasploit.
+Nous allons ensuite créer une **tâche**. Une tâche est en fait un scan qui sera programmé pour une **cible** avec une **configuration** donnée. Pour créer une tâche, il faut utiliser la commande `openvas_target_create`.
+
+- le nom de la tâche (on met ce que l'on veut)
+- un commentaire
+- un configuration (Pour connaitre les configurations disponibles, il faut utiliser `openvas_config_list`)
+
+
+openvas_report_list
+
+
+
+~~~bash
+msf > openvas_task_create "Local Scan" "Scan My Local Machine" 0 1
+~~~
+
+~~~bash
+msf > openvas_task_start
+~~~
+
 
 ### Exploitation d’une faille
 
