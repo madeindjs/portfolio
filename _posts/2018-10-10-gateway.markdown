@@ -6,14 +6,14 @@ tags: network admin linux
 categories: tutorial
 ---
 
-L’intérêt d'une passerelle est de pouvoir **isoler** un réseau interne d'un réseau externe.
+J'ai récemment fais le test de mettre en place une passerelle réseau avec des machines virtuelle. Pour rappel, une passerelle réseau est un équipement qui permet d'**isoler** un réseau **interne** d'un réseau **externe**. Vous en avez sûrement une chez vous: votre box internet. Je ne vais pas vous faire un cours sur le fonctionnement, [d'autres l'on déjà très bien fait](https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero/3199531-la-passerelle-les-bases-du-routage).
 
-Pour nos tests nous allons utiliser **Virtual Box** et deux machines virtuelles sous Debian. Nous allons donc utiliser deux machines virtuelles:
+Pour mes tests, j'ai choisi d'utiliser des machines virtuelles [Debian](https://www.debian.org/) sous **Virtual Box**. Nous allons donc utiliser **deux** machines virtuelles:
 
 - l'une sera la **passerelle**
 - l'autre sera un **serveur web**
 
-Le schéma sera le suivant:
+Le schéma est donc le suivant:
 
 ~~~
 Exterieur
@@ -34,15 +34,15 @@ Exterieur
 
 ## Création de la Gateway
 
-La passerelle fait **passerelle** entre deux réseaux:
+La gateway fait **passerelle** entre deux réseaux:
 
-- le réseau publique connecté à internet
-- le réseau privé qui englobe toutes les autres machines virtuelles
+- le réseau **publique** connecté à internet
+- le réseau **privé** qui englobe toutes les autres machines virtuelles
 
-Logiquement, si elle est connectée à deux réseaux, elle doit posséder **deux cartes réseaux**. La première étapes, avant même de démarrer la VM, est de **créer** ces deux cartes réseaux sur Virtual Box. On se rend donc donc la configuration du réseau de la machine virtuelle et on active deux carte:
+Logiquement, si elle est connectée à deux réseaux, elle doit posséder **deux cartes réseaux**. La première étapes, avant même de démarrer la VM, est de **créer** ces deux cartes réseaux sur Virtual Box. On se rend donc donc la configuration du réseau de la machine virtuelle et on active deux cartes:
 
 - un réseau **bridge** qui a accès à internet mais pas aux autres VM
-- un réseau **interne** _intnet_ qui a accès aux autres machines virtuelle
+- un réseau **interne** _(intnet)_ qui a accès aux autres machines virtuelles
 
 On démarre ensuite la machine virtuelle.
 
@@ -51,19 +51,19 @@ Une fois connecté sur la machine virtuelle, on utilise la commande `ip a` (pour
 ~~~conf
 allow-hotplug enp0s8
 iface enp0s8 inet static
-  address 169.254.1.254
+  address 192.168.1.254
   netmask 255.255.255.255
 ~~~
 
 > Plus d'infos sur [comment mettre une IP statique sur Debian](https://linuxconfig.org/how-to-setup-a-static-ip-address-on-debian-linux)
 
-Par défaut, Debian accepte uniquement les paquets réseaux qui lui sont destiné et il "jette" les autres. Il faut donc activer une option qui permet de transmettre ces paquets s'ils ne lui sont pas adressé.Pour cela, on dé-commente la ligne suivante dans _/etc/sysctl.conf_.
+Par défaut, Debian accepte uniquement les paquets réseaux qui lui sont destiné et il "jette" les autres. Il faut donc activer une option qui permet de transmettre ces paquets s'ils ne lui sont pas adressé. Pour cela, on dé-commente la ligne suivante dans _/etc/sysctl.conf_.
 
 ~~~conf
 net.ipv4.ip_forward=1
 ~~~
 
-Il ne nous reste plus qu'a indiquer comment rediriger ces paquets avec `iptables`:
+Il ne nous reste plus qu'a indiquer comment rediriger ces paquets avec une règle `iptables`:
 
 ~~~bash
 $ iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
@@ -80,7 +80,7 @@ Et on rajoute cette configuration dans le fichier _/etc/network/interfaces_ afin
 ~~~conf
 allow-hotplug enp0s8
 iface enp0s8 inet static
-  address 169.254.1.254
+  address 192.168.1.254
   netmask 255.255.255.255
 ~~~
 
@@ -103,7 +103,7 @@ allow-hotplug enp0s3
 iface enp0s3 inet static
   address 169.254.1.50
   netmask 255.255.255.255
-  gateway 169.254.1.254
+  gateway 192.168.1.254
 ~~~
 
 on rédmarre ensuite l'interface
@@ -135,14 +135,13 @@ $ sudo apt install apache2
 $ sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 169.254.1.50:80
 ~~~
 
-On n'oublie pas d'enregistrer les modification pour qu'elles soient actives au prochain démarrage:
+On n'oublie pas d'enregistrer les modifications pour qu'elles soient actives au prochain démarrage:
 
 ~~~bash
 $ sudo iptables-save | sudo tee /etc/iptables_rules.save
 ~~~
 
 Et voilà
-
 
 ## Conclusion
 
@@ -162,7 +161,7 @@ Exterieur
           | - enp0s8: internal |
           |                    |
           +--------------------+
-          169.254.1.254
+          192.168.1.254
           255.255.255.255
                  +
                  |
@@ -175,3 +174,5 @@ Exterieur
           |                    |
           +--------------------+
 ~~~
+
+Nous pouvons donc facilement réaliser des logs sur les paquets qui transite ou bien les filtrer selon certaines règles définies.

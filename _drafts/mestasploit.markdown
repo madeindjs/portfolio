@@ -127,8 +127,16 @@ $ sudo openvas-setup
 
 > **Attention**, à la fin `openvas-setup` va créer un compte admin avec un **mot de passe aléatoire** qu'il faudra noter.
 
+Pour vérifier que tout s'est bien passé, il suffit de lancer la commande suivante:
 
-Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start`. Ce service va automatiquement démarrer et écouter sur le port 9390 & 9391. On se rend donc sur <https://localhost:9390> et on accède à l'interface d'administration:
+~~~bash
+$ sudo openvas-check-setup
+~~~
+
+
+Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start` et on peut aussi mettre à jour la base de données des vulnérabilités connues avec `openvas-feed-update`.
+
+Ce service va automatiquement démarrer et écouter sur le port 9390 & 9391. On se rend donc sur <https://localhost:9390> et on accède à l'interface d'administration:
 
 ![interface d'administration d'OpenVAS](/img/blog/kali_msf_openvas.png)
 
@@ -160,7 +168,7 @@ msf > load openvas
 Il faut donc se connecter à notre serveur OpenVAS avec la commande `openvas_connect` _(si le serveur OpenVAS n'est pas démarré, il faut utiliser `openvas-start`)_.
 
 ~~~bash
-msf > openvas_target_create admin <password> 127.0.0.1 9390
+msf > openvas_connect admin <password> 127.0.0.1 9390
 ~~~
 
 ##### Création de la cible
