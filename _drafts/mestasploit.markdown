@@ -1,5 +1,5 @@
 ---
-title: Premiers pas avec Metasploit
+title: Scanner les vulnérabilité pas avec Metasploit
 layout: post
 ---
 
@@ -17,7 +17,7 @@ Lorsqu'on veut faire des tests d'intrusions, mieux vaut le faire sur une **machi
 
 C'est ici qu'arrive **Metasploitable**.
 
-**Mestasploitable** est une machine virtuelle proposée par Metasploit afin de vous entraîner. Il s'agit d'une version Ubuntu 14.04 qui contient volontairement plusieurs failles de sécurités sur des logiciels bien connu comme:
+**Metasploitable** est une machine virtuelle proposée par Metasploit afin de vous entraîner. Il s'agit d'une version Ubuntu 14.04 qui contient volontairement plusieurs failles de sécurités sur des logiciels bien connu comme:
 
 - le serveur d'intégration continue **Jenkins**
 - Des serveur de base de données **ElasticSearch** ou **MySQL**
@@ -40,7 +40,7 @@ Ensuite, il suffit de télécharger le fichier [Vagrant][vagrant] et le lancer d
 $ curl -O https://raw.githubusercontent.com/rapid7/metasploitable3/master/Vagrantfile && vagrant up
 ~~~
 
-[Vagrant][vagrant] va donc s’occuper de créer la machine virtuelle pour nous. Pour se connecter, le login par defaut est:
+[Vagrant][vagrant] va donc s’occuper de créer la machine virtuelle pour nous. Pour se connecter, le login par défaut est:
 
 - user: `vagrant`
 - password: `vagrant`
@@ -107,7 +107,7 @@ Mais ici c'est normal car
 
 ### Repérage des failles
 
-Ici nous allons scanner les vulnérabilités. Attention cette action est illégale sur un serveur qui ne vous appartient pas. Si vous voulez le faire sur un serveur d'un tiers, il faut son accord.
+Ici nous allons scanner les vulnérabilités. **Attention** cette action est **illégale** sur un serveur qui ne vous appartient pas. Si vous voulez le faire sur un serveur d'un tiers, il faut son accord. C'est pour cela que nous avons commencé par installer une machine virtuelle prévue à cet effet.
 
 #### Installer OpenVAS
 
@@ -119,7 +119,7 @@ Ici nous allons scanner les vulnérabilités. Attention cette action est illéga
 $ sudo  apt install openvas
 ~~~
 
-Une fois installé, il nous pouvons effectuer la configuration automatique avec `openvas-setup`. Cette commande va s'occupper de mettre à jour la base de données des failles que Open
+Une fois installé, il nous pouvons effectuer la configuration automatique avec `openvas-setup`. Cette commande va s’occuper de mettre à jour la base de données des failles que Open
 
 ~~~bash
 $ sudo openvas-setup
@@ -144,9 +144,7 @@ Cela nous indique que l’installation c'est bien passée. Nous n'allons cependa
 
 C'est ici qu'on ouvre Metasploit.
 
-#### Utiliser Metasploit avec OpenVAS
-
-##### Connexion au serveur OpenVAS
+#### Connexion au serveur OpenVAS
 
 Metasploit possède plusieurs interfaces. Nous allons utiliser **Msfcli**, l'interface en console. Cette interface à l'avantage d'être gratuite et elle permet de comprendre nos actions.
 
@@ -159,7 +157,7 @@ $ msfconsole
 msf >
 ~~~
 
-On charge donc le module d'OpenVAS dans Matasploit avec la commande `load`
+On charge donc le module d'OpenVAS dans Metasploit avec la commande `load`
 
 ~~~bash
 msf > load openvas
@@ -187,24 +185,20 @@ La commande nous retournes une **liste des cibles** existantes (une seule si c'e
 
 ##### Création de la tâche
 
-
 Nous allons ensuite créer une **tâche**. Une tâche est en fait un scan qui sera programmé pour une **cible** avec une **configuration** donnée. Pour créer une tâche, il faut utiliser la commande `openvas_target_create`.
 
 - le nom de la tâche (on met ce que l'on veut)
 - un commentaire
-- un configuration (Pour connaitre les configurations disponibles, il faut utiliser `openvas_config_list`)
-
-
-openvas_report_list
-
-
+- un configuration (Pour connaître les configurations disponibles, il faut utiliser `openvas_config_list`)
 
 ~~~bash
 msf > openvas_task_create "Local Scan" "Scan My Local Machine" 0 1
 ~~~
 
+On utilise ensuite la commande `openvas_task_list` pour retrouver l'identifiant de la tâche que l'on vient de créer. Pour la lancer, vous l'auriez deviné, on utilise `openvas_task_start` suivit de l'identifiant de la tâche.
+
 ~~~bash
-msf > openvas_task_start
+msf > openvas_task_start <id_de_la_tache>
 ~~~
 
 
