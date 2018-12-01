@@ -13,9 +13,9 @@ description: Mes idées et mes diverses divagations
   {% for post in paginator.posts %}
     <div class="col-md-6 col-lg-4 col-xl-4 my-2">
       <div class="card border-light">
-        <!-- {% if post.thumbnail %}
+        {% if post.thumbnail %}
         <img class="card-img-top" src="{{ post.thumbnail }}" alt="Card image cap">
-        {% endif %} -->
+        {% endif %}
         <div class="card-body">
           <h2 class="card-title h5 mb-0"><a class="text-dark" href="{{ post.url }}">{{ post.title }}</a></h2>
           <p class="card-text ">
