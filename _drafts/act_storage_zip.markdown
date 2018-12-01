@@ -1,15 +1,17 @@
 ---
 layout: post
-title: Créer une archive avec Rails et ActiveStorage
+title: Créer une gem pour zipper les ActiveStorages de Rails
 date:   2018-11-06 12:00:00 +0200
-tags: rails activestorage
+tags: rails activestorage zip
 categories: tutorial
+thumbnail: /img/blog/rails_zip.svg
+comments: true
 ---
-Récemment, pour mon projet [isignif.fr](https://isignif.fr), j'ai voulu implémenter une fonctionnalité qui permet de **télécharger une archive** de plusieurs fichiers `.zip`. Rien de bien compliqué sauf que j'utilise [**ActiveStorage**][active_storage_guide]. Active Storage est fait partit des des nouvelles fonctionnalité de Rails 5.2 (sortit janvier 2018) qui permet d'**attacher** un fichier à un modèle en utilisant **divers services de stockage** tels que Amazon S3, Google Cloud Storage, or Microsoft Azure Storage.
+Récemment, pour mon projet [iSignif.fr](https://isignif.fr), j'ai voulu implémenter une fonctionnalité qui permet de **télécharger une archive** `.zip` de plusieurs fichiers. Rien de bien compliqué sauf que j'utilise [**ActiveStorage**][active_storage_guide]. Active Storage fait partie des des nouvelles fonctionnalités de Rails 5.2 (sorti en janvier 2018) qui permet d'**attacher** un fichier à un modèle en utilisant **divers services de stockage** tels que [Amazon S3](https://aws.amazon.com/fr/s3/), [Google Cloud Storage](https://cloud.google.com/storage/) ou [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/).
 
-Cela présente beaucoup d'avantage car les fichiers sont **séparés** du serveur web. Ils sont stockés sur des services qui sont **spécialisés** dans le stockage des fichiers. Le problème est que, lorsqu'on veut les manipuler, ils ne sont pas présent physiquement sur le serveur web.
+Cela présente beaucoup d'avantages car les fichiers sont **séparés** du serveur web. Ils sont stockés sur des services qui sont **spécialisés** dans le stockage des fichiers. Le problème est que, lorsqu'on veut les manipuler, ils ne sont pas présents physiquement sur le serveur web.
 
-Vu que la documentation est assez pauvre la dessus (puisque c'est une fonctionnalité récente), j'ai décidé d'écrire un article.
+Vu que la documentation est assez pauvre là dessus (car c'est une fonctionnalité récente), j'ai décidé d'écrire un article.
 
 Dans cet article nous allons:
 
@@ -18,7 +20,7 @@ Dans cet article nous allons:
 - factoriser et améliorer l'implémentation
 - exporter le tout dans une librairie
 
-**TLDR**: Passé la complexité de l'implémentation du code, il est très facile de déplacer le code dans des méthodes réutilisable en utilisant les [`ActiveSupport::Concern`][concerns_api].
+**TLDR**: Passé la complexité de l'implémentation du code, il est très facile de déplacer le code dans des méthodes réutilisables en utilisant les [`ActiveSupport::Concern`][concerns_api].
 
 ## Sommaire
 
@@ -29,7 +31,7 @@ Dans cet article nous allons:
 
 ### Génération du projet
 
-Pour ce tutoriel j'ai choisis de partir d'un nouveau projet. Créons donc un nouveau projet Rails:
+Pour ce tutoriel j'ai choisi de partir d'un nouveau projet. Créons donc un nouveau projet Rails:
 
 ~~~bash
 $ rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --skip-system-test --skip-action-mailer
@@ -43,7 +45,7 @@ On va aussi générer aussi une entité `User` avec la commande `scaffold`:
 $ rails g scaffold user name:string
 ~~~
 
-> La commande `scaffold` va s'occuper de créer le *controller*, le *model*, les *views* et même la migrations
+> La commande `scaffold` va s'occuper de créer le *controller*, le *model*, les *views* et même la migration
 
 Maintenant puisque je veux utiliser *Active Storage*, j'ai besoin de l'**installer**. C'est très facile, la commande suivante le fait pour nous:
 
@@ -53,17 +55,17 @@ $ rails active_storage:install
 
 > Cette commande génère juste une migration qui va créer les tables `active_storage_blobs` & `active_storage_attachments`
 
-Maintenant que toutes nos **migrations** sont crées, il suffit de les jouer:
+Maintenant que toutes nos **migrations** sont créées, il suffit de les jouer:
 
 ~~~bash
 $ rake db:migrate
 ~~~
 
-Voilà, nous somme prêt à coder!
+Voilà, nous somme prêts à coder!
 
 ### Ajout de l'Active Storage
 
-Pour attacher un(des) fichier(s) à un modèles suffit d'ajouter **une seule ligne** à notre modèle `User`. C'est là toute la beauté de *conventions over configuration*!
+Pour attacher un(des) fichier(s) à un modèles, il suffit d'ajouter **une seule ligne** à notre modèle `User`. C'est là toute la beauté de *conventions over configuration*!
 
 ~~~ruby
 # app/models/user.rb
@@ -104,7 +106,7 @@ end
 ~~~
 
 
-On démarre maintenant le serveur avec `rails server` et se rend à l'URL `http://localhost:3000/users/new` pour créer un utilisateur:
+On démarre maintenant le serveur avec `rails server` et on se rend à l'URL `http://localhost:3000/users/new` pour créer un utilisateur:
 
 ![Formulaire de création d'un utilisateur avec les fichiers](/img/blog/active_storage_create_user.png)
 
@@ -128,7 +130,7 @@ L'idée serait donc de créer une route `http://localhost:3000/users/1.zip` qui 
 
 ### Création du test
 
-Comme toujours, on essaie de créer un test qui **échoue** dans un premier temps ([*Test Driven Development*][tdd]). J'ai simplement choisis de créer un *test controller* et de **tester la réponse** de la requête. C'est très simple, mais ça marche:
+Comme toujours, on essaie de créer un test qui **échoue** dans un premier temps ([*Test Driven Development*][tdd]). J'ai simplement choisi de créer un *test controller* et de **tester la réponse** de la requête. C'est très simple, mais ça marche:
 
 ~~~ruby
 # test/controllers/users_controller_test.rb
@@ -178,9 +180,9 @@ Vu qu'on parle de zip, nous allons utiliser la gem [rubyzip][rubyzip]. On modifi
 gem 'rubyzip', '>= 1.0.0'
 ~~~
 
-On installe avec `bundle install` et on démarre le serveur avec `rails s`. On est prêt à coder!
+On installe avec `bundle install` et on démarre le serveur avec `rails s`. Nous sommes prêts à coder!
 
-Comme je le disais plus haut, le problème est qu'il faut **récupérer** les fichiers sur le serveur. On aurais pu choisir de mettre le contenu du fichier en mémoire vive mais nous ne connaissons pas la tailles des fichiers donc je préfère les stocker temporairement sur le disque dur.
+Comme je le disais plus haut, le problème est qu'il faut **récupérer** les fichiers sur le serveur. Nous aurions pu choisir de mettre le contenu du fichier en mémoire vive mais nous ne connaissons pas la taille des fichiers donc je préfère les stocker temporairement sur le disque dur.
 
 ~~~ruby
 # app/controllers/users_controller.rb
@@ -282,9 +284,9 @@ Finished in 0.220150s, 36.3389 runs/s, 49.9660 assertions/s.
 
 ### Factorisation
 
-Nous allons peut-être être amené à utiliser ce code pour d'autres modèles. Afin de **factoriser** cela, Rails nous offre un excellent outil: les [`ActiveSupport::Concern`][concerns_api]!
+Nous allons peut-être être amenés à utiliser ce code pour d'autres modèles. Afin de **factoriser** cela, Rails nous offre un excellent outil: les [`ActiveSupport::Concern`][concerns_api]!
 
-Pour cela, il suffit créer un module dans le dossier *app/controllers/concerns* et de le faire hériter de [`ActiveSupport::Concern`][concerns_api]. Ensuite, je **déplace** toutes les méthodes que nous avons crées jusqu'ici. Et, pour utiliser notre *concern*, je crée une méthode `send_zip` (je l'utiliserai dans le *controller*).
+Pour cela, il suffit de créer un module dans le dossier *app/controllers/concerns* et de le faire hériter de [`ActiveSupport::Concern`][concerns_api]. Ensuite, je **déplace** toutes les méthodes que nous avons créées jusqu'ici. Et, pour utiliser notre *concern*, je crée une méthode `send_zip` (je l'utiliserai dans le *controller*).
 
 ~~~ruby
 # app/controllers/concerns/generate_zip.rb
@@ -382,7 +384,7 @@ Et voilà. C'est quand même plus sympa, non? Vous pouvez trouver le code [ici](
 
 ## Création d'une librairie
 
-C'est très bien mais je vous sens un peu déçu... En effet, si nous voulons utiliser ce module sur un autre projet, on serait tenté de **copier/coller** le module de projets en projets.. et **c'est mal**.
+C'est très bien mais je vous sens un peu déçu... En effet, si nous voulons utiliser ce module sur un autre projet, nous serions tentés de **copier/coller** le module de projets en projets.. et **c'est mal**.
 
 Ne faites pas ça, nous pouvons aller plus loin! Nous pouvons **déplacer** notre code dans une **librairie** qui nous permettra de **réutiliser** notre *concern* dans une infinité d'autres projets!
 
@@ -395,7 +397,7 @@ $ bundle gem activestorage-zip
 $ cd activestorage-zip
 ~~~
 
-Nous devons spécifier les **dépendances** de notre librairie. Évidement , nous avons besoin de Rails 5.2 et de [rubyzip][rubyzip]:
+Nous devons spécifier les **dépendances** de notre librairie. Évidemment, nous avons besoin de Rails 5.2 et de [rubyzip][rubyzip]:
 
 ~~~bash
 $ bundle add rails
@@ -426,9 +428,9 @@ end
 
 Et voilà! C'est tout! C'était vraiment simple!
 
-### utilisation de la gem
+### Utilisation de la gem
 
-Maintenant on va essayer d'**utiliser** notre gem sur notre projet précédent (avant de la publier sur [Rubygem](https://guides.rubygems.org/) par exemple). J' installe donc la gem en local avec cette commande:
+Maintenant nous allons essayer d'**utiliser** notre gem sur notre projet précédent (avant de la publier sur [Rubygem](https://guides.rubygems.org/) par exemple). J' installe donc la gem en local avec cette commande:
 
 ~~~ruby
 $ rake install:local
@@ -482,16 +484,16 @@ Nous pouvons maintenant [publier notre gem sur rubygems.org](https://guides.ruby
 
 ## Conclusion
 
-Nous avons donc vu que, passé la complexité de la création du zip, l'utilisation du *concern* deviens très simple. De plus, en créant ma propre gem (ce qui est vraiment facile), j'ai pu éviter de la **duplication** de code entre plusieurs projets. J'ai aussi contribué à la communauté Rails (à mon faible niveau :) ).
+Nous avons donc vu que, passé la complexité de la création du zip, l'utilisation du *concern* devient très simple. De plus, en créant ma propre gem (ce qui est vraiment facile), j'ai pu éviter de la **duplication** de code entre plusieurs projets. J'ai aussi contribué à la communauté Rails (à mon faible niveau :) ).
 
-Mais j'ai effleuré le sujet. Il aurait aussi été sympa de tester unitairement notre gem afin d'avoir une meilleur couverture. Nous aurions aussi put proposer une méthodes pour créer le zip directement en mémoire vive.
+Mais j'ai effleuré le sujet. Il aurait aussi été sympa de tester unitairement notre gem afin d'avoir une meilleure couverture. Nous aurions aussi pu proposer une méthode pour créer le zip directement en mémoire vive.
 
 Mais ne vous inquiétez pas, le code est disponible sur  Github:
 
 - l'application Rails: <https://github.com/madeindjs/zip_example>
 - la gem: <https://github.com/madeindjs/active_storage-send_zip>
 
-N’hésitez pas à *forker* ou me donner un retours sur d'éventuelles améliorations possibles.
+N’hésitez pas à *forker* ou me donner un retour sur d'éventuelles améliorations possibles.
 
 
 ## Liens
