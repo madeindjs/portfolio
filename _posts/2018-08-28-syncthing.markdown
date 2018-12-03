@@ -17,8 +17,6 @@ Récemment j'ai voulu trouver une solution pour synchroniser mes documents vers 
 
 J'ai donc cherché une alternative et je suis tombé sur [**Syncthing**][syncthing].
 
-![Logo de Syncthing](https://syncthing.net/images/logo-horizontal.svg)
-
 [Syncthing][syncthing] est un projet **Open-source** (le code est disponible [sur Github](https://github.com/syncthing/syncthing)) écrit principalement en [Go](https://golang.org/). Son principal avantage est qu'il est **Décentralisé**. Chaque **nœud** possède sa propre copie du dossier partagé. Si un disque dur casse, tous les fichiers sont présents sur les autres nœuds.
 
 [Syncthing][syncthing] utilise donc la méthode du **Peer-to-peer**. Toutes vos données ne résident pas sur d'autres serveur. Toutes les communications sont chiffrées de bout en bout.

@@ -4,9 +4,10 @@ title: Création d'un projet sous Symfony 4 avec Vagrant
 date:   2018-06-20 19:00:00 +0200
 tags: php symfony vagrant
 categories: tutorial
+thumbnail: /img/blog/symfony.png
 ---
 
-[Symfony][symfony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre et se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/). 
+[Symfony][symfony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre et se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/).
 
 ## Vagrant
 
@@ -53,7 +54,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./RentMyRoom/", "/var/www/html", owner: "www-data", group: "www-data", id: 'source'
   # on crée écrase la configuration par défault d'Apache
   config.vm.synced_folder "./apache2/", "/etc/apache2/sites-enabled", owner: "root", group: "root", id: 'vhost'
-  # on force le redémarrage une fois la configuration d'Apache écrasée 
+  # on force le redémarrage une fois la configuration d'Apache écrasée
   config.vm.provision :shell, run: "always", inline: "/etc/init.d/apache2 restart"
 end
 ```
@@ -148,7 +149,7 @@ Cette commande va créer:
 
 Pour mettre à jour notre base de données, deux options existent:
 
-- Mettre à jour la base de donnée **automatiquement** 
+- Mettre à jour la base de donnée **automatiquement**
 ```bash
 $ php bin/console doctrine:schema:update
 ```
@@ -257,7 +258,7 @@ Cette commande va nous générer automatiquement un migration qui va ajouter
 - la clé primaire afin de vérifier l'existence de l'`user`
 
 ~~~php
-<?php 
+<?php
 // src/Migrations/Version20180619075756.php
 
 // ..

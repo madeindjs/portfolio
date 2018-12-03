@@ -1,10 +1,11 @@
 ---
 layout: post
 title: Créer un Crawler multi-thread en Rust
-description: nous allons pousser notre Crawler afin qu'il soit Mult-threadé 
+description: nous allons pousser notre Crawler afin qu'il soit Mult-threadé
 date:   2018-04-06 13:25:00 +0200
 tags: rust crate crawler thread
 categories: tutorial
+thumbnail: /img/blog/rust2.svg
 ---
 
 Dans un [précédent article][crawler_rust], nous avions crée un [Crawler en Rust][spider]. Dans cet article, nous allons pousser notre Crawler afin qu'il soit **multi-threadé**
@@ -96,7 +97,7 @@ Voici le retour du script.
 
 Reprenons le [précédent tutoriel][crawler_rust] et utilisons des structures afin d'organiser le code.
 
-La structure `Page` représente une **page crawlé** et donc un **worker**. La méthode `new` s'occuppera de faire la requête HTTP. Dans notre cas, afin de garder une simplicité, on déplace juste `thread::sleep(one_second)` afin de simuler le temps de chargement. 
+La structure `Page` représente une **page crawlé** et donc un **worker**. La méthode `new` s'occuppera de faire la requête HTTP. Dans notre cas, afin de garder une simplicité, on déplace juste `thread::sleep(one_second)` afin de simuler le temps de chargement.
 
 ~~~rust
 // src/main.rs
@@ -245,7 +246,7 @@ Tout fonctionne correctement, on voit bien que les pages ne sont pas récupéré
     fetching... http://rousseau-alexandre.fr/contact
 
 
-On a donc vu que Rust nous permet de mettre en place un script multi-thread très rapidement et très facilement. 
+On a donc vu que Rust nous permet de mettre en place un script multi-thread très rapidement et très facilement.
 
 Si vous souhaitez voir l'implémentation réele sur notre [précédent crawler][crawler_rust], jettez un coup d'oeuil au [commit][multithread_commit].
 

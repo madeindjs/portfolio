@@ -5,12 +5,13 @@ description: Utilisez Kali Linux pour hacker un Wifi protégé par WPA/WPA2
 date:   2017-10-31 20:00:00 +0200
 tags: hack kali wifi wpa
 categories: hacking
+thumbnail: /img/blog/wifi.png
 comments: true
 ---
 
 Afin de tester, j'ai voulu cracker mon [routeur récemment installé](/network/2017/10/11/Installer_bridge_sfr_box-4k.html). Et c'est impressionnant de facilité!
 
-Afin de réaliser le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux qui apporte des outils de "hacking" pré-installé. 
+Afin de réaliser le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux qui apporte des outils de "hacking" pré-installé.
 
 ![Logo de Kali Linux](https://docs.kali.org/wp-content/uploads/2015/02/kali-logo.png)
 
@@ -63,8 +64,8 @@ Parmi toutes les lignes, mon réseau apparaît. Pensez à noter les information 
 
 ```
  BSSID              PWR  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID
-                                                                                           
- 18:D6:C7:85:7E:A0  -45        6        0    0   2  54e  WPA2 CCMP   PSK  TP-LINK_7EA0 
+
+ 18:D6:C7:85:7E:A0  -45        6        0    0   2  54e  WPA2 CCMP   PSK  TP-LINK_7EA0
 ```
 
 ## Capture d'un WPA handshake
@@ -81,11 +82,11 @@ Afin de tester, je vais déconnecter mon **Blackberry** déjà connecté dessus.
 On scan donc le réseau avec la commande `airodump-ng` et les options:
 
 * `-c` pour spécifier le channel
-* `--bssid`, l'iddentifiant de mon routeur 
+* `--bssid`, l'iddentifiant de mon routeur
 * `-w` le répertoire ou seront stocké les fichiers d'output
 
 ```bash
-# airodump-ng -c 10 --bssid 18:D6:C7:85:7E:A0 -w tplink  wlan0mon 
+# airodump-ng -c 10 --bssid 18:D6:C7:85:7E:A0 -w tplink  wlan0mon
 ```
 
 On laisse cette commande en arrière plan, elle va nous produire 3 fichiers dont un de type *xml*. C'est celui qui nous intéresse car il contient plus de détails sur les périphériques connectés sur le wi-fi. En ouvrant celui-ci, on retrouve très facilement les informations de mon Blackberry. Voici un extrait du fichier:
@@ -156,4 +157,3 @@ En appliquant un mot de passe plus complexe, nous diminuons donc le risque. En l
 De plus il est possible d'adapter le signal du wi-fi pour qu'il ne soit pas visible dans tout l'immeuble.
 
 Préferez dès que possible le câble Ethernet qui reste malgré tout la solution la plus sécurisée.
-

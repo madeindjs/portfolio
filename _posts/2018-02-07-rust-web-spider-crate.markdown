@@ -5,6 +5,7 @@ description: Créez votre premier crate en Rust
 date:   2018-02-07 12:00:00 +0200
 tags: rust crate crawler
 categories: tutorial
+thumbnail: /img/blog/rust2.svg
 ---
 
 Le but est de faire un **crawler** en [Rust][rust]. Un crawler est un script qui va **naviguer** sur un site donné. Cela permet de faire des **analyses de SEO** ou bien de repérer les pages qui mettent du temps à charger ou qui ne fonctionne pas (code 404, 500, etc..).
@@ -26,7 +27,7 @@ Afin de pouvoir utiliser notre **Crawler** dans nos future projet, nous utiliser
 
 ### Importer les librairies
 
-On commence donc par utiliser **Cargo** pour initialiser notre nouveau projet. 
+On commence donc par utiliser **Cargo** pour initialiser notre nouveau projet.
 
 ~~~bash
 $ cargo new spider --bin
@@ -74,7 +75,7 @@ De plus, nous aurons besoin de deux nouveaux fichiers:
 - _src/website.rs_ qui sera en quelque sorte le **crawler**
 - _src/page.rs_ qui sera en quelque sorte le **scraper**
 
-Pour les charger, il faut les importer dans le fichier _lib.rs_ grâce au mot clé `pub mod` (`mod` charge le fichier et `pub` le rend publique). 
+Pour les charger, il faut les importer dans le fichier _lib.rs_ grâce au mot clé `pub mod` (`mod` charge le fichier et `pub` le rend publique).
 
 ~~~rust
 // src/lib.rs
@@ -174,7 +175,7 @@ impl Page {
 
 Pour tester que tout fonctionne, il suffit de **créer un test**. La particularité de [Rust][rust] est que les tests ne sont pas forcément séparé de notre fichier testé.
 
-Le test va simplement `assert!` qu'un lien donné a bien été trouvé parmi ceux scrapés. 
+Le test va simplement `assert!` qu'un lien donné a bien été trouvé parmi ceux scrapés.
 
 ~~~rust
 // src/page.rs
@@ -345,7 +346,7 @@ maintenance = { status = "as-is" }
 
 ### L'envoyer sur [crates.io][crates.io]
 
-Tout d'abord, il faut se créer un compte. Pour cela se rendre sur [crates.io][crates.io] et suivre les étapes classiques. Une fois connecté, allez sur dans la section _Account Settings_ et créer une nouvelle **clef API**. Une commande comme la suivante vous sera donnée. 
+Tout d'abord, il faut se créer un compte. Pour cela se rendre sur [crates.io][crates.io] et suivre les étapes classiques. Une fois connecté, allez sur dans la section _Account Settings_ et créer une nouvelle **clef API**. Une commande comme la suivante vous sera donnée.
 
 ~~~bash
 $ cargo login abcdefghijklmnopqrstuvwxyz012345
@@ -372,7 +373,7 @@ $ cargo new test_spider --bin
 $ cd test_spider
 ~~~
 
-Il suffit 
+Il suffit
 
 ~~~rust
 // src/main.rs
@@ -400,7 +401,7 @@ Tout fonctionne parfaitement. D'autres paramètre sont possibles, si vous voulez
 
 ## Conclusion
 
-Cargo permet facilement de créer des **petites librairie**. Cela permet de partager des **petits composants** utilisables dans de plus gros projets. Cela nous permet d'éviter de "réinventer la roue" en utilisant d'autres composants partagés par d'autres *rustaceans*! 
+Cargo permet facilement de créer des **petites librairie**. Cela permet de partager des **petits composants** utilisables dans de plus gros projets. Cela nous permet d'éviter de "réinventer la roue" en utilisant d'autres composants partagés par d'autres *rustaceans*!
 
 N’hésitez pas à consulter / forker le dépôt complet sur ce [mon dépôt Github][spider_1.0.3].
 

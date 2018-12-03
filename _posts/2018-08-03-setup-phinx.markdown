@@ -4,6 +4,7 @@ title:  Implémenter Phinx dans une application PHP
 date:   2018-08-03 12:00:00 +0200
 tags: php phinx sql
 categories: tutorial
+thumbnail: /img/blog/cakephp.gif
 ---
 
 Les migrations permettent de **versionner** les **changements apportés à la base de données**. Ainsi, lorsqu'on récupère une branche développée par quelqu'un, on peut facilement **jouer tous les changements** apporté à la base de données. Ceci permet d'être certains que nous avons **exactement** la même base de donnée qu'un autre  développeur. Cela permet aussi de garder un historique des actions effectuées sur la base de données.

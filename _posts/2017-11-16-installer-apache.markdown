@@ -5,6 +5,7 @@ description:  Participez au développement de votre navigateur preéferé
 date:   2017-11-16 08:00:00 +0200
 tags: apache linux lxc
 categories: tutorial
+thumbnail: /img/blog/lxc_container.png
 comments: true
 ---
 
@@ -13,7 +14,7 @@ Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de
 Ses avantages sont:
 
 * **communauté** imposantes et donc beaucoup de ressources diponnibles
-* **modules** qui permettent de prendre en charge de nombreux langages (PHP, Python, Ruby, etc..) et de personnaliser [Apache][Apache] 
+* **modules** qui permettent de prendre en charge de nombreux langages (PHP, Python, Ruby, etc..) et de personnaliser [Apache][Apache]
 * **open-source** et maintenu par la [fondation Apache](https://fr.wikipedia.org/wiki/Fondation_Apache)
 * **disponnible** sur toutes les plateformes
 
@@ -38,7 +39,7 @@ $ sudo lxc-create --name apache -t debian
 On démarre le container avec `lxc-start` et on se connecte dessus à l'aide de `lxc-attach`:
 
 ~~~bash
-$ sudo lxc-start  --name apache 
+$ sudo lxc-start  --name apache
 $ sudo lxc-attach --name apache
 ~~~
 
@@ -57,7 +58,7 @@ Afin de connaitre l'addresse IP de notre machine on lance un `ìfconfig`. On ouv
 
 ![Page par défaut d'Apache](/img/blog/debian_apache_works.png)
 
-Ce n'est pas de la magie, la page par défaut est située ici. 
+Ce n'est pas de la magie, la page par défaut est située ici.
 
 ~~~plain
 /var/www/
@@ -68,15 +69,15 @@ Ce n'est pas de la magie, la page par défaut est située ici.
 
 ## Création de notre projet
 
-Nous savons donc que nos projets doivent être stockées dans dans **/var/www**. Nous allons créer notre projet _test.fr_ directement dans ce dans ce dossier. 
+Nous savons donc que nos projets doivent être stockées dans dans **/var/www**. Nous allons créer notre projet _test.fr_ directement dans ce dans ce dossier.
 
 ~~~bash
 $ mkdir -p /var/www/test.fr/public
 ~~~
 
-> Nous créeons un dossier _public_ pour séparer ce qui sera accessible de ce qui sera innaccessible à tout le monde. C'est une bonne pratique 
+> Nous créeons un dossier _public_ pour séparer ce qui sera accessible de ce qui sera innaccessible à tout le monde. C'est une bonne pratique
 
-Maintenant on crée le fichier _index.html_. 
+Maintenant on crée le fichier _index.html_.
 
 ~~~bash
 $ echo '<h1>Hello world</h1>' > /var/www/test.fr/public/index.html
@@ -106,7 +107,7 @@ Le **Virtual Host** (**Vhost** pour les intimes) nous permet d' **héberger plus
 Pour cela, il suffit de créer une nouvelle configuration dans le dossier _/etc/apache2_. Deux dossiers existent pour stocker les configurations:
 
 * _sites-availables_ contient les configurations des sites disponnibles
-* _sites-enabled_ contient les configurations des sites activées 
+* _sites-enabled_ contient les configurations des sites activées
 
 Pour le moment, nous ajoutons notre configuration dans _sites-availables_:
 
@@ -126,7 +127,7 @@ $ vi /etc/apache2/sites-availables/test.fr.conf
 </VirtualHost>
 ~~~
 
-> Eh mais Je ne possède pas [test.fr](http://test.fr/), comment va t-on faire? 
+> Eh mais Je ne possède pas [test.fr](http://test.fr/), comment va t-on faire?
 
 C'est vrai mais on peut le simuler très facilement. Sur le PC client (celui qui visite le site), on va ajouter une **entrée DNS** au fichier _/etc/hosts_. Une entrée DNS fait correspondre un **nom de domaine** (= _test.fr_) à une **addresse IP** (= 10.0.3.416).
 

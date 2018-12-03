@@ -6,13 +6,14 @@ date:   2017-11-28 08:00:00 +0200
 tags: rust
 categories: tutorial
 comments: true
+thumbnail: /img/blog/rust.png
 ---
 
-Récemment je me suis intéressé au langage [Rust][Rust]. Il est édité par la [fondation **Mozilla**][Mozilla] qui l'utilise à travers le moteur de rendu [Servo][Servo] de Firefox 57. Cette utilisation leur a permis de doubler la rapidité du chargement des pages tout en consommant moins de ressource. 
+Récemment je me suis intéressé au langage [Rust][Rust]. Il est édité par la [fondation **Mozilla**][Mozilla] qui l'utilise à travers le moteur de rendu [Servo][Servo] de Firefox 57. Cette utilisation leur a permis de doubler la rapidité du chargement des pages tout en consommant moins de ressource.
 
 Voici donc une courte introduction pour vous faire découvrir ce **langage innovant**.
 
-Dans ce tutoriel (loin d'être complet), je pars du principe que vous avez de solides notions en programmation. 
+Dans ce tutoriel (loin d'être complet), je pars du principe que vous avez de solides notions en programmation.
 
 ## Sommaire
 
@@ -46,7 +47,7 @@ Bénéficiant de performances proche du **C**, pourquoi s'en priver?
 
 De plus, [Rust][Rust] est un langage bas niveau qui est, pour l'instant, peu adapté au développement web par exemple.
 
-[Rust][Rust] est un langage encore **très jeune**. Du fait qu'il soit jeune, les librairies existantes sont souvent **peu documentées** et il faut souvent mettre les mains dans le code pour comprendre le fonctionnement de celles-ci. 
+[Rust][Rust] est un langage encore **très jeune**. Du fait qu'il soit jeune, les librairies existantes sont souvent **peu documentées** et il faut souvent mettre les mains dans le code pour comprendre le fonctionnement de celles-ci.
 
 De plus, [Rust][Rust] est encore peu utilisé dans le **monde professionnel**. Si vous recherchez un langage à mettre en avant dans une recherche d'emploi, ce n'est actuellement pas le meilleur choix.
 
@@ -75,7 +76,7 @@ Pour compiler on utilise `rustc`:
 $ rustc hello_world.rs
 ~~~
 
-Cela va nous créer un fichier binaire exécutable *hello_world* qu'il suffit d’exécuter. 
+Cela va nous créer un fichier binaire exécutable *hello_world* qu'il suffit d’exécuter.
 
 ~~~bash
 $ ./hello_world
@@ -329,7 +330,7 @@ fn change(some_string: &String) {
 
 > cannot borrow immutable borrowed content `*some_string` as mutable
 
-Pour que ce code compile, il faut spécifier que la valeur pourra être modifiée par la fonction avec la mention `&mut`. 
+Pour que ce code compile, il faut spécifier que la valeur pourra être modifiée par la fonction avec la mention `&mut`.
 
 ~~~rust
 fn main() {
@@ -343,7 +344,7 @@ fn change(some_string: &mut String) {
 }
 ~~~
 
-Avec [Rust][Rust], vous vous baterez souvent contre le compilateur mais celui ci vous protégera d'une pmajorité des *Runtime Errors* 
+Avec [Rust][Rust], vous vous baterez souvent contre le compilateur mais celui ci vous protégera d'une pmajorité des *Runtime Errors*
 
 ### Structure
 
@@ -453,7 +454,7 @@ Maintenant que le `sex` est optionnel, nous pouvons créer `alex` sans `sex`:
 ```rust
 fn main() {
     let alex = Human {
-        name: String::from("Alexandre"), 
+        name: String::from("Alexandre"),
         sex: None
     };
     alex.describe();
@@ -511,7 +512,7 @@ human/
 ~~~
 
 * *Cargo.toml* contient les informations et les dépendances de notre librairie
-* *src/lib.rs* contient 
+* *src/lib.rs* contient
 
 Voyons de plus près:
 
@@ -593,11 +594,11 @@ Et voilà. Il suffira d'ajouter ce **crate** à votre projet et de l'appeler en 
 
 ~~~rust
 extern crate human;
-~~~ 
+~~~
 
 ## Conclusion
 
-Le gros avantage de [Rust][Rust] est bien évidement son **compilateur** qui nous protège **vraiment** des *runtime* erreurs en empêchant la compilation en amont. Il nous apporte des performances proche du **C** ce qui en fait un excellent choix pour les projets nécessitants de **bonne performances** (embarqué, jeux-vidéos, etc..). 
+Le gros avantage de [Rust][Rust] est bien évidement son **compilateur** qui nous protège **vraiment** des *runtime* erreurs en empêchant la compilation en amont. Il nous apporte des performances proche du **C** ce qui en fait un excellent choix pour les projets nécessitants de **bonne performances** (embarqué, jeux-vidéos, etc..).
 
 De plus, le code écris en [Rust][Rust] est réutilisable et portable car le compilateur peut même être installé sur des architecture ARM (Raspberry PI).
 

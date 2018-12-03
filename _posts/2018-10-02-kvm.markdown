@@ -4,6 +4,7 @@ layout: post
 date:   2018-10-02 12:00:00 +0200
 tags: kvm qemu virtualization
 categories: tutorial
+thumbnail: /img/blog/lxc_container.png
 ---
 
 Récemment, pour installer Kali Linux sur une machine virtuelle, j'ai eu quelques problèmes avec [**Virtual Box**](https://www.virtualbox.org/). J'ai donc regardé s'il existait une alternative et je suis tombé sur **KVM**.

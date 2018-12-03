@@ -5,9 +5,10 @@ description:  Optimisation des performances d'Apache
 date:   2018-04-03 18:00:00 +0200
 tags: apache linux seo
 categories: tutorial
+thumbnail: /img/blog/apache.svg
 ---
 
-Dans mon [précédent article](/tutorial/2017/11/16/installer-apache.html) je vous 
+Dans mon [précédent article](/tutorial/2017/11/16/installer-apache.html) je vous
 expliquait comment installer un serveur[Apache][Apache] dans un container [LXC][LXC].
 
 La configuration de base est d'[Apache][Apache] est souvent suffisante mais une
