@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Créer une gem pour zipper les ActiveStorages de Rails
-date:   2018-11-06 12:00:00 +0200
+date:   2018-12-03 13:30:00 +0200
 tags: rails activestorage zip
 categories: tutorial
 thumbnail: /img/blog/rails_zip.svg
