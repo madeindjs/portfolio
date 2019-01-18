@@ -580,6 +580,6 @@ Et voilà. Nous pouvons désormais souscrire un abonnement.
 
 #### _Webhook_
 
-Nous avons mis en place un paiement mensuel mais nous voulons être notifié des paiement effectué au début du mois. pour cela nous devons utiliser des *Webhook*. Les webhook sont des routes qui vont recevoir des requêtes de la par de Stripe et effectuer des actions.
+Nous avons mis en place un paiement mensuel mais nous voulons être notifié des paiement effectué au début du mois. pour cela nous devons utiliser des *Webhook*. Les _webhook_ sont des routes qui vont recevoir des requêtes de la par de Stripe et effectuer des actions.
 
 Dans notre cas, le fonctionnement est le suivant
