@@ -583,3 +583,22 @@ Et voilà. Nous pouvons désormais souscrire un abonnement.
 Nous avons mis en place un paiement mensuel mais nous voulons être notifié des paiement effectué au début du mois. pour cela nous devons utiliser des *Webhook*. Les _webhook_ sont des routes qui vont recevoir des requêtes de la par de Stripe et effectuer des actions.
 
 Dans notre cas, le fonctionnement est le suivant
+
+
+
+----
+
+[_Tracking active subscriptions_](https://stripe.com/docs/billing/webhooks#tracking)
+
+
+Lorsque l'abonnement est renouvelé (c-à-d. lorsque Stripe facture le client et qu'il est facturé de nouveau), Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_:
+
+1. Quelques jours avant le renouvellement, votre site reçoit un événement `invoice.upcoming`
+2. Votre site reçoit un événement `invoice.payment_succeeded`.
+
+On va donc s'appuyer sur le signal `invoice.payment_succeeded` afin d'effectuer les mêmes actions qui sont effectuées lorsqu'un payement ponctuel est effectué
+
+
+
+
+[serveo.net](https://serveo.net/)
