@@ -5,28 +5,32 @@ date:   2019-01-15 11:23:00 +0200
 comments: true
 ---
 
-Pour mon projet [iSignif](https://isignif.fr) j'ai voulu implémenter la fonctionnalité d'accès restreint au site uniquement si l'utilisateur bénéficie d'un compte premium. Le but final est que l’utilisateur doit souscrire un compte premium afin d'accéder à certaines pages.
+Pour mon projet [iSignif](https://isignif.fr) j'ai voulu implémenter la fonctionnalité d' **accès restreint** au site uniquement si l'utilisateur bénéficie d'un **compte premium**. Le but final est que l’utilisateur doit souscrire un compte premium afin d'accéder à certaines pages.
 
-Afin d'implémenter cette fonctionnalité, le comportement attendu est le suivant:
+Afin d'implémenter cette fonctionnalité, nous avons commencé par analyser le besoin. Le comportement attendu est le suivant:
 
-- le client bénéficie d'un mois de découverte dès son inscription afin de tester l'outil
-- une fois son _solde de jours premium_ épuisé, il reçois un mail lui indiquant qu'il va falloir racheter des jours
-- l'utilisateur met à jour sont solde en effectuant un *paiement ponctuel* ou il souscris un abonnement qui effectuera un paiement automatique au début du mois.
+1. le client bénéficie d'un mois de découverte de notre outils dès son inscription
+2. une fois son _solde de jours premium_ épuisé, il reçoit un mail lui indiquant qu'il va falloir racheter des jours
+3. l'utilisateur met à jour sont solde en effectuant
+  - un *paiement ponctuel* qui lui rajoute un mois à son solde premium
+  - il souscrit un abonnement qui effectuera un paiement automatique au début de chaque mois
 
-Afin d'implémenter cela, j'ai rapidement fais le tour des solutions de paiement existantes (Paypal, BNP, etc..). Il s'est avéré que https://stripe.com[Stripe] était le meilleur compromis.
+Afin d'implémenter cela, j'ai rapidement fais le tour des solutions de paiement existantes (PayPal, BNP, etc..). Il s'est avéré que [Stripe](https://stripe.com) était le meilleur compromis.
 
 ![Logo de Stripe](/img/blog//stripe.svg)
 
-Stripe est une société américaine qui simplifie les paiements qui lève 2 millions de dollars en 2011 (un an après ça création) et puis 150 millions de dollars 2016 après avoir séduit des investisseurs comme Google. Stripe est aujourd'hui valorisé à plus de 10 milliards!
+> Stripe est une société américaine qui a pour but de simplifier les paiements en ligne. Créée en 2010, Stripe pèse maintenant plus de 10 milliards!
 
 J'ai choisis Stripe car ses avantages sont:
 
 - le client peut payer sans avoir un compte ouvert chez Stripe
-- les tarifs footnote:[Les prix de Stripe sont 1,4% + 0,25€ par transaction pour les cartes européennes et
-2,9 % + 0,25 € pour les cartes non européennes.] qui sont assez raisonnable.
-- la facilité de mise en place
+- les tarifs sont assez "raisonnable" _(1,4% + 0,25€ par transaction pour les cartes européennes)_
+- la facilité de mise en place car, en plus de propose une belle API, Stripe propose des librairies pour les langages les plus utilisés ([PHP](https://github.com/stripe/stripe-php), [Pyhton](https://github.com/stripe/stripe-python), [Ruby](https://github.com/stripe/stripe-ruby), [Java](https://github.com/stripe/stripe-java) et même [Go](https://github.com/stripe/stripe-go))
+- une [excellente documentation](https://stripe.com/docs)
 
-Dans cet article je vais donc retracer la mise en place de la fonctionnalité décrite plus haut.
+De plus, Stripe va bien plus loin qu'une _simple_ solution de paiement puisqu'il propose tout un écosystème pour gérer des clients, des factures, des produits, etc...
+
+Dans cet article je vais donc retracer la mise en place de la fonctionnalité décrite plus haut. Je précise aussi avant de commencer que ce n'est pas un article sponsorisé et je n'ai pas reçu d'argent de la part de Stripe (j'aurais bien voulu...).
 
 **TLDR**: Stripe est très simple à mettre en place.
 
@@ -44,7 +48,7 @@ Ici nous voulons juste mettre en place un système de restriction de certaines p
 On commence donc par ajouter la colonne `premium_until` à la table `users`.
 
 ~~~bash
-$ rails g migration addpremiumuntil_to_users premium_until:date
+$ rails g migration add_premium_until_to_users premium_until:date
 ~~~
 
 Cette commande va générer la migration suivante:
@@ -58,7 +62,7 @@ class AddPremiumUntilToUsers < ActiveRecord::Migration[5.2]
 end
 ~~~
 
-Nous allons créer une autre migration afin d'offrir un mois à tous les utilisateurs existants:
+Comme nous sommes généreux, nous allons aussi créer une migration supplémentaire afin d' **offrir un mois** à tous les utilisateurs existants:
 
 ~~~bash
 $ rails g migration offer_one_monthspremiumto_users
@@ -84,50 +88,60 @@ Et voilà.
 
 ### Création de la logique premium
 
-Nous avons maintenant une belle colonne `premium_until`. Nous voulons créer une méthode `User#increment_premium` qui ajoutera un mois à l'attribut `premium_until`. Créons les tests unitaires:
+Nous avons maintenant une belle colonne `premium_until` qui contient la date de validité du compte premium. Nous voulons créer une méthode `User#increment_premium` qui ajoutera un mois à cet attribut.
+
+Créons les tests unitaires qui définissent le comportement attendu de cette fonction. Cette méthode est très importante donc nous allons écrire des tests pour couvrir tous les cas possibles:
+
+- on vérifie que lors de l'inscription, nous offrons un mois:
 
 ~~~ruby
 # test/models/user_test.rb
-# ...
-class UserTest < ActiveSupport::TestCase
 
-  # vérifie que lors de l'inscription, nous offrons un mois
-  test 'should offer one month premium to new user' do
-    user = User.create!(
-      email: Faker::Internet.email,
-      premium_until: Date.today + 5.days
-      # ...
-    )
+test 'should offer one month premium to new user' do
+  user = User.create!(
+    premium_until: (Date.today + 5.days)
+    # ...
+  )
 
-    assert_equal (Date.today + 1.month + 5.days), user.premium_until
-  end
+  assert_equal (Date.today + 1.month + 5.days), user.premium_until
+end
+~~~
 
-  # vérifie que l'on ajoute un mois au solde courant
-  test 'should add one month for increment on last day' do
-    user = User.new(premium_until: Date.today)
+- on vérifie que l'on ajoute un mois au solde courant
 
-    assert_difference('user.premium_until', 1.month) do
-      user.increment_premium
-    end
-  end
+~~~ruby
+# test/models/user_test.rb
+test 'should add one month for increment on last day' do
+  user = User.new(premium_until: Date.today)
 
-  # vérifie que l'on ajoute un mois au solde courant
-  test 'should set correct premium_until for never premium user' do
-    user = User.new
+  assert_difference('user.premium_until', 1.month) do
     user.increment_premium
-    assert_equal (Date.today + 1.month), user.premium_until
-  end
-
-  # vérifie que l'on ajoute un mois à partir d’aujourd’hui pour un utilisateur qui viens de réactiver son compte après une inactivité
-  test 'should set correct premium_until for past-premium user' do
-    user = User.new(premium_until: (Date.today - 1.year))
-    user.increment_premium
-    assert_equal (Date.today + 1.month), user.premium_until
   end
 end
 ~~~
 
-ça fait beaucoup de test mais, encore une fois, nous avons écris beaucoup de tests mais l'implémentation est très rapide:
+- vérifie que l'on ajoute un mois au solde courant
+
+~~~ruby
+# test/models/user_test.rb
+test 'should set correct premium_until for never premium user' do
+  user = User.new
+  user.increment_premium
+  assert_equal (Date.today + 1.month), user.premium_until
+end
+~~~
+
+- vérifie que l'on ajoute un mois à partir d’aujourd’hui pour un utilisateur qui viens de réactiver son compte après une inactivité
+
+~~~ruby
+# test/models/user_test.rb
+test 'should set correct premium_until for past-premium user' do
+  user = User.new(premium_until: (Date.today - 1.year))
+  user.increment_premium
+  assert_equal (Date.today + 1.month), user.premium_until
+end
+~~~
+Et voilà! Nous avons écrit beaucoup de tests mais l'implémentation est très rapide:
 
 ~~~ruby
 # app/models/user.rb
@@ -225,7 +239,7 @@ end
 
 Et voilà. Le test devrait désormais passer
 
-## Mise en place de Stripe
+## Paiement ponctuel
 
 Nous avons donc mis en place la logique pour restreindre certaines pages aux utilisateurs premium. Nous avons aussi créer la méthode qui ajoutera un mois de compte premium à un utilisateur. Il ne reste plus qu'à appeler cette méthode lorsqu'un paiement est effectué.
 
@@ -236,8 +250,6 @@ Commençons donc par ajouter cette gemme à notre projet:
 ~~~
 $ bundle add stripe
 ~~~
-
-### Paiement ponctuel
 
 Dans cette première version nous allons simplement mettre en place un paiement Stripe et appeler `User#increment_premium` si tout se passe bien. Dans le jargon de Stripe, un simple paiement est une _charge_.
 
@@ -469,13 +481,13 @@ Et voilà! Le fonctionnement est identique mais désormais nous récupérons le 
 <% end %>
 ~~~
 
-### Abonnement
+## Abonnement
 
 Nous avons presque terminé. Une des dernière fonctionnalité à créer est de proposer un abonnement. L'utilisateur pourra ainsi souscrire un abonnement qui enclenchera un paiement automatique au début du mois. Dans le jargon de Stripe, cela s'appelle une https://stripe.com/docs/billing/subscriptions/products-and-plans[*subscriptions*].
 
 > Chaque plan est joint à un produit qui représente (...) le service offert aux clients. Les produits peuvent avoir plus d'un plan, reflétant les variations de prix et de durée - comme les prix mensuels et annuels à des taux différents. Il existe deux types de produits: les biens et les services. (...) qui sont destinés aux abonnements.
 
-#### Création du plan
+### Création du plan
 
 Créons donc notre premier produit [la](https://stripe.com/docs/api/plans/create?lang=ruby) en utilisant [la gemme Stripe](https://github.com/stripe/stripe-ruby/). Voici un exemple avec la console Rails (Vous pouvez faire la même chose en utilisant l'interface d'administration).
 
@@ -578,27 +590,146 @@ Et les vues:
 
 Et voilà. Nous pouvons désormais souscrire un abonnement.
 
-#### _Webhook_
+### Mise en place du _Webhook_
 
-Nous avons mis en place un paiement mensuel mais nous voulons être notifié des paiement effectué au début du mois. pour cela nous devons utiliser des *Webhook*. Les _webhook_ sont des routes qui vont recevoir des requêtes de la par de Stripe et effectuer des actions.
+Nous avons mis en place un paiement mensuel mais nous voulons être notifié des paiement effectué au début du mois.
 
-Dans notre cas, le fonctionnement est le suivant
+Dans notre cas, le fonctionnement est le suivant:
 
+1. l’utilisateur effectue une demande d'abonnement
+2. Stripe créer un abonnement pour cette utilisateur
+3. lorsque l'abonnement est renouvelé (c-à-d. lorsque Stripe facture le client et qu'il est facturé de nouveau).
 
+Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_. Les  *Webhook* sont simplement des routes qui vont recevoir les requêtes de la part de Stripe et effectuer des actions. Les *Webhooks* se configurent via l'interface d'administration de Stripe et cela se fait très facilement. Il suffit de définir une URL qui va recevoir les requêtes.
 
-----
+![Formulaire de création d'un Webhook](/img/blog/strip_webhook.png)
 
-[_Tracking active subscriptions_](https://stripe.com/docs/billing/webhooks#tracking)
-
-
-Lorsque l'abonnement est renouvelé (c-à-d. lorsque Stripe facture le client et qu'il est facturé de nouveau), Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_:
-
-1. Quelques jours avant le renouvellement, votre site reçoit un événement `invoice.upcoming`
-2. Votre site reçoit un événement `invoice.payment_succeeded`.
-
-On va donc s'appuyer sur le signal `invoice.payment_succeeded` afin d'effectuer les mêmes actions qui sont effectuées lorsqu'un payement ponctuel est effectué
+> Notez que j'ai choisis de ne recevoir que le signal `invoice.payment_succeeded` qui est envoyé lorsqu'une facture est payée. Encore une fois je n'invente rien, tout est [dans la documentation de Stripe](https://stripe.com/docs/billing/webhooks#tracking)
 
 
 
+Nous allons mettre en place le _Webhook_ avec Rails. Il suffit de générer une route avec Rails.
 
-[serveo.net](https://serveo.net/)
+~~~bash
+$ rails g controller  hooks stripe --no-assets --no-helper
+~~~
+
+Nous allons juste supprimer la vue que Rails vient de nous créer et passer la route accessible avec le verbe `POST`:
+
+~~~bash
+$ rm -r app/views/hooks
+~~~
+
+~~~ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  post 'hooks/stripe'
+  # ...
+end
+~~~
+
+Il suffit maintenant d'ajouter une méthode dans le contrôleur qui recevra  la requête de Stripe.Comme d'habitude, commençons par les tests.
+
+
+### Test fonctionnels
+
+C'est toujours compliqué de tester l'intégration d'un API donc j'ai simplement choisit de simuler une requête de la part de Stripe et de vérifier si notre contrôleur ajoute du crédit à l'utilisateur.
+
+pour cela,  j'ai simplement copié/collé les paramètres envoyés par Stripe via leur [interface de test des webhooks](https://dashboard.stripe.com/test/webhooks/).
+
+![Test d'envoie d'un Webhook via l'administration](/img/blog/stripe_webook_request.png)
+
+Une fois la requête copié, je la transformé en `Hash` Ruby en ne gardant que les paramètre qui m'intérèssent.
+
+~~~ruby
+# test/controllers/hooks_controller_test.rb
+# ...
+class HooksControllerTest < ActionDispatch::IntegrationTest
+  # Stripe webook params copied from <https://dashboard.stripe.com/test/webhooks>
+  STRIPE_INVOICE_SUCCEEDED_PARAMS = {
+    id: 'invoice.payment_00000000000000',
+    type: 'invoice.payment_succeeded',
+    # ...
+    data: {
+      object: {
+        customer: 'cus_00000000000000',
+        # ...
+      }
+    },
+    # ...
+  }.freeze
+
+  # ...
+end
+~~~
+
+Maintenant il suffit d'envoyer une requête `POST` et de vérifier que notre utilisateur est incrémenté.
+
+~~~ruby
+# test/controllers/hooks_controller_test.rb
+# ...
+class HooksControllerTest < ActionDispatch::IntegrationTest
+  # ...
+
+  setup do
+    @user = users(:one_advocate)
+  end
+
+  test 'Stripe hook should add premium days to the given user' do
+    old = user.premium_until
+    post hooks_stripe_url, params: STRIPE_INVOICE_SUCCEEDED_PARAMS
+    assert_response :success
+    user.reload
+    assert_operator old, :<=, user.premium_until
+  end
+end
+~~~
+
+Et voilà. L'implémentation est très simple:
+
+~~~ruby
+# app/controllers/hooks_controller.rb
+
+class HooksController < ApplicationController
+  protect_from_forgery except: [:stripe]
+
+  def stripe
+    if is_payment_succeeded?
+      advocate = retrieve_user
+
+      advocate.increment_premium! unless advocate.nil?
+    end
+
+    head :ok, content_type: 'text/html'
+  end
+
+  private
+
+  def retrieve_user
+    customer_token = params.dig(:data, :object, :customer)
+    return nil if customer_token.nil?
+
+    User.where(stripe_token: customer_token).first
+  end
+
+  def is_payment_succeeded?
+    params[:type] == 'invoice.payment_succeeded'
+  end
+end
+~~~
+
+> Attention a bien désactiver le `protect_from_forgery` qui va bloquer les requêtes provenant de l'exterieur.
+
+Et voilà, notre paiement récurent est désormais en place!
+
+### Test en développement
+
+Il suffit d'utiliser un service comme [Ngrok](https://ngrok.com/) ou [Serveo](https://serveo.net/) (je vous recommande ce dernier qui est plus facile à utiliser) afin d'exposer votre application à l’extérieur et ensuite de tester votre _webhook_ via [l'interface de test des webhooks de Stripe](https://dashboard.stripe.com/test/webhooks/). Je ne vais pas vous le montrer ici car nous avons déjà mis en place un test qui le simule pour nous.
+
+## Conclusion
+
+Je vous ai donc démontré via cet article qu'il était très facile de mettre en place un système de paiement récurent avec Stripe. La documentation quasi parfaite et leur gemme nous simplifie vraiment la tâche.
+
+Mais les fonctionnalités de Stripe ne s'arrêtent pas la. Stripe nous permet aussi de mettre en place un système de facturation (avec la génération de belles factures PDF), de remboursement ou encore de gestion de litiges.
+
+Je pense que pour la création de votre application il est beaucoup plus intelligent de déléguer toutes les tâche de paiement à Stripe et de se concentrer sur son business.
