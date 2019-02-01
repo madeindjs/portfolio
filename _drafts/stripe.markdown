@@ -11,9 +11,7 @@ Afin d'implémenter cette fonctionnalité, nous avons commencé par analyser le 
 
 1. le client bénéficie d'un mois de découverte de notre outils dès son inscription
 2. une fois son _solde de jours premium_ épuisé, il reçoit un mail lui indiquant qu'il va falloir racheter des jours
-3. l'utilisateur met à jour sont solde en effectuant
-  - un *paiement ponctuel* qui lui rajoute un mois à son solde premium
-  - il souscrit un abonnement qui effectuera un paiement automatique au début de chaque mois
+3. l'utilisateur met à jour sont solde en effectuant un **paiement ponctuel** qui lui rajoute un mois à son solde premium ou il souscrit un abonnement qui effectuera un **paiement automatique** au début de chaque mois
 
 Afin d'implémenter cela, j'ai rapidement fais le tour des solutions de paiement existantes (PayPal, BNP, etc..). Il s'est avéré que [Stripe](https://stripe.com) était le meilleur compromis.
 
@@ -74,7 +72,6 @@ On boucle juste sur tous les utilisateurs existants
 
 ~~~ruby
 # db/migrate/20190116132207_add_premium_until_to_users.rb
-
 # ...
 def up
   premium_until_offer = DateTime.now + 1.month
@@ -94,7 +91,6 @@ Créons les tests unitaires qui définissent le comportement attendu de cette fo
 
 ~~~ruby
 # test/models/user_test.rb
-
 test 'should offer one month premium to user' do
   user = User.create!(
     premium_until: (Date.today + 5.days)
@@ -141,7 +137,6 @@ class User < ApplicationRecord
     end
     self.premium_until += 1.month
   end
-
   # ...
 end
 ~~~
@@ -211,7 +206,6 @@ L'implémentation pour le faire passer est assez facile. Il suffit de créer une
 # app/controllers/acts_controller.rb
 class ActsController < ApplicationController
   before_action :redirect_if_not_premium, only: %i[index]
-
   # ...
 
   private
