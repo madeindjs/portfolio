@@ -5,32 +5,32 @@ date:   2019-01-15 11:23:00 +0200
 comments: true
 ---
 
-Pour mon projet [iSignif](https://isignif.fr) j'ai voulu implémenter la fonctionnalité d' **accès restreint** au site uniquement si l'utilisateur bénéficie d'un **compte premium**. Le but final est que l’utilisateur doit souscrire un compte premium afin d'accéder à certaines pages.
+Pour mon projet [iSignif](https://isignif.fr) j'ai voulu implémenter la fonctionnalité d' **accès restreint** au site uniquement si l'utilisateur bénéficie d'un **compte premium**. Le but final est que l’utilisateur doive souscrire un compte premium afin d'accéder à certaines pages.
 
 Afin d'implémenter cette fonctionnalité, nous avons commencé par analyser le besoin. Le comportement attendu est le suivant:
 
-1. le client bénéficie d'un mois de découverte de notre outils dès son inscription
+1. le client bénéficie d'un mois de découverte de notre outil dès son inscription
 2. une fois son _solde de jours premium_ épuisé, il reçoit un mail lui indiquant qu'il va falloir racheter des jours
-3. l'utilisateur met à jour sont solde en effectuant un **paiement ponctuel** qui lui rajoute un mois à son solde premium ou il souscrit un abonnement qui effectuera un **paiement automatique** au début de chaque mois
+3. l'utilisateur met à jour son solde en effectuant un **paiement ponctuel** qui lui rajoute un mois à son solde premium où il souscrit un abonnement qui effectuera un **paiement automatique** au début de chaque mois
 
-Afin d'implémenter cela, j'ai rapidement fais le tour des solutions de paiement existantes (PayPal, BNP, etc..). Il s'est avéré que [Stripe](https://stripe.com) était le meilleur compromis.
+Afin d'implémenter cela, j'ai rapidement fait le tour des solutions de paiement existantes (PayPal, BNP, etc..). Il s'est avéré que [Stripe](https://stripe.com) était le meilleur compromis.
 
 ![Logo de Stripe](/img/blog//stripe.svg)
 
 > Stripe est une société américaine qui a pour but de simplifier les paiements en ligne. Créée en 2010, Stripe pèse maintenant plus de 10 milliards!
 
-J'ai choisis Stripe car ses avantages sont:
+J'ai choisi Stripe car ses avantages sont:
 
 - le client peut payer sans avoir un compte ouvert chez Stripe
-- les tarifs sont assez "raisonnable" _(1,4% + 0,25€ par transaction pour les cartes européennes)_
-- la facilité de la mise en place car, en plus de propose une belle API, Stripe propose des librairies pour les langages les plus utilisés ([PHP](https://github.com/stripe/stripe-php), [Pyhton](https://github.com/stripe/stripe-python), [Ruby](https://github.com/stripe/stripe-ruby), [Java](https://github.com/stripe/stripe-java) et même [Go](https://github.com/stripe/stripe-go))
+- les tarifs sont assez "raisonnables" _(1,4% + 0,25€ par transaction pour les cartes européennes)_
+- la facilité de la mise en place car, en plus de proposer une belle API, Stripe propose des librairies pour les langages les plus utilisés ([PHP](https://github.com/stripe/stripe-php), [Pyhton](https://github.com/stripe/stripe-python), [Ruby](https://github.com/stripe/stripe-ruby), [Java](https://github.com/stripe/stripe-java) et même [Go](https://github.com/stripe/stripe-go))
 - une [excellente documentation](https://stripe.com/docs)
 
 De plus, Stripe va bien plus loin qu'une _simple_ solution de paiement puisqu'il propose tout un écosystème pour gérer des clients, des factures, des produits, etc...
 
 Dans cet article je vais donc retracer le développement de la fonctionnalité en essayant d'être le plus générique possible. Je précise aussi avant de commencer que ce n'est pas un article sponsorisé et je n'ai pas reçu d'argent de la part de Stripe (j'aurais bien voulu...).
 
-**TLDR**: Stripe est très simple à mettre en place et nous permet vraiment de complètement **déléguer** la gestion des paiement. Cela permet de se focaliser sur son business et c'est quelque chose qui d'inestimable pour un projet qui débute.  
+**TLDR**: Stripe est très simple à mettre en place et nous permet vraiment de complètement **déléguer** la gestion des paiement. Cela permet de se focaliser sur son business et c'est quelque chose d'inestimable pour un projet qui débute.  
 
 ## Sommaire
 
@@ -62,7 +62,7 @@ class AddPremiumUntilToUsers < ActiveRecord::Migration[5.2]
 end
 ~~~
 
-Vue que nous sommes généreux, nous allons aussi créer une migration supplémentaire afin d' **offrir un mois** à tous les utilisateurs existants:
+Vu que nous sommes généreux, nous allons aussi créer une migration supplémentaire afin d' **offrir un mois** à tous les utilisateurs existants:
 
 ~~~bash
 $ rails g migration offer_one_monthspremiumto_users
@@ -113,7 +113,7 @@ test 'should set correct premium_until for never premium user' do
 end
 ~~~
 
-- vérifie que l'on ajoute un mois à partir de aujourd’hui pour un utilisateur qui viens de réactiver son compte après une inactivité
+- vérifie que l'on ajoute un mois à partir d'aujourd’hui pour un utilisateur qui vient de réactiver son compte après une inactivité
 
 ~~~ruby
 # test/models/user_test.rb
@@ -152,7 +152,7 @@ $ bin/rails test test/models/user_test.rb
 
 ### Restrictions actions
 
-L'implémentation de la restriction est vraiment facile mais commençons par écrire les tests unitaires. On va donc créer deux _fixtures_ _(Les fixtures sont des données insérées dans la base de données afin de tester l'application)_ une représentant un utilisateur premium et un autre un utilisateur expiré.
+L'implémentation de la restriction est vraiment facile mais commençons par écrire les tests unitaires. On va donc créer deux _fixtures_ _(Les fixtures sont des données insérées dans la base de données afin de tester l'application)_ une représentant un utilisateur premium et une autre un utilisateur expiré.
 
 ~~~yml
 # test/fixtures/users.yml
@@ -165,7 +165,7 @@ expired_advocate:
   # ...
 ~~~
 
-Maintenant imaginons une page autorisé seulement aux utilisateurs premium. Le test est assez facile:
+Maintenant, imaginons une page autorisée seulement aux utilisateurs premium. Le test est assez facile:
 
 1. On connecte un utilisateur
 2. On accède à la page
@@ -222,7 +222,7 @@ Et voilà. Le test devrait désormais passer! La création de la logique pour le
 
 ## Paiement ponctuel
 
-Nous avons donc mis en place la logique pour restreindre certaines pages aux utilisateurs premium. Nous avons aussi crée la méthode qui ajoutera un mois de compte premium à un utilisateur. Il ne reste plus qu'à appeler cette méthode lorsqu'un paiement est effectué.
+Nous avons donc mis en place la logique pour restreindre certaines pages aux utilisateurs premium. Nous avons aussi créé la méthode qui ajoutera un mois de compte premium à un utilisateur. Il ne reste plus qu'à appeler cette méthode lorsqu'un paiement est effectué.
 
 Tout d'abord, pour utiliser Stripe, il faut se créer un compte qui vous permettra d'obtenir une *clé d'API*. Une fois ceci fait, l'intégration à votre application Rails est très facile car [Stripe propose une gemme](https://github.com/stripe/stripe-ruby/)! Bien sûr, nous allons l'utiliser ici.
 
@@ -335,7 +335,7 @@ production:
     secret_key: sk_live_clef_a_ne_pas_commiter
 ~~~
 
-> Évidement, il faut renseigner *votre* propre clé ici
+> Évidemment, il faut renseigner *votre* propre clé ici
 
 Et maintenant de créer la configuration nécessaire dans un _initializer_ spécifique à Stripe:
 
@@ -349,7 +349,7 @@ Rails.configuration.stripe = {
 Stripe.api_key = Rails.application.secrets.stripe[:secret_key]
 ~~~
 
-Une fois la première version mise en place, il suffit de tester que tout ce passe bien.
+Une fois la première version mise en place, il suffit de tester que tout se passe bien.
 
 > Au risque de vous décevoir, je n'ai rien inventé et j'ai quasiment tout pompé sur [le guide de Stripe](https://stripe.com/docs/checkout/rails).
 
@@ -357,7 +357,7 @@ Pour tester, on lance le serveur Rails et on se connecte sur <http://localhost:3
 
 ![Formulaire de paiement de Stripe](/img/blog/first_form.png)
 
-J'ai volontairement utilisé le numéro de carte `4242 4242 4242 4242` qui est une carte de test. Certaines carte vous permettent de simuler des erreurs. La liste complète des cartes de test est disponible [ici](https://stripe.com/docs/testing#cards)
+J'ai volontairement utilisé le numéro de carte `4242 4242 4242 4242` qui est une carte de test. Certaines cartes vous permettent de simuler des erreurs. La liste complète des cartes de test est disponible [ici](https://stripe.com/docs/testing#cards)
 
 Une fois le formulaire envoyé, vous êtes redirigé vers la page `charges#create` qui vous confirme votre achat. Vous pouvez retrouver le paiement sur Stripe dans la section _payments_:
 
@@ -365,7 +365,7 @@ Une fois le formulaire envoyé, vous êtes redirigé vers la page `charges#creat
 
 ### Sauvegarde du _cutomer token_
 
-Nous allons effectuer une petite modification à l'implémentation proposé par Stripe. Nous voulons sauvegarder le _customer_ crée par Stripe afin de le réutiliser s'il paie une nouvelle fois. On va donc ajouter une colonne `users.stripe_token`.
+Nous allons effectuer une petite modification à l'implémentation proposée par Stripe. Nous voulons sauvegarder le _customer_ créé par Stripe afin de le réutiliser s'il paie une nouvelle fois. On va donc ajouter une colonne `users.stripe_token`.
 
 ~~~
 $ rails g migration add_stripe_token_to_users stripe_token:string
@@ -466,7 +466,7 @@ Et voilà! Le fonctionnement est identique mais désormais nous récupérons le 
 
 ## Abonnement
 
-Ne lachez pas, nous avons presque terminé. Une des dernière fonctionnalité à créer est de proposer un abonnement. L'utilisateur pourra ainsi souscrire un abonnement qui enclenchera un paiement automatique au début du mois. Dans le jargon de Stripe, cela s'appelle une [*subscriptions*](https://stripe.com/docs/billing/subscriptions/products-and-plans).
+Ne lâchez pas, nous avons presque terminé. Une des dernière fonctionnalité à créer est de proposer un abonnement. L'utilisateur pourra ainsi souscrire un abonnement qui enclenchera un paiement automatique au début du mois. Dans le jargon de Stripe, cela s'appelle une [*subscriptions*](https://stripe.com/docs/billing/subscriptions/products-and-plans).
 
 > Chaque plan est joint à un produit qui représente (...) le service offert aux clients. Les produits peuvent avoir plus d'un plan, reflétant les variations de prix et de durée - comme les prix mensuels et annuels à des taux différents. Il existe deux types de produits: les biens et les services. (...) qui sont destinés aux abonnements.
 
@@ -497,7 +497,7 @@ development:
 
 ### Création de la logique
 
-Comme nous avons crée un contrôleur `charges`, nous allons en créer un nouveau contrôleur nommé `subscriptions` avec deux méthodes:
+Comme nous avons créé un contrôleur `charges`, nous allons en créer un nouveau nommé `subscriptions` avec deux méthodes:
 
 - `new` qui va simplement proposer un formulaire pour payer
 - `create` qui recevra la réponse de Stripe
@@ -581,13 +581,13 @@ Nous avons mis en place un paiement mensuel mais nous voulons être notifié des
 2. Stripe crée un abonnement pour cette utilisateur
 3. lorsque l'abonnement est renouvelé (c-à-d. lorsque Stripe facture le client et qu'il est facturé de nouveau).
 
-Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_. Les  *Webhook* sont simplement des routes que nous mettons à disposition pour recevoir les requêtes de la part de Stripe. Une fois la route créer, nous devons communiquer l'URL à Stripe via l'interface d'administration de Stripe (cela se fait très facilement).
+Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_. Les  *Webhook* sont simplement des routes que nous mettons à disposition pour recevoir les requêtes de la part de Stripe. Une fois la route créée, nous devons communiquer l'URL à Stripe via l'interface d'administration de Stripe (cela se fait très facilement).
 
 ![Formulaire de création d'un Webhook](/img/blog/strip_webhook.png)
 
-> Notez que j'ai choisis de ne recevoir que le signal `invoice.payment_succeeded` qui est envoyé lorsqu'une facture est payée. Encore une fois je n'invente rien, tout est [dans la documentation de Stripe](https://stripe.com/docs/billing/webhooks#tracking)
+> Notez que j'ai choisi de ne recevoir que le signal `invoice.payment_succeeded` qui est envoyé lorsqu'une facture est payée. Encore une fois je n'invente rien, tout est [dans la documentation de Stripe](https://stripe.com/docs/billing/webhooks#tracking)
 
-Générerons une route avec Rails.
+Générons une route avec Rails.
 
 ~~~bash
 $ rails g controller  hooks stripe --no-assets --no-helper
@@ -611,13 +611,13 @@ Il suffit maintenant d'ajouter une méthode dans le contrôleur qui recevra  la 
 
 ### Test fonctionnels
 
-C'est toujours compliqué de tester l'intégration d'un API donc j'ai simplement choisit de simuler une requête de la part de Stripe et de vérifier si notre contrôleur ajoute du crédit à l'utilisateur.
+C'est toujours compliqué de tester l'intégration d'un API donc j'ai simplement choisi de simuler une requête de la part de Stripe et de vérifier si notre contrôleur ajoute du crédit à l'utilisateur.
 
 pour cela,  j'ai simplement copié/collé les paramètres envoyés par Stripe via leur [interface de test des webhooks](https://dashboard.stripe.com/test/webhooks/).
 
 ![Test d'envoie d'un Webhook via l'administration](/img/blog/stripe_webook_request.png)
 
-Une fois la requête copié, je la transformé en `Hash` Ruby en ne gardant que les paramètre qui m'intérèssent.
+Une fois la requête copiée, je l'ai transformée en `Hash` Ruby en ne gardant que les paramètres qui m'intéressent.
 
 ~~~ruby
 # test/controllers/hooks_controller_test.rb
@@ -696,9 +696,9 @@ class HooksController < ApplicationController
 end
 ~~~
 
-> Attention a bien désactiver le `protect_from_forgery` qui va bloquer les requêtes provenant de l'exterieur.
+> Attention à bien désactiver le `protect_from_forgery` qui va bloquer les requêtes provenant de l'extérieur.
 
-Et voilà, notre paiement récurent est désormais en place!
+Et voilà, notre paiement récurrent est désormais en place!
 
 ### Test en développement
 
@@ -706,8 +706,8 @@ Il suffit d'utiliser un service comme [Ngrok](https://ngrok.com/) ou [Serveo](ht
 
 ## Conclusion
 
-Je vous ai donc démontré via cet article qu'il était très facile de mettre en place un système de paiement récurent avec Stripe. La documentation quasi parfaite et leur gemme nous simplifie vraiment la tâche.
+Je vous ai donc démontré via cet article qu'il était très facile de mettre en place un système de paiement récurrent avec Stripe. La documentation quasi parfaite et leur gemme nous simplifient vraiment la tâche.
 
 Mais les fonctionnalités de Stripe ne s'arrêtent pas la. Stripe nous permet aussi de mettre en place un système de facturation (avec la génération de belles factures PDF), de remboursement ou encore de gestion de litiges.
 
-Je pense que pour la création de votre application il est beaucoup plus intelligent de déléguer toutes les tâche de paiement à Stripe et de se concentrer sur son business.
+Je pense que pour la création de votre application il est beaucoup plus intelligent de déléguer toutes les tâches de paiement à Stripe et de se concentrer sur son business.
