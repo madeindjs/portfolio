@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<link rel="stylesheet" type="text/css" href="/css/pygments/manni.css">
+	<link rel="stylesheet" type="text/css" href="/css/pygments/monokai.css">
 	<title>{{ page.title }}</title>
 	<meta name="description" content="{{ page.description }}">
 	<meta name="keyswords" content="{{ page.tags }}">
@@ -48,7 +48,9 @@
 					{% endfor %}
 				</p>
 				{% if page.thumbnail %}
-				<p><img src="{{ page.thumbnail }}" class="center-block"></p>
+				<p class="text-center">
+					<img src="{{ page.thumbnail }}" class="center-block">
+				</p>
 				{% endif %}
 				<div class="text-justify">
 					{{ content }}

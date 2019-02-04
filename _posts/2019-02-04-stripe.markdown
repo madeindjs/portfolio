@@ -1,7 +1,10 @@
 ---
 layout: post
 title:  Connecter une application Rails avec Stripe
-date:   2019-01-15 11:23:00 +0200
+date:   2019-02-02 12:30:00 +0200
+tags: rails stripe api
+categories: tutorial
+thumbnail: /img/blog/stripe.svg
 comments: true
 ---
 
@@ -15,7 +18,7 @@ Afin d'implémenter cette fonctionnalité, nous avons commencé par analyser le 
 
 Afin d'implémenter cela, j'ai rapidement fait le tour des solutions de paiement existantes (PayPal, BNP, etc..). Il s'est avéré que [Stripe](https://stripe.com) était le meilleur compromis.
 
-![Logo de Stripe](/img/blog//stripe.svg)
+![Logo de Stripe](/img/blog/stripe.svg)
 
 > Stripe est une société américaine qui a pour but de simplifier les paiements en ligne. Créée en 2010, Stripe pèse maintenant plus de 10 milliards!
 
@@ -355,13 +358,13 @@ Une fois la première version mise en place, il suffit de tester que tout se pas
 
 Pour tester, on lance le serveur Rails et on se connecte sur <http://localhost:3000/charges/new>. Un bouton vous emmènera sur le formulaire de Stripe:
 
-![Formulaire de paiement de Stripe](/img/blog/first_form.png)
+![Formulaire de paiement de Stripe](/img/blog/stripe_first_form.png)
 
 J'ai volontairement utilisé le numéro de carte `4242 4242 4242 4242` qui est une carte de test. Certaines cartes vous permettent de simuler des erreurs. La liste complète des cartes de test est disponible [ici](https://stripe.com/docs/testing#cards)
 
 Une fois le formulaire envoyé, vous êtes redirigé vers la page `charges#create` qui vous confirme votre achat. Vous pouvez retrouver le paiement sur Stripe dans la section _payments_:
 
-![Formulaire de paiement de Stripe](/img/blog/first_payment.png)
+![Formulaire de paiement de Stripe](/img/blog/stripe_first_payment.png)
 
 ### Sauvegarde du _cutomer token_
 
@@ -583,7 +586,7 @@ Nous avons mis en place un paiement mensuel mais nous voulons être notifié des
 
 Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_. Les  *Webhook* sont simplement des routes que nous mettons à disposition pour recevoir les requêtes de la part de Stripe. Une fois la route créée, nous devons communiquer l'URL à Stripe via l'interface d'administration de Stripe (cela se fait très facilement).
 
-![Formulaire de création d'un Webhook](/img/blog/strip_webhook.png)
+![Formulaire de création d'un Webhook](/img/blog/stripe_webhook.png)
 
 > Notez que j'ai choisi de ne recevoir que le signal `invoice.payment_succeeded` qui est envoyé lorsqu'une facture est payée. Encore une fois je n'invente rien, tout est [dans la documentation de Stripe](https://stripe.com/docs/billing/webhooks#tracking)
 
