@@ -9,39 +9,14 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 <h2>A propos de moi</h2>
 
-<ul>
-  {% for desc in site.data.profil.description.multiline %}
-  <li>{{ desc }}</li>
-  {% endfor %}
-</ul>
+{% for desc in site.data.profil.description.multiline %}
+<p>{{ desc }}</p>
+{% endfor %}
 
 <p>J'aime {{ site.data.profil.interest_points }}</p>
 
 <hr>
 
-<h2>Portfolio</h2>
-
-<ul>
-  {% for project in site.data.projects %}
-  <li class="text-justify">
-    <strong>
-      {% if project.link %}
-      <a href="{{ project.link }}" class="card-link">
-        {{ project.name }}
-      </a>
-      {% else %}
-      {{ project.name }}
-      {% endif %}
-    </strong>
-    {{ project.description }}
-    {% if project.quote %}
-    <blockquote>{{ project.quote }}</blockquote>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-
-<hr>
 
 <h2>Mes experiences</h2>
 
@@ -52,7 +27,7 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
   | <small>{{ experience.dates }}</small>
 </h3>
 
-<blockquote>{{ experience.quote }}</blockquote>
+<p>{{ experience.quote }}</p>
 
 <ul>
   {% for task in experience.description %}
@@ -60,6 +35,36 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
   {% endfor %}
 </ul>
 {% endfor %}
+
+<hr>
+
+
+<h2>Experiences personnelles</h2>
+
+{% for project in site.data.projects %}
+
+<h3>
+  {% if project.link %}
+  <a href="{{ project.link }}" class="card-link">{{ project.name }}</a>
+  {% else %}
+  {{ project.name }}
+  {% endif %}
+  {% if project.github %}
+  @ <a href="{{ project.github }}">github</a>
+  {% endif %}
+</h3>
+
+<p>{{ project.description }}</p>
+
+{% if project.quote %}
+<p>{{ project.quote }}</p>
+{% endif %}
+
+{% endfor %}
+
+<h3>... et d'autres</h3>
+
+<p>Voir mon <a href="https://github.com/madeindjs/">profil Github</a> pour consulter tous mes projets Open Source.</p>
 
 
 <hr>

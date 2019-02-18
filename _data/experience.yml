@@ -1,7 +1,7 @@
-- job_title: Directeur Technique
+- job_title: Directeur Technique associé
   company: iSignif
   link: https://isignif.fr/
-  dates: Mai 2018 à aujourd'hui
+  dates: Depuis 2018-04
   quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
   description:
     - Au sein de l'équipe, je suis chargé de mettre en place une plateforme web dans le but de mettre en relation des avocats et des huissiers.
@@ -11,17 +11,17 @@
 - job_title: Developpeur PHP
   company: GAC Technology
   link: https://gac-technology.com/
-  dates: Janvier 2017 à aujourd'hui
-  quote: GAC Technology est une Scale-Up qui m'a appri à manipuler des grandes quantité de données.
+  dates: Depuis Janvier 2017
+  quote: GAC Technology est une Scale-Up qui m'a appri à manipuler des grandes quantité de données. Au sein de cette entreprise, je suis développeur back-end <strong>PHP</strong>
   description:
-    - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solution technique perenne.
-    - Au sein de cette entreprise, je suis développeur back-end <strong>PHP</strong>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tel que <strong>MySQL</strong>, <strong>Elastic Search</strong> et <strong>Redis</strong>.
+    - Développement API avec Laravel 5.6
+    - Développement application sous Zend Framework en utilisant <strong>MySQL</strong>, <strong>Elastic Search</strong> et <strong>Redis</strong>.
 
 
-- job_title: Pilote qualité process - Chef de projet - Développeur
+- job_title: Pilote qualité process / Chef de projet / Développeur
   company: Carrier
   link: https://www.carrier.com/commercial-refrigeration/
-  dates: Septembre 2011 à janvier 2017
+  dates: 2011 ~ 2016
   quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
   description:
     - Chez Carrier, j'ai eu l'opportunité de me diversifier dans mon travail

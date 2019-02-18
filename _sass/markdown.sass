@@ -1,6 +1,8 @@
-$primary: #f1c40f
+$primary: #3498db
 $grey: #95a5a6
+$keyword: #bdc3c7
 $default: #2c3e50
+$margin: 3rem
 
 
 body
@@ -8,30 +10,48 @@ body
   margin-left: auto
   margin-right: auto
 
+a
+  color: $primary
+  font-weight: normal
+  text-decoration: none
+  font-style: italic
+
+  &:hover
+    color: $primary
+    text-decoration: underline
+
+  &:before
+    content: '['
+    color: $keyword
+
+  &:after
+    content: ']'
+    color: $keyword
 
 
 header
   hr
-    border-top: 1px dashed $grey
+    border-top: 1px dashed $keyword
     border-bottom: none
 
-    p
-      margin: 0
-      padding: 0
+  p
+    margin: 0
+    padding: 0
 
-  *
+  p
     font-family: monospace
     color: $grey
 
 
 main
 
-  h1
-    text-align: center
 
-  h1,h2,h3,p,li, blockquote
+  h1,h2,h3,p,li,blockquote
     font-family: monospace
     color: $default
+
+  h1, h2, h3
+    text-transform: uppercase
 
   h1
     font-size: 3rem
@@ -41,35 +61,41 @@ main
 
   p, li, blockquote
     text-align: justify
+    // font-family: "Times New Roman", Times, serif
 
-
-  a
-    color: $primary
 
   // set same margin
   h1, h2, h3, p, ul, hr
     margin-bottom: 1rem
 
   h2
+    margin-top: $margin
+
+  h3
     margin-top: 2rem
 
   hr
-    border-top: 1px dashed $primary
+    border-top: 1px dashed $keyword
     border-bottom: none
+    margin-top: $margin
+
+  h1
+    &:before
+      content: '# '
+      color: $keyword
 
   h2
     &:before
-      content: '# '
-      color: $primary
+      content: '## '
+      color: $keyword
 
   h3
     &:before
-      content: '## '
-      color: $primary
+      content: '### '
+      color: $keyword
 
   blockquote
     padding: 0
-    margin-bottom: 2rem
     margin-left: 0
     margin-right: 0
     color: $grey
@@ -78,36 +104,39 @@ main
       content: '> '
       color: $grey
 
+
   strong
     color: $primary
-    font-weight: normal
+    // font-weight: normal
 
     &:before
-      content: '**'
-      color: $primary
+      content: '__'
+      color: $keyword
 
     &:after
-      content: '**'
-      color: $primary
+      content: '__'
+      color: $keyword
 
   code
     color: $grey
 
     &:before
       content: '`'
-      color: $grey
+      color: $keyword
 
     &:after
       content: '`'
-      color: $grey
+      color: $keyword
 
   ul
-    padding: 0
     margin-left: 0
     margin-right: 0
     list-style: none
+    padding-left: 1em
 
-  li
-    &:before
-      color: $primary
-      content: '- '
+    li
+      margin-bottom: 0.2rem
+      &:before
+        color: $primary
+        content: '- '
+        margin-left: -1em

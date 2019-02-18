@@ -1,6 +1,6 @@
-- name: Raspberry Cook
-  quote: Ce projet m'a permis de découvrir et m'auto-former sur <code>Ruby on Rails</code> et de créer un serveur sur un Raspberry PI.
-  description: Application web de stockage et partage de recettes de cuisine orienté sur la protection des données.
+- name: Raspberry-Cook.fr
+  quote:
+  description: Ce projet m'a permis de découvrir et m'auto-former sur <a href="https://rubyonrails.org/">Ruby on Rails</a> et de créer un serveur sur un Raspberry PI. C'est une application web de stockage et partage de recettes de cuisine orienté sur la protection des données.
   link: http://raspberry-cook.fr
   github: RaspberryCook/website
   picture: img/projects/raspberry-cook.png
@@ -14,23 +14,27 @@
 #     - JQuery
 #     - Bootstrap
 
-- name: Nature Coiffure Martine
-  description: Site vitrine pour un salon de coiffure créé avec <code>Jekyll</code>. J'assure l'hébergement moi même avec un Raspberry PI branché à ma box internet. 
-  link: http://nature-coiffure-lyon.fr
-  github: https://github.com/madeindjs/nature_coiffure
+# - name: Nature Coiffure Martine
+#   description: Site vitrine pour un salon de coiffure créé avec <code>Jekyll</code>. J'assure l'hébergement moi même avec un Raspberry PI branché à ma box internet.
+#   link: http://nature-coiffure-lyon.fr
+#   github: https://github.com/madeindjs/nature_coiffure
 
-- name: Cristagiri
+- name: Crystagiri
   quote: Ce projet n'était qu'une excuse pour apprendre le language <code>Crystal</code>. Maintenant il est suivi par plus de 80 personnes sur Github.
   description: Bibliothèque pour parser des documents HTML avec le langage compilé <code>Crystal</code>
-  github: madeindjs/Crystagiri
+  link: http://nature-coiffure-lyon.fr
+  github: https://github.com/madeindjs/madeindjs/Crystagiri
+
+- name: API on Rails 5
+  description: Traduction et mise à jour du livre <a href="http://apionrails.icalialabs.com/book">API on Rails</a> qui traite des meilleurs pratiques pour construire une  API en utilisant <a href="https://rubyonrails.org/">Ruby on Rails</a>
+  link: https://leanpub.com/apionrails5
+  github: https://github.com/madeindjs/api_on_rails
 
 # - name: Super-Markdown
-#   description: Utilitaire Python pour convertir des fichiers Markdown en documents HTML tout-en-un. 
+#   description: Utilitaire Python pour convertir des fichiers Markdown en documents HTML tout-en-un.
 #   github: https://github.com/madeindjs/Super-Markdown
 
-- name: Walking Dead
-  github: madeindjs/WalkingDead
-  quote: Ce projet m'a permis d'utiliser <code>Java</code> et de (tenter) d'étudier le comportement du Garbage Collector. 
-  description: Création d'un outil de simulation pour connaitre mon espérance de vie lors d'une invasion de zombie.
-
-    
+# - name: Walking Dead
+#   github: madeindjs/WalkingDead
+#   quote: Ce projet m'a permis d'utiliser <code>Java</code> et de (tenter) d'étudier le comportement du Garbage Collector.
+#   description: Création d'un outil de simulation pour connaitre mon espérance de vie lors d'une invasion de zombie.
