@@ -5,70 +5,31 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 
 <div class="row my-5">
-  {% if site.data.profil.picture %}
-    <div class="col-md-4 text-center">
-      <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
+  <div class="col-md-2 text-center">
+    <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
+  </div>
+  <div class="col-md-10">
+    <div class="align-middle">
+      <h1 class="d-none">A propos de moi</h1>
+      {% for desc in site.data.profil.description.multiline %}
+      <p class="lead text-justify">{{ desc }}</p>
+      {% endfor %}
+      <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
     </div>
-    <div class="col-md-8">
-  {% else %}
-    <div class="col">
-  {% endif %}
-      <div class="align-middle">
-        <h1 class="d-none">A propos de moi</h1>
-        {% for desc in site.data.profil.description.multiline %}
-        <p class="lead text-justify">{{ desc }}</p>
-        {% endfor %}
-        <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
-      </div>
-    </div>
-
+  </div>
 </div>
 
+
 <!-- separator -->
-<div class="row">
+<div class="row my-5">
   <div class="col">
     <hr>
   </div>
 </div>
 
-<div class="row mt-5">
-  <div class="col-12">
-    <h2>Portfolio</h2>
-  </div>
-
-
-  {% for project in site.data.projects %}
-    <div class="col-md-6 col-lg-4 col-xl-3">
-      <div class="card border-light">
-        <div class="card-body">
-          <h3 class="card-title h5">{{ project.name }}</h3>
-          {% if project.quote %}
-          <p class="card-text alert alert-light text-justify">{{ project.quote }}</p>
-          {% endif %}
-          <p class="card-text text-justify">{{ project.description }}</p>
-          {% if project.github %}
-          <a href="https://github.com/{{ project.github }}" class="card-link"><img src="/img/github-logo.svg" width="20px" height="20px"></a>
-          {% endif %}
-          {% if project.link %}
-          <a href="{{ project.link }}" class="card-link">Site web</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-</div>
-
-
-<!-- separator -->
 <div class="row">
   <div class="col">
-    <hr>
-  </div>
-</div>
-
-<div class="row mt-5">
-  <div class="col">
-    <h2>Mes experiences</h2>
+    <h2>Mes experiences professionnelles</h2>
   </div>
 </div>
 
@@ -80,44 +41,69 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
   </div>
   <div class="col-sm-9 border-left">
 
-    <p class="alert alert-light text-justify">{{ experience.quote }}</p>
     {% for task in experience.description %}
     <p class="text-justify">{{ task }}</p>
     {% endfor %}
+
+    <blockquote class="text-justify border-left pl-2">
+      {{ experience.quote }}
+    </blockquote>
   </div>
 </div>
 {% endfor %}
 
 <!-- separator -->
-<div class="row">
+<div class="row my-5">
   <div class="col">
     <hr>
   </div>
 </div>
 
-
-<div class="row mt-5">
+<div class="row">
   <div class="col-12">
-    <h2>Mes diplômes</h2>
-  </div>
-
-
-  {% for education in site.data.education %}
-    <div class="col-md-6 col-lg-4 col-xl-3">
-      <div class="card border-light">
-        <!-- <div class="card-header">{{ education.dates }} @ {{ education.name }}</div> -->
-        <div class="card-body">
-          <h3 class="card-title h5">{{ education.qualification }}</h3>
-          {% if education.quote %}
-          <p class="card-text alert alert-light text-justify">{{ education.quote }}</p>
+    <h2>Open Source</h2>
+    <p class="lead text-justify">
+      J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations:
+    </p>
+    <ul>
+      {% for project in site.data.projects %}
+      <li>
+        <strong>
+          {% if project.link %}
+          <a href="{{ project.link }}">{{ project.name }}</a>
+          {% else %}
+          {{ project.name }}
           {% endif %}
-          <p class="card-text text-justify">{{ education.description }}</p>
-
-        </div>
-        <div class="card-footer text-muted">{{ education.dates }} @ {{ education.name }}</div>
-      </div>
-    </div>
-  {% endfor %}
+        </strong>
+        {{ project.description }}
+      </li>
+      {% endfor %}
+    </ul>
+    <p>Pour voir la liste complète de mes projets en OpenSource, jettez un œil à mon <a href="https://github.com/madeindjs">profil Github</a></p>
+  </div>
 </div>
 
+<!-- separator -->
+<div class="row my-5">
+  <div class="col">
+    <hr>
+  </div>
+</div>
 
+<div class="row my-5">
+  <div class="col-12">
+    <h2>Mes diplômes</h2>
+
+    <table class="table">
+      {% for education in site.data.education %}
+      <tr>
+        <th>{{ education.qualification }}</th>
+        <td>{{ education.name }}</td>
+        <td>{{ education.dates }}</td>
+      </tr>
+      {% endfor %}
+
+    </table>
+
+  </div>
+</div>
