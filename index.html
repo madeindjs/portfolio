@@ -24,16 +24,14 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 <h3>
   {{ experience.job_title }}
   @ <a href="{{ experience.link }}">{{ experience.company }}</a>
-  | <small>{{ experience.dates }}</small>
+  | {{ experience.dates }}
 </h3>
 
 <p>{{ experience.quote }}</p>
 
-<ul>
-  {% for task in experience.description %}
-  <li>{{ task }}</li>
-  {% endfor %}
-</ul>
+{% for task in experience.description %}
+<p>{{ task }}</p>
+{% endfor %}
 {% endfor %}
 
 <hr>

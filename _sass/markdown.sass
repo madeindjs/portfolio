@@ -20,13 +20,7 @@ a
     color: $primary
     text-decoration: underline
 
-  &:before
-    content: '['
-    color: $keyword
 
-  &:after
-    content: ']'
-    color: $keyword
 
 
 header
@@ -45,19 +39,34 @@ header
 
 main
 
-
-  h1,h2,h3,p,li,blockquote
-    font-family: monospace
+  *
     color: $default
+
+  // TITLES
 
   h1, h2, h3
     text-transform: uppercase
 
+  h1, h2
+    font-size: 2rem
+
   h1
-    font-size: 3rem
+    // border-bottom: 15px double
 
   h2
     font-size: 2rem
+    border-bottom: 3px solid
+
+  h3
+    margin-top: 2rem
+    border-bottom: 2px solid
+    text-transform: uppercase
+    font-size: 1rem
+
+    a
+      font-style: normal
+      font-weight: inherit
+
 
   p, li, blockquote
     text-align: justify
@@ -71,28 +80,12 @@ main
   h2
     margin-top: $margin
 
-  h3
-    margin-top: 2rem
-
   hr
-    border-top: 1px dashed $keyword
+    border-top: 2px dashed $default
     border-bottom: none
     margin-top: $margin
 
-  h1
-    &:before
-      content: '# '
-      color: $keyword
 
-  h2
-    &:before
-      content: '## '
-      color: $keyword
-
-  h3
-    &:before
-      content: '### '
-      color: $keyword
 
   blockquote
     padding: 0
@@ -106,37 +99,17 @@ main
 
 
   strong
-    color: $primary
+    // color: $primary
     // font-weight: normal
 
-    &:before
-      content: '__'
-      color: $keyword
 
-    &:after
-      content: '__'
-      color: $keyword
 
   code
-    color: $grey
+    font-family: monospace
 
-    &:before
-      content: '`'
-      color: $keyword
-
-    &:after
-      content: '`'
-      color: $keyword
 
   ul
-    margin-left: 0
-    margin-right: 0
-    list-style: none
-    padding-left: 1em
-
-    li
-      margin-bottom: 0.2rem
-      &:before
-        color: $primary
-        content: '- '
-        margin-left: -1em
+    // margin-left: 0
+    // margin-right: 0
+    list-style: circle
+    // padding-left: 1em
