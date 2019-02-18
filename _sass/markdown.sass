@@ -1,0 +1,113 @@
+$primary: #f1c40f
+$grey: #95a5a6
+$default: #2c3e50
+
+
+body
+  max-width: 600px
+  margin-left: auto
+  margin-right: auto
+
+
+
+header
+  hr
+    border-top: 1px dashed $grey
+    border-bottom: none
+
+    p
+      margin: 0
+      padding: 0
+
+  *
+    font-family: monospace
+    color: $grey
+
+
+main
+
+  h1
+    text-align: center
+
+  h1,h2,h3,p,li, blockquote
+    font-family: monospace
+    color: $default
+
+  h1
+    font-size: 3rem
+
+  h2
+    font-size: 2rem
+
+  p, li, blockquote
+    text-align: justify
+
+
+  a
+    color: $primary
+
+  // set same margin
+  h1, h2, h3, p, ul, hr
+    margin-bottom: 1rem
+
+  h2
+    margin-top: 2rem
+
+  hr
+    border-top: 1px dashed $primary
+    border-bottom: none
+
+  h2
+    &:before
+      content: '# '
+      color: $primary
+
+  h3
+    &:before
+      content: '## '
+      color: $primary
+
+  blockquote
+    padding: 0
+    margin-bottom: 2rem
+    margin-left: 0
+    margin-right: 0
+    color: $grey
+
+    &:before
+      content: '> '
+      color: $grey
+
+  strong
+    color: $primary
+    font-weight: normal
+
+    &:before
+      content: '**'
+      color: $primary
+
+    &:after
+      content: '**'
+      color: $primary
+
+  code
+    color: $grey
+
+    &:before
+      content: '`'
+      color: $grey
+
+    &:after
+      content: '`'
+      color: $grey
+
+  ul
+    padding: 0
+    margin-left: 0
+    margin-right: 0
+    list-style: none
+
+  li
+    &:before
+      color: $primary
+      content: '- '

@@ -3,114 +3,79 @@ layout: main
 description: Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
 ---
 
+<h1>Alexandre Rousseau</h1>
 
-<div class="row mt-5 pt-5">
-  <div class="col-md-2 text-center">
-    <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
-  </div>
-  <div class="col-md-10">
-    <div class="align-middle">
-      <h1 class="d-none">A propos de moi</h1>
-      {% for desc in site.data.profil.description.multiline %}
-      <p class="lead text-justify">{{ desc }}</p>
-      {% endfor %}
-      <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
-    </div>
-  </div>
-</div>
+<!-- <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" /> -->
 
-<!-- separator -->
-<div class="row my-5">
-  <div class="col">
-    <hr>
-  </div>
-</div>
+<h2>A propos de moi</h2>
 
-<div class="row">
-  <div class="col-12">
-    <h2>Portfolio</h2>
-  </div>
-  <div class="col-12">
-    <ul>
-      {% for project in site.data.projects %}
-      <li class="text-justify">
-        <strong>
-          {% if project.link %}
-          <a href="{{ project.link }}" class="card-link">{{ project.name }}</a>
-          {% else %}
-          {{ project.name }}
-          {% endif %}
-        </strong>
-        {{ project.description }}
-        {% if project.quote %}
-        {{ project.quote }}
-        {% endif %}
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-
-
-<!-- separator -->
-<div class="row my-5">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-12">
-    <h2>Mes experiences</h2>
-  </div>
-  <div class="col-12">
-    {% for experience in site.data.experience %}
-    <h3 class="h5">
-      {{ experience.job_title }}
-      @ <a href="{{ experience.link }}">{{ experience.company }}</a>
-      | <small>{{ experience.dates }}</small>
-    </h3>
-
-    <p>{{ experience.quote }}</p>
-
-    <ul>
-      {% for task in experience.description %}
-      <li class="text-justify">{{ task }}</li>
-      {% endfor %}
-    </ul>
-    {% endfor %}
-  </div>
-</div>
-
-
-<!-- separator -->
-<div class="row">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-
-<div class="row mt-5">
-  <div class="col-12">
-    <h2>Mes diplômes</h2>
-  </div>
-
-
-  {% for education in site.data.education %}
-  <div class="col-md-6 col-lg-4 col-xl-3">
-    <div class="card border-light">
-      <!-- <div class="card-header">{{ education.dates }} @ {{ education.name }}</div> -->
-      <div class="card-body">
-        <h3 class="card-title h5">{{ education.qualification }}</h3>
-        {% if education.quote %}
-        <p class="card-text alert alert-light text-justify">{{ education.quote }}</p>
-        {% endif %}
-        <p class="card-text text-justify">{{ education.description }}</p>
-
-      </div>
-      <div class="card-footer text-muted">{{ education.dates }} @ {{ education.name }}</div>
-    </div>
-  </div>
+<ul>
+  {% for desc in site.data.profil.description.multiline %}
+  <li>{{ desc }}</li>
   {% endfor %}
+</ul>
+
+<p>J'aime {{ site.data.profil.interest_points }}</p>
+
+<hr>
+
+<h2>Portfolio</h2>
+
+<ul>
+  {% for project in site.data.projects %}
+  <li class="text-justify">
+    <strong>
+      {% if project.link %}
+      <a href="{{ project.link }}" class="card-link">
+        {{ project.name }}
+      </a>
+      {% else %}
+      {{ project.name }}
+      {% endif %}
+    </strong>
+    {{ project.description }}
+    {% if project.quote %}
+    <blockquote>{{ project.quote }}</blockquote>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+
+<hr>
+
+<h2>Mes experiences</h2>
+
+{% for experience in site.data.experience %}
+<h3>
+  {{ experience.job_title }}
+  @ <a href="{{ experience.link }}">{{ experience.company }}</a>
+  | <small>{{ experience.dates }}</small>
+</h3>
+
+<blockquote>{{ experience.quote }}</blockquote>
+
+<ul>
+  {% for task in experience.description %}
+  <li>{{ task }}</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+
+
+<hr>
+
+
+<h2>Mes diplômes</h2>
+
+{% for education in site.data.education %}
+
+<h3>{{ education.qualification }}</h3>
+
+{% if education.quote %}
+<p class="card-text alert alert-light text-justify">{{ education.quote }}</p>
+{% endif %}
+<p class="card-text text-justify">{{ education.description }}</p>
+
 </div>
+<div class="card-footer text-muted">{{ education.dates }} @ {{ education.name }}</div>
+{% endfor %}

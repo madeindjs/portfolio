@@ -1,24 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">{{ site.title }}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<header>
+  <hr>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/blog">Blog</a>
-      </li>
-    </ul>
+  <p>
+    <strong>title:</strong> {{ site.title }}
+  </p>
+
+  <p>
+    <strong>description:</strong> {{ site.description }}
+  </p>
+
+  <p>
+    <strong>links:</strong>
+    {% for link in site.data.profil.links %}
+    <a class="nav-link" href="/blog">Blog</a>
+    <a class="nav-link" href="{{ link.url }}">{{ link.name }}</a>
+    {% endfor %}
+  </p>
 
 
-    <ul class="navbar-nav">
-      {% for link in site.data.profil.links %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ link.url }}">{{ link.name }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-
-  </div>
-</nav>
+  <hr>
+</header>
