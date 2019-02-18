@@ -2,7 +2,6 @@
   description: J'ai traduis et mis à jour l'excelent livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> qui traite des meilleurs pratiques pour contruire une API en utilisant Rails
   link: https://github.com/madeindjs/api_on_rails
 
-
 - name: Crystagiri
   description: Ce projet est un parseur de document HTML. Ce n'était qu'une excuse pour apprendre le language <mark>Crystal</mark>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
   link: https://github.com/madeindjs/Crystagiri

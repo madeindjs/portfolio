@@ -20,21 +20,18 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 </div>
 
 
-
 <!-- separator -->
-<div class="row">
+<div class="row my-5">
   <div class="col">
     <hr>
   </div>
 </div>
 
-<div class="row mt-5">
+<div class="row">
   <div class="col">
-    <h2>Mes experiences</h2>
+    <h2>Mes experiences professionnelles</h2>
   </div>
 </div>
-
-
 
 {% for experience in site.data.experience %}
 <div class="row py-4">
@@ -43,25 +40,26 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
     <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
   </div>
   <div class="col-sm-9 border-left">
-    <blockquote class="text-justify border-left pl-2">
-      {{ experience.quote }}
-    </blockquote>
 
     {% for task in experience.description %}
     <p class="text-justify">{{ task }}</p>
     {% endfor %}
+
+    <blockquote class="text-justify border-left pl-2">
+      {{ experience.quote }}
+    </blockquote>
   </div>
 </div>
 {% endfor %}
 
 <!-- separator -->
-<div class="row">
+<div class="row my-5">
   <div class="col">
     <hr>
   </div>
 </div>
 
-<div class="row mt-5">
+<div class="row">
   <div class="col-12">
     <h2>Open Source</h2>
     <p class="lead text-justify">
@@ -85,16 +83,14 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
   </div>
 </div>
 
-
 <!-- separator -->
-<div class="row">
+<div class="row my-5">
   <div class="col">
     <hr>
   </div>
 </div>
 
-
-<div class="row mt-5">
+<div class="row my-5">
   <div class="col-12">
     <h2>Mes diplômes</h2>
 
