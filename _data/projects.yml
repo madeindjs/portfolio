@@ -1,8 +1,15 @@
+- name: API on Rails 5
+  description: J'ai traduis et mis à jour l'excelent livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> qui traite des meilleurs pratiques pour contruire une API en utilisant Rails
+  link: https://github.com/madeindjs/api_on_rails
+
+
+- name: Crystagiri
+  description: Ce projet est un parseur de document HTML. Ce n'était qu'une excuse pour apprendre le language <mark>Crystal</mark>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
+  link: https://github.com/madeindjs/Crystagiri
+
 - name: Raspberry Cook
-  quote: Ce projet m'a permis de découvrir et m'auto-former sur <mark>Ruby on Rails</mark> et de créer un serveur sur un Raspberry PI.
-  description: Application web de stockage et partage de recettes de cuisine orienté sur la protection des données.
-  link: http://raspberry-cook.fr
-  github: https://github.com/RaspberryCook/website
+  description: Ce projet m'a permis de découvrir et m'auto-former sur <mark>Ruby on Rails</mark> et de créer un serveur sur un Raspberry PI.
+  link: https://github.com/RaspberryCook/website
   picture: img/projects/raspberry-cook.png
 
 # - name: Fooder
@@ -14,20 +21,10 @@
 #     - JQuery
 #     - Bootstrap
 
-- name: API on Rails 5
-  description: J'ai traduis et mis à jour l'excelent livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> qui traite des meilleurs pratiques pour contruire une API en utilisant Rails
-  link: https://leanpub.com/apionrails5
-  github: https://github.com/madeindjs/api_on_rails
-
 # - name: Nature Coiffure Martine
 #   description: Site vitrine pour un salon de coiffure créé avec <mark>Jekyll</mark>. J'assure l'hébergement moi même avec un Raspberry PI branché à ma box internet.
 #   link: http://nature-coiffure-lyon.fr
 #   github: https://github.com/madeindjs/nature_coiffure
-
-- name: Cristagiri
-  quote: Ce projet n'était qu'une excuse pour apprendre le language <mark>Crystal</mark>. Maintenant il est suivi par plus de 80 personnes sur Github.
-  description: Bibliothèque pour parser des documents HTML avec le langage compilé <mark>Crystal</mark>
-  github: https://github.com/madeindjs/Crystagiri
 
 # - name: Super-Markdown
 #   description: Utilitaire Python pour convertir des fichiers Markdown en documents HTML tout-en-un.

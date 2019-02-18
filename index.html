@@ -5,109 +5,86 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 
 <div class="row my-5">
-  {% if site.data.profil.picture %}
   <div class="col-md-2 text-center">
     <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
   </div>
   <div class="col-md-10">
-    {% else %}
-    <div class="col">
-      {% endif %}
-      <div class="align-middle">
-        <h1 class="d-none">A propos de moi</h1>
-        {% for desc in site.data.profil.description.multiline %}
-        <p class="lead text-justify">{{ desc }}</p>
-        {% endfor %}
-        <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
-      </div>
-    </div>
-
-  </div>
-
-
-
-
-  <!-- separator -->
-  <div class="row">
-    <div class="col">
-      <hr>
-    </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col">
-      <h2>Mes experiences</h2>
-    </div>
-  </div>
-
-
-
-  {% for experience in site.data.experience %}
-  <div class="row py-4">
-    <div class="col-sm-3">
-      <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
-      <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
-    </div>
-    <div class="col-sm-9 border-left">
-      <blockquote class="text-justify border-left pl-2">
-        {{ experience.quote }}
-      </blockquote>
-
-      {% for task in experience.description %}
-      <p class="text-justify">{{ task }}</p>
+    <div class="align-middle">
+      <h1 class="d-none">A propos de moi</h1>
+      {% for desc in site.data.profil.description.multiline %}
+      <p class="lead text-justify">{{ desc }}</p>
       {% endfor %}
+      <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
     </div>
   </div>
-  {% endfor %}
-
-  <!-- separator -->
-  <div class="row">
-    <div class="col">
-      <hr>
-    </div>
-  </div>
-
-  <div class="row mt-5">
-    <div class="col-12">
-      <h2>Open Source</h2>
-      <p class="lead text-justify">
-        J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations:
-      </p>
-    </div>
-  </div>
-
-
-  {% for project in site.data.projects %}
-
-  <div class="row py-4">
-    <div class="col-sm-3">
-      <h3 class="h5">
-        {% if project.link %}
-        <a href="{{ project.link }}">{{ project.name }}</a>
-        {% else %}
-        {{ project.name }}
-        {% endif %}
-        {% if project.github %}
-        <a href="{{ project.github }}"><img src="/img/github-logo.svg" width="20px" height="20px"></a>
-        {% endif %}
-      </h3>
-    </div>
-    <div class="col-sm-9 border-left">
-      {% if project.quote %}
-      <blockquote class="text-justify border-left pl-2">
-        {{ project.quote }}
-      </blockquote>
-      {% endif %}
-
-      <p class="text-justify">{{ project.description }}</p>
-    </div>
-  </div>
-  {% endfor %}
 </div>
 
-<div class="col-12 mt-3">
-  Pour voir la liste complète de mes projets en OpenSource, jettez un œil à mon <a href="https://github.com/madeindjs">profil Github</a>
+
+
+<!-- separator -->
+<div class="row">
+  <div class="col">
+    <hr>
+  </div>
 </div>
+
+<div class="row mt-5">
+  <div class="col">
+    <h2>Mes experiences</h2>
+  </div>
+</div>
+
+
+
+{% for experience in site.data.experience %}
+<div class="row py-4">
+  <div class="col-sm-3">
+    <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
+    <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
+  </div>
+  <div class="col-sm-9 border-left">
+    <blockquote class="text-justify border-left pl-2">
+      {{ experience.quote }}
+    </blockquote>
+
+    {% for task in experience.description %}
+    <p class="text-justify">{{ task }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+
+<!-- separator -->
+<div class="row">
+  <div class="col">
+    <hr>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-12">
+    <h2>Open Source</h2>
+    <p class="lead text-justify">
+      J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations:
+    </p>
+    <ul>
+      {% for project in site.data.projects %}
+      <li>
+        <strong>
+          {% if project.link %}
+          <a href="{{ project.link }}">{{ project.name }}</a>
+          {% else %}
+          {{ project.name }}
+          {% endif %}
+        </strong>
+        {{ project.description }}
+      </li>
+      {% endfor %}
+    </ul>
+    <p>Pour voir la liste complète de mes projets en OpenSource, jettez un œil à mon <a href="https://github.com/madeindjs">profil Github</a></p>
+  </div>
+</div>
+
 
 <!-- separator -->
 <div class="row">
@@ -133,6 +110,4 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
     </table>
 
   </div>
-
-
 </div>
