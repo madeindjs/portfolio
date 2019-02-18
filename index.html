@@ -6,13 +6,13 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 <div class="row my-5">
   {% if site.data.profil.picture %}
-    <div class="col-md-4 text-center">
-      <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
-    </div>
-    <div class="col-md-8">
-  {% else %}
+  <div class="col-md-2 text-center">
+    <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
+  </div>
+  <div class="col-md-10">
+    {% else %}
     <div class="col">
-  {% endif %}
+      {% endif %}
       <div class="align-middle">
         <h1 class="d-none">A propos de moi</h1>
         {% for desc in site.data.profil.description.multiline %}
@@ -22,22 +22,59 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
       </div>
     </div>
 
-</div>
-
-<!-- separator -->
-<div class="row">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-<div class="row mt-5">
-  <div class="col-12">
-    <h2>Portfolio</h2>
   </div>
 
 
-  {% for project in site.data.projects %}
+
+
+  <!-- separator -->
+  <div class="row">
+    <div class="col">
+      <hr>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col">
+      <h2>Mes experiences</h2>
+    </div>
+  </div>
+
+
+
+  {% for experience in site.data.experience %}
+  <div class="row py-4">
+    <div class="col-sm-3">
+      <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
+      <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
+    </div>
+    <div class="col-sm-9 border-left">
+      <blockquote class="text-justify border-left pl-2">
+        {{ experience.quote }}
+      </blockquote>
+
+      {% for task in experience.description %}
+      <p class="text-justify">{{ task }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <!-- separator -->
+  <div class="row">
+    <div class="col">
+      <hr>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <h2>Open Source</h2>
+      <p class="lead text-justify">J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations:</p>
+    </div>
+
+
+    {% for project in site.data.projects %}
     <div class="col-md-6 col-lg-4 col-xl-3">
       <div class="card border-light">
         <div class="card-body">
@@ -55,54 +92,24 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
         </div>
       </div>
     </div>
-  {% endfor %}
-</div>
-
-
-<!-- separator -->
-<div class="row">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-<div class="row mt-5">
-  <div class="col">
-    <h2>Mes experiences</h2>
-  </div>
-</div>
-
-{% for experience in site.data.experience %}
-<div class="row py-4">
-  <div class="col-sm-3">
-    <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
-    <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
-  </div>
-  <div class="col-sm-9 border-left">
-
-    <p class="alert alert-light text-justify">{{ experience.quote }}</p>
-    {% for task in experience.description %}
-    <p class="text-justify">{{ task }}</p>
     {% endfor %}
   </div>
-</div>
-{% endfor %}
 
-<!-- separator -->
-<div class="row">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-
-<div class="row mt-5">
-  <div class="col-12">
-    <h2>Mes diplômes</h2>
+  <!-- separator -->
+  <div class="row">
+    <div class="col">
+      <hr>
+    </div>
   </div>
 
 
-  {% for education in site.data.education %}
+  <div class="row mt-5">
+    <div class="col-12">
+      <h2>Mes diplômes</h2>
+    </div>
+
+
+    {% for education in site.data.education %}
     <div class="col-md-6 col-lg-4 col-xl-3">
       <div class="card border-light">
         <!-- <div class="card-header">{{ education.dates }} @ {{ education.name }}</div> -->
@@ -117,7 +124,5 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
         <div class="card-footer text-muted">{{ education.dates }} @ {{ education.name }}</div>
       </div>
     </div>
-  {% endfor %}
-</div>
-
-
+    {% endfor %}
+  </div>
