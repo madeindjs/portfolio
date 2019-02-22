@@ -1,7 +1,7 @@
 ---
 title: Test de Rails 6.0.0.beta
 layout: post
-thumbnail: /img/blog/rails6_migrate_fail.jpg
+thumbnail: /img/blog/rails6_jump.jpg
 ---
 La sortie de Rails 6 est prévue pour [le 30 avril](https://weblog.rubyonrails.org/2018/12/20/timeline-for-the-release-of-Rails-6-0/) et apporte son [lot de nouveautés](https://edgeguides.rubyonrails.org/6_0_release_notes.html) comme:
 
@@ -12,7 +12,7 @@ La sortie de Rails 6 est prévue pour [le 30 avril](https://weblog.rubyonrails.o
 
 Impatient, j'ai décidé de tester un peu les améliorations et de basculer [isignif](https://isignif.fr) depuis la version 5.2 vers 6.0.
 
-Si vous souhaitez faire cela, je vous conseille fortement d'avoir une base de test solides qui teste l'intégralité du comportement de votre application. Et avant de se lancer dans la migration, je vous rappelle que Rails 6 a besoin de Ruby 2.5 ou supérieur. 
+Si vous souhaitez faire cela, je vous conseille fortement d'avoir une base de test solides qui teste l'intégralité du comportement de votre application. Et avant de se lancer dans la migration, je vous rappelle que Rails 6 a besoin de Ruby 2.5 ou supérieur.
 
 
 ## Mise  jour de toutes vos dépendances
@@ -134,7 +134,7 @@ Finished in 38.105956s, 7.7678 runs/s, 12.2291 assertions/s.
 
 ### 5.2.2 vers 6.0.0.beta1
 
-ça y est, nous y somme presque. Nous pouvons maintenant faire le grand saut vers la version 6.0.0.beta1. Pour cela, nous éditons encore une fois notre _Gemfile_ ..
+ça y est, nous y somme presque. Nous pouvons maintenant faire le grand saut vers la version 6.0.0.beta1. Pour cela, nous éditon encore une fois notre _Gemfile_ ..
 
 ~~~ruby
 # Gemfile
@@ -148,9 +148,7 @@ Et nous relançons la mise à jour de Rails.
 $ bundle update rails
 ~~~
 
-Cette mis à jour est beaucoup plus importante et risque de produire quelques comportements inatendus.
-
-De mon côté, j'ai simplement eu quelques Notices:
+Cette mis à jour est beaucoup plus importante et risque de produire quelques comportements inattendus. De mon côté, j'ai eu quelques [problèmes avec Authlogic et MySQL](https://github.com/rails/rails/issues/35264) et quelques notices qui sont apparues dans mes tests unitaires:
 
 ~~~
 $ rake test
@@ -174,6 +172,8 @@ Finished in 38.299336s, 7.7286 runs/s, 12.1673 assertions/s.
 296 runs, 466 assertions, 0 failures, 0 errors, 0 skips
 ~~~
 
-Vous
+## Conclusion
 
-https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-2-to-rails-6-0
+Mêmes si c'est un moment délicat à passer, je pense qu'il faut suivre de près les mise à jours afin de ne pas se retrouver complètement dépassé.
+
+Si vous voulez plus d'information sur les conseils pour migrer votre application, je vous conseille la [documentation officielle](https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-5-2-to-rails-6-0).
