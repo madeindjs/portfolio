@@ -21,18 +21,14 @@ educations_data:
   - qualification: Master Développeur Fullstack
     dates: Septembre 2017 à aujourd'hui
     name: IT-Akademy, Villeurbanne
-    quote: IT-Akademy me permet de découvrir d'autres technologies informatiques.
-    description: Un développeur full stack est capable de réaliser des tâches à n'importe quel niveau technique qui constituent une application informatique.
 
   - qualification: BTS Fluides, énergies et environnement
     dates: Septembre 2011 à Aout 2013
     name: La Martinière Monplaisir, Lyon 8e
-    description: Technicien supérieur dans le froid industriel, commercial et au conditionnement de l’air industriel.
 
   - qualification: Bac STI Génie Energétique
     dates: Septembre 2009 à Aout 2011
     name: La Martinière Monplaisir, Lyon 8e
-    description: Domaines de la production, de la distribution et de l'utilisation de l'énergie.
 
 experiences_data:
   - job_title: Directeur Technique
