@@ -1,0 +1,84 @@
+about_me: A propos de moi
+i_like: J'aime
+professional_experiences: Mes experiences professionnelles
+open_source:
+  title: Open Source
+  lead: J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations
+  see_all: Pour voir la liste complète de mes projets en OpenSource, jettez un œil à
+
+my_github_profile: mon profil Github
+my_educations: Mes diplômes
+
+
+interest_points: <mark>Ruby on Rails</mark>, la course à pied et ma copine.
+
+description:
+  - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
+  - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelle technologie telles que <mark>Rust</mark> / <mark>Crystal</mark>.
+
+
+educations_data:
+  - qualification: Master Développeur Fullstack
+    dates: Septembre 2017 à aujourd'hui
+    name: IT-Akademy, Villeurbanne
+    quote: IT-Akademy me permet de découvrir d'autres technologies informatiques.
+    description: Un développeur full stack est capable de réaliser des tâches à n'importe quel niveau technique qui constituent une application informatique.
+
+  - qualification: BTS Fluides, énergies et environnement
+    dates: Septembre 2011 à Aout 2013
+    name: La Martinière Monplaisir, Lyon 8e
+    description: Technicien supérieur dans le froid industriel, commercial et au conditionnement de l’air industriel.
+
+  - qualification: Bac STI Génie Energétique
+    dates: Septembre 2009 à Aout 2011
+    name: La Martinière Monplaisir, Lyon 8e
+    description: Domaines de la production, de la distribution et de l'utilisation de l'énergie.
+
+experiences_data:
+  - job_title: Directeur Technique
+    company: iSignif
+    link: https://isignif.fr/
+    dates: Mai 2018 à aujourd'hui
+    quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
+    description:
+      - J'ai créé une LegalTech (startup dans le domaine du droit) qui a pour but de mettre en relation les avocats et les huissiers afin de simplifier le processus de signification.
+      - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <mark>CEO</mark>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <mark>DPO</mark>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <mark>développeur</mark>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
+
+  - job_title: Professeur de cours particuliers
+    company: Superprof
+    link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
+    dates: Depuis 2018
+    description:
+      - Régulièreent, je donne quelques cours particuliers à propos de la construction d'application web avec <mark>Ruby on Rails</mark> sur la plateforme <a href="https://superprof.fr">superprof.fr</a>.
+    quote: Cela me permet de partager ma passion et c'est une experience extrèmement enrichissante.
+
+  - job_title: Developpeur PHP
+    company: GAC Technology
+    link: https://gac-technology.com/
+    dates: Janvier 2017 à aujourd'hui
+    quote: GAC Technology est une Scale-Up qui m'a appri à manipuler des grandes quantité de données.
+    description:
+      - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solution technique perenne. Au sein de cette entreprise, je suis développeur back-end <mark>PHP</mark>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tel que <mark>MySQL</mark>, <mark>Elastic Search</mark> et <mark>Redis</mark>.
+
+  - job_title: Pilote qualité process - Chef de projet - Développeur
+    company: Carrier
+    link: https://www.carrier.com/commercial-refrigeration/
+    dates: Septembre 2011 à janvier 2017
+    quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
+    description:
+      - Chez Carrier, j'ai eu l'opportunité de me diversifier dans mon travail
+      - En tant que Chef de projet, j'ai développé une solution marketing de dessin 3D avec <mark>Sketchup</mark> et l'API <mark>Ruby</mark>. En tant que Pilote qualité process, j'ai réalisé une application web avec <mark>C#</mark> & <mark>ASP.NET MVC</mark> afin de suivre les interventions techniques. En tant que bureau d'étude, je réalisais les calculs de dimensionnement des installations et le dessin des plans d'éxecution sous <mark>AutoCad</mark>.
+
+projects_data:
+  - name: API on Rails 5
+    description: J'ai traduis et mis à jour l'excelent livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> qui traite des meilleurs pratiques pour contruire une API en utilisant Rails
+    link: https://github.com/madeindjs/api_on_rails
+
+  - name: Crystagiri
+    description: Ce projet est un parseur de document HTML. Ce n'était qu'une excuse pour apprendre le language <mark>Crystal</mark>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
+    link: https://github.com/madeindjs/Crystagiri
+
+  - name: Raspberry Cook
+    description: Ce projet m'a permis de découvrir et m'auto-former sur <mark>Ruby on Rails</mark> et de créer un serveur sur un Raspberry PI.
+    link: https://github.com/RaspberryCook/website
+    picture: img/projects/raspberry-cook.png

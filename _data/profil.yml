@@ -18,19 +18,3 @@ links:
     url: https://stackoverflow.com/users/5935198/rousseaualexandre
 
 jobtitle: Développeur Fullstack
-
-description:
-  oneline: Développeur passionné auto-didacte
-  multiline:
-  - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
-  - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelle technologie telles que <mark>Rust</mark> / <mark>Crystal</mark>.
-
-
-interest_points: <mark>Ruby on Rails</mark>, la course à pied et ma copine.
-
-spoken_langages:
-  anglais:
-    speaken": 3
-    listen": 4
-    writen": 4
-    read": 5

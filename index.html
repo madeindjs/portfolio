@@ -1,6 +1,5 @@
 ---
 layout: main
-description: Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
 ---
 
 
@@ -10,11 +9,11 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
   </div>
   <div class="col-md-10">
     <div class="align-middle">
-      <h1 class="d-none">A propos de moi</h1>
-      {% for desc in site.data.profil.description.multiline %}
+      <h1 class="d-none">{% t about_me %}</h1>
+      {% for desc in site.translations[site.lang]['description'] %}
       <p class="lead text-justify">{{ desc }}</p>
       {% endfor %}
-      <p class="lead text-justify">J'aime {{ site.data.profil.interest_points }}</p>
+      <p class="lead text-justify">{% t i_like %} {% t interest_points %}</p>
     </div>
   </div>
 </div>
@@ -29,11 +28,11 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 <div class="row">
   <div class="col">
-    <h2>Mes experiences professionnelles</h2>
+    <h2>{% t professional_experiences %}</h2>
   </div>
 </div>
 
-{% for experience in site.data.experience %}
+{% for experience in site.translations[site.lang]['experiences_data'] %}
 <div class="row py-4">
   <div class="col-sm-3">
     <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
@@ -61,12 +60,10 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 <div class="row">
   <div class="col-12">
-    <h2>Open Source</h2>
-    <p class="lead text-justify">
-      J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations:
-    </p>
+    <h2>{% t open_source.title %}</h2>
+    <p class="lead text-justify">{% t open_source.lead %}</p>
     <ul>
-      {% for project in site.data.projects %}
+      {% for project in site.translations[site.lang]['projects_data'] %}
       <li>
         <strong>
           {% if project.link %}
@@ -79,7 +76,7 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
       </li>
       {% endfor %}
     </ul>
-    <p>Pour voir la liste complète de mes projets en OpenSource, jettez un œil à mon <a href="https://github.com/madeindjs">profil Github</a></p>
+    <p>{% t open_source.see_all %}<a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p>
   </div>
 </div>
 
@@ -92,10 +89,10 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
 
 <div class="row my-5">
   <div class="col-12">
-    <h2>Mes diplômes</h2>
+    <h2>{% t my_educations %}</h2>
 
     <table class="table">
-      {% for education in site.data.education %}
+      {% for education in site.translations[site.lang]['educations_data'] %}
       <tr>
         <th>{{ education.qualification }}</th>
         <td>{{ education.name }}</td>
@@ -104,6 +101,5 @@ description: Passionné et autodidacte, mon implication personnelle m'a permis d
       {% endfor %}
 
     </table>
-
   </div>
 </div>
