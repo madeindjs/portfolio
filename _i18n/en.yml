@@ -14,7 +14,7 @@ my_educations: Educations
 interest_points: <mark>Ruby on Rails</mark>, running and my girlfriend.
 
 description:
-  - Thanks to my personal involvement I'm actually a developer. Today my passion allows me to develop and specialize.
+  - Thanks to my personal involvement I'm actually a developer. Today my passion allows me to code and specialize me as a developer.
   - During the day, I like to translate complex problems into simple technical solutions. At night, I like to discover new technologies such as <mark>Rust</mark> / <mark>Crystal</mark>.
 
 
@@ -39,7 +39,7 @@ experiences_data:
     quote: Participating in the creation of a startup and the development of a product is a great challenge.
     description:
       - I have created a LegalTech (startup in the field of law) which aims to connect lawyers and bailiffs in order to simplify the service process.
-      - As a partner, I participate in the company's strategic decisions. As a <mark>CEO</mark>, my mission is to make coherent technical choices in order to ensure the durability of our product. As <mark>DPO</mark>, I am responsible for ensuring data compliance and compliance of our tool, and as <mark>developer</mark>, I have developed our entire product using Ruby On Rails and Vue.js
+      - As a partner, I participate in the company's strategic decisions. As a <mark>CEO</mark>, my mission is making coherent technical choices to ensure the durability of our product. As <mark>DPO</mark>, I am responsible for ensuring data compliance and compliance of our tool, and as <mark>developer</mark>, I have developed our entire product using Ruby On Rails and Vue.js
 
 
   - job_title: Tutoring teacher
@@ -56,7 +56,7 @@ experiences_data:
     dates: January 2017 to present
     quote: GAC Technology is a Scale-Up that has taught me how to handle large amounts of data.
     description:
-      - In my job, I have to understand the customer's needs in order to translate them into a permanent technical solution. Within this company, I am a back-end developer <mark>PHP</mark>. In order to provide technical solutions that handle a large amount of data. We use tools such as <mark>MySQL</mark>, <mark>Elastic Search</mark> and <mark>Redis</mark>.
+      - I have to understand the customer's needs to translate it into a technical solution. Within this company, I am a back-end developer <mark>PHP</mark>. I also must take care about performance because of large amount of data owned by Gac. We use tools such as <mark>MySQL</mark>, <mark>Elastic Search</mark> and <mark>Redis</mark>.
 
   - job_title: Process quality pilot - Project manager - Developer
     company: Carrier
