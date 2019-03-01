@@ -14,7 +14,7 @@ my_educations: Educations
 interest_points: <mark>Ruby on Rails</mark>, running and my girlfriend.
 
 description:
-  - Passionate and self-taught, my personal involvement has allowed me to evolve as a developer. Today my passion allows me to develop and specialize.
+  - Thanks to my personal involvement I'm actually a developer. Today my passion allows me to develop and specialize.
   - During the day, I like to translate complex problems into simple technical solutions. At night, I like to discover new technologies such as <mark>Rust</mark> / <mark>Crystal</mark>.
 
 
@@ -48,7 +48,7 @@ experiences_data:
     dates: Since 2018
     description:
       - On a regular basis, I give some private lessons about building web applications with <mark>Ruby on Rails</mark> on the platform <a href="https://superprof.fr">superprof.fr</a>.
-    quote: Cela me permet de partager ma passion et c'est une experience extrèmement enrichissante.
+    quote: I can share my pasion and that's a rewarding experience.
 
   - job_title: PHP Developper
     company: GAC Technology
@@ -65,7 +65,8 @@ experiences_data:
     quote: At Carrier, I had the wonderful experience of training people all over Europe on a project I set up.
     description:
       - At Carrier, I had the opportunity to diversify in my work
-      - As Project Manager, I developed a 3D drawing marketing solution with <mark>Sketchup</mark> and the API <mark>Ruby</mark>. As a Process Quality Pilot, I created a web application with <mark>C#</mark> & <mark>ASP.NET MVC</mark> in order to follow the technical interventions. As a design office, I carried out the calculations of the sizing of the installations and the drawing of the execution plans under <mark>AutoCad</mark>.
+      - As Project Manager, I developed a 3D drawing marketing solution with <mark>Sketchup</mark> and the API <mark>Ruby</mark>. As a Process Quality Pilot, I created a web application with <mark>C#</mark> & <mark>ASP.NET MVC</mark> in order to follow the technical interventions.
+      - As a design office, I carried out calculations of the installations's sizing and the drawing of execution's plans under <mark>AutoCad</mark>.
 
 projects_data:
   - name: API on Rails 5
@@ -73,7 +74,7 @@ projects_data:
     link: https://github.com/madeindjs/api_on_rails
 
   - name: Crystagiri
-    description: This project is an HTML document parser. It was just an excuse to learn the language <mark>Crystal</mark>. Now he is followed by just under 100 people on Github.
+    description: This project is an HTML document parser. It was just an excuse to learn the language <mark>Crystal</mark>. Now it is followed by just under 100 people on Github.
     link: https://github.com/madeindjs/Crystagiri
 
   - name: Raspberry Cook
