@@ -304,8 +304,8 @@ It is Look very easy. Now, we modify the views a little bit and generate a form:
 
 ~~~erb
 <!-- app/views/charges/new.html.erb -->
-<h1>Souscrire à un abonnement mensuel</h1>
-<p>Actuellement, votre compte premium est disponible jusqu'au <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
+<h1>Subscribe to a monthly subscription</h1>
+<p>Currently, your premium account is available until <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
 <%= form_tag charges_path do %>
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.application.secrets.stripe[:publishable_key] %>"
@@ -366,9 +366,9 @@ Once the form has been sent, you are redirected to the `charges#create` page whi
 
 ![Formulaire de paiement de Stripe](/img/blog/stripe_first_payment.png)
 
-### Backup of the _cutomer token_
+### Save user's `cutomer_token`
 
-Nous allons effectuer une petite modification à l'implémentation proposée par Stripe. Nous voulons sauvegarder le _customer_ créé par Stripe afin de le réutiliser s'il paie une nouvelle fois. On va donc ajouter une colonne `users.stripe_token`.
+We will make a small modification to the implementation proposed by Stripe. We want to save the _customer_ created by Stripe in order to reuse it if he pays again. We will therefore add a column `users.stripe_token`.
 
 ~~~
 $ rails g migration add_stripe_token_to_users stripe_token:string
@@ -376,7 +376,7 @@ $ rails g migration add_stripe_token_to_users stripe_token:string
 
 Nous allons créer un _concern_ qui va s'occuper de récupérer ou créer un _customer_ Stripe:
 
-> Si vous n'êtes pas à l'aise avec les _concerns_, j'en parle dans un [précédent article](http://rousseau-alexandre.fr/tutorial/2018/12/03/zip-active-storage.html#factorisation).
+> If you are not comfortable with _concerns_, I talk about it in [this previous article](http://rousseau-alexandre.fr/tutorial/2018/12/03/zip-active-storage.html#factorisation).
 
 ~~~ruby
 # app/controllers/concerns/stripe_concern.rb
@@ -418,7 +418,7 @@ module StripeConcern
 end
 ~~~
 
-Il suffit maintenant de modifier un peu notre contrôleur pour l'utiliser.
+It is now time to modify a little our controller to use it.
 
 ~~~ruby
 # app/controllers/charges_controller.rb
@@ -448,12 +448,12 @@ class ChargesController < ApplicationController
 end
 ~~~
 
-Et voilà! Le fonctionnement est identique mais désormais nous récupérons le client s'il existe déjà. Nous pouvons aussi nous passer du bouton Stripe si l'utilisateur a déjà un token:
+There you go! The operation is identical but now we get the customer back if he already exists. We can also do without the Stripe button if the user already has a token:
 
 ~~~erb
 <!-- app/views/charges/new.html.erb -->
-<h1>Souscrire à un abonnement mensuel</h1>
-<p>Actuellement, votre compte premium est disponible jusqu'au <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
+<h1>Subscribe to a monthly subscription</h1>
+<p>Currently, your premium account is available until <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
 <%= form_tag charges_path do %>
   <% if current_user.stripe_token %>
     <%= submit_tag 'Payer avec votre compte Stripe' %>
@@ -467,28 +467,27 @@ Et voilà! Le fonctionnement est identique mais désormais nous récupérons le 
 <% end %>
 ~~~
 
-## Abonnement
+## Subscription
 
-Ne lâchez pas, nous avons presque terminé. Une des dernière fonctionnalité à créer est de proposer un abonnement. L'utilisateur pourra ainsi souscrire un abonnement qui enclenchera un paiement automatique au début du mois. Dans le jargon de Stripe, cela s'appelle une [*subscriptions*](https://stripe.com/docs/billing/subscriptions/products-and-plans).
+Don't give up, we're almost done. One of the last features to be created is to offer a subscription. The user will be able to make a subscription that will trigger an automatic payment at the beginning of the month. According to Stripe this is called a [*subscriptions*](https://stripe.com/docs/billing/subscriptions/products-and-plans).
 
-> Chaque plan est joint à un produit qui représente (...) le service offert aux clients. Les produits peuvent avoir plus d'un plan, reflétant les variations de prix et de durée - comme les prix mensuels et annuels à des taux différents. Il existe deux types de produits: les biens et les services. (...) qui sont destinés aux abonnements.
+>  Each plan is attached to a product who represents (...) the service provided to customers. Products can have more than one plan, reflecting price and duration variations - such as monthly and annual prices at different rates. There are two types of products: goods and services (...) which are intended for subscriptions.
 
-### Création du plan
+### Creating plan
 
-Créons donc notre premier produit [la](https://stripe.com/docs/api/plans/create?lang=ruby) en utilisant [la gemme Stripe](https://github.com/stripe/stripe-ruby/). Voici un exemple avec la console Rails (Vous pouvez faire la même chose en utilisant l'interface d'administration).
+So let's create our first product using [Stripe's gem](https://github.com/stripe/stripe-ruby/). Here is an example with the Rails console (You can do the same thing using the administration interface).
 
 ~~~ruby
-2.6.0 :001 > product= Stripe::Product.create name: 'Abonnement compte premium', type: 'service'
+2.6.0 :001 > product= Stripe::Product.create name: 'Premium account subscription', type: 'service'
  => #<Stripe::Product:0x3fe4f20a1420 id=prod_EMb13PJreiAcF2> JSON: {
 2.6.0 :002 > plan = Stripe::Plan.create amount: 5000, interval: 'month', product: product.id, currency: 'eur', id: 'premium-monthly'
  )
   => #<Stripe::Plan:0x2ab3e0b46d24 id=premium-monthly> JSON: {
 ~~~
 
-> Là encore je n'ai rien inventé, tout est [Dans la documentation de Stripe](https://stripe.com/docs/api/subscriptions/object?lang=ruby)
+> Here again I didn't invent anything, everything is [in Stripe's documentation](https://stripe.com/docs/api/subscriptions/object?lang=ruby)
 
-
-Nous obtenons donc un belle instance Ruby correspondant à un _Plan_. Nous allons juste noter l' `id` et le noter dans le fichier `secret.yml`:
+So we get a pretty Ruby instance corresponding to a _Plan_. We will just write thet `id` into the `secret.yml` file:
 
 ~~~yaml
 # config/secrets.yml
@@ -498,20 +497,20 @@ development:
     # ...
 ~~~
 
-### Création de la logique
+### Creating logic
 
-Comme nous avons créé un contrôleur `charges`, nous allons en créer un nouveau nommé `subscriptions` avec deux méthodes:
+As we have created a `charges` controller, we will create a new one named `subscriptions` with two methods:
 
-- `new` qui va simplement proposer un formulaire pour payer
-- `create` qui recevra la réponse de Stripe
+- `new` which will simply propose a form to pay
+- `create` who will receive Stripe's answer
 
-Utilisons une fois de plus la commande `rails generate`
+Let's use the `rails generate` command once again
 
 ~~~bash
 $ rails generate controller subscriptions new create
 ~~~
 
-Cette méthode n'est pas parfaite, il faut modifier un peu les routes
+We have to modify generated routes a little bit:
 
 ~~~ruby
 # config/routes.rb
@@ -521,7 +520,7 @@ Rails.application.routes.draw do
 end
 ~~~
 
-L'implémentation du `SubscriptionsController` est quasiment identique au `ChargesController` (c'est pour cela que nous avons utilisé un _concern_ un peu plus haut afin d'éviter de dupliquer le code). Nous devons juste appeler la méthode `Stripe::Charge.create`
+Implementation of `SubscriptionsController` is almost identical to the `ChargesController` (that's why we previously created a _concerns_ to avoid code duplication). We just need to call the method `Stripe::Charge.create`:
 
 ~~~ruby
 class SubscriptionsController < ApplicationController
@@ -545,12 +544,12 @@ class SubscriptionsController < ApplicationController
 end
 ~~~
 
-Et les vues:
+And views:
 
 ~~~erb
 <!-- app/views/subscriptions/new.html.erb -->
-<h1>Souscrire à un abonnement mensuel</h1>
-<p>Abonner vous afin de recharger votre compte automatiquement tous les mois</p>
+<h1>Subscribe to a monthly subscription</h1>
+<p>Subscribe to reload your account automatically every month</p>
 <%= form_tag subscriptions_path do %>
   <% if current_user.stripe_token %>
     <p class="text-center">
@@ -571,32 +570,32 @@ Et les vues:
 ~~~erb
 <!-- app/views/subscriptions/create.html.erb -->
 <h1><%= @title %></h1>
-<p>Le prélèvement automatique est maitenant configuré</p>
+<p>Le débit préautorisé est maintenant configuré</p>
 ~~~
 
-Et voilà. Nous pouvons désormais souscrire un abonnement.
+There you go. We can now take out a subscription.
 
-### Mise en place du _Webhook_
+#### Setting up the _Webhook_
 
-Nous avons mis en place un paiement mensuel mais nous voulons être notifié des paiements effectués au début du mois. Dans notre cas, le _workflow_ type est le suivant:
+We have set up a monthly payment but we want to be notified of the payments made. In our case, the _workflow_ type is as follows:
 
-1. l’utilisateur effectue une demande d'abonnement
-2. Stripe crée un abonnement pour cette utilisateur
-3. lorsque l'abonnement est renouvelé (c-à-d. lorsque Stripe facture le client et qu'il est facturé de nouveau).
+1. the user makes a subscription request
+2. Stripe creates a subscription for this user
+3. when the subscription is renewed (i.e. when Stripe invoices the customer and it is re-invoiced).
 
-Stripe envoie une requête pour signaler que le paiement a été effectué par le biais du _hook_. Les  *Webhook* sont simplement des routes que nous mettons à disposition pour recevoir les requêtes de la part de Stripe. Une fois la route créée, nous devons communiquer l'URL à Stripe via l'interface d'administration de Stripe (cela se fait très facilement).
+Stripe sends a request to report that the payment has been made through the _hook_. *Webhooks* are simply routes that we make available to receive requests from Stripe. Once the route is created, we must communicate the URL to Stripe via the Stripe administration interface (this is very easy).
 
 ![Formulaire de création d'un Webhook](/img/blog/stripe_webhook.png)
 
-> Notez que j'ai choisi de ne recevoir que le signal `invoice.payment_succeeded` qui est envoyé lorsqu'une facture est payée. Encore une fois je n'invente rien, tout est [dans la documentation de Stripe](https://stripe.com/docs/billing/webhooks#tracking)
+> Note that I have chosen to receive only the signal `invoice.payment_succeeded` that is sent when an invoice is paid. Once again I'm not making anything up, everything is [in Stripe's documentation](https://stripe.com/docs/billing/webhooks#tracking)
 
-Générons une route avec Rails.
+Let's generate a route with Rails.
 
 ~~~bash
 $ rails g controller  hooks stripe --no-assets --no-helper
 ~~~
 
-Nous allons juste supprimer la vue que Rails vient de nous créer et passer la route accessible avec le verbe `POST`:
+We will just delete views created by Rails and pass accessible route with the HTTP `POST` verb:
 
 ~~~bash
 $ rm -r app/views/hooks
@@ -610,17 +609,16 @@ Rails.application.routes.draw do
 end
 ~~~
 
-Il suffit maintenant d'ajouter une méthode dans le contrôleur qui recevra  la requête de Stripe.Comme d'habitude, commençons par les tests.
+Now it is enough to add a method in the controller that will receive Stripe's request, as usual, let's start with the tests.
 
-### Test fonctionnels
 
-C'est toujours compliqué de tester l'intégration d'un API donc j'ai simplement choisi de simuler une requête de la part de Stripe et de vérifier si notre contrôleur ajoute du crédit à l'utilisateur.
+### Functional tests
 
-pour cela,  j'ai simplement copié/collé les paramètres envoyés par Stripe via leur [interface de test des webhooks](https://dashboard.stripe.com/test/webhooks/).
+It is always complicated to test API integration so I simply chose to simulate a request from Stripe and check if our controller adds credit to the user. To do that I simply copied/pasted the parameters sent by Stripe via their[webhooks test interface](https://dashboard.stripe.com/test/webhooks/).
 
 ![Test d'envoie d'un Webhook via l'administration](/img/blog/stripe_webook_request.png)
 
-Une fois la requête copiée, je l'ai transformée en `Hash` Ruby en ne gardant que les paramètres qui m'intéressent.
+Once the request was copied, I transformed it into a Ruby `Hash` and keep only parameters that interest me.
 
 ~~~ruby
 # test/controllers/hooks_controller_test.rb
@@ -644,14 +642,13 @@ class HooksControllerTest < ActionDispatch::IntegrationTest
 end
 ~~~
 
-Maintenant il suffit d'envoyer une requête `POST` et de vérifier que notre utilisateur est incrémenté.
+Now just send a `POST` request and check that our user is incremented.
 
 ~~~ruby
 # test/controllers/hooks_controller_test.rb
 # ...
 class HooksControllerTest < ActionDispatch::IntegrationTest
   # ...
-
   setup do
     @user = users(:one_advocate)
   end
@@ -666,11 +663,10 @@ class HooksControllerTest < ActionDispatch::IntegrationTest
 end
 ~~~
 
-Et voilà. L'implémentation est très simple:
+There you go. The implementation is fairly simple:
 
 ~~~ruby
 # app/controllers/hooks_controller.rb
-
 class HooksController < ApplicationController
   protect_from_forgery except: [:stripe]
 
@@ -699,18 +695,18 @@ class HooksController < ApplicationController
 end
 ~~~
 
-> Attention à bien désactiver le `protect_from_forgery` qui va bloquer les requêtes provenant de l'extérieur.
+> Be careful to disable the `protect_from_forgery` which will block requests from outside.
 
-Et voilà, notre paiement récurrent est désormais en place!
+And that's it, our recurring payment is now in place!
 
-### Test en développement
+#### Test in development
 
-Il suffit d'utiliser un service comme [Ngrok](https://ngrok.com/) ou [Serveo](https://serveo.net/) (je vous recommande ce dernier qui est plus facile à utiliser) afin d'exposer votre application à l’extérieur et ensuite de tester votre _webhook_ via [l'interface de test des webhooks de Stripe](https://dashboard.stripe.com/test/webhooks/). Je ne vais pas vous le montrer ici car nous avons déjà mis en place un test qui le simule pour nous.
+You just need to use a service like [Ngrok](https://ngrok.com/) or [Serveo](https://serveo.net/) (I recommend the latter which is easier to use) to expose your application outdoors and then test your _webhook_ via [Stripe's webhooks test interface](https://dashboard.stripe.com/test/webhooks/). I'm not going to show you here because we have already set up a test that simulates it for us.
 
 ## Conclusion
 
-Je vous ai donc démontré via cet article qu'il était très facile de mettre en place un système de paiement récurrent avec Stripe. La documentation quasi parfaite et leur gemme nous simplifient vraiment la tâche.
+I have therefore demonstrated to you through this article that it is very easy to set up a recurring payment system with Stripe. The almost perfect documentation and their gem make it really easy for us.
 
-Mais les fonctionnalités de Stripe ne s'arrêtent pas la. Stripe nous permet aussi de mettre en place un système de facturation (avec la génération de belles factures PDF), de remboursement ou encore de gestion de litiges.
+But Stripe's features don't stop there. Stripe also allows us to set up an invoicing system (with the generation of beautiful PDF invoices), reimbursement or even dispute management.
 
-Je pense que pour la création de votre application il est beaucoup plus intelligent de déléguer toutes les tâches de paiement à Stripe et de se concentrer sur son business.
+I think that for the creation of your application it is much smarter to delegate all payment tasks to Stripe and focus on your business.
