@@ -23,3 +23,13 @@ div.container-blog
   h2,h3
     margin-top: 2rem
     margin-bottom: 1rem
+
+div.card:hover img.card-img-top
+  filter: none
+
+img.card-img-top,
+img.grey
+  // Safari 6.0 - 9.0
+  -webkit-filter: grayscale(100%)
+  filter: grayscale(100%)
+  // background-color: lightgray
