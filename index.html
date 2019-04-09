@@ -64,7 +64,7 @@ layout: main
     <p class="lead text-justify">{% t open_source.lead %}</p>
     <ul>
       {% for project in site.translations[site.lang]['projects_data'] %}
-      <li>
+      <li class="text-justify">
         <strong>
           {% if project.link %}
           <a href="{{ project.link }}">{{ project.name }}</a>
