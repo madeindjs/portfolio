@@ -32,7 +32,7 @@ educations_data:
     name: La Martinière Monplaisir, Lyon 8e
 
 experiences_data:
-  - job_title: CEO & Associate
+  - job_title: CTO & Associate
     company: iSignif
     link: https://isignif.fr/
     dates: May 2018 to today
