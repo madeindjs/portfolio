@@ -14,12 +14,12 @@ Le but de cet article est de découvrir une mise en place d'une [API][api] [REST
 
 Nous allons donc mettre en place un système de _graph_api_ très basique. Nous allons créer deux modèles:
 
-- un **node** (nœud) qui représente une étape simple. Elle contient juste un `nom' et un`id'.
-- un **link** (lien) qui ne connecte que deux nœuds avec des attributs `from_id' et`to_id'.
+- un **node** (nœud) qui contient juste un `name` et un`id`.
+- un **link** (lien) qui ne connecte que deux nœuds à l'aide d'attributs `from_id` et`to_id`.
 
 C'est aussi simple que ça.
 
-Pour construire l'API, j'utiliserai [Express.js], un framework minimaliste qui nous permet de faire des API en JavaScript. J'utiliserai aussi
+Pour construire l'API, j'utiliserai [Express.js], un framework minimaliste qui nous permet de faire des API en JavaScript. J'utiliserai aussi [Sequelize][sequelize], un ORM.
 
 A la fin de l'article, l'API pourra générer un définition d'un graphe [Mermaid][mermaid] qui permet ainsi de convertir le graph_api en un beau graphique comme celui ci-dessous:
 
@@ -29,9 +29,9 @@ _Let's go_!
 
 > NOTE: je vais aller un peu vite car c'est un peu un aide-mémoire pour moi-même. Tout le code est disponible sur le [_repository_ Github `graph_api.ts`][github_repo]
 
-> TL;DR: La grand liberté d'Express nous permet de décider nous même de l'architecture de notre application et TypeScript nous donne la possibilité de créer de vrais _design paterns_.
+> TL;DR: La grand liberté d'Express nous permet de décider nous même de l'architecture de notre application et TypeScript nous donne la possibilité de s'éclater avec des _design paterns_ pouvant faire palir un adepte de Java.
 
-## Setup project
+## Mise en place du projet
 
 Commençons donc par créer un nouveau projet avec [NPM](https://www.npmjs.com/) et [Git](https://git-scm.com/).
 
@@ -49,7 +49,7 @@ $ npm install --save express body-parser
 $ npm install --save-dev typescript ts-node @types/express @types/node
 ```
 
-Comme nous utilisons [TypeScript][typescript], nous avons besoin de créer un fichier `tsconfig.json` pour indiquer à TypeScript que les fichiers seront transpilés depuis `lib` vers le dossier `dist`. Nous précision aussi que nous utiliserons la syntaxe [ES6][es6]:
+Comme nous utilisons [TypeScript][typescript], nous avons besoin de créer un fichier `tsconfig.json` pour indiquer à TypeScript que les fichiers seront transpilés depuis `lib` vers le dossier `dist`. Nous utiliserons la syntaxe [ES6][es6]:
 
 ```json
 // tsconfig.json
@@ -68,7 +68,7 @@ Comme nous utilisons [TypeScript][typescript], nous avons besoin de créer un fi
 }
 ```
 
-Maintenant nous allons créer le `lib/app.ts`. Ce dernier se chargera de la configuration, du chargement des routes et du démarrage du serveur Express:
+Maintenant nous allons créer le `lib/app.ts`. Ce dernier se chargera de la configuration, du chargement des routes de notre API:
 
 ```typescript
 // lib/app.ts
@@ -128,9 +128,7 @@ export class Routes {
 }
 ```
 
-Maintenant nous pouvons charger l'application et la démarrer dans un fichier `server.ts`:
-
-Et un fichier `lib/server.ts` pour lancer l'objet `App`:
+Maintenant nous pouvons charger l'application et la démarrer dans un fichier `server.ts`. Celui va simplement appeler la méthode `app.listen` sur un port définit. Par défaut on utilise le 3000 mais on laise la possibilité à l'utilisateur de la définir en passant la variable d'environnement `PORT`:
 
 ```ts
 // lib/server.ts
@@ -149,9 +147,9 @@ $ curl http://localhost:3000/nodes
 
 Jusqu'ici tout fonctionne.
 
-## Setup sequelize
+## Mise en place de Sequelize
 
-[Sequelize][sequelize] est un[ORM (Object Relational Mapping)][orm] qui est chargé de traduire l'objet TypeScript dans les requêtes SQL pour enregistrer les modèles. La documentation de TypeScript (http://docs.sequelizejs.com/manual/typescript) est vraiment complète mais ne paniquez pas, je vais vous montrer comment l'implémenter avec Express.
+[Sequelize][sequelize] est un[ORM (Object Relational Mapping)][orm] qui est chargé de traduire l'objet TypeScript dans les requêtes SQL pour enregistrer les modèles. La [documentation de TypeScript](http://docs.sequelizejs.com/manual/typescript) est vraiment complète mais ne paniquez pas, je vais vous montrer comment l'implémenter avec Express.
 
 Nous commençons à ajouter des bibliothèques:
 
@@ -162,7 +160,7 @@ $ npm install --save-dev @types/bluebird @types/validator @types/sequelize
 
 > Vous remarquerez peut-être que j'ai choisi la base de données SQLite pour sa simplicité mais vous pouvez utiliser MySQL ou Postgres.
 
-Ensuite, nous allons créer un fichier _lib/config/database.ts_ pour configurer Sequelize database system. Pour plus de simplicité, je crée une base de données Sqlite en mémoire :
+Ensuite, nous allons créer un fichier _lib/config/database.ts_ pour configurer Sequelize database system. Pour plus de simplicité, je crée une base de données Sqlite en mémoire:
 
 ```ts
 // lib/config/database.ts
@@ -174,6 +172,8 @@ export const database = new Sequelize({
   storage: ":memory:"
 });
 ```
+
+> NOTE: toutes les données disparaitrons au rédémarage du serveur puisque la mémoire utilisée par notre application sera libérée
 
 Ensuite, nous pourrons créer un **modèle**. Nous commencerons par le modèle **Node** qui étend la classe Sequelize `Model` :
 
@@ -233,6 +233,8 @@ Maintenant que nous avons configuré la base de données, créons des méthodes 
 
 ### Index
 
+Récupérer tous les enregistrements est assez facile Nous utilisons la méthode `Node.findAll` qui retourne une **Promesse** contenant les données (comme presque toutes les méthodes Sequelize):
+
 ```ts
 // lib/controllers/nodes.controller.ts
 import { Request, Response } from "express";
@@ -271,7 +273,7 @@ $ curl http://localhost:3000/nodes/
 []
 ```
 
-Cela semble fonctionner mais nous n'avons pas encore de données dans la base de données SQlite. Continuons afin de les ajouter.
+Cela semble fonctionner mais nous n'avons pas encore de données dans la base de données SQlite. C'est ce que nous allons faire tout de suite.
 
 ### Create
 
@@ -335,11 +337,11 @@ $ curl -X POST http://localhost:3000/nodes/
 {"name":"SequelizeValidationError","errors":[{"message":"Node.name cannot be null","type":"notNull Violation",...]}
 ```
 
-Parfait! Allons plus loins.
+Parfait! Allons plus loin.
 
 ### Show
 
-La méthode `show` a une petite différence: nous avons besoin d'un `id' comme paramètre GET. Cela signifie que nous devrions avoir une URL comme celle-ci :`/nodes/1`. C'est simple à faire lorsque vous construisez la route.
+La méthode `show` a une petite différence: nous avons besoin d'un `id` comme paramètre GET. Cela signifie que nous devrions avoir une URL comme celle-ci :`/nodes/1`. C'est simple à faire lorsque vous construisez la route.
 
 Voilà l'implémentation.
 
@@ -388,8 +390,6 @@ $ curl -X POST http://localhost:3000/nodes/99
 ```
 
 ### Update
-
-Update method seams like the previous one and need an `id` parameter. Let's build route:
 
 La méthode `update` fonctionne comme la précédente et nécessite un paramètre `id`. Construisons la route:
 
@@ -448,7 +448,7 @@ Parfait! Continuons.
 
 ### Destroy
 
-Destroy method seams like the previous one and need an `id` parameter. Let's build route:
+La méthode `destroy` ressemble à la précédente dans le sens ou elle à besoin d'un `id` comme paramètre. La route est donc très similaire:
 
 ```ts
 // lib/config/routes.ts
@@ -497,9 +497,9 @@ $ curl -X DELETE  http://localhost:3000/nodes/1
 
 Perfect!
 
-## Create the Link relationship
+## Créer la relation
 
-Maintenant, nous voulons créer le deuxième modèle : le `link`. Il possède deux attributs:
+Maintenant, nous voulons créer le deuxième modèle: le `link`. Il possède deux attributs:
 
 - `from_id` qui sera une liaison sur le nœud précédent
 - `to_id` qui sera une liaison sur le nœud suivant
@@ -725,6 +725,8 @@ graph TD;
 1 --> 2;
 2 --> 3
 ```
+
+> NOTE: si vous ne connaissez par Mermaid, je vous invide à jeter un coup d'œil à la syntaxe qui s'apprend en quelques minutes.
 
 C'est très simple. Créez une nouvel route liée à un nouveau contrôleur.
 
