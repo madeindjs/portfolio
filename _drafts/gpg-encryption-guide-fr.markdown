@@ -4,21 +4,19 @@ origin: https://www.tutonics.com/2012/11/gpg-encryption-guide-part-1.html
 
 # Guide du Chiffrement avec GPG - Partie 1
 
-Apprenez à utiliser le cryptage de niveau militaire à l'aide de GPG. Ceci est le premier d'une série de guides qui vous apprendront à utiliser GPG pour le chiffrement symétrique et asymétrique.
-
+Apprenez à utiliser le chiffrement de niveau militaire à l'aide de GPG. Ceci est le premier d'une série de guides qui vous apprendront à utiliser GPG pour le chiffrement symétrique et asymétrique.
 
 ## Présentation de _GNU Privacy Guard_ (GPG)
 
 _GNU Pirvacy Guard_ est une implémentation du standard **OpenPGP**. Ubuntu, et d'autres distributions Linux, inclue _GNU Privacy Guard_ de base via la commande `gpg`.
 
-La commande `gpg` peut être utilisée pour le cryptage symétrique et asymétrique de vos fichiers et données (y compris les e-mails). Il peut également être utilisé pour effectuer des signatures numériques. Si vous n'êtes pas familier avec ces concepts, ne vous inquiétez pas: nous allons vous expliquer toute la terminologie et les concepts que vous devez connaître en langage simple.
+La commande `gpg` peut être utilisée pour le chiffrement symétrique et asymétrique de vos fichiers et données (y compris les e-mails). Il peut également être utilisé pour effectuer des signatures numériques. Si vous n'êtes pas familier avec ces concepts, ne vous inquiétez pas: nous allons vous expliquer toute la terminologie et les concepts que vous devez connaître en langage simple.
 
 Nous vous montrerons ensuite comment générer une paire de clés et comment l'importer et l'exporter (et pourquoi vous devriez le faire). Alors commençons par la terminologie...
 
 ## Chiffrement symétrique
 
-Le cryptage symétrique implique un processus de chiffrement et de déchiffrement qui utilisent la même clé. Dans ce cas, la clé est considérée comme un secret partagé et doit être gardé confidentielle à la fois par le crypteur et par le décrypteur. Voici quelques exemples d'algorithmes supportés par `gpg` pour le cryptage symétrique: AES, Blowfish, Twofish, et Triple Des
-
+Le chiffrement symétrique implique un processus de chiffrement et de déchiffrement qui utilisent la même clé. Dans ce cas, la clé est considérée comme un secret partagé et doit être gardé confidentielle à la fois par le crypteur et par le décrypteur. Voici quelques exemples d'algorithmes supportés par `gpg` pour le chiffrement symétrique: AES, Blowfish, Twofish, et Triple Des
 
 ## Chiffrement asymétrique
 
@@ -36,7 +34,6 @@ Un condensé ou hachage est un algorithme cryptographique unidirectionnel qui, l
 
 Quelques exemples d'algorithme de _hashes_ et de _Digests_ supportés par GPG sont: SHA1, SHA256 et SHA512.
 
-
 ## Signatures numériques
 
 Lorsque Alice reçoit des données de Bob, il est parfois utile pour Alice de s'assurer que les données envoyées n'ont pas été **altérées**. Dans de tels cas, un **hachage cryptographique** est effectué sur les données du côté de l'expéditeur, et crypté à l'aide de la clé privée de l'expéditeur
@@ -47,7 +44,7 @@ Le hachage signé prouve dans les deux cas que les données proviennent de Bob, 
 
 ## Générer une paire de clés GPG
 
-Une **paire de clés** est nécessaire pour le cryptage asymétrique (et donc la signature numérique). Si vous voulez seulement utiliser GPG pour le cryptage symétrique, ce processus n'est pas nécessaire.
+Une **paire de clés** est nécessaire pour le chiffrement asymétrique (et donc la signature numérique). Si vous voulez seulement utiliser GPG pour le chiffrement symétrique, ce processus n'est pas nécessaire.
 
 Pour générer une paire clé publique/clé privée, exécutez la commande suivante:
 
@@ -107,8 +104,6 @@ Et voici un exemple de l'affichage que vous pouvez obtenir en générant une pai
     uid                      Jean-Luc Mélanchon (Je suis la république.) <jean-luc@melanchon.fr>
     sub   rsa3072 2018-12-10 [E]
 
-
-
 Comme vous pouvez le constater, plusieurs options vous seront proposées en cours de route.
 
 Tout d'abord, vous devrez choisir un algorithme, l'algorithme par défaut de RSA et RSA est le meilleur donc utilisez l'option 1.
@@ -161,7 +156,6 @@ Pour visualiser vos clés privées entrez
 
 Vous pouvez bien sûr simplement afficher les détails d'une ou plusieurs touches spécifiques en plaçant simplement leur nom d'utilisateur ou leur code d'accès après les commandes ci-dessus. Par exemple pour afficher uniquement la clé publique `jean-luc@melanchon.fr` vous pouvez utiliser :
 
-
     gpg --list-public-keys jean-luc@melanchon.fr
 
 ou
@@ -177,7 +171,6 @@ or
     gpg --list-secret-keys 01C72E00B
 
 > Notez qu'en ce qui concerne la paire de clé que vous venez de générer, la sortie des commandes des touches de la liste ci-dessus doit être la même (sauf `pub` vs `sec` et `sub` vs `ssb`). La raison pour laquelle ils sont les mêmes qu'ils se réfèrent simplement à l'identité de la clé plutôt qu'à la clé elle-même.
-
 
 ## Faire connaître votre clé publique aux autres
 
@@ -199,7 +192,6 @@ Donc pour exporter, lancez cette commande :
     gpg --armor --export jean-luc@melanchon.fr > public_key.asc
 
 Notez que le nom du fichier _public_key.asc_ est arbitraire, mais informatif dans ce cas. Vous avez maintenant une copie de votre clé publique. Dans notre cas, le contenu de la clé publique jean-luc@melanchon.fr est indiqué ci-dessous :
-
 
     -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -312,7 +304,6 @@ Ensuite, pour vérifier qu'il est signé, vous pouvez exécuter:
 
 Pour sortir de l'interface en ligne de commande de GPG entrez : _"Quitter"_ ou appuyez sur _Ctrl+d_. On vous demandera si vous voulez _"Sauvegarder les modifications ? (y/N)"_: entrez _"y"_. Maintenant que vous avez validé cette clé publique.
 
-
 ## Sauvegarde de votre clé privée (ou copie pour utilisation sur une autre machine)
 
 Pour sauvegarder une copie de données brutes ou une copie ASCII de la clé privée, vous pouvez utiliser l'option `--export-secret-keys`. Voici un exemple de données brutes (inclure `--armor` pour la version ASCII) :
@@ -322,7 +313,6 @@ Pour sauvegarder une copie de données brutes ou une copie ASCII de la clé priv
 > Notez que la clé privée exportée est toujours protégée par le mot de passe que vous avez utilisé lors de sa création.
 
 Pour importer la clé privée dans votre porte-clés privé sur une autre boîte (ou une boîte reconstruite dans le cas où votre disque dur a été perdu), vous utiliseriez l'option `--import`. Donc dans notre cas, pour _jean-luc@melanchon.fr_, nous utiliserions:
-
 
     gpg --import private_key
 
@@ -348,7 +338,7 @@ Si quelqu'un veut importer cette clé publique depuis le serveur de clés, il pe
 
 Si vous pensez que votre clé publique n'est plus valide (par exemple si vous ne l'utilisez plus ou si vous pensez que votre clé privée a été compromise), vous pouvez la **révoquer** en utilisant un **certificat de révocation**. EVous pouvez créer un certificat de révocation en utilisant :
 
-  gpg --output revocation_cert.asc --gen-revoke jean-luc@melanchon.fr
+gpg --output revocation_cert.asc --gen-revoke jean-luc@melanchon.fr
 
 > Notez que vous ne pouvez pas créer ce certificat de révocation après avoir perdu votre clé privée! Il est donc recommandé d'en créer un en même temps que vous créez la paire de clés, puis de le conserver dans un endroit vraiment sûr.
 
@@ -370,11 +360,11 @@ Merci à tous ceux qui ont travaillé sur _GNU Privacy Guard_ (l'implémentation
 
 # Guide du Chiffrement avec GPG - Partie 2 (Chiffrement Asymétrique)
 
-Ici, nous couvrons le cryptage asymétrique et le décryptage des données à l'aide de la commande GPG.
+Ici, nous couvrons le chiffrement asymétrique et le déchiffrement des données à l'aide de la commande GPG.
 
 Pour rafraîchir rapidement la mémoire, le chiffrement asymétrique implique l'utilisation d'une **paire de clés publiques/privées**. La clé publique est distribuée aux personnes qui souhaitent vous envoyer des données cryptées. Vous utilisez ensuite votre clé privée (à laquelle personne d'autre n'a accès) pour déchiffrer ces données.
 
-## Cryptage asymétrique
+## chiffrement asymétrique
 
 Tout d'abord, assurez-vous d'avoir la clé publique de la personne pour laquelle vous souhaitez crypter les données. Vous pouvez le vérifier deux fois à l'aide de la commande :
 
@@ -396,13 +386,13 @@ Cela produira un fichier crypté appelé _file.txt.gpg_ que seul le destinataire
 
 > Notez que si vous n'aviez pas encore vérifié la clé publique (voir la première partie pour savoir comment), vous recevrez un message d'avertissement à cet effet lorsque vous essayez de crypter les données en utilisant cette clé publique.
 
-## Décryptage de textes chiffrés de façon asymétrique
+## Déchiffrement de textes chiffrés de façon asymétrique
 
 Pour que le destinataire décrypte les données cryptées créées dans les étapes ci-dessus, il doit spécifier le fichier de sortie en utilisant `-o` et aussi utiliser l'option `-d` (ou `--decrypt`):
 
     gpg -o file.txt -d file.txt.gpg
 
-Le destinataire sera invité à entrer la phrase de passe de sa clé privée. Si la phrase de chiffrement correcte est utilisée, l'algorithme de décryptage se poursuit et les données d'origine sont stockées dans le _fichier.txt_.
+Le destinataire sera invité à entrer la phrase de passe de sa clé privée. Si la phrase de chiffrement correcte est utilisée, l'algorithme de déchiffrement se poursuit et les données d'origine sont stockées dans le _fichier.txt_.
 
 Il est important de noter que si aucun fichier de sortie n'est spécifié, le chiffrement décrypté, c'est-à-dire le texte en clair (les données d'origine) est envoyé en sortie standard. Ainsi, à moins que vous ne le transfériez vers un fichier ou un autre programme, il sera affiché dans votre terminal et non stocké dans un fichier.
 
@@ -417,7 +407,7 @@ Dans la prochaine partie du Guide GPG, nous vous montrerons comment le crypteur 
 Cette partie va vous expliquer comment signer numériquement des données de diverses manières et aussi comment les vérifier.
 
 ## Le but des signatures numériques
-cd
+
 Lorsqu'un expéditeur utilise une clé publique pour crypter les données d'un destinataire, comment ce dernier est-il censé savoir si l'expéditeur est bien celui qu'il prétend être?
 
 La clé publique est à la disposition de tous, de sorte que l'expéditeur doit pouvoir prouver sans équivoque que les données proviennent d'eux. GPG fournit donc un moyen de le faire en combinant avec une signature (comme une empreinte digitale) aux données qui prouve que les données n'ont pas été trafiquées.
@@ -441,7 +431,7 @@ Bien que ce type de signature numérique ne soit pas nécessaire chaque fois qu'
 Si un document, un logiciel ou d'autres données sont disponibles pour la consommation publique, il n'est pas nécessaire de les chiffrer.
 Dans un tel cas, cependant, il peut toujours y avoir de bonnes raisons pour les personnes de vouloir prouver que les données sont authentiques (proviennent du créateur ou du propriétaire spécifié et n'ont pas été trafiquées). C'est là que les signatures numériques peuvent être utiles.
 
-> L'utilisation d'une signature numérique seule (sans cryptage) n'implique que les étapes 1, 2, 3, 6 et 7.
+> L'utilisation d'une signature numérique seule (sans chiffrement) n'implique que les étapes 1, 2, 3, 6 et 7.
 
 Il existe deux types de signature numérique que GPG peut applique:
 
@@ -504,9 +494,9 @@ Cela produira le fichier _file.txt.gpg_, dont le contenu contiendra nos données
 
     gpg --verify file.txt.gpg
 
-### Utilisation d'une signature numérique avec cryptage asymétrique des données
+### Utilisation d'une signature numérique avec chiffrement asymétrique des données
 
-Lorsque l'expéditeur chiffre également les données à décrypter pour le destinataire, l'expéditeur doit simplement combiner les commandes utilisées pour le cryptage asymétrique avec l'option `-s` (ou `--sign`).
+Lorsque l'expéditeur chiffre également les données à décrypter pour le destinataire, l'expéditeur doit simplement combiner les commandes utilisées pour le chiffrement asymétrique avec l'option `-s` (ou `--sign`).
 
 La commande ci-dessous signe et crypte pour le destinataire Jean-Luc:
 
@@ -522,7 +512,7 @@ Pour décrypter et vérifier, l'option `-d` (ou `--decrypt`) fera les deux (c'es
 
     gpg --decrypt file.txt.gpg
 
-Si le destinataire n'a pas la clé publique de l'expéditeur sur son porte-clés pour vérification, le décryptage fonctionnera toujours comme d'habitude, mais le message suivant sera affiché:
+Si le destinataire n'a pas la clé publique de l'expéditeur sur son porte-clés pour vérification, le déchiffrement fonctionnera toujours comme d'habitude, mais le message suivant sera affiché:
 
     gpg: Can't check signature: public key not found
 
@@ -555,19 +545,17 @@ ou, si vous avez changé le nom du _fichier.txt_ en nom de fichier entre-temps o
 
     gpg --verify file.txt.sig /path/to/filename
 
-
 ## What's next?
 
-Dans le prochain chapitre, nous parlerons de l'utilisation de GPG pour le cryptage symétrique en utilisant différents algorithmes.
+Dans le prochain chapitre, nous parlerons de l'utilisation de GPG pour le chiffrement symétrique en utilisant différents algorithmes.
 
 ---
 
-# Cryptage symétrique
+# chiffrement symétrique
 
 Ce guide GPG explique comment utiliser la commande GPG pour un chiffrement symétrique simple mais puissant en utilisant différents algorithmes de chiffrement par blocs.
 
 ## Chiffrement sans tracas
-
 
 Un autre type de solution cryptographique fournie par _Gnu Privacy Guard (GPG)_ est le chiffrement à clé symétrique, également connu sous le nom de chiffrement par blocs.
 
@@ -575,7 +563,7 @@ Les chiffres utilisés pour le chiffrement à clé symétrique utilisent la mêm
 
 La raison pour laquelle les chiffres sont appelés des chiffres de bloc est parce que les données à chiffrer sont chiffrées en **morceaux** ou en blocs.
 
-Si vous souhaitez simplement crypter certains fichiers ou données et que vous ne souhaitez pas mettre en place une paire de clés (nécessaire pour le cryptage asymétrique et les signatures numériques), alors la cryptographie à clé symétrique est votre réponse.
+Si vous souhaitez simplement crypter certains fichiers ou données et que vous ne souhaitez pas mettre en place une paire de clés (nécessaire pour le chiffrement asymétrique et les signatures numériques), alors la cryptographie à clé symétrique est votre réponse.
 
 Ci-dessous, nous allons couvrir plusieurs des chiffres disponibles, y compris : AES256, TWOFISH et CAMELLIA256.
 
@@ -589,7 +577,6 @@ Vous verrez quelque chose comme ça:
 
     Chiffrement : IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256,
                   TWOFISH, CAMELLIA128, CAMELLIA192, CAMELLIA256
-
 
 Chaque fois que vous utilisez un chiffre symétrique pour crypter des données, il vous sera demandé de fournir une phrase de chiffrement (deux fois pour la confirmer). Cette phrase de passe est utilisée pour aider à générer une clé qui est ensuite utilisée avec l'algorithme choisi pour crypter les données.
 
@@ -646,9 +633,9 @@ Ainsi, si vous souhaitez choisir un algorithme encore meilleur comme Twofish ou 
 
     cipher-algo AES256
 
-Si vous utilisez CAST5 ou n'importe quel chiffre dont la taille de bloc est inférieure ou égale à 64 bits (3DES est un autre exemple de taille de bloc 64 bits), vous devez également utiliser l'option `--force-mdc`. Cela impose l'utilisation d'un cryptage avec un code de détection de modification. Sans l'utilisation d'un mdc, le message crypté devient vulnérable à une attaque de modification de message.
+Si vous utilisez CAST5 ou n'importe quel chiffre dont la taille de bloc est inférieure ou égale à 64 bits (3DES est un autre exemple de taille de bloc 64 bits), vous devez également utiliser l'option `--force-mdc`. Cela impose l'utilisation d'un chiffrement avec un code de détection de modification. Sans l'utilisation d'un mdc, le message crypté devient vulnérable à une attaque de modification de message.
 
-Donc, juste pour être clair: pour les chiffres de taille de bloc de 64 bits ou moins, vous obtiendrez l'avertissement suivant lors du décryptage sauf si vous utilisez l'option `--force-mdc`:
+Donc, juste pour être clair: pour les chiffres de taille de bloc de 64 bits ou moins, vous obtiendrez l'avertissement suivant lors du déchiffrement sauf si vous utilisez l'option `--force-mdc`:
 
     gpg: WARNING: message was not integrity protected
 
