@@ -170,7 +170,27 @@ Maintenant que nous avons vu comment rapidement vu comment utiliser GPG, nous al
 
 ### Signer ses commit avec Git
 
-<!-- TODO -->
+Git permet de suivre sont code et c'est un outil formidable.
+
+Le problème est le suivant: Édouard Philippe peut très bien modifier sa configuration Git sur son PC et ainsi faire des commits foireux sous le nom de la république. Pour palier à ça, JLM peut facilement signer ses commits avec Git et ainsi valider son identité. Et c'est très facile en plus.
+
+La première étape consiste à se placer dans un répertoire Git et configurer la clé qui sera utilisée pour signer les commits.
+
+```bash
+$ git config user.signingkey 501BAC7F7CE0AA38B1FA00A2EA0C20A533FC3A02
+```
+
+Ensuite on active la signature automatique des commits:
+
+```bash
+$ git config commit.gpgsign true
+```
+
+En tant que libriste, Jean-Luc utilise très certainement [Gitlab](https://about.gitlab.com/) et c'est parfait puisque Gitlab supporte la vérification de la signature des commits. Il lui suffit d'[ajouter la clé publique dans son compte Gitlab](https://docs.gitlab.com/ee/user/project/repository/gpg_signed_commits/#adding-a-gpg-key-to-your-account).
+
+Ensuite, Gitlab rajoute automatiquement la mention "vérifié" sur tout ses commits.
+
+Dans tes dents Édouard.
 
 ### Chiffrer des fichiers
 
