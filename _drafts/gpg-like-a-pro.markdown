@@ -33,7 +33,7 @@ _GNU Pirvacy Guard_ est une implémentation du standard **OpenPGP**. Ubuntu, et 
 GPG permet plusieurs type de chiffrement:
 
 - Le **chiffrement symétrique** implique un processus de chiffrement et de déchiffrement qui utilisent **la même clé**. Dans ce cas, la clé est considérée comme un secret partagé et doit être gardée confidentielle à la fois par le crypteur et par le décrypteur.
-- Le **Hashes** ou **Digests** est un algorithme cryptographique **unidirectionnel** qui utilise une fonction de hachage pour obtenir l' _"empreinte digitale"_ d'un bloc de données arbitraire. Il ets très utilisé pour les mots de passe car il permet de contrôler si un mot de passe est valide sans pouvoir le déchiffrer.
+- Le **Hash** _(rien à voir avec ce que Jean-Luc achète en bas des tours)_ est un algorithme cryptographique **unidirectionnel** qui utilise une fonction de hachage pour obtenir l' _"empreinte digitale"_ d'un bloc de données arbitraire. Il ets très utilisé pour les mots de passe car il permet de contrôler si un mot de passe est valide sans pouvoir le déchiffrer.
 - Le **chiffrement asymétrique** implique l'utilisation d'une **clé publique** et d'une **clé privée**. La clé publique est mise à la disposition de quiconque souhaite chiffrer des données pour les envoyer au propriétaire de la clé publique. Exemple: Si Bob voulait envoyer un fichier chiffré à Alice, Bob chiffrerai les données à l'aide de la clé publique d'Alice, puis les enverrait à Alice. Alice peut alors déchiffrer les données à l'aide de sa clé privée. Une fois que Bob a chiffré les données, personne d'autre qu'Alice ne peut les déchiffrer.
 - La **Signatures numériques** est utile lorsque Alice reçoit des données de Bob et qu'elle souhaite s'assurer que les données envoyées n'ont pas été **altérées**. Dans de tels cas, un **hachage** est effectué sur les données du côté de l'expéditeur, et chiffré à l'aide de la clé privée de l'expéditeur
 
@@ -144,9 +144,9 @@ Si quelqu'un veut importer cette clé publique depuis le serveur de clés, il pe
 
 ### Key Revocation
 
-Si vous pensez que votre clé publique n'est plus valide (par exemple si vous pensez que votre clé privée a été compromise), vous pouvez la **révoquer** en utilisant un **certificat de révocation**. EVous pouvez créer un certificat de révocation en utilisant :
+Si Jean-Luc se fait perquisitionner et qu'il souhaite signaler que sa clé n'est plus valide, il peut la **révoquer** en utilisant un **certificat de révocation**. il lui peut l'obtenir en utilisant:
 
-gpg --output revocation_cert.asc --gen-revoke jean-luc@melanchon.fr
+    gpg --output revocation_cert.asc --gen-revoke jean-luc@melanchon.fr
 
 > Notez que vous ne pouvez pas créer ce certificat de révocation après avoir perdu votre clé privée! Il est donc recommandé d'en créer un en même temps que vous créez la paire de clés, puis de le conserver dans un endroit vraiment sûr.
 
