@@ -11,11 +11,11 @@ my_educations: Educations
 
 
 
-interest_points: <mark>Ruby on Rails</mark>, running and my girlfriend.
+interest_points: <strong>Ruby on Rails</strong>, running and my girlfriend.
 
 description:
   - Thanks to my personal involvement I'm actually a developer. Today my passion allows me to code and specialize me as a developer.
-  - During the day, I like to translate complex problems into simple technical solutions. At night, I like to discover new technologies such as <mark>Rust</mark> / <mark>Crystal</mark>.
+  - During the day, I like to translate complex problems into simple technical solutions. At night, I like to discover new technologies such as <strong>Rust</strong> / <strong>Crystal</strong>.
 
 
 educations_data:
@@ -39,7 +39,7 @@ experiences_data:
     quote: Participating in the creation of a startup and the development of a product is a great challenge.
     description:
       - I have created a LegalTech (startup in the field of law) which aims to connect lawyers and bailiffs in order to simplify the service process.
-      - As a partner, I participate in the company's strategic decisions. As a <mark>CEO</mark>, my mission is making coherent technical choices to ensure the durability of our product. As <mark>DPO</mark>, I am responsible for ensuring data compliance and compliance of our tool, and as <mark>developer</mark>, I have developed our entire product using Ruby On Rails and Vue.js
+      - As a partner, I participate in the company's strategic decisions. As a <strong>CEO</strong>, my mission is making coherent technical choices to ensure the durability of our product. As <strong>DPO</strong>, I am responsible for ensuring data compliance and compliance of our tool, and as <strong>developer</strong>, I have developed our entire product using Ruby On Rails and Vue.js
 
 
   - job_title: Tutoring teacher
@@ -47,7 +47,7 @@ experiences_data:
     link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
     dates: Since 2018
     description:
-      - On a regular basis, I give some private lessons about building web applications with <mark>Ruby on Rails</mark> on the platform <a href="https://superprof.fr">superprof.fr</a>.
+      - On a regular basis, I give some private lessons about building web applications with <strong>Ruby on Rails</strong> on the platform <a href="https://superprof.fr">superprof.fr</a>.
     quote: I can share my pasion and that's a rewarding experience.
 
   - job_title: PHP Developper
@@ -56,7 +56,7 @@ experiences_data:
     dates: January 2017 to present
     quote: GAC Technology is a Scale-Up that has taught me how to handle large amounts of data.
     description:
-      - I have to understand the customer's needs to translate it into a technical solution. Within this company, I am a back-end developer <mark>PHP</mark>. I also must take care about performance because of large amount of data owned by Gac. We use tools such as <mark>MySQL</mark>, <mark>Elastic Search</mark> and <mark>Redis</mark>.
+      - I have to understand the customer's needs to translate it into a technical solution. Within this company, I am a back-end developer <strong>PHP</strong>. I also must take care about performance because of large amount of data owned by Gac. We use tools such as <strong>MySQL</strong>, <strong>Elastic Search</strong> and <strong>Redis</strong>.
 
   - job_title: Process quality pilot - Project manager - Developer
     company: Carrier
@@ -65,8 +65,8 @@ experiences_data:
     quote: At Carrier, I had the wonderful experience of training people all over Europe on a project I set up.
     description:
       - At Carrier, I had the opportunity to diversify in my work
-      - As Project Manager, I developed a 3D drawing marketing solution with <mark>Sketchup</mark> and the API <mark>Ruby</mark>. As a Process Quality Pilot, I created a web application with <mark>C#</mark> & <mark>ASP.NET MVC</mark> in order to follow the technical interventions.
-      - As a design office, I carried out calculations of the installations's sizing and the drawing of execution's plans under <mark>AutoCad</mark>.
+      - As Project Manager, I developed a 3D drawing strongeting solution with <strong>Sketchup</strong> and the API <strong>Ruby</strong>. As a Process Quality Pilot, I created a web application with <strong>C#</strong> & <strong>ASP.NET MVC</strong> in order to follow the technical interventions.
+      - As a design office, I carried out calculations of the installations's sizing and the drawing of execution's plans under <strong>AutoCad</strong>.
 
 projects_data:
   - name: API on Rails 5
@@ -74,10 +74,10 @@ projects_data:
     link: https://github.com/madeindjs/api_on_rails
 
   - name: Crystagiri
-    description: This project is an HTML document parser. It was just an excuse to learn the language <mark>Crystal</mark>. Now it is followed by just under 100 people on Github.
+    description: This project is an HTML document parser. It was just an excuse to learn the language <strong>Crystal</strong>. Now it is followed by just under 100 people on Github.
     link: https://github.com/madeindjs/Crystagiri
 
   - name: Raspberry Cook
-    description: This project allowed me to discover and train myself on <mark>Ruby on Rails</mark> and to create a server on a Raspberry PI.
+    description: This project allowed me to discover and train myself on <strong>Ruby on Rails</strong> and to create a server on a Raspberry PI.
     link: https://github.com/RaspberryCook/website
     picture: img/projects/raspberry-cook.png

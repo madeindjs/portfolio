@@ -30,18 +30,18 @@
 	<!-- CSS -->
 	<link href="/css/stylesheet.css" rel="stylesheet">
 	<link href="/css/pygments/bw.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://unpkg.com/wingcss"/>
+	<link href="https://unpkg.com/readable-css/css/readable.css" rel="stylesheet" />
 </head>
 
-<body class="container ">
+<body class="readable-content ">
 	{% include header.html %}
 	<!-- header & navigation -->
 	<h1>{{ page.title }}</h1>
-	<p class="badges">
+	<!-- <p class="badges">
 		{% for tag in page.tags %}
 		<span class="badge badge-dark">{{ tag }}</span>
 		{% endfor %}
-	</p>
+	</p> -->
 	{% if page.thumbnail %}
 	<p class="text-center">
 		<img src="{{ page.thumbnail }}" class="center-block grey">

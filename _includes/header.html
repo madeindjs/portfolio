@@ -1,16 +1,9 @@
 <nav class="nav">
-
-  <p>
-    <a href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</a>
-  </p>
-
-  <p>
-    <a href="{{ '/blog' | prepend: site.baseurl }}">Blog</a>
-    {% if site.lang == 'fr' %}
-    <a href="/en/">English version</a>
-    {% elsif site.lang == 'en' %}
-    <a href="/">French version</a>
-    {% endif %}
-  </p>
-
+  <a href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</a> - 
+  <a href="{{ '/blog' | prepend: site.baseurl }}">Blog</a> - 
+  {% if site.lang == 'fr' %}
+  <a href="/en/">English version</a>
+  {% elsif site.lang == 'en' %}
+  <a href="/">French version</a>
+  {% endif %}
 </nav>

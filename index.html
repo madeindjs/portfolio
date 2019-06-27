@@ -13,10 +13,12 @@ layout: main
 
 <section>
   <h2>{% t professional_experiences %}</h2>
-  
+
   {% for experience in site.translations[site.lang]['experiences_data'] %}
-    <h3>{{ experience.job_title }} @ <i><a href="{{ experience.link }}">{{ experience.company }}</a></i><br/><small>{{ experience.dates }}</small></h3>
-  
+    <h3>{{ experience.job_title }}</h3>
+
+    <p>{{ experience.dates }} @ <a href="{{ experience.link }}">{{ experience.company }}</a></p>
+
     {% for task in experience.description %}
     <p>{{ task }}</p>
     {% endfor %}

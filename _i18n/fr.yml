@@ -10,11 +10,11 @@ my_github_profile: mon profil Github
 my_educations: Mes diplômes
 
 
-interest_points: <mark>Ruby on Rails</mark>, la course à pied et ma copine.
+interest_points: <strong>Ruby on Rails</strong>, la course à pied et ma copine.
 
 description:
   - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
-  - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelle technologie telles que <mark>Rust</mark> / <mark>Crystal</mark>.
+  - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelle technologie telles que <strong>Rust</strong> / <strong>Crystal</strong>.
 
 
 educations_data:
@@ -38,14 +38,14 @@ experiences_data:
     quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
     description:
       - J'ai créé une LegalTech (startup dans le domaine du droit) qui a pour but de mettre en relation les avocats et les huissiers afin de simplifier le processus de signification.
-      - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <mark>CEO</mark>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <mark>DPO</mark>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <mark>développeur</mark>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
+      - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <strong>CEO</strong>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <strong>DPO</strong>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <strong>développeur</strong>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
 
   - job_title: Professeur de cours particuliers
     company: Superprof
     link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
     dates: Depuis 2018
     description:
-      - Régulièreent, je donne quelques cours particuliers à propos de la construction d'application web avec <mark>Ruby on Rails</mark> sur la plateforme <a href="https://superprof.fr">superprof.fr</a>.
+      - Régulièreent, je donne quelques cours particuliers à propos de la construction d'application web avec <strong>Ruby on Rails</strong> sur la plateforme <a href="https://superprof.fr">superprof.fr</a>.
     quote: Cela me permet de partager ma passion et c'est une experience extrèmement enrichissante.
 
   - job_title: Developpeur PHP
@@ -54,7 +54,7 @@ experiences_data:
     dates: Janvier 2017 à aujourd'hui
     quote: GAC Technology est une Scale-Up qui m'a appri à manipuler des grandes quantité de données.
     description:
-      - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solution technique perenne. Au sein de cette entreprise, je suis développeur back-end <mark>PHP</mark>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tel que <mark>MySQL</mark>, <mark>Elastic Search</mark> et <mark>Redis</mark>.
+      - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solution technique perenne. Au sein de cette entreprise, je suis développeur back-end <strong>PHP</strong>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tel que <strong>MySQL</strong>, <strong>Elastic Search</strong> et <strong>Redis</strong>.
 
   - job_title: Pilote qualité process - Chef de projet - Développeur
     company: Carrier
@@ -63,7 +63,7 @@ experiences_data:
     quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
     description:
       - Chez Carrier, j'ai eu l'opportunité de me diversifier dans mon travail
-      - En tant que Chef de projet, j'ai développé une solution marketing de dessin 3D avec <mark>Sketchup</mark> et l'API <mark>Ruby</mark>. En tant que Pilote qualité process, j'ai réalisé une application web avec <mark>C#</mark> & <mark>ASP.NET MVC</mark> afin de suivre les interventions techniques. En tant que bureau d'étude, je réalisais les calculs de dimensionnement des installations et le dessin des plans d'éxecution sous <mark>AutoCad</mark>.
+      - En tant que Chef de projet, j'ai développé une solution strongeting de dessin 3D avec <strong>Sketchup</strong> et l'API <strong>Ruby</strong>. En tant que Pilote qualité process, j'ai réalisé une application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> afin de suivre les interventions techniques. En tant que bureau d'étude, je réalisais les calculs de dimensionnement des installations et le dessin des plans d'éxecution sous <strong>AutoCad</strong>.
 
 projects_data:
   - name: API on Rails 5
@@ -71,10 +71,10 @@ projects_data:
     link: https://github.com/madeindjs/api_on_rails
 
   - name: Crystagiri
-    description: Ce projet est un parseur de document HTML. Ce n'était qu'une excuse pour apprendre le language <mark>Crystal</mark>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
+    description: Ce projet est un parseur de document HTML. Ce n'était qu'une excuse pour apprendre le language <strong>Crystal</strong>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
     link: https://github.com/madeindjs/Crystagiri
 
   - name: Raspberry Cook
-    description: Ce projet m'a permis de découvrir et m'auto-former sur <mark>Ruby on Rails</mark> et de créer un serveur sur un Raspberry PI.
+    description: Ce projet m'a permis de découvrir et m'auto-former sur <strong>Ruby on Rails</strong> et de créer un serveur sur un Raspberry PI.
     link: https://github.com/RaspberryCook/website
     picture: img/projects/raspberry-cook.png
