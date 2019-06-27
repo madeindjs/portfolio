@@ -2,104 +2,60 @@
 layout: main
 ---
 
-
-<div class="row my-5">
-  <div class="col-md-2 text-center">
-    <img src="{{ site.data.profil.picture }}" class="img-fluid rounded-circle" />
-  </div>
-  <div class="col-md-10">
-    <div class="align-middle">
-      <h1 class="d-none">{% t about_me %}</h1>
-      {% for desc in site.translations[site.lang]['description'] %}
-      <p class="lead text-justify">{{ desc }}</p>
-      {% endfor %}
-      <p class="lead text-justify">{% t i_like %} {% t interest_points %}</p>
-    </div>
-  </div>
-</div>
+<section>
+  <h1>{% t about_me %}</h1>
+  {% for desc in site.translations[site.lang]['description'] %}
+  <p>{{ desc }}</p>
+  {% endfor %}
+  <p>{% t i_like %} {% t interest_points %}</p>
+</section>
 
 
-<!-- separator -->
-<div class="row my-5">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col">
-    <h2>{% t professional_experiences %}</h2>
-  </div>
-</div>
-
-{% for experience in site.translations[site.lang]['experiences_data'] %}
-<div class="row py-4">
-  <div class="col-sm-3">
-    <h3 class="h5">{{ experience.job_title }}<br><i><a href="{{ experience.link }}">{{ experience.company }}</a></i></h3>
-    <p class="my-0 pt-0"><small>{{ experience.dates }}</small></p>
-  </div>
-  <div class="col-sm-9 border-left">
-
+<section>
+  <h2>{% t professional_experiences %}</h2>
+  
+  {% for experience in site.translations[site.lang]['experiences_data'] %}
+    <h3>{{ experience.job_title }} @ <i><a href="{{ experience.link }}">{{ experience.company }}</a></i><br/><small>{{ experience.dates }}</small></h3>
+  
     {% for task in experience.description %}
-    <p class="text-justify">{{ task }}</p>
+    <p>{{ task }}</p>
     {% endfor %}
-
-    <blockquote class="text-justify border-left pl-2">
+  
+    <blockquote>
       {{ experience.quote }}
     </blockquote>
-  </div>
-</div>
-{% endfor %}
+  {% endfor %}
+</section>
 
-<!-- separator -->
-<div class="row my-5">
-  <div class="col">
-    <hr>
-  </div>
-</div>
+<section>
+  <h2>{% t open_source.title %}</h2>
+  <p>{% t open_source.lead %}</p>
+  <ul>
+    {% for project in site.translations[site.lang]['projects_data'] %}
+    <li>
+        {% if project.link %}
+        <a href="{{ project.link }}">{{ project.name }}</a>
+        {% else %}
+        {{ project.name }}
+        {% endif %}
+      {{ project.description }}
+    </li>
+    {% endfor %}
+  </ul>
+  <p>{% t open_source.see_all %}<a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p>
+</section>
 
-<div class="row">
-  <div class="col-12">
-    <h2>{% t open_source.title %}</h2>
-    <p class="lead text-justify">{% t open_source.lead %}</p>
-    <ul>
-      {% for project in site.translations[site.lang]['projects_data'] %}
-      <li class="text-justify">
-        <strong>
-          {% if project.link %}
-          <a href="{{ project.link }}">{{ project.name }}</a>
-          {% else %}
-          {{ project.name }}
-          {% endif %}
-        </strong>
-        {{ project.description }}
-      </li>
-      {% endfor %}
-    </ul>
-    <p>{% t open_source.see_all %}<a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p>
-  </div>
-</div>
+<section>
+  <h2>{% t my_educations %}</h2>
+  
+  <ul>
+    {% for education in site.translations[site.lang]['educations_data'] %}
+    <li>
+      <strong>{{ education.qualification }}</strong>:
+      {{ education.name }}
+      {{ education.dates }}
+    </tr>
+    {% endfor %}
+  </ul>
+</section>
 
-<!-- separator -->
-<div class="row my-5">
-  <div class="col">
-    <hr>
-  </div>
-</div>
-
-<div class="row my-5">
-  <div class="col-12">
-    <h2>{% t my_educations %}</h2>
-
-    <table class="table">
-      {% for education in site.translations[site.lang]['educations_data'] %}
-      <tr>
-        <th>{{ education.qualification }}</th>
-        <td>{{ education.name }}</td>
-        <td>{{ education.dates }}</td>
-      </tr>
-      {% endfor %}
-
-    </table>
-  </div>
-</div>

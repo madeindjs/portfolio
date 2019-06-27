@@ -1,33 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="nav">
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ '/blog' | prepend: site.baseurl }}">Blog</a>
-      </li>
+  <p>
+    <a href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</a>
+  </p>
 
+  <p>
+    <a href="{{ '/blog' | prepend: site.baseurl }}">Blog</a>
+    {% if site.lang == 'fr' %}
+    <a href="/en/">English version</a>
+    {% elsif site.lang == 'en' %}
+    <a href="/">French version</a>
+    {% endif %}
+  </p>
 
-    </ul>
-
-
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        {% if site.lang == 'fr' %}
-        <a class="nav-link" href="/en/">English version</a>
-        {% elsif site.lang == 'en' %}
-        <a class="nav-link" href="/">French version</a>
-        {% endif %}
-      </li>
-      {% for link in site.data.profil.links %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ link.url }}">{{ link.name }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-
-  </div>
 </nav>

@@ -3,12 +3,10 @@
   <head>
     {% include head.html %}
   </head>
-  <body>
+  <body class="container">
     {% include header.html %}
-    <div class="container my-5">
-      <!-- header & navigation -->
-      {{ content }}
-      {% include footer.html %}
-    </div>
+    <!-- header & navigation -->
+    {{ content }}
+    {% include footer.html %}
   </body>
 </html>
