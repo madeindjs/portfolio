@@ -1,9 +1,10 @@
 <footer>
 	<hr>
 	<nav>
-		<a class="nav-item" href="mailto:{{site.data.profil.email}}">{{site.data.profil.email}}</a>
+		<a class="nav-item" href="mailto:{{site.data.profil.email}}">{{site.data.profil.email}}</a> -
+		<a class="nav-item" href="pgp.txt">PGP public key</a>
 		{% for links in site.data.profil.links %}
-		<a class="nav-item" href="{{links.url}}">{{links.name}}</a>
+		- <a class="nav-item" href="{{links.url}}">{{links.name}}</a>
 		{% endfor %}
 	</nav>
 </footer>
