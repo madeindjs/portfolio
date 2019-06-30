@@ -35,46 +35,52 @@ experiences_data:
     company: iSignif
     link: https://isignif.fr/
     dates: Mai 2018 à aujourd'hui
-    quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
+    # quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
     description:
-      - J'ai créé une LegalTech (startup dans le domaine du droit) qui a pour but de mettre en relation les avocats et les huissiers afin de simplifier le processus de signification.
-      - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <strong>CEO</strong>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <strong>DPO</strong>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <strong>développeur</strong>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
+      - Participation à la création d'une startup qui a pour but de mettre en relation les avocats et les huissiers afin de simplifier le processus de signification.
+      - Développement du produit en utilisant <strong>Ruby on Rails</strong>, <strong>MariaDB</strong> et <strong>Vue.js</strong>
+      # - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <strong>CEO</strong>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <strong>DPO</strong>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <strong>développeur</strong>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
 
   - job_title: Professeur de cours particuliers
     company: Superprof
     link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
     dates: Depuis 2018
     description:
-      - Régulièrement, je donne des cours particuliers à propos de la construction d'applications web avec <strong>Ruby on Rails</strong> sur la plateforme <a href="https://superprof.fr">superprof.fr</a>.
-    quote: Cela me permet de partager ma passion et c'est une expérience extrêmement enrichissante.
+      - Dispense de cours particuliers à propos <strong>Ruby on Rails</strong> par webcam.
+    # quote: Cela me permet de partager ma passion et c'est une expérience extrêmement enrichissante.
 
   - job_title: Développeur PHP
     company: GAC Technology
     link: https://gac-technology.com/
     dates: Janvier 2017 à aujourd'hui
-    quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
+    # quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
     description:
-      - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solutions techniques pérennes. Au sein de cette entreprise, je suis développeur back-end <strong>PHP</strong>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tels que <strong>MySQL</strong>, <strong>Elastic Search</strong> et <strong>Redis</strong>.
+      - Développement de l'application web en PHP avec Zend Framework
+      - Construction d'une API avec Laravel
+      # - Création de 
+      # - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solutions techniques pérennes. Au sein de cette entreprise, je suis développeur back-end <strong>PHP</strong>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tels que <strong>MySQL</strong>, <strong>Elastic Search</strong> et <strong>Redis</strong>.
 
-  - job_title: Pilote qualité process - Chef de projet - Développeur
+  - job_title: Assistant Bureau d'études / Développeur
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
     dates: Septembre 2011 à janvier 2017
     quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
     description:
-      - Chez Carrier, j'ai eu l'opportunité de me diversifier dans mon travail
-      - En tant que Chef de projet, j'ai développé une solution de dessin 3D avec <strong>Sketchup</strong> et l'API <strong>Ruby</strong>. En tant que Pilote qualité process, j'ai réalisé une application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> afin de suivre les interventions techniques. En tant que bureau d'étude, je réalisais les calculs de dimensionnement des installations et le dessin des plans d'éxecution sous <strong>AutoCad</strong>.
+      - Développement d'un plugin de dessin 3D pour <strong>Sketchup</strong> gràce à l'API <strong>Ruby</strong>.
+      - Formation des utilisateurs européens en anglais.
+      - Développement application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> afin de suivre des interventions techniques. 
+      - Réalisation les calculs de dimensionnement des installations et le dessin des plans d'éxecution sous <strong>AutoCad</strong>.
 
 projects_data:
   - name: API on Rails 5
-    description: J'ai traduit et mis à jour l'excellent livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> qui traite des meilleures pratiques pour construire une API en utilisant Rails
+    description: Traduction et mise à jour du livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails</a> qui traite des meilleures pratiques pour construire une API en utilisant Rails
     link: https://github.com/madeindjs/api_on_rails
 
   - name: Crystagiri
-    description: Ce projet est un parseur de document HTML. Ce n'était qu'une excuse pour apprendre le langage <strong>Crystal</strong>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
+    description: Parseur de document HTML. Ce n'était qu'une excuse pour apprendre le langage <strong>Crystal</strong>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
     link: https://github.com/madeindjs/Crystagiri
 
   - name: Raspberry Cook
-    description: Ce projet m'a permis de découvrir et m'auto-former sur <strong>Ruby on Rails</strong> ainsi que de créer un serveur sur un Raspberry PI.
+    description: Plateforme de partage de recettes de cuisines. Ce projet m'a permis de découvrir et m'auto-former sur <strong>Ruby on Rails</strong> ainsi que de créer un serveur sur un Raspberry PI.
     link: https://github.com/RaspberryCook/website
     picture: img/projects/raspberry-cook.png

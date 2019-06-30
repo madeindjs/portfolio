@@ -12,22 +12,24 @@ layout: main
 
 
 <section>
-  <h2>{% t professional_experiences %}</h2>
+    <h2>{% t professional_experiences %}</h2>
 
-  {% for experience in site.translations[site.lang]['experiences_data'] %}
-    <h3>{{ experience.job_title }}</h3>
-
-    <p>{{ experience.dates }} @ <a href="{{ experience.link }}">{{ experience.company }}</a></p>
-
-    {% for task in experience.description %}
-    <p>{{ task }}</p>
-    {% endfor %}
+    <dl>
+      {% for experience in site.translations[site.lang]['experiences_data'] %}
+      <dt> {{ experience.job_title }} <small>@ <a href="{{ experience.link }}">{{ experience.company }}</a> - {{ experience.dates }}</small></dt>
+      
+      <dd>
+        <ul>
+          {% for task in experience.description %}
+            <li>{{ task }}</li>
+            {% endfor %}
+        </ul>
+      </dd>
+      <br>
+      {% endfor %}
+    </dl>
+  </section>
   
-    <blockquote>
-      {{ experience.quote }}
-    </blockquote>
-  {% endfor %}
-</section>
 
 <section>
   <h2>{% t open_source.title %}</h2>
@@ -44,7 +46,7 @@ layout: main
     </li>
     {% endfor %}
   </ul>
-  <p>{% t open_source.see_all %}<a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p>
+  <p>{% t open_source.see_all %} <a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p>
 </section>
 
 <section>
