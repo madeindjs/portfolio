@@ -1,0 +1,219 @@
+---
+---
+
+//  heavily inspired from https://github.com/nicokant/readable-css
+
+$serifFont: "times"
+$sansFont: "sans-serif"
+$baseFontSize: 1em
+$line-height: 1.3em
+$max-width: 32em
+$text-color: #555
+$title-color: #222
+$subtitle-color: #777
+$marker-color: rgba(82, 232, 165, 0.3)
+$table-background-color: rgb(58, 83, 155)
+$table-text-color: #222
+$table-border-color: #777
+
+=marginDefault ($fontSize)
+  margin-top: $fontSize
+  margin-bottom: $fontSize
+  margin-right: 0
+  margin-left: 0
+
+// content
+p
+  +marginDefault($baseFontSize)
+  line-height: $line-height
+  color: $text-color
+  font-family: $serifFont, serif
+  text-align: justify
+
+blockquote
+  +marginDefault($baseFontSize)
+  margin-left: $baseFontSize
+  border-left: $baseFontSize/4 solid #dddddd
+  padding-left: $baseFontSize
+
+code
+  background-color: #dddddd
+  opacity: .9
+  padding: $baseFontSize/8 $baseFontSize/4
+  border-radius: 3px
+
+// header
+
+h1, h2, h3, h4, h5, h6
+  @include marginDefault($baseFontSize)
+  font-family: $sansFont, sans-serif
+  font-weight: 700
+  color: $title-color
+h1
+  font-size: $baseFontSize * 2
+h2
+  font-size: $baseFontSize * 1.5
+h3
+  font-size: $baseFontSize * 1.25
+h4, h5, h6
+  font-size: $baseFontSize
+
+// nav
+//   padding-top: $baseFontSize
+//   padding-bottom: $baseFontSize
+
+
+// inline
+
+a
+  color: $text-color
+  text-decoration: underline
+
+  &:hover
+    color: $title-color
+
+mark
+  color: $text-color
+  background-color: $marker-color
+
+strong, b
+  font-weight: 700
+
+em, i, cite, blockquote, q
+  font-style: italic
+
+small
+  font-size: $baseFontSize * 0.6
+
+big
+  font-size: $baseFontSize * 1.2
+
+abbr[title], acronym[title]
+  text-decoration: underline dotted
+
+sup
+  vertical-align: super
+  font-size: $baseFontSize * 0.6
+
+sub
+  vertical-align: sub
+  font-size: $baseFontSize * 0.6
+
+u
+  text-decoration: underline
+
+// list
+
+ul
+  list-style: disc outside none
+ol
+  list-style: decimal outside none
+li
+  @include marginDefault($baseFontSize/2)
+  color: $text-color
+  text-align: justify
+
+dl
+  @include marginDefault($baseFontSize)
+
+  dt
+    font-weight: 700
+  dd
+    margin-left: $baseFontSize
+  dt + dd
+    margin-bottom: $baseFontSize
+
+
+// media
+
+img
+  max-width: 100%
+  display: block
+  margin: $baseFontSize auto
+
+  &.big
+    @include marginDefault($baseFontSize)
+    width: 120%
+    margin-left: -10%
+
+
+// table
+
+table
+  text-align: center
+  vertical-align: middle
+  color: $table-text-color
+
+  td, th
+    border-width: 1px
+    border-style: solid
+    border-color: $table-border-color
+    padding: 0 1em
+
+  th
+    font-weight: 700
+
+  thead th
+    background-color: rgba($table-background-color, .7)
+
+  tbody tr
+    &:nth-child(even)
+      background-color: rgba($table-background-color, .2)
+
+footer
+  margin-bottom: 5rem
+  padding-top: 2rem 
+
+// custom
+
+ul.list-inline
+  list-style-type: none
+  padding-left: 0
+  // @include marginDefault($baseFontSize)
+  
+  & > li ~ li::before
+    content : ' - '
+    // padding-right: 1em
+
+  li
+    margin: 0
+    display: inline
+
+@media screen
+  body
+    max-width: 720px
+    margin: auto
+
+  h1
+    font-size: 3rem
+
+  h2
+    font-size: 2rem
+
+  article
+    margin-bottom: 5rem
+
+  pre.highlight
+    background-color: #ddd
+
+  pre.highlight
+    overflow-x: auto
+    overflow-y: hidden
+
+  
+
+  .hidden
+    display: none
+
+  img
+    max-width: 100%
+
+  .only-print
+    display: none !important
+
+@media print
+  footer, header, .no-print
+    display: none !important
+
+  a
+    text-decoration: none

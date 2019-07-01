@@ -13,8 +13,8 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Rousseau Alexandre
-email: contact@rousseau-alexandre.Fr
+title: Alexandre Rousseau
+email: contact@rousseau-alexandre.fr
 description: Mon Portfolio
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://rousseau-alexandre.fr" # the base hostname & protocol for your site, e.g. http://example.com

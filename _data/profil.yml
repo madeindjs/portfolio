@@ -1,9 +1,9 @@
 firstname: Alexandre
 lastname: Rousseau
 birth_date: 1992-12-28
-address: 73c avenue de Bohlen, 69120, Vaulx-en-Velin
+address: 18 rue de ma Gaité, 69006, Lyon
 phone: "+33663549581"
-email: contact@rousseau-alexandre.com
+email: contact@rousseau-alexandre.fr
 picture: https://avatars3.githubusercontent.com/u/11815139?s=300&v=4
 
 birth_date: '1992-12-28'
@@ -12,9 +12,12 @@ town_birth: Toulouse
 links:
   - name: LinkedIn
     url: https://www.linkedin.com/in/alexandre-rousseau-a55a9464/
+    short: linkedin.com/in/alexandre-rousseau-a55a9464
   - name: Github
     url: https://github.com/madeindjs/
+    short: github.com/madeindjs
   - name: Stack Overflow
     url: https://stackoverflow.com/users/5935198/rousseaualexandre
+    short: stackoverflow.com/users/5935198
 
 jobtitle: Développeur Fullstack

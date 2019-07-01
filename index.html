@@ -2,8 +2,17 @@
 layout: main
 ---
 
+<nav class="only-print">
+  <ul class="list-inline">
+    <li><a href="mailto:{{site.data.profil.email}}">{{ site.data.profil.email }}</a></li>
+    <li><a href="pgp.txt">3072R/AB2676CC</a></li>
+    <li><a href="https://github.com/madeindjs">github.com/madeindjs</a></li>
+  </ul>
+  </nav>
+  
+  
 <section>
-  <h1>{% t about_me %}</h1>
+  <h1>Alexandre Rousseau</h1>
   {% for desc in site.translations[site.lang]['description'] %}
   <p>{{ desc }}</p>
   {% endfor %}
@@ -14,26 +23,21 @@ layout: main
 <section>
     <h2>{% t professional_experiences %}</h2>
 
-    <dl>
       {% for experience in site.translations[site.lang]['experiences_data'] %}
-      <dt> {{ experience.job_title }} <small>@ <a href="{{ experience.link }}">{{ experience.company }}</a> - {{ experience.dates }}</small></dt>
+      <p><strong>{{ experience.job_title }}</strong> @ <a href="{{ experience.link }}">{{ experience.company }}</a> - <small>{{ experience.dates }}</small></p>
       
-      <dd>
-        <ul>
-          {% for task in experience.description %}
-            <li>{{ task }}</li>
-            {% endfor %}
-        </ul>
-      </dd>
-      <br>
+      <ul>
+        {% for task in experience.description %}
+          <li>{{ task }}</li>
+          {% endfor %}
+      </ul>
       {% endfor %}
-    </dl>
   </section>
   
 
 <section>
   <h2>{% t open_source.title %}</h2>
-  <p>{% t open_source.lead %}</p>
+  <!-- <p>{% t open_source.lead %}</p> -->
   <ul>
     {% for project in site.translations[site.lang]['projects_data'] %}
     <li>
@@ -46,7 +50,7 @@ layout: main
     </li>
     {% endfor %}
   </ul>
-  <p>{% t open_source.see_all %} <a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p>
+  <!-- <p>{% t open_source.see_all %} <a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p> -->
 </section>
 
 <section>

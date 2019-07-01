@@ -20,41 +20,29 @@ title: Blog
     <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 256 }} ... <a href="{{ post.url | prepend: site.baseurl }}">voir plus</a></p>
     <!-- <p><small>{{ post.date | date: "%d/%m/%Y" }}</small></p> -->
   </article>
-  <hr>
 {% endfor %}
 
 <!-- Pagination links -->
 <nav>
-  <ul class="pagination">
     {% if paginator.previous_page %}
-    <li class="page-item">
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="page-link">Précédent</a>
-    </li>
+      <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Précédent</a>
     {% else %}
-    <li class="page-item disabled"><span class="page-link">Précédent</span></li>
+      <span>Précédent</span>
     {% endif %}
-    {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-    <li class="page-item active">
-      <a class="page-link" href="{{ paginator.previous_page_path | relative_url | prepend: site.baseurl }}">{{ page }}</a>
-    </li>
-    {% elsif page == 1 %}
 
-    <li class="page-item">
-      <a class="page-link" href="{{ paginator.previous_page_path | relative_url | prepend: site.baseurl }}">{{ page }}</a>
-    </li>
-    {% else %}
-    <li class="page-item">
-      <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
-    </li>
-    {% endif %}
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <a href="{{ paginator.previous_page_path | relative_url | prepend: site.baseurl }}">{{ page }}</a>
+      {% elsif page == 1 %}
+        <a href="{{ paginator.previous_page_path | relative_url | prepend: site.baseurl }}">{{ page }}</a>
+      {% else %}
+        <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+      {% endif %}
     {% endfor %}
     {% if paginator.next_page %}
-    <li class="page-item">
-      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="page-link">Suivant</a>
-    </li>
+      <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">Suivant</a>
     {% else %}
-    <li class="page-item disabled"><span class="page-link">Suivant</span></li>
+      <span>Suivant</span>
     {% endif %}
   </ul>
 </nav>

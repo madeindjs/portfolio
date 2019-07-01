@@ -1,11 +1,13 @@
 <footer>
 	<hr>
 	<nav>
-		<a class="nav-item" href="mailto:{{site.data.profil.email}}">{{site.data.profil.email}}</a> -
-		<a class="nav-item" href="pgp.txt">PGP public key</a>
-		{% for links in site.data.profil.links %}
-		- <a class="nav-item" href="{{links.url}}">{{links.name}}</a>
-		{% endfor %}
+		<ul class="list-inline">
+			<li><a href="mailto:{{site.data.profil.email}}">{{site.data.profil.email}}</a></li>
+			<li><a href="pgp.txt">GPG: 3072R/AB2676CC</a></li>
+			{% for links in site.data.profil.links %}
+				<li><a href="{{links.url}}">{{links.name}}</a></li>
+			{% endfor %}
+		</ul>
 	</nav>
 </footer>
 

@@ -16,19 +16,18 @@ description:
   - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
   - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelles technologies telles que <strong>Rust</strong> / <strong>Crystal</strong>.
 
-
 educations_data:
-  - qualification: Master Développeur Fullstack
+  - qualification: Titre RNCP niveau II, Développeur Full Stack en cours d'obtention
     dates: Septembre 2017 à aujourd'hui
     name: IT-Akademy, Villeurbanne
 
-  - qualification: BTS Fluides, énergies et environnement
-    dates: Septembre 2011 à Aout 2013
-    name: La Martinière Monplaisir, Lyon 8e
+  - qualification: BTS <abbr title="Fluides, énergies et environnement">FEE</abbr>
+    dates: 2011 à 2013
+    name: La Martinière Monplaisir, Lyon
 
-  - qualification: Bac STI Génie Energétique
-    dates: Septembre 2009 à Aout 2011
-    name: La Martinière Monplaisir, Lyon 8e
+  - qualification: Bac <abbr title="Sciences et Techniques de l'Ingénieur">STI</abbr> Génie Energétique
+    dates: 2009 à 2011
+    name: La Martinière Monplaisir, Lyon
 
 experiences_data:
   - job_title: Associé
@@ -37,22 +36,16 @@ experiences_data:
     dates: Mai 2018 à aujourd'hui
     # quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
     description:
-      - Participation à la création d'une startup qui a pour but de mettre en relation les avocats et les huissiers afin de simplifier le processus de signification.
-      - Développement du produit en utilisant <strong>Ruby on Rails</strong>, <strong>MariaDB</strong> et <strong>Vue.js</strong>
+      - Participation à la création d'une startup dans le domaine du droit.
+      - Développement from scratch en utilisant <strong>Ruby on Rails</strong>, <strong>MariaDB</strong> et <strong>Vue.js</strong>
+      - Délégué à la Protection des Données <abbr title="Règlement général sur la protection des données">RGPD</abbr>
       # - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <strong>CEO</strong>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <strong>DPO</strong>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <strong>développeur</strong>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
 
-  - job_title: Professeur de cours particuliers
-    company: Superprof
-    link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
-    dates: Depuis 2018
-    description:
-      - Dispense de cours particuliers à propos <strong>Ruby on Rails</strong> par webcam.
-    # quote: Cela me permet de partager ma passion et c'est une expérience extrêmement enrichissante.
 
   - job_title: Développeur PHP
     company: GAC Technology
     link: https://gac-technology.com/
-    dates: Janvier 2017 à aujourd'hui
+    dates: Janvier 2017 à Juillet 2019 (2 ans, 6 mois)
     # quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
     description:
       - Développement de l'application web en PHP avec Zend Framework
@@ -63,13 +56,20 @@ experiences_data:
   - job_title: Assistant Bureau d'études / Développeur
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: Septembre 2011 à janvier 2017
+    dates: Septembre 2011 à janvier 2017 (5 ans, 3 mois)
     quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
     description:
-      - Développement d'un plugin de dessin 3D pour <strong>Sketchup</strong> gràce à l'API <strong>Ruby</strong>.
-      - Formation des utilisateurs européens en anglais.
-      - Développement application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> afin de suivre des interventions techniques. 
-      - Réalisation les calculs de dimensionnement des installations et le dessin des plans d'éxecution sous <strong>AutoCad</strong>.
+      - Développement plugin de dessin 3D pour <strong>Sketchup</strong> gràce à l'API <strong>Ruby</strong>. Formation des utilisateurs en anglais.
+      - Développement application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> pour le suivis d'interventions techniques. 
+      - Calculs de dimensionnement d'installations et dessin de plans d'éxecution sous <strong>AutoCad</strong>.
+
+  - job_title: Professeur particulier Ruby
+    company: Superprof
+    link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
+    dates: Depuis 2018
+    description:
+      - Dispense de cours particuliers à propos <strong>Ruby on Rails</strong> par webcam.
+    # quote: Cela me permet de partager ma passion et c'est une expérience extrêmement enrichissante.
 
 projects_data:
   - name: API on Rails 5
