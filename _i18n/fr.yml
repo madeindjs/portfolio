@@ -13,11 +13,11 @@ my_educations: Mes diplômes
 interest_points: <strong>Ruby on Rails</strong>, la course à pied et ma copine.
 
 description:
-  - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
+  # - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
   - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelles technologies telles que <strong>Rust</strong> / <strong>Crystal</strong>.
 
 educations_data:
-  - qualification: Titre RNCP niveau II, Développeur Full Stack en cours d'obtention
+  - qualification: Titre <abbr title="Répertoire National des Certifications Professionnelles">RNCP</abbr> niveau II, Développeur Full Stack en cours d'obtention
     dates: Septembre 2017 à aujourd'hui
     name: IT-Akademy, Villeurbanne
 
@@ -68,19 +68,23 @@ experiences_data:
     link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
     dates: Depuis 2018
     description:
-      - Dispense de cours particuliers à propos <strong>Ruby on Rails</strong> par webcam.
+      # - Dispense de cours particuliers à propos <strong>Ruby on Rails</strong> par webcam.
     # quote: Cela me permet de partager ma passion et c'est une expérience extrêmement enrichissante.
 
 projects_data:
   - name: API on Rails 5
-    description: Traduction et mise à jour du livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails</a> qui traite des meilleures pratiques pour construire une API en utilisant Rails
+    description: Traduction et mise à jour du livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a>
     link: https://github.com/madeindjs/api_on_rails
 
+  - name: ActiveStorage::SendZip
+    description: Librairie pour Ruby on Rails qui permet de créer des archives .zip simplement.
+    link: https://github.com/madeindjs/active_storage-send_zip
+
   - name: Crystagiri
-    description: Parseur de document HTML. Ce n'était qu'une excuse pour apprendre le langage <strong>Crystal</strong>. Maintenant il est suivi par un peu moins de 100 personnes sur Github.
+    description: Parseur de document HTML écrit en <strong>Crystal</strong> et suivi par plus de 100 personnes sur Github.
     link: https://github.com/madeindjs/Crystagiri
 
   - name: Raspberry Cook
-    description: Plateforme de partage de recettes de cuisines. Ce projet m'a permis de découvrir et m'auto-former sur <strong>Ruby on Rails</strong> ainsi que de créer un serveur sur un Raspberry PI.
+    description: Plateforme de partage de recettes de cuisines écris avec Ruby on Rails et auto-hébergé sur un Raspberry PI.
     link: https://github.com/RaspberryCook/website
     picture: img/projects/raspberry-cook.png

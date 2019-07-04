@@ -42,9 +42,9 @@ layout: main
     {% for project in site.translations[site.lang]['projects_data'] %}
     <li>
         {% if project.link %}
-        <a href="{{ project.link }}">{{ project.name }}</a>
+          <strong><a href="{{ project.link }}">{{ project.name }}</a></strong>
         {% else %}
-        {{ project.name }}
+          {{ project.name }}
         {% endif %}
       {{ project.description }}
     </li>
