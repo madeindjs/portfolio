@@ -3,8 +3,8 @@
 
 //  heavily inspired from https://github.com/nicokant/readable-css
 
-$serifFont: "times"
-$sansFont: "sans-serif"
+$font: "iA Writer Duospace"
+$sansFont: "iA Writer Duospace"
 $baseFontSize: 1em
 $line-height: 1.3em
 $max-width: 32em
@@ -22,12 +22,16 @@ $table-border-color: #777
   margin-right: 0
   margin-left: 0
 
+h1, h2, h3, h4, h5, h6
+p, li, pre, blockquote
+  font-family: $font, serif
+  
+
 // content
 p
   +marginDefault($baseFontSize)
   line-height: $line-height
   color: $text-color
-  font-family: $serifFont, serif
   text-align: justify
 
 blockquote
@@ -46,7 +50,7 @@ code
 
 h1, h2, h3, h4, h5, h6
   @include marginDefault($baseFontSize)
-  font-family: $sansFont, sans-serif
+  // font-family: $sansFont, sans-serif
   font-weight: 700
   color: $title-color
 h1
@@ -105,13 +109,18 @@ u
 // list
 
 ul
-  list-style: disc outside none
+  list-style: none
+  padding-left: 20px
 ol
   list-style: decimal outside none
 li
-  @include marginDefault($baseFontSize/2)
+  // @include marginDefault($baseFontSize/2)  
   color: $text-color
   text-align: justify
+  text-indent: -20px
+  &:before
+    content: '- '
+    text-indent: 20px
 
 dl
   @include marginDefault($baseFontSize)
@@ -171,6 +180,8 @@ ul.list-inline
   padding-left: 0
   // @include marginDefault($baseFontSize)
   
+  li:before
+    content : ''
   & > li ~ li::before
     content : ' - '
     // padding-right: 1em
@@ -219,3 +230,27 @@ ul.list-inline
 
   a
     text-decoration: none
+
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: normal
+  font-style: normal
+  src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
+
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: normal
+  font-style: italic
+  src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
+
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: bold
+  font-style: normal
+  src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
+
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: bold
+  font-style: italic
+  src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
