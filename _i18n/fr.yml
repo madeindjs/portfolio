@@ -39,8 +39,15 @@ experiences_data:
       - Participation à la création d'une startup dans le domaine du droit.
       - Développement from scratch en utilisant <strong>Ruby on Rails</strong>, <strong>MariaDB</strong> et <strong>Vue.js</strong>
       - Délégué à la Protection des Données <abbr title="Règlement général sur la protection des données">RGPD</abbr>
-      # - En tant qu’associé, je participe aux décisions stratégiques de l’entreprise. En tant que <strong>CEO</strong>,  j’ai pour mission de faire des choix techniques cohérents afin d’assurer la pérennité de notre  produit. En tant que <strong>DPO</strong>, je suis chargé de veiller au respect des données et à la mise en conformité de notre outil.En tant que <strong>développeur</strong>, j'ai entièrement développé notre produit en utilisant Ruby On Rails et Vue.js
 
+  - job_title: Développeur Fullstack
+    company: Dougs
+    link: https://www.dougs.fr/
+    dates: Depuis août 2019
+    # quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
+    description:
+      - Développement de l'API avec Node.js, Express.js et PostgreSQL
+      - Développement du client Front-end avec Angular
 
   - job_title: Développeur PHP
     company: GAC Technology
@@ -48,10 +55,8 @@ experiences_data:
     dates: Janvier 2017 à Juillet 2019 (2 ans, 6 mois)
     # quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
     description:
-      - Développement de l'application web en PHP avec Zend Framework
       - Construction d'une API avec Laravel
-      # - Création de 
-      # - Dans mon métier, je suis amené à comprendre le besoin du client afin de le retranscrire en solutions techniques pérennes. Au sein de cette entreprise, je suis développeur back-end <strong>PHP</strong>. Afin d'apporter des solutions techniques manipulant une grande quantité de donnés. Nous utilisons des outils tels que <strong>MySQL</strong>, <strong>Elastic Search</strong> et <strong>Redis</strong>.
+      - Développement de l'application web en PHP avec Zend Framework
 
   - job_title: Assistant Bureau d'études / Développeur
     company: Carrier
@@ -59,20 +64,18 @@ experiences_data:
     dates: Septembre 2011 à janvier 2017 (5 ans, 3 mois)
     quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
     description:
-      - Développement plugin de dessin 3D pour <strong>Sketchup</strong> gràce à l'API <strong>Ruby</strong>. Formation des utilisateurs en anglais.
+      - Développement plugin de dessin 3D pour <strong>Sketchup</strong> avec  <strong>Ruby</strong>. Formation des utilisateurs en anglais.
       - Développement application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> pour le suivis d'interventions techniques. 
-      - Calculs de dimensionnement d'installations et dessin de plans d'éxecution sous <strong>AutoCad</strong>.
+      - Calculs de dimensionnement et dessin de plans d'éxecution avec <strong>AutoCad</strong>.
 
   - job_title: Professeur particulier Ruby
     company: Superprof
     link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
     dates: Depuis 2018
     description:
-      # - Dispense de cours particuliers à propos <strong>Ruby on Rails</strong> par webcam.
-    # quote: Cela me permet de partager ma passion et c'est une expérience extrêmement enrichissante.
 
 projects_data:
-  - name: API on Rails 5
+  - name: API on Rails
     description: Traduction et mise à jour du livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a>
     link: https://github.com/madeindjs/api_on_rails
 

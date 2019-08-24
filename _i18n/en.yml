@@ -41,6 +41,13 @@ experiences_data:
       - I have created a LegalTech (startup in the field of law) which aims to connect lawyers and bailiffs in order to simplify the service process.
       - As a partner, I participate in the company's strategic decisions. As a <strong>CEO</strong>, my mission is making coherent technical choices to ensure the durability of our product. As <strong>DPO</strong>, I am responsible for ensuring data compliance and compliance of our tool, and as <strong>developer</strong>, I have developed our entire product using Ruby On Rails and Vue.js
 
+  - job_title: Fullstack developer Node.JS / JavaScript
+    company: GAC Technology
+    link: https://www.dougs.fr/
+    dates: Since august 2019
+    description:
+      - Build API with Node.js, Express.js and PostgreSQL
+      - Build Front-end client with Angular
 
   - job_title: Tutoring teacher
     company: Superprof
@@ -53,7 +60,7 @@ experiences_data:
   - job_title: PHP Developper
     company: GAC Technology
     link: https://gac-technology.com/
-    dates: January 2017 to present
+    dates: January 2017 to july 2019
     quote: GAC Technology is a Scale-Up that has taught me how to handle large amounts of data.
     description:
       - I have to understand the customer's needs to translate it into a technical solution. Within this company, I am a back-end developer <strong>PHP</strong>. I also must take care about performance because of large amount of data owned by Gac. We use tools such as <strong>MySQL</strong>, <strong>Elastic Search</strong> and <strong>Redis</strong>.
@@ -69,7 +76,7 @@ experiences_data:
       - As a design office, I carried out calculations of the installations's sizing and the drawing of execution's plans under <strong>AutoCad</strong>.
 
 projects_data:
-  - name: API on Rails 5
+  - name: API on Rails
     description: I translated and updated the excellent book <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> which deals with best practices for building an API using Rails
     link: https://github.com/madeindjs/api_on_rails
 
