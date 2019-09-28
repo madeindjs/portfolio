@@ -1,11 +1,38 @@
+---
+title: Mettre en place un serveur XMPP sur un Raspberry PI
+---
+
+TODO: expliquer XMPP
+
+TODO: expliquer Prosody
 
 ~~~bash
-$ sudo prosodyctl adduser user@domain.com
+$ sudo apt-get install prosody
+~~~
+
+Générer un certificat pour chiffrer les connexions:
+
+~~~bash
+$ sudo prosodyctl cert generate rousseau-alexandre.fr
+~~~
+
+~~~lua
+-- /etc/prosody/prosody.cfg.lua
+
+VirtualHost rousseau-alexandre.fr"
+ssl = {
+        key = "/var/lib/prosody/rousseau-alexandre.fr.key";
+        certificate = "/var/lib/prosody/rousseau-alexandre.fr.crt";
+}
+~~~
+
+Ajouter un utilisateur:
+
+~~~bash
+$ sudo prosodyctl adduser alexandre@rousseau-alexandre.fr
 ~~~
 
 ## Extrieur
-
-[shaula/rpi-prosody: Prosody XMPP server for Raspberry Pi](https://github.com/shaula/rpi-prosody)
 
 The following ports are exposed:
 
