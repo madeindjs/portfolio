@@ -9,12 +9,75 @@ $baseFontSize: 1em
 $line-height: 1.3em
 $max-width: 32em
 $text-color: #555
+$text-color-dark: white
+$background-dark: #121212
 $title-color: #222
+$title-color-dark: white
 $subtitle-color: #777
 $marker-color: rgba(82, 232, 165, 0.3)
 $table-background-color: rgb(58, 83, 155)
 $table-text-color: #222
+$table-text-color-dark: white
 $table-border-color: #777
+
+@media (prefers-color-scheme: default)
+  h1, h2, h3, h4, h5, h6
+    color: $title-color
+
+  body
+    color: $text-color
+
+  table
+    color: $table-text-color
+
+@media (prefers-color-scheme: dark)
+  h1, h2, h3, h4, h5, h6
+    color: $title-color-dark
+
+  body
+    background: $background-dark
+    color: $text-color-dark
+
+  a
+    color: $text-color-dark
+
+  button, .button
+    background: $background-dark
+    color: $text-color-dark
+    border-color: $text-color-dark
+
+  input
+    &[type="button"], &[type="reset"], &[type="submit"]
+      background: $background-dark
+      color: $text-color-dark
+      border-color: $text-color-dark
+
+
+  input
+    &[type="email"], &[type="number"], &[type="password"], &[type="search"], &[type="tel"], &[type="text"], &[type="url"]
+      color: $text-color-dark
+      border-color: $text-color-dark
+
+  textarea, select
+    color: $text-color-dark
+    border-color: $text-color-dark
+
+  td, th
+    border-bottom-color: $text-color-dark
+
+  blockquote
+    border-left-color: $text-color-dark
+
+  pre
+    border-left-color: $text-color-dark
+    border-color: $text-color-dark
+    border-left-color: $text-color-dark
+
+  hr
+    border-color: white
+
+  table
+    color: $table-text-color-dark
 
 =marginDefault ($fontSize)
   margin-top: $fontSize
@@ -31,7 +94,6 @@ p, li, pre, blockquote
 p
   +marginDefault($baseFontSize)
   line-height: $line-height
-  color: $text-color
   text-align: justify
 
 blockquote
@@ -50,9 +112,7 @@ code
 
 h1, h2, h3, h4, h5, h6
   @include marginDefault($baseFontSize)
-  // font-family: $sansFont, sans-serif
   font-weight: 700
-  color: $title-color
 h1
   font-size: $baseFontSize * 2
 h2
@@ -67,11 +127,11 @@ h4, h5, h6
 //   padding-bottom: $baseFontSize
 
 header
-  border-bottom: dashed 2px $text-color
+  border-bottom: dashed 2px
   text-align: center
 
 footer
-  border-top: dashed 2px $text-color
+  border-top: dashed 2px
   text-align: center
   margin-bottom: 2rem
   margin-top: 2rem
@@ -80,14 +140,12 @@ footer
 // inline
 
 a
-  color: $text-color
   text-decoration: underline
 
   &:hover
     color: $title-color
 
 mark
-  color: $text-color
   background-color: $marker-color
 
 strong, b
@@ -128,8 +186,6 @@ ul
 ol
   list-style: decimal outside none
 li
-  // @include marginDefault($baseFontSize/2)  
-  color: $text-color
   text-align: justify
   text-indent: -20px
   &:before
@@ -266,3 +322,4 @@ ul.list-inline
   font-weight: bold
   font-style: italic
   src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
+
