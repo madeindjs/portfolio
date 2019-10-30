@@ -5,7 +5,7 @@
 
 $font: "iA Writer Duospace"
 $sansFont: "iA Writer Duospace"
-$baseFontSize: 1em
+$baseFontSize: 1.2em
 $line-height: 1.3em
 $max-width: 32em
 $text-color: #555
@@ -92,9 +92,12 @@ p, li, pre, blockquote
 
 // content
 p
-  +marginDefault($baseFontSize)
+  +marginDefault($baseFontSize * 1.5)
   line-height: $line-height
   text-align: justify
+
+ul li
+  +marginDefault($baseFontSize/2)
 
 blockquote
   +marginDefault($baseFontSize)
@@ -103,7 +106,7 @@ blockquote
   padding-left: $baseFontSize
 
 code
-  background-color: #dddddd
+  // background-color: #dddddd
   opacity: .9
   padding: $baseFontSize/8 $baseFontSize/4
   border-radius: 3px
@@ -111,16 +114,20 @@ code
 // header
 
 h1, h2, h3, h4, h5, h6
-  @include marginDefault($baseFontSize)
   font-weight: 700
+  margin-bottom: $baseFontSize / 2
 h1
-  font-size: $baseFontSize * 2
+  font-size: $baseFontSize * 3
+  margin-top: $baseFontSize * 2
 h2
-  font-size: $baseFontSize * 1.5
+  font-size: $baseFontSize * 2
+  margin-top: $baseFontSize * 1.5
 h3
-  font-size: $baseFontSize * 1.25
+  font-size: $baseFontSize * 1.5
+  margin-top: $baseFontSize * 1.5
 h4, h5, h6
   font-size: $baseFontSize
+  margin-top: $baseFontSize
 
 // nav
 //   padding-top: $baseFontSize
@@ -274,8 +281,6 @@ ul.list-inline
   article
     margin-bottom: $baseFontSize * 3
 
-  pre.highlight
-    background-color: #ddd
 
   pre.highlight
     overflow-x: auto
