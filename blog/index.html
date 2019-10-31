@@ -7,7 +7,7 @@ title: Blog
 <h2 class="hidden">Liste des article</h2>
 
 {% for post in paginator.posts %}
-  <article class="col col-4">
+  <article>
     <!-- {% if post.thumbnail %}
       <img src="{{ post.thumbnail }}" alt="Card image cap">
     {% endif %} -->
@@ -17,8 +17,8 @@ title: Blog
         <li>{{ tag }}</li>
       {% endfor %}
     </ul> -->
-    <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 256 }} ... <a href="{{ post.url | prepend: site.baseurl }}">voir plus</a></p>
-    <!-- <p><small>{{ post.date | date: "%d/%m/%Y" }}</small></p> -->
+    <p class="text-right m-0"><date>{{ post.date | date: "%Y-%m-%dT%H:%M" }}</date></p>
+    <p class="mt-0">{{ post.excerpt | strip_html | strip_newlines | truncate: 256 }} ... <a href="{{ post.url | prepend: site.baseurl }}">voir plus</a></p>
   </article>
 {% endfor %}
 

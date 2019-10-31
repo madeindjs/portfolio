@@ -206,7 +206,7 @@ li
     text-indent: 20px
 
 dl
-  @include marginDefault($baseFontSize)
+  +marginDefault($baseFontSize)
 
   dt
     font-weight: 700
@@ -224,7 +224,7 @@ img
   margin: $baseFontSize auto
 
   &.big
-    @include marginDefault($baseFontSize)
+    +marginDefault($baseFontSize)
     width: 120%
     margin-left: -10%
 
@@ -252,6 +252,8 @@ table
     &:nth-child(even)
       background-color: rgba($table-background-color, .2)
 
+article
+  +marginDefault($baseFontSize * 2)
 
 
 // custom
@@ -271,6 +273,15 @@ ul.list-inline
     margin: 0
     display: inline
 
+.text-right
+  text-align: right
+
+.m-0
+  margin: 0
+
+.mt-0
+  margin: 0
+
 @media screen
   body
     max-width: 720px
@@ -285,7 +296,7 @@ ul.list-inline
     font-size: $baseFontSize * 2
 
   article
-    margin-bottom: $baseFontSize * 3
+    +marginDefault($baseFontSize * 3)
 
 
   pre.highlight
