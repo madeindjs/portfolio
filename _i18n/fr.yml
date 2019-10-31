@@ -1,6 +1,6 @@
 about_me: A propos de moi
 i_like: J'aime
-professional_experiences: Expériences professionnelles
+professional_experiences: Expériences
 open_source:
   title: Open Source
   lead: J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations
@@ -9,74 +9,58 @@ open_source:
 my_github_profile: mon profil Github
 my_educations: Diplômes
 
-
 interest_points: <strong>Ruby on Rails</strong>, la course à pied et ma copine.
 
 description:
-  # - Passionné et autodidacte, mon implication personnelle m'a permis d'évoluer en tant que développeur. Aujourd'hui ma passion me permet de m'épanouir et me spécialiser.
   - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelles technologies telles que <strong>Rust</strong> / <strong>Crystal</strong>.
 
 educations_data:
-  - qualification: Titre <abbr title="Répertoire National des Certifications Professionnelles">RNCP</abbr> niveau II, Développeur Full Stack en cours d'obtention
-    dates: Septembre 2017 à aujourd'hui
+  - qualification: Titre <abbr title="Répertoire National des Certifications Professionnelles">RNCP</abbr> niveau Bac +4 Développeur Full Stack
+    dates: 2019
     name: IT-Akademy, Villeurbanne
 
   - qualification: BTS <abbr title="Fluides, énergies et environnement">FEE</abbr>
-    dates: 2011 à 2013
+    dates: 2013
     name: La Martinière Monplaisir, Lyon
 
   - qualification: Bac <abbr title="Sciences et Techniques de l'Ingénieur">STI</abbr> Génie Energétique
-    dates: 2009 à 2011
+    dates: 2011
     name: La Martinière Monplaisir, Lyon
 
 experiences_data:
-  - job_title: Associé
+  - job_title: Associé / Directeur Technique / <abbr title="Délégué à la protection des Données">DPO</abbr>
     company: iSignif
     link: https://isignif.fr/
-    dates: Mai 2018 à aujourd'hui
-    # quote: Participer à la création d'une startup et au développement d'un produit est un grand challenge.
-    description:
-      - Participation à la création d'une startup dans le domaine du droit.
-      - Développement from scratch en utilisant <strong>Ruby on Rails</strong>, <strong>MariaDB</strong> et <strong>Vue.js</strong>
-      - Délégué à la Protection des Données <abbr title="Règlement général sur la protection des données">RGPD</abbr>
+    dates: Depuis 2018-05
+    tags: [RubyOnRails, MariaDB, VueJS, Linux]
 
   - job_title: Développeur Fullstack
     company: Dougs
     link: https://www.dougs.fr/
-    dates: Depuis août 2019
-    # quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
-    description:
-      - Développement de l'API avec Node.js, Express.js et PostgreSQL
-      - Développement du client Front-end avec Angular
+    dates: Depuis 2019-08
+    tags: [NodeJS, TypeScript, PostgreSQL]
 
   - job_title: Développeur PHP
     company: GAC Technology
     link: https://gac-technology.com/
-    dates: Janvier 2017 à Juillet 2019 (2 ans, 6 mois)
-    # quote: GAC Technology est une Scale-Up qui m'a appris à manipuler des grandes quantités de données.
-    description:
-      - Construction d'une API avec Laravel
-      - Développement de l'application web en PHP avec Zend Framework
+    dates: 2017\2019 (2 ans, 6 mois)
+    tags: [PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux]
 
   - job_title: Assistant Bureau d'études / Développeur
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: Septembre 2011 à janvier 2017 (5 ans, 3 mois)
-    quote: Au sein de Carrier, j'ai eu la formidable expérience de former des personnes dans toute l'Europe sur un projet que j'ai mis en place.
-    description:
-      - Développement plugin de dessin 3D pour <strong>Sketchup</strong> avec  <strong>Ruby</strong>. Formation des utilisateurs en anglais.
-      - Développement application web avec <strong>C#</strong> & <strong>ASP.NET MVC</strong> pour le suivis d'interventions techniques. 
-      - Calculs de dimensionnement et dessin de plans d'éxecution avec <strong>AutoCad</strong>.
+    dates: 2011\2017 (5 ans, 3 mois)
+    tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
 
   - job_title: Professeur particulier Ruby
     company: Superprof
     link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
+    tags: [RubyOnRails, Vue.JS]
     dates: Depuis 2018
-    description:
 
 projects_data:
   - name: API on Rails
-    description: Traduction et mise à jour du livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a>
+    description: Redaction & publication livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a>.
     link: https://github.com/madeindjs/api_on_rails
 
   - name: ActiveStorage::SendZip
@@ -84,10 +68,10 @@ projects_data:
     link: https://github.com/madeindjs/active_storage-send_zip
 
   - name: Crystagiri
-    description: Parseur de document HTML écrit en <strong>Crystal</strong> et suivi par plus de 100 personnes sur Github.
+    description: Parseur de document HTML écrit en <strong>Crystal</strong>.
     link: https://github.com/madeindjs/Crystagiri
 
   - name: Raspberry Cook
-    description: Plateforme de partage de recettes de cuisines écris avec Ruby on Rails et auto-hébergé sur un Raspberry PI.
+    description: Plateforme de partage de recettes de cuisines.
     link: https://github.com/RaspberryCook/website
     picture: img/projects/raspberry-cook.png

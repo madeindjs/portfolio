@@ -3,8 +3,8 @@
 
 //  heavily inspired from https://github.com/nicokant/readable-css
 
-$font: "iA Writer Duospace"
-$sansFont: "iA Writer Duospace"
+$font: monospace
+$sansFont: monospace
 $baseFontSize: 1.2em
 $line-height: 1.3em
 $max-width: 32em
@@ -27,6 +27,12 @@ $table-border-color: #777
   body
     color: $text-color
 
+  a
+    color: $text-color
+
+    &:hover
+      color: $title-color
+
   table
     color: $table-text-color
 
@@ -40,6 +46,9 @@ $table-border-color: #777
 
   a
     color: $text-color-dark
+
+    &:hover
+      font-weight: bold
 
   button, .button
     background: $background-dark
@@ -107,9 +116,9 @@ blockquote
 
 code
   // background-color: #dddddd
-  opacity: .9
+  // opacity: .9
   padding: $baseFontSize/8 $baseFontSize/4
-  border-radius: 3px
+  // border-radius: 3px
 
 // header
 
@@ -118,7 +127,7 @@ h1, h2, h3, h4, h5, h6
   margin-bottom: $baseFontSize / 2
 h1
   font-size: $baseFontSize * 3
-  margin-top: $baseFontSize * 2
+  // margin-top: $baseFontSize * 2
 h2
   font-size: $baseFontSize * 2
   margin-top: $baseFontSize * 1.5
@@ -148,9 +157,6 @@ footer
 
 a
   text-decoration: underline
-
-  &:hover
-    color: $title-color
 
 mark
   background-color: $marker-color
@@ -304,27 +310,27 @@ ul.list-inline
   a
     text-decoration: none
 
-@font-face
-  font-family: "iA Writer Duospace"
-  font-weight: normal
-  font-style: normal
-  src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
+// @font-face
+//   font-family: "iA Writer Duospace"
+//   font-weight: normal
+//   font-style: normal
+//   src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
 
-@font-face
-  font-family: "iA Writer Duospace"
-  font-weight: normal
-  font-style: italic
-  src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
+// @font-face
+//   font-family: "iA Writer Duospace"
+//   font-weight: normal
+//   font-style: italic
+//   src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
 
-@font-face
-  font-family: "iA Writer Duospace"
-  font-weight: bold
-  font-style: normal
-  src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
+// @font-face
+//   font-family: "iA Writer Duospace"
+//   font-weight: bold
+//   font-style: normal
+//   src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
 
-@font-face
-  font-family: "iA Writer Duospace"
-  font-weight: bold
-  font-style: italic
-  src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
+// @font-face
+//   font-family: "iA Writer Duospace"
+//   font-weight: bold
+//   font-style: italic
+//   src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
 
