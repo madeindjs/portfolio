@@ -202,7 +202,7 @@ puts Slim::Template.new { slim_content }.render(context)
 
 ## Super, et les performances dans tout ça?
 
-J'ai voulu m'intéresser à l'impact qu'avaient de telles librairies sur les performances d'une application. Je me doute bien que cela n'aura pas autant d'impact qu'une [requête N+1]({% post_url 2018-06-22-kill-rails-n1-queries %}) mais c'est toujours intéressant de regarder d'un peu plus près (et puis c'est mon blog donc je fais ce que je veux).
+J'ai voulu m'intéresser à l'impact qu'avaient de telles librairies sur les performances d'une application. Je me doute bien que cela n'aura pas autant d'impact qu'une [requête N+1](/tutorial/2018/06/22/kill-rails-n1-queries.html) mais c'est toujours intéressant de regarder d'un peu plus près (et puis c'est mon blog donc je fais ce que je veux).
 
 Afin d'étudier les performances, j'ai utilisé la fonction `Benchmark#measure` et j'ai réalisé 50 000 conversions pour chaque:
 
