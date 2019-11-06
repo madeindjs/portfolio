@@ -11,14 +11,14 @@ title: Blog
     <!-- {% if post.thumbnail %}
       <img src="{{ post.thumbnail }}" alt="Card image cap">
     {% endif %} -->
-    <h3>{{ post.title }}</h3>
-    <!-- <ul class="list-inline">
+    <h3>{{ post.title }} <small>@{{ post.categories }}</small></h3>
+    <p class="text-right">
       {% for tag in post.tags %}
-        <li>{{ tag }}</li>
+        <code>+{{ tag }}</code>
       {% endfor %}
-    </ul> -->
-    <p class="text-right m-0"><date>{{ post.date | date: "%Y-%m-%dT%H:%M" }}</date></p>
-    <p class="mt-0">{{ post.excerpt | strip_html | strip_newlines | truncate: 256 }} ... <a href="{{ post.url | prepend: site.baseurl }}">voir plus</a></p>
+      &nbsp;<date>{{ post.date | date: "%Y-%m-%dT%H:%M" }}</date>
+    </p>
+    <p class="mt-0 text-justify">{{ post.excerpt | strip_html | strip_newlines | truncate: 512 }} ... <a href="{{ post.url | prepend: site.baseurl }}">voir plus</a></p>
   </article>
 {% endfor %}
 
