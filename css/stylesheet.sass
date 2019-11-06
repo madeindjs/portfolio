@@ -3,6 +3,7 @@
 
 //  heavily inspired from https://github.com/nicokant/readable-css
 
+$title-font: monospace
 $font: monospace
 $sansFont: monospace
 $baseFontSize: 1.2em
@@ -94,18 +95,13 @@ $table-border-color: #777
   margin-right: 0
   margin-left: 0
 
-h1, h2, h3, h4, h5, h6
-p, li, pre, blockquote
-  font-family: $font, serif
-  
-
 // content
 p
-  +marginDefault($baseFontSize * 1.5)
+  +marginDefault($baseFontSize)
   line-height: $line-height
-  text-align: justify
 
 ul li
+  font-size: $baseFontSize
   +marginDefault($baseFontSize/2)
 
 blockquote
@@ -114,15 +110,11 @@ blockquote
   border-left: $baseFontSize/4 solid #dddddd
   padding-left: $baseFontSize
 
-code
-  // background-color: #dddddd
-  // opacity: .9
-  padding: $baseFontSize/8 $baseFontSize/4
-  // border-radius: 3px
 
 // header
 
 h1, h2, h3, h4, h5, h6
+  font-family: $title-font
   font-weight: 700
   margin-bottom: $baseFontSize / 2
 h1
@@ -167,6 +159,12 @@ strong, b
 em, i, cite, blockquote, q
   font-style: italic
 
+p, code
+  font-size: $baseFontSize
+
+code
+  font-family: monospace
+
 small
   font-size: $baseFontSize * 0.6
 
@@ -199,7 +197,6 @@ ul
 ol
   list-style: decimal outside none
 li
-  text-align: justify
   text-indent: -20px
   &:before
     content: '- '
@@ -278,6 +275,10 @@ ul.list-inline
 
 .m-0
   margin: 0
+
+.my-1
+  margin-top: 1rem
+  margin-bottom: 1rem
 
 .mt-0
   margin: 0
