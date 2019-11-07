@@ -11,7 +11,7 @@ $line-height: 1.3em
 $max-width: 32em
 $text-color: #555
 $text-color-dark: white
-$background-dark: #121212
+$background-dark: rgb(10, 10, 10)
 $title-color: #222
 $title-color-dark: white
 $subtitle-color: #777
@@ -130,6 +130,8 @@ h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
 
+
+
 // nav
 //   padding-top: $baseFontSize
 //   padding-bottom: $baseFontSize
@@ -149,6 +151,9 @@ footer
 
 // a
   // text-decoration: underline
+
+p, li, quote
+  font-size: $baseFontSize
 
 mark
   background-color: $marker-color
@@ -196,12 +201,6 @@ ul
   padding-left: 20px
 ol
   list-style: decimal outside none
-li
-  text-indent: -20px
-  &:before
-    content: '- '
-    text-indent: 20px
-
 dl
   +marginDefault($baseFontSize)
 
@@ -260,8 +259,6 @@ ul.list-inline
   padding-left: 0
   // @include marginDefault($baseFontSize)
   
-  li:before
-    content : ''
   & > li ~ li::before
     content : ' - '
     // padding-right: 1em
