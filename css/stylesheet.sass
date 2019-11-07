@@ -21,68 +21,6 @@ $table-text-color: #222
 $table-text-color-dark: white
 $table-border-color: #777
 
-@media (prefers-color-scheme: default)
-  h1, h2, h3, h4, h5, h6
-    color: $title-color
-
-  body
-    color: $text-color
-
-  table
-    color: $table-text-color
-
-@media (prefers-color-scheme: dark)
-  h1, h2, h3, h4, h5, h6
-    color: $title-color-dark
-
-  body
-    background: $background-dark
-    color: $text-color-dark
-
-  a
-    color: lightblue
-
-  code
-    color: lightgray
-
-
-  button, .button
-    background: $background-dark
-    color: $text-color-dark
-    border-color: $text-color-dark
-
-  input
-    &[type="button"], &[type="reset"], &[type="submit"]
-      background: $background-dark
-      color: $text-color-dark
-      border-color: $text-color-dark
-
-
-  input
-    &[type="email"], &[type="number"], &[type="password"], &[type="search"], &[type="tel"], &[type="text"], &[type="url"]
-      color: $text-color-dark
-      border-color: $text-color-dark
-
-  textarea, select
-    color: $text-color-dark
-    border-color: $text-color-dark
-
-  td, th
-    border-bottom-color: $text-color-dark
-
-  blockquote
-    border-left-color: $text-color-dark
-
-  pre
-    border-left-color: $text-color-dark
-    border-color: $text-color-dark
-    border-left-color: $text-color-dark
-
-  hr
-    border-color: white
-
-  table
-    color: $table-text-color-dark
 
 =marginDefault ($fontSize)
   margin-top: $fontSize
@@ -125,11 +63,6 @@ h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
 
-
-
-// nav
-//   padding-top: $baseFontSize
-//   padding-bottom: $baseFontSize
 
 header
   border-bottom: dashed 2px
@@ -191,9 +124,6 @@ hr
 
 // list
 
-ul
-  list-style: none
-  padding-left: 20px
 ol
   list-style: decimal outside none
 dl
@@ -278,6 +208,26 @@ ul.list-inline
 .mt-0
   margin: 0
 
+// MARKDOWN
+
+h1:before
+  content: '# '
+  color: gray
+
+h2:before
+  content: '## '
+  color: gray
+
+h3:before
+  content: '### '
+  color: gray
+
+h4:before
+  content: '### '
+  color: gray
+
+// MEDIA
+
 @media screen
   body
     max-width: 720px
@@ -316,6 +266,70 @@ ul.list-inline
 
   a
     text-decoration: none
+
+@media (prefers-color-scheme: default)
+  h1, h2, h3, h4, h5, h6
+    color: $title-color
+
+  body
+    color: $text-color
+
+  table
+    color: $table-text-color
+
+@media (prefers-color-scheme: dark)
+  h1, h2, h3, h4, h5, h6
+    color: $title-color-dark
+
+  body
+    background: $background-dark
+    color: $text-color-dark
+
+  a
+    color: lightblue
+
+  code
+    color: lightgray
+
+
+  button, .button
+    background: $background-dark
+    color: $text-color-dark
+    border-color: $text-color-dark
+
+  input
+    &[type="button"], &[type="reset"], &[type="submit"]
+      background: $background-dark
+      color: $text-color-dark
+      border-color: $text-color-dark
+
+
+  input
+    &[type="email"], &[type="number"], &[type="password"], &[type="search"], &[type="tel"], &[type="text"], &[type="url"]
+      color: $text-color-dark
+      border-color: $text-color-dark
+
+  textarea, select
+    color: $text-color-dark
+    border-color: $text-color-dark
+
+  td, th
+    border-bottom-color: $text-color-dark
+
+  blockquote
+    border-left-color: $text-color-dark
+
+  pre
+    border-left-color: $text-color-dark
+    border-color: $text-color-dark
+    border-left-color: $text-color-dark
+
+  hr
+    border-color: white
+
+  table
+    color: $table-text-color-dark
+
 
 // @font-face
 //   font-family: "iA Writer Duospace"

@@ -4,22 +4,16 @@ title: Blog
 ---
 <h1>Blog</h1>
 
-<h2 class="hidden">Liste des article</h2>
 
 {% for post in paginator.posts %}
-  <article>
-    <!-- {% if post.thumbnail %}
-      <img src="{{ post.thumbnail }}" alt="Card image cap">
-    {% endif %} -->
-    <h3>{{ post.title }} <small>@{{ post.categories }}</small></h3>
-    <p class="text-right">
+    <p>
+      <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> @{{ post.categories }}
+      <br>
+      <date>{{ post.date | date: "%Y-%m-%d" }}</date>
       {% for tag in post.tags %}
         <code>+{{ tag }}</code>
       {% endfor %}
-      &nbsp;<date>{{ post.date | date: "%Y-%m-%dT%H:%M" }}</date>
     </p>
-    <p class="mt-0 text-justify">{{ post.excerpt | strip_html | strip_newlines | truncate: 512 }} ... <a href="{{ post.url | prepend: site.baseurl }}">voir plus</a></p>
-  </article>
 {% endfor %}
 
 <!-- Pagination links -->
