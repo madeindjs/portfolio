@@ -11,7 +11,7 @@ $line-height: 1.3em
 $max-width: 32em
 $text-color: #555
 $text-color-dark: white
-$background-dark: rgb(10, 10, 10)
+$background-dark: #212121
 $title-color: #222
 $title-color-dark: white
 $subtitle-color: #777
@@ -33,7 +33,8 @@ p
   +marginDefault($baseFontSize)
   line-height: $line-height
 
-ul li
+ul li,
+ol li
   font-size: $baseFontSize
   +marginDefault($baseFontSize/2)
 
@@ -150,28 +151,20 @@ img
     margin-left: -10%
 
 
-// table
-
 table
   text-align: center
   vertical-align: middle
-  color: $table-text-color
+  width: 100%
 
-  td, th
-    border-width: 1px
-    border-style: solid
-    border-color: $table-border-color
-    padding: 0 1em
+  border-top: 2px solid
+
+  td
+    border-bottom: 1px solid
+  th
+    border-bottom: 2px solid
 
   th
     font-weight: 700
-
-  thead th
-    background-color: rgba($table-background-color, .7)
-
-  tbody tr
-    &:nth-child(even)
-      background-color: rgba($table-background-color, .2)
 
 article
   +marginDefault($baseFontSize * 2)
