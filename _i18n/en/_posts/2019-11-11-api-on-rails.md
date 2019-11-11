@@ -112,7 +112,7 @@ Once the book is finished, the promotion begins. It's a pretty foreign part for 
 
 ## Conclusion
 
-In conclusion I think I made the mistake of wanting to go too fast because I started this part when my book had small spelling mistakes and syntax errors. The specialized community (in particular Hacker News) is quite uncompromising on this. I have had some negative feedback but also some excellent feedback by email which are very rewarding.
+In conclusion I think I made the mistake of wanting to go too fast because I started this promoting when my book had small spelling mistakes and syntax errors. The specialized community (in particular Hacker News) is quite uncompromising on this. I have had some negative feedback but also some excellent feedback by email which are very rewarding.
 
 On the other hand, it was an exceptional experience that gave me a lot of personal satisfaction. This project also allowed me to set foot in open source and maintain a small project.
 
