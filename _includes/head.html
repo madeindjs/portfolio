@@ -6,14 +6,12 @@
 <meta property="rv" content="contact@rousseau-alexandre.fr">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{ site.title }}">
+<meta property="og:title" content="{{ page.title | default: site.title }}">
 <meta property="og:url" content="{{ site.url }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ site.title }}">
-<meta name="twitter:description" content="{{ site.description }}">
-<!-- meta -->
-<!-- <meta name="google-site-verification" content="Z_1TpnrBSiWBWWCGy5VQTcfHv1CnW1CmpIV_qgoizWg" /> -->
+<meta name="twitter:title" content="{{ page.title | default: site.title }}">
+<meta name="twitter:description" content="{{ page.description }}">
 <!-- compatibilities -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
