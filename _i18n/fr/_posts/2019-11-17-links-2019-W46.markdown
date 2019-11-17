@@ -1,0 +1,31 @@
+---
+title: Liens intéressants semaine 46
+layout: post
+date: 2019-11-17 22:00:00 +0200
+categories: links
+---
+Voici mes liens intéressants pour la semaine 46. En vrac.
+
+## Dev
+
+[If You’re Busy, You’re Doing Something Wrong](https://www.calnewport.com/blog/2011/11/11/if-youre-busy-youre-doing-something-wrong-the-surprisingly-relaxed-lives-of-elite-achievers/) parle de la différence d'habitude entre les violonistes "élite" et les autres. Le résultat est surprenant.
+
+[What you need to know about burnout in open source communities](https://opensource.com/article/19/11/burnout-open-source-communities) raconte le burnout chez les développeur passionnés qui s'impliquent trop dans leur travail.
+
+[L'art et l'importance de savoir dire non](https://blog.eleven-labs.com/fr/lart-et-limportance-de-savoir-dire-non/) t'invite à développer ton esprit critique et à ne pas être un simple exécutant.
+
+[Modern Data Practice and the SQL Tradition](https://tselai.com/modern-data-practice-and-the-sql-tradition.html) défend le SQL contre le mouvement NoSQL chez les _Data Scientists_.
+
+## Privacy
+
+[Libération : à traqueur vaillant, rien d'impossible](https://reflets.info/articles/liberation-a-traqueur-vaillant-rien-d-impossible), la suite du feuilleton du journal Libération qui a masqué sa collecte des donnés via un système ingénieux et un [article pour bloquer ce système](https://www.shaftinc.fr/escalade-traque-eulerian.html) qui est de plus en plus utilisé.
+
+[Brian Acton, le cofondateur de WhatsApp, maintient qu'il faut quitter Facebook. Il reste sceptique quant à l'engagement de Mark Zuckerberg en matière de chiffrement](http://www.developpez.com/actu/283985/Brian-Acton-le-cofondateur-de-WhatsApp-maintient-qu-il-faut-quitter-Facebook-Il-reste-sceptique-quant-a-l-engagement-de-Mark-Zuckerberg-en-matiere-de-chiffrement/) et préconise du supprimer Whatsapp et passer à Signal.
+
+[Affreux, sales et méchants](https://reflets.info/articles/affreux-sales-et-mechants)
+
+## UX
+
+[Design better data tables](https://uxdesign.cc/design-better-data-tables-4ecc99d23356) pour faire de jolis tableaux pour vos sites.
+
+[CSS Utility Classes and "Separation of Concerns"](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) pour apprendre à organiser son CSS.
