@@ -8,4 +8,4 @@ thumbnail: /img/blog/rails_zip.svg
 comments: true
 ---
 
-Good boi
+Good boi 2
