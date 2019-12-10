@@ -12,6 +12,6 @@ Voici mes liens intéressants pour la semaine 49. En vrac.
 
 [Behind the One-Way Mirror: A Deep Dive Into the Technology of Corporate Surveillance](https://www.eff.org/wp/behind-the-one-way-mirror) un article (vraiment) complet de la _Electric Frontier Foundation_ qui récapitule toutes les méthodes utilisées pour tracker l'utilisateur.
 
-[Go Plain: My Simplicity-Driven Personal Productivity System](https://www.ostricher.com/2016/03/go-plain-personal-productivity-system/)
+[Go Plain: My Simplicity-Driven Personal Productivity System](https://www.ostricher.com/2016/03/go-plain-personal-productivity-system/), comment s'organiser avec de simples fichiers textes.
 
 [The Pirate Bay, plus qu’un site pirate](https://pando.world/the-pirate-bay-ce-provocateur/)
