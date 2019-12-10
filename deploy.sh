@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git fetch origin
 
 UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
