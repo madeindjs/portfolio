@@ -44,7 +44,7 @@ exclude_from_localizations: ["js", "img", "css"]
 mermaid:
   src: https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js
 
-include: [".well-known"]
+include: [".well-known", ".well-known/brave-rewards-verification.txt"]
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
