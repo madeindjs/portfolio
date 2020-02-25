@@ -826,4 +826,4 @@ As you can see, ExpressJS is a toolbox that interfaces very well with TypeScript
 [express]: https://expressjs.com/
 [sequelize]: http://docs.sequelizejs.com
 [mocha]: https://mochajs.org/
-[github_repo]: https://github.com/madeindjs/graph_api.ts
+[github_repo]: https://github.com/madeindjs/workflow.ts
