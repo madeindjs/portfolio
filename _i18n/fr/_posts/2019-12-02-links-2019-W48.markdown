@@ -1,7 +1,7 @@
 ---
 title: Liens intéressants semaine 48
 layout: post
-date: 2019-12-02 13:30:00 +0200
+date: 2019-12-02 13:59:00 +0200
 categories: links
 ---
 Voici mes liens intéressants pour la semaine 48. En vrac.
