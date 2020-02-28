@@ -12,7 +12,8 @@ if [ $LOCAL = $REMOTE ]; then
 elif [ $LOCAL = $BASE ]; then
   echo "Need to pull"
   git pull origin master
-  bundle exec jekyll build --incremental
+  bundle exec jekyll build
+  rm -rf /var/www/portfolio/*
   cp -r _site/* /var/www/portfolio/
 elif [ $REMOTE = $BASE ]; then
   echo "Need to push"
