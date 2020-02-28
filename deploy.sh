@@ -12,7 +12,7 @@ if [ $LOCAL = $REMOTE ]; then
 elif [ $LOCAL = $BASE ]; then
   echo "Need to pull"
   git pull origin master
-  bundle exec jekyll build
+  /home/pi/.rvm/gems/ruby-2.4.0/bin/bundle exec jekyll build
   rm -rf /var/www/portfolio/*
   cp -r _site/* /var/www/portfolio/
 elif [ $REMOTE = $BASE ]; then
