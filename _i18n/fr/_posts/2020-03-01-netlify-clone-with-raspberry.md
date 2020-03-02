@@ -1,7 +1,7 @@
 ---
 title: Déployer son site statique automatiquement sur un Raspberry à la manière de Netlify
 layout: post
-date: 2020-01-03 11:20:00 +0200
+date: 2020-03-01 11:20:00 +0200
 tags: bash jekyll
 categories: devops
 ---
