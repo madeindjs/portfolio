@@ -10,11 +10,7 @@ categories: devops
 
 C'est génial mais tu n'as pas forcément envie de dépendre d'un service tiers de plus. Ou alors comme moi, tu héberge toi-même ton serveur web.
 
-J'ai une solution _low tech_ à base de Crontab qui ne demande aucune dépendance.
-
-## La mise en place
-
-Pour ce blog, j'utilise un script Bash assez basique qui s'occupe de:
+J'ai une solution _low tech_ à base de Crontab qui ne demande aucune dépendance: un script Bash. Assez basiquement il s'occupe de:
 
 1. faire un `git pull` si nécessaire
 2. _rebuild_ le site avec Jekyll
