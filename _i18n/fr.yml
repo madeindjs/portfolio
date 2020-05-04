@@ -38,7 +38,7 @@ experiences_data:
     company: Dougs
     link: https://www.dougs.fr/
     dates: Depuis 2019-08
-    tags: [NodeJS, TypeScript, PostgreSQL]
+    tags: [NodeJS, TypeScript, AngularJS, PostgreSQL]
 
   - job_title: Développeur PHP
     company: GAC Technology
