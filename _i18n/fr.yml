@@ -29,24 +29,28 @@ educations_data:
 
 experiences_data:
   - job_title: Associé / Directeur Technique / <abbr title="Délégué à la protection des Données">DPO</abbr>
+    description: Création d'une startup pour la mise en relation d'avocats et d'huissiers de justice afin d'améliorer le workflow de signification d'actes.
     company: iSignif
     link: https://isignif.fr/
     dates: Depuis 2018-05
     tags: [RubyOnRails, MariaDB, VueJS, Linux]
 
   - job_title: Développeur Fullstack
+    description: Développement application SPA en Node.js pour la gestion de la comptabilité.
     company: Dougs
     link: https://www.dougs.fr/
     dates: Depuis 2019-08
     tags: [NodeJS, TypeScript, AngularJS, PostgreSQL]
 
-  - job_title: Développeur PHP
+  - job_title: Développeur Fullstack
+    description: Développeur fullstack dans le domaine de la gestion de flotte automobile manipulant une grande quantité de données.
     company: GAC Technology
     link: https://gac-technology.com/
     dates: 2017\2019 (2 ans, 6 mois)
     tags: [PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux]
 
   - job_title: Assistant Bureau d'études / Développeur
+    description: Développement d'une solution de dessin 3D avec Sketchup et l'API Ruby. Développement d'un application web de suivi d'interventions techniques avec C# & ASP.NET MVC. Bureau d'études d’installations frigorifiques.
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
     dates: 2011\2017 (5 ans, 3 mois)
