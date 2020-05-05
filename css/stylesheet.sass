@@ -9,7 +9,7 @@ $sansFont: monospace
 $baseFontSize: 1.2em
 $line-height: 1.3em
 $max-width: 32em
-$text-color: #555
+$text-color: black
 $text-color-dark: white
 $background-dark: #212121
 $title-color: #222
@@ -20,7 +20,7 @@ $table-background-color: rgb(58, 83, 155)
 $table-text-color: #222
 $table-text-color-dark: white
 $table-border-color: #777
-
+$primary-color: #2980b9
 
 =marginDefault ($fontSize)
   margin-top: $fontSize
@@ -78,7 +78,8 @@ footer
 
 // inline
 
-// a
+a
+  color: $primary-color
   // text-decoration: underline
 
 p, li, quote
@@ -176,7 +177,7 @@ ul.list-inline
   list-style-type: none
   padding-left: 0
   // @include marginDefault($baseFontSize)
-  
+
   & > li ~ li::before
     content : ' - '
     // padding-right: 1em
@@ -205,19 +206,19 @@ ul.list-inline
 
 h1:before
   content: '# '
-  color: gray
+  color: $primary-color
 
 h2:before
   content: '## '
-  color: gray
+  color: $primary-color
 
 h3:before
   content: '### '
-  color: gray
+  color: $primary-color
 
 h4:before
   content: '### '
-  color: gray
+  color: $primary-color
 
 // MEDIA
 
@@ -242,8 +243,6 @@ h4:before
     overflow-x: auto
     overflow-y: hidden
 
-  
-
   .hidden
     display: none
 
@@ -260,7 +259,7 @@ h4:before
   a
     text-decoration: none
 
-@media (prefers-color-scheme: default)
+@media (prefers-color-scheme: light)
   h1, h2, h3, h4, h5, h6
     color: $title-color
 
