@@ -35,13 +35,13 @@ experiences_data:
   - job_title: CTO & Associate
     company: iSignif
     link: https://isignif.fr/
-    dates: May 2018 to today
+    dates: Since 2018
     tags: [RubyOnRails, MariaDB, VueJS, Linux]
 
   - job_title: Fullstack developer
     company: Dougs
     link: https://www.dougs.fr/
-    dates: 2019\2020 (1 an)
+    dates: 2019-2020 (1 an)
     tags: [NodeJS, TypeScript, PostgreSQL, Angular]
 
   - job_title: Fullstack developer
@@ -53,13 +53,13 @@ experiences_data:
   - job_title: Design office - Developer
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2013\2017 (3 ans, 3 mois)
+    dates: 2013-2017 (3 ans, 3 mois)
     tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
 
   - job_title: Design office (Work study contract)
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2011\2013 (2 years)
+    dates: 2011-2013 (2 years)
     tags: [AutoCad]
 
   - job_title: Tutoring teacher

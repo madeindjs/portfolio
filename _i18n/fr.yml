@@ -32,35 +32,35 @@ experiences_data:
     description: Création d'une startup pour la mise en relation d'avocats et d'huissiers de justice afin d'améliorer le workflow de signification d'actes.
     company: iSignif
     link: https://isignif.fr/
-    dates: Depuis 2018-05
+    dates: Depuis 2018
     tags: [RubyOnRails, MariaDB, VueJS, Linux]
 
   - job_title: Développeur Fullstack
     description: Développement application SPA en Node.js pour la gestion de la comptabilité.
     company: Dougs
     link: https://www.dougs.fr/
-    dates: 2019\2020 (1 an)
+    dates: 2019-2020 (1 an)
     tags: [NodeJS, TypeScript, AngularJS, PostgreSQL]
 
   - job_title: Développeur Fullstack
     description: Développeur fullstack dans le domaine de la gestion de flotte automobile manipulant une grande quantité de données.
     company: GAC Technology
     link: https://gac-technology.com/
-    dates: 2017\2019 (2 ans, 6 mois)
+    dates: 2017-2019 (2 ans, 6 mois)
     tags: [PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux]
 
   - job_title: Assistant Bureau d'études / Développeur
     description: Développement d'une solution de dessin 3D avec Sketchup et l'API Ruby. Développement d'un application web de suivi d'interventions techniques avec C# & ASP.NET MVC. Bureau d'études d’installations frigorifiques.
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2013\2017 (3 ans, 3 mois)
+    dates: 2013-2017 (3 ans, 3 mois)
     tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
 
   - job_title: Apprentis Bureau d'études
     description: Bureau d'études d’installations frigorifiques.
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2011\2013 (2 ans)
+    dates: 2011-2013 (2 ans)
     tags: [Sketchup, AutoCad]
 
   - job_title: Professeur particulier Ruby
