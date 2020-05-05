@@ -39,7 +39,7 @@ experiences_data:
     description: Développement application SPA en Node.js pour la gestion de la comptabilité.
     company: Dougs
     link: https://www.dougs.fr/
-    dates: Depuis 2019-08
+    dates: 2019\2020 (1 an)
     tags: [NodeJS, TypeScript, AngularJS, PostgreSQL]
 
   - job_title: Développeur Fullstack
@@ -53,8 +53,15 @@ experiences_data:
     description: Développement d'une solution de dessin 3D avec Sketchup et l'API Ruby. Développement d'un application web de suivi d'interventions techniques avec C# & ASP.NET MVC. Bureau d'études d’installations frigorifiques.
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2011\2017 (5 ans, 3 mois)
+    dates: 2013\2017 (3 ans, 3 mois)
     tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
+
+  - job_title: Apprentis Bureau d'études
+    description: Bureau d'études d’installations frigorifiques.
+    company: Carrier
+    link: https://www.carrier.com/commercial-refrigeration/
+    dates: 2011\2013 (2 ans)
+    tags: [Sketchup, AutoCad]
 
   - job_title: Professeur particulier Ruby
     company: Superprof

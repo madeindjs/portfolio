@@ -38,23 +38,29 @@ experiences_data:
     dates: May 2018 to today
     tags: [RubyOnRails, MariaDB, VueJS, Linux]
 
-  - job_title: Fullstack developer Node.JS / JavaScript
+  - job_title: Fullstack developer
     company: Dougs
     link: https://www.dougs.fr/
-    dates: Depuis 2019-08
-    tags: [NodeJS, TypeScript, PostgreSQL]
+    dates: 2019\2020 (1 an)
+    tags: [NodeJS, TypeScript, PostgreSQL, Angular]
 
-  - job_title: PHP Developper
+  - job_title: Fullstack developer
     company: GAC Technology
     link: https://gac-technology.com/
-    dates: January 2017 to july 2019
+    dates: 2017\2019 (2 years, 6 months)
     tags: [PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux]
 
-  - job_title: Process quality pilot - Project manager - Developer
+  - job_title: Design office - Developer
     company: Carrier
     link: https://www.carrier.com/commercial-refrigeration/
-    dates: September 2011 to January 2017
+    dates: 2013\2017 (3 ans, 3 mois)
     tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
+
+  - job_title: Design office (Work study contract)
+    company: Carrier
+    link: https://www.carrier.com/commercial-refrigeration/
+    dates: 2011\2013 (2 years)
+    tags: [AutoCad]
 
   - job_title: Tutoring teacher
     company: Superprof
