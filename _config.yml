@@ -17,7 +17,7 @@ title: Alexandre Rousseau
 email: contact@rousseau-alexandre.fr
 description: Mon Portfolio
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://rousseau-alexandre.fr" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://rousseau-alexandre.fr" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  madeindjs
 
 # Build settings
@@ -38,13 +38,14 @@ plugins:
 paginate: 15
 paginate_path: "/blog/page/:num/"
 
-languages: ["fr", "en"]
-exclude_from_localizations: ["js", "img", "css"]
+languages: [fr, en]
+exclude_from_localizations: [js, img, css]
 
 mermaid:
   src: https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js
 
-include: [".well-known", ".well-known/brave-rewards-verification.txt"]
+include:
+  - .well-known
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

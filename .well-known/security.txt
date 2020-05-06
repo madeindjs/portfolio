@@ -1,0 +1,4 @@
+Canonical: https://rousseau-alexandre.fr/.well-known/security.txt
+Contact: mailto:contact@rousseau-alexandre.fr
+Encryption: https://rousseau-alexandre.fr/pgp.txt
+Preferred-Languages: en, fr
