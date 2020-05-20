@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr_FR">
+
+<head>
+    <title>{% if page.title %}{{ page.title }} - {% endif %}Alexandre Rousseau</title>
+    <meta name="description" content="{{ page.description }}">
+    <!-- CEO Stuffs -->
+    <link rel="canonical" href="{{ site.url }}">
+    <meta charset="utf-8">
+<link href="/css/resume.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>{{ page.title }}<br/><small>{{ page.author }}</small></h1>
+    {{ content }}
+</body>
+
+</html>
