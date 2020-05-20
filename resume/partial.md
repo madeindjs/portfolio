@@ -1,6 +1,5 @@
 ---
-title: Curriculum vitæ
-author: Alexandre Rousseau
+title: Alexandre Rousseau
 localisation: Lyon, France
 layout: resume
 # geometry: margin=2cm
@@ -8,7 +7,7 @@ pdf-engine: pdflatex
 links-as-notes: true
 ---
 
-__Développeur passionné. Lyon, France__
+__Lyon, France - 0663549591 - contact@rousseau-alexandre.fr__
 
 Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, je continue d'alimenter ma passion en codant sur des projets perso.
 
@@ -26,9 +25,10 @@ Développement d'une application SPA de comptabilité sous __Node.js__ / __Types
 
 ### Développeur @ [Gac Technology](https://www.gac-technology.com) _(2017/2019)_
 
-Développement d'un application SAAS de gestion de flotte automobile et portefeuille immobilier. Je développais des fonctionnalités dans un environnement contraint par la grande quantité de données gérées par GAC Technology.
+Développement d'un application SAAS de gestion de flotte automobile et de portefeuille immobilier avec __PHP7__ / __Zend Framework__. Je développais des fonctionnalités dans un environnement contraint par la grande quantité de données gérées par GAC Technology.
 
-Environnement: PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux
+J'ai aussi développé une API avec __Laravel__ qui suit les standards __JSON:API__ et documentée avec __Swagger__.
+
 
 ### Bureau d'études / Développeur @ [Carrier](http://www.carrier.fr) _(2013/2017)_
 

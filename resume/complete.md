@@ -115,7 +115,7 @@ Assistant bureau d'études:
 
 - 2019: Titre RNCP niveau Bac +4 Développeur Full Stack à IT-Akademy, Lyon
 - 2013: BTS FEE: La Martinière Monplaisir, Lyon
-- 2011: Bac STI Génie Energétique: La Martinière Monplaisir, Lyon
+- 2011: Bac STI Génie Énergétique: La Martinière Monplaisir, Lyon
 
 ## Open source
 
