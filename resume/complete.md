@@ -45,6 +45,11 @@ Développement d'une API ouverte avec _Ruby on Rails_:
 - Implémentation de la norme JSON:API avec la librairie `fast_jsonapi` de Netflix
 - Création d'un [paquet NPM](https://github.com/isignif/isignif-client) qui permet de consommer l'API en Javascript dans le navigateur
 
+### Développeur / DevOps @ [Optimiz.me](https://optimiz.me/) (2020)
+
+- Benchmark des différents type de base de données pour le stockage et la manipulation d'une grande quantité de données (+100M)
+- Mise en place de Gitlab CI qui se déploie automatiquement sur __Google Cloud Plateform__
+
 
 ### Développeur @ [Dougs](https://dougs.fr) (2019/2020)
 
