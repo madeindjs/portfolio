@@ -37,11 +37,19 @@ experiences_data:
     link: https://isignif.fr/
     dates: Since 2018
     tags: [RubyOnRails, MariaDB, VueJS, Linux]
+ 
+  - job_title: Fullstack developer / DevOps
+    description: Build SPA application with Node.js to fetch and analyze data from Google Search Console.
+    company: Optimiz.me
+    link: https://optimiz.me/
+    dates: Depuis 2020
+    tags: [NodeJS, TypeScript, Angular9, PostgreSQL, GoogleCloud]
 
   - job_title: Fullstack developer
+    description: Build SPA application with Node.js to simplify life of accountant and freelancer.
     company: Dougs
     link: https://www.dougs.fr/
-    dates: 2019-2020 (1 an)
+    dates: 2019-2020 (1 year)
     tags: [NodeJS, TypeScript, PostgreSQL, Angular]
 
   - job_title: Fullstack developer

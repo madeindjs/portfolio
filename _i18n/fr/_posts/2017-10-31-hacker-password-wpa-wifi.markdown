@@ -13,7 +13,7 @@ Afin de tester, j'ai voulu cracker mon [routeur récemment installé](/network/2
 
 Afin de réaliser le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux qui apporte des outils de "hacking" pré-installé.
 
-![Logo de Kali Linux](https://docs.kali.org/wp-content/uploads/2015/02/kali-logo.png)
+![Logo de Kali Linux](/img/blog/kali.svg)
 
 Je l'ai installé en [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) mais il est aussi possible de l'utiliser en Live USB ou en machine virtuelle avec [VirtualBox](https://www.virtualbox.org/).
 
@@ -32,7 +32,7 @@ Ici nous allons utiliser [Aircrack-ng](https://www.aircrack-ng.org/) qui est est
 La première étape est d'activer le **mode moniteur** de la carte réseau mettre en place. Pour cela on liste les cartes réseaux disponnibles avec `airmong-ng`. Ouvrez un terminal et tapez:
 
 ```bash
-# airmon-ng
+airmon-ng
 ```
 
 > Si votre carte réseau ne s'affiche pas, c'est qu'elle n'est pas compatible. Il faut vous en acheter une *(un dongle USB wifi suffit)*
@@ -40,7 +40,7 @@ La première étape est d'activer le **mode moniteur** de la carte réseau mettr
 Dans notre cas on voit que l'on peut utiliser notre carte réseau **wlan0**. On active donc le **mode moniteur** avec la commande suivante:
 
 ```bash
-# airmon-ng start wlan0
+airmon-ng start wlan0
 ```
 
 A partir d'ici, la carte réseau **wlan0** n'est plus disponible *(vous n'avez plus internet)*, et une nouvelle carte réseau apparaît. On peut la retrouver en faisant un `ifconfig`. Dans mon cas, il s'agit de **wlan0mon**.
@@ -50,7 +50,7 @@ A partir d'ici, la carte réseau **wlan0** n'est plus disponible *(vous n'avez p
 Désormais, on peut *sniffer* les paquets réseaux qui circulent autour de nous grâce à `airodump`:
 
 ```bash
-# airodump-ng wlan0mon
+airodump-ng wlan0mon
 ```
 
 Cette commande va trouver des informations supplémentaires sur les wifi dont:
@@ -86,7 +86,7 @@ On scan donc le réseau avec la commande `airodump-ng` et les options:
 * `-w` le répertoire ou seront stocké les fichiers d'output
 
 ```bash
-# airodump-ng -c 10 --bssid 18:D6:C7:85:7E:A0 -w tplink  wlan0mon
+airodump-ng -c 10 --bssid 18:D6:C7:85:7E:A0 -w tplink  wlan0mon
 ```
 
 On laisse cette commande en arrière plan, elle va nous produire 3 fichiers dont un de type *xml*. C'est celui qui nous intéresse car il contient plus de détails sur les périphériques connectés sur le wi-fi. En ouvrant celui-ci, on retrouve très facilement les informations de mon Blackberry. Voici un extrait du fichier:
@@ -107,7 +107,7 @@ Maintenant que nous avons toutes les informations, nous allons envoyer un packet
 * la carte réseau utilisée
 
 ```bash
-# aireplay-ng -0 2 -a 18:D6:C7:85:7E:A0 -c 94:EB:CD:25:E0:C1 wlan0mon
+aireplay-ng -0 2 -a 18:D6:C7:85:7E:A0 -c 94:EB:CD:25:E0:C1 wlan0mon
 ```
 
 Le périphérique se déconnecte et se reconnecte automatiquement. On obtient donc un **WPA Handshake** qui est contenu dans le fichier *tplink.cpa*.
@@ -118,7 +118,7 @@ Maintenant que nous avons obtenu un packet contenant le **mot de passe WPA crypt
 
 ### le dictionnaire
 
-Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver des[fichiers textes de plusieurs giga-octes des mots de passe les plus utilisés](http://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html). Dans mon cas, je sais que le mot de passe de mon Wifi contient 8 chiffres. Je vais donc utiliser la commande `crunch` pour génerer toutes les combinaisons possibles. `crunch` utilise plusieurs paramètres:
+Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver des [fichiers textes de plusieurs giga-octes des mots de passe les plus utilisés](http://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html). Dans mon cas, je sais que le mot de passe de mon Wifi contient 8 chiffres. Je vais donc utiliser la commande `crunch` pour génerer toutes les combinaisons possibles. `crunch` utilise plusieurs paramètres:
 
 1. la longueur minimum *(8)*
 2. la longueur maximum *(8)*
@@ -127,7 +127,7 @@ Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver 
 On envoie tout ça dans un fichier *passwords.txt*.
 
 ```bash
-# crunch 8 8 12345678 > passwords.txt
+crunch 8 8 12345678 > passwords.txt
 ```
 
 En quelques secondes on obtiens un fichier de **43046721 lignes** pesant **369 MB**!!!
@@ -139,7 +139,7 @@ On passe à l'action. Ici nous allons effectuer bruteforcer le mot de passe. Pou
 Pour cela on utilise `aircrack-ng`
 
 ```bash
-# aircrack-ng -a2 -b 18:D6:C7:85:7E:A0 -w /root/Desktop/passwords.txt /root/Desktop/tplink.cap
+aircrack-ng -a2 -b 18:D6:C7:85:7E:A0 -w /root/Desktop/passwords.txt /root/Desktop/tplink.cap
 ```
 
 Et au bout de quelques temps:

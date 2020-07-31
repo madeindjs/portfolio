@@ -7,11 +7,12 @@ title: Blog
 
 {% for post in paginator.posts %}
     <p>
-      <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> @{{ post.categories }}
+    <a href="{{ post.url | prepend: site.baseurl }}"><b>{{ post.title }}</b></a> @{{ post.categories }}
       <br>
       <date>{{ post.date | date: "%Y-%m-%d" }}</date>
+      <br>
       {% for tag in post.tags %}
-        <code>+{{ tag }}</code>
+        <code>#{{ tag }}</code>
       {% endfor %}
     </p>
 {% endfor %}

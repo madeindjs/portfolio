@@ -17,6 +17,9 @@ Le jour, j'aime traduire des problèmes complexes en solutions techniques simple
 
 Participation à la création d'une société en étant le référent technique. J'ai entièrement créé l'application web _from scratch_ sous __Ruby on Rails__ et j'ai déployé notre solution sous un serveur __Ubuntu__ vierge. Je propose aussi une __JSON:API__ documentée avec __Swagger__.
 
+### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me) _(depuis 2020)
+
+Développement application SPA en __Node.js / Typescript__ pour récupérer et analyser les données de Google Search Console. Les données sont stockées de manière asynchrone via une job queue sous __Postgres__. Une interface _Front-end_ en __Angular 9__ restranscrit les données sous forme de tableau. L'authentification est gérée par __Keycloak__.
 
 ### Développeur @ [Dougs](https://dougs.fr) _(2019/2020)_
 

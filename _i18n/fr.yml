@@ -34,6 +34,13 @@ experiences_data:
     link: https://isignif.fr/
     dates: Depuis 2018
     tags: [RubyOnRails, MariaDB, VueJS, Linux]
+ 
+  - job_title: Développeur Fullstack / DevOps
+    description: Développement application SPA en Node.js pour récupérer et analyser les données de Google Search Console.
+    company: Optimiz.me
+    link: https://optimiz.me/
+    dates: Depuis 2020
+    tags: [NodeJS, TypeScript, Angular9, PostgreSQL, GoogleCloud]
 
   - job_title: Développeur Fullstack
     description: Développement application SPA en Node.js pour la gestion de la comptabilité.

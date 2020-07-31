@@ -49,6 +49,10 @@ Développement d'une API ouverte avec _Ruby on Rails_:
 
 - Benchmark de base __PostgreSQL__, __MongoDB__ et __Elastic Search__ pour le stockage et la manipulation d'une grande quantité de données (+100M)
 - Mise en place de __Gitlab CI__ qui se déploie automatiquement sur __Google Cloud Plateform__
+- Développement d'une job queue avec __Postgres__
+- Mise en place d'une authentification automatisée avec [Keycloak](https://www.keycloak.org/) qui fait interface avec l'OAuth de Google
+- Création de service automatisée pour récupéerer les données de manière asynchrone en s'appuyant sur la _job queue_
+- Création de l'interface sous __Angular 9__
 
 
 ### Développeur @ [Dougs](https://dougs.fr) (2019/2020)
