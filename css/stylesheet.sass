@@ -23,8 +23,8 @@ $table-border-color: #777
 $primary-color: #2980b9
 
 =marginDefault ($fontSize)
-  margin-top: $fontSize
-  margin-bottom: $fontSize
+  margin-top: $fontSize * 1.5
+  margin-bottom: $fontSize * 1.5
   margin-right: 0
   margin-left: 0
 
@@ -32,6 +32,7 @@ $primary-color: #2980b9
 p
   +marginDefault($baseFontSize)
   line-height: $line-height
+  text-align: justify
 
 ul li,
 ol li

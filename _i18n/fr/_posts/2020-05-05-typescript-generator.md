@@ -6,7 +6,6 @@ tags: typescript nodejs
 thumbnail: /img/blog/typescript.jpg
 categories: programming
 ---
-# Les générateurs en Node.js
 
 Récemment, j'ai du faire un script pour calculer les données de tous nos utilisateurs. J'ai rencontré quelques problèmes de performances liées à la quantité de données que cela représente (plusieurs milliers d'utilisateurs). J'ai réussi à régler ce problème en utilisant les **générateurs** qui permettent dans certains cas de réduire considérablement l'empreinte mémoire. Si ce terme ne te dis rien, je t'invite à lire la suite de cet article.
 
