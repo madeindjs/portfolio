@@ -52,6 +52,7 @@ h1, h2, h3, h4, h5, h6
   font-family: $title-font
   font-weight: 700
   margin-bottom: $baseFontSize / 2
+  color: $title-color
 h1
   font-size: $baseFontSize * 3
   // margin-top: $baseFontSize * 2
@@ -65,6 +66,8 @@ h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
 
+body
+  color: $text-color
 
 header
   border-bottom: dashed 2px
@@ -77,11 +80,13 @@ footer
   margin-top: 2rem
   // padding-top: 1rem
 
+section
+  margin-top: $baseFontSize * 4
+  margin-bottom: $baseFontSize * 4
+
+
 // inline
 
-a
-  color: $primary-color
-  // text-decoration: underline
 
 p, li, quote
   font-size: $baseFontSize
@@ -203,6 +208,9 @@ ul.list-inline
 .mt-0
   margin: 0
 
+.lead
+  font-style: underline
+
 // MARKDOWN
 
 h1:before
@@ -260,68 +268,11 @@ h4:before
   a
     text-decoration: none
 
-@media (prefers-color-scheme: light)
-  h1, h2, h3, h4, h5, h6
-    color: $title-color
-
-  body
-    color: $text-color
-
-  table
-    color: $table-text-color
 
 @media (prefers-color-scheme: dark)
-  h1, h2, h3, h4, h5, h6
-    color: $title-color-dark
-
-  body
-    background: $background-dark
-    color: $text-color-dark
-
-  a
-    color: lightblue
-
-  code
-    color: lightgray
-
-
-  button, .button
-    background: $background-dark
-    color: $text-color-dark
-    border-color: $text-color-dark
-
-  input
-    &[type="button"], &[type="reset"], &[type="submit"]
-      background: $background-dark
-      color: $text-color-dark
-      border-color: $text-color-dark
-
-
-  input
-    &[type="email"], &[type="number"], &[type="password"], &[type="search"], &[type="tel"], &[type="text"], &[type="url"]
-      color: $text-color-dark
-      border-color: $text-color-dark
-
-  textarea, select
-    color: $text-color-dark
-    border-color: $text-color-dark
-
-  td, th
-    border-bottom-color: $text-color-dark
-
-  blockquote
-    border-left-color: $text-color-dark
-
-  pre
-    border-left-color: $text-color-dark
-    border-color: $text-color-dark
-    border-left-color: $text-color-dark
-
-  hr
-    border-color: white
-
-  table
-    color: $table-text-color-dark
+  html
+    background-color: black
+    filter: invert(1) hue-rotate(180deg)
 
 
 // @font-face

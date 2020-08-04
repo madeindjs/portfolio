@@ -1,96 +1,20 @@
 about_me: A propos de moi
 i_like: J'aime
 see_more: Voir plus
-professional_experiences: Expériences
-open_source:
-  title: Open Source
-  lead: J'essaie de participer au maximum à quelques projets Open Source. Voici quelques une des mes réalisations
-  see_all: Pour voir la liste complète de mes projets en OpenSource, jetez un œil à
+resume: Curriculum vitæ
+resume_lite: Curriculum vitæ
+resume_full: Dossier de compétence complet
+last_posts: Derniers articles
+see_all_posts: Voir tous mes articles
+
+
+### 
+
 
 my_github_profile: mon profil Github
 my_educations: Diplômes
 
-interest_points: <strong>Ruby on Rails</strong>, la course à pied et ma copine.
 
 description:
-  - Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, j'aime découvrir de nouvelles technologies telles que <strong>Rust</strong> / <strong>Crystal</strong>.
-
-educations_data:
-  - qualification: Titre <abbr title="Répertoire National des Certifications Professionnelles">RNCP</abbr> niveau Bac +4 Développeur Full Stack
-    dates: 2019
-    name: IT-Akademy, Villeurbanne
-
-  - qualification: BTS <abbr title="Fluides, énergies et environnement">FEE</abbr>
-    dates: 2013
-    name: La Martinière Monplaisir, Lyon
-
-  - qualification: Bac <abbr title="Sciences et Techniques de l'Ingénieur">STI</abbr> Génie Energétique
-    dates: 2011
-    name: La Martinière Monplaisir, Lyon
-
-experiences_data:
-  - job_title: Associé / Directeur Technique / <abbr title="Délégué à la protection des Données">DPO</abbr>
-    description: Création d'une startup pour la mise en relation d'avocats et d'huissiers de justice afin d'améliorer le workflow de signification d'actes.
-    company: iSignif
-    link: https://isignif.fr/
-    dates: Depuis 2018
-    tags: [RubyOnRails, MariaDB, VueJS, Linux]
-
-  - job_title: Développeur Fullstack / DevOps
-    description: Développement application SPA en Node.js pour récupérer et analyser les données de Google Search Console.
-    company: Optimiz.me
-    link: https://optimiz.me/
-    dates: Depuis 2020
-    tags: [NodeJS, TypeScript, Angular9, PostgreSQL, GoogleCloud]
-
-  - job_title: Développeur Fullstack
-    description: Développement application SPA en Node.js pour la gestion de la comptabilité.
-    company: Dougs
-    link: https://www.dougs.fr/
-    dates: 2019-2020 (1 an)
-    tags: [NodeJS, TypeScript, AngularJS, PostgreSQL]
-
-  - job_title: Développeur Fullstack
-    description: Développeur fullstack dans le domaine de la gestion de flotte automobile manipulant une grande quantité de données.
-    company: GAC Technology
-    link: https://gac-technology.com/
-    dates: 2017-2019 (2 ans, 6 mois)
-    tags: [PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux]
-
-  - job_title: Assistant Bureau d'études / Développeur
-    description: Développement d'une solution de dessin 3D avec Sketchup et l'API Ruby. Développement d'un application web de suivi d'interventions techniques avec C# & ASP.NET MVC. Bureau d'études d’installations frigorifiques.
-    company: Carrier
-    link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2013-2017 (3 ans, 3 mois)
-    tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
-
-  - job_title: Apprentis Bureau d'études
-    description: Bureau d'études d’installations frigorifiques.
-    company: Carrier
-    link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2011-2013 (2 ans)
-    tags: [Sketchup, AutoCad]
-
-  - job_title: Professeur particulier Ruby
-    company: Superprof
-    link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
-    tags: [RubyOnRails, Vue.JS]
-    dates: Depuis 2018
-
-projects_data:
-  - name: API on Rails
-    description: Redaction & publication livre <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a>.
-    link: https://github.com/madeindjs/api_on_rails
-
-  - name: ActiveStorage::SendZip
-    description: Librairie pour Ruby on Rails qui permet de créer des archives .zip simplement.
-    link: https://github.com/madeindjs/active_storage-send_zip
-
-  - name: Crystagiri
-    description: Parseur de document HTML écrit en <strong>Crystal</strong>.
-    link: https://github.com/madeindjs/Crystagiri
-
-  - name: Raspberry Cook
-    description: Plateforme de partage de recettes de cuisines.
-    link: https://github.com/RaspberryCook/website
-    picture: img/projects/raspberry-cook.png
+  - Développeur passionné auto-didacte.
+  # - J'aime développer, la course à pied et ma copine.

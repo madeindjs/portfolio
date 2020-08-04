@@ -4,64 +4,39 @@ layout: main
 
 <nav class="only-print">
   <ul class="list-inline">
-    <li><a href="mailto:{{site.data.profil.email}}">{{ site.data.profil.email }}</a></li>
+    <li>
+      <a href="mailto:{{site.data.profil.email}}">
+        {{ site.data.profil.email }}
+      </a>
+    </li>
     <li><a href="/pgp.txt">3072R/AB2676CC</a></li>
     <li><a href="https://github.com/madeindjs">github.com/madeindjs</a></li>
   </ul>
 </nav>
 
-
 <h1>Alexandre Rousseau</h1>
-{% for desc in site.translations[site.lang]['description'] %}
-<p>{{ desc }}</p>
-{% endfor %}
-<p>{% t i_like %} {% t interest_points %}</p>
-
 
 <section>
-  <h2>{% t professional_experiences %}</h2>
+  {% for desc in site.translations[site.lang]['description'] %}
+  <p class="lead">{{ desc }}</p>
+  {% endfor %}
+</section>
 
-  {% for experience in site.translations[site.lang]['experiences_data'] %}
-  <p>
-    <strong>{{ experience.job_title }}</strong> @ <a href="{{ experience.link }}">{{ experience.company }}</a> - <date>
-      {{ experience.dates }}</date>
-    <br>
-    {% for tag in experience.tags %}
-    <code>#{{ tag }}</code>
+<section>
+  <h2>{{ site.translations[site.lang]['last_posts'] }}</h2>
+  <ul>
+    {% for post in site.posts limit: 5 %}
+    <li>
+      <a href="{{ post.url | prepend: site.baseurl }}"
+        ><b>{{ post.title }}</b></a
+      >
+      @{{ post.categories }}
+    </li>
     {% endfor %}
-  </p>
-  <ul class="list-inline m-0 text-italic">
-
   </ul>
-</section>
-{% endfor %}
-</section>
-
-
-<section>
-  <h2>{% t open_source.title %}</h2>
-  <!-- <p>{% t open_source.lead %}</p> -->
-  {% for project in site.translations[site.lang]['projects_data'] %}
   <p>
-    {% if project.link %}
-    <strong><a href="{{ project.link }}">{{ project.name }}</a></strong>
-    {% else %}
-    {{ project.name }}
-    {% endif %}
-    {{ project.description }}
+    <a href="{{ '/blog' | prepend: site.baseurl }}"
+      >{{ site.translations[site.lang]['see_all_posts'] }}</a
+    >
   </p>
-  {% endfor %}
-  <!-- <p>{% t open_source.see_all %} <a href="https://github.com/madeindjs">{% t my_github_profile %}</a></p> -->
-</section>
-
-<section>
-  <h2>{% t my_educations %}</h2>
-
-  {% for education in site.translations[site.lang]['educations_data'] %}
-  <p>
-    <strong>{{ education.qualification }}</strong>:
-    {{ education.name }}
-    {{ education.dates }}
-  </p>
-  {% endfor %}
 </section>

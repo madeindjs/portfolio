@@ -1,92 +1,13 @@
 about_me: About me
 i_like: I like
 see_more: See more
-professional_experiences: Experiences
-open_source:
-  title: Open Source
-  lead: I try to participate as much as possible in some Open Source projects. Here are some of my achievements
-  see_all: To see the complete list of my OpenSource projects, take a look at
+resume: Resume
+resume_lite: Resume
+resume_full: Competency file
+last_posts: Derniers articles
+see_all_posts: See all posts
 
-my_github_profile: my Github profil
-my_educations: Educations
-
-
-
-interest_points: <strong>Ruby on Rails</strong>, running and my girlfriend.
+###
 
 description:
-  - Thanks to my personal involvement I'm actually a developer. Today my passion allows me to code and specialize me as a developer.
-  - During the day, I like to translate complex problems into simple technical solutions. At night, I like to discover new technologies such as <strong>Rust</strong> / <strong>Crystal</strong>.
-
-
-educations_data:
-  - qualification: Master Fullstack Developer
-    dates: September 2017 to today
-    name: IT-Akademy, Villeurbanne
-
-  - qualification: BTS Fluides, énergies et environnement
-    dates: September 2011 to August 2013
-    name: La Martinière Monplaisir, Lyon 8e
-
-  - qualification: Bac STI Génie Energétique
-    dates: September 2009 to August 2011
-    name: La Martinière Monplaisir, Lyon 8e
-
-experiences_data:
-  - job_title: CTO & Associate
-    company: iSignif
-    link: https://isignif.fr/
-    dates: Since 2018
-    tags: [RubyOnRails, MariaDB, VueJS, Linux]
-
-  - job_title: Fullstack developer / DevOps
-    description: Build SPA application with Node.js to fetch and analyze data from Google Search Console.
-    company: Optimiz.me
-    link: https://optimiz.me/
-    dates: Depuis 2020
-    tags: [NodeJS, TypeScript, Angular9, PostgreSQL, GoogleCloud]
-
-  - job_title: Fullstack developer
-    description: Build SPA application with Node.js to simplify life of accountant and freelancer.
-    company: Dougs
-    link: https://www.dougs.fr/
-    dates: 2019-2020 (1 year)
-    tags: [NodeJS, TypeScript, PostgreSQL, Angular]
-
-  - job_title: Fullstack developer
-    company: GAC Technology
-    link: https://gac-technology.com/
-    dates: 2017\2019 (2 years, 6 months)
-    tags: [PHP7, Laravel, ZendFramework, VueJS, MySQL, Linux]
-
-  - job_title: Design office - Developer
-    company: Carrier
-    link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2013-2017 (3 ans, 3 mois)
-    tags: [Sketchup, AutoCad, Ruby, C#, ASPnet]
-
-  - job_title: Design office (Work study contract)
-    company: Carrier
-    link: https://www.carrier.com/commercial-refrigeration/
-    dates: 2011-2013 (2 years)
-    tags: [AutoCad]
-
-  - job_title: Tutoring teacher
-    company: Superprof
-    link: https://www.superprof.fr/developpeur-web-experimente-rails-lyon-debutant-perfectionner.html
-    dates: Since 2018
-    tags: [RubyOnRails, Vue.JS]
-
-projects_data:
-  - name: API on Rails
-    description: I translated and updated the excellent book <a href="http://apionrails.icalialabs.com/book/">APIs on Rails - Building REST APIs with Rails</a> which deals with best practices for building an API using Rails
-    link: https://github.com/madeindjs/api_on_rails
-
-  - name: Crystagiri
-    description: This project is an HTML document parser. It was just an excuse to learn the language <strong>Crystal</strong>. Now it is followed by just under 100 people on Github.
-    link: https://github.com/madeindjs/Crystagiri
-
-  - name: Raspberry Cook
-    description: This project allowed me to discover and train myself on <strong>Ruby on Rails</strong> and to create a server on a Raspberry PI.
-    link: https://github.com/RaspberryCook/website
-    picture: img/projects/raspberry-cook.png
+  - Passionate Software developer.

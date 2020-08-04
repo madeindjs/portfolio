@@ -2,7 +2,7 @@
 layout: main
 ---
 
-# CV et Dossier de compétences
+# {{ site.translations[site.lang]['resume'] }}
 
-- [CV](/resume/partial)
-- [Dossier de compétences](/resume/complete)
+- [{{ site.translations[site.lang]['resume_lite'] }}](/resume/partial)
+- [{{ site.translations[site.lang]['resume_full'] }}](/resume/complete)
