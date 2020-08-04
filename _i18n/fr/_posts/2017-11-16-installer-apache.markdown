@@ -13,10 +13,10 @@ Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de
 
 Ses avantages sont:
 
-* **communauté** imposantes et donc beaucoup de ressources diponnibles
+* **communauté** imposantes et donc beaucoup de ressources disponibles
 * **modules** qui permettent de prendre en charge de nombreux langages (PHP, Python, Ruby, etc..) et de personnaliser [Apache][Apache]
 * **open-source** et maintenu par la [fondation Apache](https://fr.wikipedia.org/wiki/Fondation_Apache)
-* **disponnible** sur toutes les plateformes
+* **disponible** sur toutes les plateformes
 
 Beaucoup de tutoriels existent pour installer [Apache][Apache] mais voici les informations que j'aurais aimé avoir sous la mains à mes débuts.
 
@@ -45,7 +45,7 @@ $ sudo lxc-attach --name apache
 
 Nous voilà dans notre container isolé de notre système.
 
-## Instalation d'apache
+## Installation d'apache
 
 Rien de bien sorcier, un petit `apt install` et c'est plié:
 
@@ -54,7 +54,7 @@ $ apt install apache2
 ~~~
 
 
-Afin de connaitre l'addresse IP de notre machine on lance un `ìfconfig`. On ouvre donc notre navigateur et on tape directement [http://10.0.3.416](http://10.0.3.416) (en remplaçant par votre IP). La page d'acceuil par défaut apparait!
+Afin de connaître l'adresse IP de notre machine on lance un `ìfconfig`. On ouvre donc notre navigateur et on tape directement [http://10.0.3.416](http://10.0.3.416) (en remplaçant par votre IP). La page d'accueil par défaut apparaît!
 
 ![Page par défaut d'Apache](/img/blog/debian_apache_works.png)
 
@@ -106,7 +106,7 @@ Le **Virtual Host** (**Vhost** pour les intimes) nous permet d' **héberger plus
 
 Pour cela, il suffit de créer une nouvelle configuration dans le dossier _/etc/apache2_. Deux dossiers existent pour stocker les configurations:
 
-* _sites-availables_ contient les configurations des sites disponnibles
+* _sites-availables_ contient les configurations des sites disponibles
 * _sites-enabled_ contient les configurations des sites activées
 
 Pour le moment, nous ajoutons notre configuration dans _sites-availables_:
@@ -129,7 +129,7 @@ $ vi /etc/apache2/sites-availables/test.fr.conf
 
 > Eh mais Je ne possède pas [test.fr](http://test.fr/), comment va t-on faire?
 
-C'est vrai mais on peut le simuler très facilement. Sur le PC client (celui qui visite le site), on va ajouter une **entrée DNS** au fichier _/etc/hosts_. Une entrée DNS fait correspondre un **nom de domaine** (= _test.fr_) à une **addresse IP** (= 10.0.3.416).
+C'est vrai mais on peut le simuler très facilement. Sur le PC client (celui qui visite le site), on va ajouter une **entrée DNS** au fichier _/etc/hosts_. Une entrée DNS fait correspondre un **nom de domaine** (= _test.fr_) à une **adresse IP** (= 10.0.3.416).
 
 ~~~bash
 $ echo '10.0.3.146 test.fr' | sudo tee --append /etc/hosts
@@ -143,7 +143,7 @@ On termine par activer notre configuration. On utilise `a2ensite` qui va s'occup
 $ a2ensite test.fr
 ~~~
 
-Il suffit de redemmarer notre serveur Apache.
+Il suffit de redémarrer notre serveur Apache.
 
 ~~~bash
 $ systemctl reload apache2

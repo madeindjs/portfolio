@@ -310,7 +310,7 @@ Une des plus grandes forces de [Rust][Rust] est qu'il ne vous **laissera pas com
 
 ### [Le système d'appartenance][ownership]
 
-Un autre gros point fort de [Rust][Rust] est le sysème d'appartenance. Nous avons vu que gràace à celui-ci, la mémoire est libérée au fur à mesure. Le système d'appartenance nous protège aussi contre les comportement innatendu. Aunsi une fonction **ne peut pas modifier un pointeur** sans que cela soit explicitement indiqué.
+Un autre gros point fort de [Rust][Rust] est le système d'appartenance. Nous avons vu que grâce à celui-ci, la mémoire est libérée au fur à mesure. Le système d'appartenance nous protège aussi contre les comportement inattendu. Ainsi une fonction **ne peut pas modifier un pointeur** sans que cela soit explicitement indiqué.
 
 Prenons cet exemple. Une fonction `change` permet d'ajouter le text `", world"` à la fin d'un texte donné en paramètre. Nous utilisons un pointeur vers le texte qui sera modifié.
 
@@ -326,7 +326,7 @@ fn change(some_string: &String) {
 }
 ~~~
 
-[Rust][Rust] refusera de compiler ce code car la fonction modfie le contenu de `some_string` sans que cela soit indiqué.
+[Rust][Rust] refusera de compiler ce code car la fonction modifie le contenu de `some_string` sans que cela soit indiqué.
 
 > cannot borrow immutable borrowed content `*some_string` as mutable
 
@@ -344,7 +344,7 @@ fn change(some_string: &mut String) {
 }
 ~~~
 
-Avec [Rust][Rust], vous vous baterez souvent contre le compilateur mais celui ci vous protégera d'une pmajorité des *Runtime Errors*
+Avec [Rust][Rust], vous vous bâterez souvent contre le compilateur mais celui ci vous protégera d'une majorité des *Runtime Errors*
 
 ### Structure
 
@@ -369,7 +369,7 @@ fn main() {
 }
 ~~~
 
-Comme en POO, nous pouvons ajouter des **méthodes** sur ces structures avec les **implémentations**. Pour cela on utilise `impl`. Pour les fonctions, si elle prennent en paramètre `&self`, ce sont des **méthodes d'instances**. Si elle ne prennent pas en paramètre `&self`, ce sont des **métodes statiques**.
+Comme en POO, nous pouvons ajouter des **méthodes** sur ces structures avec les **implémentations**. Pour cela on utilise `impl`. Pour les fonctions, si elle prennent en paramètre `&self`, ce sont des **méthodes d'instances**. Si elle ne prennent pas en paramètre `&self`, ce sont des **méthodes statiques**.
 
 Essayons ça avec une une méthode `describe` qui permet d'afficher les informations.
 
@@ -398,7 +398,7 @@ fn main() {
 
 ### Les `enum`
 
-`alex` est bien sympa, mais au lieu de remplir le champs `sex` par `Male` ou `Femmale`, il a mis "big" (le con!).
+`alex` est bien sympa, mais au lieu de remplir le champs `sex` par `Male` ou `Female`, il a mis "big" (le con!).
 
 Pour parer à cela, nous pouvons forcer le choix à des types définis avec un `enum` ressemblant à cela
 
@@ -406,7 +406,7 @@ Pour parer à cela, nous pouvons forcer le choix à des types définis avec un `
 #[derive(Debug)]
 enum Sex {
     Male,
-    Femmale
+    Female
 }
 ~~~
 
@@ -550,7 +550,7 @@ pub struct Size{
 
 pub enum Sex{
     Male(Size),
-    Femmale
+    Female
 }
 
 pub struct Human {

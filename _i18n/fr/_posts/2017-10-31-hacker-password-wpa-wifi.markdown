@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  Hacker un Wifi protégé par WPA/WPA2
+title: Hacker un Wifi protégé par WPA/WPA2
 description: Utilisez Kali Linux pour hacker un Wifi protégé par WPA/WPA2
-date:   2017-10-31 20:00:00 +0200
+date: 2017-10-31 20:00:00 +0200
 tags: hack kali wifi wpa
 categories: hacking
 thumbnail: /img/blog/wifi.png
@@ -21,21 +21,20 @@ Je l'ai installé en [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) mais i
 
 Ici nous allons utiliser [Aircrack-ng](https://www.aircrack-ng.org/) qui est est une suite de logiciels open-source utilisée pour surveiller lses réseaux sans fil et "casser" les clés WEP et WPA des réseaux Wi-fi. L'attaque se déroulera en plusieurs phases:
 
-* **Préparation** de votre carte réseau
-* **Analyse** du Wi-fi cible
-* **Capture** d'un **WPA handshake** *(une connexion au réseau Wifi)* en déconnectant un périphérique sur le Wifi
-* **Crackage** du mot de passe contenu dans le **WPA handshake** par *bruteforce*
-
+- **Préparation** de votre carte réseau
+- **Analyse** du Wi-fi cible
+- **Capture** d'un **WPA handshake** _(une connexion au réseau Wifi)_ en déconnectant un périphérique sur le Wifi
+- **Déchiffrement** du mot de passe contenu dans le **WPA handshake** par _bruteforce_
 
 ## Préparation
 
-La première étape est d'activer le **mode moniteur** de la carte réseau mettre en place. Pour cela on liste les cartes réseaux disponnibles avec `airmong-ng`. Ouvrez un terminal et tapez:
+La première étape est d'activer le **mode moniteur** de la carte réseau mettre en place. Pour cela on liste les cartes réseaux disponibles avec `airmong-ng`. Ouvrez un terminal et tapez:
 
 ```bash
 airmon-ng
 ```
 
-> Si votre carte réseau ne s'affiche pas, c'est qu'elle n'est pas compatible. Il faut vous en acheter une *(un dongle USB wifi suffit)*
+> Si votre carte réseau ne s'affiche pas, c'est qu'elle n'est pas compatible. Il faut vous en acheter une _(un dongle USB wifi suffit)_
 
 Dans notre cas on voit que l'on peut utiliser notre carte réseau **wlan0**. On active donc le **mode moniteur** avec la commande suivante:
 
@@ -43,11 +42,11 @@ Dans notre cas on voit que l'on peut utiliser notre carte réseau **wlan0**. On 
 airmon-ng start wlan0
 ```
 
-A partir d'ici, la carte réseau **wlan0** n'est plus disponible *(vous n'avez plus internet)*, et une nouvelle carte réseau apparaît. On peut la retrouver en faisant un `ifconfig`. Dans mon cas, il s'agit de **wlan0mon**.
+A partir d'ici, la carte réseau **wlan0** n'est plus disponible _(vous n'avez plus internet)_, et une nouvelle carte réseau apparaît. On peut la retrouver en faisant un `ifconfig`. Dans mon cas, il s'agit de **wlan0mon**.
 
 ## Analyse
 
-Désormais, on peut *sniffer* les paquets réseaux qui circulent autour de nous grâce à `airodump`:
+Désormais, on peut _sniffer_ les paquets réseaux qui circulent autour de nous grâce à `airodump`:
 
 ```bash
 airodump-ng wlan0mon
@@ -55,10 +54,10 @@ airodump-ng wlan0mon
 
 Cette commande va trouver des informations supplémentaires sur les wifi dont:
 
-* le **BSSID**
-* le **CH**annel
-* l' **AUTH**, le mode d'authentification
-* le **ESSID**, le nom du routeur
+- le **BSSID**
+- le **CH**annel
+- l' **AUTH**, le mode d'authentification
+- le **ESSID**, le nom du routeur
 
 Parmi toutes les lignes, mon réseau apparaît. Pensez à noter les information car elles nous seront utiles.
 
@@ -72,8 +71,8 @@ Parmi toutes les lignes, mon réseau apparaît. Pensez à noter les information 
 
 Un **WPA handshake** se déroule lors de la connexion d'un périphérique sur le Wifi. Notre but est d'en capturer un afin de récupérer le mot de passe crypté.
 
-* sniffer le Wi-fi et attendre qu'un périphérique se connecte au wi-fi
-* sniffer le Wi-fi et provoquer une déconnexion et attendre que l'appareil se reconnecte
+-   sniffer le Wi-fi et attendre qu'un périphérique se connecte au wi-fi
+-   sniffer le Wi-fi et provoquer une déconnexion et attendre que l'appareil se reconnecte
 
 Afin de tester, je vais déconnecter mon **Blackberry** déjà connecté dessus.
 
@@ -81,15 +80,15 @@ Afin de tester, je vais déconnecter mon **Blackberry** déjà connecté dessus.
 
 On scan donc le réseau avec la commande `airodump-ng` et les options:
 
-* `-c` pour spécifier le channel
-* `--bssid`, l'iddentifiant de mon routeur
-* `-w` le répertoire ou seront stocké les fichiers d'output
+- `-c` pour spécifier le channel
+- `--bssid`, l'identifiant de mon routeur
+- `-w` le répertoire ou seront stocké les fichiers d'output
 
 ```bash
 airodump-ng -c 10 --bssid 18:D6:C7:85:7E:A0 -w tplink  wlan0mon
 ```
 
-On laisse cette commande en arrière plan, elle va nous produire 3 fichiers dont un de type *xml*. C'est celui qui nous intéresse car il contient plus de détails sur les périphériques connectés sur le wi-fi. En ouvrant celui-ci, on retrouve très facilement les informations de mon Blackberry. Voici un extrait du fichier:
+On laisse cette commande en arrière plan, elle va nous produire 3 fichiers dont un de type _xml_. C'est celui qui nous intéresse car il contient plus de détails sur les périphériques connectés sur le wi-fi. En ouvrant celui-ci, on retrouve très facilement les informations de mon Blackberry. Voici un extrait du fichier:
 
 ```xml
 <client-mac>94:EB:CD:25:E0:C1</client-mac>
@@ -98,33 +97,32 @@ On laisse cette commande en arrière plan, elle va nous produire 3 fichiers dont
 
 ### La déconnexion
 
-
 Maintenant que nous avons toutes les informations, nous allons envoyer un packet qui va **demander la déconnection** de mon Blackberry. On utilise `aireplay-ng` avec les paramètres:
 
-* `-0` pour envoyer un signal de dés authentification
-* `-a` le BSSID de notre Wi-fi
-* `-c` le BSSID de la cible
-* la carte réseau utilisée
+- `-0` pour envoyer un signal de dés authentification
+- `-a` le BSSID de notre Wi-fi
+- `-c` le BSSID de la cible
+- la carte réseau utilisée
 
 ```bash
 aireplay-ng -0 2 -a 18:D6:C7:85:7E:A0 -c 94:EB:CD:25:E0:C1 wlan0mon
 ```
 
-Le périphérique se déconnecte et se reconnecte automatiquement. On obtient donc un **WPA Handshake** qui est contenu dans le fichier *tplink.cpa*.
+Le périphérique se déconnecte et se reconnecte automatiquement. On obtient donc un **WPA Handshake** qui est contenu dans le fichier _tplink.cpa_.
 
-## Le crackage
+## Le déchiffrement
 
 Maintenant que nous avons obtenu un packet contenant le **mot de passe WPA crypté**, il suffit de tester plusieurs combinaisons jusqu'à en trouver un correspondante: on appelle cela un **bruteforce**.
 
 ### le dictionnaire
 
-Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver des [fichiers textes de plusieurs giga-octes des mots de passe les plus utilisés](http://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html). Dans mon cas, je sais que le mot de passe de mon Wifi contient 8 chiffres. Je vais donc utiliser la commande `crunch` pour génerer toutes les combinaisons possibles. `crunch` utilise plusieurs paramètres:
+Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver des [fichiers textes de plusieurs giga-octes des mots de passe les plus utilisés](http://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html). Dans mon cas, je sais que le mot de passe de mon Wifi contient 8 chiffres. Je vais donc utiliser la commande `crunch` pour générer toutes les combinaisons possibles. `crunch` utilise plusieurs paramètres:
 
-1. la longueur minimum *(8)*
-2. la longueur maximum *(8)*
-3. les caractères à utiliser *(0123...9)*
+1. la longueur minimum _(8)_
+2. la longueur maximum _(8)_
+3. les caractères à utiliser _(0123...9)_
 
-On envoie tout ça dans un fichier *passwords.txt*.
+On envoie tout ça dans un fichier _passwords.txt_.
 
 ```bash
 crunch 8 8 12345678 > passwords.txt
@@ -134,7 +132,7 @@ En quelques secondes on obtiens un fichier de **43046721 lignes** pesant **369 M
 
 ### Le bruteforce
 
-On passe à l'action. Ici nous allons effectuer bruteforcer le mot de passe. Pour cela nous utilisons `aircrack-ng` qui va crypter les mots de passe un par un et vérifier s'il correspond au mot de passe du paquet réseaux qure nous avons capturé (Préparez vous un café car cela peut être long).
+On passe à l'action. Ici nous allons effectuer bruteforcer le mot de passe. Pour cela nous utilisons `aircrack-ng` qui va crypter les mots de passe un par un et vérifier s'il correspond au mot de passe du paquet réseaux que nous avons capturé (Préparez vous un café car cela peut être long).
 
 Pour cela on utilise `aircrack-ng`
 
@@ -156,4 +154,4 @@ En appliquant un mot de passe plus complexe, nous diminuons donc le risque. En l
 
 De plus il est possible d'adapter le signal du wi-fi pour qu'il ne soit pas visible dans tout l'immeuble.
 
-Préferez dès que possible le câble Ethernet qui reste malgré tout la solution la plus sécurisée.
+Préférez dès que possible le câble Ethernet qui reste malgré tout la solution la plus sécurisée.
