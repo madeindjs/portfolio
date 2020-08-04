@@ -8,48 +8,46 @@ layout: main
     <li><a href="/pgp.txt">3072R/AB2676CC</a></li>
     <li><a href="https://github.com/madeindjs">github.com/madeindjs</a></li>
   </ul>
-  </nav>
-  
-  
+</nav>
+
+
+<h1>Alexandre Rousseau</h1>
+{% for desc in site.translations[site.lang]['description'] %}
+<p>{{ desc }}</p>
+{% endfor %}
+<p>{% t i_like %} {% t interest_points %}</p>
+
+
 <section>
-  <h1>Alexandre Rousseau</h1>
-  {% for desc in site.translations[site.lang]['description'] %}
-  <p>{{ desc }}</p>
-  {% endfor %}
-  <p>{% t i_like %} {% t interest_points %}</p>
+  <h2>{% t professional_experiences %}</h2>
+
+  {% for experience in site.translations[site.lang]['experiences_data'] %}
+  <p>
+    <strong>{{ experience.job_title }}</strong> @ <a href="{{ experience.link }}">{{ experience.company }}</a> - <date>
+      {{ experience.dates }}</date>
+    <br>
+    {% for tag in experience.tags %}
+    <code>#{{ tag }}</code>
+    {% endfor %}
+  </p>
+  <ul class="list-inline m-0 text-italic">
+
+  </ul>
+</section>
+{% endfor %}
 </section>
 
-
-<section>
-    <h2>{% t professional_experiences %}</h2>
-
-      {% for experience in site.translations[site.lang]['experiences_data'] %}
-        <p>
-          <strong>{{ experience.job_title }}</strong> @ <a href="{{ experience.link }}">{{ experience.company }}</a> - <date>{{ experience.dates }}</date>
-          <br>
-          {% for tag in experience.tags %}
-            <code>#{{ tag }}</code>
-          {% endfor %}
-
-        </p>
-          <ul class="list-inline m-0 text-italic">
-            
-          </ul>
-        </section>
-      {% endfor %}
-  </section>
-  
 
 <section>
   <h2>{% t open_source.title %}</h2>
   <!-- <p>{% t open_source.lead %}</p> -->
   {% for project in site.translations[site.lang]['projects_data'] %}
   <p>
-      {% if project.link %}
-        <strong><a href="{{ project.link }}">{{ project.name }}</a></strong>
-      {% else %}
-        {{ project.name }}
-      {% endif %}
+    {% if project.link %}
+    <strong><a href="{{ project.link }}">{{ project.name }}</a></strong>
+    {% else %}
+    {{ project.name }}
+    {% endif %}
     {{ project.description }}
   </p>
   {% endfor %}
@@ -58,7 +56,7 @@ layout: main
 
 <section>
   <h2>{% t my_educations %}</h2>
-  
+
   {% for education in site.translations[site.lang]['educations_data'] %}
   <p>
     <strong>{{ education.qualification }}</strong>:
@@ -67,4 +65,3 @@ layout: main
   </p>
   {% endfor %}
 </section>
-
