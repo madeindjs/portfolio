@@ -29,16 +29,16 @@ On retrouve beaucoup en téléchargement la version 2 [en téléchargement sur S
 
 [Vagrant][vagrant] est un logiciel libre et open-source qui gère la création et la configuration des machines virtuelles. Pour l'installer, il suffit de télécharger le paquet via [le site officiel](https://www.vagrantup.com/downloads.html). Par exemple, pour Debian:
 
-~~~bash
+```bash
 $ wget https://releases.hashicorp.com/vagrant/2.1.5/vagrant_2.1.5_x86_64.deb
 $ sudo dpkg -i vagrant_2.1.5_x86_64.deb
-~~~
+```
 
 Ensuite, il suffit de télécharger le fichier [Vagrant][vagrant] et le lancer directement avec `vagrant up`:
 
-~~~bash
+```bash
 $ curl -O https://raw.githubusercontent.com/rapid7/metasploitable3/master/Vagrantfile && vagrant up
-~~~
+```
 
 [Vagrant][vagrant] va donc s’occuper de créer la machine virtuelle pour nous. Pour se connecter, le login par défaut est:
 
@@ -78,7 +78,7 @@ Ces "portes ouvertes" nous donne donc beaucoup d'indications sur la machines et 
 
 `nmap` possède beaucoup d'options, mais nous pouvons utiliser la version la plus simple
 
-~~~bash
+```bash
 $ sudo nmap 172.28.128.3
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-10-05 23:12 CEST
@@ -97,7 +97,7 @@ PORT     STATE  SERVICE
 MAC Address: 08:00:27:0E:30:35 (Oracle VirtualBox virtual NIC)
 
 Nmap done: 1 IP address (1 host up) scanned in 5.17 seconds
-~~~
+```
 
 > L'utilisation de `sudo` donne plus de liberté à `nmap` et ainsi nous donne plus d'information. Attention néanmoins car le scan de port est facilement détectable.
 
@@ -115,24 +115,23 @@ Ici nous allons scanner les vulnérabilités. **Attention** cette action est **i
 
 [OpenVAS][openvas] est disponible dans les paquets Debian donc il s'installe très facilement.
 
-~~~bash
+```bash
 $ sudo  apt install openvas
-~~~
+```
 
 Une fois installé, il nous pouvons effectuer la configuration automatique avec `openvas-setup`. Cette commande va s’occuper de mettre à jour la base de données des failles que Open
 
-~~~bash
+```bash
 $ sudo openvas-setup
-~~~
+```
 
 > **Attention**, à la fin `openvas-setup` va créer un compte admin avec un **mot de passe aléatoire** qu'il faudra noter.
 
 Pour vérifier que tout s'est bien passé, il suffit de lancer la commande suivante:
 
-~~~bash
+```bash
 $ sudo openvas-check-setup
-~~~
-
+```
 
 Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start` et on peut aussi mettre à jour la base de données des vulnérabilités connues avec `openvas-feed-update`.
 
@@ -152,22 +151,22 @@ Metasploit possède plusieurs interfaces. Nous allons utiliser **Msfcli**, l'int
 
 On ouvre donc la console avec `msfconsole`. Ceci va nous ouvrir un mode interactif pour interagir directement avec Metasploit:
 
-~~~bash
+```bash
 $ msfconsole
 msf >
-~~~
+```
 
 On charge donc le module d'OpenVAS dans Metasploit avec la commande `load`
 
-~~~bash
+```bash
 msf > load openvas
-~~~
+```
 
 Il faut donc se connecter à notre serveur OpenVAS avec la commande `openvas_connect` _(si le serveur OpenVAS n'est pas démarré, il faut utiliser `openvas-start`)_.
 
-~~~bash
+```bash
 msf > openvas_connect admin <password> 127.0.0.1 9390
-~~~
+```
 
 ##### Création de la cible
 
@@ -177,9 +176,9 @@ Maintenant que nous sommes connecté à OpenVAS, nous allons créer une **target
 - l'adresse IP de la cible
 - un commentaire (obligatoire)
 
-~~~bash
+```bash
 msf > openvas_target_create "Metasploitable" 192.168.70.128 "This is Metasploitable"
-~~~
+```
 
 La commande nous retournes une **liste des cibles** existantes (une seule si c'est votre première cible).
 
@@ -191,16 +190,15 @@ Nous allons ensuite créer une **tâche**. Une tâche est en fait un scan qui se
 - un commentaire
 - un configuration (Pour connaître les configurations disponibles, il faut utiliser `openvas_config_list`)
 
-~~~bash
+```bash
 msf > openvas_task_create "Local Scan" "Scan My Local Machine" 0 1
-~~~
+```
 
 On utilise ensuite la commande `openvas_task_list` pour retrouver l'identifiant de la tâche que l'on vient de créer. Pour la lancer, vous l'auriez deviné, on utilise `openvas_task_start` suivit de l'identifiant de la tâche.
 
-~~~bash
+```bash
 msf > openvas_task_start <id_de_la_tache>
-~~~
-
+```
 
 ### Exploitation d’une faille
 

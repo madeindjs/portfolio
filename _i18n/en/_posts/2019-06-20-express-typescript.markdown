@@ -102,7 +102,7 @@ import { Request, Response } from "express";
 export class NodesController {
   public index(req: Request, res: Response) {
     res.json({
-      message: "Hello boi"
+      message: "Hello boi",
     });
   }
 }
@@ -165,7 +165,7 @@ import { Sequelize } from "sequelize";
 export const database = new Sequelize({
   database: "some_db",
   dialect: "sqlite",
-  storage: ":memory:"
+  storage: ":memory:",
 });
 ```
 
@@ -197,16 +197,16 @@ Node.init(
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: new DataTypes.STRING(128),
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     tableName: "nodes",
-    sequelize: database // this bit is important
+    sequelize: database, // this bit is important
   }
 );
 
@@ -417,7 +417,7 @@ export class NodesController {
 
     const update: UpdateOptions = {
       where: { id: nodeId },
-      limit: 1
+      limit: 1,
     };
 
     Node.update(params, update)
@@ -469,7 +469,7 @@ export class NodesController {
     const nodeId: number = req.params.id;
     const options: DestroyOptions = {
       where: { id: nodeId },
-      limit: 1
+      limit: 1,
     };
 
     Node.destroy(options)
@@ -526,20 +526,20 @@ Link.init(
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     fromId: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false
+      allowNull: false,
     },
     toId: {
       type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     tableName: "links",
-    sequelize: database
+    sequelize: database,
   }
 );
 
@@ -589,7 +589,7 @@ export class LinksController {
 
     const options: UpdateOptions = {
       where: { id: linkId },
-      limit: 1
+      limit: 1,
     };
 
     Link.update(params, options)
@@ -601,7 +601,7 @@ export class LinksController {
     const linkId: number = req.params.id;
     const options: DestroyOptions = {
       where: { id: linkId },
-      limit: 1
+      limit: 1,
     };
 
     Link.destroy(options)
@@ -661,13 +661,13 @@ import { Link } from "./link.model";
 Node.hasMany(Link, {
   sourceKey: "id",
   foreignKey: "fromId",
-  as: "previousLinks"
+  as: "previousLinks",
 });
 
 Node.hasMany(Link, {
   sourceKey: "id",
   foreignKey: "toId",
-  as: "nextLinks"
+  as: "nextLinks",
 });
 
 Node.sync({ force: true }).then(() => console.log("Node table created"));

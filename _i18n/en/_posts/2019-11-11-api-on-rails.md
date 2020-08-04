@@ -42,15 +42,15 @@ The workflow I followed was as follows:
 1. redo the code examples on my side in [a separate Github project](https://github.com/madeindjs/market_place_api_6)
 2. rework the English version according to the changes I had just made
 3. paste the English version into a file
-3. make translations in copy/paste mode in [Deepl](https://deepl.com)
-4. correct the translation (because it is far from perfect)
-5. paste the French version into a file
+4. make translations in copy/paste mode in [Deepl](https://deepl.com)
+5. correct the translation (because it is far from perfect)
+6. paste the French version into a file
 
 The first problem I encountered was managing this whole process that involves writing the book in English and French. Adding the management of the project created throughout this book it was difficult. Looking back I should have left everything in English and maybe translated at the end.
 
 Then I fixed myself:
 
-- two **rewritings** per chapter in which I wrote quite quickly
+- two **rewriting** per chapter in which I wrote quite quickly
 - two **reviews** per chapter (including one from my girlfriend who helped me a lot)
 - a promotion part (I will talk about it later)
 
@@ -67,7 +67,7 @@ I was really surprised by the help of the open source community. Here are the fi
 
 I received pull requests that corrected syntax errors, broken links and questionable formulations. I also received s and bad feedback. For an anecdote, I was even contacted by a Russian who was interested in translating the book. He just needed to forge the project and create a `ru` folder. That's great.
 
-Open source really gives the feeling that **the book is alive**. 
+Open source really gives the feeling that **the book is alive**.
 
 When the book is finished or I have fixed things, I do a _release_ on Github and attach the PDF, EPUB and MOBI files. So anyone can read it **free of charge** on the **support of his choice**.
 
@@ -79,8 +79,6 @@ I looked a little bit at Amazon but it seemed more complicated to me to create a
 
 I chose Leanpub for its ease and also the fact that the price can be free.
 
-
-
 So I published a total of 4 versions:
 
 - one [English version](https://leanpub.com/apionrails5) and one [French version](https://leanpub.com/apionrails5-fr) for Ruby on Rails 5
@@ -88,17 +86,17 @@ So I published a total of 4 versions:
 
 In the end, here are all the royalty figures, i.e. what goes in my pocket after the Leanpub commissions.
 
-| Book | Royalties |
-| ------------------- | ----------|
-|[API on Rails 5 (EN)](https://leanpub.com/apionrails5) | $160.63 |
-|[API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | $15.98 |
-|[API on Rails 6 (EN)](https://leanpub.com/apionrails6) | $473.22 |
-|[API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | $20.78 |
-| Total | $670.61 |
+| Book                                                      | Royalties |
+| --------------------------------------------------------- | --------- |
+| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)    | \$160.63  |
+| [API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | \$15.98   |
+| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)    | \$473.22  |
+| [API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | \$20.78   |
+| Total                                                     | \$670.61  |
 
 I was really surprised to sell "so much". These figures really motivate me to keep the project going.
 
-The figures are also to be put into context. It took a lot of work on my part, which is difficult to quantify. From the nose I would say between **500 and 1000 hours**. This gives an hourly wage of $1.34 / hour**. So yes, clearly I'm not doing this for the money. But it was for me plus an excellent **paid experience**.
+The figures are also to be put into context. It took a lot of work on my part, which is difficult to quantify. From the nose I would say between **500 and 1000 hours**. This gives an hourly wage of \$1.34 / hour**. So yes, clearly I'm not doing this for the money. But it was for me plus an excellent **paid experience\*\*.
 
 We also see that the English version sells **17 times better** than the French version. The first sad conclusion I can give is that **you have to translate your book into Shakespeare's language**.
 

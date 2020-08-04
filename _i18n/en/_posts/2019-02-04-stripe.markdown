@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Connecting a Rails application with Stripe
-date:   2019-02-02 12:30:00 +0200
+title: Connecting a Rails application with Stripe
+date: 2019-02-02 12:30:00 +0200
 tags: rails stripe api
 categories: tutorial
 thumbnail: /img/blog/stripe.svg
@@ -33,12 +33,12 @@ In addition, Stripe goes much further than a _simple_ payment solution since it 
 
 In this article I will therefore retrace the development of the functionality by trying to be as generic as possible. I also specify before starting that it is not a sponsored item and I did not receive any money from Stripe (I would have liked...).
 
-**TLDR**: Stripe is very simple to set up and really allows us to completely delegate payment management. This allows you to focus on your business and is invaluable for a project that is just beginning.  
+**TLDR**: Stripe is very simple to set up and really allows us to completely delegate payment management. This allows you to focus on your business and is invaluable for a project that is just beginning.
 
 ## Table of content
 
-* TOC
-{:toc}
+- TOC
+  {:toc}
 
 ## Implementation of the premium mode
 
@@ -48,41 +48,39 @@ In this first part I will talk to you about the implementation of the _premium_ 
 
 We will therefore start setting up a system to restrict certain pages to _premium_ users.
 
-L'idée est d'ajouter un attribut `premium_until` de type [`DateTime`](https://api.rubyonrails.org/classes/DateTime.html) qui contiendra la date de validité du compte premium. On ajoute donc cette colonne pour la table des `users`.
+The idea is to add a `premium_until` [`DateTime`](https://api.rubyonrails.org/classes/DateTime.html) attribute which will contains validity date of the premium account. So we add this column for the `users` table.
 
-The idea is to add a `premium_until` [`DateTime`](https://api.rubyonrails.org/classes/DateTime.html) attribute which will contains  validity date of the premium account. So we add this column for the `users` table.
-
-~~~bash
+```bash
 $ rails g migration add_premium_until_to_users premium_until:date
-~~~
+```
 
 This command will generate this migration:
 
-~~~ruby
-# db/migrate/20190116132207_addpremiumuntil_to_users.rb
+```ruby
+# db/migrate/20190116132207_add_premium_until_to_users.rb
 class AddPremiumUntilToUsers < ActiveRecord::Migration[5.2]
   def change
     add_column :users, :premium_until, :date
   end
 end
-~~~
+```
 
 Since we are generous we will also create an additional migration to **offer one month** to all existing users:
 
-~~~bash
+```bash
 $ rails g migration offer_one_monthspremiumto_users
-~~~
+```
 
 We're just looping through all the existing users
 
-~~~ruby
+```ruby
 # db/migrate/20190116132207_add_premium_until_to_users.rb
 # ...
 def up
   premium_until_offer = DateTime.now + 1.month
   User.all.each { |user| user.update! premium_until: premium_until_offer }
 end
-~~~
+```
 
 There you go.
 
@@ -94,7 +92,7 @@ Let's create the unit tests that define the expected behavior of this function. 
 
 - when the user already has a balance of days
 
-~~~ruby
+```ruby
 # test/models/user_test.rb
 test 'should offer one month premium to user' do
   user = User.create!(
@@ -104,33 +102,33 @@ test 'should offer one month premium to user' do
 
   assert_equal (Date.today + 1.month + 5.days), user.premium_until
 end
-~~~
+```
 
 - when the user does not yet have a day balance
 
-~~~ruby
+```ruby
 # test/models/user_test.rb
 test 'should set correct premium_until for never premium user' do
   user = User.new
   user.increment_premium
   assert_equal (Date.today + 1.month), user.premium_until
 end
-~~~
+```
 
 - checks that we add one month from today for a user who has just reactivated his account after an inactivity
 
-~~~ruby
+```ruby
 # test/models/user_test.rb
 test 'should set correct premium_until for past-premium user' do
   user = User.new(premium_until: (Date.today - 1.year))
   user.increment_premium
   assert_equal (Date.today + 1.month), user.premium_until
 end
-~~~
+```
 
 I think these tests are sufficient to cover all possible cases. We have written a lot of tests but the implementation is very short:
 
-~~~ruby
+```ruby
 # app/models/user.rb
 class User < ApplicationRecord
   before_create :increment_premium
@@ -143,22 +141,22 @@ class User < ApplicationRecord
   end
   # ...
 end
-~~~
+```
 
 There you go. The tests are now passing:
 
-~~~bash
+```bash
 $ bin/rails test test/models/user_test.rb
 # Running:
 
 ....
-~~~
+```
 
 ### Restrictions actions
 
 Implementing the restriction is really easy but let's start by writing the unit tests. We will therefore create two **fixtures** _(fixtures are data inserted in the database in order to test the application)_ one representing a premium user and another representing an expired user.
 
-~~~yml
+```yml
 # test/fixtures/users.yml
 premium_advocate:
   premium_until: <%= DateTime.now + 1.month %>
@@ -167,7 +165,7 @@ premium_advocate:
 expired_advocate:
   premium_until: <%= DateTime.now - 1.month %>
   # ...
-~~~
+```
 
 Now let's imagine a page only authorized for premium users. The test is quite easy:
 
@@ -177,7 +175,7 @@ Now let's imagine a page only authorized for premium users. The test is quite ea
 
 So here is the implementation of the tests:
 
-~~~ruby
+```ruby
 # test/controllers/acts_controller_test.rb
 class ActsControllerTest < ActionDispatch::IntegrationTest
 
@@ -194,18 +192,18 @@ class ActsControllerTest < ActionDispatch::IntegrationTest
   end
   # ...
 end
-~~~
+```
 
 If you run the tests at this point you will get a pretty mistake like that:
 
-~~~
+```
 ActsControllerTest#test_should_forbid_get_index_for_non-premium_user
 Expected response to be a <3XX: redirect>, but was a <200: OK>
-~~~
+```
 
 Implementation to get it through is quite easy. Simply create a method that will verify that the `premium_until` attribute of the connected user is greater than `DateTime.now`. Then simply call this method using a [controler _hook_](https://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html#method-i-before_action). The is the code:
 
-~~~ruby
+```ruby
 # app/controllers/acts_controller.rb
 class ActsController < ApplicationController
   before_action :redirect_if_not_premium, only: %i[index]
@@ -217,7 +215,7 @@ class ActsController < ApplicationController
     redirect_to root_path if current_user.nil? or current_user.premium_until < DateTime.now
   end
 end
-~~~
+```
 
 > The `current_user` method allows me to retrieve the user connected to the application. To implement it, I recommend that you use [Authlogic](https://github.com/binarylogic/authlogic)
 
@@ -227,13 +225,13 @@ There you go. The test should now pass! The creation of the logic for the user m
 
 We set up logic to restrict some pages to premium users. We also created the method who will add one month of premium account to a user. All that remains is to call this method when a payment is made.
 
-First of all, to use Stripe, you need to create an account that will allow you to get an *API key*. Once this is done, integration into your Rails application is pretty easy thnaks to [Stripe's gem](https://github.com/stripe/stripe-ruby/)! Of course we'll use it here.
+First of all, to use Stripe, you need to create an account that will allow you to get an _API key_. Once this is done, integration into your Rails application is pretty easy thnaks to [Stripe's gem](https://github.com/stripe/stripe-ruby/)! Of course we'll use it here.
 
 So let's start by adding this gem to our project:
 
-~~~bash
+```bash
 $ bundle add stripe
-~~~
+```
 
 In this first version we will simply set up a Stripe punctual payment and call `User#increment_premium` if everything goes well. In Stripe terms, a simple payment is a _charge_.
 
@@ -244,24 +242,24 @@ So we will create a `charges` controller that will contain two actions:
 
 So let's generate all this with `rails generate` command :
 
-~~~bash
+```bash
 $ rails generate controller charges new create
-~~~
+```
 
 All we have to do now is modify the code generated by Rails. First of all, we modify routes:
 
-~~~ruby
+```ruby
 # config/routes.rb
 Rails.application.routes.draw do
   # ...
   resources :charges, only: %i[new create]
   # ...
 end
-~~~
+```
 
 The actions are then implemented in the controller:
 
-~~~ruby
+```ruby
 # app/controllers/charges_controller.rb
 class ChargesController < ApplicationController
   # display Stripe form to make a new payment
@@ -292,7 +290,7 @@ class ChargesController < ApplicationController
     end
   end
 end
-~~~
+```
 
 That's represent a lot of code. Let me take a look at `create` method:
 
@@ -302,7 +300,7 @@ That's represent a lot of code. Let me take a look at `create` method:
 
 It is Look very easy. Now, we modify the views a little bit and generate a form:
 
-~~~erb
+```erb
 <!-- app/views/charges/new.html.erb -->
 <h1>Subscribe to a monthly subscription</h1>
 <p>Currently, your premium account is available until <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
@@ -313,17 +311,17 @@ It is Look very easy. Now, we modify the views a little bit and generate a form:
           data-amount="500"
           data-locale="auto"></script>
 <% end %>
-~~~
+```
 
-~~~erb
+```erb
 <!-- app/views/charges/create.html.erb -->
 <h1>Votre paiement a été accepté</h1>
 <p>Le paiement a été effectué. Votre compte premium à été étendu au <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
-~~~
+```
 
 We end with configuration. Simply retrieve the API keys via the Stripe interface and add them to the `secrets.yml` file.
 
-~~~yaml
+```yaml
 # config/secrets.yml
 development:
   stripe:
@@ -336,13 +334,13 @@ production:
   stripe:
     publishable_key: pk_live_azerty
     secret_key: sk_live_clef_a_ne_pas_commiter
-~~~
+```
 
-> Of course you must enter *your* own* key here
+> Of course you must enter _your_ own\* key here
 
 And now to create the necessary configuration in a Stripe-specific _initializer_:
 
-~~~ruby
+```ruby
 # config/initializers/stripe.rb
 Rails.configuration.stripe = {
   publishable_key: Rails.application.secrets.stripe[:publishable_key],
@@ -350,7 +348,7 @@ Rails.configuration.stripe = {
 }
 
 Stripe.api_key = Rails.application.secrets.stripe[:secret_key]
-~~~
+```
 
 Once the first version is implemented, it is enough to test that everything is going well.
 
@@ -370,15 +368,15 @@ Once the form has been sent, you are redirected to the `charges#create` page whi
 
 We will make a small modification to the implementation proposed by Stripe. We want to save the _customer_ created by Stripe in order to reuse it if he pays again. We will therefore add a column `users.stripe_token`.
 
-~~~
+```
 $ rails g migration add_stripe_token_to_users stripe_token:string
-~~~
+```
 
 Nous allons créer un _concern_ qui va s'occuper de récupérer ou créer un _customer_ Stripe:
 
 > If you are not comfortable with _concerns_, I talk about it in [this previous article](http://rousseau-alexandre.fr/tutorial/2018/12/03/zip-active-storage.html#factorisation).
 
-~~~ruby
+```ruby
 # app/controllers/concerns/stripe_concern.rb
 module StripeConcern
   extend ActiveSupport::Concern
@@ -416,11 +414,11 @@ module StripeConcern
     end
   end
 end
-~~~
+```
 
 It is now time to modify a little our controller to use it.
 
-~~~ruby
+```ruby
 # app/controllers/charges_controller.rb
 class ChargesController < ApplicationController
   include StripeConcern
@@ -446,11 +444,11 @@ class ChargesController < ApplicationController
     end
   end
 end
-~~~
+```
 
 There you go! The operation is identical but now we get the customer back if he already exists. We can also do without the Stripe button if the user already has a token:
 
-~~~erb
+```erb
 <!-- app/views/charges/new.html.erb -->
 <h1>Subscribe to a monthly subscription</h1>
 <p>Currently, your premium account is available until <%= current_user.premium_until.strftime('%d/%m/%Y') %></p>
@@ -465,37 +463,37 @@ There you go! The operation is identical but now we get the customer back if he 
             data-locale="auto"></script>
   <% end %>
 <% end %>
-~~~
+```
 
 ## Subscription
 
-Don't give up, we're almost done. One of the last features to be created is to offer a subscription. The user will be able to make a subscription that will trigger an automatic payment at the beginning of the month. According to Stripe this is called a [*subscriptions*](https://stripe.com/docs/billing/subscriptions/products-and-plans).
+Don't give up, we're almost done. One of the last features to be created is to offer a subscription. The user will be able to make a subscription that will trigger an automatic payment at the beginning of the month. According to Stripe this is called a [_subscriptions_](https://stripe.com/docs/billing/subscriptions/products-and-plans).
 
->  Each plan is attached to a product who represents (...) the service provided to customers. Products can have more than one plan, reflecting price and duration variations - such as monthly and annual prices at different rates. There are two types of products: goods and services (...) which are intended for subscriptions.
+> Each plan is attached to a product who represents (...) the service provided to customers. Products can have more than one plan, reflecting price and duration variations - such as monthly and annual prices at different rates. There are two types of products: goods and services (...) which are intended for subscriptions.
 
 ### Creating plan
 
 So let's create our first product using [Stripe's gem](https://github.com/stripe/stripe-ruby/). Here is an example with the Rails console (You can do the same thing using the administration interface).
 
-~~~ruby
+```ruby
 2.6.0 :001 > product= Stripe::Product.create name: 'Premium account subscription', type: 'service'
  => #<Stripe::Product:0x3fe4f20a1420 id=prod_EMb13PJreiAcF2> JSON: {
 2.6.0 :002 > plan = Stripe::Plan.create amount: 5000, interval: 'month', product: product.id, currency: 'eur', id: 'premium-monthly'
  )
   => #<Stripe::Plan:0x2ab3e0b46d24 id=premium-monthly> JSON: {
-~~~
+```
 
 > Here again I didn't invent anything, everything is [in Stripe's documentation](https://stripe.com/docs/api/subscriptions/object?lang=ruby)
 
 So we get a pretty Ruby instance corresponding to a _Plan_. We will just write thet `id` into the `secret.yml` file:
 
-~~~yaml
+```yaml
 # config/secrets.yml
 development:
   stripe:
     premium_plan_id: premium-monthly
     # ...
-~~~
+```
 
 ### Creating logic
 
@@ -506,23 +504,23 @@ As we have created a `charges` controller, we will create a new one named `subsc
 
 Let's use the `rails generate` command once again
 
-~~~bash
+```bash
 $ rails generate controller subscriptions new create
-~~~
+```
 
 We have to modify generated routes a little bit:
 
-~~~ruby
+```ruby
 # config/routes.rb
 Rails.application.routes.draw do
   resources :subscriptions, only: %w[new create]
   # ...
 end
-~~~
+```
 
 Implementation of `SubscriptionsController` is almost identical to the `ChargesController` (that's why we previously created a _concerns_ to avoid code duplication). We just need to call the method `Stripe::Charge.create`:
 
-~~~ruby
+```ruby
 class SubscriptionsController < ApplicationController
   include StripeConcern
 
@@ -542,11 +540,11 @@ class SubscriptionsController < ApplicationController
     end
   end
 end
-~~~
+```
 
 And views:
 
-~~~erb
+```erb
 <!-- app/views/subscriptions/new.html.erb -->
 <h1>Subscribe to a monthly subscription</h1>
 <p>Subscribe to reload your account automatically every month</p>
@@ -565,13 +563,13 @@ And views:
         data-locale="auto"></script>
   <% end %>
 <% end %>
-~~~
+```
 
-~~~erb
+```erb
 <!-- app/views/subscriptions/create.html.erb -->
 <h1><%= @title %></h1>
 <p>Le débit préautorisé est maintenant configuré</p>
-~~~
+```
 
 There you go. We can now take out a subscription.
 
@@ -583,7 +581,7 @@ We have set up a monthly payment but we want to be notified of the payments made
 2. Stripe creates a subscription for this user
 3. when the subscription is renewed (i.e. when Stripe invoices the customer and it is re-invoiced).
 
-Stripe sends a request to report that the payment has been made through the _hook_. *Webhooks* are simply routes that we make available to receive requests from Stripe. Once the route is created, we must communicate the URL to Stripe via the Stripe administration interface (this is very easy).
+Stripe sends a request to report that the payment has been made through the _hook_. _Webhooks_ are simply routes that we make available to receive requests from Stripe. Once the route is created, we must communicate the URL to Stripe via the Stripe administration interface (this is very easy).
 
 ![Formulaire de création d'un Webhook](/img/blog/stripe_webhook.png)
 
@@ -591,26 +589,25 @@ Stripe sends a request to report that the payment has been made through the _hoo
 
 Let's generate a route with Rails.
 
-~~~bash
+```bash
 $ rails g controller  hooks stripe --no-assets --no-helper
-~~~
+```
 
 We will just delete views created by Rails and pass accessible route with the HTTP `POST` verb:
 
-~~~bash
+```bash
 $ rm -r app/views/hooks
-~~~
+```
 
-~~~ruby
+```ruby
 # config/routes.rb
 Rails.application.routes.draw do
   post 'hooks/stripe'
   # ...
 end
-~~~
+```
 
 Now it is enough to add a method in the controller that will receive Stripe's request, as usual, let's start with the tests.
-
 
 ### Functional tests
 
@@ -620,7 +617,7 @@ It is always complicated to test API integration so I simply chose to simulate a
 
 Once the request was copied, I transformed it into a Ruby `Hash` and keep only parameters that interest me.
 
-~~~ruby
+```ruby
 # test/controllers/hooks_controller_test.rb
 # ...
 class HooksControllerTest < ActionDispatch::IntegrationTest
@@ -640,11 +637,11 @@ class HooksControllerTest < ActionDispatch::IntegrationTest
 
   # ...
 end
-~~~
+```
 
 Now just send a `POST` request and check that our user is incremented.
 
-~~~ruby
+```ruby
 # test/controllers/hooks_controller_test.rb
 # ...
 class HooksControllerTest < ActionDispatch::IntegrationTest
@@ -661,11 +658,11 @@ class HooksControllerTest < ActionDispatch::IntegrationTest
     assert_operator old, :<=, user.premium_until
   end
 end
-~~~
+```
 
 There you go. The implementation is fairly simple:
 
-~~~ruby
+```ruby
 # app/controllers/hooks_controller.rb
 class HooksController < ApplicationController
   protect_from_forgery except: [:stripe]
@@ -693,7 +690,7 @@ class HooksController < ApplicationController
     params[:type] == 'invoice.payment_succeeded'
   end
 end
-~~~
+```
 
 > Be careful to disable the `protect_from_forgery` which will block requests from outside.
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Create a gem to zip Rails ActiveStorages
-date:   2018-12-03 13:30:00 +0200
+date: 2018-12-03 13:30:00 +0200
 tags: rails activestorage zip
 categories: tutorial
 thumbnail: /img/blog/rails_zip.svg
@@ -25,8 +25,8 @@ In this article we go:
 
 ## Table of content
 
-* TOC
-{:toc}
+- TOC
+  {:toc}
 
 ## Creating an example
 
@@ -34,52 +34,52 @@ In this article we go:
 
 For this tutorial I have chosen to start from a new project. So let's create a new Rails project:
 
-~~~bash
+```bash
 $ rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --skip-system-test --skip-action-mailer
-~~~
+```
 
-> I added "some" *flags* `--skip` to remove anything that will be useless to us
+> I added "some" _flags_ `--skip` to remove anything that will be useless to us
 
 We will also generate a `User` entity with the `scaffold` command:
 
-~~~bash
+```bash
 $ rails g scaffold user name:string
-~~~
+```
 
-> `scaffold` command will create the *controller*, the *model*, *views* and even the migration
+> `scaffold` command will create the _controller_, the _model_, _views_ and even the migration
 
-Now since I want to use *Active Storage* wich I need to install. It's very easy to do this, the next command does it for us:
+Now since I want to use _Active Storage_ wich I need to install. It's very easy to do this, the next command does it for us:
 
-~~~bash
+```bash
 $ rails active_storage:install
-~~~
+```
 
 > This command just generates a migration that will create the tables `active_storage_blobs` & `active_storage_attachments`
 
 Now that all our **migrations** are created, just run them:
 
-~~~bash
+```bash
 $ rake db:migrate
-~~~
+```
 
 That's it, we're ready to code!
 
 ### Adding Active Storage
 
-To attach file(s) to a template, simply add **a single line** to our `User` template. This is the beauty of *conventions over configuration*!
+To attach file(s) to a template, simply add **a single line** to our `User` template. This is the beauty of _conventions over configuration_!
 
-~~~ruby
+```ruby
 # app/models/user.rb
 class User < ApplicationRecord
   has_many_attached :pictures
 end
-~~~
+```
 
 > Each `ActFile` has a file (`has_one_attached :file`) which therefore represents a link to an object [`ActiveStorage::Attached::Many`][active_storage_attached_many].
 
 I will also add a field `file_field :pictures` to the **form** so that we can upload our files
 
-~~~erb
+```erb
 <!-- app/views/users/_form.html.erb -->
 <%= form_with(model: user, local: true) do |form| %>
   <!-- ... -->
@@ -88,11 +88,11 @@ I will also add a field `file_field :pictures` to the **form** so that we can up
   <%= form.file_field :pictures, multiple: true, class: 'form-control' %>
   <%= form.submit %>
 <% end %>
-~~~
+```
 
-Don't forget to **authorize** this field in the *controller*:
+Don't forget to **authorize** this field in the _controller_:
 
-~~~ruby
+```ruby
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   # ....
@@ -104,7 +104,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 end
-~~~
+```
 
 We now start the server with `rails server` and go to the URL `http://localhost:3000/users/new` to create a user:
 
@@ -112,7 +112,7 @@ We now start the server with `rails server` and go to the URL `http://localhost:
 
 You should see in the server console that the files are **loaded** when you validate the form with files
 
-~~~
+```
 Started POST "/users" for 127.0.0.1 at 2018-11-30 08:48:29 +0100
 Processing by UsersController#create as HTML
   ActiveStorage::Blob Create (1.0ms)  INSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["key", "2gVacD6hhv6viMW2bgYGVzsV"], ["filename", "2172652.png"], ["content_type", "image/png"], ["metadata", "{\"identified\":true}"], ["byte_size", 414730], ["checksum", "L2ka9VIXeONlrtvE8w0kMQ=="], ["created_at", "2018-11-30 07:48:29.724333"]]
@@ -120,7 +120,7 @@ Processing by UsersController#create as HTML
   ActiveStorage::Attachment Create (0.4ms)  INSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)  [["name", "pictures"], ["record_type", "User"], ["record_id", 2], ["blob_id", 3], ["created_at", "2018-11-30 07:48:29.774326"]]
   ActiveStorage::Attachment Create (0.2ms)  INSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)  [["name", "pictures"], ["record_type", "User"], ["record_id", 2], ["blob_id", 4], ["created_at", "2018-11-30 07:48:29.777281"]]
 Completed 302 Found in 96ms (ActiveRecord: 37.5ms)
-~~~
+```
 
 ## Create ZIP
 
@@ -128,9 +128,9 @@ The idea would therefore be to create a route `http://localhost:3000/users/1.zip
 
 ### Creating test
 
-As always we try to create a test that **fails** at first ([*Test Driven Development*][tdd]). I simply chose to create a *test controller* and **test the answer** of the request. It's very simple, but it works:
+As always we try to create a test that **fails** at first ([_Test Driven Development_][tdd]). I simply chose to create a _test controller_ and **test the answer** of the request. It's very simple, but it works:
 
-~~~ruby
+```ruby
 # test/controllers/users_controller_test.rb
 # ...
 class UsersControllerTest < ActionDispatch::IntegrationTest
@@ -141,11 +141,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'application/zip', response.content_type
   end
 end
-~~~
+```
 
 Test fails for the moment and **it is normal**:
 
-~~~
+```
 $ rake test
 
 # Running:
@@ -157,7 +157,7 @@ UsersControllerTest#test_should_get_user_as_zip:
 ActionController::UnknownFormat: UsersController#show is missing a template for this request format and variant.
 
 request.formats: ["application/zip"]
-~~~
+```
 
 ### Implementation
 
@@ -168,18 +168,18 @@ First it's necessary to **download** the files to the server. For that we will:
 3. **Zip** files in the temporary folder with the content I just recovered
 4. Return the contents of the zip file
 
-Since we're talking about zip, we're going to use gem [rubyzip][rubyzip][rubyzip]. So we modify the *Gemfile*:
+Since we're talking about zip, we're going to use gem [rubyzip][rubyzip][rubyzip]. So we modify the _Gemfile_:
 
-~~~ruby
+```ruby
 # Gemfile
 gem 'rubyzip', '>= 1.0.0'
-~~~
+```
 
 Now run `bundle install` and start the server with `rails s`. We are ready to code!
 
 As I said earlier the problem is you have to **get** files from the server. We could have chosen to put the content of the file in RAM but we do not know the size of the files so I prefer to store them temporarily on the hard disk.
 
-~~~ruby
+```ruby
 # app/controllers/users_controller.rb
 
 # Download active storage files on server in a temporary folder
@@ -198,11 +198,11 @@ def save_files_on_server(files)
     filepath
   end
 end
-~~~
+```
 
 Now that files are on the hard disk, we can create the zip:
 
-~~~ruby
+```ruby
 # Create a temporary zip file & return the content as bytes
 #
 # @param filepaths [Array<String>] files paths
@@ -232,11 +232,11 @@ def create_temporary_zip_file(filepaths)
     filepaths.each { |filepath| FileUtils.rm(filepath) }
   end
 end
-~~~
+```
 
 Then just send files content with the method [`send_data`][send_data] and send the content of the zip. We use [`respond_to`][respond_to] method to send the archive when the requested format is a zip.
 
-~~~ruby
+```ruby
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   # ...
@@ -256,13 +256,13 @@ class UsersController < ApplicationController
   end
 
 end
-~~~
+```
 
 > You can see all [file here](https://github.com/madeindjs/zip_example/blob/a0fab8ec8d85bf839948c84a11badaa61b766268/app/controllers/users_controller.rb).
 
 Tests now pass:
 
-~~~
+```
 $ rake test
 Run options: --seed 43367
 
@@ -272,15 +272,15 @@ Run options: --seed 43367
 
 Finished in 0.220150s, 36.3389 runs/s, 49.9660 assertions/s.
 8 runs, 11 assertions, 0 failures, 0 errors, 0 skips
-~~~
+```
 
 ### Invoicing
 
 We may need to use this code for other models. In order to **factorize** this, Rails offers us an excellent tool: the[`ActiveSupport::Concern`][concerns_api]!
 
-To do this, simply create a module in the *app/controllers/concerns* folder and inherit it from [`ActiveSupport::Concern`][concerns_api]. Then, I **move** all methods we have created so far. And to use our *concerns*, I create a `send_zip` method (I will use it in the *controller*).
+To do this, simply create a module in the _app/controllers/concerns_ folder and inherit it from [`ActiveSupport::Concern`][concerns_api]. Then, I **move** all methods we have created so far. And to use our _concerns_, I create a `send_zip` method (I will use it in the _controller_).
 
-~~~ruby
+```ruby
 # app/controllers/concerns/generate_zip.rb
 module GenerateZip
   extend ActiveSupport::Concern
@@ -348,11 +348,11 @@ module GenerateZip
     end
   end
 end
-~~~
+```
 
-In the *controller*, I simply include our *concerns* and use the `send_zip` method.
+In the _controller_, I simply include our _concerns_ and use the `send_zip` method.
 
-~~~ruby
+```ruby
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   include GenerateZip
@@ -368,7 +368,7 @@ class UsersController < ApplicationController
   end
 
 end
-~~~
+```
 
 There you go. It's still nicer, isn't it? You can find the code [here](https://github.com/madeindjs/zip_example/commit/67a8bcb8fd6124fdb7a2c8c3f2fd85fcbd704e5b).
 
@@ -376,27 +376,27 @@ There you go. It's still nicer, isn't it? You can find the code [here](https://g
 
 That's very good but I feel a little disappointed... If we want to use this module on another project we would be tempted to **copy/paste** the module from project to project... and **it's wrong**.
 
-Don't do that, we can go further! We can **move** our code into a **library** that will allow us to **reuse** our *concerns* in an infinite number of other projects!
+Don't do that, we can go further! We can **move** our code into a **library** that will allow us to **reuse** our _concerns_ in an infinite number of other projects!
 
 #### Make a new gem
 
 This is easy to do. Let's leave our project for two seconds and **create** a gem with [bundler][bundler]:
 
-~~~bash
+```bash
 $ bundle gem activestorage-zip
 $ cd activestorage-zip
-~~~
+```
 
 We must specify **dependencies** of our gem. Of course, we need Rails 5.2 and [rubyzip][rubyzip]:
 
-~~~bash
+```bash
 $ bundle add rails
 $ bundle add rubyzip
-~~~
+```
 
 And then I move all the concerned into the file
 
-~~~ruby
+```ruby
 # lib/active_storage/send_zip.rb
 require 'active_storage/send_zip/version'
 require 'rails'
@@ -410,7 +410,7 @@ module ActiveStorage
     # ...
   end
 end
-~~~
+```
 
 > You can see [the complete file](https://github.com/madeindjs/active_storage-send_zip/blob/master/lib/active_storage/send_zip.rb)
 
@@ -420,22 +420,22 @@ There you go! That's all! It was really simple!
 
 Now we will try to **use** our gem on our previous project (before publishing it on [Rubygem](https://guides.rubygems.org/) for example). So I install the gem locally with this command:
 
-~~~ruby
+```ruby
 $ rake install:local
-~~~
+```
 
-Now go back to *example_zip* project. Just add our gem to the *Gemfile*:
+Now go back to _example_zip_ project. Just add our gem to the _Gemfile_:
 
-~~~ruby
+```ruby
 # Gemfile
 gem 'active_storage-send_zip', '~> 0.1.0'
-~~~
+```
 
 > Don't forget to run `bundle install`
 
-and now use it in our *controller*:
+and now use it in our _controller_:
 
-~~~ruby
+```ruby
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   include ActiveStorage::SendZip
@@ -449,11 +449,11 @@ class UsersController < ApplicationController
       format.zip { send_zip @user.pictures }
     end
   end
-~~~
+```
 
 And to make sure everything works. Run our tests again:
 
-~~~
+```
 $ rake test
 Run options: --seed 4817
 
@@ -463,13 +463,13 @@ Run options: --seed 4817
 
 Finished in 0.250440s, 31.9437 runs/s, 43.9226 assertions/s.
 8 runs, 11 assertions, 0 failures, 0 errors, 0 skips
-~~~
+```
 
 Beautiful! We can now [publish our gem on rubygems.org](https://guides.rubygems.org/publishing/).
 
 ## Conclusion
 
-We have therefore seen that after the complexity of creating the zip the use of *concerns* becomes very simple. In addition, by creating my own gem (which is really easy) I was able to avoid code **duplication** between several projects. I also contributed to the Rails community (at my low level :) ).
+We have therefore seen that after the complexity of creating the zip the use of _concerns_ becomes very simple. In addition, by creating my own gem (which is really easy) I was able to avoid code **duplication** between several projects. I also contributed to the Rails community (at my low level :) ).
 
 But I touched on the subject. It would also have been nice to test our gem individually in order to have a better coverage. We could also have proposed a method to create the zip directly in RAM.
 
@@ -478,7 +478,7 @@ But don't worry, the code is available on Github:
 - the Rails application: <https://github.com/madeindjs/zip_example>
 - the gem: <https://github.com/madeindjs/active_storage-send_zip>
 
-Feel free to *fork* or give me feedback on possible improvements.
+Feel free to _fork_ or give me feedback on possible improvements.
 
 ## Liens
 

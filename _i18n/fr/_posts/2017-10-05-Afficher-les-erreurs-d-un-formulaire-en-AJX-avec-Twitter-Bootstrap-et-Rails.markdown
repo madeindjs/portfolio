@@ -11,7 +11,7 @@ comments: true
 
 Voici mon controller avec deux simples actions *(j'ai volontairement simplifié l'exemple)*.
 
-{% highlight ruby %}
+```ruby
 # app/controllers/dishes_controller.rb
 
 class DishesController < ApplicationController
@@ -32,12 +32,12 @@ class DishesController < ApplicationController
     end
   end
 end
-{% endhighlight %}
+```
 
 
 Et voici mon formulaire
 
-{% highlight erb %}
+```erb
 <!-- app/views/dishes/_form.html.erb -->
 <%= bootstrap_form_for dish, remote: true do |f| %>
   <%= render 'shared/errors_form', model: dish %>
@@ -45,13 +45,13 @@ Et voici mon formulaire
   <!-- d'autres champs ici -->
   <%= f.submit 'Confirmer' %>
 <% end %>
-{% endhighlight %}
+```
 
 **Rails** nous simplifie largement la vie car l'attribut `remote: true` gère pour nous l'envoie du formulaire en AJAX. Il nous reste donc "juste" à implémenter les actions à effectuer lorsque 
 
 * le plat est mis à jour
 
-{% highlight javascript %}
+```javascript
 // app/assets/javascripts/dishes.js
 $(document).on('ajax:success', 'form.edit_dish', function(e, data, status, xhr){
   // le formulaire a été envoyé correctement et le plat a été mis à jour
@@ -60,11 +60,11 @@ $(document).on('ajax:success', 'form.edit_dish', function(e, data, status, xhr){
   // on ferme le jquery-ui dialog
   $('.ui-dialog').remove();
 });
-{% endhighlight %}
+```
 
 * le formulaire contient une erreur.
 
-{% highlight javascript %}
+```javascript
 // app/assets/javascripts/dishes.js
 $(document).on('ajax:error', 'form.edit_dish', function(e, xhr, status, error){
   // le plat n'a pas été mis à jour, sûrement à cause d'une erreur de donnée, 
@@ -72,7 +72,7 @@ $(document).on('ajax:error', 'form.edit_dish', function(e, xhr, status, error){
   var form = $(this);
   form.parent().html(xhr.responseText);
 });
-{% endhighlight %}
+```
 
 
 **Ruby on Rails** est magique!

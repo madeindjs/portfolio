@@ -14,26 +14,25 @@ Afin d'automatiser et d'améliorer la qualité du code, il est possible de lance
 
 Les _hooks_ sont des petits scripts qui se lancent lors des différentes actions Git. Il en existe plusieurs et pour les connaitre il suffit de se rendre dans un dépot Git et de faire:
 
-
-{% highlight bash %}
+```bash
 $ ls .git/hooks/
 applypatch-msg.sample  pre-applypatch.sample          pre-commit.sample          pre-push.sample    update.sample
 commit-msg.sample      post-update.sample             prepare-commit-msg.sample  pre-rebase.sample
-{% endhighlight %}
+```
 
 Les fichiers _.sample_ sont des examples proposés par Git. Dans notre cas, on va partir de zéro en créant un script vide
 
-{% highlight bash %}
+```bash
 $ touch .git/hooks/pre-commit
-{% endhighlight %}
+```
 
 ## Le script
 
-Nous allons donc commencer par afficher les fichiers contenu dans le commit. Pour cela on s'appuie sur la commande `git diff --cached --name-only` qui affiche les uniquement le nom des fichiers modifié. On rajoute un petit `grep` par dessus pour filtrer uniquement les fichiers PHP et on boucle dessus. 
+Nous allons donc commencer par afficher les fichiers contenu dans le commit. Pour cela on s'appuie sur la commande `git diff --cached --name-only` qui affiche les uniquement le nom des fichiers modifié. On rajoute un petit `grep` par dessus pour filtrer uniquement les fichiers PHP et on boucle dessus.
 
 Voici le résultat:
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 # .git/hooks/pre-commit
 
@@ -41,11 +40,11 @@ Voici le résultat:
 for file in $(git diff --cached --name-only | grep -E '.php$') ; do
   echo "[x] $file"
 done
-{% endhighlight %}
+```
 
 Il faut ensuite faire le tri dans ses fichiers car Git nous remonte aussi ceux supprimés, il faut donc rajouter une condition:
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 # .git/hooks/pre-commit
 
@@ -56,11 +55,11 @@ for file in $(git diff --cached --name-only | grep -E '.php$') ; do
     echo "[x] $file"
   fi
 done
-{% endhighlight %}
+```
 
 Et pour terminer on vérifie la syntaxe à l'aide de la commande `php -l "$file"` et si on trouve une erreur, on stoppe l'execution avec un signal d'erreur à l'aide de la fonction `exit 1`.
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 # .git/hooks/pre-commit
 
@@ -74,31 +73,30 @@ for file in $(git diff --cached --name-only | grep -E '.php$') ; do
     else
       # file contains syntax error, so we'll stop programm & cancel commit
       echo "[ ] $file"
-      exit 1 
+      exit 1
     fi
   fi
 done
-{% endhighlight %}
-
+```
 
 ## Le test
 
 Notre script étant prêt, il nous reste plus qu'à tester. On ajoute un fichier PHP valide et on vérifie qu'il est accepté
 
-{% highlight bash %}
+```bash
 $ echo '<?php echo "test";' > valid.php
 $ git add valid.php
-$ git commit -m "Add valid file" 
-{% endhighlight %}
+$ git commit -m "Add valid file"
+```
 
 Maintenant on teste avec un fichier PHP non valide
 
-{% highlight bash %}
+```bash
 $ git reset --hard HEAD^ # on annule le précedent commit
 $ echo '<?php echo "test;' > invalid.php
 $ git add invalid.php
-$ git commit -m "Add invalid file" 
-{% endhighlight %}
+$ git commit -m "Add invalid file"
+```
 
 Le script coupe l'ajout du commit!
 
@@ -106,6 +104,6 @@ Le script coupe l'ajout du commit!
 
 Nous avons vu à travers un exemple simple qu'il est possible d'automatiser les tâches les pluscourant. On pourrait aller plus loin et:
 
-* Vérifier la syntaxe des fichier Ruby avec la commande `ruby -c file`
-* Formatter automatiquement les fichier commité
-* Lancer les test unitaires 
+- Vérifier la syntaxe des fichier Ruby avec la commande `ruby -c file`
+- Formatter automatiquement les fichier commité
+- Lancer les test unitaires

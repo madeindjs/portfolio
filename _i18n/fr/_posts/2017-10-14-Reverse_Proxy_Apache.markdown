@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  Installer un reverse Proxy
-description:  Soyez le roi des redirection
-date:   2017-10-14 23:00:00 +0200
+title: Installer un reverse Proxy
+description: Soyez le roi des redirection
+date: 2017-10-14 23:00:00 +0200
 tags: networking apache
 categories: network
 comments: true
@@ -23,42 +23,41 @@ Deux cas sont alors possibles
 ![Interface de redirection des ports de TP Link](/img/blog/network_apache_proxy_rc.png)
 ![Interface de redirection des ports de TP Link](/img/blog/network_apache_proxy_ar.png)
 
-
 ## La pratique!
 
 Pour le serveur de [rousseau-alexandre.fr](http://rousseau-alexandre.fr), aucune configuration spécifique n'est nécessaire. Il s'agit d'une configuration classique. En revanche, pour le deuxième, c'est plus compliqué.
 
 On commence donc par se connecter sur raspberry-cook.fr.
 
-{% highlight bash %}
+```bash
 $ ssh pi@192.168.1.102
-{% endhighlight %}
+```
 
-On commence par ajouter la corrrespondance du nom de domaines dans le ficher */etc/hosts*.
+On commence par ajouter la corrrespondance du nom de domaines dans le ficher _/etc/hosts_.
 
-{% highlight bash %}
+```bash
 $ echo '192.168.1.103 rousseau-alexandre.fr' >> /etc/hosts
-{% endhighlight %}
+```
 
 Et on s'attaque à Apache en ajoutant le module nécessaire.
 
-{% highlight bash %}
+```bash
 $ sudo a2enmod proxy_http
-{% endhighlight %}
+```
 
 Et on ajoute la configuration de nos sites. Pour la configuration de [raspberry-cook.fr](raspberry-cook.fr), il n'y aura rien de particulier, c'est celle de [rousseau-alexandre.fr](http://rousseau-alexandre.fr) qui sera particulière.
 
-{% highlight bash %}
+```bash
 $ sudo vi /etc/apache2/site-available/rousseau-alexandre.fr.conf
-{% endhighlight %}
+```
 
-{% highlight apache %}
+```apache
 <VirtualHost>
     ServerName rousseau-alexandre.fr
     ServerAdmin contact@rousseau-alexandre.fr
     ProxyPassReverse / http://192.168.1.103/
     ProxyRequests Off
 </VirtualHost>
-{% endhighlight %}
+```
 
 Et voilà!
