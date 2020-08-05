@@ -6,20 +6,7 @@ title: Blog
 
 
 {% for post in paginator.posts %}
-<section>
-  <h2><a href="{{ post.url | prepend: site.baseurl }}"><b>{{ post.title }}</b></a> @{{ post.categories }}</h2>
-  <p>
-    <date>{{ post.date | date: "%Y-%m-%d" }}</date>
-    {% for tag in post.tags %}
-    <code>#{{ tag }}</code>
-    {% endfor %}
-  </p>
-  <p class="text-justify">
-    {{ post.excerpt }}
-    <a href="{{ post.url | prepend: site.baseurl }}">{{ site.translations[site.lang]['see_more'] }}</a>
-  </p>
-
-</section>
+  {% include posts.html post=post %}
 {% endfor %}
 
 <!-- Pagination links -->
