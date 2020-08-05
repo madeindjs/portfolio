@@ -11,7 +11,7 @@
   <h1>{{ page.title }}<br><small>@{{ page.categories }}</small></h1>
   <p class="text-right">
     {% for tag in page.tags %}
-    <code>+{{ tag }}</code>
+    <code>#{{ tag }}</code>
     {% endfor %}
     &nbsp;<date>{{ page.date | date: "%Y-%m-%dT%H:%M" }}</date>
   </p>
