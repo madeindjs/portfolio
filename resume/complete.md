@@ -47,12 +47,17 @@ Développement d'une API ouverte avec _Ruby on Rails_:
 
 ### Développeur / DevOps @ [Optimiz.me](https://optimiz.me/) (depuis 2020)
 
+Développement _from scratch_ de Optimiz Data
+
 - Benchmark de base **PostgreSQL**, **MongoDB** et **Elastic Search** pour le stockage et la manipulation d'une grande quantité de données (+100M)
-- Mise en place de **Gitlab CI** avec lancement des _runners_ sous **Google Cloud Plateform**
 - Développement d'une job queue avec **Postgres**
 - Mise en place d'une authentification automatisée avec [Keycloak](https://www.keycloak.org/) qui fait interface avec l'OAuth de Google
 - Création de service automatisée pour récupéerer les données de manière asynchrone en s'appuyant sur la _job queue_
 - Création de l'interface sous **Angular 9**
+
+Devops
+
+- Mise en place de **Gitlab CI** avec lancement des _runners_ sous **Google Cloud Plateform**
 - déploiement de l'application sous **Google Cloud Plateform** avec **Kubernetes**
 
 ### Développeur @ [Dougs](https://dougs.fr) (2019/2020)
