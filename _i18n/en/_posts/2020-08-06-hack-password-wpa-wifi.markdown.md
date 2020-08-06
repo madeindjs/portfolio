@@ -161,4 +161,4 @@ As soon as possible, use the Ethernet cable, which is still the most secure solu
 ## Links
 
 - [Aircrack-ng](https://www.aircrack-ng.org/)
-- [Kali Linux | Penetration Testing and Ethical Hacking Linux Distribution](https://www.kali.org/)
+- [Kali Linux - Penetration Testing and Ethical Hacking Linux Distribution](https://www.kali.org/)
