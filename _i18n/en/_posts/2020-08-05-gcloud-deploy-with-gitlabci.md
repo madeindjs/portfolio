@@ -43,7 +43,7 @@ In my case, I created the following actions :
 2. `publish`: creation of a Docker image and publication in the GCloud's private image registry
 3. `deploy`: tells the GCloud to deploy the images previously _uploaded_.
 
-So the structure of the `.gitlab-ci.yml' file looks like this:
+So the structure of the `.gitlab-ci.yml` file looks like this:
 
 ```yml
 # .gitlab-ci.yml
