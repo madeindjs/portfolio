@@ -84,7 +84,7 @@ On fait la même chose pour le Raspberry PI 3 _(et changeant l’adresse IP bien
 
 Vous êtes toujours là? On vient de faire le plus dur! Maintenant on va mettre en place les redirections.
 
-On va donc se connecter au résaux TP Link afin d'accéder à l'interface d'administration (le SSID & le mot de passe sont noté sous l'étiquette dessous). L'interface d'administration est [http://192.168.1.1](http://192.168.1.1) ou bien [http://tplinkwifi.net/](http://tplinkwifi.net/).
+On va donc se connecter au résaux TP Link afin d'accéder à l'interface d'administration (le SSID & le mot de passe sont noté sous l'étiquette dessous). L'interface d'administration est [http://192.168.1.1](http://192.168.1.1) ou bien [http://tplinkWi-fi.net/](http://tplinkWi-fi.net/).
 
 On se rend dans l'onglet _Forwarding > Virtual Server_
 

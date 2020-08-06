@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Hacker un Wifi protégé par WPA/WPA2
-description: Utilisez Kali Linux pour hacker un Wifi protégé par WPA/WPA2
+title: Hacker un Wi-fi protégé par WPA/WPA2
+description: Utilisez Kali Linux pour hacker un Wi-fi protégé par WPA/WPA2
 date: 2017-10-31 20:00:00 +0200
-tags: hack kali wifi wpa
+tags: hack kali Wi-fi wpa
 categories: hacking
-thumbnail: /img/blog/wifi.png
+thumbnail: /img/blog/Wi-fi.png
 comments: true
 ---
 
@@ -23,7 +23,7 @@ Ici nous allons utiliser [Aircrack-ng](https://www.aircrack-ng.org/) qui est est
 
 - **Préparation** de votre carte réseau
 - **Analyse** du Wi-fi cible
-- **Capture** d'un **WPA handshake** _(une connexion au réseau Wifi)_ en déconnectant un périphérique sur le Wifi
+- **Capture** d'un **WPA handshake** _(une connexion au réseau Wi-fi)_ en déconnectant un périphérique sur le Wi-fi
 - **Déchiffrement** du mot de passe contenu dans le **WPA handshake** par _bruteforce_
 
 ## Préparation
@@ -34,7 +34,7 @@ La première étape est d'activer le **mode moniteur** de la carte réseau mettr
 airmon-ng
 ```
 
-> Si votre carte réseau ne s'affiche pas, c'est qu'elle n'est pas compatible. Il faut vous en acheter une _(un dongle USB wifi suffit)_
+> Si votre carte réseau ne s'affiche pas, c'est qu'elle n'est pas compatible. Il faut vous en acheter une _(un dongle USB Wi-fi suffit)_
 
 Dans notre cas on voit que l'on peut utiliser notre carte réseau **wlan0**. On active donc le **mode moniteur** avec la commande suivante:
 
@@ -52,7 +52,7 @@ Désormais, on peut _sniffer_ les paquets réseaux qui circulent autour de nous 
 airodump-ng wlan0mon
 ```
 
-Cette commande va trouver des informations supplémentaires sur les wifi dont:
+Cette commande va trouver des informations supplémentaires sur les Wi-fi dont:
 
 - le **BSSID**
 - le **CH**annel
@@ -69,14 +69,14 @@ Parmi toutes les lignes, mon réseau apparaît. Pensez à noter les information 
 
 ## Capture d'un WPA handshake
 
-Un **WPA handshake** se déroule lors de la connexion d'un périphérique sur le Wifi. Notre but est d'en capturer un afin de récupérer le mot de passe crypté.
+Un **WPA handshake** se déroule lors de la connexion d'un périphérique sur le Wi-fi. Notre but est d'en capturer un afin de récupérer le mot de passe crypté.
 
--   sniffer le Wi-fi et attendre qu'un périphérique se connecte au wi-fi
--   sniffer le Wi-fi et provoquer une déconnexion et attendre que l'appareil se reconnecte
+- sniffer le Wi-fi et attendre qu'un périphérique se connecte au wi-fi
+- sniffer le Wi-fi et provoquer une déconnexion et attendre que l'appareil se reconnecte
 
 Afin de tester, je vais déconnecter mon **Blackberry** déjà connecté dessus.
 
-### Scan du Wifi
+### Scan du Wi-fi
 
 On scan donc le réseau avec la commande `airodump-ng` et les options:
 
@@ -116,7 +116,7 @@ Maintenant que nous avons obtenu un packet contenant le **mot de passe WPA crypt
 
 ### le dictionnaire
 
-Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver des [fichiers textes de plusieurs giga-octes des mots de passe les plus utilisés](http://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html). Dans mon cas, je sais que le mot de passe de mon Wifi contient 8 chiffres. Je vais donc utiliser la commande `crunch` pour générer toutes les combinaisons possibles. `crunch` utilise plusieurs paramètres:
+Pour trouver un mot de passe il nous faut... des mots de passe! On peut trouver des [fichiers textes de plusieurs giga-octes des mots de passe les plus utilisés](http://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html). Dans mon cas, je sais que le mot de passe de mon Wi-fi contient 8 chiffres. Je vais donc utiliser la commande `crunch` pour générer toutes les combinaisons possibles. `crunch` utilise plusieurs paramètres:
 
 1. la longueur minimum _(8)_
 2. la longueur maximum _(8)_
@@ -146,7 +146,7 @@ Et au bout de quelques temps:
 
 ## Conclusion
 
-A travers ce petit test on voit qu'il est très facile de "craquer" un wifi avec un mot de passe WPA. Les outils mis à notre disposition sont facile d'accès et aucun matériel spécifique n'est requis. Cependant en appliquant quelques règles simple on peut éviter ce genre de risque.
+A travers ce petit test on voit qu'il est très facile de "craquer" un Wi-fi avec un mot de passe WPA. Les outils mis à notre disposition sont facile d'accès et aucun matériel spécifique n'est requis. Cependant en appliquant quelques règles simple on peut éviter ce genre de risque.
 
 Rappelez vous, le mot de passe utilisé n'était que de 8 caractères numériques. Le nombre de combinaisons tenais dans un fichier de 380 mo. Si le mot de passe avait inclus des caractères alphabétiques, le dictionnaire aurait dépassé le terra-octet. Le bruteforce aurait certainement duré plusieurs semaines.
 

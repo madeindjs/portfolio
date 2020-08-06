@@ -137,7 +137,7 @@ Une majorité de mes _sides-projects_ sont sur [mon Github](https://github.com/m
 - Rédaction & publication du livre [_APIs on Rails - Building REST APIs_](https://leanpub.com/apionrails6) (172\*)
 - [`Crystagiri`](https://github.com/madeindjs/Crystagiri) Parseur de document HTML écrit en Crystal. (113\*)
 - [`ActiveStorage::SendZip`](https://github.com/madeindjs/active_storage-send_zip), Librairie Ruby on Rails pour créer des ZIP (20\*)
-- `wifi_bruteforce`, Script Python pour se connecter aux wifi des voisins (21\*)
+- `Wi-fi_bruteforce`, Script Python pour se connecter aux Wi-fi des voisins (21\*)
 
 <!-- ## LIENS
 
