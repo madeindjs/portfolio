@@ -1,5 +1,6 @@
 ---
 title: Déployer une application Frontent / Backend sur Google Cloud Plateform avec Gitlab CI
+description: Tutoriel pour utiliser Gitlab CI afin de créer les images Docker d'une application Backend + Frontend et de la déployer sur Google Cloud Computing avec Kubernetes.
 layout: post
 date: 2020-08-05 15:00:00 +0200
 tags: [devops, gcloud, gitlabci, docker]
@@ -17,7 +18,7 @@ Mon projet sur lequel je travaille actuellement est découpé en trois partie : 
 Chaque partie tourne dans des _containers_ Docker bien séparés. Ils possèdent donc tous un `Dockerfile` :
 
 1. le _frontend_ utilise une image Node.js qui build **Angular 9** puis une image NGINX qui sert les fichiers statiques
-2. le _backend_ utilise une image **Node.js** qui lance un serveur web sur le port 3000 
+2. le _backend_ utilise une image **Node.js** qui lance un serveur web sur le port 3000
 3. la _job_queue_ utilise aussi une image Node.js qui lance un script **Node.js** qui communique avec la base Postgres et effectue des actions en différé
 
 Mon projet à donc la structure suivante :
