@@ -5,6 +5,7 @@ layout: post
 date: 2020-08-05 15:00:00 +0200
 tags: [devops, gcloud, gitlabci, docker]
 categories: programming
+toc: true
 ---
 
 J'ai déployé une application Fullstack (c'est à dire Frontend / Backend) sur Google Cloud Plateform avec Kubernetes. Et comme [les développeur sont fainéant](https://www.forbes.com/sites/forbestechcouncil/2018/01/08/developers-are-lazy-and-thats-usually-a-good-thing/), j'ai tout automatisé avec Gitlab CI.
@@ -30,7 +31,7 @@ Mon projet à donc la structure suivante :
 └── frontend
 ```
 
-J'ai donc souhaiter construire ces images automatiquement lors d'un `git push` et la publier sur Google Cloud Plateform avec Kubernetes. Pour cela, j'ai utilisé  **Gitlab CI** mais la logique doit être identique avec Circle CI de Github.
+J'ai donc souhaiter construire ces images automatiquement lors d'un `git push` et la publier sur Google Cloud Plateform avec Kubernetes. Pour cela, j'ai utilisé **Gitlab CI** mais la logique doit être identique avec Circle CI de Github.
 
 > La base Postgres est indépendante de Kubernetes et fonctionne sur un service [Google Cloud SQL pour PostgreSQL](https://cloud.google.com/sql/docs/postgres). Je n'en parlerai pas ici.
 
@@ -173,9 +174,9 @@ Pour les créer, tu peux passer par l'interface de GCloud ou bien utiliser direc
 Pour la version en ligne de commande il faut utiliser `kubectl create deployment` :
 
 ```bash
-kubectl create deployment dpl-develop-data-frontend --image=us.gcr.io/mazen-158916/data-k8s-frontend
-kubectl create deployment dpl-develop-data-backend --image=us.gcr.io/mazen-158916/data-k8s-backend
-kubectl create deployment dpl-develop-data-worker --image=us.gcr.io/mazen-158916/data-k8s-worker
+kubectl create deployment dpl-develop-data-frontend --image=us.gcr.io/<your-node>/data-k8s-frontend
+kubectl create deployment dpl-develop-data-backend --image=us.gcr.io/<your-node>/data-k8s-backend
+kubectl create deployment dpl-develop-data-worker --image=us.gcr.io/<your-node>/data-k8s-worker
 ```
 
 > On peut vérifier que tout s'est bien passé avec `kubectl get deployments` qui doit lister nos trois nouveaux déploiements.

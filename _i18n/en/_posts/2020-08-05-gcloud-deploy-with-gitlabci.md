@@ -172,9 +172,9 @@ To create them, you can use the GCloud interface or use `kubectl` directly on yo
 For the command line version, use `kubectl create deployment` :
 
 ```bash
-kubectl create deployment dpl-develop-data-frontend --image=us.gcr.io/mazen-158916/data-k8s-frontend
-kubectl create deployment dpl-develop-data-backend --image=us.gcr.io/mazen-158916/data-k8s-backend
-kubectl create deployment dpl-develop-data-worker --image=us.gcr.io/mazen-158916/data-k8s-worker
+kubectl create deployment dpl-develop-data-frontend --image=us.gcr.io/<your-node>/data-k8s-frontend
+kubectl create deployment dpl-develop-data-backend --image=us.gcr.io/<your-node>/data-k8s-backend
+kubectl create deployment dpl-develop-data-worker --image=us.gcr.io/<your-node>/data-k8s-worker
 ```
 
 > We can check that everything went well with `kubectl get deployments` which should list our three new deployments.
