@@ -1,4 +1,4 @@
 This is a Brave Rewards publisher verification file.
 
-Domain: rousseau-alexandre.fr
-Token: f063559a3d9d84ff22706591b18c13d7dd439ea8a1fe2509f279bc19e7f046a3
+Domain: rsseau.fr
+Token: 0700d248335e910ea774aa0343d019fe9f87cc255678f5cebe046e3e17b6fd48
