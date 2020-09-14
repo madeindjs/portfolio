@@ -7,7 +7,7 @@ pdf-engine: pdflatex
 links-as-notes: true
 ---
 
-**Lyon, France - [mailto:contact@rousseau-alexandre.fr](contact@rousseau-alexandre.fr)**
+**Lyon, France - [contact@rousseau-alexandre.fr](mailto:contact@rousseau-alexandre.fr)**
 
 Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, je continue d'alimenter ma passion en codant sur des projets perso.
 
