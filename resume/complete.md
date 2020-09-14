@@ -20,31 +20,6 @@ layout: main
 
 ## Expériences professionnelles
 
-### Associé / Directeur technique @ [iSignif](https://isignif.fr) _(depuis 2018)_
-
-Développement de l'application SAAS de mise en relation d'huissiers de justice et d'avocats pour simplifier le processus de signification sous **Ruby on Rails**:
-
-- Intégration de la plateforme Stripe pour automatiser l'envoi de facture aux huissiers et gérer les abonnements mensuels des avocats
-- Gestion de l'authentification avec la librairie **Authlogic**
-- Design de l'interface avec **Twitter Boostrap 3**
-- Création de tests unitaires et tests fonctionnels
-- [Refonte de l'interface avec **Vue.js** / **Vuetify**](https://github.com/isignif/vue-app/)
-
-Déploiement de l'application sur un serveur dédié (VPS) sous Ubuntu 18.04 chez OVH:
-
-- Installation et configuration de Apache HTTP, Passenger et **MariaDB**
-- Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG
-- Création d'un [rapport automatisé avec **GoAccess**](https://rousseau-alexandre.fr/devops/2020/03/02/automatic-report-with-goaccess.html)
-- Déploiement automatisé avec Capistrano
-
-Développement d'une API ouverte avec _Ruby on Rails_:
-
-- Implémentation de la norme **REST** et **JSON:API**
-- Mise en place de l'authentification avec des jetons JWT
-- [Documentation de l'API avec Swagger](https://github.com/isignif/openapi-definition)
-- Implémentation de la norme JSON:API avec la librairie `fast_jsonapi` de Netflix
-- Création d'un [paquet NPM](https://github.com/isignif/isignif-client) qui permet de consommer l'API en Javascript dans le navigateur
-
 ### Développeur / DevOps @ [Optimiz.me](https://optimiz.me/) (depuis 2020)
 
 Développement _from scratch_ de Optimiz Data
@@ -123,6 +98,33 @@ Assistant bureau d'études:
 
 - Dessins des plan d'exécution sous **AutoCAD**
 - Calculs et dimensionnements des installations frigorifiques avec des outils internes
+
+## Experiences personnelles
+
+### Associé / Directeur technique @ [iSignif](https://isignif.fr) _(depuis 2018)_
+
+Développement de l'application SAAS de mise en relation d'huissiers de justice et d'avocats pour simplifier le processus de signification sous **Ruby on Rails**:
+
+- Intégration de la plateforme Stripe pour automatiser l'envoi de facture aux huissiers et gérer les abonnements mensuels des avocats
+- Gestion de l'authentification avec la librairie **Authlogic**
+- Design de l'interface avec **Twitter Boostrap 3**
+- Création de tests unitaires et tests fonctionnels
+- [Refonte de l'interface avec **Vue.js** / **Vuetify**](https://github.com/isignif/vue-app/)
+
+Déploiement de l'application sur un serveur dédié (VPS) sous Ubuntu 18.04 chez OVH:
+
+- Installation et configuration de Apache HTTP, Passenger et **MariaDB**
+- Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG
+- Création d'un [rapport automatisé avec **GoAccess**](https://rousseau-alexandre.fr/devops/2020/03/02/automatic-report-with-goaccess.html)
+- Déploiement automatisé avec Capistrano
+
+Développement d'une API ouverte avec _Ruby on Rails_:
+
+- Implémentation de la norme **REST** et **JSON:API**
+- Mise en place de l'authentification avec des jetons JWT
+- [Documentation de l'API avec Swagger](https://github.com/isignif/openapi-definition)
+- Implémentation de la norme JSON:API avec la librairie `fast_jsonapi` de Netflix
+- Création d'un [paquet NPM](https://github.com/isignif/isignif-client) qui permet de consommer l'API en Javascript dans le navigateur
 
 ## Diplômes
 
