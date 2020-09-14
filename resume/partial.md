@@ -7,15 +7,11 @@ pdf-engine: pdflatex
 links-as-notes: true
 ---
 
-**Lyon, France - 0663549591 - contact@rousseau-alexandre.fr**
+**Lyon, France - [mailto:contact@rousseau-alexandre.fr](contact@rousseau-alexandre.fr)**
 
 Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, je continue d'alimenter ma passion en codant sur des projets perso.
 
 ## Experiences professionnelles
-
-### Associé / Directeur technique @ [iSignif](https://isignif.fr) _(depuis 2018)_
-
-Participation à la création d'une société en étant le référent technique. J'ai entièrement créé l'application web _from scratch_ sous **Ruby on Rails** et j'ai déployé notre solution sous un serveur **Ubuntu** vierge. Je propose aussi une **JSON:API** documentée avec **Swagger**.
 
 ### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me) _(depuis 2020)_
 
@@ -38,6 +34,12 @@ Développement d'une solution de dessin 3D avec **Sketchup** et son API **Ruby**
 ### Apprentis Bureau d'études @ Carrier _(2011/2013)_
 
 Dessin des plans d'execution des installations frigorifiques sous **AutoCad** et calculs sous Excel.
+
+## Experiences personnelles
+
+### Associé / Directeur technique @ [iSignif](https://isignif.fr) _(depuis 2018)_
+
+Participation à la création d'une société en étant le référent technique. J'ai entièrement créé l'application web _from scratch_ sous **Ruby on Rails** et j'ai déployé notre solution sous un serveur **Ubuntu** vierge. Je propose aussi une **JSON:API** documentée avec **Swagger**.
 
 ## Open source
 
