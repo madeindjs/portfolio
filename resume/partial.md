@@ -9,7 +9,7 @@ links-as-notes: true
 
 **Lyon, France - [contact@rousseau-alexandre.fr](mailto:contact@rousseau-alexandre.fr)**
 
-Le jour, j'aime traduire des problèmes complexes en solutions techniques simples. La nuit, je continue d'alimenter ma passion en codant sur des projets perso.
+J'aime partager ma passion à travers des cours informatique à distance sur [Superprof](https://www.superprof.fr/). J'aime aussi développer sur des projets personnels ou à travers de petites missions de Freelance..
 
 ## Experiences professionnelles
 
