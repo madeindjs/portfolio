@@ -13,7 +13,7 @@ J'aime partager ma passion à travers des cours informatique à distance sur [Su
 
 ## Experiences professionnelles
 
-### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me) _(depuis 2020)_
+### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/) _(depuis 2020)_
 
 Développement application SPA en **Node.js / Typescript** pour récupérer et analyser les données de Google Search Console. Les données sont stockées de manière asynchrone via une job queue sous **Postgres**. Une interface _Front-end_ en **Angular 9** restranscrit les données sous forme de tableau. L'authentification est gérée par **Keycloak**.
 
