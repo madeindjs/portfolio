@@ -20,7 +20,7 @@ layout: main
 
 ## Expériences professionnelles
 
-### Développeur / DevOps @ [Optimiz.me](https://optimiz.me/) (depuis 2020)
+### Développeur / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/) (depuis 2020)
 
 Développement _from scratch_ de Optimiz Data
 
