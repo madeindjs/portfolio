@@ -15,10 +15,10 @@ layout: main
   <ul>
     {% for post in site.posts limit: 5 %}
     <li>
-      <a href="{{ post.url | prepend: site.baseurl }}"
-        ><b>{{ post.title }}</b></a
-      >
-      @{{ post.categories }}
+      <a href="{{ post.url | prepend: site.baseurl }}">
+        <b>{{ post.title }}</b>
+      </a>
+      - <date>{{ post.date | date: "%Y-%m-%d" }}</date>
     </li>
     {% endfor %}
   </ul>
