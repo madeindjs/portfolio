@@ -166,11 +166,11 @@ Je pense donc que tu dois conserver ce nom de domaine. Pendant combien de temps 
 
 Connectes toi donc sur [Google Search Console](https://search.google.com/search-console) après quelques semaines et regardez l'évolution du trafic du domaine précédent :
 
-[performance du trafic de l'ancien site web sur la Google Search Console](/img/blog/google-webmaster-old-domain.png)
+![performance du trafic de l'ancien site web sur la Google Search Console](/img/blog/google-webmaster-old-domain.png)
 
 Super ! Tu vois que le trafic commence à diminuer à la date de la migration. Voyons donc l'évolution du trafic du nouveau domaine :
 
-! [performance du trafic de la Google Search Console pour le nouveau site web](/img/blog/google-webmaster-new-domain.png)
+![performance du trafic de la Google Search Console pour le nouveau site web](/img/blog/google-webmaster-new-domain.png)
 
 Ces informations montrent que tout mon trafic a été correctement transféré dans mon nouveau domaine ! Je reçois en moyenne le même nombre de clics sur mon nouveau site que sur l'ancien. Mais ces capture d'écran montrent aussi que même après quelques semaines, mon ancien site continue à recevoir du trafic de Google.
 
