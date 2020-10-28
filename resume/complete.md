@@ -1,10 +1,10 @@
 ---
 title: Dossier de compétences
-author: Alexandre Rousseau - contact@rousseau-alexandre.fr
+author: <contact@rousseau-alexandre.fr>
 localisation: Lyon, France
 # geometry: margin=2cm
 pdf-engine: pdflatex
-links-as-notes: true
+# links-as-notes: true
 layout: main
 ---
 
@@ -26,14 +26,15 @@ Développement _from scratch_ de Optimiz Data
 
 - Benchmark de base **PostgreSQL**, **MongoDB** et **Elastic Search** pour le stockage et la manipulation d'une grande quantité de données (+100M)
 - Développement d'une job queue avec **Postgres**
-- Mise en place d'une authentification automatisée avec [Keycloak](https://www.keycloak.org/) qui fait interface avec l'OAuth de Google
-- Création de service automatisée pour récupéerer les données de manière asynchrone en s'appuyant sur la _job queue_
-- Création de l'interface sous **Angular 9**
+- Mise en place d'une authentification automatisée avec [Keycloak](https://www.keycloak.org/) qui fait interface avec l'**OAuth de Google**
+- Création d'un service automatisé pour récupérer les données de manière asynchrone en s'appuyant sur la _job queue_
+- Création de l'interface sous **Angular 9/10**
 
 Devops
 
-- Mise en place de **Gitlab CI** avec lancement des _runners_ sous **Google Cloud Plateform**
-- déploiement de l'application sous **Google Cloud Plateform** avec **Kubernetes**
+- Mise en place de **Gitlab CI** avec lancement des _runners_ sous **Google Cloud Platform**
+- Déploiement de l'application sous **Google Cloud Platform** avec **Kubernetes**
+- Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG
 
 ### Développeur @ [Dougs](https://dougs.fr) (2019/2020)
 
@@ -100,6 +101,14 @@ Assistant bureau d'études:
 - Calculs et dimensionnements des installations frigorifiques avec des outils internes
 
 ## Experiences personnelles
+
+### Freelance _(depuis 2020)_
+
+Travail pour [Shipotsu](https://www.shipotsu.com/) (~50 heures)
+
+- Refonte de l'application sous une architecture orienté API avec **ExpressJS** / **Typescript** / **MongoDB**
+- Création de l'interface sous **Angular 9/10**
+- Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG
 
 ### Associé / Directeur technique @ [iSignif](https://isignif.fr) _(depuis 2018)_
 

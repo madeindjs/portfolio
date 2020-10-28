@@ -8,15 +8,10 @@ last_posts: Derniers articles
 see_all_posts: Voir tous mes articles
 tag_results: Articles liés au tag
 
-### 
-
+###
 
 my_github_profile: mon profil Github
 my_educations: Diplômes
 
-
 description:
-  - Développeur passionné auto-didacte.
-  - J'aime partager ma passion à travers des cours informatique à distance sur <a href="https://www.superprof.fr/">Superprof</a>. J'aime aussi développer sur des projets personnels ou à travers de petites missions de Freelance.
-  - N'hésitez pas à me contacter via mes coordonées en bas de page.
-  # - J'aime développer, la course à pied et ma copine.
+  - Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes. Cela permet de créer des fonctionnalités performantes et évolutives.

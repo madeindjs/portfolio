@@ -1,51 +1,80 @@
 ---
-title: Alexandre Rousseau
+title: CV Alexandre ROUSSEAU
+author: <contact@rousseau-alexandre.fr> - Lyon, France
 localisation: Lyon, France
 layout: main
 # geometry: margin=2cm
 pdf-engine: pdflatex
-links-as-notes: true
+# links-as-notes: true
 ---
 
-**Lyon, France - [contact@rousseau-alexandre.fr](mailto:contact@rousseau-alexandre.fr)**
-
-J'aime partager ma passion à travers des cours informatique à distance sur [Superprof](https://www.superprof.fr/). J'aime aussi développer sur des projets personnels ou à travers de petites missions de Freelance..
+Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes. Cela permet de créer des fonctionnalités performantes et évolutives.
 
 ## Experiences professionnelles
 
-### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/) _(depuis 2020)_
+### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/) depuis 2020
 
-Développement application SPA en **Node.js / Typescript** pour récupérer et analyser les données de Google Search Console. Les données sont stockées de manière asynchrone via une job queue sous **Postgres**. Une interface _Front-end_ en **Angular 9** restranscrit les données sous forme de tableau. L'authentification est gérée par **Keycloak**.
+_Node.js - Typescript - PostreSQL - Angular - Docker - Google Cloud_
 
-### Développeur @ [Dougs](https://dougs.fr) _(2019/2020)_
+- Développement API pour récupérer, stocker et analyser les données de Google API de manière asynchrone
+- Développement de la partie _Front-end_
+- Déploiement de l'application chez _Google Cloud Computing_ avec Kubernetes ([article](https://rsseau.fr/programming/2020/08/05/gcloud-deploy-with-gitlabci.html))
+- Construction d'un processus de d'intégration continue avec _Gitlab CI_
 
-Développement d'une application SPA de comptabilité sous **Node.js** / **Typescript**. Côté _Back-end_, j'automatisais le travail complexes des comptables via une job queue sous **PostgreSQL**. Côté _Front-end_, je m'assurais que l'interface présentée au client reste la plus simple possible.
+### Développeur Fullstack @ [Dougs](https://dougs.fr) 2019/2020
 
-### Développeur @ [Gac Technology](https://www.gac-technology.com) _(2017/2019)_
+_Node.js - Typescript - PostgreSQL - Angular.js_
 
-Développement d'un application SAAS de gestion de flotte automobile et de portefeuille immobilier avec **PHP7** / **Zend Framework**. Je développais des fonctionnalités dans un environnement contraint par la grande quantité de données gérées par GAC Technology.
+- Développement d'une application SPA de comptabilité
+- Automatisation du travail des comptables via une job queue sous _PostgreSQL_
+- Développement de la partie _Front-end_
+- Présentation des nouvelles fonctionnalité
 
-J'ai aussi développé une API avec **Laravel** qui suit les standards **JSON:API** et documentée avec **Swagger**.
+### Développeur @ [Gac Technology](https://www.gac-technology.com) 2017/2019
 
-### Bureau d'études / Développeur @ [Carrier](http://www.carrier.fr) _(2013/2017)_
+_PHP 5.6 / 7 - ZendFramework - Laravel - MySQL - Docker_
 
-Développement d'une solution de dessin 3D avec **Sketchup** et son API **Ruby**. J'ai aussi développé une application web de suivi d'interventions techniques avec **ASP.NET MVC**. A côté, je m'occupais de dessiner des installations frigorifiques sous **AutoCAD**.
+- Développement d'un application SAAS de gestion de flotte automobile et de portefeuille immobilier avec _PHP7_ / _Zend Framework_
+- Développement d'une API avec _Laravel_ qui suit les standards _JSON:API_ et documentée avec _Swagger_.
+
+### Bureau d'études / Développeur @ [Carrier](http://www.carrier.fr) 2013/2017
+
+_Sketchup - Ruby - ASP.net MVC - C# - AutoCAD - Excel_
+
+- Développement d'une solution de dessin 3D
+- Développement d'une application web de suivi d'interventions techniques
+- Dessin et calculs des plans techniques
 
 ### Apprentis Bureau d'études @ Carrier _(2011/2013)_
 
-Dessin des plans d'execution des installations frigorifiques sous **AutoCad** et calculs sous Excel.
+_AutoCAD - Excel_
+
+- Dessin et calculs des plans techniques
 
 ## Experiences personnelles
 
-### Associé / Directeur technique @ [iSignif](https://isignif.fr) _(depuis 2018)_
+### Freelance Développeur Fullstack @ [Shipotsu](https://www.shipotsu.com/) 2020
 
-Participation à la création d'une société en étant le référent technique. J'ai entièrement créé l'application web _from scratch_ sous **Ruby on Rails** et j'ai déployé notre solution sous un serveur **Ubuntu** vierge. Je propose aussi une **JSON:API** documentée avec **Swagger**.
+_ExpressJS - Typescript - MongoDB - Angular - Docker_
+
+- Refonte de l'application sous une architecture orienté API
+- Développement de la partie _Front-end_
+- Mise en place d'une sauvegarde distante automatisée et chiffrée
+
+### Associé / Directeur technique @ [iSignif](https://isignif.fr) depuis 2018
+
+_Ruby on Rails - Vue.js_
+
+- Participation à la création d'une société
+- choix techniques et développement de l'application web _from scratch_
+- Déploiement de l'application sous un serveur vierge
+- Documentation de l'API avec _Swagger_
 
 ## Open source
 
 Presque tous mes _sides-projects_ sont sur [mon Github](http://github.com/madeindjs). Voici quelque exemples:
 
-- Redaction & publication livre [_APIs on Rails - Building REST APIs_](https://leanpub.com/apionrails6) (172\*)
+- Redaction & publication livre [_APIs on Rails - Building REST APIs_](https://leanpub.com/apionrails6) (172\*) ([article](https://rsseau.fr/story/2019/11/10/api-on-rails.html))
 - [`Crystagiri`](https://github.com/madeindjs/Crystagiri) Parseur de document HTML écrit en Crystal. (113\*)
 - [`ActiveStorage::SendZip`](https://github.com/madeindjs/active_storage-send_zip), Librairie Ruby on Rails pour créer des ZIP (20\*)
 - `Wi-fi_bruteforce`, Script Python pour se connecter aux Wi-fi des voisins (21\*)
@@ -54,4 +83,4 @@ Presque tous mes _sides-projects_ sont sur [mon Github](http://github.com/madein
 
 - 2019: Titre RNCP niveau Bac +4 Développeur Full Stack à IT-Akademy, Lyon
 - 2013: BTS FEE: La Martinière Monplaisir, Lyon
-- 2011: Bac STI Génie Energétique: La Martinière Monplaisir, Lyon
+- 2011: Bac STI Génie Énergétique: La Martinière Monplaisir, Lyon
