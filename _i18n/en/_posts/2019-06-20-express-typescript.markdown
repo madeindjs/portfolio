@@ -10,16 +10,16 @@ categories: programming
 
 The purpose of this article is to discover an implementation of an[API][api][RESTfull][rest] using[TypeScript][typescript].
 
-> TypeScript is a free and open source programming language developed by Microsoft to improve and secure the production of JavaScript code. (...) . The TypeScript code is transcompiled into JavaScript (...) TypeScript allows optional static typing of variables and functions (...) while maintaining the non-binding approach of JavaScript. [Wikipedia - TypeScript](https://fr.wikipedia.org/wiki/TypeScript)
+> TypeScript is a free and open-source programming language developed by Microsoft to improve and secure the production of JavaScript code. (...) . The TypeScript code is transpiled into JavaScript (...) TypeScript allows optional static typing of variables and functions (...) while maintaining the non-binding approach of JavaScript. [Wikipedia - TypeScript](https://fr.wikipedia.org/wiki/TypeScript)
 
 We will therefore set up a very basic _graph_api_ system. We will create two models:
 
-- a **node** (node) which represents a simple step. It just contains a `name' and an`id'.
+- a **node** (node) which represents a simple step. It just contains a `name' and an`id`.
 - a **link** (link) that connects only two nodes with attributes `from_id' and`to_id'.
 
 It's as simple as that.
 
-To build the API, I will use[Express.js], a minimalist framework that allows us to make APIs in JavaScript. At the end of the article, the API will be able to generate a definition of a [Mermaid][mermaid] graph which allows to convert the graph_api into a beautiful graph like the one below:
+To build the API, I will use[Express.js], a minimalist framework that allows us to make APIs in JavaScript. At the end of the article, the API will be able to generate a definition of a [Mermaid][mermaid] graph which allows converting the graph_api into a beautiful graph like the one below:
 
 ![Mermaid example](http://rich-iannone.github.io/DiagrammeR/img/mermaid_1.png)
 
@@ -40,7 +40,7 @@ $ npm init
 $ git init
 ```
 
-Then we start to install somes dependencies to build the HTTP server:
+Then we start to install some dependencies to build the HTTP server:
 
 ```bash
 $ npm install --save express body-parser
@@ -136,7 +136,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 ```
 
-And that's it. You can start server using `npm run dev` and try API using cURL:
+And that's it. You can start the server using `npm run dev` and try API using cURL:
 
 ```bash
 $ curl http://localhost:3000/nodes
@@ -145,7 +145,7 @@ $ curl http://localhost:3000/nodes
 
 ## Setup sequelize
 
-Sequelize is an [ORM (Object Relational Mapping)][orm] which is in charge to translate TypeScript object in SQL queries to save models. The [sequelize documentation about TypeScrypt](http://docs.sequelizejs.com/manual/typescript) is really complete but don't panics I'll show you how to implement with Express.
+Sequelize is an [ORM (Object Relational Mapping)][orm] which is in charge to translate TypeScript objects in SQL queries to save models. The [sequelize documentation about TypeScrypt](http://docs.sequelizejs.com/manual/typescript) is really complete but don't panics I'll show you how to implement with Express.
 
 We start to add librairies:
 
@@ -217,9 +217,9 @@ That's it!
 
 ## Setup Node controller
 
-Now we setup database, let's create simple CRUD methods in controller. This means:
+Now we set up the database, let's create simple CRUD methods in the controller. This means:
 
-- `index` to show list of nodes
+- `index` to show a list of nodes
 - `show` to show a node
 - `create` to add a new node
 - `update` to edit a node
@@ -265,11 +265,11 @@ $ curl http://localhost:3000/nodes/
 []
 ```
 
-It's seem to work but we have not data in SQlite database yet. Let's continue to add them.
+It's seems to work but we have not data in SQlite database yet. Let's continue to add them.
 
 ### Create
 
-We'll first define an **interface** which define properties we should receive from POST query. We only want to receive `name` property as `String`. We'll use this interface to cast `req.body` object properties. This will prevent user to inject a parameters who we not want to save in database. This is a good practice.
+We'll first define an **interface** which defines properties we should receive from POST query. We only want to receive `name` property as `String`. We'll use this interface to cast `req.body` object properties. This will prevent user to inject parameters who we do not want to save in the database. This is a good practice.
 
 ```ts
 // lib/models/node.model.ts
@@ -279,7 +279,7 @@ export interface NodeInterface {
 }
 ```
 
-Now back in controller. We simply call `Node.create` and pass params from `req.body`. Then we'll use **Promise** to handle some errors:
+Now back in the controller. We simply call `Node.create` and pass params from `req.body`. Then we'll use **Promise** to handle some errors:
 
 ```ts
 // lib/controllers/nodes.controller.ts
@@ -333,7 +333,7 @@ Perfect. We can now continue.
 
 ### Show
 
-The show method have a little difference because we need an `id` as GET parameter. This means we should have an URL like this: `/nodes/1`. It's simple to make this when you build the route. There the implementation.
+The show method has a little different because we need an `id` as GET parameter. This means we should have an URL like this: `/nodes/1`. It's simple to make this when you build the route. There the implementation.
 
 ```ts
 // lib/config/routes.ts
@@ -347,7 +347,7 @@ export class Routes {
 }
 ```
 
-Now we can get the `id` parameter using `req.params.id`. THen we simply use `Node.findByPk` method and handle when this Promise get a `null` value which mean the node was not found. In this case, we return a 404 response:
+Now we can get the `id` parameter using `req.params.id`. Then we simply use `Node.findByPk` method and handle when this Promise gets a `null` value which means the node was not found. In this case, we return a 404 response:
 
 ```ts
 // lib/controllers/nodes.controller.ts
@@ -381,7 +381,7 @@ $ curl -X POST http://localhost:3000/nodes/99
 
 ### Update
 
-Update method seams like the previous one and need an `id` parameter. Let's build route:
+The update method seems like the previous one and needs an `id` parameter. Let's build a route:
 
 ```ts
 // lib/config/routes.ts
@@ -398,12 +398,12 @@ export class Routes {
 }
 ```
 
-Now we'll use the `Node.update` method which take two parameters:
+Now we'll use the `Node.update` method which takes two parameters:
 
-- an `NodeInterface` interface which contains properties to update
+- a `NodeInterface` interface which contains properties to update
 - an `UpdateOptions` interface which contains the SQL `WHERE` constraint
 
-Then `Node.update` return a `Promise` like many Sequelize methods.
+Then `Node.update` returns a `Promise` like many Sequelize methods.
 
 ```ts
 // lib/controllers/nodes.controller.ts
@@ -438,7 +438,7 @@ Beautiful. Let's continue.
 
 ### Destroy
 
-Destroy method seams like the previous one and need an `id` parameter. Let's build route:
+Destroy method seems like the previous one and need an `id` parameter. Let's build a route:
 
 ```ts
 // lib/config/routes.ts
@@ -496,7 +496,7 @@ Now we want to create the second model: the link. It has two attributes:
 
 ### Setup CRUD
 
-I will be quick on basic CRUD link implementation because this is the same than nodes CRUD:
+I will be quick on basic CRUD link implementation because this is the same as nodes CRUD:
 
 The model:
 
@@ -647,7 +647,7 @@ $ curl http://localhost:3000/links
 [{"id":1,"fromId":420,"toId":666,"createdAt":"2019-06-18T11:09:49.739Z","updatedAt":"2019-06-18T11:09:49.739Z"}]
 ```
 
-It's seem good but you see what going wrong? Actually we setup `toId` and `fromId` to nonexisting nodes. Let's correct that.
+It seems good but you see what goes wrong? Actually we setup `toId` and `fromId` to nonexisting nodes. Let's correct that.
 
 ### Relationships
 
@@ -697,11 +697,11 @@ $ curl -X POST --data "fromId=1" --data "toId=2"  http://localhost:3000/links
 {"id":1,"fromId":"1","toId":"2","updatedAt":"2019-06-18T11:22:10.439Z","createdAt":"2019-06-18T11:22:10.439Z"}
 ```
 
-Perfect! Sequelize allow you to do many things so I suggest you to take a look at [their documentation](http://docs.sequelizejs.com/manual/associations.html).
+Perfect! Sequelize allows you to do many things so I suggest you to take a look at [their documentation](http://docs.sequelizejs.com/manual/associations.html).
 
 ## Draw the graph
 
-Now we'll use our model to draw a graph. To do that, using [Mermaid.js][mermaid] who generate beautiful graph from plan text definitions. A valid definition look something like this:
+Now we'll use our model to draw a graph. To do that, use [Mermaid.js][mermaid] who generates a beautiful graph from plan text definitions. A valid definition looks something like this:
 
 ```mermaid
 graph TD;
@@ -804,18 +804,19 @@ Beautiful!
 We just build foundations of a graph_api system. We can easily con further. Here some ideas:
 
 - build unit test
-- add a names to links
-- add a names to links
+- add names to links
+- add names to links
 - add a `Graph` object who own some nodes
 - add an authentification using JWT token
 
-As you can see, ExpressJS is a toolbox that interfaces very well with TypeScript. Express' great freedom allows us to decide for ourselves the architecture of our application and TypeScript gives us the possibility to create real _design paterns_.
+As you can see, ExpressJS is a toolbox that interfaces very well with TypeScript. Express great freedom allows us to decide for ourselves the architecture of our application and TypeScript gives us the possibility to create real _design paterns_.
 
-## Liens
+## Links
 
 - https://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
 - https://www.techighness.com/post/unit-testing-expressjs-controller-part-1/
 - https://blog.logrocket.com/a-quick-and-complete-guide-to-mocha-testing-d0e0ea09f09d/
+- https://www.toptal.com/express-js/nodejs-typescript-rest-api-pt-1
 
 [mermaid]: https://github.com/knsv/mermaid
 [typescript]: https://www.typescriptlang.org/
