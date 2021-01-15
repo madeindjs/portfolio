@@ -45,7 +45,6 @@ blockquote
   border-left: $baseFontSize/4 solid #dddddd
   padding-left: $baseFontSize
 
-
 // header
 
 h1, h2, h3, h4, h5, h6
@@ -65,7 +64,6 @@ h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
 
-
 header
   border-bottom: dashed 2px
   text-align: center
@@ -80,7 +78,6 @@ footer
 section
   margin-top: $baseFontSize * 4
   margin-bottom: $baseFontSize * 4
-
 
 // inline
 
@@ -144,7 +141,6 @@ dl
   dt + dd
     margin-bottom: $baseFontSize
 
-
 // media
 
 img
@@ -156,7 +152,6 @@ img
     +marginDefault($baseFontSize)
     width: 120%
     margin-left: -10%
-
 
 table
   text-align: center
@@ -175,7 +170,6 @@ table
 
 article
   +marginDefault($baseFontSize * 2)
-
 
 // custom
 
@@ -244,7 +238,6 @@ h4:before
   article
     +marginDefault($baseFontSize * 3)
 
-
   pre.highlight
     overflow-x: auto
     overflow-y: hidden
@@ -289,7 +282,6 @@ h4:before
   code
     color: lightgray
 
-
   button, .button
     background: $background-dark
     color: $text-color-dark
@@ -300,7 +292,6 @@ h4:before
       background: $background-dark
       color: $text-color-dark
       border-color: $text-color-dark
-
 
   input
     &[type="email"], &[type="number"], &[type="password"], &[type="search"], &[type="tel"], &[type="text"], &[type="url"]
@@ -317,18 +308,23 @@ h4:before
   blockquote
     border-left-color: $text-color-dark
 
+  mark
+    background-color: yellow
+
+    a
+      color: black
+      font-weight: 600
 
   hr
     border-color: white
 
   table
     color: $table-text-color-dark
-  
+
   // .highlight .hll
   //   background-color: black
   // .highlight
   //   background: black
-
 
 // @font-face
 //   font-family: "iA Writer Duospace"
@@ -353,4 +349,3 @@ h4:before
 //   font-weight: bold
 //   font-style: italic
 //   src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
-

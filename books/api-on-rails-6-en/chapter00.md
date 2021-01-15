@@ -4,6 +4,8 @@ layout: book
 next: /books/api-on-rails-6-en/chapter01.html
 ---
 
+{% include api-on-rails-6-en-support.html %}
+
 "API on Rails 6" is based on ["APIs on Rails: Building REST APIs with Rails"](http://apionrails.icalialabs.com/book/). It was initially published in 2014 by https://twitter.com/kurenn[Abraham Kuri] under the licenses http://opensource.org/licenses/MIT[MIT] and http://people.freebsd.org/~phk/[Beerware].
 
 The first version was not maintained and was initially planned for Ruby on Rails version 4, which does not https://guides.rubyonrails.org/maintenance_policy.html#security-issues[receive more than security updates]. I wanted to update this excellent book, adapting it to new versions of Ruby on Rails. Therefore, this book is available for Ruby on Rails versions 5.2 and 6.0 (the one you are currently reading).

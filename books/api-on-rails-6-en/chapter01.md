@@ -5,6 +5,8 @@ previous: /books/api-on-rails-6-en/chapter00.html
 next: /books/api-on-rails-6-en/chapter02.html
 ---
 
+{% include api-on-rails-6-en-support.html %}
+
 Welcome to API on Rails 6, a tutorial on steroids to learn the best way to build your next API with Rails. The purpose of this book is to provide a comprehensive methodology to develop a RESTful API following best practices.
 
 As soon as you finish this book, you will be able to create your own API and integrate it with any client, such as a web browser or mobile application. The generated code is built with Ruby on Rails 6.0, which is the current version.
@@ -230,5 +232,3 @@ As we move forward with the tutorial, I'll be using the practices I follow daily
 ## Conclusion
 
 It's been a long way through this chapter. If you reach here, let me congratulate you and be sure that things will get better from this point. So let's get our hands dirty and start typing some code!
-
-[_Next chapter_](/books/api-on-rails-6-en/chapter02.html)

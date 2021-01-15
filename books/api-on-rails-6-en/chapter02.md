@@ -5,6 +5,8 @@ previous: /books/api-on-rails-6-en/chapter01.html
 next: /books/api-on-rails-6-en/chapter03.html
 ---
 
+{% include api-on-rails-6-en-support.html %}
+
 In this section, I'll outline the application. By now, you should have read the previous chapter. If you did not read it, I recommend you to do it.
 
 You can clone the project until this point with:
@@ -214,7 +216,3 @@ I know it's been a long way, but you made it, don't give up this is just our sma
 - https://github.com/bploetz/versionist[Versionist]
 
 I'm not covering those in this book since we are trying to learn how to implement this kind of functionality, but it is good to know. By the way, the code up to this point is https://github.com/madeindjs/market_place_api_6/releases/tag/checkpoint_chapter03[here].
-
-```
-
-```
