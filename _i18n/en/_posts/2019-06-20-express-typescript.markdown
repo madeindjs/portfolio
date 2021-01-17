@@ -29,6 +29,8 @@ _Let's go_!
 
 > TL;DR: Express great freedom allows us to decide for ourselves the architecture of our application and TypeScript gives us the possibility to create real _design paterns_.
 
+{% include restapi-promote.html %}
+
 ## Setup project
 
 Let's create a brand new project using [NPM](https://www.npmjs.com/) and [Git versionning](https://git-scm.com/).
