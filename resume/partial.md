@@ -75,6 +75,7 @@ _Ruby on Rails - Vue.js_
 Presque tous mes _sides-projects_ sont sur [mon Github](http://github.com/madeindjs). Voici quelque exemples:
 
 - Rédaction & publication du livre [_APIs on Rails - Building REST APIs_](https://leanpub.com/apionrails6) (195\*)
+- Rédaction & publication du livre [_REST-API.ts - Building REST APIs_](https://leanpub.com/rest-api-ts/)
 - [`Crystagiri`](https://github.com/madeindjs/Crystagiri) Parseur de document HTML écrit en Crystal. (118\*)
 - [`ActiveStorage::SendZip`](https://github.com/madeindjs/active_storage-send_zip), Librairie Ruby on Rails pour créer des ZIP (26\*)
 - `Wi-fi_bruteforce`, Script Python pour se connecter aux Wi-fi des voisins (34\*)
