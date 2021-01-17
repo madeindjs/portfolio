@@ -1,5 +1,9 @@
-[#chapter05-user-products]
-= API on Rails 6: User's products
+---
+title: API on Rails 6 - User's products [5/9]
+layout: book
+previous: /books/api-on-rails-6-en/chapter04.html
+next: /books/api-on-rails-6-en/chapter06.html
+---
 
 In the previous chapter, we implemented the authentication mechanism we will use throughout the application.
 
@@ -98,9 +102,8 @@ What I have seen in the code of other developers, when they work with associatio
 
 We need a user with one of the products to test this interaction between the models. Then we will delete this user in the hope that the products will disappear with him. Rails have already generated this for us. Take a look at the _fixture_ of the products:
 
-.test/fixtures/products.yml
-
 ```yaml
+# test/fixtures/products.yml
 one:
   title: MyString
   price: 9.99
@@ -113,9 +116,8 @@ You can see this _fixture_ does not use the attribute `user_id` but `user`. This
 
 Therefore, it is necessary to specify a cascading deletion to delete the `one` product when the `one` user is deleted. Let's start with the unit test:
 
-.test/models/user_test.rb
-
 ```ruby
+# test/models/user_test.rb
 # ...
 class UserTest < ActiveSupport::TestCase
   # ...
@@ -129,9 +131,8 @@ end
 
 You just have to modify the `User` model and specify the `has_many` relationship with the `depend: :destroy` option. We will see later what this method does in more detail.
 
-.app/models/user.rb
-
 ```ruby
+# app/models/user.rb
 # ...
 class User < ApplicationRecord
   # ...
@@ -604,9 +605,8 @@ With the file `db/seeds.rb`, Rails gives us a way to easily and quickly provide 
 
 So let's start by creating a user:
 
-.db/seeds.rb
-
 ```ruby
+# db/seeds.rb
 User.delete_all
 user = User.create! email: 'toto@toto.fr', password: 'toto123'
 puts "Created a new user: #{user.email}"
@@ -627,9 +627,8 @@ $ bundle add faker
 
 Now we can use it to create five users at once with different emails.
 
-.db/seeds.rb
-
 ```ruby
+# db/seeds.rb
 User.delete_all
 
 5.times do
@@ -651,9 +650,8 @@ Created a new user: chelsie@wiza.net
 
 There you go. But we can go further by creating products associated with these users:
 
-.db/seeds.rb
-
 ```ruby
+# db/seeds.rb
 Product.delete_all
 User.delete_all
 

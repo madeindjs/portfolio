@@ -1,9 +1,15 @@
+---
+title: API on Rails 6 - Optimizations [9/9]
+layout: book
+previous: /books/api-on-rails-6-en/chapter08.html
+---
+
 Welcome to the last chapter of the book. It has been a long way, but you are only a step away from the end. In the previous chapter, we completed the modeling of the order model. We could say that the project is now finished, but I want to cover some important details about optimization. The topics I will discuss here will be:
 
-* pagination
-* caching
-* optimization of SQL queries
-* the activation of CORS
+- pagination
+- caching
+- optimization of SQL queries
+- the activation of CORS
 
 I will try to go as far as I can by trying to cover some common scenarios. I hope these scenarios will be useful for some of your projects.
 
@@ -18,7 +24,6 @@ Let's now create a branch to start working:
 ```bash
 $ git checkout -b chapter09
 ```
-
 
 ## Pagination
 
@@ -46,9 +51,8 @@ $ bundle add kaminari
 
 Now we can go to the `index` action on the `products_controller` and add the pagination methods as pointed on the documentation:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-```
+```rb
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   # ...
   def index
@@ -82,9 +86,8 @@ We need to provide the pagination information on the `meta` tag in the following
 
 Now we have the final structure for the `meta` tag we just need to output it on the JSON response. Let's first add some specs:
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-```
+```rb
+# test/controllers/api/v1/products_controller_test.rb
 # ...
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -115,9 +118,7 @@ Expected nil to not be nil.
 
 Let's add the pagination information. We will make a part of it in a separate _concerns_ in order to better decouple our code:
 
-[source,ruby]
-.app/controllers/concerns/paginable.rb
-```
+```rb
 # app/controllers/concerns/paginable.rb
 module Paginable
   protected
@@ -134,9 +135,8 @@ end
 
 And now we can use it in the controller.
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-```
+```rb
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   include Paginable
   # ...
@@ -177,14 +177,12 @@ $ git add .
 $ git commit -m "Adds pagination for the products index action to optimize response"
 ```
 
-
 ### Orders list
 
 Now it's time to do exactly the same for the `orders` list endpoint, which should be really easy to implement. But first, let's add some specs to the `orders_controller_test.rb` file:
 
-[source,ruby]
-.test/controllers/api/v1/orders_controller_test.rb
-```
+```rb
+# test/controllers/api/v1/orders_controller_test.rb
 # ...
 class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -216,10 +214,8 @@ Expected nil to not be nil.
 
 Let's turn the red into green:
 
-
-[source,ruby]
-.app/controllers/api/v1/orders_controller.rb
-```
+```rb
+# app/controllers/api/v1/orders_controller.rb
 class Api::V1::OrdersController < ApplicationController
   include Paginable
   # ...
@@ -252,13 +248,11 @@ $ rake test
 42 runs, 67 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-
 Let's place and commit, because a refactor is coming:
 
 ```bash
 $ git commit -am "Adds pagination for orders index action"
 ```
-
 
 ### Refactoring pagination
 
@@ -275,9 +269,8 @@ assert_not_nil json_response.dig(:links, :prev)
 
 To refactor it, we will move these assertions into the `test_helper.rb` file in a method we will use:
 
-[source,ruby]
-.test/test_helper.rb
-```
+```rb
+# test/test_helper.rb
 # ...
 class ActiveSupport::TestCase
   # ...
@@ -292,9 +285,8 @@ end
 
 This method can now be used to replace the four assertions in the `orders_controller_test.rb` and `products_controller_test.rb` files:
 
-[source,ruby]
-.test/controllers/api/v1/orders_controller_test.rb
-```
+```rb
+# test/controllers/api/v1/orders_controller_test.rb
 # ...
 class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -306,9 +298,8 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
 end
 ```
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-```
+```rb
+# test/controllers/api/v1/products_controller_test.rb
 # ...
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -328,13 +319,10 @@ $ rake test
 42 runs, 71 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-
 Now we have done this simple factorization for testing, we can move on to implementing pagination for controllers and clean things up. If you remember the indexing action for both product and order controllers, they both have the same pagination format. Let's move this logic into a method called `get_links_serializer_options` under the file `paginable.rb`, so we can access it on any controller that would need paging.
 
-
-[source,ruby]
-.app/controllers/concerns/paginable.rb
-```
+```rb
+# app/controllers/concerns/paginable.rb
 module Paginable
   protected
 
@@ -354,9 +342,8 @@ end
 
 And now we can substitute the pagination hash on both controllers for the method. Like so:
 
-[source,ruby]
-.app/controllers/api/v1/orders_controller.rb
-```
+```rb
+# app/controllers/api/v1/orders_controller.rb
 class Api::V1::OrdersController < ApplicationController
   include Paginable
   # ...
@@ -374,9 +361,8 @@ class Api::V1::OrdersController < ApplicationController
 end
 ```
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-```
+```rb
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   include Paginable
   # ...
@@ -423,27 +409,24 @@ NOTE: The `-w` option allows us to retrieve the time of the request, `-o' redire
 
 By adding only one line to the `ProductSerializer` class, we will see a significant improvement in response time!
 
-[source,ruby]
-.app/serializers/order_serializer.rb
-```
+```rb
+# app/serializers/order_serializer.rb
 class OrderSerializer
   # ...
   cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour
 end
 ```
 
-[source,ruby]
-.app/serializers/product_serializer.rb
-```
+```rb
+# app/serializers/product_serializer.rb
 class ProductSerializer
   # ...
   cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour
 end
 ```
 
-[source,ruby]
-.app/serializers/user_serializer.rb
-```
+```rb
+# app/serializers/user_serializer.rb
 class UserSerializer
   # ...
   cache_options store: Rails.cache, namespace: 'jsonapi-serializer', expires_in: 1.hour
@@ -467,7 +450,7 @@ $ git commit -am "Adds caching for the serializers"
 
 ## N+1 Queries
 
-N+1* requests are a wound that can have a huge impact on the performance of an application. This phenomenon often occurs when using an **ORM** because it generates **automatically** SQL queries for us. This handy tool is double-edged because it can generate a **large number** of SQL queries.
+N+1\* requests are a wound that can have a huge impact on the performance of an application. This phenomenon often occurs when using an **ORM** because it generates **automatically** SQL queries for us. This handy tool is double-edged because it can generate a **large number** of SQL queries.
 
 Something to know about SQL queries is that it's better to limit the number. In other words, a large request is often more efficient than a hundred small ones.
 
@@ -499,15 +482,14 @@ Product Load (0.3ms)  SELECT "products".* FROM "products"
 User Load (0.8ms)  SELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?, ?)  [["id", 28], ["id", 29], ["id", 30]]
 ```
 
-Rails make a second request that will retrieve *all* users at once.
+Rails make a second request that will retrieve _all_ users at once.
 
 ### Prevention of N + 1 requests
 
 Imagine we want adding owners of the products for the path `/products`. We have already seen that with the `fast_jsonapi` library it is straightforward to do this:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-```
+```rb
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   # ...
   def index
@@ -563,12 +545,10 @@ To install it, we add the _gem_ to the _GemFile_
 $ bundle add bullet --group development
 ```
 
-
 And it is enough to update the configuration of our application for the development environment. In our case, we will only activate the `rails_logger` mode, which will be displayed:
 
-[source,ruby]
-.config/environments/development.rb
-```
+```rb
+# config/environments/development.rb
 Rails.application.configure do
   # ...
   config.after_initialize do
@@ -599,10 +579,8 @@ He even tells us how to correct it:
 
 So we correct our error in the controller:
 
-
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-```
+```rb
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   # ...
   def index
@@ -647,10 +625,8 @@ We must manually enable this feature so that any client can make requests on our
 
 Rails allow us to do this very easily. Take a look at the `cors.rb` file located in the `initializers` folder.
 
-
-[source,ruby]
-.config/initializers/cors.rb
-```
+```rb
+# config/initializers/cors.rb
 # ...
 
 # Rails.application.config.middleware.insert_before 0, Rack::Cors do
@@ -666,9 +642,8 @@ Rails allow us to do this very easily. Take a look at the `cors.rb` file located
 
 You see. It is enough to uncomment the code and modify it slightly to limit access to some actions or some HTTP verbs. In our case, this configuration is very convenient for us at the moment.
 
-[source,ruby]
-.config/initializers/cors.rb
-```
+```rb
+# config/initializers/cors.rb
 # ...
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
@@ -688,7 +663,6 @@ $ bundle add rack-cors
 ```
 
 There you go! It is now time to make our last commit and merge our changes on the master branch.
-
 
 ```bash
 $ git commit -am "Activate CORS"

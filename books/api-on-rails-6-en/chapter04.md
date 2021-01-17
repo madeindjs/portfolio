@@ -1,5 +1,9 @@
-[#chapter04-authentication]
-= API on Rails 6: Authenticating user
+---
+title: API on Rails 6 - Authenticating user [4/9]
+layout: book
+previous: /books/api-on-rails-6-en/chapter03.html
+next: /books/api-on-rails-6-en/chapter05.html
+---
 
 It's been a long time since you started. I hope you enjoy this trip as much as I do.
 
@@ -47,21 +51,19 @@ Overall a JWT token is composed of three parts:
 
 These three parts are each encoded in base64 and then concatenated using points (`.`). This gives us something like that:
 
-.A valid JWT token
-
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 ```
 
 Once decoded, this token gives us the following information:
 
-.The JWT token header
+The JWT token header
 
 ```json
 { "alg": "HS256", "typ": "JWT" }
 ```
 
-.The payload of the JWT token
+The payload of the JWT token
 
 ```json
 { "sub": "1234567890", "name": "John Doe", "iat": 1516239022 }
@@ -99,9 +101,8 @@ In the first line, we encoded a _payload_ with the secret key `my_secret_key`. S
 
 We will now include all this logic in a `JsonWebToken` class in a new file located in `lib/`. This will allow us to avoid duplicating the code. This class will just encode and decode the JWT tokens. So here is the implementation.
 
-.lib/json_web_token.rb
-
 ```ruby
+# lib/json_web_token.rb
 class JsonWebToken
   SECRET_KEY = Rails.application.credentials.secret_key_base.to_s
 
@@ -124,9 +125,8 @@ I know that's a lot of code, but we're going to review it together.
 
 There you go. To load the file into our application, you must specify the `lib` folder in the list of Ruby on Rails \_autoload_s. To do this, add the following configuration to the `application.rb` file:
 
-.config/application.rb
-
 ```ruby
+# config/application.rb
 # ...
 module MarketPlaceApi
   class Application < Rails::Application
@@ -154,9 +154,8 @@ $ rails generate controller api::v1::tokens create
 
 We will modify the route a little to respect the _REST_ conventions:
 
-.config/routes.rb
-
 ```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -174,9 +173,8 @@ We will build functional tests before going any further. The desired behavior is
 
 The tests therefore materialize as follows:
 
-.test/controllers/api/v1/tokens_controller_test.rb
-
 ```ruby
+# test/controllers/api/v1/tokens_controller_test.rb
 require 'test_helper'
 
 class Api::V1::TokensControllerTest < ActionDispatch::IntegrationTest
@@ -201,9 +199,8 @@ end
 
 You may be wondering: "but how can you know the user's password?". Simply use the `BCrypt::Password.create` method in the _fixtures_ of users:
 
-.test/fixtures/users.yml
-
 ```yaml
+# test/fixtures/users.yml
 one:
   email: one@one.org
   password_digest: <%= BCrypt::Password.create('g00d_pa$$') %>
@@ -227,9 +224,8 @@ Expected response to be a <401: unauthorized>, but was a <204: No Content>
 
 That's normal. It's now time to implement the logic to create the JWT token. It is effortless.
 
-.app/controllers/api/v1/tokens_controller.rb
-
 ```ruby
+# app/controllers/api/v1/tokens_controller.rb
 class Api::V1::TokensController < ApplicationController
   def create
     @user = User.find_by_email(user_params[:email])
@@ -430,9 +426,8 @@ Therefore, we will split our test _should update user_ and _should destroy user_
 
 Let's start by updating the _should update user_ test.
 
-.test/controllers/api/v1/users_controller_test.rb
-
 ```ruby
+# test/controllers/api/v1/users_controller_test.rb
 # ...
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -455,9 +450,8 @@ You can see how we have to add a header _Authorization_ for the user's modificat
 
 We can imagine about the same thing for the test _should forbid destroy user_:
 
-.test/controllers/api/v1/users_controller_test.rb
-
 ```ruby
+# test/controllers/api/v1/users_controller_test.rb
 # ...
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   # ...

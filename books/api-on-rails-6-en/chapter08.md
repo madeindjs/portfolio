@@ -1,5 +1,9 @@
-[#chapter08-improve_orders]
-= API on Rails 6: Improving orders
+---
+title: API on Rails 6 - Improving orders [8/9]
+layout: book
+previous: /books/api-on-rails-6-en/chapter07.html
+next: /books/api-on-rails-6-en/chapter09.html
+---
 
 In the previous chapter, we extended our API to place orders and send a confirmation email to the user (just to improve the user experience). This chapter will take care of some validations on the order model, just to make sure it is placeable, just like:
 
@@ -10,13 +14,13 @@ We’ll probably need to update the JSON output for the orders a little, but let
 
 So now that we have everything clear, we can get our hands dirty. You can clone the project up to this point with:
 
-```ruby
+```sh
 $ git checkout tags/checkpoint_chapter08
 ```
 
 Let’s create a branch to start working:
 
-```ruby
+```sh
 $ git checkout -b chapter08
 ```
 
@@ -32,9 +36,8 @@ Wait, don’t run migrations now. We'll be making a small modification to it. As
 
 Your migration file should look like this:
 
-[source,ruby]
-.db/migrate/20190621105101_add_quantity_to_products.rb
-```
+```rb
+# db/migrate/20190621105101_add_quantity_to_products.rb
 class AddQuantityToProducts < ActiveRecord::Migration[6.0]
   def change
     add_column :products, :quantity, :integer, default: 0
@@ -48,11 +51,10 @@ Now we can migrate the database:
 $ rake db:migrate
 ```
 
-And let's not forget to update the _fixtures_ by adding the *quantity* field (I chose the value `5` totally randomly).
+And let's not forget to update the _fixtures_ by adding the _quantity_ field (I chose the value `5` totally randomly).
 
-[source,yml]
-.test/fixtures/products.yml
-```
+```yml
+# test/fixtures/products.yml
 one:
   # ...
   quantity: 5
@@ -65,7 +67,6 @@ another_tv:
   # ...
   quantity: 5
 ```
-
 
 It is now time to reduce the product's quantity once the `Order` has been passed. The first thing probably coming to mind is to do it in the `Order` model. This is a common mistake.
 
@@ -84,9 +85,8 @@ product_ids_and_quantities = [
 
 This is going to be tricky so stay with me. Let’s first build some unit tests:
 
-[source,ruby]
-.test/models/order_test.rb
-```
+```rb
+# test/models/order_test.rb
 # ...
 class OrderTest < ActiveSupport::TestCase
   # ...
@@ -104,12 +104,10 @@ class OrderTest < ActiveSupport::TestCase
 end
 ```
 
-
 Then into the implementation:
 
-[source,ruby]
-.app/models/order.rb
-```
+```rb
+# app/models/order.rb
 class Order < ApplicationRecord
   # ...
 
@@ -136,9 +134,8 @@ The `build_placements_with_product_ids_and_quantities` will build the placement 
 
 First we update the `orders_controller_test` file:
 
-[source,ruby]
-.test/controllers/api/v1/orders_controller_test.rb
-```
+```rb
+# test/controllers/api/v1/orders_controller_test.rb
 # ...
 class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -171,9 +168,8 @@ end
 
 Then we need to update the `orders_controller`:
 
-[source,ruby]
-.app/controllers/api/v1/orders_controller.rb
-```
+```rb
+# app/controllers/api/v1/orders_controller.rb
 class Api::V1::OrdersController < ApplicationController
   # ...
 
@@ -197,7 +193,6 @@ class Api::V1::OrdersController < ApplicationController
 end
 ```
 
-
 Note that I also modified the `OrdersController#order_params` method.
 
 Finally, we need to update the factory product file to assign a high quantity value to have at least a few products in stock.
@@ -217,9 +212,8 @@ $ rails generate migration add_quantity_to_placements quantity:integer
 
 As with the product quantity attribute migration we should add a default value equal to 0. Remember this is optional but I do like this approach. Migration file should look like:
 
-[source,ruby]
-.db/migrate/20190621114614_add_quantity_to_placements.rb
-```
+```rb
+# db/migrate/20190621114614_add_quantity_to_placements.rb
 class AddQuantityToPlacements < ActiveRecord::Migration[6.0]
   def change
     add_column :placements, :quantity, :integer, default: 0
@@ -235,9 +229,8 @@ $ rake db:migrate
 
 Let's add the attribute `quantity` in the _fixtures_:
 
-[source,yml]
-.test/fixtures/placements.yml
-```
+```yml
+# test/fixtures/placements.yml
 one:
   # ...
   quantity: 5
@@ -249,9 +242,8 @@ two:
 
 Now we just need to update the `build_placements_with_product_ids_and_quantities` to add the `quantity` for the placements:
 
-[source,ruby]
-.app/models/order.rb
-```
+```rb
+# app/models/order.rb
 class Order < ApplicationRecord
   # ...
 
@@ -287,9 +279,8 @@ $ git add . && git commit -m "Adds quantity to placements"
 
 It is time to update the product quantity once the order is saved, or more accurate once the placement is created. To achieve this, we will add a method and then hook it up to an `after_create` callback.
 
-[source,ruby]
-.test/models/placement_test.rb
-```
+```rb
+# test/models/placement_test.rb
 # ...
 class PlacementTest < ActiveSupport::TestCase
   setup do
@@ -308,9 +299,8 @@ end
 
 Implementation is fairly easy as shown bellow:
 
-[source,ruby]
-.app/models/placement.rb
-```
+```rb
+# app/models/placement.rb
 class Placement < ApplicationRecord
   # ...
   after_create :decrement_product_quantity!
@@ -320,7 +310,6 @@ class Placement < ApplicationRecord
   end
 end
 ```
-
 
 Let's _commit_ our changes:
 
@@ -343,9 +332,8 @@ $ touch app/validators/enough_products_validator.rb
 
 Before we drop any code line, we need to add a spec to the `Order` model to check if the order can be placed.
 
-[source,ruby]
-.test/models/order_test.rb
-```
+```rb
+# test/models/order_test.rb
 # ...
 class OrderTest < ActiveSupport::TestCase
   # ...
@@ -362,9 +350,8 @@ As you can see on the spec, we first make sure that `placement_2` is trying to r
 
 The test by now should be failing, let’s turn it into green by adding the code for the validator:
 
-[source,ruby]
-.app/validators/enough_products_validator.rb
-```
+```rb
+# app/validators/enough_products_validator.rb
 class EnoughProductsValidator < ActiveModel::Validator
   def validate(record)
     record.placements.each do |placement|
@@ -379,9 +366,8 @@ end
 
 I manage to add a message for each of the products out of stock, but you can handle it differently. Now we just need to add the validator to the `Order` model like so:
 
-[source,ruby]
-.app/models/order.rb
-```
+```rb
+# app/models/order.rb
 class Order < ApplicationRecord
   include ActiveModel::Validations
   # ...
@@ -402,9 +388,8 @@ Did you realize that the `total` is being miscalculated? Currently, it is just a
 
 Currently, in the `order` model we have this method to calculate the amount to pay:
 
-[source,ruby]
-.app/models/order.rb
-```
+```rb
+# app/models/order.rb
 class Order < ApplicationRecord
   # ...
   def set_total!
@@ -416,9 +401,8 @@ end
 
 Instead of calculating the `total` by just adding the product prices, we need to multiply it by the quantity. So let’s update the spec first:
 
-[source,ruby]
-.test/models/order_test.rb
-```
+```rb
+# test/models/order_test.rb
 # ...
 class OrderTest < ActiveSupport::TestCase
   # ...
@@ -438,9 +422,8 @@ end
 
 And the implementation is fairly easy:
 
-[source,ruby]
-.app/models/order.rb
-```
+```rb
+# app/models/order.rb
 class Order < ApplicationRecord
   # ...
   def set_total!

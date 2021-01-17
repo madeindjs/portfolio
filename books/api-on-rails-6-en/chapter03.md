@@ -15,7 +15,7 @@ You can clone the project until this point with:
 $ git checkout tags/checkpoint_chapter03
 ```
 
-As you can already imagine, there are a lot of authentication solutions for Rails, https://github.com/binarylogic/authlogic[AuthLogic], https://github.com/thoughtbot/clearance[Clearance], and https://github.com/plataformatec/devise[Devise].
+As you can already imagine, there are a lot of authentication solutions for Rails, [AuthLogic](https://github.com/binarylogic/authlogic), [Clearance](https://github.com/thoughtbot/clearance), and [Devise](https://github.com/plataformatec/devise).
 
 These solutions are turnkey libraries, i.e., they allow you to manage many things like authentication, password forgetfulness, validation, etc... Nevertheless, we will use [bcrypt](https://github.com/codahale/bcrypt-ruby) gem to hash the user's password.
 
@@ -56,9 +56,8 @@ This command generates a lot of files! Don't worry, we'll review them one by one
 
 The migration file contained in the `db/migrate` folder contains the _migration_ that describes the changes that will be made to the database. This file should look like this:
 
-.db/migrate/20190603195146_create_users.rb
-
 ```ruby
+# db/migrate/20190603195146_create_users.rb
 class CreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
@@ -83,9 +82,8 @@ We will, therefore add two additional constraints:
 
 The migration thus becomes:
 
-.db/migrate/20190603195146_create_users.rb
-
 ```ruby
+# db/migrate/20190603195146_create_users.rb
 # ...
 create_table :users do |t|
   t.string :email, null: false
@@ -96,8 +94,6 @@ end
 ```
 
 We can run changes once the migration is complete with the following command:
-
-.db/migrate/20190603195146_create_users.rb
 
 ```ruby
 $ rake db:migrate
@@ -115,15 +111,14 @@ So we defined our database schema. The next step is to update our model to defin
 
 Ruby on Rails provides a complete validation mechanism found at [their official documentation](https://guides.rubyonrails.org/active_record_validations.html). In our case, we want to validate only three things:
 
-. the email must have a valid format
-. the email must be unique
-. the password must be filled in
+- the email must have a valid format
+- the email must be unique
+- the password must be filled in
 
 These three rules are defined by the following code:
 
-.app/models/user.rb
-
 ```ruby
+# app/models/user.rb
 class User < ApplicationRecord
   validates :email, uniqueness: true
   validates_format_of :email, with: /@/
@@ -133,17 +128,11 @@ end
 
 There you go. Rails use a straightforward syntax, and the code is very readable.
 
-.Email validation
-
----
-
 You may notice that the email validation uses a simplistic validation by only checking for the presence of a `@`.
 
 That's normal.
 
 There are infinite exceptions to the email address so well [that even `Look at all these spaces!@example.com` is a valid address](https://davidcel.is/posts/stop-validating-email-addresses-with-regex/). Therefore, it is better to favor a simple approach and confirm the email by a validation email.
-
----
 
 #### Unit tests
 
@@ -157,9 +146,8 @@ NOTE: _fixtures_ are not designed to create all the data your tests need. They j
 
 So we will start by creating a _fixture_ defining a user:
 
-.test/fixtures/users.yml
-
 ```yaml
+# test/fixtures/users.yml
 one:
   email: one@one.org
   password_digest: hashed_password
@@ -169,9 +157,8 @@ So we can now create three tests:
 
 - 1. Check that a user with valid data is valid:
 
-.test/models/user_test.rb
-
 ```ruby
+# test/models/user_test.rb
 # ...
 test 'user with a valid email should be valid' do
   user = User.new(email: 'test@test.org', password_digest: 'test')
@@ -181,9 +168,8 @@ end
 
 - 2. Check that a user with an invalid email address is not valid:
 
-.test/models/user_test.rb
-
 ```ruby
+# test/models/user_test.rb
 # ...
 test 'user with invalid email should be invalid' do
   user = User.new(email: 'test', password_digest: 'test')
@@ -193,9 +179,8 @@ end
 
 - 3. Check that a new user with a duplicate email is not valid. So we use the same email as the _fixture_ we just created.
 
-.test/models/user_test.rb
-
 ```ruby
+# test/models/user_test.rb
 # ...
 test 'user with taken email should be invalid' do
   other_user = users(:one)
@@ -307,10 +292,6 @@ This command will create `users_controller_test.rb` file. Before going further, 
 - The JSON structure returned by the server
 - The HTTP response code returned by the server
 
-.Common HTTP codes
-
----
-
 The first digit of the status code specifies one of the five response classes. The bare minimum for an HTTP client is that it uses one of these five classes. Here is a list of commonly used HTTP codes:
 
 - `200`: Standard response for successful HTTP requests. This is usually on `GET` requests
@@ -322,8 +303,6 @@ The first digit of the status code specifies one of the five response classes. T
 - 500: A generic error message, given when an unexpected condition has been encountered, and no other specific message is appropriate.
 
 For a complete list of [Wikipedia article](HTTP response codes, see https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
-
----
 
 We will therefore implement the functional test that verifies access to the `Users#show` method,
 
