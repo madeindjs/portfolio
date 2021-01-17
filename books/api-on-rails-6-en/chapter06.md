@@ -1,0 +1,922 @@
+---
+title: API on Rails 6 - Building JSON [6/9]
+layout: book
+previous: /books/api-on-rails-6-en/chapter05.html
+next: /books/api-on-rails-6-en/chapter07.html
+---
+
+In the previous chapter, we added products to the application and built all the necessary routes. We have also associated a product with a user and restricted some of the actions of `products_controller`.
+
+Now you should be satisfied with all this work. But we still have a lot of work to do. Currently, we have a JSON output that is not perfect. JSON output looks like this:
+
+```json
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Tag Case",
+      "price": "98.7761933800815",
+      "published": false,
+      "user_id": 1,
+      "created_at": "2018-12-20T12:47:26.686Z",
+      "updated_at": "2018-12-20T12:47:26.686Z"
+    }
+  ]
+}
+```
+
+However, we want an output that does not contain the fields `user_id`, `created_at`, and `updated_at`.
+
+An important (and difficult) part when creating your API is to decide the output format. Fortunately, some organizations have already faced this kind of problem and have established some conventions you will discover in this chapter.
+
+You can clone the project up to this point with:
+
+```bash
+$ git checkout tags/checkpoint_chapter06
+```
+
+Let's start a new branch for this chapter:
+
+```bash
+$ git checkout -b chapter06
+```
+
+## Presentation of https://jsonapi.org/[JSON:API]
+
+An important and difficult part of creating your API is deciding the output format. Fortunately, some conventions already exist. Certainly, the most used of them is https://jsonapi.org/[JSON:API].
+
+The https://jsonapi.org/format/#document-structure[JSON:API documentation] gives us some rules to follow regarding the JSON document formatting.
+
+Thus, our document _must_ contain these keys:
+
+- `data`: which must contain the data we send back
+- `errors` which must contain an array of errors that have occurred
+- `meta` which contains a https://jsonapi.org/format/#document-meta[meta object]
+
+The content of the `data` key is also quite strict:
+
+- it must have a `type` key corresponding to kind of the JSON model (an article, a user, etc...)
+- properties of the objects must be placed in an `attributes` key
+- links of the objects must be placed in a `relationships` key
+
+In this chapter we will customize the JSON output using https://github.com/jsonapi-serializer/jsonapi-serializer[jsonapi-serializer] gem (fork of Netflix's https://github.com/Netflix/fast_jsonapi[fast_jsonapi] gem) . Luckily for us, it already implements all https://jsonapi.org/[JSON:API] specifications.
+
+So let's install the gem `jsonapi-serializer`:
+
+```bash
+$ bundle add jsonapi-serializer
+```
+
+You should be ready to continue with this tutorial.
+
+## Serialize user
+
+JSON:API Serializer uses _serializers_. Serializers represent Ruby classes responsible for converting a model into an https://ruby-doc.org/core-2.6.3/Hash.html[`Hash`] or a JSON.
+
+So we need to add a `user_serializer.rb` file. We can do it manually, but the gem provides a command-line interface to do it:
+
+```bash
+$ rails generate serializer User email
+      create  app/serializers/user_serializer.rb
+```
+
+This has created a file called `user_serializer.rb` under the `app/serializers` directory. The new file should look like the following file:
+
+```
+# app/serializers/user_serializer.rb
+class UserSerializer
+  include JSONAPI::Serializer
+  attributes :email
+end
+```
+
+This _serializer_ will allow us to convert our `User` object to JSON, which implements all JSON:API specifications. Because we specified `email` as `attributes` we retrieve it in `data` array.
+
+Let's try all this in the Rails with `rails console` console:
+
+```ruby
+2.6.3 :001 > UserSerializer.new( User.first ).serializable_hash
+=> {:data=>{:id=>"25", :type=>:user, :attributes=>{:email=>"tova@beatty.org"}}}
+```
+
+There you go. As you can see, this is easy. Now we can use our new _serializer_ in our _controller_:
+
+```ruby
+# app/controllers/api/v1/users_controller.rb
+class Api::V1::UsersController < ApplicationController
+  # ...
+  def show
+    render json: UserSerializer.new(@user).serializable_hash.to_json
+  end
+
+  def update
+    if @user.update(user_params)
+      render json: UserSerializer.new(@user).serializable_hash.to_json
+    else
+      # ...
+    end
+  end
+
+  def create
+    # ...
+    if @user.save
+      render json: UserSerializer.new(@user).serializable_hash.to_json, status: :created
+    else
+      # ...
+    end
+  end
+
+  # ...
+end
+```
+
+Quite easy, isn't it? However, we should have a test that fails. Try it for yourself:
+
+```bash
+$ rake test
+
+Failure:
+Expected: "one@one.org"
+  Actual: nil
+```
+
+For some reason, the answer is not quite what we expect. This is because the gem modifies the response we had previously defined. So to pass these tests, you just have to modify it:
+
+```rb
+# test/controllers/api/v1/users_controller_test.rb
+# ...
+class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
+  # ...
+  test "should show user" do
+    # ...
+    assert_equal @user.email, json_response['data']['attributes']['email']
+  end
+  # ...
+end
+```
+
+If you do so test now should pass:
+
+```bash
+$ rake test
+........................
+```
+
+Let's commit to these changes and keep moving forward:
+
+```bash
+$ git add . && git commit -am "Adds user serializer for customizing the json output"
+```
+
+## Serialize products
+
+Now that we understand how the serialization gem works, it's time to customize the product output. The first step is the same as what we did in the previous section. We need a product serializer. So let's do it:
+
+```bash
+$ rails generate serializer Product title price published
+      create  app/serializers/product_serializer.rb
+```
+
+Now let's add attributes to serialize the product:
+
+```rb
+# app/serializers/product_serializer.rb
+class ProductSerializer
+  include JSONAPI::Serializer
+  attributes :title, :price, :published
+end
+```
+
+There you go. It's no more complicated than that. Let's change our controller a little bit.
+
+```rb
+# app/controllers/api/v1/products_controller.rb
+class Api::V1::ProductsController < ApplicationController
+  # ...
+  def index
+    @products = Product.all
+    render json: ProductSerializer.new(@products).serializable_hash.to_json
+  end
+
+  def show
+    render json: ProductSerializer.new(@product).serializable_hash.to_json
+  end
+
+  def create
+    product = current_user.products.build(product_params)
+    if product.save
+      render json: ProductSerializer.new(product).serializable_hash.to_json, status: :created
+    else
+      # ...
+    end
+  end
+
+  def update
+    if @product.update(product_params)
+      render json: ProductSerializer.new(@product).serializable_hash.to_json
+    else
+      # ...
+    end
+  end
+  # ...
+end
+```
+
+And we're updating our functional test:
+
+```rb
+# test/controllers/api/v1/products_controller_test.rb
+# ...
+class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
+  # ...
+  test 'should show product' do
+    # ...
+    assert_equal @product.title, json_response['data']['attributes']['title']
+  end
+  # ...
+end
+```
+
+You can check that tests pass but they should. Let's _commit_ these small changes:
+
+```
+$ git add .
+$ git commit -m "Adds product serializer for custom json output"
+```
+
+### Serialize associations
+
+We have worked with serializers, and you may notice that it is straightforward. In some cases difficult decision is naming your routes or structuring the JSON output. When working with associations between models on an API there are many approaches you can take.
+
+We don't have to worry about this problem in our case: JSON:API specifications did it for us!
+
+To summarize, we have a `has_many` type association between users and products.
+
+```rb
+# app/models/user.rb
+class User < ApplicationRecord
+  has_many :products, dependent: :destroy
+  # ...
+end
+```
+
+```rb
+# app/models/product.rb
+class Product < ApplicationRecord
+  belongs_to :user
+  # ...
+end
+```
+
+It is a good idea to integrate users into the JSON outputs of products. This will make the output more cumbersome, but it will prevent the API client from executing other requests to retrieve user information related to the products. This method can save you a huge bottleneck.
+
+## Theory of the injection of relationships
+
+Imagine a scenario where you go to the API to get the products, but you have to display some of the user information in this case.
+
+One possible solution would be adding the attribute `user_id` to the `product_serializer` to get the corresponding user later. This may sound like a good idea, but if you are concerned about performance or your database transactions are not fast enough, you should reconsider this approach. You must understand that for each product you retrieve, you will have to retrieve its corresponding user.
+
+Faced with this problem, there are several alternatives.
+
+### Integrate into a meta attribute
+
+The first solution (a good one, in my opinion) is to integrate identifiers of linked users to products in a meta attribute. So we obtain a JSON like below:
+
+```json
+{
+  "meta": { "user_ids": [1, 2, 3] },
+  "data": []
+}
+```
+
+So that the client can retrieve these users from these `user_ids`.
+
+### Incorporate the object into the attribute
+
+Another solution is to incorporate the `user` object into the `product` object. This may make the first request a little slower, but in this way, the client does not need to make another additional request. An example of the expected results is presented below:
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "product",
+      "attributes": {
+        "title": "First product",
+        "price": "25.02",
+        "published": false,
+        "user": {
+          "id": 2,
+          "attributes": {
+            "email": "stephany@lind.co.uk",
+            "created_at": "2014-07-29T03:52:07.432Z",
+            "updated_at": "2014-07-29T03:52:07.432Z",
+            "auth_token": "Xbnzbf3YkquUrF_1bNkZ"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+The problem with this approach is we have to duplicate the `User' objects for each product that belongs to the same user:
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "product",
+      "attributes": {
+        "title": "First product",
+        "price": "25.02",
+        "published": false,
+        "user": {
+          "id": 2,
+          "type": "user",
+          "attributes": {
+            "email": "stephany@lind.co.uk",
+            "created_at": "2014-07-29T03:52:07.432Z",
+            "updated_at": "2014-07-29T03:52:07.432Z",
+            "auth_token": "Xbnzbf3YkquUrF_1bNkZ"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "product",
+      "attributes": {
+        "title": "Second product",
+        "price": "25.02",
+        "published": false,
+        "user": {
+          "id": 2,
+          "type": "user",
+          "attributes": {
+            "email": "stephany@lind.co.uk",
+            "created_at": "2014-07-29T03:52:07.432Z",
+            "updated_at": "2014-07-29T03:52:07.432Z",
+            "auth_token": "Xbnzbf3YkquUrF_1bNkZ"
+          }
+        }
+      }
+    }
+  ]
+}
+```
+
+### Incorporate the relationships into `include
+
+The third solution (chosen by the JSON:API) is a mixture of the first two.
+
+We will include all the relationships in an `include` key that will contain all the previously mentioned objects' relationships. Each object will also include a relationship key that defines the relationship, and that must be found in the included key.
+
+A JSON is worth a thousand words:
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "type": "product",
+      "attributes": {
+        "title": "First product",
+        "price": "25.02",
+        "published": false
+      },
+      "relationships": {
+        "user": {
+          "id": 1,
+          "type": "user"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": "product",
+      "attributes": {
+        "title": "Second product",
+        "price": "25.02",
+        "published": false
+      },
+      "relationships": {
+        "user": {
+          "id": 1,
+          "type": "user"
+        }
+      }
+    }
+  ],
+  "include": [
+    {
+      "id": 2,
+      "type": "user",
+      "attributes": {
+        "email": "stephany@lind.co.uk",
+        "created_at": "2014-07-29T03:52:07.432Z",
+        "updated_at": "2014-07-29T03:52:07.432Z",
+        "auth_token": "Xbnzbf3YkquUrF_1bNkZ"
+      }
+    }
+  ]
+}
+```
+
+Do you see the difference? This solution drastically reduces the size of the JSON and therefore, the bandwidth used.
+
+## Application of the injection of relationships
+
+So we will incorporate the user object into the product. Let's start by adding some tests.
+
+We will simply modify the `Products#show` test to verify that we are recovering:
+
+```rb
+# test/controllers/api/v1/products_controller_test.rb
+# ...
+class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
+  # ...
+  test 'should show product' do
+    get api_v1_product_url(@product), as: :json
+    assert_response :success
+
+    json_response = JSON.parse(response.body, symbolize_names: true)
+    assert_equal @product.title, json_response.dig(:data, :attributes, :title)
+    assert_equal @product.user.id.to_s, json_response.dig(:data, :relationships, :user, :data, :id)
+    assert_equal @product.user.email, json_response.dig(:included, 0, :attributes, :email)
+  end
+  # ...
+end
+```
+
+We are now checking three things on the JSON that has been returned:
+
+. it contains the title of the product
+. it contains the user ID of the user linked to the product
+. the user data is included in the `include` key
+
+NOTE: You may have noticed that I have chosen to use the method [`Hash#dig`](https://ruby-doc.org/core-2.6.3/Hash.html#method-i-dig). It is a Ruby method allowing you to retrieve elements in a nested _Hash_ by avoiding errors if an element is not present.
+
+To pass this test we will start by including the relationship in the _serializer_:
+
+```rb
+# app/serializers/product_serializer.rb
+class ProductSerializer
+  include JSONAPI::Serializer
+  attributes :title, :price, :published
+  belongs_to :user
+end
+```
+
+This addition will add a `relationship` key containing the user's identifier:
+
+```json
+{
+  "data": {
+    "id": "1",
+    "type": "product",
+    "attributes": {
+      "title": "Durable Marble Lamp",
+      "price": "11.55",
+      "published": true
+    },
+    "relationships": {
+      "user": {
+        "data": {
+          "id": "1",
+          "type": "user"
+        }
+      }
+    }
+  }
+}
+```
+
+This allows us to correct our first two assertions. We now want to include attributes of the user who owns the product. To do this, we simply need to pass an option `:include` to the _serializer_ instantiated in the _controller_. Then let's do it:
+
+```rb
+# app/controllers/api/v1/products_controller.rb
+class Api::V1::ProductsController < ApplicationController
+  # ...
+  def show
+    options = { include: [:user] }
+    render json: ProductSerializer.new(@product, options).serializable_hash.to_json
+  end
+  # ...
+end
+```
+
+There you go. Now, this is what the JSON should look like:
+
+```json
+{
+  "data": {
+    ...
+  },
+  "included": [
+    {
+      "id": "1",
+      "type": "user",
+      "attributes": {
+          "email": "staceeschultz@hahn.info"
+      }
+    }
+  ]
+}
+```
+
+Now all tests should pass:
+
+```bash
+$ rake test
+........................
+```
+
+Let's make a _commit_ to celebrate:
+
+```bash
+$ git commit -am "Add user relationship to product serializer"
+```
+
+<<<
+
+### Retrieve user's products
+
+Do you understand the principle? We have included user information in the JSON of the products. We can do the same by including product information related to a user for the `/api/v1/users/1` page.
+
+Let's start with the test:
+
+```rb
+# test/controllers/api/v1/users_controller_test.rb
+# ...
+class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
+  # ...
+  test "should show user" do
+    get api_v1_user_url(@user), as: :json
+    assert_response :success
+
+    json_response = JSON.parse(self.response.body, symbolize_names: true)
+    assert_equal @user.email, json_response.dig(:data, :attributes, :email)
+    assert_equal @user.products.first.id.to_s, json_response.dig(:data, :relationships, :products, :data, 0, :id)
+    assert_equal @user.products.first.title, json_response.dig(:included, 0, :attributes, :title)
+  end
+  # ...
+end
+```
+
+_serializer_:
+
+```rb
+# app/serializers/user_serializer.rb
+class UserSerializer
+  include JSONAPI::Serializer
+  attributes :email
+  has_many :products
+end
+```
+
+And to finish controller:
+
+```rb
+# app/controllers/api/v1/users_controller.rb
+class Api::V1::UsersController < ApplicationController
+  # ...
+  def show
+    options = { include: [:products] }
+    render json: UserSerializer.new(@user, options).serializable_hash.to_json
+  end
+  # ...
+end
+```
+
+There you go. We obtain a JSON like the following:
+
+```json
+{
+  "data": {
+    "id": "1",
+    "type": "user",
+    "attributes": {
+      "email": "staceeschultz@hahn.info"
+    },
+    "relationships": {
+      "products": {
+        "data": [
+          { "id": "1", "type": "product" },
+          { "id": "2", "type": "product" }
+        ]
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "1",
+      "type": "product",
+      "attributes": {
+        "title": "Durable Marble Lamp",
+        "price": "11.5537474980286",
+        "published": true
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "id": "1",
+            "type": "user"
+          }
+        }
+      }
+    },
+    {
+        ...
+    }
+  ]
+}
+```
+
+It was straightforward. Let's make a _commit_:
+
+```bash
+$ git commit -am "Add products relationship to user#show"
+```
+
+## Search for products
+
+This last section will continue to strengthen the `Products#index` action by setting up a straightforward search mechanism allowing any customer to filter the results. This section is optional as it will have no impact on the application modules. But if you want to practice more with the TDD I recommend that you complete this last step.
+
+I use https://github.com/activerecord-hackery/ransack[Ransack] or https://github.com/casecommons/pg_search[pg_search] to build advanced search forms extremely quickly. But since the goal is learning and searching, we are going to do very simple. I think we can build a search engine from scratch. We simply have to consider the criteria by which we will filter the attributes. Hang on to your seats it's going to be a tough trip.
+
+We will, therefore, filter the products according to the following criteria:
+
+- By title
+- By price
+- Sort by creation date
+
+It may seem short and easy, but believe me, it will give you a headache if you don't plan it.
+
+### The keyword by
+
+We will create a _scope_ to find records that match a particular character pattern. Let's call it `filter_by_title`.
+
+We will start by adding some _fixtures_ with different products to test:
+
+```yml
+# test/fixtures/products.yml
+one:
+  title: TV Plosmo Philopps
+  price: 9999.99
+  published: false
+  user: one
+
+two:
+  title: Azos Zeenbok
+  price: 499.99
+  published: false
+  user: two
+
+another_tv:
+  title: Cheap TV
+  price: 99.99
+  published: false
+  user: two
+```
+
+And now we can build some tests:
+
+```rb
+# test/models/product_test.rb
+# ...
+class ProductTest < ActiveSupport::TestCase
+  # ...
+  test "should filter products by name" do
+    assert_equal 2, Product.filter_by_title('tv').count
+  end
+
+  test 'should filter products by name and sort them' do
+    assert_equal [products(:another_tv), products(:one)], Product.filter_by_title('tv').sort
+  end
+end
+```
+
+The following tests ensure that the method `Product.filter_by_title` will correctly search for products according to their title. We use the term `tv` in lowercase to ensure that our search will not be case sensitive.
+
+```rb
+# app/models/product.rb
+class Product < ApplicationRecord
+  # ...
+  scope :filter_by_title, lambda { |keyword|
+    where('lower(title) LIKE ?', "%#{keyword.downcase}%")
+  }
+end
+```
+
+NOTE: _scoping_ allows you to specify commonly-used queries that can be referenced as method calls on models. With these **scopes** you can also link with Active Record methods like `where`, `joins`, and `includes` because a _scope_ always returns an object https://api.rubyonrails.org/classes/ActiveRecord/Relation.html[`ActiveRecord::Relation`]. I invite you to take a look at https://guides.rubyonrails.org/active_record_querying.html#scopes_record_querying.html#scopes[Rails documentation]
+
+Implementation is sufficient for our tests to pass:
+
+```bash
+$ rake test
+..........................
+```
+
+### By price
+
+To filter by price, things can get a little more delicate. We will break the logic of filtering by price in two different methods: one that will look for products larger than the price received and the other that will look for those below that price. This way, we will keep some flexibility, and we can easily test the _scope_.
+
+Let's start by building the tests of the _scope_ `above_or_equal_to_price`:
+
+```rb
+# test/models/product_test.rb
+# ...
+class ProductTest < ActiveSupport::TestCase
+  # ...
+  test 'should filter products by price and sort them' do
+    assert_equal [products(:two), products(:one)], Product.above_or_equal_to_price(200).sort
+  end
+end
+```
+
+Implementation is very, very simple:
+
+```rb
+# app/models/product.rb
+class Product < ApplicationRecord
+  # ...
+  scope :above_or_equal_to_price, lambda { |price|
+    where('price >= ?', price)
+  }
+end
+```
+
+This is sufficient to convert our tests to green:
+
+```bash
+$ rake test
+...........................
+```
+
+You can now imagine the behavior of the opposite method. Here are the tests:
+
+```rb
+# test/models/product_test.rb
+# ...
+class ProductTest < ActiveSupport::TestCase
+  # ...
+  test 'should filter products by price lower and sort them' do
+    assert_equal [products(:another_tv)], Product.below_or_equal_to_price(200).sort
+  end
+end
+```
+
+And implementation.
+
+```rb
+# app/models/product.rb
+class Product < ApplicationRecord
+  # ...
+  scope :below_or_equal_to_price, lambda { |price|
+    where('price <= ?', price)
+  }
+end
+```
+
+For our sake, let's do the tests and check that everything is beautiful and green:
+
+```bash
+$ rake test
+............................
+```
+
+As you can see, we haven't had many problems. Let's just add another _scope_ to sort the records by date of the last update. If the owner of the products decides to update some data, he will surely want to sort his products by creation date.
+
+### Sort by creation date
+
+This _scope_ is very easy. Let's add some tests first:
+
+```rb
+# test/models/product_test.rb
+# ...
+class ProductTest < ActiveSupport::TestCase
+  # ...
+  test 'should sort product by most recent' do
+    # we will touch some products to update them
+    products(:two).touch
+    assert_equal [products(:another_tv), products(:one), products(:two)], Product.recent.to_a
+  end
+end
+```
+
+And the implementation:
+
+```rb
+# app/models/product.rb
+class Product < ApplicationRecord
+  # ...
+  scope :recent, lambda {
+    order(:updated_at)
+  }
+end
+```
+
+All our tests should pass:
+
+```bash
+$ rake test
+.............................
+```
+
+Let's commit our changes:
+
+```bash
+$ git commit -am "Adds search scopes on the product model"
+```
+
+#### Search engine
+
+Now that we have the basis for the search engine we will use in the application, it is time to implement a simple but powerful search method. It will manage all the logic to retrieve the product records.
+
+The method will link all the `scope` that we have previously built and return the result. Let's start by adding some tests:
+
+```rb
+# test/models/product_test.rb
+# ...
+class ProductTest < ActiveSupport::TestCase
+  # ...
+  test 'search should not find "videogame" and "100" as min price' do
+    search_hash = { keyword: 'videogame', min_price: 100 }
+    assert Product.search(search_hash).empty?
+  end
+
+  test 'search should find cheap TV' do
+    search_hash = { keyword: 'tv', min_price: 50, max_price: 150 }
+    assert_equal [products(:another_tv)], Product.search(search_hash)
+  end
+
+  test 'should get all products when no parameters' do
+    assert_equal Product.all.to_a, Product.search({})
+  end
+
+  test 'search should filter by product ids' do
+    search_hash = { product_ids: [products(:one).id] }
+    assert_equal [products(:one)], Product.search(search_hash)
+  end
+end
+```
+
+We have added a lot of code, but I assure you that the implementation is straightforward. You can go further and add some additional tests but, in my case, I didn't find it necessary.
+
+```rb
+# app/models/product.rb
+class Product < ApplicationRecord
+  # ...
+  def self.search(params = {})
+    products = params[:product_ids].present? ? Product.where(id: params[:product_ids]) : Product.all
+
+    products = products.filter_by_title(params[:keyword]) if params[:keyword]
+    products = products.above_or_equal_to_price(params[:min_price].to_f) if params[:min_price]
+    products = products.below_or_equal_to_price(params[:max_price].to_f) if params[:max_price]
+    products = products.recent if params[:recent]
+
+    products
+  end
+end
+```
+
+It is important to note that we return the products as an object [`ActiveRecord::Relation`](https://api.rubyonrails.org/classes/ActiveRecord/Relation.html) so that we can chain other methods if necessary or page them as we will see in the last chapters. Simply update the `Product#index` action to retrieve the products from the search method:
+
+```rb
+# app/controllers/api/v1/products_controller.rb
+class Api::V1::ProductsController < ApplicationController
+  # ...
+  def index
+    @products = Product.search(params)
+    render json: ProductSerializer.new(@products).serializable_hash.to_json
+  end
+  # ...
+end
+```
+
+We can run the entire test suite to ensure that the application is in good health so far:
+
+```bash
+$ rake test
+.................................
+33 runs, 49 assertions, 0 failures, 0 errors, 0 skips
+```
+
+Let's commit all these changes:
+
+```bash
+$ git commit -am "Adds search class method to filter products"
+```
+
+And as we get to the end of our chapter, it is time to apply all our modifications to the master branch by making a `merge`:
+
+```bash
+$ git checkout master
+$ git merge chapter06
+```
+
+## Conclusion
+
+Until now, it was easy thanks to the gem [jsonapi-serializer](https://github.com/jsonapi-serializer/jsonapi-serializer). In the coming chapters, we will start building the `Order` model to involve users in the products.
