@@ -1,5 +1,9 @@
-[#chapter03-presenting-users]
-= API on Rails 6: Presenting users
+---
+title: API on Rails 6 - Presenting users [3/9]
+layout: book
+previous: /books/api-on-rails-6-en/chapter02.html
+next: /books/api-on-rails-6-en/chapter04.html
+---
 
 In the last chapter, we manage to set up the bare bones for our application endpoints configuration.
 
@@ -237,10 +241,8 @@ $ bundle add bcrypt
 
 Once the command is executed, the following line is added at the end of the _Gemfile_:
 
-[source,ruby]
-.Gemfile
-
-```
+```ruby
+# Gemfile
 gem "bcrypt", "~> 3.1"
 ```
 
@@ -248,10 +250,8 @@ NOTE: Version 3.1 of bcrypt is the current version at the time of writing. It ma
 
 Active Record offers us a method [`ActiveModel::SecurePassword::has_secure_password`](https://github.com/rails/rails/blob/6-0-stable/activemodel/lib/active_model/secure_password.rb#L61) that will interface with Bcrypt and hack the password for us very easily.
 
-[source,ruby]
-.app/models/user.rb
-
-```
+```ruby
+# app/models/user.rb
 class User < ApplicationRecord
   # ...
   has_secure_password
@@ -327,10 +327,8 @@ For a complete list of [Wikipedia article](HTTP response codes, see https://en.w
 
 We will therefore implement the functional test that verifies access to the `Users#show` method,
 
-[source,ruby]
-.test/controllers/api/v1/users_controller_test.rb
-
-```
+```ruby
+# test/controllers/api/v1/users_controller_test.rb
 # ...
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -349,10 +347,8 @@ end
 
 Then simply add the action to our controller. It is extremely simple:
 
-[source,ruby]
-.app/controllers/api/v1/users_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/users_controller.rb
 class  Api::V1::UsersController < ApplicationController
   # GET /users/1
   def show
@@ -376,10 +372,8 @@ DRb::DRbRemoteError: undefined method `api_v1_user_url` for #<UsersControllerTes
 
 This type of error is very common when you generate your resources manually! Indeed, we have totally forgotten _the route_. So let's add them:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -430,10 +424,8 @@ Ensure that your Git directory is clean and that you do not have a file in _stag
 
 So let's start by writing our test by adding an entry to create a user on the file `users_controller_test.rb`:
 
-[source,ruby]
-.test/controllers/users_controller_test.rb
-
-```
+```ruby
+# test/controllers/users_controller_test.rb
 # ...
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -467,10 +459,8 @@ $ rails test
 
 So it's time to implement the code for our tests to be successful:
 
-[source,ruby]
-.app/controllers/api/v1/users_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/users_controller.rb
 class Api::V1::UsersController < ApplicationController
   # ...
 
@@ -496,10 +486,8 @@ end
 
 Remember that each time we add an entry in our API we must also add this action in our `routes.rb` file.
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -532,10 +520,8 @@ The user update scheme is very similar to the one at creation. If you are an exp
 
 As usual, we start by writing our tests:
 
-[source,ruby]
-.test/controllers/users_controller_test.rb
-
-```
+```ruby
+# test/controllers/users_controller_test.rb
 # ...
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -553,10 +539,8 @@ end
 
 For the tests to succeed, we must build the update action on the file `users_controller.rb` and add the route to the file `routes.rb`. As you can see, we have too much-duplicated code. We will redesign our tests in chapter 4. first, we add the action the file `routes.rb`:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   # ...
   resources :users, only: %i[show create update]
@@ -566,10 +550,8 @@ end
 
 Then we implement the update action on the user controller and run our tests:
 
-[source,ruby]
-.app/controllers/api/v1/users_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/users_controller.rb
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update]
 
@@ -617,10 +599,8 @@ $ git commit -am "Adds update action the users controller"
 
 So far, we have built many actions on the user controller with their tests, but it is not finished. We just need one more, which is the action of destruction. So let's create the test:
 
-[source,ruby]
-.test/controllers/users_controller_test.rb
-
-```
+```ruby
+# test/controllers/users_controller_test.rb
 # ...
 class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -638,10 +618,8 @@ As you can see, the test is straightforward. We only respond with a status of _2
 
 The implementation of the destruction action is also quite simple:
 
-[source,ruby]
-.app/controllers/api/v1/users_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/users_controller.rb
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
   # ...
@@ -658,10 +636,8 @@ end
 
 Don't forget to add the action `destroy` in the file `routes.rb`:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   # ...
   resources :users, only: %i[show create update destroy]

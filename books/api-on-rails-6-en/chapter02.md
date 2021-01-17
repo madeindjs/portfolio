@@ -25,7 +25,7 @@ image:data_model.png[Schema of links betweens models]
 
 In brief, the `user` will be able to place many `orders`, upload multiple `products` which can have many `images` or `comments` from other users on the app.
 
-We will not build views for displaying or interacting with the API, so not to make this a huge tutorial, I'll let that to you. There are plenty of options out there like javascript frameworks (https://angularjs.org/[Angular], https://vuejs.org/[Vue.js], https://reactjs.org/[React.js]).
+We will not build views for displaying or interacting with the API, so not to make this a huge tutorial, I'll let that to you. There are plenty of options out there like javascript frameworks ([Angular](https://angularjs.org/), [Vue.js](https://vuejs.org/), [React.js](https://reactjs.org/)).
 
 By this point, you must be asking yourself:
 
@@ -37,9 +37,9 @@ That's fair. Probably if you google something related to API exploring, an appli
 
 An API is defined by [wikipedia](http://en.wikipedia.org/wiki/Application_programming_interface) as _an application programming interface (API) specifies how some software components should interact with each other._ In other words, the way systems interact with each other through a common interface, in our case, a web service built with JSON. There are other kinds of communication protocols like SOAP, but we are not covering that here.
 
-As the Internet media type standard, JSON is widely accepted, readable, extensible, and easy to implement. Many of the current frameworks consume JSON APIs by default ([Angular](https://angularjs.org/) or [Vue.js](https://vuejs.org/), for example). There are also great libraries for Objective-C too like [AFNetworking](https://github.com/AFNetworking/AFNetworking) or http://restkit.org/[RESTKit]. There are probably good solutions for Android, but I might not be the right person to recommend something because of my lack of experience in that development platform.
+As the Internet media type standard, JSON is widely accepted, readable, extensible, and easy to implement. Many of the current frameworks consume JSON APIs by default ([Angular](https://angularjs.org/) or [Vue.js](https://vuejs.org/), for example). There are also great libraries for Objective-C too like [AFNetworking](https://github.com/AFNetworking/AFNetworking) or [RESTKit](http://restkit.org/). There are probably good solutions for Android, but I might not be the right person to recommend something because of my lack of experience in that development platform.
 
-All right. So we are building our API with JSON. There are many ways to achieve this. The first thing that comes to mind would be just to start adding routes defining the endpoints. This may be bad because they may not have a http://www.w3.org/2005/Incubator/wcl/matching.html[URI pattern] clear enough to know which resource is being exposed. The protocol or structure I'm talking about is http://en.wikipedia.org/wiki/Representational_state_transfer[REST] which stands for Representational State Transfer and by Wikipedia definition
+All right. So we are building our API with JSON. There are many ways to achieve this. The first thing that comes to mind would be just to start adding routes defining the endpoints. This may be bad because they may not have a [URI pattern](http://www.w3.org/2005/Incubator/wcl/matching.html) clear enough to know which resource is being exposed. The protocol or structure I'm talking about is [REST](http://en.wikipedia.org/wiki/Representational_state_transfer) which stands for Representational State Transfer and by Wikipedia definition
 
 ```soap
 aService.getUser("1")
@@ -49,13 +49,13 @@ And in REST you may call a URL with a specific HTTP request, in this case with a
 
 RESTful APIs must follow at least three simple guidelines:
 
-- A base http://en.wikipedia.org/wiki/Uniform_resource_identifier[URI], such as `http://example.com/resources/`.
+- A base [URI](http://en.wikipedia.org/wiki/Uniform_resource_identifier), such as `http://example.com/resources/`.
 - An Internet media type to represent the data is commonly JSON and is commonly set through header exchange.
-- Follows the standard http://en.wikipedia.org/wiki/HTTP_method#Request_methods[HTTP Methods] such as GET, POST, PUT, DELETE.
-  ** _GET_: Reads the resource or resources defined by the URI pattern
-  ** _POST_: Creates a new entry into the resources collection
-  ** _PUT_: Updates a collection or member of the resources
-  ** _DELETE_: Destroys a collection or member of the resources
+- Follows the standard [HTTP Methods](http://en.wikipedia.org/wiki/HTTP_method#Request_methods) such as GET, POST, PUT, DELETE.
+  - `GET`: Reads the resource or resources defined by the URI pattern
+  - `POST`: Creates a new entry into the resources collection
+  - `PUT`: Updates a collection or member of the resources
+  - `DELETE`: Destroys a collection or member of the resources
 
 This might not be clear enough or may look like a lot of information to digest, but hopefully, it'll get a lot easier to understand as we move on with the tutorial.
 
@@ -104,10 +104,6 @@ end
 
 By defining a namespace under the `routes.rb` file. Rails will automatically map that namespace to a directory matching the name under the _controllers_ folder, in our case the `api/`` directory.
 
-.Rails media types supported
-
----
-
 Rails can handle up to 35 different media types, you can list them by accessing the SET class under de Mime module:
 
 ```bash
@@ -116,14 +112,10 @@ $ rails c
  => ["text/html", "text/plain", "text/javascript", "text/css", "text/calendar", "text/csv", "text/vcard", "text/vtt", "image/png", "image/jpeg", "image/gif", "image/bmp", "image/tiff", "image/svg+xml", "video/mpeg", "audio/mpeg", "audio/ogg", "audio/aac", "video/webm", "video/mp4", "font/otf", "font/ttf", "font/woff", "font/woff2", "application/xml", "application/rss+xml", "application/atom+xml", "application/x-yaml", "multipart/form-data", "application/x-www-form-urlencoded", "application/json", "application/pdf", "application/zip", "application/gzip"]
 ```
 
----
+This is important because we are going to be working with JSON, one of the built-in [MIME types](http://en.wikipedia.org/wiki/Internet_media_type) accepted by Rails, so we just need to specify this format as the default one:
 
-This is important because we are going to be working with JSON, one of the built-in http://en.wikipedia.org/wiki/Internet_media_type[MIME types] accepted by Rails, so we just need to specify this format as the default one:
-
-[source,ruby]
-.config/routes.rb
-
-```
+```rb
+# config/routes.rb
 Rails.application.routes.draw do
   # API definition
   namespace :api, defaults: { format: :json }  do
@@ -143,10 +135,8 @@ $ git commit -m "Set the routes constraints for the API"
 
 At this point, we should have a nice route mapping using a namespace. Your `routes.rb` file should look like this:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```rb
+# config/routes.rb
 Rails.application.routes.draw do
   # API definition
   namespace :api, defaults: { format: :json }  do
@@ -155,7 +145,7 @@ Rails.application.routes.draw do
 end
 ```
 
-Now it is time to set up some other constraints for versioning purposes. You should care about versioning your application from the beginning since this will give a better structure to your API. When changes need to be made, you can give developers who are consuming your API the opportunity to adapt to the new features while the old ones are being deprecated. There is an excellent http://railscasts.com/episodes/350-rest-api-versioning[railscast] explaining this.
+Now it is time to set up some other constraints for versioning purposes. You should care about versioning your application from the beginning since this will give a better structure to your API. When changes need to be made, you can give developers who are consuming your API the opportunity to adapt to the new features while the old ones are being deprecated. There is an excellent [railscast](http://railscasts.com/episodes/350-rest-api-versioning) explaining this.
 
 To set the version for the API, we first need to add another directory under the `API` we created:
 
@@ -165,10 +155,8 @@ $ mkdir app/controllers/API/v1
 
 This way we can namespace our api into different versions very easily, now we just need to add the necessary code to the `routes.rb` file:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   # Api definition
   namespace :api, defaults: { format: :json }  do
@@ -181,13 +169,9 @@ end
 
 By this point, the API is now scoped via the URL. For example, with the current configuration, an endpoint for retrieving a product would be like <http://localhost:3000/v1/products/1>.
 
-.Common API patterns
-
----
-
 You can find many approaches to set up the _base_uri_ when building an API following different patterns, assuming we are versioning our API:
 
-- `api.example.com/`: In my opinion, this is the way to go, gives you a better interface and isolation, and in the long term can help you to http://www.makeuseof.com/tag/optimize-your-dns-for-faster-internet/[quickly scalate]
+- `api.example.com/`: In my opinion, this is the way to go, gives you a better interface and isolation, and in the long term can help you to [quickly scalate](http://www.makeuseof.com/tag/optimize-your-dns-for-faster-internet/)
 - `example.com/api/`: This pattern is very common, and it is actually a good way to go when you don't want to namespace your API under a subdomain
 - `example.com/api/v1`: it seems like a good idea by setting the version of the API through the URL seems like a more descriptive pattern, but this way you enforce the version to be included on URL on each request, so if you ever decide to change this pattern, this becomes a problem of maintenance in the long-term
 
@@ -212,7 +196,7 @@ $ git merge chapter02
 
 I know it's been a long way, but you made it, don't give up this is just our small scaffolding for something big, so keep it up. In the meantime, and if you feel curious, some gems handle this kind of configuration:
 
-- https://github.com/Sutto/rocket_pants[RocketPants]
-- https://github.com/bploetz/versionist[Versionist]
+- [RocketPants](https://github.com/Sutto/rocket_pants)
+- [Versionist](https://github.com/bploetz/versionist)
 
-I'm not covering those in this book since we are trying to learn how to implement this kind of functionality, but it is good to know. By the way, the code up to this point is https://github.com/madeindjs/market_place_api_6/releases/tag/checkpoint_chapter03[here].
+I'm not covering those in this book since we are trying to learn how to implement this kind of functionality, but it is good to know. By the way, the code up to this point is [here](https://github.com/madeindjs/market_place_api_6/releases/tag/checkpoint_chapter03).

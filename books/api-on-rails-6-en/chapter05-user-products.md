@@ -55,10 +55,8 @@ NOTE: We used the `belongs_to` type for the attribute `user`. This is a shortcut
 
 Migration file should look like bellow:
 
-[source,ruby]
-.db/migrate/20190608205942_create_products.rb
-
-```
+```ruby
+# db/migrate/20190608205942_create_products.rb
 class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :products do |t|
@@ -154,10 +152,8 @@ Validations are an important part when building any kind of application. This wi
 
 Also, an important thing about validation is to validate that every product has a user. In this case, we need to validate the presence of the `user_id`. You can see what I’m talking about in the next code snippet.
 
-[source,ruby]
-.test/models/product_test.rb
-
-```
+```ruby
+# test/models/product_test.rb
 # ...
 class ProductTest < ActiveSupport::TestCase
   test "should have a positive price" do
@@ -170,10 +166,8 @@ end
 
 Now we need to add the implementation to make the tests pass:
 
-[source,ruby]
-.app/models/product.rb
-
-```
+```ruby
+# app/models/product.rb
 class Product < ApplicationRecord
   validates :title, :user_id, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }, presence: true
@@ -215,10 +209,8 @@ As a warmup, we will start nice and easy by building the `show` action for the p
 
 As usual, we begin by adding some product `show` controller specs. The strategy here is straightforward: we just need to create a single product and make sure the server's response is what we expect.
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-
-```
+```ruby
+# test/controllers/api/v1/products_controller_test.rb
 # ...
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -237,10 +229,8 @@ end
 
 Then we add the code to make the test pass:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   def show
     render json: Product.find(params[:id])
@@ -250,10 +240,8 @@ end
 
 Wait! Don’t run the tests yet. Remember we need to add the resource to the `routes.rb` file:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -278,10 +266,8 @@ As you may notice already, the specs and implementation are straightforward. The
 
 Now it is time to output a list of products (which could be displayed as the marketplace product catalog). This endpoint should be accessible without credentials. That means we don’t require the user to be logged in to access the data. As usual, we will start writing some tests:
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-
-```
+```ruby
+# test/controllers/api/v1/products_controller_test.rb
 # ...
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -305,10 +291,8 @@ end
 
 Let’s move into the implementation, which for now is going to be a simple `index` method:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   def index
     render json: Product.all
@@ -319,10 +303,8 @@ end
 
 Don't forget to add the corresponding route:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -345,10 +327,8 @@ Creating products is a little more complex because we will need an additional co
 
 So let's start by the `products_controller_test.rb` file:
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-
-```
+```ruby
+# test/controllers/api/v1/products_controller_test.rb
 # ...
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -380,10 +360,8 @@ In this way, we can see the user and create a product associated with them. But 
 
 If we adopt this approach, we can increase the scope of our authorization mechanism. We built the logic to get a logged user from the header `Authorization` and assigned him a method `current_user`. It is therefore quite easy to set up by simply adding the authorization header to the request and retrieving the user from it. So let's do it:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   before_action :check_login, only: %i[create]
   # ...
@@ -407,10 +385,8 @@ end
 
 As you can see, we protect the `create` action with the `check_login` method. We also build the product by associating the current user. I added this very simple method to the _concern_ `authenticable.rb`:
 
-[source,ruby]
-.app/controllers/concerns/authenticable.rb
-
-```
+```ruby
+# app/controllers/concerns/authenticable.rb
 module Authenticable
   # ...
   protected
@@ -423,10 +399,8 @@ end
 
 One last thing before you do your tests: the necessary route:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -451,10 +425,8 @@ Hopefully, by now, you understand the logic to build the upcoming actions. This 
 
 We first adding the action to the routes so we don’t forget later:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -469,10 +441,8 @@ Before we start dropping some tests, I just want to clarify that similarly to th
 
 Let's add some specs:
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-
-```
+```ruby
+# test/controllers/api/v1/products_controller_test.rb
 require 'test_helper'
 
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
@@ -502,10 +472,8 @@ Tests may look complex but take a second peek. They are almost the same we built
 
 Now let’s implement the code to make our tests pass:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[show update]
   before_action :check_login, only: %i[create]
@@ -558,10 +526,8 @@ Our last stop for the product endpoints will be the `destroy` action. You might 
 
 Let’s start again by adding the route name to the routes file:
 
-[source,ruby]
-.config/routes.rb
-
-```
+```ruby
+# config/routes.rb
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -575,10 +541,8 @@ end
 
 After this, we have to add some tests as shown on this code snippet:
 
-[source,ruby]
-.test/controllers/api/v1/products_controller_test.rb
-
-```
+```ruby
+# test/controllers/api/v1/products_controller_test.rb
 # ...
 class Api::V1::ProductsControllerTest < ActionDispatch::IntegrationTest
   # ...
@@ -601,10 +565,8 @@ end
 
 Now we simply add the necessary code to make tests pass:
 
-[source,ruby]
-.app/controllers/api/v1/products_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/products_controller.rb
 class Api::V1::ProductsController < ApplicationController
   before_action :set_product, only: %i[show update destroy]
   before_action :check_login, only: %i[create]

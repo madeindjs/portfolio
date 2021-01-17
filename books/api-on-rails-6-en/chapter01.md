@@ -26,11 +26,11 @@ In the first chapter, I will explain how to configure your environment (if you d
 
 We'll build the application following a simple working method that I use daily in the next chapters. We will develop the entire application using Test Driven Development (TDD). I will also explain the interest of using an API for your next project and choosing a suitable response format such as JSON or XML. Further on, we will get our hands on the code and complete the application's basics by building all the necessary roads. We will also secure access to the API by building authentication by exchanging HTTP headers. Finally, in the last chapter, we will add some optimization techniques to improve the server's structure and response times.
 
-The final application will scratch the surface of being a market place where users will be able to place orders, upload products, and more. There are plenty of options out there to set up an online store, such as http://shopify.com[Shopify], http://spreecommerce.com/[Spree], or http://magento.com[Magento].
+The final application will scratch the surface of being a market place where users will be able to place orders, upload products, and more. There are plenty of options out there to set up an online store, such as [Shopify](http://shopify.com), [Spree](http://spreecommerce.com/), or [Magento](http://magento.com).
 
 ## Conventions on this book
 
-The conventions in this book are based on the ones from http://www.railstutorial.org/book/beginning#sec-conventions[Ruby on Rails Tutorial]. In this section, I'll mention some that may not be so clear.
+The conventions in this book are based on the ones from [Ruby on Rails Tutorial](http://www.railstutorial.org/book/beginning#sec-conventions). In this section, I'll mention some that may not be so clear.
 
 I'll be using many examples using command-line instructions. I won't deal with windows `cmd` (sorry guys), so all the examples use Unix-style command line prompt, as follows:
 
@@ -53,18 +53,18 @@ One of the most painful parts for almost every developer is setting everything u
 
 ### Text editors and Terminal
 
-There are many cases in which development environments may differ from computer to computer. That is not the case with text editors or IDE's. I think for Rails development an IDE is way too much, but some other might find that the best way to go, so if that it's your case I recommend you go with http://www.aptana.com/products/radrails[RadRails] or http://www.jetbrains.com/ruby/index.html[RubyMine], both are well supported and come with many integrations out of the box.
+There are many cases in which development environments may differ from computer to computer. That is not the case with text editors or IDE's. I think for Rails development an IDE is way too much, but some other might find that the best way to go, so if that it's your case I recommend you go with [RadRails](http://www.aptana.com/products/radrails) or [RubyMine](http://www.jetbrains.com/ruby/index.html), both are well supported and come with many integrations out of the box.
 
-- _Text editor_: I personally use http://www.vim.org/[vim] as my default editor with https://github.com/carlhuda/janus[janus], which will add and handle many of the plugins you are probably going to use. In case you are not a _vim_ fan like me, there are a lot of other solutions such as http://www.sublimetext.com/[Sublime Text] which is a cross-platform easy to learn and customize (this is probably your best option), it is highly inspired by http://macromates.com/[TextMate] (only available for Mac OS). A third option uses a more recent text editor from the guys at http://gitub.com[GitHub] called https://atom.io/[Atom]. It's a promising text editor made with JavaScript. It is easy to extend and customize to meet your needs. Give it a try. Any of the editors I present will do the job, so I'll let you decide which one fits your eye.
-- _Terminal_: If you decided to go with http://icalialabs.github.io/kaishi/[kaishi] for setting the environment, you would notice that it sets the default shell to `zsh`, which I highly recommend. For the terminal, I'm not a fan of the _Terminal_ app that comes out of the box if you are on Mac OS, so check out http://www.iterm2.com/#/section/home[iTerm2], which is a terminal replacement for Mac OS. If you are on Linux, you probably have a nice terminal already, but the default should work fine.
+- _Text editor_: I personally use [vim](http://www.vim.org/) as my default editor with [janus](https://github.com/carlhuda/janus), which will add and handle many of the plugins you are probably going to use. In case you are not a _vim_ fan like me, there are a lot of other solutions such as [Sublime Text](http://www.sublimetext.com/) which is a cross-platform easy to learn and customize (this is probably your best option), it is highly inspired by [TextMate](http://macromates.com/) (only available for Mac OS). A third option uses a more recent text editor from the guys at [GitHub](http://gitub.com) called [Atom](https://atom.io/). It's a promising text editor made with JavaScript. It is easy to extend and customize to meet your needs. Give it a try. Any of the editors I present will do the job, so I'll let you decide which one fits your eye.
+- _Terminal_: If you decided to go with [kaishi](http://icalialabs.github.io/kaishi/) for setting the environment, you would notice that it sets the default shell to `zsh`, which I highly recommend. For the terminal, I'm not a fan of the _Terminal_ app that comes out of the box if you are on Mac OS, so check out [iTerm2](http://www.iterm2.com/#/section/home), which is a terminal replacement for Mac OS. If you are on Linux, you probably have a nice terminal already, but the default should work fine.
 
 ### Browsers
 
-When it comes to browsers, I would say http://www.mozilla.org/en-US/firefox/new/[Firefox] immediately, but some other developers may say https://www.google.com/intl/en/chrome/browser/[Chrome] or even https://www.apple.com/safari/[Safari]. Any of those will help you build the application you want. They come with a nice inspector not just for the DOM but also for network analysis and many other features you might know already.
+When it comes to browsers, I would say [Firefox](http://www.mozilla.org/en-US/firefox/new/) immediately, but some other developers may say [Chrome](https://www.google.com/intl/en/chrome/browser/) or even [Safari](https://www.apple.com/safari/). Any of those will help you build the application you want. They come with a nice inspector not just for the DOM but also for network analysis and many other features you might know already.
 
 ### Package manager
 
-- _Mac OS_: There are many options to manage how you install packages on your Mac, such as https://www.macports.org/[Mac Ports] or http://brew.sh/[Homebrew], both are good options, but I would choose the last one, I've encountered fewer troubles when I install software, and I manage it. To install `brew`, just run the command below:
+- _Mac OS_: There are many options to manage how you install packages on your Mac, such as [Mac Ports](https://www.macports.org/) or [Homebrew](http://brew.sh/), both are good options, but I would choose the last one, I've encountered fewer troubles when I install software, and I manage it. To install `brew`, just run the command below:
 
 ```bash
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -89,11 +89,11 @@ $ ruby -v
 
 Rails 6.0 requires the installation of version 2.5 or higher.
 
-I recommend using http://rvm.io/[Ruby Version Manager (RVM)] or http://rbenv.org/[rbenv] to install it. We will use RVM in this tutorial, but it doesn't matter which of these two options you use.
+I recommend using [Ruby Version Manager (RVM)](http://rvm.io/) or [rbenv](http://rbenv.org/) to install it. We will use RVM in this tutorial, but it doesn't matter which of these two options you use.
 
 The principle of these tools is allowing you to install several versions of Ruby on the same machine, in an environment that is airtight to a possible version installed on your operating system, and to be able to switch from one to the other easily.
 
-To install RVM, go to https://rvm.io/ and install the GPG footnote key:[The GPG key allows you to verify the identity of the author of the sources you download.]. Once that's done:
+To install RVM, go to <https://rvm.io/> and install the GPG. Once that's done:
 
 ```bash
 $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
@@ -138,7 +138,7 @@ Rails 6.0.0
 
 #### Database
 
-I highly recommend you install http://www.postgresql.org/[Postgresql] to manage your databases. But here, we'll be using http://www.sqlite.org/[SQlite] for simplicity. If you are using Mac OS, you should be ready to go. In case you are on Linux, don't worry. We have you covered:
+I highly recommend you install [Postgresql](http://www.postgresql.org/) to manage your databases. But here, we'll be using [SQlite](http://www.sqlite.org/) for simplicity. If you are using Mac OS, you should be ready to go. In case you are on Linux, don't worry. We have you covered:
 
 ```bash
 $ sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev
@@ -168,7 +168,7 @@ As you may guess, the commands above will generate the bare bones of your Rails 
 
 ## Versioning
 
-Remember that Git helps you track and maintain your code history. Keep in mind that the source code of the application is published on GitHub. You can follow the project on https://github.com/madeindjs/api_on_rails_6[GitHub].
+Remember that Git helps you track and maintain your code history. Keep in mind that the source code of the application is published on GitHub. You can follow the project on [GitHub](https://github.com/madeindjs/market_place_api_6).
 
 Ruby on Rails initialized the Git directory for you when you used the `rails new` command. This means that you do not need to execute the `git init` command.
 
@@ -179,9 +179,7 @@ $ git config --global user.name "Type in your name"
 $ git config --global user.email "Type in your email"
 ```
 
-Rails also provide a _.gitignore_ file to ignore some files that we don't want to track. The default _.gitignore_ file should look like the one shown below:
-
-..gitignore
+Rails also provide a `.gitignore` file to ignore some files that we don't want to track. The default `.gitignore` file should look like the one shown below:
 
 ```
 # Ignore bundler config.
@@ -206,7 +204,7 @@ Rails also provide a _.gitignore_ file to ignore some files that we don't want t
 /config/master.key
 ```
 
-After modifying the _.gitignore_ file, we just need to add the files and commit the changes, the necessary commands are shown below:
+After modifying the `.gitignore` file, we just need to add the files and commit the changes, the necessary commands are shown below:
 
 ```bash
 $ git add .

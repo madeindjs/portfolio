@@ -288,10 +288,8 @@ We will therefore create a `current_user` method to meet our needs. It will find
 
 When it comes to authentication, I like adding all the associated methods in a separate file. Then simply include the file in the `ApplicationController`. In this way, it's straightforward to test in isolation. Let's create the file in the `controllers/concerns` directory with a `current_user` method that we will implement right after:
 
-[source,ruby]
-.app/controllers/concerns/authenticable.rb
-
-```
+```ruby
+# app/controllers/concerns/authenticable.rb
 module Authenticable
   def current_user
     # TODO
@@ -308,10 +306,8 @@ $ touch test/controllers/concerns/authenticable_test.rb
 
 As usual, we start by writing our tests. In this case, our `current_user` method will search for a user by the authentication token in the HTTP header `Authorization`. The test is quite basic:
 
-[source,ruby]
-.test/controllers/concerns/authenticable_test.rb
-
-```
+```ruby
+# test/controllers/concerns/authenticable_test.rb
 # ...
 class AuthenticableTest < ActionDispatch::IntegrationTest
   setup do
@@ -335,10 +331,8 @@ You may be wondering, "Where does the `MockController` come from?". It is a _Moc
 
 We can define the `MockController` class just above our test:
 
-[source,ruby]
-.test/controllers/concerns/authenticable_test.rb
-
-```
+```ruby
+# test/controllers/concerns/authenticable_test.rb
 # ...
 class MockController
   include Authenticable
@@ -356,10 +350,8 @@ The `MockController` class simply includes our `Authenticable` module that we wi
 
 Then we can implement our two tests right after
 
-[source,ruby]
-.test/controllers/concerns/authenticable_test.rb
-
-```
+```ruby
+# test/controllers/concerns/authenticable_test.rb
 # ...
 class AuthenticableTest < ActionDispatch::IntegrationTest
   setup do
@@ -382,10 +374,8 @@ end
 
 Our tests must fail. So let's implement the code so that it can be passed:
 
-[source,ruby]
-.app/controllers/concerns/authenticable.rb
-
-```
+```ruby
+# app/controllers/concerns/authenticable.rb
 module Authenticable
   def current_user
     return @current_user if @current_user
@@ -412,10 +402,8 @@ $ rake test
 
 All we have to do is include the `Authenticable` module in the `ApplicationController` class:
 
-[source,ruby]
-.app/controllers/application_controller.rb
-
-```
+```ruby
+# app/controllers/application_controller.rb
 class ApplicationController < ActionController::API
   # ...
   include Authenticable
@@ -510,10 +498,8 @@ The solution is quite simple. We will add a `before_action`, which will call the
 
 Here is the implementation:
 
-[source,ruby]
-.app/controllers/api/v1/users_controller.rb
-
-```
+```ruby
+# app/controllers/api/v1/users_controller.rb
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
   before_action :check_owner, only: %i[update destroy]
