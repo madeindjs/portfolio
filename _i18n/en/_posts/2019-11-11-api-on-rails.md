@@ -19,7 +19,7 @@ So I started to rewriting the book from scratch. As long as I was rewriting, I t
 
 Here is my feedback on the writing of a book of more than 200 pages in English and French.
 
-{% include restapi-promote.html %}
+{% include promote-apionrails-en.html %}
 
 ## How to write a book?
 

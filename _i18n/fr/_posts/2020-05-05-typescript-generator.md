@@ -10,6 +10,8 @@ categories: programming
 
 Récemment, j'ai du faire un script pour calculer les données de tous nos utilisateurs. J'ai rencontré quelques problèmes de performances liées à la quantité de données que cela représente (plusieurs milliers d'utilisateurs). J'ai réussi à régler ce problème en utilisant les **générateurs** qui permettent dans certains cas de réduire considérablement l'empreinte mémoire. Si ce terme ne te dis rien, je t'invite à lire la suite de cet article.
 
+{% include promote-restapits-fr.html %}
+
 ## Exemple simpliste
 
 Afin que tu saisisse le problème, je vais recréer un exemple simple. Basique.
@@ -112,7 +114,7 @@ async function* getUsers(
 
     for (const user of await Company.unscoped().findAll({
       limit: perPage,
-      offset: nbFetched
+      offset: nbFetched,
     })) {
       yield user;
     }

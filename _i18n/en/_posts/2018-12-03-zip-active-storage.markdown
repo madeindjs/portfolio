@@ -23,6 +23,8 @@ In this article we go:
 
 **TLDR**: After the complexity of implementing the code, it is very easy to move the code into reusable methods using the[`ActiveSupport::Concern`][concerns_api].
 
+{% include promote-apionrails-en.html %}
+
 ## Table of content
 
 - TOC

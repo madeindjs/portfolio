@@ -3,37 +3,36 @@ title: Un comparatif des librairies de templating
 layout: post
 tags: ruby haml slim
 categories: benchmarking
-date:   2018-11-12 08:00:00 +0200
+date: 2018-11-12 08:00:00 +0200
 thumbnail: /img/blog/erb.png
 ---
 
 Récemment, sur une application web, je me suis rendu compte que je commençais à avoir des **fichiers HTML** de plus en plus **compliqués**. HTML, étant un **langage de balisage** assez proche du XML, il est assez lourd. J'ai donc voulu tester et comparer les alternatives existantes.
 
-
-
+{% include promote-apionrails-fr.html %}
 
 ## Templating?
 
 Les frameworks web utilisent un **langage de templating** qui permet de **générer** du HTML. Ainsi l'exemple suivant
 
-~~~erb
+```erb
 <h1><%= user.complete_name %></h1>
 <ul>
   <% user.quotes.each do |quote| %>
     <li><%= user.description %></li>
   <% end %>
 </ul>
-~~~
+```
 
 donnera..
 
-~~~html
+```html
 <h1>Chuck Norris</h1>
 <ul>
   <li>Chuck Norris counted to infinity. Twice.</li>
   <li>Chuck Norris knows Victoria's secret.</li>
 </ul>
-~~~
+```
 
 Utilisant Ruby on Rails, je ne m’étais jamais posé la question de me tourner vers autre chose que **ERB**. ERB fait d’ailleurs partie de la [librairie standard de Ruby][current_erb] (et elle est même présente [depuis Ruby 1.8][erb_1.8]).
 
@@ -47,7 +46,7 @@ Ces deux librairies sont **écrites en Ruby**. J'ai utilisé ce même langage po
 
 Commençons donc par comparer la syntaxe avec un exemple basique. Voici donc une barre de navigation en ERB:
 
-~~~erb
+```erb
 <div id="sidebar">
   <ul class="main" aria-role="navigation">
     <li class="active"><%= link_to 'Accueil', home_path %></li>
@@ -57,33 +56,33 @@ Commençons donc par comparer la syntaxe avec un exemple basique. Voici donc une
     <% end %>
   </ul>
 </div>
-~~~
+```
 
 Maintenant, la même chose en utilisant [HAML][haml]
 
-~~~haml
+```haml
 #sidebar
   %ul.main{'aria-role' => 'navigation'}
     %li.active= link_to 'Accueil', home_path
     %li= link_to 'Nouvelles', news_path
     - if current_user
       %li= link_to 'Mon profil', current_user
-~~~
+```
 
 Et c'est à peu de chose près la même chose pour [Slim][slim]
 
-~~~haml
+```haml
 div#sidebar
   ul.main aria-role="navigation"
     li.active = link_to 'Accueil', home_path
     li = link_to 'Nouvelles', news_path
     - if current_user
       li = link_to 'Mon profil', current_user
-~~~
+```
 
 C'est quand même beaucoup mieux, non? On voit donc que [HAML][haml] & [Slim][slim] utilisent l'**indentation** pour générer le HTML. Par conséquent, on **réduit le code** que l'on écrit et cela semble plus clair.
 
- Je ne vais pas faire une description des fonctionnalités existantes, [Symbioz l'a déjà très bien fait pour HAML][symbioz_haml] et je vous laisse voir la documentation vous même.
+Je ne vais pas faire une description des fonctionnalités existantes, [Symbioz l'a déjà très bien fait pour HAML][symbioz_haml] et je vous laisse voir la documentation vous même.
 
 ## Parser un document
 
@@ -93,7 +92,7 @@ Afin de comparer les performances, nous allons simplement utiliser les trois lib
 
 Commençons donc par **parser** un document ERB. Voici un petit exemple
 
-~~~ruby
+```ruby
 require 'erb'
 
 class Context
@@ -124,20 +123,20 @@ HTML
 
 context = Context.new 'Hello world', 'Lorem ipsum'
 puts ERB.new(erb_content).result(context.get_binding)
-~~~
+```
 
 > Attend, c'est quoi ce foutu `binding`?!
 
-Le **biding** est une notion assez avancée de Ruby. Cela correspond (plus ou moins) à un **contexte**.  On passe donc un contexte à la méthode `ERB#result` qui l'utilise pour retrouver les propriétés demandées. Cependant, la méthode `binding` provient de `Kernel#binding` qui est une méthode privée. Il faut donc passer par une classe et lui implémenter la fonction `get_biding` qui va appeler la méthode `Kernel#binding` dans une méthode publique. C'est pourquoi on obtient
+Le **biding** est une notion assez avancée de Ruby. Cela correspond (plus ou moins) à un **contexte**. On passe donc un contexte à la méthode `ERB#result` qui l'utilise pour retrouver les propriétés demandées. Cependant, la méthode `binding` provient de `Kernel#binding` qui est une méthode privée. Il faut donc passer par une classe et lui implémenter la fonction `get_biding` qui va appeler la méthode `Kernel#binding` dans une méthode publique. C'est pourquoi on obtient
 
-~~~ruby
+```ruby
 class Context
   # ...
   def get_binding
     binding
   end
 end
-~~~
+```
 
 > Pour aller plus loin dans le biding, je vous recommande l'excellent [article de Medhi Farsi](https://medium.com/@farsi_mehdi/context-binding-in-ruby-fa118ea62269) à ce sujet.
 
@@ -145,13 +144,13 @@ end
 
 Maintenant que vous avez compris le biding, c'est plus simple. Tout d'abord, il faut commencer par installer la Gem:
 
-~~~bash
+```bash
 $ gem install haml
-~~~
+```
 
 Et le principe est exactement le même:
 
-~~~ruby
+```ruby
 require 'haml'
 
 # ...
@@ -167,7 +166,7 @@ haml_content = <<-HAML
 HAML
 
 puts Haml::Engine.new(haml_content).render(context.get_binding)
-~~~
+```
 
 On voit que l'on obtient le même résultat!
 
@@ -175,11 +174,11 @@ On voit que l'on obtient le même résultat!
 
 C'est pareil, seul le nom des méthodes change:
 
-~~~bash
+```bash
 $ gem install haml
-~~~
+```
 
-~~~ruby
+```ruby
 require 'slim'
 
 # ...
@@ -196,7 +195,7 @@ SLIM
 
 
 puts Slim::Template.new { slim_content }.render(context)
-~~~
+```
 
 > Attention, `Template#new` prend en paramètre un `block` qui correspond au contenu. Si le paramètre un `String`, cela correspond au chemin d'un fichier.
 
@@ -206,7 +205,7 @@ J'ai voulu m'intéresser à l'impact qu'avaient de telles librairies sur les per
 
 Afin d'étudier les performances, j'ai utilisé la fonction `Benchmark#measure` et j'ai réalisé 50 000 conversions pour chaque:
 
-~~~ruby
+```ruby
 require 'erb'
 require 'haml'
 require 'benchmark'
@@ -233,17 +232,17 @@ puts Benchmark.measure {
   end
 }
 # => 138.663156   0.056433 138.719589 (138.883643)
-~~~
+```
 
 > Vous pouvez retrouver le code complet [ici](https://gist.github.com/madeindjs/4ba21bf4bed03bf5dc278ab82707dc28)
 
 On obtient donc ces résultats:
 
-~~~txt
+```txt
 ERB  |=> 5.9 s                |
 HAML |=======> 73.6 s         | 12x plus lent
 SLIM |==============> 138.7 s | 23x plus lent
-~~~
+```
 
 On voit donc bien que ces librairies ont un **impact énorme** sur les performances!
 
@@ -254,7 +253,6 @@ Bon, ces résultats sont quand même à prendre avec du recul. On ne parse pas 5
 De plus, il faut apprécier le service que ces outils nous rend. Le code est plus clair donc **plus maintenable**. De plus, avec Ruby on Rails par exemple, on peut très bien utiliser plusieurs langages de templating et donc utiliser [HAML][haml] sur des vues bien spécifiques.
 
 Mais de mon côté, je pense que ces librairies répondent à un **non-problème**. Lorsqu'on a du mal à se repérer dans notre propre vue, c'est que notre vue est **trop chargée**. Il faut donc se tourner vers des helpers qui vont externaliser le code dans des fonctions réutilisables.
-
 
 ## Liens
 

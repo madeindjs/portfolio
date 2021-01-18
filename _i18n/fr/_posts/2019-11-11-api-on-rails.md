@@ -19,6 +19,8 @@ Je suis donc reparti de zéro et je me suis lancé dans la réécriture du livre
 
 Voici donc mon retour d'expérience sur la rédaction d'un livre de plus de 200 pages en anglais et en français.
 
+{% include promote-apionrails-fr.html %}
+
 ## Comment écrire un livre?
 
 Si tu veux écrire un livre, sache que c'est **chronophage**. J'ai donc fait en sorte que ça me prenne le moins de temps possible. Je ne prétends pas avoir la meilleure solution. Voici juste la mienne.
@@ -42,9 +44,9 @@ Le workflow que j'ai suivi était le suivant:
 1. refaire les exemples de code de mon côté dans [un projet Github séparé](https://github.com/madeindjs/market_place_api_6)
 2. retravailler la version anglaise en fonction des modifications que je venais d'apporter
 3. coller la version anglaise dans un fichier
-3. faire des traductions en mode copié / collé dans [Deepl](https://deepl.com)
-4. corriger la traduction (car c'est loin d'être parfait)
-5. coller la version française dans un fichier
+4. faire des traductions en mode copié / collé dans [Deepl](https://deepl.com)
+5. corriger la traduction (car c'est loin d'être parfait)
+6. coller la version française dans un fichier
 
 Le premier problème que j'ai rencontré a été de gérer tout ce processus qui mêle l'écriture du livre en anglais et en français. En rajoutant la gestion du projet créé tout au long de ce livre ça a été difficile. Avec le recul j'aurais dû tout laisser en français et peut être traduire à la fin.
 
@@ -65,9 +67,9 @@ J'ai été vraiment surpris de l'aide de la communauté open source. Voici les c
 - 92 stars
 - 21 fork
 
-J'ai reçu des pull request qui corrigeaient des erreurs de syntaxe, des liens cassés et des formulations douteuses. Pour anecdote, j'ai même  été contacté par un russe qui était intéressé pour traduire le livre. Il a juste eu besoin de forker le projet et créer un dossier `ru`. C'était top.
+J'ai reçu des pull request qui corrigeaient des erreurs de syntaxe, des liens cassés et des formulations douteuses. Pour anecdote, j'ai même été contacté par un russe qui était intéressé pour traduire le livre. Il a juste eu besoin de forker le projet et créer un dossier `ru`. C'était top.
 
-L'open source donne vraiment la sensation que **le livre est vivant**. 
+L'open source donne vraiment la sensation que **le livre est vivant**.
 
 Lorsque le livre est terminé ou que j'ai fixé des erreurs, je fais une _release_ sur Github et j'attache les fichiers PDF, EPUB et MOBI. Ainsi n'importe qui peut le lire **gratuitement** sur le **support de son choix**.
 
@@ -79,7 +81,6 @@ J'ai regardé un peu du côté d'Amazon mais cela m'a semblé trop compliqué ca
 
 J'ai choisi Leanpub pour sa facilité et aussi le fait que le prix peut être libre.
 
-
 J'ai donc publié au total 4 versions:
 
 - une [version anglaise](https://leanpub.com/apionrails5) et une [version française](https://leanpub.com/apionrails5-fr) pour Ruby on Rails 5
@@ -87,13 +88,13 @@ J'ai donc publié au total 4 versions:
 
 Au final, voici tous les chiffres des royalties, c'est à dire ce qui va dans ma poche après la commissions de Leanpub.
 
-| Livre               | Royalties |
-| ------------------- | ----------|
-| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)  | $160.63   |
+| Livre                                                     | Royalties |
+| --------------------------------------------------------- | --------- |
+| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)    | $160.63   |
 | [API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | $15.98    |
-| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)  | $473.22   |
+| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)    | $473.22   |
 | [API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | $20.78    |
-| Total               | $670.61   |
+| Total                                                     | $670.61   |
 
 J'ai été vraiment surpris de vendre "autant". Ces chiffres ont pour moi vraiment un côté motivant qui me pousse à maintenir le projet.
 
