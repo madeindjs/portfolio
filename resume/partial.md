@@ -2,7 +2,7 @@
 title: CV Alexandre ROUSSEAU
 author: <contact@rousseau-alexandre.fr> - Lyon, France
 localisation: Lyon, France
-layout: main
+layout: resume
 # geometry: margin=2cm
 pdf-engine: pdflatex
 # links-as-notes: true
@@ -12,27 +12,20 @@ Je suis passionné par la programmation et le monde du logiciel libre. J'essaie 
 
 ## Experiences professionnelles
 
-### Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/) depuis 2020
+### >2020 - Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/)
 
-_Node.js - Typescript - PostreSQL - Angular - Docker - Google Cloud_
+- Développement API pour récupérer, stocker et analyser les données de Google API de manière asynchrone avec **Node.JS**
+- Développement de la partie _Front-end_ avec **Angular 10**
+- Déploiement de l'application chez **Google Cloud** avec **Kubernetes** ([article](https://rsseau.fr/programming/2020/08/05/gcloud-deploy-with-gitlabci.html))
+- Construction d'un processus de d'intégration continue avec **Gitlab CI**
 
-- Développement API pour récupérer, stocker et analyser les données de Google API de manière asynchrone
-- Développement de la partie _Front-end_
-- Déploiement de l'application chez _Google Cloud Computing_ avec Kubernetes ([article](https://rsseau.fr/programming/2020/08/05/gcloud-deploy-with-gitlabci.html))
-- Construction d'un processus de d'intégration continue avec _Gitlab CI_
+### 2019/2020 - Développeur Fullstack @ [Dougs](https://dougs.fr)
 
-### Développeur Fullstack @ [Dougs](https://dougs.fr) 2019/2020
-
-_Node.js - Typescript - PostgreSQL - Angular.js_
-
-- Développement d'une application SPA de comptabilité
-- Automatisation du travail des comptables via une job queue sous _PostgreSQL_
-- Développement de la partie _Front-end_
+- Développement d'une application SPA de comptabilité avec **Node.js**, **Typescript**, **Angular**
+- Automatisation du travail des comptables via une job queue sous **PostgreSQL**
 - Présentation des nouvelles fonctionnalité
 
-### Développeur @ [Gac Technology](https://www.gac-technology.com) 2017/2019
-
-_PHP 5.6 / 7 - ZendFramework - Laravel - MySQL - Docker_
+### 2017/2019 - Développeur @ [Gac Technology](https://www.gac-technology.com)
 
 - Développement d'un application SAAS de gestion de flotte automobile et de portefeuille immobilier avec _PHP7_ / _Zend Framework_
 - Développement d'une API avec _Laravel_ qui suit les standards _JSON:API_ et documentée avec _Swagger_.
