@@ -171,7 +171,14 @@ table
 article
   +marginDefault($baseFontSize * 2)
 
+ul, ol
+  padding-left: 0
+
 // custom
+
+div.highlighter-rouge
+  position: relative
+  padding-left: $baseFontSize * 2
 
 ul.list-inline
   list-style-type: none
@@ -204,9 +211,17 @@ ul.list-inline
 
 // MARKDOWN
 
-h1:before
+h1, h2, h3, h4, h5, h6
+  position: relative
+
+h1:before, h2:before, h3:before, h4:before, h5:before, h6:before
   content: '# '
   color: $primary-color
+  position: absolute
+  right: 100%
+  margin-right: $baseFontSize
+  display: inline-block
+  text-align: right
 
 h2:before
   content: '## '
@@ -226,8 +241,8 @@ h4:before
   body
     max-width: 720px
     margin: auto
-    padding-left: $baseFontSize
-    padding-right: $baseFontSize
+    padding-left: $baseFontSize * 2
+    padding-right: $baseFontSize * 2
 
   h1
     font-size: $baseFontSize * 3
