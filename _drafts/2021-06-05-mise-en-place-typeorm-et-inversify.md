@@ -3,20 +3,24 @@ title: Setup dependency injection with Node.js / Typescript
 description: This tutorial show you how to setup dependency injection with
   TypeORM and Inversify libraries
 layout: post
-date: 2021-06-05 15:00:00 +0200
+date: 2021-06-0s5 15:00:00 +0200
 tags:
-  - typeorm
   - node.js
   - typescript
+  - typeorm
+  - expressjs
+  - inversify
 categories: programming
-modified: 2021-06-05T14:34:57.330Z
+modified: 2021-06-06T13:12:06.407Z
 ---
 
-Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une exemple réél. Nous allons utiliser [Inversify](https://inversify.io/) et [TypeORM](https://typeorm.io/).
+Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API. L'API sera une simple API [RESTfull](https://fr.wikipedia.org/wiki/Representational_state_transfer) pour gérer des utilisateurs avec les actions basiques (consultation, création, edition, suppression).
 
-Nous allons créer une application REST qui va permettre de créer des utilisateurs.
+Nous allons utiliser [Inversify](https://inversify.io/), [TypeORM](https://typeorm.io/) et [Express.js](https://expressjs.com/). J'ai choisis ces librairies car je les connais bien mais il est possible d'utiliser [Sequelize](https://sequelize.org/) à la place de [TypeORM](https://typeorm.io/), remplacer Express.js par [Fastify](https://www.fastify.io/) ou autre chose.
 
 ## Initialisation de l'application avec Typescript
+
+Commençons par créer un projet Node.js versionné avec Git:
 
 Let's start by creating a basic Typescript application:
 
@@ -27,18 +31,18 @@ $ npm init
 $ git init # Initialize Git repository (optional)
 ```
 
-Now we need to install Typescript:
+Installons maintenant Typescript:
 
 ```sh
 npm add typescript @types/node --save-dev
 ```
 
-We have added two libraries :
+Nous avons ajouté deux librairies :
 
-- `typescript`, which will give us the tools for _transpilation_.
-- `@types/node` which will add the definition of the types of Node.js
+- `typescript` qui va nous offrir les outils de _transpilation_
+- `@types/node` qui va ajouter la définition des types de Node.js
 
-So let's add our first Typescript file :
+Ajoutons donc notre premier fichier Typescript :
 
 ```ts
 // src/main.ts
@@ -48,9 +52,9 @@ function say(message: string): void {
 say("Hello");
 ```
 
-This code is really basic and will just be used to check that the transpilation works.
+Ce code est vraiment très basique et va juste nous servir a vérifier que la transpilation fonctionne.
 
-To use Typescript transpilation, we need to define a configuration file `tsconfig.json`. Here is a basic one:
+Afin d'utiliser la transpilation de Typescript, nous avons besoin de définir un fichier de configuration `tsconfig.json`. En voici un basique:
 
 ```jsonc
 // tsconfig.json
@@ -70,7 +74,11 @@ To use Typescript transpilation, we need to define a configuration file `tsconfi
 }
 ```
 
-That's much code but the two directives to remember here are: `rootDir` and `outDir`. They will specify where the Typescript files are (`rootDir`) and where the Javascript files resulting from the transpilation are (`outDir`).
+Cela fait beaucoup de code mais les deux directives a retenir ici sont: `rootDir` et `outDir`. Elles vont simplement spécifier ou sont les fichiers Typescript (`rootDir`) et ou placer les fichiers Javascript résultants de la transpilation (`outDir`).
+
+Dans notre cas je place tous les fichiers Typescript dans le dossier `src` et le résultat de la transpilation dans `dist`.
+
+On ajoute maintenant un script dans le `package.json` pour compiler et executer notre application:
 
 ```jsonc
 // package.json
@@ -83,17 +91,73 @@ That's much code but the two directives to remember here are: `rootDir` and `out
 }
 ```
 
-Now you can try everything works with:
+On peut vérifier que tout fonctionne en executant le script:
 
 ```sh
-$ npm start
+npm start
 > dependecy-injection-example@1.0.0 start /home/alexandre/github/madeindjs/dependecy-injection-example
 > tsc && node dist/main.js
-
-I said: Hello
+``
 ```
 
-Great! We do not need to much more for the moment!
+I said: Hello
+
+````
+
+Nous n'avons pas besoin d'aller plus loin pour le moment!
+
+## Mise en place du serveur web
+
+Jusqu'ici nous avons mis en place un environnement qui va nous permettre d'éviter les erreurs de syntaxe et de typage automatiquement avec Typescript. Il est temps d'enfin faire une vrai fonctionnalité: le serveur web.
+
+Il existe plusieurs bibliothèque pour faire un serveur web avec Node.js. Dans mon cas je recommande [Express.js](https://expressjs.com/fr/) tout simplement car c'est celle qui a une plus grosse communauté et elle offre des fonctionnalités basique. Elle vous laisse aussi la liberté d'organiser votre code comme vous le souhaitez tout en offrant une tonne de plugin pour rajouter des fonctionnalités par dessus.
+
+Pour l'ajouter c'est très facile:
+
+```bash
+npm add express --save
+````
+
+On va aussi ajouter les typages Typescript qui vont aider un peu votre éditeur de code :
+
+```bash
+npm add @types/express --save-dev
+```
+
+Et maintenant nous pouvons instancier notre serveur dans le fichier `main.ts`
+
+```ts
+// src/main.ts
+import express, { Request, Response } from "express";
+
+const app = express();
+const port = 3000;
+
+app.get("/", (req: Request, res: Response) => res.send("Hello World!"));
+app.listen(port, () => console.log(`listen on http://localhost:${port}/`));
+```
+
+Vous pouvez lancer le serveur avec Nodemon (si ce n'est pas déjà fait) avec `npm run start:watch` et vous allez avoir le résultat suivant :
+
+```
+Server listen on http://localhost:3000/
+```
+
+Vous pouvez donc ouvrir votre navigateur a l'adresse http://localhost:3000 et voir que tout fonctionne. Voici ici le résultat en utilisant `curl`:
+
+```bash
+curl http://localhost:3000
+```
+
+```
+Hello World!
+```
+
+Maintenant que tout fonctionne, commitons les changements:
+
+```bash
+$ git commit -am "Add express.js server"
+```
 
 ### L'injection de dépendance
 
