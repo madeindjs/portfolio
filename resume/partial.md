@@ -8,73 +8,62 @@ pdf-engine: pdflatex
 # links-as-notes: true
 ---
 
-Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes. Cela permet de créer des fonctionnalités performantes et évolutives.
+![Alexandre Rousseau](https://avatars.githubusercontent.com/u/11815139?v=4){ height=150px }
 
-## Experiences professionnelles
+Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes.
 
-### >2020 - Développeur Fullstack / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/)
+## Expériences
 
-- Développement API pour récupérer, stocker et analyser les données de Google API de manière asynchrone avec **Node.JS**
-- Développement de la partie _Front-end_ avec **Angular 10**
-- Déploiement de l'application chez **Google Cloud** avec **Kubernetes** ([article](https://rsseau.fr/programming/2020/08/05/gcloud-deploy-with-gitlabci.html))
-- Construction d'un processus de d'intégration continue avec **Gitlab CI**
+**Développeur Fullstack / DevOPS** chez [Optimiz.me](https://optimiz.me) depuis juin 2020.
 
-### 2019/2020 - Développeur Fullstack @ [Dougs](https://dougs.fr)
+- Développement et déploiement de trois logiciels full JS [^1]
+- Déploiement des application sur Google Cloud avec Docker et Kubernetes
+- Mise à l'échelle d'une base de données contenant plusieurs milliards de lignes
 
-- Développement d'une application SPA de comptabilité avec **Node.js**, **Typescript**, **Angular**
-- Automatisation du travail des comptables via une job queue sous **PostgreSQL**
-- Présentation des nouvelles fonctionnalité
+**Développeur Fullstack** chez [Dougs Compta](https://dougs.fr) de juin 2019 à juin 2020
 
-### 2017/2019 - Développeur @ [Gac Technology](https://www.gac-technology.com)
+- Développement d'une application SPA full JS [^2]
 
-- Développement d'un application SAAS de gestion de flotte automobile et de portefeuille immobilier avec _PHP7_ / _Zend Framework_
-- Développement d'une API avec _Laravel_ qui suit les standards _JSON:API_ et documentée avec _Swagger_.
+**Développeur** chez [Gac Technology](https://www.gac-technology.com) de janvier 2017 à juin 2019
 
-### Bureau d'études / Développeur @ [Carrier](http://www.carrier.fr) 2013/2017
+- Développement application monolithe avec PHP
+- Création de micro-service [^3]
 
-_Sketchup - Ruby - ASP.net MVC - C# - AutoCAD - Excel_
+**Bureau d'études / Développeur** chez [Carrier](https://carrier.com) de janvier 2017 à aout 2013 (dont 2 ans en alternance)
 
-- Développement d'une solution de dessin 3D
-- Développement d'une application web de suivi d'interventions techniques
-- Dessin et calculs des plans techniques
+- Développement outil de marketing 3D [^4]
+- Formations utilisateurs
+- Dessin & calculs des plans d’exécution avec AutoCAD.
 
-### Apprentis Bureau d'études @ Carrier _(2011/2013)_
+## Expériences supplémentaires
 
-_AutoCAD - Excel_
+**Création startup** [iSignif](https://isignif.fr) en juillet 2018
 
-- Dessin et calculs des plans techniques
+- Développement de la plateforme [^5]
+- Déploiement et maintenance sous un serveur Linux chez OVH
+- Délégué à la Protection des Donnés (RGPD)
 
-## Experiences personnelles
+**Freelance** depuis septembre 2020
 
-### Freelance Développeur Fullstack @ [Shipotsu](https://www.shipotsu.com/) 2020
+- Développement pour [Ship&Co](https://www.shipnco.io/) [^6]
+- Cours d'informatique à distance
 
-_ExpressJS - Typescript - MongoDB - Angular - Docker_
+**Open-source**
 
-- Refonte de l'application sous une architecture orienté API
-- Développement de la partie _Front-end_
-- Mise en place d'une sauvegarde distante automatisée et chiffrée
-
-### Associé / Directeur technique @ [iSignif](https://isignif.fr) depuis 2018
-
-_Ruby on Rails - Vue.js_
-
-- Participation à la création d'une société
-- choix techniques et développement de l'application web _from scratch_
-- Déploiement de l'application sous un serveur vierge
-- Documentation de l'API avec _Swagger_
-
-## Open source
-
-Presque tous mes _sides-projects_ sont sur [mon Github](http://github.com/madeindjs). Voici quelque exemples:
-
-- Rédaction & publication du livre [_APIs on Rails - Building REST APIs_](https://leanpub.com/apionrails6) (195\*)
-- Rédaction & publication du livre [_REST-API.ts - Building REST APIs_](https://leanpub.com/rest-api-ts/)
-- [`Crystagiri`](https://github.com/madeindjs/Crystagiri) Parseur de document HTML écrit en Crystal. (118\*)
-- [`ActiveStorage::SendZip`](https://github.com/madeindjs/active_storage-send_zip), Librairie Ruby on Rails pour créer des ZIP (26\*)
-- `Wi-fi_bruteforce`, Script Python pour se connecter aux Wi-fi des voisins (34\*)
+- Développement de [plusieurs projets Open-source](https://github.com/madeindjs?tab=repositories&sort=stargazers) comptabilisant plusieurs centaines de contributeurs
+- Publication d'un livre vendu en 250 exemplaires [^7]
+- Contributions pour projets comme [TypeORM](https://github.com/typeorm/typeorm/pull/7693), [mongoose-softdelete](https://github.com/riyadhalnur/mongoose-softdelete/pull/8), [extract-domain](https://github.com/bjarneo/extract-domain/pull/9), [etc...](https://github.com/search?q=madeindjs&type=issues)
 
 ## Diplômes
 
 - 2019: Titre RNCP niveau Bac +4 Développeur Full Stack à IT-Akademy, Lyon
 - 2013: BTS FEE: La Martinière Monplaisir, Lyon
 - 2011: Bac STI Génie Énergétique: La Martinière Monplaisir, Lyon
+
+[^1]: Node.js / TypeScript / Express.JS / Angular / React / PostgreSQL / MongoDB
+[^2]: Node.js / Typescript / Angular / PostgreSQL
+[^3]: PHP7 / Laravel
+[^4]: Sketchup + SDK Ruby
+[^5]: Ruby on Rails / Vue.js
+[^6]: Node.js / Angular / MongoDB
+[^7]: [API on Rails](https://github.com/madeindjs/api_on_rails), un livre pour apprendre Ruby on Rails, [vendu en plus de 240 examplaires](https://leanpub.com/apionrails6/) et possède [18 contributeurs](https://github.com/madeindjs/api_on_rails/graphs/contributors)

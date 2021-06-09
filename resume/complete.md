@@ -35,6 +35,7 @@ Devops
 - Mise en place de **Gitlab CI** avec lancement des _runners_ sous **Google Cloud Platform**
 - Déploiement de l'application sous **Google Cloud Platform** avec **Kubernetes**
 - Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG
+- Migration de PostgreSQL vers Google Cloud SQL
 
 ### Développeur @ [Dougs](https://dougs.fr) (2019/2020)
 
