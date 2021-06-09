@@ -6,6 +6,13 @@ layout: resume
 # geometry: margin=2cm
 pdf-engine: pdflatex
 # links-as-notes: true
+lang: fr
+# Latex variables
+documentclass: article
+papersize: a4
+colorlinks: true
+lof: false
+lot: false
 ---
 
 ![Alexandre Rousseau](https://avatars.githubusercontent.com/u/11815139?v=4){ height=150px }
