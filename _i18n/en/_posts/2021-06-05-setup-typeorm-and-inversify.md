@@ -10,12 +10,12 @@ tags:
   - typescript
 categories: programming
 thumbnail: /img/blog/postgres.svg
-modified: 2021-06-05T13:59:27.147Z
+modified: 2021-06-10T12:46:39.739Z
 ---
 
 In this tutorial I will show how what is dependency injection, why you should care about and how you can implement it easily with [TypeORM](https://typeorm.io/) and [inversify](http://inversify.io/).
 
-Our example will be quite simple. It will consist of just one user models.
+{% include promote-restapits-en.html %}
 
 ## Initialize a basic project with Typescript
 
@@ -804,8 +804,12 @@ query: SELECT "User"."id" AS "User_id", "User"."email" AS "User_email", "User"."
 query: DELETE FROM "user" WHERE "id" = ? AND "email" = ? AND "password" = ? -- PARAMETERS: [1,"foo@bar.com","test"]
 ```
 
-And there you go. Now that we are at the end of our controller, we can commit all these changes:
+And there you go.
 
-```bash
-$ git commit -am "Implement CRUD actions on user"
-```
+## Conclusion
+
+And that's it, this tutorial is coming to an end.
+
+I hope that this article has helped demystify dependency injection and/or that you have learned some things here.
+
+{% include promote-restapits-en.html %}
