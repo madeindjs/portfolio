@@ -18,7 +18,7 @@ email: contact@rousseau-alexandre.fr
 description: Mon Portfolio
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://rousseau-alexandre.fr" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  madeindjs
+github_username: madeindjs
 
 # Build settings
 markdown: kramdown
@@ -34,6 +34,7 @@ plugins:
   - jekyll-mermaid
   - jekyll-paginate
   - jekyll-multiple-languages-plugin
+  - jekyll-toc
 
 tag_page_layout: tag
 tag_page_dir: tag
@@ -43,6 +44,15 @@ paginate_path: "/blog/page/:num/"
 
 languages: [fr, en]
 exclude_from_localizations: [js, img, css]
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      toc: true
+
+toc:
+  max_level: 2
 
 mermaid:
   src: https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js
