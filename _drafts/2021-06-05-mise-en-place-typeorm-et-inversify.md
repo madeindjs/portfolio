@@ -14,15 +14,139 @@ categories: programming
 modified: 2021-06-06T13:12:06.407Z
 ---
 
-Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API. L'API sera une simple API [RESTfull](https://fr.wikipedia.org/wiki/Representational_state_transfer) pour gérer des utilisateurs avec les actions basiques (consultation, création, edition, suppression).
+Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API.
 
-Nous allons utiliser [Inversify](https://inversify.io/), [TypeORM](https://typeorm.io/) et [Express.js](https://expressjs.com/). J'ai choisis ces librairies car je les connais bien mais il est possible d'utiliser [Sequelize](https://sequelize.org/) à la place de [TypeORM](https://typeorm.io/), remplacer Express.js par [Fastify](https://www.fastify.io/) ou autre chose.
+Nous allons mettre en place une API complète [RESTfull](https://fr.wikipedia.org/wiki/Representational_state_transfer) pour gérer des utilisateurs avec les actions basiques (consultation, création, edition, suppression). Et tant qu'à faire, nous allons mettre des tests unitaires et fonctionnels.
+
+Mais avant de commencer à tout mettre en place, je vais essayer ici de vous résumer ce qu'est l'injection de dépendance et à quoi ça sert.
+
+## Pourquoi utiliser l'injection de dépendance
+
+Imaginons une classe `User` qui a besoin d'une classe `Database` pour être sauvegardé. On serait tenter d'initialiser la connection à la base de donnée dans le constructeur de l'utilisateur :
+
+```ts
+class Logger {
+  log(message: string): void {
+    const time = new Date().toISOString();
+    console.log(`${time} -- ${message}`);
+  }
+}
+
+class Database {
+  constructor(connectionString: string) {
+    // do some stuff here
+  }
+}
+
+class User {
+  private database: Database;
+
+  constructor(public email: string, databaseString: string) {
+    this.database = new Database(databaseString);
+  }
+}
+
+const user = new User("john@doe.io", "./user.sqlite");
+```
+
+Cela pose plusieurs problème:
+
+1. la classe `User` depends de la classe `Database`. Si on change l'implémentation de la classe `Database`, il faudra modifier la classe `User`
+2. le code est beaucoup moins testable car pour tester un utilisateur, je dois connaître le fonctionnement de la classe user
+
+Pour vous accentuer le problème, rajoutons une classe `Logger` qui permet de logger les événements dans l'appli. Imaginons que nous avons besoin de logger la connection à la base de donnée. Le code devient donc
+
+```ts
+class Logger {
+  log(message: string): void {
+    const time = new Date().toISOString();
+    console.log(`${time} -- ${message}`);
+  }
+}
+
+class Database {
+  constructor(connectionString: string) {
+    const logger = new Logger();
+    logger.log(`Connected to ${connectionString}`);
+  }
+}
+
+class User {
+  private database: Database;
+  constructor(public email: string, databaseString: string) {
+    this.database = new Database(databaseString);
+  }
+}
+
+const user = new User("john@doe.io", "./user.sqlite");
+```
+
+On voit bien que la situation se dégrade car toutes les classes deviennent dépendantes entre elles. Pour corriger cela, nous allons injecter directement la classe `Database` dans le constructeur de `User` :
+
+```ts
+class Logger {
+  /* ... */
+}
+
+class Database {
+  constructor(logger: Logger, connectionString: string) {
+    logger.log(`Connected to ${connectionString}`);
+  }
+}
+
+class User {
+  constructor(private database: Database) {}
+}
+
+const logger = new Logger();
+const database = new Database(logger, "db.sqlite");
+const user = new User(database);
+```
+
+Ce code devient plus solide car la classe `User`, `Database` et `Logger` sont découplés.
+
+> OK, mais ça devient plus pénible d'instancier une `User`.
+
+Effectivement. C'est pourquoi nous utilisons un `Container` qui va enregistrer les classes qui peuvent être injectées et nous proposer de créer des instances facilement :
+
+```ts
+class Logger {
+  /* ... */
+}
+class Database {
+  /* ... */
+}
+class User {
+  /* ... */
+}
+
+class Container {
+  getLogger(): Logger {
+    return new Logger();
+  }
+
+  getDatabase(): Database {
+    return new Database(this.getLogger(), "db.sqlite");
+  }
+
+  getUser(): User {
+    return new User(this.getDatabase());
+  }
+}
+
+const container = new Container();
+const user = container.getUser();
+```
+
+Le code est plus long mais tout devient découpé. Rassurez-vous, nous n'allons pas implémenter tout cela à la main. De très bonne librairies existent. Celle que j'ai choisi est [Inversify](https://github.com/inversify/InversifyJS).
 
 ## Initialisation de l'application avec Typescript
 
-Commençons par créer un projet Node.js versionné avec Git:
+Maintenant que vous voyez un peu à quoi sert l'injection de dépendance, nous allons mettre en pratique dans un cas réel.
 
-Let's start by creating a basic Typescript application:
+Nous allons utiliser [TypeORM](https://typeorm.io/) et [Express.js](https://expressjs.com/). J'ai choisi ces librairies car je les connais bien mais il est possible d'utiliser [Sequelize](https://sequelize.org/) à la place de [TypeORM](https://typeorm.io/), remplacer Express.js par [Fastify](https://www.fastify.io/) ou autre chose.
+
+Commençons par créer un projet Node.js versionné avec Git:
 
 ```sh
 $ mkdir dependecy-injection-example
@@ -97,12 +221,8 @@ On peut vérifier que tout fonctionne en executant le script:
 npm start
 > dependecy-injection-example@1.0.0 start /home/alexandre/github/madeindjs/dependecy-injection-example
 > tsc && node dist/main.js
-``
-```
-
 I said: Hello
-
-````
+```
 
 Nous n'avons pas besoin d'aller plus loin pour le moment!
 
@@ -116,7 +236,7 @@ Pour l'ajouter c'est très facile:
 
 ```bash
 npm add express --save
-````
+```
 
 On va aussi ajouter les typages Typescript qui vont aider un peu votre éditeur de code :
 
@@ -128,7 +248,7 @@ Et maintenant nous pouvons instancier notre serveur dans le fichier `main.ts`
 
 ```ts
 // src/main.ts
-import express, { Request, Response } from "express";
+import express, {Request, Response} from "express";
 
 const app = express();
 const port = 3000;
@@ -159,123 +279,11 @@ Maintenant que tout fonctionne, commitons les changements:
 $ git commit -am "Add express.js server"
 ```
 
-### L'injection de dépendance
+## Mise en place de Inversify
 
-Dans cette section nous allons mettre en place le système d'_injection de dépendance_.
+Dans cette section nous allons (enfin) mettre en place le système d'_injection de dépendance_ avec [Inversify](https://inversify.io).
 
-Je vais essayer ici de vous résumer ce qu'est l'injection de dépendance et à quoi ça sert. Imaginons une classe `User` qui a besoin d'une classe `Database` pour être sauvegardé. On serait tenter d'initialiser la connection à la base de donnée dans le constructeur de l'utilisateur :
-
-```ts
-class Logger {
-  log(message: string): void {
-    const time = new Date().toISOString();
-    console.log(`${time} -- ${message}`);
-  }
-}
-
-class Database {
-  constructor(connectionString: string) {
-    // do some stuff here
-  }
-}
-
-class User {
-  private database: Database;
-
-  constructor(public email: string, databaseString: string) {
-    this.database = new Database(databaseString);
-  }
-}
-
-const user = new User("john@doe.io", "./user.sqlite");
-```
-
-Cela pose plusieurs problème:
-
-1. la classe `User` depends de la classe `Database`. Si on change l'implémentation de la classe `Database`, il faudra modifier la classe `User`
-2. le code est beaucoup moins testable car pour tester un utilisateur, je dois connaître le fonctionnement de la classe user
-
-Pour vous accentuer le problème, rajoutons une classe `Logger` qui permet de logger les événements dans l'appli. Imaginons que nous avons besoin de logger la connection à la base de donnée. Le code devient donc
-
-```ts
-class Logger {
-  log(message: string): void {
-    const time = new Date().toISOString();
-    console.log(`${time} -- ${message}`);
-  }
-}
-
-class Database {
-  constructor(connectionString: string) {
-    const logger = new Logger();
-    logger.log(`Connected to ${connectionString}`);
-  }
-}
-
-class User {
-  private database: Database;
-  constructor(public email: string, databaseString: string) {
-    this.database = new Database(databaseString);
-  }
-}
-
-const user = new User("john@doe.io", "./user.sqlite");
-```
-
-On voit bien que la situation se dégrade car toutes les classes deviennent dépendantes entre elles. Pour corriger cela, nous allons injecter directement la classe `Database` dans le constructeur de `User` :
-
-```ts
-class Logger {/_ ... _/}
-
-class Database {
-  constructor(logger: Logger, connectionString: string) {
-    logger.log(`Connected to ${connectionString}`);
-  }
-}
-
-class User {
-  constructor(private database: Database) {}
-}
-
-const logger = new Logger();
-const database = new Database(logger, "db.sqlite");
-const user = new User(database);
-```
-
-Ce code devient plus solide car la classe `User`, `Database` et `Logger` sont découplés.
-
-> OK, mais ça devient plus pénible d'instancier une `User`.
-
-Effectivement. C'est pourquoi nous utilisons un `Container` qui va enregistrer les classes qui peuvent être injectées et nous proposer de créer des instances facilement :
-
-```ts
-class Logger {/_ ... _/}
-class Database {/_ ... _/}
-class User {/_ ... _/}
-
-class Container {
-  getLogger(): Logger {
-    return new Logger();
-  }
-
-  getDatabase(): Database {
-    return new Database(this.getLogger(), "db.sqlite");
-  }
-
-  getUser(): User {
-    return new User(this.getDatabase());
-  }
-}
-
-const container = new Container();
-const user = container.getUser();
-```
-
-Le code est plus long mais tout devient découpé. Rassurez-vous, nous n'allons pas implémenter tout cela à la main. De très bonne librairies existent. Celle que j'ai choisi est [Inversify](https://github.com/inversify/InversifyJS).
-
-Dans cette section nous allons mettre en place concrètement un système d'injection de dépendance complet.
-
-Nous allons mettre en place un Logger qui pourra être injecté dans toutes les classes de notre application. Il nous permettra de les requêtes HTTP par exemple mais aussi bien d'autres événements.
+Nous allons commencer par mettre en place un Logger qui pourra être injecté dans toutes les classes de notre application. Il nous permettra de les requêtes HTTP par exemple mais aussi bien d'autres événements.
 
 Installons donc `inversify`:
 
@@ -297,20 +305,22 @@ export class Logger {
 }
 ```
 
-Pour la rendre injectable, il faut lui ajouter un décorateur `@injectable`. Ce décorateur va simplement [ajouter une metadata](https://github.com/inversify/InversifyJS/blob/master/src/annotation/injectable.ts#L12) a notre classe afin qu'elle puisse être injectée dans nos futures dépendances.
+Pour la rendre injectable, il faut lui ajouter un décorateur `@injectable`. Ce décorateur va simplement [ajouter une metadata](https://github.com/inversify/InversifyJS/blob/5.1.1/src/annotation/injectable.ts#L12) a notre classe afin qu'elle puisse être injectée dans nos futures dépendances.
 
 ```ts
-import {injectable} from 'inversify';
+import {injectable} from "inversify";
 
 @injectable()
-export class Logger {/_ ... _/}
+export class Logger {
+  /* ... */
+}
 ```
 
 Et voilà. Il ne nous reste plus qu'à créer le container qui va enregistrer ce service. [La documentation](https://github.com/inversify/InversifyJS#installation) recommande de créer un objet `TYPES` qui va simplement stocker les identifiants de nos services. Nous allons créer un dossier `core` qui contiendra tout le code transverse à toute notre application.
 
 ```ts
 // src/core/types.core.ts
-export const TYPES = { Logger: Symbol.for("Logger") };
+export const TYPES = {Logger: Symbol.for("Logger")};
 ```
 
 NOTE: Un [`Symbol`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) est un type primitif qui permet d'avoir une référence unique.
@@ -319,9 +329,9 @@ Maintenant nous pouvons utiliser ce symbole pour enregistrer notre logger dans u
 
 ```ts
 // src/core/container.core.ts
-import { Container } from "inversify";
-import { Logger } from "../services/logger.service";
-import { TYPES } from "./types.core";
+import {Container} from "inversify";
+import {Logger} from "../services/logger.service";
+import {TYPES} from "./types.core";
 
 export const container = new Container();
 container.bind(TYPES.Logger).to(Logger);
@@ -349,12 +359,12 @@ Avant d'écrire notre premier contrôleur, il est nécessaire de faire quelques 
 ```ts
 // src/core/server.ts
 import * as bodyParser from "body-parser";
-import { InversifyExpressServer } from "inversify-express-utils";
-import { container } from "./container.core";
+import {InversifyExpressServer} from "inversify-express-utils";
+import {container} from "./container.core";
 
 export const server = new InversifyExpressServer(container);
 server.setConfig((app) => {
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 });
 ```
@@ -364,13 +374,15 @@ Comme vous pouvez le voir, nous utilisons maintenant une instance de `InversifyE
 ```ts
 // src/main.ts
 import "reflect-metadata";
-import { container } from "./core/container.core";
-import { server } from "./core/server";
-import { TYPES } from "./core/types.core";
+import {container} from "./core/container.core";
+import {server} from "./core/server";
+import {TYPES} from "./core/types.core";
 
 const port = 3000;
 
-server.build().listen(port, () => console.log(`Listen on http://localhost:${port}/`));
+server
+  .build()
+  .listen(port, () => console.log(`Listen on http://localhost:${port}/`));
 ```
 
 Et voilà. Nous pouvons maintenant nous attaquer à notre premier contrôleur.
@@ -381,7 +393,7 @@ Passons directement à l'implémentation afin que cela soit plus parlant:
 
 ```ts
 // src/controllers/home.controller.ts
-import { controller, httpGet } from "inversify-express-utils";
+import {controller, httpGet} from "inversify-express-utils";
 
 @controller("/")
 export class HomeController {
@@ -402,8 +414,8 @@ Maintenant essayons d'injecter le `Logger` afin d'afficher un message lorsque ce
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import { TYPES } from "../core/types.core";
-import { Logger } from "../services/logger.service";
+import {TYPES} from "../core/types.core";
+import {Logger} from "../services/logger.service";
 
 @controller("/")
 export class HomeController {
@@ -489,10 +501,10 @@ Nous allons maintenant créer un service `DatabaseService` qu va s'occuper de co
 
 ```ts
 // src/services/database.service.ts
-import { inject, injectable } from "inversify";
-import { Connection, createConnection, ObjectType } from "typeorm";
-import { TYPES } from "../core/types.core";
-import { Logger } from "./logger.service";
+import {inject, injectable} from "inversify";
+import {Connection, createConnection, ObjectType} from "typeorm";
+import {TYPES} from "../core/types.core";
+import {Logger} from "./logger.service";
 
 @injectable()
 export class DatabaseService {
@@ -542,8 +554,8 @@ export const TYPES = {
 
 ```ts
 // src/core/container.core.ts
-import { Container } from "inversify";
-import { DatabaseService } from "../services/database.service";
+import {Container} from "inversify";
+import {DatabaseService} from "../services/database.service";
 // ...
 export const container = new Container();
 // ...
@@ -561,14 +573,20 @@ Afin de simplifier l'exemple, je vais mettre ces deux classes dans le même fich
 
 ```ts
 // src/entities/user.entity.ts
-import { Column, Entity, EntityRepository, PrimaryGeneratedColumn, Repository } from "typeorm";
+import {
+  Column,
+  Entity,
+  EntityRepository,
+  PrimaryGeneratedColumn,
+  Repository,
+} from "typeorm";
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({unique: true})
   email: string;
 
   @Column()
@@ -604,16 +622,18 @@ Voici l'implémentation de notre contrôleur:
 
 ```ts
 // src/controllers/users.controller.ts
-import { Request, Response } from "express";
-import { inject } from "inversify";
-import { controller, httpGet } from "inversify-express-utils";
-import { TYPES } from "../core/types.core";
-import { UserRepository } from "../entities/user.entity";
-import { DatabaseService } from "../services/database.service";
+import {Request, Response} from "express";
+import {inject} from "inversify";
+import {controller, httpGet} from "inversify-express-utils";
+import {TYPES} from "../core/types.core";
+import {UserRepository} from "../entities/user.entity";
+import {DatabaseService} from "../services/database.service";
 
 @controller("/users")
 export class UsersController {
-  public constructor(@inject(TYPES.DatabaseService) private readonly database: DatabaseService) {}
+  public constructor(
+    @inject(TYPES.DatabaseService) private readonly database: DatabaseService
+  ) {}
 
   @httpGet("/")
   public async index(req: Request, res: Response) {
@@ -672,7 +692,12 @@ Maintenant que toute notre structure a été mise en place, la suite va aller be
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import { controller, httpGet, httpPost, requestBody } from "inversify-express-utils";
+import {
+  controller,
+  httpGet,
+  httpPost,
+  requestBody,
+} from "inversify-express-utils";
 // ...
 
 interface CreateUserBody {
@@ -684,7 +709,11 @@ interface CreateUserBody {
 export class UsersController {
   // ...
   @httpPost("/")
-  public async create(@requestBody() body: CreateUserBody, req: Request, res: Response) {
+  public async create(
+    @requestBody() body: CreateUserBody,
+    req: Request,
+    res: Response
+  ) {
     const repository = await this.database.getRepository(UserRepository);
     const user = new User();
     user.email = body.email;
@@ -800,7 +829,11 @@ La méthode `delete` est la plus facile. Il suffit de récupérer l'utilisateur 
 export class UsersController {
   // ...
   @httpDelete("/:userId")
-  public async destroy(@requestParam("userId") userId: number, req: Request, res: Response) {
+  public async destroy(
+    @requestParam("userId") userId: number,
+    req: Request,
+    res: Response
+  ) {
     const repository = await this.database.getRepository(UserRepository);
     const user = await repository.findOneOrFail(userId);
     await repository.delete(user);
@@ -833,7 +866,7 @@ $ git commit -am "Implement CRUD actions on user"
 Tout semble fonctionner mais il rest une problème: nous ne validons pas les données que nous insérons en base. Ainsi, il est possible de créer un utilisateur avec un email faux :
 
 ....
-$ curl -X POST -d "whatever" -d "password=test" http://localhost:3000/users
+curl -X POST -d "whatever" -d "password=test" http://localhost:3000/users
 ....
 
 Encore une fois, nous allons avoir recours a une librairie toute faite: `class-validator`. Cette librairie va nous offrir https://github.com/typestack/class-validator/#table-of-contents[une tonne de décorateurs] pour vérifier très facilement notre instance `User`.
@@ -841,7 +874,7 @@ Encore une fois, nous allons avoir recours a une librairie toute faite: `class-v
 Installons la avec NPM :
 
 ....
-$ npm install class-validator --save
+npm install class-validator --save
 ....
 
 Et il suffit ensuite d'ajouter les décorateurs `@IsEmail` et `@IsDefined` comme ceci :
@@ -897,7 +930,7 @@ export class UsersController {
     // ...
     const errors = await validate(user);
     if (errors.length !== 0) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({errors});
     }
 
     return repository.save(user);
@@ -908,7 +941,7 @@ export class UsersController {
     // ...
     const errors = await validate(user);
     if (errors.length !== 0) {
-      return res.status(400).json({ errors });
+      return res.status(400).json({errors});
     }
     return repository.save(user);
   }
@@ -945,20 +978,26 @@ Pour factoriser ce code il y aurait deux solutions :
 J'ai choisi la deuxième option car elle permet de réduire le code et la responsabilité du contrôleur. De plus, avec `inversify-express-utils` c'est très facile. Laissez moi vous montrer :
 
 ```typescript
-import { NextFunction, Request, Response } from "express";
-import { inject, injectable } from "inversify";
-import { BaseMiddleware } from "inversify-express-utils";
-import { TYPES } from "../core/types.core";
-import { User, UserRepository } from "../entities/user.entity";
-import { DatabaseService } from "../services/database.service";
+import {NextFunction, Request, Response} from "express";
+import {inject, injectable} from "inversify";
+import {BaseMiddleware} from "inversify-express-utils";
+import {TYPES} from "../core/types.core";
+import {User, UserRepository} from "../entities/user.entity";
+import {DatabaseService} from "../services/database.service";
 
 @injectable()
 export class FetchUserMiddleware extends BaseMiddleware {
-  constructor(@inject(TYPES.DatabaseService) private readonly database: DatabaseService) {
+  constructor(
+    @inject(TYPES.DatabaseService) private readonly database: DatabaseService
+  ) {
     super();
   }
 
-  public async handler(req: Request & { user: User }, res: Response, next: NextFunction): Promise<void | Response> {
+  public async handler(
+    req: Request & {user: User},
+    res: Response,
+    next: NextFunction
+  ): Promise<void | Response> {
     const userId = req.query.userId ?? req.params.userId;
     const repository = await this.database.getRepository(UserRepository);
     req.user = await repository.findOne(Number(userId));
@@ -1055,7 +1094,7 @@ $ git commit -m "Factorize user controller with middleware"
 Nous allons utiliser la librairie de base de Node.js : https://nodejs.org/api/crypto.html[Crypto]. Voici un exemple d'une méthode pour hasher le mot de pass:
 
 ```ts
-import { createHash } from "crypto";
+import {createHash} from "crypto";
 
 function hashPassword(password: string): string {
   return createHash("sha256").update(password).digest("hex");
@@ -1068,7 +1107,7 @@ console.log(hashPassword("$uper_u$er_p@ssw0rd"));
 Et voilà! Pour savoir si le mot de passe correspond il suffit de vérifier si le hash correspond au précédent :
 
 ```ts
-import { createHash } from "crypto";
+import {createHash} from "crypto";
 
 function hashPassword(password: string): string {
   return createHash("sha256").update(password).digest("hex");
@@ -1091,7 +1130,7 @@ Si vos mots de passe fuite, il sera assez facile à retrouver le mot de passe co
 Le sel de hachage consiste a rajouter un texte définis à chaque mot de passe. Voici la modification :
 
 ```ts
-import { createHash } from "crypto";
+import {createHash} from "crypto";
 
 const salt = "my private salt";
 
@@ -1117,7 +1156,7 @@ Maintenant que nous avons vu la théorie, passons à la pratique. Nous allons ut
 
 ```ts
 // src/utils/password.utils.ts
-import { createHash } from "crypto";
+import {createHash} from "crypto";
 
 const salt = "my private salt";
 
@@ -1135,7 +1174,7 @@ Nous allons maintenant utiliser la méthode `hashPassword` dans l'entité `User`
 ```ts
 // src/entities/user.entity.ts
 // ...
-import { hashPassword } from "../utils/password.utils";
+import {hashPassword} from "../utils/password.utils";
 
 @Entity()
 export class User {
@@ -1212,8 +1251,8 @@ Nous voici prêt à créer notre premier test :
 ```ts
 // src/entities/user.entity.spec.ts
 import assert from "assert";
-import { hashPassword } from "../utils/password.utils";
-import { User } from "./user.entity";
+import {hashPassword} from "../utils/password.utils";
+import {User} from "./user.entity";
 
 describe("User", () => {
   it("should hash password", () => {
@@ -1275,7 +1314,7 @@ Et tant qu'à faire, nous pouvons aussi ajouter un autre test unitaire sur la m�
 ```ts
 // src/utils/password.utils.spec.ts
 import assert from "assert";
-import { hashPassword, isPasswordMatch } from "./password.utils";
+import {hashPassword, isPasswordMatch} from "./password.utils";
 
 describe("isPasswordMatch", () => {
   const hash = hashPassword("good");
@@ -1327,8 +1366,8 @@ Maintenant créons notre agent qui sera utilisé dans tous nos tests:
 
 ```ts
 // src/tests/supertest.utils.ts
-import supertest, { SuperTest, Test } from "supertest";
-import { server } from "../core/server";
+import supertest, {SuperTest, Test} from "supertest";
+import {server} from "../core/server";
 
 export const agent: SuperTest<Test> = supertest(server.build());
 ```
@@ -1337,10 +1376,10 @@ Et maintenant commençons pas créer notre premier test pour la méthode `index`
 
 ```ts
 // src/controllers/users.controller.spec.ts
-import { container } from "../core/container.core";
-import { TYPES } from "../core/types.core";
-import { UserRepository } from "../entities/user.entity";
-import { agent } from "../tests/supertest.utils";
+import {container} from "../core/container.core";
+import {TYPES} from "../core/types.core";
+import {UserRepository} from "../entities/user.entity";
+import {agent} from "../tests/supertest.utils";
 
 describe("UsersController", () => {
   let userRepository: UserRepository;
@@ -1377,12 +1416,12 @@ describe("UsersController", () => {
   describe("create", () => {
     it("should create user", (done) => {
       const email = `${new Date().getTime()}@test.io`;
-      agent.post("/users").send({ email, password: "toto" }).expect(201, done);
+      agent.post("/users").send({email, password: "toto"}).expect(201, done);
     });
 
     it("should not create user with missing email", (done) => {
       const email = `${new Date().getTime()}@test.io`;
-      agent.post("/users").send({ email }).expect(400, done);
+      agent.post("/users").send({email}).expect(400, done);
     });
   });
 });
