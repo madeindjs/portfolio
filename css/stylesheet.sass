@@ -28,6 +28,9 @@ $primary-color: #2980b9
   margin-right: 0
   margin-left: 0
 
+body
+  overflow-x: hidden
+
 // content
 p
   +marginDefault($baseFontSize)
@@ -168,9 +171,6 @@ table
   th
     font-weight: 700
 
-article
-  +marginDefault($baseFontSize * 2)
-
 ul, ol
   padding-left: 0
 
@@ -260,9 +260,6 @@ ul.list-inline
   h2
     font-size: $baseFontSize * 2
 
-  article
-    +marginDefault($baseFontSize * 3)
-
   pre.highlight
     overflow-x: auto
     overflow-y: hidden
@@ -334,11 +331,11 @@ ul.list-inline
     border-left-color: $text-color-dark
 
   mark
-    background-color: yellow
+    background-color: lightblue
 
     a
       color: black
-      font-weight: 600
+  //     font-weight: 600
 
   hr
     border-color: white
@@ -406,18 +403,31 @@ body.post
 
 #post-content
   display: flex
-  flex-wrap: wrap
+  // flex-wrap: wrap
 
   article
-    flex-grow: 3
+    // flex-basis: 3
+    overflow: hidden
+
+  div.gutter
+    width: 100px
 
   nav
-    width: 250px
+    // flex-basis: 250px
+    max-width: 250px
+    text-align: right
 
     ul
       display: flex
       flex-direction: column
+      font-size: $baseFontSize / 1.5
 
       li
-        margin-top: $baseFontSize
-        margin-bottom: $baseFontSize
+        margin-top: $baseFontSize / 2
+        margin-bottom: $baseFontSize / 2
+        // limit element to 1 line
+        // https://stackoverflow.com/questions/1318108/css-limit-element-to-1-line
+        white-space: nowrap
+        overflow: hidden
+        display: block
+        text-overflow: ellipsis

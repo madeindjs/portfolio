@@ -6,16 +6,17 @@
 
   <body id="post" class="readable-content post">
     {% include header.html %}
+    <h1>{{ page.title }}<br /><small>@{{ page.categories }}</small></h1>
+    <p class="text-right">
+      {% for tag in page.tags %}
+      <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"><code>#{{ tag }}</code></a>
+      {% endfor %} &nbsp;<date>{{ page.date | date: "%Y-%m-%dT%H:%M" }}</date>
+    </p>
     <div id="post-content">
       <nav>{{ content | toc_only }}</nav>
+      <div class="gutter"></div>
       <article>
         <!-- header & navigation -->
-        <h1>{{ page.title }}<br /><small>@{{ page.categories }}</small></h1>
-        <p class="text-right">
-          {% for tag in page.tags %}
-          <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"><code>#{{ tag }}</code></a>
-          {% endfor %} &nbsp;<date>{{ page.date | date: "%Y-%m-%dT%H:%M" }}</date>
-        </p>
         <!-- <p class="badges">
         {% for tag in page.tags %}
         <span class="badge badge-dark">{{ tag }}</span>
