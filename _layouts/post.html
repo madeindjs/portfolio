@@ -4,11 +4,11 @@
     {% include head.html %}
   </head>
 
-  <body class="readable-content post">
+  <body id="post" class="readable-content post">
     {% include header.html %}
-    <div class="row">
-      <div class="col toc">{{ content | toc_only }}</div>
-      <div class="col">
+    <div id="post-content">
+      <nav>{{ content | toc_only }}</nav>
+      <article>
         <!-- header & navigation -->
         <h1>{{ page.title }}<br /><small>@{{ page.categories }}</small></h1>
         <p class="text-right">
@@ -54,7 +54,7 @@
             >.
           </small>
         </p>
-      </div>
+      </article>
     </div>
     {% include footer.html %}
     <link href="/css/pygments/monokai.css" rel="stylesheet" />

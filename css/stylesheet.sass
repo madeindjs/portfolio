@@ -64,10 +64,6 @@ h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
 
-header
-  border-bottom: dashed 2px
-  text-align: center
-
 footer
   margin-bottom: 2rem
   margin-top: 2rem
@@ -255,8 +251,8 @@ ul.list-inline
   body
     max-width: 720px
     margin: auto
-    padding-left: $baseFontSize * 2
-    padding-right: $baseFontSize * 2
+    padding-left: $baseFontSize
+    padding-right: $baseFontSize
 
   h1
     font-size: $baseFontSize * 3
@@ -404,3 +400,24 @@ body.post
       font-size: $baseFontSize * 2
       margin-top: 0
       margin-bottom: $baseFontSize / 2
+
+#post
+  max-width: 1200px
+
+#post-content
+  display: flex
+  flex-wrap: wrap
+
+  article
+    flex-grow: 3
+
+  nav
+    width: 250px
+
+    ul
+      display: flex
+      flex-direction: column
+
+      li
+        margin-top: $baseFontSize
+        margin-bottom: $baseFontSize
