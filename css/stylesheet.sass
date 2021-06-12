@@ -3,7 +3,7 @@
 
 //  heavily inspired from https://github.com/nicokant/readable-css
 
-$title-font: monospace
+$title-font: serif
 $font: monospace
 $sansFont: monospace
 $baseFontSize: 1.2em
@@ -37,7 +37,7 @@ p
 ul li,
 ol li
   font-size: $baseFontSize
-  +marginDefault($baseFontSize/2)
+  +marginDefault($baseFontSize)
 
 blockquote
   +marginDefault($baseFontSize)
@@ -48,8 +48,8 @@ blockquote
 // header
 
 h1, h2, h3, h4, h5, h6
-  font-family: $title-font
-  font-weight: 700
+  // font-family: $title-font
+  font-weight: 600
   margin-bottom: $baseFontSize / 2
 h1
   font-size: $baseFontSize * 3
@@ -69,8 +69,6 @@ header
   text-align: center
 
 footer
-  border-top: dashed 2px
-  text-align: center
   margin-bottom: 2rem
   margin-top: 2rem
   // padding-top: 1rem
@@ -78,6 +76,11 @@ footer
 section
   margin-top: $baseFontSize * 4
   margin-bottom: $baseFontSize * 4
+
+nav ul
+  list-style: none
+  display: flex
+  justify-content: space-between
 
 // inline
 
@@ -124,8 +127,9 @@ u
   text-decoration: underline
 
 hr
-  border-top: 0px
-  border-bottom: dashed 2px
+  width: $baseFontSize * 3
+  // border-top: 0px
+  // border-bottom: dashed 2px
 
 // list
 
@@ -186,7 +190,7 @@ ul.list-inline
   // @include marginDefault($baseFontSize)
 
   & > li ~ li::before
-    content : ' - '
+    content: ' - '
     // padding-right: 1em
 
   li
@@ -209,39 +213,41 @@ ul.list-inline
 .mt-0
   margin: 0
 
+.hide
+  display: none
+
 // MARKDOWN
 
-h1, h2, h3, h4, h5, h6
-  position: relative
+// h1, h2, h3, h4, h5, h6
+//   position: relative
 
-h1:before, h2:before, h3:before, h4:before, h5:before, h6:before
-  content: '# '
-  color: $primary-color
-  position: absolute
-  right: 100%
-  margin-right: $baseFontSize
-  display: inline-block
-  text-align: right
+// h1:before, h2:before, h3:before, h4:before, h5:before, h6:before
+//   color: $primary-color
+//   position: absolute
+//   right: 100%
+//   margin-right: $baseFontSize
+//   display: inline-block
+//   text-align: right
 
-h2:before
-  content: '## '
-  color: $primary-color
+// h2:before
+//   content: '## '
+//   color: $primary-color
 
-h3:before
-  content: '### '
-  color: $primary-color
+// h3:before
+//   content: '### '
+//   color: $primary-color
 
-h4:before
-  content: '#### '
-  color: $primary-color
+// h4:before
+//   content: '#### '
+//   color: $primary-color
 
-h5:before
-  content: '##### '
-  color: $primary-color
+// h5:before
+//   content: '##### '
+//   color: $primary-color
 
-h6:before
-  content: '###### '
-  color: $primary-color
+// h6:before
+//   content: '###### '
+//   color: $primary-color
 
 // MEDIA
 
@@ -372,3 +378,29 @@ h6:before
 //   font-weight: bold
 //   font-style: italic
 //   src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
+
+// POST
+
+body.post
+  max-width: 900px
+
+.row
+  display: flex
+
+#landing
+  h2
+    margin-top: $baseFontSize
+
+  section.main
+    min-height: 70vh
+    margin-top: 0
+    margin-bottom: 0
+
+    display: flex
+    flex-direction: column
+    justify-content: end
+
+    p
+      font-size: $baseFontSize * 2
+      margin-top: 0
+      margin-bottom: $baseFontSize / 2

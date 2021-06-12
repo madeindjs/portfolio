@@ -15,4 +15,6 @@ my_github_profile: mon profil Github
 my_educations: Diplômes
 
 description:
-  - Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes. Cela permet de créer des fonctionnalités performantes et évolutives.
+  - Je suis passionné par la programmation et le monde du logiciel libre. J'essaie de contribuer au monde de l'Open-source à mes projets personnels et différentes contributions sur <a href="https://github.com/madeindjs">Github</a> / <a href="https://gitlab.com/alexandre.rousseau">Gitlab</a>.
+  - J'ai écris deux livres sous licence libre. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> et <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> qui enseignent les meilleurs pratiques pour construire une API avec Ruby on Rails ou Node.js.
+  - A côté de ça, j'aime partager mes découvertes via <a href="/blog">des articles sur mon blog</a>.

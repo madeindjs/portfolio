@@ -1,20 +1,9 @@
+<hr />
 <footer>
-  <nav>
-    <ul class="list-inline">
-      <li>
-        <a href="mailto:{{site.data.profil.email}}"
-          >{{site.data.profil.email}}</a
-        >
-      </li>
-      <li><a href="/pgp.txt">GPG: 3072R/AB2676CC</a></li>
-      {% for links in site.data.profil.links %}
-      <li><a href="{{links.url}}">{{links.name}}</a></li>
-      {% endfor %}
-      <li>
-        <a href="{{ '/resume' | prepend: site.baseurl }}"
-          >{{ site.translations[site.lang]['resume'] }}</a
-        >
-      </li>
-    </ul>
-  </nav>
+  <p>
+    Vous pouvez me contacter <a href="mailto:{{site.data.profil.email}}">par mail</a> (<a href="/pgp.txt">GPG</a>) ou
+    bien via <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">LinkedIn</a>. Si vous êtes intéressé
+    pour travailler avec moi, vous pouvez <a href="{{ '/resume' | prepend: site.baseurl }}">consulter mon CV</a> ou bien
+    <a>télécharger une version PDF</a>.
+  </p>
 </footer>
