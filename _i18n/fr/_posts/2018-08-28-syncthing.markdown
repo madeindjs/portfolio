@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Synchroniser ses fichiers avec Syncthing
-date:   2018-08-28 12:00:00 +0200
+date: 2018-08-28 12:00:00 +0200
 tags: sync selfhosted
 categories: tutorial
 thumbnail: https://syncthing.net/images/logo-horizontal.svg
@@ -29,15 +29,15 @@ Cerise sur le gateau, [Syncthing][syncthing] est **Multi-plateforme**. Il est di
 
 [Syncthing][syncthing] est disponible dans les packets Debian. Du coup on l'installer facilement avec `apt`
 
-~~~bash
-$ sudo apt install syncthing
-~~~
+```bash
+sudo apt install syncthing
+```
 
 Et pour le démarrer il suffit d'utiliser la commande `syncthing`.
 
-~~~bash
-$ syncthing
-~~~
+```bash
+syncthing
+```
 
 Il suffit ensuite de se connecter à l'interface web <http://localhost:8384>.
 
@@ -49,19 +49,19 @@ Mon Raspberry PI tourne sous [Raspbian](https://www.raspbian.org) donc l’insta
 
 Je me connecte donc à mon Raspberry en SSH et j'installe et lance [Syncthing][syncthing].
 
-~~~bash
-$ ssh ftp
-$ sudo apt install syncthing
-$ syncthing &
-~~~
+```bash
+ssh ftp
+sudo apt install syncthing
+syncthing &
+```
 
 > le `&` permet de lancer Syncthing en tâche de fond et donc de fermer la connexion SSH sans mettre fin au processus
 
 Ici, l'url de l'interface de l'administration est <http://127.0.0.1:41689>. Malheureusement ma Box SFR bloque la connexion, je crée donc un [tunnel SSH ](https://wiki.korben.info/Tunnel_SSH) afin d'avoir le port 41689 sur mon desktop.
 
-~~~bash
-$ ssh ftp -L 41689:127.0.0.1:41689 -N
-~~~
+```bash
+ssh ftp -L 41689:127.0.0.1:41689 -N
+```
 
 ## Configuration
 
@@ -74,15 +74,15 @@ Le plus simple est d'ouvrir deux onglets:
 
 ### Ajout du dossier
 
-Je vais commencer par configurer le partage de mon dossier *Documents* de mon Raspberry. Pour cela, je commence par me connecter sur l'interface <http://localhost:41689> .
+Je vais commencer par configurer le partage de mon dossier _Documents_ de mon Raspberry. Pour cela, je commence par me connecter sur l'interface <http://localhost:41689> .
 
-Rien de plus simple, on clique sur le bouton *add folder* et on spécifier le chemin du dossier à partager.
+Rien de plus simple, on clique sur le bouton _add folder_ et on spécifier le chemin du dossier à partager.
 
 ![Interface principale de Syncthing](/img/blog/syncthing_add_folder.png)
 
 ### Couplage des nœuds
 
-Pour commencer il faut coupler nos deux nœuds. Pour cela, il faut se rendre sur un des deux nœud et de cliquer sur *add remote* et d'ajouter l’identifiant du deuxième nœud que l'on trouve sur l'interface.
+Pour commencer il faut coupler nos deux nœuds. Pour cela, il faut se rendre sur un des deux nœud et de cliquer sur _add remote_ et d'ajouter l’identifiant du deuxième nœud que l'on trouve sur l'interface.
 
 ![Interface principale de Syncthing](/img/blog/syncthing_add_device.png)
 
@@ -99,7 +99,6 @@ Et un autre popup nous signale qu'il est possible de synchroniser un dossier en 
 [Syncthing][syncthing] permet de se passer très simplement de [Dropbox][dropbox]. La configuration est très simple mais son fonctionnement n'en reste pas moins très puissant.
 
 Pour mon usage personnel je synchronise sans problèmes toutes mes musiques (+ 40 GO) et mes documents (> 1 GO) vers 4 nœuds (2 PC, 1 RPI & mon smartphone)!
-
 
 [syncthing]: https://syncthing.net/
 [dropbox]: https://www.dropbox.com/h

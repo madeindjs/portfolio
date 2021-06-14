@@ -54,7 +54,7 @@ Ne sortez pas le câble HDMI de votre Raspberry, on fait tout via **SSH**.
 On commence par trouver les Raspberry Pi avec un bon vieux **nmap**
 
 ```bash
-$ sudo nmap -n -sP 192.168.1.*
+sudo nmap -n -sP 192.168.1.*
 ```
 
 ![Résultat du nmap](/img/blog/network_nmap_raspberry.gif)
@@ -62,13 +62,13 @@ $ sudo nmap -n -sP 192.168.1.*
 Il nous suffit donc de se connecter au Raspberry PI via **SSH**:
 
 ```bash
-$ ssh pi@192.168.1.101
+ssh pi@192.168.1.101
 ```
 
 Et on édite le fichier de configuration réseau
 
 ```bash
-$ sudo vi /etc/network/interfaces
+sudo vi /etc/network/interfaces
 ```
 
 ```bash
@@ -101,14 +101,14 @@ Le principe est simple: tous les paquet passeront par le RPI2 et les redirigera 
 Pour se faire, on active les modules qui vont bien sur le RPI2:
 
 ```bash
-$ ssh pi@192.168.1.102
-$ sudo a2enmod proxy_http
+ssh pi@192.168.1.102
+sudo a2enmod proxy_http
 ```
 
 Sur la RPI2 on ajoute notre configuration Apache
 
 ```bash
-$ sudo vi /etc/apache2/site-available/raspberry-cook.fr.conf
+sudo vi /etc/apache2/site-available/raspberry-cook.fr.conf
 ```
 
 ```apache
@@ -125,8 +125,8 @@ $ sudo vi /etc/apache2/site-available/raspberry-cook.fr.conf
 Et on termine par activer le site & redémarrer Apache
 
 ```bash
-$ sudo a2ensite raspberry-cook.fr
-$ sudo service apache2 restart
+sudo a2ensite raspberry-cook.fr
+sudo service apache2 restart
 ```
 
 Et le tour est joué.

@@ -145,7 +145,7 @@ end
 Maintenant que vous avez compris le biding, c'est plus simple. Tout d'abord, il faut commencer par installer la Gem:
 
 ```bash
-$ gem install haml
+gem install haml
 ```
 
 Et le principe est exactement le même:
@@ -175,7 +175,7 @@ On voit que l'on obtient le même résultat!
 C'est pareil, seul le nom des méthodes change:
 
 ```bash
-$ gem install haml
+gem install haml
 ```
 
 ```ruby

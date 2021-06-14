@@ -79,7 +79,7 @@ Vu qu'on veut des statistiques par jour, on veut les logs d'apache découpés pa
 Apache gère ça nativement et c'est très simple.
 
 ```bash
-$ sudo vim /etc/apache2/sites-enabled/isignif.fr.conf
+sudo vim /etc/apache2/sites-enabled/isignif.fr.conf
 ```
 
 ```conf
@@ -97,18 +97,18 @@ Fantastique. Essayons de lire un peu ce fichier.
 
 ### Parser les résultats JSON avec `jq`
 
-Afin de garder les choses les plus simples possibles, je me suis limité sur les choix des technos et j'ai préféré rester dans l'esprit UNIX, c'est à dire un outil pour chaque chose. J'ai donc choisis la librairie `jq`. Il s'installe avec: 
+Afin de garder les choses les plus simples possibles, je me suis limité sur les choix des technos et j'ai préféré rester dans l'esprit UNIX, c'est à dire un outil pour chaque chose. J'ai donc choisis la librairie `jq`. Il s'installe avec:
 
-~~~bash
-$ sudo apt install jq
-~~~
+```bash
+sudo apt install jq
+```
 
 `jq` permet de parser un fichier JSON et de récupérer une valeur~dedans. Voici un petit exemple:
 
-~~~bash
-$ echo '{ "email": { "subject": "Hllo", "content": "Lorem ipsum" } }' | jq '.email.subject'
+```bash
+echo '{ "email": { "subject": "Hllo", "content": "Lorem ipsum" } }' | jq '.email.subject'
 "Hllo"
-~~~
+```
 
 Le résultat est étonnamment lisible et maintenable.`jq` s'utilise aussi parfaitement dans un script BASH et s'installe hyper facilement. C'est donc le parfait outil.
 
@@ -119,19 +119,19 @@ Pour mon cas, j'ai trouvé les informations suivantes utiles:
 - le nombre de visiteur du jour
 
 ```bash
-$ cat /tmp/daily_goaccess_report.json | jq '.general.unique_visitors'
+cat /tmp/daily_goaccess_report.json | jq '.general.unique_visitors'
 ```
 
 - L'heure ou l'affluence a été la plus forte
 
 ```bash
-$ cat /tmp/daily_goaccess_report.json | jq '.visit_time.data | max_by(.visitors.percents) | .data'
+cat /tmp/daily_goaccess_report.json | jq '.visit_time.data | max_by(.visitors.percents) | .data'
 ```
 
 - Le pourcentage de requêtes qui termine en erreur 500:
 
 ```bash
-$ cat /tmp/daily_goaccess_report.json | jq '.status_codes[][] | select(.data == "5xx Server Error") | .hits.percent' 2> /dev/null
+cat /tmp/daily_goaccess_report.json | jq '.status_codes[][] | select(.data == "5xx Server Error") | .hits.percent' 2> /dev/null
 ```
 
 Je te laisse en trouver d'autres.

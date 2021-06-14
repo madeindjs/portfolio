@@ -22,10 +22,10 @@ In this tutorial I will show how what is dependency injection, why you should ca
 Let's start by creating a basic Typescript application:
 
 ```sh
-$ mkdir dependecy-injection-example
-$ cd dependecy-injection-example
-$ npm init
-$ git init # Initialize Git repository (optional)
+mkdir dependecy-injection-example
+cd dependecy-injection-example
+npm init
+git init # Initialize Git repository (optional)
 ```
 
 Now we need to install Typescript:
@@ -87,7 +87,7 @@ That's much code but the two directives to remember here are: `rootDir` and `out
 Now you can try everything works with:
 
 ```sh
-$ npm start
+npm start
 > dependecy-injection-example@1.0.0 start /home/alexandre/github/madeindjs/dependecy-injection-example
 > tsc && node dist/main.js
 
@@ -105,7 +105,7 @@ To install it is straightforward. We are going to install the TypeORM library bu
 Here we go:
 
 ```bash
-$ npm add typeorm sqlite3 --save
+npm add typeorm sqlite3 --save
 ```
 
 ## Dependency injection
@@ -122,7 +122,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({unique: true})
   email: string;
 }
 
@@ -263,7 +263,7 @@ We will set up a Logger that can be injected into all classes of our application
 So let's install `inversify`:
 
 ```bash
-$ npm install inversify --save
+npm install inversify --save
 ```
 
 And let's create a simple event logging class:
@@ -283,7 +283,7 @@ export class Logger {
 To make it injectable, you need to add a `@injectable` decorator to it. This decorator will simply https://github.com/inversify/InversifyJS/blob/master/src/annotation/injectable.ts#L12[add metadata] to our class so that it can be injected into our future dependencies.
 
 ```ts
-import { injectable } from "inversify";
+import {injectable} from "inversify";
 
 @injectable()
 export class Logger {
@@ -295,7 +295,7 @@ And there you go. Now we just have to create the container that will register th
 
 ```ts
 // src/core/types.core.ts
-export const TYPES = { Logger: Symbol.for("Logger") };
+export const TYPES = {Logger: Symbol.for("Logger")};
 ```
 
 NOTE: A https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol[`Symbol`] is a primitive type that allows you to have a unique reference.
@@ -304,9 +304,9 @@ Now we can use this symbol to save our logger in a new `container.core.ts` file.
 
 ```ts
 // src/core/container.core.ts
-import { Container } from "inversify";
-import { Logger } from "../services/logger.service";
-import { TYPES } from "./types.core";
+import {Container} from "inversify";
+import {Logger} from "../services/logger.service";
+import {TYPES} from "./types.core";
 
 export const container = new Container();
 container.bind(TYPES.Logger).to(Logger);
@@ -323,7 +323,7 @@ We start by installing the library. We'll also add `body-parser`, which will all
 To install it, it's straightforward. Just follow the https://github.com/inversify/inversify-express-utils[official documentation]. So we start by installing some libraries.
 
 ```bash
-$ npm install inversify-express-utils reflect-metadata body-parse --save
+npm install inversify-express-utils reflect-metadata body-parse --save
 ```
 
 - `reflet-metadata` allows Inversify to add metadata on our class. This import must be located at the very beginning of the first file.
@@ -336,12 +336,12 @@ Before writing our first controller, it is necessary to make some modifications 
 ```ts
 // src/core/server.ts
 import * as bodyParser from "body-parser";
-import { InversifyExpressServer } from "inversify-express-utils";
-import { container } from "./container.core";
+import {InversifyExpressServer} from "inversify-express-utils";
+import {container} from "./container.core";
 
 export const server = new InversifyExpressServer(container);
 server.setConfig((app) => {
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 });
 ```
@@ -351,13 +351,15 @@ As you can see, we are now using an instance of `InversifyExpressServer`. The `s
 ```ts
 // src/main.ts
 import "reflect-metadata";
-import { container } from "./core/container.core";
-import { server } from "./core/server";
-import { TYPES } from "./core/types.core";
+import {container} from "./core/container.core";
+import {server} from "./core/server";
+import {TYPES} from "./core/types.core";
 
 const port = 3000;
 
-server.build().listen(port, () => console.log(`Listen on http://localhost:${port}/`));
+server
+  .build()
+  .listen(port, () => console.log(`Listen on http://localhost:${port}/`));
 ```
 
 And there you go. Now we can tackle our first controller.
@@ -368,7 +370,7 @@ Let's go straight to the implementation to make it more meaningful:
 
 ```ts
 // src/controllers/home.controller.ts
-import { controller, httpGet } from "inversify-express-utils";
+import {controller, httpGet} from "inversify-express-utils";
 
 @controller("/")
 export class HomeController {
@@ -389,8 +391,8 @@ Now let's try to inject the `Logger` to display a message when this route is use
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import { TYPES } from "../core/types.core";
-import { Logger } from "../services/logger.service";
+import {TYPES} from "../core/types.core";
+import {Logger} from "../services/logger.service";
 
 @controller("/")
 export class HomeController {
@@ -421,8 +423,8 @@ You can now start the server with `npm run start` or wait for the transpilation 
 If everything works as before, you can commit the changes:
 
 ```bash
-$ git add .
-$ git commit -m "Add inversify"
+git add .
+git commit -m "Add inversify"
 ```
 
 ## Setup TypeORM
@@ -444,7 +446,7 @@ Here we will put the _Model_ layer of the _design patern_ MVC. This is the layer
 We will now generate our configuration file. By default, `dotenv` will look for a file named `.env`. Let's create it:
 
 ```bash
-$ touch .env
+touch .env
 ```
 
 And let's start by defining https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md#using-environment-variables[TypeORM environment variables] for a basic connection to an SQLite database:
@@ -529,8 +531,8 @@ export const TYPES = {
 
 ```ts
 // src/core/container.core.ts
-import { Container } from "inversify";
-import { DatabaseService } from "../services/database.service";
+import {Container} from "inversify";
+import {DatabaseService} from "../services/database.service";
 // ...
 export const container = new Container();
 // ...
@@ -555,7 +557,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({unique: true})
   email: string;
 
   @Column()
@@ -573,8 +575,8 @@ Our work is not very visible but hold on because you will see the result in the 
 We can commit the changes made so far:
 
 ```bash
-$ git add .
-$ git commit -m "Setup TypeORM"
+git add .
+git commit -m "Setup TypeORM"
 ```
 
 ## Creating the user controller
@@ -591,16 +593,18 @@ Here is the implementation of our controller:
 
 ```ts
 // src/controllers/users.controller.ts
-import { Request, Response } from "express";
-import { inject } from "inversify";
-import { controller, httpGet } from "inversify-express-utils";
-import { TYPES } from "../core/types.core";
-import { UserRepository } from "../entities/user.entity";
-import { DatabaseService } from "../services/database.service";
+import {Request, Response} from "express";
+import {inject} from "inversify";
+import {controller, httpGet} from "inversify-express-utils";
+import {TYPES} from "../core/types.core";
+import {UserRepository} from "../entities/user.entity";
+import {DatabaseService} from "../services/database.service";
 
 @controller("/users")
 export class UsersController {
-  public constructor(@inject(TYPES.DatabaseService) private readonly database: DatabaseService) {}
+  public constructor(
+    @inject(TYPES.DatabaseService) private readonly database: DatabaseService
+  ) {}
 
   @httpGet("/")
   public async index(req: Request, res: Response) {
@@ -623,7 +627,7 @@ import "../controllers/users.controller";
 And there you go. Run the command `npm run start:watch` to start the server if you have stopped it and let's test the functionality with `cURL`:
 
 ```bash
-$ curl http://localhost:3000/users
+curl http://localhost:3000/users
 ```
 
 Command's output indicates an empty result: this is normal because there is no user yet. On the other hand, the server terminal tells us that a lot has happened:
@@ -655,7 +659,12 @@ Now that our entire structure has been put in place, the rest will go much faste
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import { controller, httpGet, httpPost, requestBody } from "inversify-express-utils";
+import {
+  controller,
+  httpGet,
+  httpPost,
+  requestBody,
+} from "inversify-express-utils";
 // ...
 
 interface CreateUserBody {
@@ -667,7 +676,11 @@ interface CreateUserBody {
 export class UsersController {
   // ...
   @httpPost("/")
-  public async create(@requestBody() body: CreateUserBody, req: Request, res: Response) {
+  public async create(
+    @requestBody() body: CreateUserBody,
+    req: Request,
+    res: Response
+  ) {
     const repository = await this.database.getRepository(UserRepository);
     const user = new User();
     user.email = body.email;
@@ -683,7 +696,7 @@ It's a bit of code but don't panic. `CreateUserBody` is an interface that define
 Let's test that it all works:
 
 ```bash
-$ curl -X POST -d "email=test@test.fr" -d "password=test" http://localhost:3000/users
+curl -X POST -d "email=test@test.fr" -d "password=test" http://localhost:3000/users
 ```
 
 Perfect. You can see that everything is working properly!
@@ -715,7 +728,7 @@ The implementation is really very simple. Just return an object, and `inversify-
 Let's try it to see:
 
 ```bash
-$ curl http://localhost:3000/users/1
+curl http://localhost:3000/users/1
 {"id":1, "email": "test@test.fr", "password": "test"}.
 ```
 
@@ -759,7 +772,7 @@ export class UsersController {
 And there you go. As before, let's see if it works:
 
 ```bash
-$ curl -X PUT -d "email=foo@bar.com"  http://localhost:3000/users/1
+curl -X PUT -d "email=foo@bar.com"  http://localhost:3000/users/1
 ```
 
 Perfect! You can even see, our user has been updated and it is sent back to us in JSON format. You can even see the SQL query that TypeORM performed in the terminal logs.
@@ -782,7 +795,11 @@ The `delete` method is the easiest. Just retrieve the user and call the `reposit
 export class UsersController {
   // ...
   @httpDelete("/:userId")
-  public async destroy(@requestParam("userId") userId: number, req: Request, res: Response) {
+  public async destroy(
+    @requestParam("userId") userId: number,
+    req: Request,
+    res: Response
+  ) {
     const repository = await this.database.getRepository(UserRepository);
     const user = await repository.findOneOrFail(userId);
     await repository.delete(user);
@@ -794,7 +811,7 @@ export class UsersController {
 The `delete` method is the easiest. Just retrieve the user and call the `repository.delete` method. Let's do it:
 
 ```bash
-$ curl -X DELETE  http://localhost:3000/users/1
+curl -X DELETE  http://localhost:3000/users/1
 ```
 
 Here again, we can verify that the user has been deleted by looking at the TypeORM logs:

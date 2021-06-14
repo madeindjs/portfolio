@@ -1,27 +1,33 @@
 ---
-layout: main
+layout: landing
 ---
 
-<h1>Alexandre Rousseau</h1>
+<section class="main">
+  <h1 class="hide">Alexandre Rousseau</h1>
+  {% for desc in site.translations[site.lang]['lead'] %}
+  <p>{{ desc }}</p>
+  {% endfor %}
+</section>
+
+<hr />
 
 <section>
+  <h2 class="hide">à propos</h2>
   {% for desc in site.translations[site.lang]['description'] %}
   <p>{{ desc }}</p>
   {% endfor %}
 </section>
 
+<hr />
+
 <section>
   <h2>{{ site.translations[site.lang]['last_posts'] }}</h2>
-  <ul>
-    {% for post in site.posts limit: 5 %}
-    <li>
-      <a href="{{ post.url | prepend: site.baseurl }}">
-        <b>{{ post.title }}</b>
-      </a>
-      - <date>{{ post.date | date: "%Y-%m-%d" }}</date>
-    </li>
-    {% endfor %}
-  </ul>
+  {% for post in site.posts limit: 8 %}
+  <p>
+    <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> - {{
+    post.description }}
+  </p>
+  {% endfor %}
   <p>
     <a href="{{ '/blog' | prepend: site.baseurl }}"
       >{{ site.translations[site.lang]['see_all_posts'] }}</a

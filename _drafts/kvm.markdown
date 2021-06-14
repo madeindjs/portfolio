@@ -1,7 +1,7 @@
 ---
 title: Utiliser KVM pour créer des machines virtuelles
 layout: post
-date:   2018-10-02 12:00:00 +0200
+date: 2018-10-02 12:00:00 +0200
 tags: kvm qemu virtualization
 categories: tutorial
 ---
@@ -10,41 +10,36 @@ Récemment, pour installer Kali Linux sur une machine virtuelle, j'ai eu quelque
 
 KVM, pour _Kernel-based Virtual Machine_, est maintenu par la **communauté Linux** et plus particulièrement par Red Hat. L'avantage est qu'il est **intégré au noyau Linux**. Du coup, il existe pour la majorité des distributions classiques et il s'installe très facilement.
 
-~~~bash
-$ sudo apt-get install qemu qemu-kvm
-~~~
+```bash
+sudo apt-get install qemu qemu-kvm
+```
 
 > QEMU est un système d'émulation complet(...) . Le CPU est émulé (...) cela permet au final d'exécuter un code original dans une machine totalement virtualisée. Il est par exemple tout à fait possible d'exécuter un code écrit pour un processeur ARM sur un ordinateur équipé d'un processeur Intel. Avec ce système, l'émulation est très lente car il est nécessaire de traduire chaque opcode original en série d'instructions compatibles. [source](https://www.eslot.fr/etude/difference-entre-qemu-et-kvm)
-
-
 
 ## Création d'un machine virtuelle
 
 On commence par créer une image vide _kali.img_ de 10Go avec la commande `qemu-img`.
 
-~~~bash
-$ qemu-img create kali.img 10G
-~~~
+```bash
+qemu-img create kali.img 10G
+```
 
 Ensuite on utilise la commane `kvm` pour démarrer l'image:
 
-~~~bash
-$ kvm -hda kali.img -boot d -cdrom kali-linux-xfce-2018.3a-amd64.iso -m 1G
-~~~
+```bash
+kvm -hda kali.img -boot d -cdrom kali-linux-xfce-2018.3a-amd64.iso -m 1G
+```
 
 - `-hda` spécifie le fichier de l'image à utiliser
 - `-m` spécifie la quantité de mémoire vive (ici 640 Mo)
 - `-cdrom` le fichier à insérer dans le **lecteur du disque** de la VM
 - `-boot` spécifie l' **ordre de priorité** du boot (ici on commence par le CD-ROM)
 
-
 L’installation se fait classiquement. Une fois la distribution installée, on peut la démarrer avec la commande suivante
 
-
-~~~bash
-$ kvm -hda kali.img -m 1G
-~~~
-
+```bash
+kvm -hda kali.img -m 1G
+```
 
 ## Liens
 

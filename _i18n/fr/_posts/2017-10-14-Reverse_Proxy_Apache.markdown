@@ -30,25 +30,25 @@ Pour le serveur de [rousseau-alexandre.fr](http://rousseau-alexandre.fr), aucune
 On commence donc par se connecter sur raspberry-cook.fr.
 
 ```bash
-$ ssh pi@192.168.1.102
+ssh pi@192.168.1.102
 ```
 
 On commence par ajouter la corrrespondance du nom de domaines dans le ficher _/etc/hosts_.
 
 ```bash
-$ echo '192.168.1.103 rousseau-alexandre.fr' >> /etc/hosts
+echo '192.168.1.103 rousseau-alexandre.fr' >> /etc/hosts
 ```
 
 Et on s'attaque à Apache en ajoutant le module nécessaire.
 
 ```bash
-$ sudo a2enmod proxy_http
+sudo a2enmod proxy_http
 ```
 
 Et on ajoute la configuration de nos sites. Pour la configuration de [raspberry-cook.fr](raspberry-cook.fr), il n'y aura rien de particulier, c'est celle de [rousseau-alexandre.fr](http://rousseau-alexandre.fr) qui sera particulière.
 
 ```bash
-$ sudo vi /etc/apache2/site-available/rousseau-alexandre.fr.conf
+sudo vi /etc/apache2/site-available/rousseau-alexandre.fr.conf
 ```
 
 ```apache

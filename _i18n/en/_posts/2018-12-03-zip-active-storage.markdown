@@ -37,7 +37,7 @@ In this article we go:
 For this tutorial I have chosen to start from a new project. So let's create a new Rails project:
 
 ```bash
-$ rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --skip-system-test --skip-action-mailer
+rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --skip-system-test --skip-action-mailer
 ```
 
 > I added "some" _flags_ `--skip` to remove anything that will be useless to us
@@ -45,7 +45,7 @@ $ rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --sk
 We will also generate a `User` entity with the `scaffold` command:
 
 ```bash
-$ rails g scaffold user name:string
+rails g scaffold user name:string
 ```
 
 > `scaffold` command will create the _controller_, the _model_, _views_ and even the migration
@@ -53,7 +53,7 @@ $ rails g scaffold user name:string
 Now since I want to use _Active Storage_ wich I need to install. It's very easy to do this, the next command does it for us:
 
 ```bash
-$ rails active_storage:install
+rails active_storage:install
 ```
 
 > This command just generates a migration that will create the tables `active_storage_blobs` & `active_storage_attachments`
@@ -61,7 +61,7 @@ $ rails active_storage:install
 Now that all our **migrations** are created, just run them:
 
 ```bash
-$ rake db:migrate
+rake db:migrate
 ```
 
 That's it, we're ready to code!
@@ -148,7 +148,7 @@ end
 Test fails for the moment and **it is normal**:
 
 ```
-$ rake test
+rake test
 
 # Running:
 
@@ -265,7 +265,7 @@ end
 Tests now pass:
 
 ```
-$ rake test
+rake test
 Run options: --seed 43367
 
 # Running:
@@ -385,15 +385,15 @@ Don't do that, we can go further! We can **move** our code into a **library** th
 This is easy to do. Let's leave our project for two seconds and **create** a gem with [bundler][bundler]:
 
 ```bash
-$ bundle gem activestorage-zip
-$ cd activestorage-zip
+bundle gem activestorage-zip
+cd activestorage-zip
 ```
 
 We must specify **dependencies** of our gem. Of course, we need Rails 5.2 and [rubyzip][rubyzip]:
 
 ```bash
-$ bundle add rails
-$ bundle add rubyzip
+bundle add rails
+bundle add rubyzip
 ```
 
 And then I move all the concerned into the file
@@ -423,7 +423,7 @@ There you go! That's all! It was really simple!
 Now we will try to **use** our gem on our previous project (before publishing it on [Rubygem](https://guides.rubygems.org/) for example). So I install the gem locally with this command:
 
 ```ruby
-$ rake install:local
+rake install:local
 ```
 
 Now go back to _example_zip_ project. Just add our gem to the _Gemfile_:
@@ -456,7 +456,7 @@ class UsersController < ApplicationController
 And to make sure everything works. Run our tests again:
 
 ```
-$ rake test
+rake test
 Run options: --seed 4817
 
 # Running:

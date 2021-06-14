@@ -63,10 +63,10 @@ echo "Avg: $TIME_AVERAGE"
 Voici donc le résultat avec mon Raspberry PI 2 B+ avec 50 requêtes.
 
 ```bash
-$ ./average_reponse_time.sh http://raspberry-cook.fr/recipes 50
+./average_reponse_time.sh http://raspberry-cook.fr/recipes 50
 Sum: 38.278
 Avg: .76556
-$ ./average_reponse_time.sh http://raspberry-cook.fr/recipes 50
+./average_reponse_time.sh http://raspberry-cook.fr/recipes 50
 Sum: 34.014
 Avg: .68028
 ```
@@ -74,10 +74,10 @@ Avg: .68028
 Voici donc le résultat avec mon Raspberry PI 3 B+ avec 50 requêtes.
 
 ```bash
-$ ./average_reponse_time.sh http://192.168.1.103/recipes 50
+./average_reponse_time.sh http://192.168.1.103/recipes 50
 Sum: 19.812
 Avg: .39624
-$ ./average_reponse_time.sh http://192.168.1.103/recipes 50
+./average_reponse_time.sh http://192.168.1.103/recipes 50
 Sum: 19.766
 Avg: .39532
 ```

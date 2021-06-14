@@ -15,16 +15,16 @@ Après quelques recherches, voici la procédure à suivre.
 ## Cloner le projet et installer les dépendances
 
 ```bash
-$ git clone https://github.com/madeindjs/super-markdown.git
-$ cd super-markdown
-$ pip install -r requirements.txt
-$ python setup.py install
+git clone https://github.com/madeindjs/super-markdown.git
+cd super-markdown
+pip install -r requirements.txt
+python setup.py install
 ```
 
 ## configuration pour Pypi
 
 ```bash
-$ vi ~/.pypirc
+vi ~/.pypirc
 ```
 
 ```ini
@@ -39,7 +39,7 @@ password=your_password
 On n'oublie pas de mettre les droit en lecture / ecriture uniquement pour l'utilisateur courant:
 
 ```bash
-$ chmod 600 ~/.pypirc
+chmod 600 ~/.pypirc
 ```
 
 ## envoie du packet
@@ -47,13 +47,13 @@ $ chmod 600 ~/.pypirc
 On se connecte via la ligne de commande
 
 ```bash
-$ python setup.py register
+python setup.py register
 ```
 
 Et on envoie le packet
 
 ```bash
-$ python setup.py sdist upload
+python setup.py sdist upload
 ```
 
 Et le tour est joué.

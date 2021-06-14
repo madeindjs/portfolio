@@ -14,5 +14,13 @@ toc: Sommaire
 my_github_profile: mon profil Github
 my_educations: Diplômes
 
+lead:
+  - Bonjour, je m'appelle Alexandre.
+  - Je suis un développeur fullstack / DevOPS.
+
 description:
-  - Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes. Cela permet de créer des fonctionnalités performantes et évolutives.
+  - Je suis passionné par la programmation et le monde du logiciel libre. J'essaie de contribuer au monde de l'Open-source à mes projets personnels et différentes contributions sur <a href="https://github.com/madeindjs">Github</a> / <a href="https://gitlab.com/alexandre.rousseau">Gitlab</a>.
+  - J'ai écris deux livres sous licence libre. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> et <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> qui enseignent les meilleurs pratiques pour construire une API avec Ruby on Rails ou Node.js (j'en parle dans <a href="/story/2019/11/10/api-on-rails.html">cet article</a>).
+  - A côté de ça, j'aime partager mes découvertes via <a href="/blog">des articles sur mon blog</a>.
+
+footer: Vous pouvez me contacter <a href="mailto:contact@rousseau-alexandre.fr">par mail</a> (<a href="/pgp.txt">GPG</a>) ou bien via <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">LinkedIn</a>. Si vous êtes intéressé pour travailler avec moi, vous pouvez <a href="/resume">consulter mon CV</a> ou bien <a>télécharger une version PDF</a>.

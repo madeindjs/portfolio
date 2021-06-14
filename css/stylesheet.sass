@@ -3,8 +3,8 @@
 
 //  heavily inspired from https://github.com/nicokant/readable-css
 
-$title-font: monospace
-$font: monospace
+$font: 'iA Writer Duospace'
+$title-font: $font
 $sansFont: monospace
 $baseFontSize: 1.2em
 $line-height: 1.3em
@@ -28,49 +28,56 @@ $primary-color: #2980b9
   margin-right: 0
   margin-left: 0
 
+body
+  font-family: $font
+  overflow-x: hidden
+  padding-left: $baseFontSize * 2
+  padding-right: $baseFontSize * 2
+
 // content
 p
   +marginDefault($baseFontSize)
   line-height: $line-height
-  text-align: justify
+  // text-align: justify
 
 ul li,
 ol li
   font-size: $baseFontSize
-  +marginDefault($baseFontSize/2)
+  +marginDefault($baseFontSize)
+
+nav ul li
+  margin-top: 0
+  margin-bottom: 0
 
 blockquote
   +marginDefault($baseFontSize)
-  margin-left: $baseFontSize
-  border-left: $baseFontSize/4 solid #dddddd
+  margin-left: 0
+  border-left: $baseFontSize/4 solid $primary-color
   padding-left: $baseFontSize
 
 // header
 
+h1
+  margin-top: 0
+
 h1, h2, h3, h4, h5, h6
   font-family: $title-font
-  font-weight: 700
+  font-weight: 600
   margin-bottom: $baseFontSize / 2
 h1
   font-size: $baseFontSize * 3
   // margin-top: $baseFontSize * 2
 h2
   font-size: $baseFontSize * 2
-  margin-top: $baseFontSize * 3
+  margin-top: $baseFontSize
 h3
   font-size: $baseFontSize * 1.5
-  margin-top: $baseFontSize * 1.5
+  margin-top: $baseFontSize
 h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
 
-header
-  border-bottom: dashed 2px
-  text-align: center
-
 footer
-  border-top: dashed 2px
-  text-align: center
   margin-bottom: 2rem
   margin-top: 2rem
   // padding-top: 1rem
@@ -78,6 +85,11 @@ footer
 section
   margin-top: $baseFontSize * 4
   margin-bottom: $baseFontSize * 4
+
+header nav ul
+  list-style: none
+  display: flex
+  justify-content: space-between
 
 // inline
 
@@ -124,8 +136,9 @@ u
   text-decoration: underline
 
 hr
-  border-top: 0px
-  border-bottom: dashed 2px
+  width: $baseFontSize * 3
+  // border-top: 0px
+  // border-bottom: dashed 2px
 
 // list
 
@@ -168,9 +181,6 @@ table
   th
     font-weight: 700
 
-article
-  +marginDefault($baseFontSize * 2)
-
 ul, ol
   padding-left: 0
 
@@ -178,7 +188,8 @@ ul, ol
 
 div.highlighter-rouge
   position: relative
-  padding-left: $baseFontSize * 2
+  padding-left: $baseFontSize
+  border-left: $baseFontSize/4 solid $primary-color
 
 ul.list-inline
   list-style-type: none
@@ -186,7 +197,7 @@ ul.list-inline
   // @include marginDefault($baseFontSize)
 
   & > li ~ li::before
-    content : ' - '
+    content: ' - '
     // padding-right: 1em
 
   li
@@ -209,57 +220,54 @@ ul.list-inline
 .mt-0
   margin: 0
 
+.hide
+  display: none
+
 // MARKDOWN
 
-h1, h2, h3, h4, h5, h6
-  position: relative
+// h1, h2, h3, h4, h5, h6
+//   position: relative
 
-h1:before, h2:before, h3:before, h4:before, h5:before, h6:before
-  content: '# '
-  color: $primary-color
-  position: absolute
-  right: 100%
-  margin-right: $baseFontSize
-  display: inline-block
-  text-align: right
+// h1:before, h2:before, h3:before, h4:before, h5:before, h6:before
+//   color: $primary-color
+//   position: absolute
+//   right: 100%
+//   margin-right: $baseFontSize
+//   display: inline-block
+//   text-align: right
 
-h2:before
-  content: '## '
-  color: $primary-color
+// h2:before
+//   content: '## '
+//   color: $primary-color
 
-h3:before
-  content: '### '
-  color: $primary-color
+// h3:before
+//   content: '### '
+//   color: $primary-color
 
-h4:before
-  content: '#### '
-  color: $primary-color
+// h4:before
+//   content: '#### '
+//   color: $primary-color
 
-h5:before
-  content: '##### '
-  color: $primary-color
+// h5:before
+//   content: '##### '
+//   color: $primary-color
 
-h6:before
-  content: '###### '
-  color: $primary-color
+// h6:before
+//   content: '###### '
+//   color: $primary-color
 
 // MEDIA
 
 @media screen
   body
-    max-width: 720px
+    max-width: 900px
     margin: auto
-    padding-left: $baseFontSize * 2
-    padding-right: $baseFontSize * 2
 
   h1
     font-size: $baseFontSize * 3
 
   h2
     font-size: $baseFontSize * 2
-
-  article
-    +marginDefault($baseFontSize * 3)
 
   pre.highlight
     overflow-x: auto
@@ -332,11 +340,11 @@ h6:before
     border-left-color: $text-color-dark
 
   mark
-    background-color: yellow
+    background-color: lightblue
 
     a
       color: black
-      font-weight: 600
+  //     font-weight: 600
 
   hr
     border-color: white
@@ -349,26 +357,49 @@ h6:before
   // .highlight
   //   background: black
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: normal
-//   font-style: normal
-//   src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: normal
+  font-style: normal
+  src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: normal
-//   font-style: italic
-//   src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: normal
+  font-style: italic
+  src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: bold
-//   font-style: normal
-//   src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: bold
+  font-style: normal
+  src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: bold
-//   font-style: italic
-//   src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: bold
+  font-style: italic
+  src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
+
+// POST
+
+.row
+  display: flex
+
+#landing
+  h2
+    margin-top: $baseFontSize
+
+  section.main
+    min-height: 50vh
+    margin-top: 0
+    margin-bottom: 0
+
+    display: flex
+    flex-direction: column
+    justify-content: end
+
+    p
+      font-size: $baseFontSize * 2
+      margin-top: 0
+      margin-bottom: $baseFontSize / 2

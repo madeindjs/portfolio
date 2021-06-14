@@ -4,57 +4,73 @@
     {% include head.html %}
   </head>
 
-  <body class="readable-content">
+  <body id="post" class="readable-content post">
     {% include header.html %}
-    <!-- header & navigation -->
-    <h1>{{ page.title }}<br /><small>@{{ page.categories }}</small></h1>
-    <p class="text-right">
-      {% for tag in page.tags %}
-      <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"><code>#{{ tag }}</code></a>
-      {% endfor %} &nbsp;<date>{{ page.date | date: "%Y-%m-%dT%H:%M" }}</date>
-    </p>
-    <div class="toc">
-      <h2>{{ site.translations[site.lang]['toc'] }}</h2>
-      {{ content | toc_only }}
-    </div>
-    <!-- <p class="badges">
-    {% for tag in page.tags %}
-    <span class="badge badge-dark">{{ tag }}</span>
-    {% endfor %}
-  </p> -->
-    {% if page.thumbnail %}
-    <p class="text-center">
-      <img src="{{ page.thumbnail }}" class="center-block grey" />
-    </p>
-    {% endif %}
-    <div>{{ content }}</div>
+    <article>
+      <h1>{{ page.title }}</h1>
+      <ul class="list-inline">
+        <li><date>{{ page.date | date: "%Y-%m-%d" }}</date></li>
+        <li>
+          {% for tag in page.tags %}
+          <a
+            href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
+            >#{{ tag }}</a
+          >
+          {% endfor %}
+        </li>
+        <li>@{{ page.categories }}</li>
+      </ul>
+      <nav>
+        <p>{{ site.translations[site.lang]['toc'] }}</p>
+        {{ content | toc_only }}
+      </nav>
 
-    <p>
-      <small>
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-          ><img
-            alt="Licence Creative Commons"
-            style="border-width: 0"
-            src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a
-        ><br />Cet
-        <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type"
-          >article</span
-        >
-        de
-        <a
-          xmlns:cc="http://creativecommons.org/ns#"
-          href="http://rousseau-alexandre.fr"
-          property="cc:attributionName"
-          rel="cc:attributionURL"
-          >Alexandre Rousseau</a
-        >
-        est mise à disposition selon les termes de la
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-          >licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0
-          International</a
-        >.
-      </small>
-    </p>
+      {% if page.thumbnail %}
+      <p class="text-center">
+        <img src="{{ page.thumbnail }}" class="center-block grey" />
+      </p>
+      {% endif %}
+
+      <hr />
+
+      <div>{{ content }}</div>
+
+      <hr />
+
+      <p>
+        <small>
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            ><img
+              alt="Licence Creative Commons"
+              style="border-width: 0"
+              src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a
+          ><br />Cet
+          <span
+            xmlns:dct="http://purl.org/dc/terms/"
+            href="http://purl.org/dc/dcmitype/Text"
+            rel="dct:type"
+            >article</span
+          >
+          de
+          <a
+            xmlns:cc="http://creativecommons.org/ns#"
+            href="http://rousseau-alexandre.fr"
+            property="cc:attributionName"
+            rel="cc:attributionURL"
+            >Alexandre Rousseau</a
+          >
+          est mise à disposition selon les termes de la
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            >licence Creative Commons Attribution - Pas d’Utilisation
+            Commerciale - Partage dans les Mêmes Conditions 4.0 International</a
+          >.
+        </small>
+      </p>
+    </article>
     {% include footer.html %}
     <link href="/css/pygments/monokai.css" rel="stylesheet" />
   </body>

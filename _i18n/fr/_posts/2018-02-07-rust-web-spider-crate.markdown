@@ -2,7 +2,7 @@
 layout: post
 title: Un Crawler en Rust
 description: Créez votre premier crate en Rust
-date:   2018-02-07 12:00:00 +0200
+date: 2018-02-07 12:00:00 +0200
 tags: rust crate crawler
 categories: tutorial
 thumbnail: /img/blog/rust2.svg
@@ -18,8 +18,8 @@ Un langage performant n'est pas nécessairement un bon critère ici, car le craw
 
 ## Sommaire
 
-* TOC
-{:toc}
+- TOC
+  {:toc}
 
 ## Création projet
 
@@ -29,19 +29,19 @@ Afin de pouvoir utiliser notre **Crawler** dans nos future projet, nous utiliser
 
 On commence donc par utiliser **Cargo** pour initialiser notre nouveau projet.
 
-~~~bash
-$ cargo new spider --bin
-$ cd spider
-~~~
+```bash
+cargo new spider --bin
+cd spider
+```
 
 Nous avons donc une architecture par défaut
 
-~~~
+```
 spider/
 ├── Cargo.toml
 └── src
     └── lib.rs
-~~~
+```
 
 On aura besoin de quelques librairies afin de de réaliser notre crawler:
 
@@ -50,7 +50,7 @@ On aura besoin de quelques librairies afin de de réaliser notre crawler:
 
 On les ajoutes donc au fichier _Cargo.toml_
 
-~~~toml
+```toml
 # Cargo.toml
 
 # ...
@@ -58,15 +58,15 @@ On les ajoutes donc au fichier _Cargo.toml_
 [dependencies]
 reqwest = "0.8.2"
 scraper = "0.4.0"
-~~~
+```
 
 Pour les utiliser, nous devons les charger dans le fichier _lib.rs_.
 
-~~~rust
+```rust
 // src/lib.rs
 extern crate reqwest;
 extern crate scraper;
-~~~
+```
 
 ### Structure du projet
 
@@ -77,14 +77,14 @@ De plus, nous aurons besoin de deux nouveaux fichiers:
 
 Pour les charger, il faut les importer dans le fichier _lib.rs_ grâce au mot clé `pub mod` (`mod` charge le fichier et `pub` le rend publique).
 
-~~~rust
+```rust
 // src/lib.rs
 
 // ...
 
 pub mod website;
 pub mod page;
-~~~
+```
 
 ## Le code
 
@@ -92,7 +92,7 @@ pub mod page;
 
 On commence par créer une nouvelle structure `Page` qui contiendra l'URL de la page et le contenu HTML parsé.
 
-~~~rust
+```rust
 // src/page.rs
 use scraper::Html;
 
@@ -103,11 +103,11 @@ pub struct Page {
     /// HTML parsé par scrapper
     html: Html,
 }
-~~~
+```
 
-On implémente donc les **méthodes** pour notre scraper. La méthode `new` permettra de créer une  récupérer le contenu HTML de la page avec **reqwest**. Lors de l'appel, nous récupérerons le contenu de la page et nous parserons le résultat avec la méthode `visit`.
+On implémente donc les **méthodes** pour notre scraper. La méthode `new` permettra de créer une récupérer le contenu HTML de la page avec **reqwest**. Lors de l'appel, nous récupérerons le contenu de la page et nous parserons le résultat avec la méthode `visit`.
 
-~~~rust
+```rust
 // src/page.rs
 use scraper::Html;
 use reqwest;
@@ -133,11 +133,11 @@ impl Page {
         Html::parse_document(&body)
     }
 }
-~~~
+```
 
 Afin de récupérer le contenu de la page web, nous utiliserons **reqwest**. D'autres librairies existent mais **reqwest** est simple à utiliser.
 
-~~~rust
+```rust
 // src/page.rs
 use scraper::Html;
 use reqwest;
@@ -171,13 +171,13 @@ impl Page {
     }
 
 }
-~~~
+```
 
 Pour tester que tout fonctionne, il suffit de **créer un test**. La particularité de [Rust][rust] est que les tests ne sont pas forcément séparé de notre fichier testé.
 
 Le test va simplement `assert!` qu'un lien donné a bien été trouvé parmi ceux scrapés.
 
-~~~rust
+```rust
 // src/page.rs
 use scraper::Html;
 use reqwest;
@@ -193,20 +193,19 @@ fn parse_links() {
             &"http://rousseau-alexandre.fr/blog".to_string()
     ));
 }
-~~~
+```
 
 Maintenant on lance les tests et on vérifie que tout se passe bien.
 
-~~~bash
-$ cargo test
-~~~
-
+```bash
+cargo test
+```
 
 ### Le Crawler
 
 Le crawler sera une structure `Website`. Cette structure contiendra toutes les pages visitées et les URLS des pages à visiter.
 
-~~~rust
+```rust
 // src/website.rs
 use page::Page;
 
@@ -220,11 +219,11 @@ pub struct Website {
     /// les pages visitées
     pages: Vec<Page>,
 }
-~~~
+```
 
 La méthode `new` permettra de créer un nouveau `Website` à partir du domaine.
 
-~~~rust
+```rust
 // src/website.rs
 use page::Page;
 
@@ -243,11 +242,11 @@ impl Website {
         }
     }
 }
-~~~
+```
 
 Il faut donc implémenter la méthode `crawl` qui va récupérer les `Page`s parmi les `links` restant et boucler sur toutes les `links` des pages récupérées
 
-~~~rust
+```rust
 // src/website.rs
 use page::Page;
 
@@ -273,7 +272,7 @@ impl Website {
                         new_links.push(link_founded);
                     }
                 }
-                // on ajoute la page à la structure                
+                // on ajoute la page à la structure
                 self.pages.push(page);
                 // on màj les URLs à visiter
                 self.links_visited.push(link.to_string());
@@ -283,11 +282,11 @@ impl Website {
         }
     }
 }
-~~~
+```
 
 Pour tester que tout fonctionne, on crée un simple test pour vérifier qu'une page contenue dans un site existe:
 
-~~~rust
+```rust
 // src/website.rs
 use page::Page;
 
@@ -303,13 +302,13 @@ fn crawl() {
         &"http://rousseau-alexandre.fr/blog".to_string(),
     ));
 }
-~~~
+```
 
 ... et de lancer les tests:
 
-~~~bash
-$ cargo test
-~~~
+```bash
+cargo test
+```
 
 Notre librairie est donc complète!
 
@@ -319,7 +318,7 @@ Notre librairie est donc complète!
 
 Une [liste d'attributs][cargo_publishing_list] est disponible pour notre fichier _Cargo.toml_ afin d'ajouter des informations complémentaires à notre librairie.
 
-~~~toml
+```toml
 # Cargo.toml
 [package]
 name = "spider"
@@ -342,40 +341,40 @@ documentation = "https://docs.rs/spider"
 maintenance = { status = "as-is" }
 
 # ...
-~~~
+```
 
 ### L'envoyer sur [crates.io][crates.io]
 
 Tout d'abord, il faut se créer un compte. Pour cela se rendre sur [crates.io][crates.io] et suivre les étapes classiques. Une fois connecté, allez sur dans la section _Account Settings_ et créer une nouvelle **clef API**. Une commande comme la suivante vous sera donnée.
 
-~~~bash
-$ cargo login abcdefghijklmnopqrstuvwxyz012345
-~~~
+```bash
+cargo login abcdefghijklmnopqrstuvwxyz012345
+```
 
 Une fois Il suffit d'utiliser la commande `package` qui va créer un fichier _target/package/spider.crate_.
 
-~~~bash
-$ cargo package
-~~~
+```bash
+cargo package
+```
 
 Pour publier ce paquet il suffit d'utiliser la commande `publish` qui va s'occuper de tout envoyer sur [crates.io][crates.io].
 
-~~~bash
-$ cargo publish
-~~~
+```bash
+cargo publish
+```
 
 ### Test d'utilisation du Crate
 
 Pour tester que tout fonctionne, essayons de créer un nouveau projet
 
-~~~bash
-$ cargo new test_spider --bin
-$ cd test_spider
-~~~
+```bash
+cargo new test_spider --bin
+cd test_spider
+```
 
 Il suffit
 
-~~~rust
+```rust
 // src/main.rs
 extern crate spider;
 
@@ -389,19 +388,19 @@ fn main() {
         println!("- {}", page.get_url());
     }
 }
-~~~
+```
 
 et on lance pour vérifier que tout fonctionne
 
-~~~bash
-$ cargo run
-~~~
+```bash
+cargo run
+```
 
 Tout fonctionne parfaitement. D'autres paramètre sont possibles, si vous voulez en savoir plus, jetez un coup d'oeuil à la [documentation officielle][cargo_publishing].
 
 ## Conclusion
 
-Cargo permet facilement de créer des **petites librairie**. Cela permet de partager des **petits composants** utilisables dans de plus gros projets. Cela nous permet d'éviter de "réinventer la roue" en utilisant d'autres composants partagés par d'autres *rustaceans*!
+Cargo permet facilement de créer des **petites librairie**. Cela permet de partager des **petits composants** utilisables dans de plus gros projets. Cela nous permet d'éviter de "réinventer la roue" en utilisant d'autres composants partagés par d'autres _rustaceans_!
 
 N’hésitez pas à consulter / forker le dépôt complet sur ce [mon dépôt Github][spider_1.0.3].
 
