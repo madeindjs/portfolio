@@ -3,8 +3,8 @@
 
 //  heavily inspired from https://github.com/nicokant/readable-css
 
-$title-font: serif
-$font: monospace
+$font: 'iA Writer Duospace'
+$title-font: $font
 $sansFont: monospace
 $baseFontSize: 1.2em
 $line-height: 1.3em
@@ -29,6 +29,7 @@ $primary-color: #2980b9
   margin-left: 0
 
 body
+  font-family: $font
   overflow-x: hidden
   padding-left: $baseFontSize * 2
   padding-right: $baseFontSize * 2
@@ -37,7 +38,7 @@ body
 p
   +marginDefault($baseFontSize)
   line-height: $line-height
-  text-align: justify
+  // text-align: justify
 
 ul li,
 ol li
@@ -60,7 +61,7 @@ h1
   margin-top: 0
 
 h1, h2, h3, h4, h5, h6
-  // font-family: $title-font
+  font-family: $title-font
   font-weight: 600
   margin-bottom: $baseFontSize / 2
 h1
@@ -356,29 +357,29 @@ ul.list-inline
   // .highlight
   //   background: black
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: normal
-//   font-style: normal
-//   src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: normal
+  font-style: normal
+  src: url("/fonts/iAWriterDuospace-Regular.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Regular.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Regular.woff") format("woff")
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: normal
-//   font-style: italic
-//   src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: normal
+  font-style: italic
+  src: url("/fonts/iAWriterDuospace-Italic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Italic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Italic.woff") format("woff")
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: bold
-//   font-style: normal
-//   src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: bold
+  font-style: normal
+  src: url("/fonts/iAWriterDuospace-Bold.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-Bold.woff2") format("woff2"), url("/fonts/iAWriterDuospace-Bold.woff") format("woff")
 
-// @font-face
-//   font-family: "iA Writer Duospace"
-//   font-weight: bold
-//   font-style: italic
-//   src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
+@font-face
+  font-family: "iA Writer Duospace"
+  font-weight: bold
+  font-style: italic
+  src: url("/fonts/iAWriterDuospace-BoldItalic.eot") format("embedded-opentype"), url("/fonts/iAWriterDuospace-BoldItalic.woff2") format("woff2"), url("/fonts/iAWriterDuospace-BoldItalic.woff") format("woff")
 
 // POST
 
