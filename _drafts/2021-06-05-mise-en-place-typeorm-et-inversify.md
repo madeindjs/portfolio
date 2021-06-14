@@ -1,9 +1,9 @@
 ---
-title: Mise en place de l'injection de dépendance dans une API avec Inversify
-description: Ce tutoriel vous montre comment mettre en place une API RESTfull
-  complète en utilisant l'injection de dépendances Inversify.
+title: Setup dependency injection with Node.js / Typescript
+description: This tutorial show you how to setup dependency injection with
+  TypeORM and Inversify libraries
 layout: post
-date: 2021-06-10 12:00:00 +0200
+date: 2021-06-0s5 15:00:00 +0200
 tags:
   - node.js
   - typescript
@@ -11,7 +11,7 @@ tags:
   - expressjs
   - inversify
 categories: programming
-modified: 2021-06-10T12:53:20.368Z
+modified: 2021-06-06T13:12:06.407Z
 ---
 
 Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API.
@@ -19,8 +19,6 @@ Dans cet article nous allons voir pourquoi et comment mettre en place l'injectio
 Nous allons mettre en place une API complète [RESTfull](https://fr.wikipedia.org/wiki/Representational_state_transfer) pour gérer des utilisateurs avec les actions basiques (consultation, création, edition, suppression). Et tant qu'à faire, nous allons mettre des tests unitaires et fonctionnels.
 
 Mais avant de commencer à tout mettre en place, je vais essayer ici de vous résumer ce qu'est l'injection de dépendance et à quoi ça sert.
-
-{% include promote-restapits-fr.html %}
 
 ## Pourquoi utiliser l'injection de dépendance
 
@@ -667,7 +665,7 @@ curl http://localhost:3000/users
 
 Le retour de la commande nous indique un tableau vide: c'est normal car il n'y a pas encore d'utilisateur. En revanche, le terminal du serveur nous indique qu'il s'est passé beaucoup de chose:
 
-```
+....
 query: BEGIN TRANSACTION
 query: SELECT _ FROM "sqlite_master" WHERE "type" = 'table' AND "name" IN ('user')
 query: SELECT _ FROM "sqlite_master" WHERE "type" = 'index' AND "tbl_name" IN ('user')
@@ -676,7 +674,7 @@ query: CREATE TABLE "user" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "em
 query: COMMIT
 2020-11-15T22:09:25.476Z - INFO - Connection established - {}
 query: SELECT "User"."id" AS "User_id", "User"."email" AS "User_email", "User"."password" AS "User_password" FROM "user" "User"
-```
+....
 
 Il s'agit des logs de TypeORM. Ceux-ci nous indiquent que:
 
@@ -867,17 +865,17 @@ git commit -am "Implement CRUD actions on user"
 
 Tout semble fonctionner mais il rest une problème: nous ne validons pas les données que nous insérons en base. Ainsi, il est possible de créer un utilisateur avec un email faux :
 
-```sh
+....
 curl -X POST -d "whatever" -d "password=test" http://localhost:3000/users
-```
+....
 
 Encore une fois, nous allons avoir recours a une librairie toute faite: `class-validator`. Cette librairie va nous offrir https://github.com/typestack/class-validator/#table-of-contents[une tonne de décorateurs] pour vérifier très facilement notre instance `User`.
 
 Installons la avec NPM :
 
-```sh
+....
 npm install class-validator --save
-```
+....
 
 Et il suffit ensuite d'ajouter les décorateurs `@IsEmail` et `@IsDefined` comme ceci :
 
@@ -1446,8 +1444,10 @@ git add && git commit -m "Add functional tests"
 
 ## Conclusion
 
-Et voilà, ce tutoriel touche à sa fin.
+Oh vous êtes là! Bien joué! Je sais que c’était probablement le chapitre le plus long mais n’abandonnez pas!
 
-J'espère que cet article aura permit de démystifier un peu l'injection de dépendance et/ou que vous aurez appris des choses ici.
+Si vous n'avez pas l'habitude d'utiliser des tests, nous verrons dans le chapitre comment les utiliser pour définir à l'avance le comportement que nous souhaitons avant même de coder les fonctionnalité. Nous mettrons donc en place les tests pour les méthodes `show`, `update` et `destroy` qui auront besoin d'une authentification. En d'autres termes, nous commencerons à faire du développement dirigé par les tests _Test Driven Development_. Il s'agit très certainement de la partie la plus importante du livre!
 
-{% include promote-restapits-fr.html %}
+## Conclusion
+
+Ça a été un peu long, je sais, mais vous avez réussi! N’abandonnez pas, c’est juste notre petite fondation pour quelque chose de grand, alors continuez comme ça.

@@ -6,17 +6,17 @@ TODO: expliquer XMPP
 
 TODO: expliquer Prosody
 
-~~~bash
-$ sudo apt-get install prosody
-~~~
+```bash
+sudo apt-get install prosody
+```
 
 Générer un certificat pour chiffrer les connexions:
 
-~~~bash
-$ sudo prosodyctl cert generate rousseau-alexandre.fr
-~~~
+```bash
+sudo prosodyctl cert generate rousseau-alexandre.fr
+```
 
-~~~lua
+```lua
 -- /etc/prosody/prosody.cfg.lua
 
 VirtualHost rousseau-alexandre.fr"
@@ -24,13 +24,13 @@ ssl = {
         key = "/var/lib/prosody/rousseau-alexandre.fr.key";
         certificate = "/var/lib/prosody/rousseau-alexandre.fr.crt";
 }
-~~~
+```
 
 Ajouter un utilisateur:
 
-~~~bash
-$ sudo prosodyctl adduser alexandre@rousseau-alexandre.fr
-~~~
+```bash
+sudo prosodyctl adduser alexandre@rousseau-alexandre.fr
+```
 
 ## Extrieur
 
@@ -42,7 +42,6 @@ The following ports are exposed:
 - 5347: XMPP component port
 - 5280: BOSH / websocket port
 - 5281: Secure BOSH / websocket port
-
 
 Now foreward ports `5222` and `5269` on your router (Go ahead and foreward `5280` and `5281` as well if you want to upload and store files on your server).
 

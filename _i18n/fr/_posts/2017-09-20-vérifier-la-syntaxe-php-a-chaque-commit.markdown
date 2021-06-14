@@ -15,7 +15,7 @@ Afin d'automatiser et d'améliorer la qualité du code, il est possible de lance
 Les _hooks_ sont des petits scripts qui se lancent lors des différentes actions Git. Il en existe plusieurs et pour les connaitre il suffit de se rendre dans un dépot Git et de faire:
 
 ```bash
-$ ls .git/hooks/
+ls .git/hooks/
 applypatch-msg.sample  pre-applypatch.sample          pre-commit.sample          pre-push.sample    update.sample
 commit-msg.sample      post-update.sample             prepare-commit-msg.sample  pre-rebase.sample
 ```
@@ -23,7 +23,7 @@ commit-msg.sample      post-update.sample             prepare-commit-msg.sample 
 Les fichiers _.sample_ sont des examples proposés par Git. Dans notre cas, on va partir de zéro en créant un script vide
 
 ```bash
-$ touch .git/hooks/pre-commit
+touch .git/hooks/pre-commit
 ```
 
 ## Le script
@@ -84,18 +84,18 @@ done
 Notre script étant prêt, il nous reste plus qu'à tester. On ajoute un fichier PHP valide et on vérifie qu'il est accepté
 
 ```bash
-$ echo '<?php echo "test";' > valid.php
-$ git add valid.php
-$ git commit -m "Add valid file"
+echo '<?php echo "test";' > valid.php
+git add valid.php
+git commit -m "Add valid file"
 ```
 
 Maintenant on teste avec un fichier PHP non valide
 
 ```bash
-$ git reset --hard HEAD^ # on annule le précedent commit
-$ echo '<?php echo "test;' > invalid.php
-$ git add invalid.php
-$ git commit -m "Add invalid file"
+git reset --hard HEAD^ # on annule le précedent commit
+echo '<?php echo "test;' > invalid.php
+git add invalid.php
+git commit -m "Add invalid file"
 ```
 
 Le script coupe l'ajout du commit!

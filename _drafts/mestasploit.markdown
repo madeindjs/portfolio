@@ -30,14 +30,14 @@ On retrouve beaucoup en téléchargement la version 2 [en téléchargement sur S
 [Vagrant][vagrant] est un logiciel libre et open-source qui gère la création et la configuration des machines virtuelles. Pour l'installer, il suffit de télécharger le paquet via [le site officiel](https://www.vagrantup.com/downloads.html). Par exemple, pour Debian:
 
 ```bash
-$ wget https://releases.hashicorp.com/vagrant/2.1.5/vagrant_2.1.5_x86_64.deb
-$ sudo dpkg -i vagrant_2.1.5_x86_64.deb
+wget https://releases.hashicorp.com/vagrant/2.1.5/vagrant_2.1.5_x86_64.deb
+sudo dpkg -i vagrant_2.1.5_x86_64.deb
 ```
 
 Ensuite, il suffit de télécharger le fichier [Vagrant][vagrant] et le lancer directement avec `vagrant up`:
 
 ```bash
-$ curl -O https://raw.githubusercontent.com/rapid7/metasploitable3/master/Vagrantfile && vagrant up
+curl -O https://raw.githubusercontent.com/rapid7/metasploitable3/master/Vagrantfile && vagrant up
 ```
 
 [Vagrant][vagrant] va donc s’occuper de créer la machine virtuelle pour nous. Pour se connecter, le login par défaut est:
@@ -79,7 +79,7 @@ Ces "portes ouvertes" nous donne donc beaucoup d'indications sur la machines et 
 `nmap` possède beaucoup d'options, mais nous pouvons utiliser la version la plus simple
 
 ```bash
-$ sudo nmap 172.28.128.3
+sudo nmap 172.28.128.3
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-10-05 23:12 CEST
 Nmap scan report for 172.28.128.3
@@ -116,13 +116,13 @@ Ici nous allons scanner les vulnérabilités. **Attention** cette action est **i
 [OpenVAS][openvas] est disponible dans les paquets Debian donc il s'installe très facilement.
 
 ```bash
-$ sudo  apt install openvas
+sudo  apt install openvas
 ```
 
 Une fois installé, il nous pouvons effectuer la configuration automatique avec `openvas-setup`. Cette commande va s’occuper de mettre à jour la base de données des failles que Open
 
 ```bash
-$ sudo openvas-setup
+sudo openvas-setup
 ```
 
 > **Attention**, à la fin `openvas-setup` va créer un compte admin avec un **mot de passe aléatoire** qu'il faudra noter.
@@ -130,7 +130,7 @@ $ sudo openvas-setup
 Pour vérifier que tout s'est bien passé, il suffit de lancer la commande suivante:
 
 ```bash
-$ sudo openvas-check-setup
+sudo openvas-check-setup
 ```
 
 Pour plus tard, il suffira de démarrer le service simplement avec la commande `openvas-start` et on peut aussi mettre à jour la base de données des vulnérabilités connues avec `openvas-feed-update`.
@@ -152,7 +152,7 @@ Metasploit possède plusieurs interfaces. Nous allons utiliser **Msfcli**, l'int
 On ouvre donc la console avec `msfconsole`. Ceci va nous ouvrir un mode interactif pour interagir directement avec Metasploit:
 
 ```bash
-$ msfconsole
+msfconsole
 msf >
 ```
 

@@ -13,13 +13,13 @@ Je ne me suis jamais posé la question et j'ai toujours utilisé **MySQL** pour 
 On commence donc par installer **MariaDB** sur le Raspberry Pi.
 
 ```bash
-$ sudo apt install mariadb-server libmariadb-dev
+sudo apt install mariadb-server libmariadb-dev
 ```
 
 La petite subtilité par rapport à MySQL est que rien n'est affiché pour spécifié l'utilisateur par défault. Pour se connecter il suffit de lancer `mariadb` avec `sudo`:
 
 ```bash
-$ sudo mariadb
+sudo mariadb
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 6
 Server version: 10.1.23-MariaDB-9+deb9u1 Raspbian 9.0
@@ -34,16 +34,16 @@ MariaDB [(none)]>
 On commence donc par sécuriser notre serveur avec la commande
 
 ```bash
-$ sudo mysql_secure_installation
-$ # on peut aussi le faire à la main
-$ sudo mysql -e "CREATE USER 'pi'@'localhost' IDENTIFIED BY 'pi'"
-$ sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'pi'@'localhost' WITH GRANT OPTION"
+sudo mysql_secure_installation
+# on peut aussi le faire à la main
+sudo mysql -e "CREATE USER 'pi'@'localhost' IDENTIFIED BY 'pi'"
+sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'pi'@'localhost' WITH GRANT OPTION"
 ```
 
 Et pour tester que tout c'est bien passé, on se connecte de la même façon qu'on le faisait avec **MySQL**
 
 ```bash
-$ mariadb -u pi -ppi
+mariadb -u pi -ppi
 ```
 
 La bonne nouvelle, c'est qu'au niveau de l'application **Ruby On Rails** nous n'avons pas besoin de changer quoique ce soit:
@@ -65,16 +65,16 @@ development:
   encoding: utf8
   username: pi
   password: pi
-  host:  localhost
+  host: localhost
 ```
 
 Donc il suffit de lancer les migrations et lancer notre serveur de développement.
 
 ```bash
-$ bundle install
-$ rake db:create
-$ rake db:migrate
-$ rails s
+bundle install
+rake db:create
+rake db:migrate
+rails s
 ```
 
 Si tout pouvait être aussi simple...

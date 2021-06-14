@@ -37,7 +37,7 @@ Dans cet article nous allons:
 Pour ce tutoriel j'ai choisi de partir d'un nouveau projet. Créons donc un nouveau projet Rails:
 
 ```bash
-$ rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --skip-system-test --skip-action-mailer
+rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --skip-system-test --skip-action-mailer
 ```
 
 > j'ai ajouté "quelques" _flags_ `--skip` afin d'enlever tout ce qui nous sera inutile
@@ -45,7 +45,7 @@ $ rails new zip_example --skip-action-cable --skip-coffee --skip-turbolinks --sk
 On va aussi générer aussi une entité `User` avec la commande `scaffold`:
 
 ```bash
-$ rails g scaffold user name:string
+rails g scaffold user name:string
 ```
 
 > La commande `scaffold` va s'occuper de créer le _controller_, le _model_, les _views_ et même la migration
@@ -53,7 +53,7 @@ $ rails g scaffold user name:string
 Maintenant puisque je veux utiliser _Active Storage_, j'ai besoin de l'**installer**. C'est très facile, la commande suivante le fait pour nous:
 
 ```bash
-$ rails active_storage:install
+rails active_storage:install
 ```
 
 > Cette commande génère juste une migration qui va créer les tables `active_storage_blobs` & `active_storage_attachments`
@@ -61,7 +61,7 @@ $ rails active_storage:install
 Maintenant que toutes nos **migrations** sont créées, il suffit de les jouer:
 
 ```bash
-$ rake db:migrate
+rake db:migrate
 ```
 
 Voilà, nous somme prêts à coder!
@@ -151,7 +151,7 @@ end
 Pour l'instant, le test échoue et **c'est normal**:
 
 ```
-$ rake test
+rake test
 
 # Running:
 
@@ -270,7 +270,7 @@ end
 Les tests passent désormais
 
 ```
-$ rake test
+rake test
 Run options: --seed 43367
 
 # Running:
@@ -392,15 +392,15 @@ Ne faites pas ça, nous pouvons aller plus loin! Nous pouvons **déplacer** notr
 Pour cela rien de plus facile. Quittons deux secondes notre projet et **créons** une gem avec [bundler][bundler]:
 
 ```bash
-$ bundle gem activestorage-zip
-$ cd activestorage-zip
+bundle gem activestorage-zip
+cd activestorage-zip
 ```
 
 Nous devons spécifier les **dépendances** de notre librairie. Évidemment, nous avons besoin de Rails 5.2 et de [rubyzip][rubyzip]:
 
 ```bash
-$ bundle add rails
-$ bundle add rubyzip
+bundle add rails
+bundle add rubyzip
 ```
 
 Et ensuite, je déplace tout le concern dans le fichier
@@ -432,7 +432,7 @@ Et voilà! C'est tout! C'était vraiment simple!
 Maintenant nous allons essayer d'**utiliser** notre gem sur notre projet précédent (avant de la publier sur [Rubygem](https://guides.rubygems.org/) par exemple). J' installe donc la gem en local avec cette commande:
 
 ```ruby
-$ rake install:local
+rake install:local
 ```
 
 Et maintenant revenons au projet _example_zip_. Il suffit de d'ajouter notre gem au _Gemfile_:
@@ -466,7 +466,7 @@ class UsersController < ApplicationController
 Et pour vérifier que tout fonctionne, on relance nos tests:
 
 ```
-$ rake test
+rake test
 Run options: --seed 4817
 
 # Running:

@@ -36,17 +36,17 @@ _Let's go_!
 Let's create a brand new project using [NPM](https://www.npmjs.com/) and [Git versionning](https://git-scm.com/).
 
 ```bash
-$ mkdir graph_api.ts
-$ cd graph_api.ts/
-$ npm init
-$ git init
+mkdir graph_api.ts
+cd graph_api.ts/
+npm init
+git init
 ```
 
 Then we start to install some dependencies to build the HTTP server:
 
 ```bash
-$ npm install --save express body-parser
-$ npm install --save-dev typescript ts-node @types/express @types/node
+npm install --save express body-parser
+npm install --save-dev typescript ts-node @types/express @types/node
 ```
 
 As we use [TypeScript][typescript] we need to create a `tsconfig.json` to indicate how transcript TypeScript files from `lib` to `dist` folder. Also we transpile to [ES6][es6] version:
@@ -74,7 +74,7 @@ Now we we'll create the the `lib/app.ts`. This will be in charge to configure, l
 // lib/app.ts
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { Routes } from "./config/routes";
+import {Routes} from "./config/routes";
 
 class App {
   public app: express.Application;
@@ -88,7 +88,7 @@ class App {
 
   private config(): void {
     this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({extended: false}));
   }
 }
 
@@ -99,7 +99,7 @@ As you can see, we load the routes to define the controllers and the routes to c
 
 ```typescript
 // lib/controllers/nodes.controller.ts
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 
 export class NodesController {
   public index(req: Request, res: Response) {
@@ -114,8 +114,8 @@ We will now separate the routes into a separate file:
 
 ```typescript
 // lib/config/routes.ts
-import { Request, Response } from "express";
-import { NodesController } from "../controllers/nodes.controller";
+import {Request, Response} from "express";
+import {NodesController} from "../controllers/nodes.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -141,7 +141,7 @@ app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
 And that's it. You can start the server using `npm run dev` and try API using cURL:
 
 ```bash
-$ curl http://localhost:3000/nodes
+curl http://localhost:3000/nodes
 {"message":"Hello boi"}
 ```
 
@@ -152,8 +152,8 @@ Sequelize is an [ORM (Object Relational Mapping)][orm] which is in charge to tra
 We start to add librairies:
 
 ```bash
-$ npm install --save sequelize sqlite
-$ npm install --save-dev @types/bluebird @types/validator @types/sequelize
+npm install --save sequelize sqlite
+npm install --save-dev @types/bluebird @types/validator @types/sequelize
 ```
 
 > You may notice I choose SQLite database because of simplicity but you can use MySQL or Postgres
@@ -162,7 +162,7 @@ Then we will create a _lib/config/database.ts_ file to setup Sequelize database 
 
 ```ts
 // lib/config/database.ts
-import { Sequelize } from "sequelize";
+import {Sequelize} from "sequelize";
 
 export const database = new Sequelize({
   database: "some_db",
@@ -175,8 +175,8 @@ Then we'll be able to create a **model**. We'll begin with **Node** model who ex
 
 ```ts
 // lib/models/node.model.ts
-import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
-import { database } from "../config/database";
+import {Sequelize, Model, DataTypes, BuildOptions} from "sequelize";
+import {database} from "../config/database";
 
 export class Node extends Model {
   public id!: number;
@@ -212,7 +212,7 @@ Node.init(
   }
 );
 
-Node.sync({ force: true }).then(() => console.log("Node table created"));
+Node.sync({force: true}).then(() => console.log("Node table created"));
 ```
 
 That's it!
@@ -231,8 +231,8 @@ Now we set up the database, let's create simple CRUD methods in the controller. 
 
 ```ts
 // lib/controllers/nodes.controller.ts
-import { Request, Response } from "express";
-import { Node } from "../models/node.model";
+import {Request, Response} from "express";
+import {Node} from "../models/node.model";
 
 export class NodesController {
   public index(req: Request, res: Response) {
@@ -247,8 +247,8 @@ And setup route:
 
 ```ts
 // lib/config/routes.ts
-import { Request, Response } from "express";
-import { NodesController } from "../controllers/nodes.controller";
+import {Request, Response} from "express";
+import {NodesController} from "../controllers/nodes.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -263,7 +263,7 @@ export class Routes {
 You can try the route using cURL:
 
 ```bash
-$ curl http://localhost:3000/nodes/
+curl http://localhost:3000/nodes/
 []
 ```
 
@@ -286,7 +286,7 @@ Now back in the controller. We simply call `Node.create` and pass params from `r
 ```ts
 // lib/controllers/nodes.controller.ts
 // ...
-import { Node, NodeInterface } from "../models/node.model";
+import {Node, NodeInterface} from "../models/node.model";
 
 export class NodesController {
   // ...
@@ -320,14 +320,14 @@ export class Routes {
 You can try the route using cURL:
 
 ```bash
-$ curl -X POST --data "name=first" http://localhost:3000/nodes/
+curl -X POST --data "name=first" http://localhost:3000/nodes/
 {"id":2,"name":"first","updatedAt":"2019-06-14T11:12:17.606Z","createdAt":"2019-06-14T11:12:17.606Z"}
 ```
 
 It's seem work. Let's try with a bad request:
 
 ```bash
-$ curl -X POST http://localhost:3000/nodes/
+curl -X POST http://localhost:3000/nodes/
 {"name":"SequelizeValidationError","errors":[{"message":"Node.name cannot be null","type":"notNull Violation",...]}
 ```
 
@@ -364,7 +364,7 @@ export class NodesController {
         if (node) {
           res.json(node);
         } else {
-          res.status(404).json({ errors: ["Node not found"] });
+          res.status(404).json({errors: ["Node not found"]});
         }
       })
       .catch((err: Error) => res.status(500).json(err));
@@ -375,9 +375,9 @@ export class NodesController {
 Now it should be alright. Let's try it:
 
 ```bash
-$ curl -X POST http://localhost:3000/nodes/1
+curl -X POST http://localhost:3000/nodes/1
 {"id":1,"name":"first","createdAt":"2019-06-14T11:32:47.731Z","updatedAt":"2019-06-14T11:32:47.731Z"}
-$ curl -X POST http://localhost:3000/nodes/99
+curl -X POST http://localhost:3000/nodes/99
 {"errors":["Node not found"]}
 ```
 
@@ -409,7 +409,7 @@ Then `Node.update` returns a `Promise` like many Sequelize methods.
 
 ```ts
 // lib/controllers/nodes.controller.ts
-import { UpdateOptions } from "sequelize";
+import {UpdateOptions} from "sequelize";
 // ...
 export class NodesController {
   // ...
@@ -418,12 +418,12 @@ export class NodesController {
     const params: NodeInterface = req.body;
 
     const update: UpdateOptions = {
-      where: { id: nodeId },
+      where: {id: nodeId},
       limit: 1,
     };
 
     Node.update(params, update)
-      .then(() => res.status(202).json({ data: "success" }))
+      .then(() => res.status(202).json({data: "success"}))
       .catch((err: Error) => res.status(500).json(err));
   }
 }
@@ -432,7 +432,7 @@ export class NodesController {
 Get it? Let's try it:
 
 ```bash
-$ curl -X PUT --data "name=updated" http://localhost:3000/nodes/1
+curl -X PUT --data "name=updated" http://localhost:3000/nodes/1
 {"data":"success"}}
 ```
 
@@ -463,19 +463,19 @@ For `destroy` method we call `Node.destroy` we take a `DestroyOptions` interface
 ```ts
 // lib/controllers/nodes.controller.ts
 // ...
-import { UpdateOptions, DestroyOptions } from "sequelize";
+import {UpdateOptions, DestroyOptions} from "sequelize";
 
 export class NodesController {
   // ...
   public delete(req: Request, res: Response) {
     const nodeId: number = req.params.id;
     const options: DestroyOptions = {
-      where: { id: nodeId },
+      where: {id: nodeId},
       limit: 1,
     };
 
     Node.destroy(options)
-      .then(() => res.status(204).json({ data: "success" }))
+      .then(() => res.status(204).json({data: "success"}))
       .catch((err: Error) => res.status(500).json(err));
   }
 }
@@ -484,7 +484,7 @@ export class NodesController {
 Let's try it:
 
 ```bash
-$ curl -X DELETE  http://localhost:3000/nodes/1
+curl -X DELETE  http://localhost:3000/nodes/1
 ```
 
 Perfect!
@@ -504,9 +504,9 @@ The model:
 
 ```ts
 // lib/models/node.model.ts
-import { Model, DataTypes } from "sequelize";
-import { database } from "../config/database";
-import { Node } from "./node.model";
+import {Model, DataTypes} from "sequelize";
+import {database} from "../config/database";
+import {Node} from "./node.model";
 
 export class Link extends Model {
   public id!: number;
@@ -545,16 +545,16 @@ Link.init(
   }
 );
 
-Link.sync({ force: true }).then(() => console.log("Link table created"));
+Link.sync({force: true}).then(() => console.log("Link table created"));
 ```
 
 Controller:
 
 ```ts
 // lib/controllers/links.controller.ts
-import { Request, Response } from "express";
-import { Link, LinkInterface } from "../models/link.model";
-import { UpdateOptions, DestroyOptions } from "sequelize";
+import {Request, Response} from "express";
+import {Link, LinkInterface} from "../models/link.model";
+import {UpdateOptions, DestroyOptions} from "sequelize";
 
 export class LinksController {
   public index(_req: Request, res: Response) {
@@ -579,7 +579,7 @@ export class LinksController {
         if (link) {
           res.json(link);
         } else {
-          res.status(404).json({ errors: ["Link not found"] });
+          res.status(404).json({errors: ["Link not found"]});
         }
       })
       .catch((err: Error) => res.status(500).json(err));
@@ -590,24 +590,24 @@ export class LinksController {
     const params: LinkInterface = req.body;
 
     const options: UpdateOptions = {
-      where: { id: linkId },
+      where: {id: linkId},
       limit: 1,
     };
 
     Link.update(params, options)
-      .then(() => res.status(202).json({ data: "success" }))
+      .then(() => res.status(202).json({data: "success"}))
       .catch((err: Error) => res.status(500).json(err));
   }
 
   public delete(req: Request, res: Response) {
     const linkId: number = req.params.id;
     const options: DestroyOptions = {
-      where: { id: linkId },
+      where: {id: linkId},
       limit: 1,
     };
 
     Link.destroy(options)
-      .then(() => res.status(204).json({ data: "success" }))
+      .then(() => res.status(204).json({data: "success"}))
       .catch((err: Error) => res.status(500).json(err));
   }
 }
@@ -617,9 +617,9 @@ And routes:
 
 ```ts
 // lib/config/routes.ts
-import { Request, Response } from "express";
-import { NodesController } from "../controllers/nodes.controller";
-import { LinksController } from "../controllers/links.controller";
+import {Request, Response} from "express";
+import {NodesController} from "../controllers/nodes.controller";
+import {LinksController} from "../controllers/links.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -644,8 +644,8 @@ export class Routes {
 Now everything should work like node endpoints:
 
 ```bash
-$ curl -X POST --data "fromId=420" --data "toId=666"  http://localhost:3000/links
-$ curl http://localhost:3000/links
+curl -X POST --data "fromId=420" --data "toId=666"  http://localhost:3000/links
+curl http://localhost:3000/links
 [{"id":1,"fromId":420,"toId":666,"createdAt":"2019-06-18T11:09:49.739Z","updatedAt":"2019-06-18T11:09:49.739Z"}]
 ```
 
@@ -657,7 +657,7 @@ With sequelize we can easily build relationships between model using `belongTo` 
 
 ```ts
 // lib/models/node.model.ts
-import { Link } from "./link.model";
+import {Link} from "./link.model";
 // ...
 
 Node.hasMany(Link, {
@@ -672,7 +672,7 @@ Node.hasMany(Link, {
   as: "nextLinks",
 });
 
-Node.sync({ force: true }).then(() => console.log("Node table created"));
+Node.sync({force: true}).then(() => console.log("Node table created"));
 ```
 
 Then restart the server using `npm run dev`. You may see the SQL query who create base:
@@ -684,18 +684,18 @@ Executing (default): CREATE TABLE IF NOT EXISTS `links` (`id` INTEGER PRIMARY KE
 You see the difference? Sequelize create _foreign keys_ between nodes and links. Now we can't create a link with broken relationship:
 
 ```bash
-$ curl -X POST --data "fromId=420" --data "toId=666"  http://localhost:3000/links
+curl -X POST --data "fromId=420" --data "toId=666"  http://localhost:3000/links
 {"name":"SequelizeForeignKeyConstraintError"
 ```
 
 Let's retry to create link with valid nodes:
 
 ```bash
-$ curl -X POST --data "name=first"  http://localhost:3000/nodes
+curl -X POST --data "name=first"  http://localhost:3000/nodes
 {"id":1,"name":"first","updatedAt":"2019-06-18T11:21:38.264Z","createdAt":"2019-06-18T11:21:38.264Z"}
-$ curl -X POST --data "name=second"  http://localhost:3000/nodes
+curl -X POST --data "name=second"  http://localhost:3000/nodes
 {"id":2,"name":"second","updatedAt":"2019-06-18T11:21:47.327Z","createdAt":"2019-06-18T11:21:47.327Z"}
-$ curl -X POST --data "fromId=1" --data "toId=2"  http://localhost:3000/links
+curl -X POST --data "fromId=1" --data "toId=2"  http://localhost:3000/links
 {"id":1,"fromId":"1","toId":"2","updatedAt":"2019-06-18T11:22:10.439Z","createdAt":"2019-06-18T11:22:10.439Z"}
 ```
 
@@ -721,7 +721,7 @@ It's really simple. Let's do create a new route linked to a new
 ```ts
 // lib/config/routes.ts
 // ...
-import { GraphController } from "../controllers/graph.controller";
+import {GraphController} from "../controllers/graph.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -741,9 +741,9 @@ I move all the code into a **Promise** to improve readability and error handling
 
 ```ts
 // lib/controllers/build.controller.ts
-import { Request, Response } from "express";
-import { Link } from "../models/link.model";
-import { Node } from "../models/node.model";
+import {Request, Response} from "express";
+import {Link} from "../models/link.model";
+import {Node} from "../models/node.model";
 
 export class GraphController {
   public mermaid(_req: Request, res: Response) {
@@ -780,7 +780,7 @@ export class GraphController {
 ```
 
 ```bash
-$ curl -X POST --data "name=first"  http://localhost:3000/nodes &&
+curl -X POST --data "name=first"  http://localhost:3000/nodes &&
   curl -X POST --data "name=second"  http://localhost:3000/nodes &&
   curl -X POST --data "name=third"  http://localhost:3000/nodes &&
   curl -X POST --data "fromId=1" --data "toId=2"  http://localhost:3000/links &&
@@ -790,7 +790,7 @@ $ curl -X POST --data "name=first"  http://localhost:3000/nodes &&
 And try the result output:
 
 ~~~bash
-$ curl http://localhost:3000
+curl http://localhost:3000
 graph TD;
 1[first];
 2[second];

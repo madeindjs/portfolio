@@ -43,20 +43,20 @@ J'ai donc copié l'ancienne configuration vers une nouvelle
 Dès que tu as reçu ton nouveau nom de domaine, tu dois le faire pointer sur ton nouveau site.
 
 ```bash
-$ sudo cp /etc/apache2/sites-available/rousseau-alexandre.fr.conf /etc/apache2/sites-available/rsseau.fr.conf
+sudo cp /etc/apache2/sites-available/rousseau-alexandre.fr.conf /etc/apache2/sites-available/rsseau.fr.conf
 ```
 
 ... et remplacé le `ServerName` et `ServerAlias` par le nouveau:
 
 ```bash
-$ sudo sed -i 's/rousseau-alexandre.fr/rsseau.fr/g' /etc/apache2/sites-available/rsseau.fr.conf
+sudo sed -i 's/rousseau-alexandre.fr/rsseau.fr/g' /etc/apache2/sites-available/rsseau.fr.conf
 ```
 
 Et ensuite il suffit d'activer la nouvelle configuration.
 
 ```bash
-$ sudo a2ensite rsseau.fr.conf
-$ sudo service apache2 restart
+sudo a2ensite rsseau.fr.conf
+sudo service apache2 restart
 ```
 
 A ce moment la, le nouveau site est disponible !
@@ -121,8 +121,8 @@ Et c'est tout! N'oublie pas de mettre aussi la configuration pour la versions HT
 Et ensuite on redémarre le serveur.
 
 ```bash
-$ sudo a2ensite rsseau.fr.conf
-$ sudo service apache2 restart
+sudo a2ensite rsseau.fr.conf
+sudo service apache2 restart
 ```
 
 ## Configurer Google Webmasters Tools

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Créer un réseau interne avec une gateway
-date:   2018-10-10 17:00:00 +0200
+date: 2018-10-10 17:00:00 +0200
 tags: network admin linux
 categories: tutorial
 thumbnail: /img/blog/gateway.jpg
@@ -16,7 +16,7 @@ Pour mes tests, j'ai choisi d'utiliser des machines virtuelles [Debian](https://
 
 Le schéma est donc le suivant:
 
-~~~
+```
 Exterieur
     +------------+
                  |
@@ -30,8 +30,7 @@ Exterieur
           +--------------------+
           |Apache              |
           +--------------------+
-~~~
-
+```
 
 ## Création de la Gateway
 
@@ -49,47 +48,47 @@ On démarre ensuite la machine virtuelle.
 
 Une fois connecté sur la machine virtuelle, on utilise la commande `ip a` (pour les anciens `ifconfig` est _deprecated_ :) ). On voit qu'une seule des deux cartes est configurée. Il faut donc configurer la deuxième. On rajoute cette configuration au fichier _/etc/network/interfaces_.
 
-~~~conf
+```conf
 allow-hotplug enp0s8
 iface enp0s8 inet static
   address 192.168.1.254
   netmask 255.255.255.255
-~~~
+```
 
 > Plus d'infos sur [comment mettre une IP statique sur Debian](https://linuxconfig.org/how-to-setup-a-static-ip-address-on-debian-linux)
 
 Par défaut, Debian accepte uniquement les paquets réseaux qui lui sont destiné et il "jette" les autres. Il faut donc activer une option qui permet de transmettre ces paquets s'ils ne lui sont pas adressé. Pour cela, on dé-commente la ligne suivante dans _/etc/sysctl.conf_.
 
-~~~conf
+```conf
 net.ipv4.ip_forward=1
-~~~
+```
 
 Il ne nous reste plus qu'a indiquer comment rediriger ces paquets avec une règle `iptables`:
 
-~~~bash
-$ iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
-~~~
+```bash
+iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+```
 
 Pour que ces modifications soient actives au démarrage, il faut les enregistrer dans un fichier avec la commande `iptables-save`:
 
-~~~bash
-$ iptables-save > /etc/iptables_rules.save
-~~~
+```bash
+iptables-save > /etc/iptables_rules.save
+```
 
 Et on rajoute cette configuration dans le fichier _/etc/network/interfaces_ afin que les modifications soient apportées lors du prochaine redémarrage:
 
-~~~conf
+```conf
 allow-hotplug enp0s8
 iface enp0s8 inet static
   address 192.168.1.254
   netmask 255.255.255.255
-~~~
+```
 
 Pour terminer on active l'interface réseau:
 
-~~~bash
-$ sudo ifup enp0s8
-~~~
+```bash
+sudo ifup enp0s8
+```
 
 Si tout c'est bien passé, on doit être capable de réaliser un `ping` sur une machine connecté au réseau _intnet_.
 
@@ -99,48 +98,48 @@ Sur notre deuxième machine virtuelle, on va simplement associer un **réseau in
 
 La première chose à faire est de lui attribuer une IP statique et de spécifier la gateway via le fichier _/etc/network/interfaces_.
 
-~~~conf
+```conf
 allow-hotplug enp0s3
 iface enp0s3 inet static
   address 169.254.1.50
   netmask 255.255.255.255
   gateway 192.168.1.254
-~~~
+```
 
 on rédmarre ensuite l'interface
 
-~~~bash
-$ sudo ifdown enp0s3
-$ sudo /etc/init.d/networking restart
-$ sudo ifup enp0s3
-~~~
+```bash
+sudo ifdown enp0s3
+sudo /etc/init.d/networking restart
+sudo ifup enp0s3
+```
 
 A partir de maintenant, on doit avoir accès à internet à travers la gateway:
 
-~~~bash
-$ ping 8.8.8.8 # le DNS de google
-$ ping google.fr
-~~~
+```bash
+ping 8.8.8.8 # le DNS de google
+ping google.fr
+```
 
 > si vous pouvez `ping`er `8.8.8.8` mais pas `google.fr`, c'est très probablement un problème de DNS. il suffit d'éditer le fichier _/etc/resolv.conf_ et mettre un DNS à la main comme `8.8.8.8`. Redémarrez votre carte et vérifier que ça fonctionne.
 
 Vue que l'on accès à internet, nous pouvons maintenant installer un serveur Apache
 
-~~~bash
-$ sudo apt install apache2
-~~~
+```bash
+sudo apt install apache2
+```
 
 ## Mettre en place une redirection sur la Gateway
 
-~~~bash
-$ sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 169.254.1.50:80
-~~~
+```bash
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 169.254.1.50:80
+```
 
 On n'oublie pas d'enregistrer les modifications pour qu'elles soient actives au prochain démarrage:
 
-~~~bash
-$ sudo iptables-save | sudo tee /etc/iptables_rules.save
-~~~
+```bash
+sudo iptables-save | sudo tee /etc/iptables_rules.save
+```
 
 Et voilà
 
@@ -148,7 +147,7 @@ Et voilà
 
 Nous arrivons donc à cette installation:
 
-~~~
+```
 Exterieur
     +------------+
                  |
@@ -174,6 +173,6 @@ Exterieur
           | - enp0s3: internal |
           |                    |
           +--------------------+
-~~~
+```
 
 Nous pouvons donc facilement réaliser des logs sur les paquets qui transite ou bien les filtrer selon certaines règles définies.

@@ -60,7 +60,7 @@ Et ensuite déplacer l'utilisateur dans le groupe `sudo`. Il existe plusieurs ma
 à partir de là on peut se reconnecter avec l'utilisateur courant et tester la commande `sudo`
 
 ```bash
-$ sudo touch /tmp/test.txt
+sudo touch /tmp/test.txt
 ```
 
 ### Supprimer le support d’installation des PPA
@@ -68,14 +68,14 @@ $ sudo touch /tmp/test.txt
 Une fois qu'on à les droits sudo, si l'on essaye de faire un `apt update` pour mettre à jour les listes de logiciels à jours on va avoir une erreur. En effet, dans les dépôts de logiciels, il reste le périphérique que l'on à utilisé pour installer Debian. Pour le supprimer, il suffit de l'enlever de la liste:
 
 ```bash
-$ sudo nano /etc/apt/source.list
+sudo nano /etc/apt/source.list
 ```
 
 Pour vérifier que tout fonctionne, on lance un `apt update`
 
 ```bash
-$ sudo apt update
-$ sudo apt upgrade
+sudo apt update
+sudo apt upgrade
 ```
 
 ### Installer les drivers Wi-fi
@@ -87,7 +87,7 @@ Lors de l’installation vous êtes tombé sur message de ce genre:
 Il faut commencer par récupérer les dépôts non libre. pour cela, on modifie les PPA:
 
 ```bash
-$ sudo nano /etc/apt/source.list
+sudo nano /etc/apt/source.list
 ```
 
 Et on remplace
@@ -101,13 +101,13 @@ par
 Ensuit on relance pour régénérer la liste des dépôts:
 
 ```bash
-$ sudo apt update
+sudo apt update
 ```
 
 Et on installe le paquet `firmware-iwlWi-fi`
 
 ```bash
-$ sudo apt install firmware-iwlWi-fi
+sudo apt install firmware-iwlWi-fi
 ```
 
 ### Installer un utilitaire pour scanner
@@ -115,8 +115,8 @@ $ sudo apt install firmware-iwlWi-fi
 Par défault [Debian][debian] utilise [xsane](https://doc.ubuntu-fr.org/xsane). Je n'aime pas du tout l'interface et je préfère de loin [simple-scan](https://gitlab.gnome.org/GNOME/simple-scan).
 
 ```bash
-$ sudo apt purge xsane
-$ sudo apt install simple-scane
+sudo apt purge xsane
+sudo apt install simple-scane
 ```
 
 ### Installer un client de messagerie graphique
@@ -124,8 +124,8 @@ $ sudo apt install simple-scane
 Par défaut, Debian utilise [mutt](http://www.mutt.org/), un client mail en ligne de commande.
 
 ```bash
-$ sudo apt purge xsane
-$ sudo apt install simple-scane
+sudo apt purge xsane
+sudo apt install simple-scane
 ```
 
 ### Le reste en vrac
@@ -133,7 +133,7 @@ $ sudo apt install simple-scane
 Et quelques paquets en plus:
 
 ```bash
-$ sudo apt install texlive-base texlive-lang-french texlive-latex-extra gummi \
+sudo apt install texlive-base texlive-lang-french texlive-latex-extra gummi \
                    rhythmbox \
                    vim curl \
                    arc-theme

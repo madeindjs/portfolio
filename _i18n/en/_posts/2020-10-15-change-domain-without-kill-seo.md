@@ -43,20 +43,20 @@ After you bought you domain name and configure DNS you should update your Apache
 In my case I just copy old configuration...
 
 ```bash
-$ sudo cp /etc/apache2/sites-available/rousseau-alexandre.fr.conf /etc/apache2/sites-available/rsseau.fr.conf
+sudo cp /etc/apache2/sites-available/rousseau-alexandre.fr.conf /etc/apache2/sites-available/rsseau.fr.conf
 ```
 
 ... and replace `ServerName` and `ServerAlias` by new domain:
 
 ```bash
-$ sudo sed -i 's/rousseau-alexandre.fr/rsseau.fr/g' /etc/apache2/sites-available/rsseau.fr.conf
+sudo sed -i 's/rousseau-alexandre.fr/rsseau.fr/g' /etc/apache2/sites-available/rsseau.fr.conf
 ```
 
 Then activate the new configuration and restart server:
 
 ```bash
-$ sudo a2ensite rsseau.fr.conf
-$ sudo service apache2 restart
+sudo a2ensite rsseau.fr.conf
+sudo service apache2 restart
 ```
 
 You may also want to create a new HTTPS certificate. Using [Let's Encrypt](https://letsencrypt.org/). If so, it's probably simply as `sudo certbot --apache` (it was for me).
@@ -123,8 +123,8 @@ Also do not forget to update HTTPS configuration if you have one:
 Then restart server:
 
 ```bash
-$ sudo a2ensite rsseau.fr.conf
-$ sudo service apache2 restart
+sudo a2ensite rsseau.fr.conf
+sudo service apache2 restart
 ```
 
 ## Update Your Website in Google Webmasters Tools

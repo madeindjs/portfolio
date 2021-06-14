@@ -3,26 +3,26 @@
 On commence donc par se créer un dossier avec quelques données:
 
 ```bash
-$ mkdir folder
-$ echo 'Lorem Ipsum' > folder/foo.txt
-$ echo 'Dolor Sit Amet' > folder/bar.txt
+mkdir folder
+echo 'Lorem Ipsum' > folder/foo.txt
+echo 'Dolor Sit Amet' > folder/bar.txt
 ```
 
 Si l'on suit la logique UNIX,
 
 ```bash
-$ tar czvf - folder | gpg --symmetric --cipher-algo aes256 -o /tmp/folder.tar.gz.gpg
+tar czvf - folder | gpg --symmetric --cipher-algo aes256 -o /tmp/folder.tar.gz.gpg
 folder/
 folder/bar.txt
 folder/foo.txt
 ```
 
 ```bash
-$ rm -r folder
+rm -r folder
 ```
 
 ```bash
-$ gpg -d /tmp/folder.tar.gz.gpg | tar xzvf -
+gpg -d /tmp/folder.tar.gz.gpg | tar xzvf -
 gpg: données chiffrées avec AES256
 gpg: chiffré avec 1 phrase secrète
 folder/
@@ -31,7 +31,7 @@ folder/foo.txt
 ```
 
 ```bash
-$ cat folder/foo.txt
+cat folder/foo.txt
 Lorem Ipsum
 ```
 
@@ -40,7 +40,7 @@ Lorem Ipsum
 Il faut commencer par créer une clé pour encrypter le fichier avec une clé (logique):
 
 ```bash
-$ gpg --gen-key
+gpg --gen-key
 ...
 Nom réel : merdive
 Adresse électronique : merdive@l-astuce.fr
@@ -49,13 +49,13 @@ Adresse électronique : merdive@l-astuce.fr
 Ensuite, il nous faut un fichier
 
 ```bash
-$ echo 'foo' > bar.txt
+echo 'foo' > bar.txt
 ```
 
 Et maintenant, nous pouvons utiliser notre clé pour chiffrer notre fichier:
 
 ```bash
-$ gpg --encrypt --recipient merdive bar.txt
+gpg --encrypt --recipient merdive bar.txt
 ```
 
 Cette commande aura pour effet de créer un fichier _bar.txt.gpg_. Pour le lire il faut
@@ -78,19 +78,19 @@ On voit
 Dans mon cas des sauvegardes sur le serveur distant, je veux donc que mon serveur
 
 ```bash
-$ gpg --export --armor merdive > merdive.gpg_pubkey
-$ scp merdive.gpg_pubkey  pi3:/tmp/
+gpg --export --armor merdive > merdive.gpg_pubkey
+scp merdive.gpg_pubkey  pi3:/tmp/
 ```
 
 ```bash
-$ ssh pi3
-$ gpg --import /tmp/merdive.gpg_pubkey
-$ echo 'Hello from Raspberry' > /tmp/hello.txt
-$ gpg --encrypt --recipient merdive /tmp/hello.txt
+ssh pi3
+gpg --import /tmp/merdive.gpg_pubkey
+echo 'Hello from Raspberry' > /tmp/hello.txt
+gpg --encrypt --recipient merdive /tmp/hello.txt
 ```
 
 ```bash
-$ gpg --decrypt hello.txt.gpg
+gpg --decrypt hello.txt.gpg
 gpg: chiffré avec une clef RSA de 3072 bits, identifiant 36757201BC370907, créée le 2018-12-05
       « merdive <merdive@l-astuce.fr> »
 Hello from Raspberry
@@ -98,8 +98,8 @@ Hello from Raspberry
 
 ## isignif
 
-$ gpg --export --armor 'Alexandre Rousseau' > isignif.gpg_pubkey
-$ scp isignif.gpg_pubkey isignif:/home/isignif/
+gpg --export --armor 'Alexandre Rousseau' > isignif.gpg_pubkey
+scp isignif.gpg_pubkey isignif:/home/isignif/
 
 ## Liens
 

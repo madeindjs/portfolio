@@ -18,7 +18,7 @@ J'ai une solution _low tech_ à base de Crontab qui ne demande aucune dépendanc
 
 Ca tiens en 13 lignes de code. Voilà ce que ça donne:
 
-~~~bash
+```bash
 #!/bin/bash
 # deploy.sh
 
@@ -35,21 +35,21 @@ if [ $LOCAL = $BASE ]; then
   rm -rf /var/www/portfolio/*
   cp -r _site/* /var/www/portfolio/
 fi
-~~~
+```
 
 Ce fichier est versionné avec mon projet Jekyll, je l'ai sobrement appelé `deploy.sh` et il est situé à la racine du projet.
 
 Il suffit ensuite d'appeler ce script toutes les heures par exemples en mettant en place un [CRON](https://fr.wikipedia.org/wiki/Cron#crontab). Pour l'installer, il suffit de lancer la commande:
 
-~~~bash
-$ crontab
-~~~
+```bash
+crontab
+```
 
 et ensuite copier / coller la ligne suivante (en adaptant à ton cas spécifique).
 
-~~~bash
+```bash
 0 *  *   *   *    cd /home/pi/portfolio && ./deploy.sh
-~~~
+```
 
 Et voilà, c'est terminé.
 
