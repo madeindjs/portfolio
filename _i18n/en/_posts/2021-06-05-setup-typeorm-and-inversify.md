@@ -451,9 +451,7 @@ touch .env
 
 And let's start by defining https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md#using-environment-variables[TypeORM environment variables] for a basic connection to an SQLite database:
 
-.The basic configuration of TypeORM for a connection to SQLite
-
-```env
+```console
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=db/development.sqlite
 TYPEORM_LOGGING=true

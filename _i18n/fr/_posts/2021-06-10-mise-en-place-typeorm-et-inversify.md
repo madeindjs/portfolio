@@ -475,7 +475,7 @@ touch .env
 
 Et commençons par définir [les variables d'environnement de TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md#using-environment-variables) pour une connexion basique à une base de donnée SQLite:
 
-```env
+```console
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=db/development.sqlite
 TYPEORM_LOGGING=true
@@ -1289,7 +1289,7 @@ Quelques explications sur cette commande:
 
 Lorsque nous testons notre application, nous ne voulons pas polluer notre base de données avec des données que nous créons pendant les tests. C'est donc une bonne pratique de créer une base de donnée dédiée. Dans notre cas, nous allons utiliser une base SQLite _in memory_. C'est a dire qu'elle n'est pas stockée sur le disque dur mais directement dans la mémoire vive. Voici donc le fichier `.test.env`:
 
-```env
+```console
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=:memory:
 TYPEORM_LOGGING=true
