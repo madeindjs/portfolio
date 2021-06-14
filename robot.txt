@@ -1,11 +1,1 @@
-x 2021-01-16 Disallow: /resume
-x 2021-01-16 convert as markdown chapter 0 +addApiOnRailsBook
-x 2021-01-16 convert as markdown chapter 1 +addApiOnRailsBook
-x 2021-01-16 convert as markdown chapter 2 +addApiOnRailsBook
-convert as markdown chapter 3 +addApiOnRailsBook
-convert as markdown chapter 4 +addApiOnRailsBook
-convert as markdown chapter 5 +addApiOnRailsBook
-convert as markdown chapter 6 +addApiOnRailsBook
-convert as markdown chapter 7 +addApiOnRailsBook
-convert as markdown chapter 8 +addApiOnRailsBook
-convert as markdown chapter 9 +addApiOnRailsBook
+Disallow: /resume
