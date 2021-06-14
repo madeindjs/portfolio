@@ -1,13 +1,17 @@
 <section>
   <h2>
-    <a href="{{ include.post.url | prepend: site.baseurl }}"><b>{{ include.post.title }}</b></a>
-    @{{ include.post.categories }}
+    <a href="{{ include.post.url | prepend: site.baseurl }}"
+      >{{ include.post.title }}</a
+    >
   </h2>
   <p>
     <date>{{ include.post.date | date: "%Y-%m-%d" }}</date>
     {% for tag in include.post.tags %}
-    <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"><code>#{{ tag }}</code></a>
-    {% endfor %}
+    <a
+      href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
+      ><code>#{{ tag }}</code></a
+    >
+    {% endfor %} @{{ include.post.categories }}
   </p>
   <p class="text-justify">
     {{ include.post.excerpt }}
