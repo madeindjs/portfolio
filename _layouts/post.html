@@ -11,7 +11,7 @@
       <p class="text-right">
         {% for tag in page.tags %}
         <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"><code>#{{ tag }}</code></a>
-        {% endfor %} &nbsp;<date>{{ page.date | date: "%Y-%m-%dT%H:%M" }}</date>
+        {% endfor %} &nbsp;<date>{{ page.date | date: "%Y-%m-%d" }}</date>
         <nav>
           <p>{{ site.translations[site.lang]['toc'] }}</p>
           {{ content | toc_only }}

@@ -51,7 +51,7 @@ nav ul li
 blockquote
   +marginDefault($baseFontSize)
   margin-left: 0
-  border-left: $baseFontSize/4 solid #dddddd
+  border-left: $baseFontSize/4 solid $primary-color
   padding-left: $baseFontSize
 
 // header
@@ -68,10 +68,10 @@ h1
   // margin-top: $baseFontSize * 2
 h2
   font-size: $baseFontSize * 2
-  margin-top: $baseFontSize * 3
+  margin-top: $baseFontSize
 h3
   font-size: $baseFontSize * 1.5
-  margin-top: $baseFontSize * 1.5
+  margin-top: $baseFontSize
 h4, h5, h6
   font-size: $baseFontSize
   margin-top: $baseFontSize
@@ -188,7 +188,7 @@ ul, ol
 div.highlighter-rouge
   position: relative
   padding-left: $baseFontSize
-  border-left: $baseFontSize/4 solid #dddddd
+  border-left: $baseFontSize/4 solid $primary-color
 
 ul.list-inline
   list-style-type: none
@@ -259,7 +259,7 @@ ul.list-inline
 
 @media screen
   body
-    max-width: 720px
+    max-width: 900px
     margin: auto
 
   h1
@@ -382,9 +382,6 @@ ul.list-inline
 
 // POST
 
-body.post
-  max-width: 900px
-
 .row
   display: flex
 
@@ -393,7 +390,7 @@ body.post
     margin-top: $baseFontSize
 
   section.main
-    min-height: 70vh
+    min-height: 50vh
     margin-top: 0
     margin-bottom: 0
 
