@@ -7,17 +7,23 @@
   <body id="post" class="readable-content post">
     {% include header.html %}
     <article>
-      <h1>{{ page.title }}<br /><small>@{{ page.categories }}</small></h1>
-      <p class="text-right">
-        {% for tag in page.tags %}
-        <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"><code>#{{ tag }}</code></a>
-        {% endfor %} &nbsp;<date>{{ page.date | date: "%Y-%m-%d" }}</date>
-        <nav>
-          <p>{{ site.translations[site.lang]['toc'] }}</p>
-          {{ content | toc_only }}
-        </nav>
-
-      </p>
+      <h1>{{ page.title }}</h1>
+      <ul class="list-inline">
+        <li><date>{{ page.date | date: "%Y-%m-%d" }}</date></li>
+        <li>
+          {% for tag in page.tags %}
+          <a
+            href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
+            >#{{ tag }}</a
+          >
+          {% endfor %}
+        </li>
+        <li>@{{ page.categories }}</li>
+      </ul>
+      <nav>
+        <p>{{ site.translations[site.lang]['toc'] }}</p>
+        {{ content | toc_only }}
+      </nav>
 
       {% if page.thumbnail %}
       <p class="text-center">
@@ -25,21 +31,26 @@
       </p>
       {% endif %}
 
-      <hr>
+      <hr />
 
       <div>{{ content }}</div>
 
-      <hr>
+      <hr />
 
       <p>
         <small>
-          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
             ><img
               alt="Licence Creative Commons"
               style="border-width: 0"
               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a
           ><br />Cet
-          <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type"
+          <span
+            xmlns:dct="http://purl.org/dc/terms/"
+            href="http://purl.org/dc/dcmitype/Text"
+            rel="dct:type"
             >article</span
           >
           de
@@ -51,9 +62,11 @@
             >Alexandre Rousseau</a
           >
           est mise à disposition selon les termes de la
-          <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-            >licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions
-            4.0 International</a
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            >licence Creative Commons Attribution - Pas d’Utilisation
+            Commerciale - Partage dans les Mêmes Conditions 4.0 International</a
           >.
         </small>
       </p>

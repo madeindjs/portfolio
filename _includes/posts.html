@@ -11,7 +11,7 @@
       {% for tag in include.post.tags %}
       <a
         href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
-        ><code>#{{ tag }}</code></a
+        >#{{ tag }}</a
       >
       {% endfor %}
     </li>
