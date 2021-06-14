@@ -22,13 +22,20 @@ layout: main
 
 ### Développeur / DevOps @ [Optimiz.me](https://optimiz.me/agence-referencement-lyon/) (depuis 2020)
 
-Développement _from scratch_ de Optimiz Data
+Développement _from scratch_ de [Optimiz Data](https://data.optimiz.me/)
 
 - Benchmark de base **PostgreSQL**, **MongoDB** et **Elastic Search** pour le stockage et la manipulation d'une grande quantité de données (+100M)
 - Développement d'une job queue avec **Postgres**
 - Mise en place d'une authentification automatisée avec [Keycloak](https://www.keycloak.org/) qui fait interface avec l'**OAuth de Google**
 - Création d'un service automatisé pour récupérer les données de manière asynchrone en s'appuyant sur la _job queue_
 - Création de l'interface sous **Angular 9/10**
+
+Développement de [Optimiz SEO](https://data.optimiz.me/)
+
+- Séparation de l'application en Backend / Frontend
+- Migration vers la dernière version de React (16)
+- Intervention sur la Google Pub Sub
+- Recherche et Amélioration des performances de React / Redux
 
 Devops
 

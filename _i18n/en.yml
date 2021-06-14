@@ -20,4 +20,4 @@ description:
   - I have written two books under a free license. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> and <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> that teach best practices for building an API with Ruby on Rails or Node.js  (I wrote about it <a href="/en/story/2019/11/10/api-on-rails.html">in this post</a>).
   - Besides that, I like to share my findings via <a href="/en/blog">posts on my blog</a>.
 
-footer: You can contact me <a href="mailto:contact@rousseau-alexandre.fr">by email</a> (<a href="/pgp.txt">GPG</a>) or via <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">LinkedIn</a>. If you are interested in working with me, you can <a href="/resume">view my resume</a> or <a>download a PDF version</a>.
+footer: You can contact me <a href="mailto:contact@rousseau-alexandre.fr">by email</a> (<a href="/pgp.txt">GPG</a>) or via <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">LinkedIn</a>. If you are interested in working with me, you can <a href="/resume">view my resume</a> or <a href="/resume/alexandre-rousseau.pdf">download a PDF version</a>.

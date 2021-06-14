@@ -15,7 +15,7 @@ lof: false
 lot: false
 ---
 
-![Alexandre Rousseau](https://avatars.githubusercontent.com/u/11815139?v=4){ height=150px }
+# Alexandre ROUSSEAU
 
 Je suis passionné par la programmation et le monde du logiciel libre. J'essaie d’apporter des solutions simples aux problèmes complexes.
 
