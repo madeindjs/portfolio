@@ -43,7 +43,6 @@ p
 ul li,
 ol li
   font-size: $baseFontSize
-  +marginDefault($baseFontSize)
 
 nav ul li
   margin-top: 0
@@ -184,6 +183,18 @@ table
 ul, ol
   padding-left: 0
 
+ul
+  list-style: none
+  position: relative
+
+  li::before
+    content: ' - '
+    position: absolute
+    right: 100%
+    margin-right: $baseFontSize / 2
+    display: inline-block
+    text-align: right
+
 // custom
 
 div.highlighter-rouge
@@ -310,12 +321,6 @@ ul.list-inline
     background: $background-dark
     color: $text-color-dark
 
-  a
-    color: lightblue
-
-  code
-    color: lightgray
-
   button, .button
     background: $background-dark
     color: $text-color-dark
@@ -340,7 +345,7 @@ ul.list-inline
     border-bottom-color: $text-color-dark
 
   blockquote
-    border-left-color: $text-color-dark
+    border-left-color: $primary-color
 
   mark
     background-color: lightblue
