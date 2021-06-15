@@ -53,6 +53,7 @@ blockquote
   margin-left: 0
   border-left: $baseFontSize/4 solid $primary-color
   padding-left: $baseFontSize
+  margin-left: -($baseFontSize/4 + $baseFontSize)
 
 // header
 
@@ -100,7 +101,11 @@ p, li, quote
   font-size: $baseFontSize
 
 mark
-  background-color: $marker-color
+  background-color: $primary-color
+  color: white
+
+  a
+    color: white
 
 strong, b
   font-weight: 700
@@ -201,6 +206,7 @@ div.highlighter-rouge
   position: relative
   padding-left: $baseFontSize
   border-left: $baseFontSize/4 solid $primary-color
+  margin-left: -($baseFontSize/4 + $baseFontSize)
 
 code.highlighter-rouge
   color: $primary-color
@@ -352,13 +358,6 @@ div.footnotes
 
   blockquote
     border-left-color: $primary-color
-
-  mark
-    background-color: lightblue
-
-    a
-      color: black
-  //     font-weight: 600
 
   hr
     border-color: white
