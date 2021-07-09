@@ -29,20 +29,23 @@ Développement _from scratch_ de [Optimiz Data](https://data.optimiz.me/)
 - Mise en place d'une authentification automatisée avec [Keycloak](https://www.keycloak.org/) qui fait interface avec l'**OAuth de Google**
 - Création d'un service automatisé pour récupérer les données de manière asynchrone en s'appuyant sur la _job queue_
 - Création de l'interface sous **Angular 9/10**
+- Mise à l'echelle d'un base de données PostgreSQL contenant plusieurs millards de lignes (ajout d'index brin, mise en place `matierialized views` et partitionnement des tables)
 
-Développement de [Optimiz SEO](https://data.optimiz.me/)
+Développement de [Optimiz SEO](https://seo.optimiz.me/)
 
 - Séparation de l'application en Backend / Frontend
-- Migration vers la dernière version de React (16)
-- Intervention sur la Google Pub Sub
-- Recherche et Amélioration des performances de React / Redux
+- Migration vers la dernière version de **React** (16)
+- Refonte de l'interface
+- Intervention sur la **Google Pub Sub**
+- Recherche et Amélioration des performances de **React / Redux**
+- migration des données depuis **MongoDB** vers **MariaDB**
 
 Devops
 
 - Mise en place de **Gitlab CI** avec lancement des _runners_ sous **Google Cloud Platform**
 - Déploiement de l'application sous **Google Cloud Platform** avec **Kubernetes**
-- Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG
-- Migration de PostgreSQL vers Google Cloud SQL
+- Mise en place d'une sauvegarde régulière avec une CRONtab automatisée et chiffrée avec GnuPG sur un FTP
+- Migration de **PostgreSQL** vers **Google Cloud SQL** avec mise en place de réplication
 
 ### Développeur @ [Dougs](https://dougs.fr) (2019/2020)
 
