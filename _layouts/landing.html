@@ -4,8 +4,9 @@
     {% include head.html %}
   </head>
 
-  <body id="landing">
-    <!-- header & navigation -->
-    {{ content }} {% include footer.html %}
+  <body>
+    {% include header.html %}
+    <main id="landing">{{ content }}</main>
+    {% include footer.html %}
   </body>
 </html>
