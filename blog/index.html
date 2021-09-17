@@ -4,10 +4,11 @@ title: Blog
 ---
 <h1>Blog</h1>
 
-
-{% for post in paginator.posts %}
-  {% include posts.html post=post %}
-{% endfor %}
+<div class="posts">
+  {% for post in paginator.posts %}
+    {% include posts.html post=post %}
+  {% endfor %}
+</div>
 
 <!-- Pagination links -->
 <nav>

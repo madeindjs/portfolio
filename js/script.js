@@ -2,12 +2,12 @@ window.onscroll = function () {
   scrollFunction();
 };
 
-const nav = document.querySelector("nav");
+const navbar = document.querySelector("nav.navbar");
 
 function scrollFunction() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-    nav.className = "lite";
+    navbar.className = "navbar lite";
   } else {
-    nav.className = "";
+    navbar.className = "navbar";
   }
 }
