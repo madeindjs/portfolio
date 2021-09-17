@@ -4,66 +4,74 @@
     {% include head.html %}
   </head>
 
-  <body id="post" class="readable-content post">
+  <body>
     {% include header.html %}
-    <article>
-      <h1>{{ page.title }}</h1>
-      <ul class="list-inline">
-        <li><date>{{ page.date | date: "%Y-%m-%d" }}</date></li>
-        <li>
-          {% for tag in page.tags %}
-          <a
-            href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
-            >#{{ tag }}</a
+
+    <nav class="toc">
+      <!-- <p>{{ site.translations[site.lang]['toc'] }}</p> -->
+      {{ content | toc_only }}
+    </nav>
+    <main class="grid grid-posts">
+      <div></div>
+
+      <article>
+        <h1>{{ page.title }}</h1>
+        <ul class="list-inline">
+          <li><date>{{ page.date | date: "%Y-%m-%d" }}</date></li>
+          <li>
+            {% for tag in page.tags %}
+            <a
+              href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
+              >#{{ tag }}</a
+            >
+            {% endfor %}
+          </li>
+          <li>@{{ page.categories }}</li>
+        </ul>
+
+        {% if page.thumbnail %}
+        <p class="text-center">
+          <img src="{{ page.thumbnail }}" class="center-block grey" />
+        </p>
+        {% endif %}
+
+        <hr />
+
+        {{ content }}
+
+        <hr />
+
+        <p>
+          Cet
+          <span
+            xmlns:dct="http://purl.org/dc/terms/"
+            href="http://purl.org/dc/dcmitype/Text"
+            rel="dct:type"
+            >article</span
           >
-          {% endfor %}
-        </li>
-        <li>@{{ page.categories }}</li>
-      </ul>
-      <nav>
-        <p>{{ site.translations[site.lang]['toc'] }}</p>
-        {{ content | toc_only }}
-      </nav>
+          de
+          <a
+            xmlns:cc="http://creativecommons.org/ns#"
+            href="/"
+            property="cc:attributionName"
+            rel="cc:attributionURL"
+            >Alexandre Rousseau</a
+          >
+          est mise à disposition selon les termes de la
+          <a
+            rel="license"
+            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+            title="licence Creative Commons Attribution - Pas d’Utilisation Commerciale
+            - Partage dans les Mêmes Conditions 4.0 International"
+            target="_blank"
+            >CC BY-NC-SA 4.0</a
+          >.
+        </p>
+      </article>
 
-      {% if page.thumbnail %}
-      <p class="text-center">
-        <img src="{{ page.thumbnail }}" class="center-block grey" />
-      </p>
-      {% endif %}
+      <div></div>
+    </main>
 
-      <hr />
-
-      <div>{{ content }}</div>
-
-      <hr />
-
-      <p>
-        Cet
-        <span
-          xmlns:dct="http://purl.org/dc/terms/"
-          href="http://purl.org/dc/dcmitype/Text"
-          rel="dct:type"
-          >article</span
-        >
-        de
-        <a
-          xmlns:cc="http://creativecommons.org/ns#"
-          href="/"
-          property="cc:attributionName"
-          rel="cc:attributionURL"
-          >Alexandre Rousseau</a
-        >
-        est mise à disposition selon les termes de la
-        <a
-          rel="license"
-          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-          title="licence Creative Commons Attribution - Pas d’Utilisation Commerciale
-          - Partage dans les Mêmes Conditions 4.0 International"
-          target="_blank"
-          >CC BY-NC-SA 4.0</a
-        >.
-      </p>
-    </article>
     {% include footer.html %}
     <link href="/css/pygments/custom.css" rel="stylesheet" />
   </body>

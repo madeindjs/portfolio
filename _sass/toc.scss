@@ -1,0 +1,52 @@
+@import "size";
+
+$nav_toc_size_xl: 300px;
+
+ul.section-nav {
+  list-style: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100%;
+
+  display: flex;
+
+  margin-top: 0;
+  margin-bottom: 0;
+
+  li.toc-entry {
+    display: flex;
+    height: 100%;
+    // margin-top: 1rem;
+    text-align: center;
+    // flex-basis: 1;
+    text-overflow: ellipsis;
+    // white-space: nowrap;
+    flex-grow: 1;
+    color: darkgray;
+
+    &.active {
+      // font-weight: bold;
+      color: black;
+      background-color: aliceblue;
+      flex-grow: 2;
+    }
+
+    // &.active::
+
+    a {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      color: inherit;
+    }
+  }
+}
+
+nav.toc {
+  position: fixed;
+  width: 100%;
+  bottom: 10px;
+  height: 68px;
+  overflow: hidden;
+  background-color: whitesmoke;
+  box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
+}

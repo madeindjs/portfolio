@@ -1,11 +1,14 @@
-body {
-  margin: 0px;
-}
 @import "nav";
 @import "landing";
 @import "utils";
 @import "footer";
 @import "post";
+@import "toc";
+@import "size";
+
+body {
+  margin: 0px;
+}
 
 h2 {
   font-size: 2rem;
@@ -23,12 +26,30 @@ hr {
   margin-bottom: 1rem;
 }
 
+article {
+  width: min(70ch, 100%);
+}
+
 main {
-  padding-top: 150px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  padding-top: $start_top;
   font-size: 18px;
+  width: 100%;
+
+  // display: flex;
+
+  &.grid {
+    display: grid;
+    grid-template-columns:
+      1fr
+      min(70ch, 100%)
+      1fr;
+  }
+
+  .highlighter-rouge {
+    width: 100%;
+    grid-column: 1 / 4;
+    overflow-x: scroll;
+  }
 }
 
 a {
