@@ -1,11 +1,11 @@
-<div class="post-card">
-  <p class="post-card-title">{{ include.post.title }}</p>
-  <p class="post-card-description">{{ include.post.description }}</p>
-  <div class="post-card-actions">
-    <a
-      class="btn btn-secondary"
-      href="{{ include.post.url | prepend: site.baseurl }}"
-      >see</a
-    >
+<a href="{{ include.post.url | prepend: site.baseurl }}">
+  <div class="flip">
+    <div class="card flip-front">
+      <p class="post-card-title">{{ include.post.title }}</p>
+    </div>
+
+    <div class="card flip-back">
+      <p class="post-card-description">{{ include.post.description }}</p>
+    </div>
   </div>
-</div>
+</a>

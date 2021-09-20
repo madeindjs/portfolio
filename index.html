@@ -4,15 +4,12 @@ layout: landing
 
 <section class="main lead">
   <h1 class="hide">Alexandre Rousseau</h1>
-  <p>
-    {% for desc in site.translations[site.lang]['lead'] %} {{ desc }} {% endfor
-    %}
-  </p>
+  <p>{% for desc in site.translations[site.lang]['lead'] %} {{ desc }} {% endfor %}</p>
 </section>
 
 <hr />
 
-<section class="lead">
+<section>
   {% for desc in site.translations[site.lang]['description'] %}
   <p>{{ desc }}</p>
   {% endfor %}
@@ -22,10 +19,7 @@ layout: landing
 
 <section>
   <h2>{{ site.translations[site.lang]['last_posts'] }}</h2>
-  <div class="posts">
-    {% for post in site.posts limit: 8 %} {% include posts.html post=post %} {%
-    endfor %}
-  </div>
+  <div class="posts">{% for post in site.posts limit: 8 %} {% include posts.html post=post %} {% endfor %}</div>
   <div>
     <a href="{{ '/blog' | prepend: site.baseurl }}" class="btn btn-secondary"
       >{{ site.translations[site.lang]['see_all_posts'] }}</a
