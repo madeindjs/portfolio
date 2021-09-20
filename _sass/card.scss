@@ -1,0 +1,26 @@
+.card {
+  width: 300px;
+  height: 300px;
+  // border: lightgray 1px solid;
+  border-radius: 5px;
+  box-shadow: 3px 6px 4px rgba(50, 50, 50, 0.2);
+  // margin: 1rem;
+  padding: 1rem;
+  transition: box-shadow width 0.5s;
+
+  // text-align: justify;
+
+  &-title {
+    font-weight: 800;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &:hover {
+    // width: 210px;
+    box-shadow: 3px 6px 8px rgba(50, 50, 50, 0.2);
+  }
+}

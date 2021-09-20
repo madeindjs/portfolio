@@ -1,11 +1,11 @@
-<a href="{{ include.post.url | prepend: site.baseurl }}">
+<a href="{{ include.post.url | prepend: site.baseurl }}" class="post-card">
   <div class="flip">
-    <div class="card flip-front">
+    <div class="card flip-front post-card-title">
       <p class="post-card-title">{{ include.post.title }}</p>
     </div>
 
-    <div class="card flip-back">
-      <p class="post-card-description">{{ include.post.description }}</p>
+    <div class="card flip-back post-card-description">
+      <p>{{ include.post.description }}</p>
     </div>
   </div>
 </a>
