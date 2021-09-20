@@ -9,8 +9,7 @@
 
     <main>
       <h1>{{ site.translations[site.lang]['tag_results'] }}: {{ page.tag }}</h1>
-      {% for post in page.posts %} {% include posts.html post=post %} {% endfor
-      %}
+      {% for post in page.posts %} {% include post.html post=post %} {% endfor %}
     </main>
     {% include footer.html %}
   </body>
