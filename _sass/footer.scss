@@ -3,8 +3,7 @@ footer {
   justify-content: space-around;
   background-color: whitesmoke;
 
-  div,
-  p {
-    flex-basis: 1;
+  ul {
+    flex-basis: 300px;
   }
 }
