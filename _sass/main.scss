@@ -7,6 +7,7 @@
 @import "size";
 @import "flip";
 @import "card";
+@import "grid";
 
 * {
   box-sizing: border-box;
@@ -32,10 +33,6 @@ hr {
   margin-bottom: 1rem;
 }
 
-article {
-  width: min(70ch, 100%);
-}
-
 main {
   padding-top: $start_top;
   font-size: 18px;
@@ -44,20 +41,6 @@ main {
   padding-right: 1rem;
 
   // display: flex;
-
-  &.grid {
-    display: grid;
-    grid-template-columns:
-      1fr
-      min(70ch, 100%)
-      1fr;
-  }
-
-  .highlighter-rouge {
-    width: 100%;
-    grid-column: 1 / 4;
-    overflow-x: scroll;
-  }
 }
 
 a {
