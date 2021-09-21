@@ -8,6 +8,7 @@
 @import "flip";
 @import "card";
 @import "grid";
+@import "highlight";
 
 * {
   box-sizing: border-box;
@@ -17,8 +18,19 @@ body {
   margin: 0px;
 }
 
+h1,
+h2,
+h3 {
+  &:hover {
+    &::before {
+      content: "🔗";
+    }
+  }
+}
+
 h2 {
   font-size: 2rem;
+  color: $light_black;
   font-weight: normal;
 }
 

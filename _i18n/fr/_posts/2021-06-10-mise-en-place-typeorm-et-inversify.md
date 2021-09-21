@@ -974,8 +974,8 @@ Pendant la mise en place, vous avez sans doute remarqué que la méthode `show`,
 
 Pour factoriser ce code il y aurait deux solutions :
 
-. déplacer le bout de code dans un méthode privée et l'appeler
-. créer un _Middleware_ qui va être exécuté avant le contrôleur
+- déplacer le bout de code dans un méthode privée et l'appeler
+- créer un _Middleware_ qui va être exécuté avant le contrôleur
 
 J'ai choisi la deuxième option car elle permet de réduire le code et la responsabilité du contrôleur. De plus, avec `inversify-express-utils` c'est très facile. Laissez moi vous montrer :
 

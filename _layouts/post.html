@@ -17,7 +17,10 @@
         <li><date>{{ page.date | date: "%Y-%m-%d" }}</date></li>
         <li>
           {% for tag in page.tags %}
-          <a href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}">#{{ tag }}</a>
+          <a
+            href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
+            >#{{ tag }}</a
+          >
           {% endfor %}
         </li>
         <li>@{{ page.categories }}</li>
@@ -37,11 +40,18 @@
 
       <p>
         Cet
-        <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type"
+        <span
+          xmlns:dct="http://purl.org/dc/terms/"
+          href="http://purl.org/dc/dcmitype/Text"
+          rel="dct:type"
           >article</span
         >
         de
-        <a xmlns:cc="http://creativecommons.org/ns#" href="/" property="cc:attributionName" rel="cc:attributionURL"
+        <a
+          xmlns:cc="http://creativecommons.org/ns#"
+          href="/"
+          property="cc:attributionName"
+          rel="cc:attributionURL"
           >Alexandre Rousseau</a
         >
         est mise à disposition selon les termes de la
@@ -57,6 +67,5 @@
     </article>
 
     {% include footer.html %}
-    <link href="/css/pygments/custom.css" rel="stylesheet" />
   </body>
 </html>
