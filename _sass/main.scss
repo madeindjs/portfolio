@@ -21,9 +21,14 @@ body {
 h1,
 h2,
 h3 {
+  cursor: pointer;
+
   &:hover {
-    &::before {
+    &::after {
       content: "🔗";
+      position: relative;
+      height: inherit;
+      line-height: inherit;
     }
   }
 }
