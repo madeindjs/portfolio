@@ -16,7 +16,6 @@ nav.navbar {
 
   display: flex;
 
-  /* background-color: aliceblue; */
   justify-content: space-around;
   align-items: center;
 
@@ -42,20 +41,16 @@ nav.navbar {
   }
 
   a {
-    // background-color: rosybrown;
     text-decoration: none;
     color: black;
     height: $nav_height;
     line-height: 80px;
-    // padding: 20px;
     flex-grow: 1;
-    // border-radius: 5px;
     text-transform: lowercase;
   }
 
   a:hover {
     text-decoration: underline;
-    // background-color: rgba(50, 50, 50, 0.2);
   }
 
   a.brand {
@@ -75,8 +70,9 @@ nav.navbar {
     }
 
     &:hover {
+      text-decoration: none;
       span {
-        background-color: blue;
+        background-color: $belize_hole;
       }
     }
   }

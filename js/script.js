@@ -20,12 +20,14 @@ window.addEventListener("DOMContentLoaded", () => {
     const tocEntries = document.querySelectorAll("ul.section-nav li");
 
     const observer = new IntersectionObserver((entries) => {
+      let entriesVisible = 0;
       entries.forEach((entry) => {
         const title = entry.target.textContent;
 
         if (entry.isIntersecting) {
           tocEntries.forEach((tocEntry) => {
             if (tocEntry.textContent === title) {
+              entriesVisible += 1;
               tocEntry.classList.add("active");
             } else {
               tocEntry.classList.remove("active");

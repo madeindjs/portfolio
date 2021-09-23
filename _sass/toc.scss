@@ -1,52 +1,83 @@
 @import "size";
+@import "colors";
 
 $nav_toc_size_xl: 300px;
 
-ul.section-nav {
-  list-style: none;
-  padding-left: 20px;
-  padding-right: 20px;
-  height: 100%;
+nav.toc {
+  width: 150px;
+  height: 100px;
 
-  display: flex;
+  position: fixed;
+  top: 100px;
+  right: 50px;
 
-  margin-top: 0;
-  margin-bottom: 0;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: hidden;
 
-  li.toc-entry {
-    display: flex;
+  background-color: $cloud;
+  box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
+
+  transition-property: height;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+
+  p.toc-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: $midnight_blue;
+  }
+
+  ul.section-nav {
+    list-style: none;
     height: 100%;
-    // margin-top: 1rem;
-    text-align: center;
-    // flex-basis: 1;
-    text-overflow: ellipsis;
-    // white-space: nowrap;
-    flex-grow: 1;
-    color: darkgray;
+    padding-left: 0;
 
-    &.active {
-      // font-weight: bold;
-      color: black;
-      background-color: aliceblue;
-      flex-grow: 2;
-    }
+    display: flex;
+    flex-direction: column;
 
-    // &.active::
+    margin-top: 0;
+    margin-bottom: 0;
 
-    a {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      color: inherit;
+    li.toc-entry {
+      display: none;
+      text-align: center;
+      max-height: 40px;
+      text-overflow: ellipsis;
+      overflow-y: hidden;
+      color: $silver;
+
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+      &.active {
+        // font-weight: bold;
+        color: $midnight_blue;
+        display: block;
+
+        & + li {
+          display: block;
+        }
+      }
+
+      // &.active::
+
+      a {
+        height: 40px;
+        max-height: 40px;
+        color: inherit;
+      }
     }
   }
-}
 
-nav.toc {
-  position: fixed;
-  width: 100%;
-  bottom: 10px;
-  height: 68px;
-  overflow: hidden;
-  background-color: whitesmoke;
-  box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
+  &:hover {
+    height: 500px;
+    overflow-y: auto;
+    transition-timing-function: ease-in;
+
+    li.toc-entry {
+      display: block !important;
+    }
+  }
 }

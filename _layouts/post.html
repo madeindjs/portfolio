@@ -8,7 +8,7 @@
     {% include header.html %}
 
     <nav class="toc">
-      <!-- <p>{{ site.translations[site.lang]['toc'] }}</p> -->
+      <p class="toc-title">{{ site.translations[site.lang]['toc'] }}</p>
       {{ content | toc_only }}
     </nav>
     <article class="grid grid-posts">
