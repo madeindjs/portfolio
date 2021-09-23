@@ -1,0 +1,94 @@
+@import "colors";
+
+@keyframes rotate {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(70deg);
+  }
+
+  to {
+    transform: scale(1) rotate(90deg);
+  }
+}
+
+.cube-rotate {
+  height: 300px;
+  width: 300px;
+  // border-radius: 300px;
+  background-color: $sun_flower;
+
+  z-index: -1;
+  position: absolute;
+  top: 20vh;
+  left: 20vw;
+
+  animation: rotate 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+
+  // animation-delay: 2s;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+
+.ball {
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  background-color: $sun_flower;
+
+  z-index: -1;
+  position: absolute;
+  top: 20vh;
+  left: 20vw;
+  animation: bounce 300ms alternate infinite cubic-bezier(0.2, 0.65, 0.6, 1);
+}
+
+.circle {
+  width: 200px;
+  height: 200px;
+  border-top-left-radius: 48%;
+  border-top-right-radius: 48%;
+  border-bottom-left-radius: 48%;
+  border-bottom-right-radius: 48%;
+  background: $sun_flower;
+  position: absolute;
+  z-index: -1;
+  position: absolute;
+  top: 20vh;
+  left: 20vw;
+}
+
+.circle2 {
+  width: 200px;
+  height: 200px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  background: $sun_flower;
+  position: absolute;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: rotating 2s linear infinite;
+}
