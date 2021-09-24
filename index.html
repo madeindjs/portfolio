@@ -22,7 +22,7 @@ layout: landing
 <hr />
 
 <h2>{{ site.translations[site.lang]['last_posts'] }}</h2>
-<div class="posts full-breed">
+<div class="cards full-breed">
   {% for post in site.posts limit: 8 %} {% include post.html post=post %} {%
   endfor %}
 </div>

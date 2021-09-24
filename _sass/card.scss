@@ -1,3 +1,9 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .card {
   width: 300px;
   height: 300px;
@@ -9,7 +15,14 @@
   transition: box-shadow width 0.5s;
   background-color: white;
 
+  background-position: center;
+  background-size: cover;
+
   // text-align: justify;
+
+  &.card-long {
+    height: 500px;
+  }
 
   &-title {
     font-weight: 800;

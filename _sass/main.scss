@@ -10,6 +10,7 @@
 @import "grid";
 @import "highlight";
 @import "ball";
+@import "books";
 
 * {
   box-sizing: border-box;
@@ -40,12 +41,10 @@ main {
   padding-top: $start_top;
   font-size: 18px;
   width: 100%;
-
-  // display: flex;
+  min-height: calc(100vh - 100px);
 }
 
 a {
   text-decoration: none;
   color: $pumpkin;
-  // background-color: burlywood;
 }
