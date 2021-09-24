@@ -13,7 +13,7 @@
 $nav_toc_size_xl: 300px;
 
 nav.toc {
-  width: 200px;
+  width: 40px;
   height: 100px;
 
   position: fixed;
@@ -22,22 +22,27 @@ nav.toc {
 
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  padding: 10px;
+  padding: 13px;
   overflow: hidden;
 
   // background-color: $cloud;
   background-color: $silver;
   box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
 
-  transition-property: height;
+  transition-property: height, width;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
+
+  display: flex;
 
   p.toc-title {
     margin-top: 0;
     margin-bottom: 0;
     font-weight: bold;
     color: $midnight_blue;
+    transform: rotate(-90deg);
+    // position: absolute;
+    // left: -10px;
   }
 
   ul.section-nav {
@@ -52,7 +57,9 @@ nav.toc {
     margin-bottom: 0;
 
     li.toc-entry {
-      display: none;
+      // &:has(+ .active) {
+      // }
+
       // text-align: center;
       // max-height: 40px;
       text-overflow: ellipsis;
@@ -89,8 +96,13 @@ nav.toc {
 
   &:hover {
     height: 500px;
+    width: 250px;
     overflow-y: auto;
     transition-timing-function: ease-in;
+
+    p.toc-title {
+      display: none;
+    }
 
     li.toc-entry {
       display: block !important;
