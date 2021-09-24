@@ -30,3 +30,19 @@
     justify-content: flex-end;
   }
 }
+
+article {
+  h2,
+  h3 {
+    cursor: pointer;
+
+    &:hover {
+      &::after {
+        content: "🔗";
+        position: relative;
+        height: inherit;
+        line-height: inherit;
+      }
+    }
+  }
+}
