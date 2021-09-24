@@ -31,3 +31,12 @@
     }
   }
 }
+
+@media (prefers-reduced-motion) {
+  .flip {
+    &-front,
+    &-back {
+      transition: none;
+    }
+  }
+}

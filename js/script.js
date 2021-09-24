@@ -21,6 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const observer = new IntersectionObserver((entries) => {
       let entriesVisible = 0;
+
       entries.forEach((entry) => {
         const title = entry.target.textContent;
 

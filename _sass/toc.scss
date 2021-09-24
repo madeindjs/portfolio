@@ -1,21 +1,32 @@
 @import "size";
 @import "colors";
+@import "utils";
+
+.triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-left: 50px solid #555;
+  border-bottom: 25px solid transparent;
+}
 
 $nav_toc_size_xl: 300px;
 
 nav.toc {
-  width: 150px;
+  width: 200px;
   height: 100px;
 
   position: fixed;
   top: 100px;
-  right: 50px;
+  right: 0px;
 
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   padding: 10px;
   overflow: hidden;
 
-  background-color: $cloud;
+  // background-color: $cloud;
+  background-color: $silver;
   box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
 
   transition-property: height;
@@ -42,18 +53,23 @@ nav.toc {
 
     li.toc-entry {
       display: none;
-      text-align: center;
-      max-height: 40px;
+      // text-align: center;
+      // max-height: 40px;
       text-overflow: ellipsis;
-      overflow-y: hidden;
-      color: $silver;
+      // overflow-y: hidden;
+      color: $wet_asphalt;
 
-      padding-top: 5px;
-      padding-bottom: 5px;
+      margin-top: 5px;
+      margin-bottom: 0.5rem;
 
       &.active {
+        ::before {
+          content: "👉";
+        }
+
         // font-weight: bold;
         color: $midnight_blue;
+        font-weight: 500;
         display: block;
 
         & + li {

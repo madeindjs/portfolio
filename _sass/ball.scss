@@ -65,8 +65,8 @@
   position: absolute;
   z-index: -1;
   position: absolute;
-  top: 20vh;
-  left: 20vw;
+  bottom: calc(50% - 100px);
+  left: calc(50% - 100px);
 }
 
 .circle2 {
@@ -91,4 +91,10 @@
 
 .rotating {
   animation: rotating 2s linear infinite;
+}
+
+@media (prefers-reduced-motion) {
+  .rotating {
+    animation-name: dissolve;
+  }
 }

@@ -19,3 +19,17 @@
     border-style: groove;
   }
 }
+
+.mark {
+  background-color: $sun_flower;
+  padding: 10px;
+  border-radius: 10px;
+
+  mark {
+    background-color: transparent;
+
+    a {
+      color: $belize_hole;
+    }
+  }
+}
