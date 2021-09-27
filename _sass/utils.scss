@@ -1,3 +1,5 @@
+@import "colors";
+
 .lead {
   font-size: 24px;
 }
@@ -5,15 +7,15 @@
 .btn {
   display: block;
   border-radius: 5px;
-  border: 1px dashed darkgray;
   min-width: 40px;
-  height: 20px;
   // font-size: 1rem;
   text-align: center;
   padding: 5px;
 
   transition: border-style 0.5s;
   color: inherit;
+
+  background-color: $belize_hole;
 
   &:hover {
     border-style: groove;
