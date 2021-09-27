@@ -1,0 +1,99 @@
+@import "colors";
+
+@keyframes rotate {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.2) rotate(70deg);
+  }
+
+  to {
+    transform: scale(1) rotate(90deg);
+  }
+}
+
+$circle_height: 200px;
+$circle_width: 200px;
+
+.avatar {
+  width: $circle_width;
+  height: $circle_height;
+  position: relative;
+
+  &:hover {
+    transition: opacity ease-in-out 0.5s;
+
+    .avatar-circle-1,
+    .avatar-circle-2 {
+      opacity: 0%;
+    }
+
+    .avatar-photo {
+      clip-path: circle(100%);
+    }
+  }
+
+  &-circle-1 {
+    width: $circle_width;
+    height: $circle_height;
+    border-top-left-radius: 48%;
+    border-top-right-radius: 48%;
+    border-bottom-left-radius: 48%;
+    border-bottom-right-radius: 48%;
+    background: #95d7f3;
+    position: absolute;
+    top: 0;
+    transition: opacity ease-in-out 0.5s;
+  }
+
+  &-circle-2 {
+    width: $circle_width;
+    height: $circle_height;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background: #95d7f3;
+    position: absolute;
+    transition: opacity ease-in-out 0.5s;
+  }
+
+  &-photo {
+    width: $circle_width;
+    height: $circle_height;
+    clip-path: circle(50%);
+    background-image: url("/img/me.png");
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+
+    transition: clip-path ease-in-out 0.5s;
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  animation: rotating 2s linear infinite;
+}
+
+@media (prefers-reduced-motion) {
+  .rotating {
+    animation-name: dissolve;
+  }
+
+  .avatar-circle-1,
+  .avatar-circle-2 {
+    display: none;
+  }
+}

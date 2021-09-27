@@ -4,6 +4,12 @@ layout: landing
 
 <section class="main lead">
   <h1 class="hide">Alexandre Rousseau</h1>
+  <div class="avatar">
+    <div class="avatar-circle-1 rotating">
+      <div class="avatar-circle-2"></div>
+    </div>
+    <div class="avatar-photo"></div>
+  </div>
   <p>
     {% for desc in site.translations[site.lang]['lead'] %} {{ desc }} {% endfor
     %}
@@ -16,7 +22,6 @@ layout: landing
   {% for desc in site.translations[site.lang]['description'] %}
   <p>{{ desc }}</p>
   {% endfor %}
-  <div class="circle rotating"><div class="circle2"></div></div>
 </section>
 
 <hr />
