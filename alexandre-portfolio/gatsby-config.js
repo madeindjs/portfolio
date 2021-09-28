@@ -6,6 +6,7 @@ module.exports = {
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-sitemap",
+    "gatsby-plugin-typescript",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
