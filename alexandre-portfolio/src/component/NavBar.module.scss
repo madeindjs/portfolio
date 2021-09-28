@@ -41,7 +41,8 @@ $small_nav_height: 50px;
     }
   }
 
-  a {
+  a,
+  div {
     text-decoration: none;
     color: black;
     height: $nav_height;
@@ -77,4 +78,10 @@ $small_nav_height: 50px;
       }
     }
   }
+}
+
+.language {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
 }

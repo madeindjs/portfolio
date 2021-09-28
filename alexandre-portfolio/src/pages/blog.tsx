@@ -1,38 +1,20 @@
 // src/pages/blog.tsx
-import {graphql, useStaticQuery} from "gatsby";
+import {graphql} from "gatsby";
+import {Trans} from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import Cards from "../component/Cards";
 import Layout from "../component/Layout";
 import PostCard from "../component/PostCard";
 
-const BlogPage: React.FC = () => {
-  const {allMarkdownRemark} = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark(
-        sort: {order: DESC, fields: [frontmatter___date]}
-        limit: 1000
-      ) {
-        edges {
-          node {
-            excerpt(pruneLength: 100)
-            frontmatter {
-              title
-              date
-              tags
-            }
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
+const BlogPage: React.FC<{data: any}> = ({data}) => {
+  console.log(data);
   return (
     <Layout>
-      <h1>Blog</h1>
+      <h1>
+        <Trans>blog</Trans>
+      </h1>
       <Cards>
-        {allMarkdownRemark.edges.map(({node}) => (
+        {data.allMarkdownRemark.edges.map(({node}) => (
           <PostCard
             slug={node.fields.slug}
             title={node.frontmatter.title}
@@ -44,5 +26,37 @@ const BlogPage: React.FC = () => {
     </Layout>
   );
 };
+
+export const query = graphql`
+  query ($language: String!) {
+    allMarkdownRemark(
+      sort: {order: DESC, fields: [frontmatter___date]}
+      limit: 1000
+    ) {
+      edges {
+        node {
+          excerpt(pruneLength: 100)
+          frontmatter {
+            title
+            date
+            tags
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+    locales: allLocale(filter: {language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
 
 export default BlogPage;
