@@ -1,0 +1,26 @@
+.book-card {
+  text-decoration: none;
+  color: black;
+}
+
+%book-card-side {
+  width: 300px;
+  height: 600px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-card-front {
+  @extend %book-card-side;
+  text-align: center;
+  font-weight: 700;
+
+  background-position: center;
+  background-size: cover;
+}
+.book-card-back {
+  @extend %book-card-side;
+  flex-direction: column;
+}

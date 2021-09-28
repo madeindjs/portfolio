@@ -14,9 +14,13 @@ interface Props {
 const PostCard: React.FC<Props> = (props) => {
   const linkUrl = `/posts/${props.slug}`;
   return (
-    <Link to={linkUrl}>
+    <Link to={linkUrl} className={styles.postCard}>
       <FlipCard
-        front={<p className={styles.postCardFront}>{props.title}</p>}
+        front={
+          <div className={styles.postCardFront}>
+            <p>{props.title}</p>
+          </div>
+        }
         back={<p className={styles.postCardBack}>{props.excerpt}</p>}
       />
     </Link>

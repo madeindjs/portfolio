@@ -6,14 +6,13 @@ import * as styles from "./FlipCard.module.scss";
 interface Props {
   front: React.ReactElement;
   back: React.ReactElement;
-  className?: string;
 }
 
-const FlipCard: React.FC<Props> = ({front, back, className}) => {
+const FlipCard: React.FC<Props> = ({front, back}) => {
   return (
     <div className={styles.flip}>
-      <Card className={styles.flipFront + " " + className}>{front}</Card>
-      <Card className={styles.flipBack + " " + className}>{back}</Card>
+      <Card className={styles.flipFront}>{front}</Card>
+      <Card className={styles.flipBack}>{back}</Card>
     </div>
   );
 };

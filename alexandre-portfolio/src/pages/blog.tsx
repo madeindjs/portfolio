@@ -8,13 +8,17 @@ import PostCard from "../component/PostCard";
 const BlogPage: React.FC = () => {
   const {allMarkdownRemark} = useStaticQuery(graphql`
     query {
-      allMarkdownRemark {
+      allMarkdownRemark(
+        sort: {order: DESC, fields: [frontmatter___date]}
+        limit: 1000
+      ) {
         edges {
           node {
             excerpt(pruneLength: 100)
             frontmatter {
               title
               date
+              tags
             }
             fields {
               slug
