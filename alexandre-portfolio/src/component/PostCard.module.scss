@@ -1,0 +1,16 @@
+%post-card {
+  width: 300px;
+  height: 300px;
+
+  display: flex;
+  align-items: center;
+}
+
+.post-card-front {
+  @extend %post-card;
+  font-weight: 700;
+  text-align: center;
+}
+.post-card-back {
+  @extend %post-card;
+}

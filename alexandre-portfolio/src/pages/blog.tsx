@@ -1,10 +1,11 @@
 import {graphql, useStaticQuery} from "gatsby";
 import * as React from "react";
+import Cards from "../component/Cards";
 import Layout from "../component/Layout";
+import PostCard from "../component/PostCard";
 
-// markup
-const BlogPage = () => {
-  const {allMarkdownRemark, site} = useStaticQuery(graphql`
+const BlogPage: React.FC = () => {
+  const {allMarkdownRemark} = useStaticQuery(graphql`
     query {
       allMarkdownRemark {
         edges {
@@ -18,27 +19,20 @@ const BlogPage = () => {
           }
         }
       }
-      site {
-        siteMetadata {
-          description
-        }
-      }
     }
   `);
   return (
     <Layout>
       <h1>Blog</h1>
-      <ul>
+      <Cards>
         {allMarkdownRemark.edges.map(({node}) => (
-          <li className="blog-post-item" key={node.id}>
-            <h2>{node.frontmatter.title}</h2>
-            <p>{node.excerpt}</p>
-            <span className="published-at">
-              Published at {node.frontmatter.date}
-            </span>
-          </li>
+          <PostCard
+            title={node.frontmatter.title}
+            excerpt={node.excerpt}
+            date={node.frontmatter.date}
+          />
         ))}
-      </ul>
+      </Cards>
     </Layout>
   );
 };
