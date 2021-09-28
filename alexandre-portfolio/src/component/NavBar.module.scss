@@ -1,0 +1,80 @@
+@import "../styles/colors.scss";
+
+$nav_height: 84px;
+$small_nav_height: 50px;
+
+.navbar {
+  height: $nav_height;
+
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  background-color: white;
+
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+
+  font-size: 1.5rem;
+  padding-left: 10%;
+  padding-right: 10%;
+  box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
+
+  transition: height 0.5s;
+
+  &.lite {
+    height: $small_nav_height;
+
+    a.brand {
+      span {
+        width: 40px;
+        height: 40px;
+        padding: 6px;
+        border-radius: 5px;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+    height: $nav_height;
+    line-height: 80px;
+    flex-grow: 1;
+    text-transform: lowercase;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  a.brand {
+    font-size: 2rem;
+    font-weight: 700;
+
+    span {
+      width: 50px;
+      background-color: black;
+      color: white;
+      height: 50px;
+      padding: 10px;
+      border-radius: 5px;
+      text-transform: uppercase;
+
+      transition: background-color height width font-size 0.5s;
+    }
+
+    &:hover {
+      text-decoration: none;
+      span {
+        background-color: $belize_hole;
+      }
+    }
+  }
+}

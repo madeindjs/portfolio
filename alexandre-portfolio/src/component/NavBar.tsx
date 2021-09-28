@@ -1,8 +1,10 @@
 import React from "react";
+// @ts-ignore
+import * as styles from "./NavBar.module.scss";
 
 const NavBar: React.FC = () => {
   return (
-    <nav className="navbar">
+    <nav className={styles.navbar}>
       <a
         className="brand"
         href="{{ '/' | prepend: site.baseurl }}"
