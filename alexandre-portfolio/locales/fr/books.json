@@ -1,0 +1,6 @@
+{
+  "api-on-rails-description": "Apprenez les meilleures pratiques pour construire une API en utilisant Ruby on Rails 6. L'intention avec ce livre n'est pas seulement de vous apprendre comment construire une API avec Rails, le but est de vous apprendre à construire des API évolutives et maintenables avec Rails. Cela signifie améliorer vos connaissances actuelles sur les rails",
+  "api-on-rails-alt": "Couverture du livre API on Rails",
+  "rest-api-ts-description": "Apprenez les meilleures pratiques pour construire une API en utilisant Node.js / Typescript. L'objectif de ce livre n'est pas seulement de vous apprendre à construire une API. Le but est également de vous apprendre à construire une API évolutive et maintenable avec Rails, ce qui signifie améliorer vos connaissances actuelles.",
+  "rest-api-ts-alt": "Couverture du livre REST-API.ts"
+}
