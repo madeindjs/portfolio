@@ -23,7 +23,7 @@ div.highlighter-rouge {
     min(70ch, 100%)
     1fr;
 
-  & > div.highlight {
+  & > .highlight {
     grid-column: 2;
     overflow-x: auto;
   }
