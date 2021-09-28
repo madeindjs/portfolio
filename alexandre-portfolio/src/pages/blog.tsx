@@ -1,3 +1,4 @@
+// src/pages/blog.tsx
 import {graphql, useStaticQuery} from "gatsby";
 import * as React from "react";
 import Cards from "../component/Cards";
@@ -15,7 +16,9 @@ const BlogPage: React.FC = () => {
               title
               date
             }
-            id
+            fields {
+              slug
+            }
           }
         }
       }
@@ -27,6 +30,7 @@ const BlogPage: React.FC = () => {
       <Cards>
         {allMarkdownRemark.edges.map(({node}) => (
           <PostCard
+            slug={node.fields.slug}
             title={node.frontmatter.title}
             excerpt={node.excerpt}
             date={node.frontmatter.date}
