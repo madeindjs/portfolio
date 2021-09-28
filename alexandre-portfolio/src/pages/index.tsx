@@ -3,16 +3,14 @@ import Avatar from "../component/Avatar";
 import Layout from "../component/Layout";
 
 // markup
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   return (
     <Layout>
-      <h1>Index</h1>
-
-      <section class="main lead">
+      <section>
         <Avatar></Avatar>
 
-        <h1 class="hide">Alexandre Rousseau</h1>
-        <p></p>
+        <h1>Alexandre Rousseau</h1>
+        <p>TODO use translation</p>
       </section>
     </Layout>
   );

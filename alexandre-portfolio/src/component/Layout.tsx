@@ -1,4 +1,6 @@
 import React from "react";
+// @ts-ignore
+import * as styles from "./Layout.module.scss";
 import NavBar from "./NavBar";
 
 const Layout: React.FC = (props) => {
@@ -7,9 +9,7 @@ const Layout: React.FC = (props) => {
       <header>
         <NavBar></NavBar>
       </header>
-      <p>Layout</p>
-
-      <main>{props.children}</main>
+      <main className={styles.layout}>{props.children}</main>
     </>
   );
 };
