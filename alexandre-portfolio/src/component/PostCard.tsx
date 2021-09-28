@@ -19,7 +19,7 @@ const PostCard: React.FC<Props> = (props) => {
   return (
     <Card className={styles.postCard}>
       <p className={styles.title}>
-        <AniLink paintDrip to={linkUrl}>
+        <AniLink cover to={linkUrl} duration={0.6} bg="black">
           {props.title}
         </AniLink>
       </p>
@@ -32,7 +32,12 @@ const PostCard: React.FC<Props> = (props) => {
       </div>
       <p className={styles.postCardBack}>{props.excerpt}</p>
       <div className="actions">
-        <AniLink paintDrip to={linkUrl} className={styles.button}>
+        <AniLink
+          paintDrip
+          to={linkUrl}
+          className={styles.button}
+          duration={0.5}
+        >
           <Trans>read</Trans>
         </AniLink>
       </div>

@@ -21,6 +21,8 @@ $circle_width: 200px;
   width: $circle_width;
   height: $circle_height;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 
   &:hover {
     transition: opacity ease-in-out 0.5s;
@@ -38,10 +40,10 @@ $circle_width: 200px;
   &-circle-1 {
     width: $circle_width;
     height: $circle_height;
-    border-top-left-radius: 48%;
-    border-top-right-radius: 48%;
-    border-bottom-left-radius: 48%;
-    border-bottom-right-radius: 48%;
+    border-top-left-radius: 47%;
+    border-top-right-radius: 47%;
+    border-bottom-left-radius: 47%;
+    border-bottom-right-radius: 47%;
     background: #95d7f3;
     position: absolute;
     top: 0;

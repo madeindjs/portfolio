@@ -8,7 +8,9 @@ import * as styles from "./books.module.scss";
 
 // markup
 const BooksPage = () => {
-  const {t} = useI18next();
+  const {t, i18n} = useI18next();
+  const isFr = i18n.language === "fr";
+  const isEn = i18n.language === "en";
   return (
     <Layout>
       <h1>
@@ -24,7 +26,17 @@ const BooksPage = () => {
             height={526}
             width={372}
           ></StaticImage>
-          <p>{t("api-on-rails-description")}</p>
+          <p>
+            <Trans>api-on-rails-description</Trans>
+          </p>
+          <div className="action">
+            <a href="https://github.com/madeindjs/api_on_rails" className="btn">
+              Github
+            </a>
+            <a href="https://github.com/madeindjs/api_on_rails" className="btn">
+              <Trans>buyOnLeanpub</Trans>
+            </a>
+          </div>
         </section>
         <section className={styles.book}>
           <h2>REST-API.ts</h2>
@@ -34,7 +46,9 @@ const BooksPage = () => {
             height={526}
             width={372}
           ></StaticImage>
-          <p>{t("rest-api-ts-description")}</p>
+          <p>
+            <Trans>rest-api-ts-description</Trans>
+          </p>
         </section>
       </div>
     </Layout>

@@ -1,0 +1,53 @@
+@import "./colors.scss";
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background-color: black;
+  color: white;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+  transition: clip-path ease-in-out 0.2s;
+
+  &:hover {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4,
+h5,
+h5 {
+  font-size: 1.2rem;
+}
+
+a {
+  color: $belize_hole;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+hr {
+  display: block;
+  height: 8px;
+  background-color: $silver;
+  width: 60px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
