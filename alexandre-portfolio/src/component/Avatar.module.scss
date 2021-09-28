@@ -1,4 +1,4 @@
-@import "colors";
+@import "../styles/colors.scss";
 
 @keyframes rotate {
   from {
@@ -46,6 +46,7 @@ $circle_width: 200px;
     position: absolute;
     top: 0;
     transition: opacity ease-in-out 0.5s;
+    animation: rotating 2s linear infinite;
   }
 
   &-circle-2 {
@@ -64,7 +65,7 @@ $circle_width: 200px;
     width: $circle_width;
     height: $circle_height;
     clip-path: circle(50%);
-    background-image: url("/img/me.png");
+    background-image: url("../images/me.png");
     background-position: center;
     background-size: cover;
     position: absolute;
