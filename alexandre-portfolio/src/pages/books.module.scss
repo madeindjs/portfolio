@@ -1,0 +1,15 @@
+.books {
+  grid-column: 1 / 4 !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 70ch;
+  max-width: 500px;
+  flex-direction: column;
+  margin: 1rem;
+}

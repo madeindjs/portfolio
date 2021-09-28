@@ -1,9 +1,7 @@
-import {Link} from "gatsby";
 import {Trans} from "gatsby-plugin-react-i18next";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import * as React from "react";
 import Card from "./Card";
-import FlipCard from "./FlipCard";
 // @ts-ignore
 import * as styles from "./PostCard.module.scss";
 
@@ -39,23 +37,6 @@ const PostCard: React.FC<Props> = (props) => {
         </AniLink>
       </div>
     </Card>
-  );
-  return (
-    <Link to={linkUrl} className={styles.postCard}>
-      <FlipCard
-        front={
-          <div className={styles.postCardFront}>
-            <p>{props.title}</p>
-            <ul className={styles.tags}>
-              {props.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
-          </div>
-        }
-        back={<p className={styles.postCardBack}>{props.excerpt}</p>}
-      />
-    </Link>
   );
 };
 

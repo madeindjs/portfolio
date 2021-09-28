@@ -1,4 +1,3 @@
-import {graphql} from "gatsby";
 import {Link, Trans, useI18next} from "gatsby-plugin-react-i18next";
 import React from "react";
 // @ts-ignore
@@ -48,18 +47,5 @@ const NavBar: React.FC = () => {
     </nav>
   );
 };
-export const query = graphql`
-  query ($language: String!) {
-    locales: allLocale(filter: {language: {eq: $language}}) {
-      edges {
-        node {
-          ns
-          data
-          language
-        }
-      }
-    }
-  }
-`;
 
 export default NavBar;

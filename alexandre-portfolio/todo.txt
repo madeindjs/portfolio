@@ -1,2 +1,9 @@
 {% include promote-restapits-en.html %}
 books button
+broken post links
+rss
+page title
+favicon
+seo
+code block
+footer

@@ -12,10 +12,9 @@ const IndexPage: React.FC = () => {
       <section>
         <Avatar></Avatar>
 
-        <h1>Alexandre Rousseau</h1>
-        <p>
+        <h1>
           <Trans>lead</Trans>
-        </p>
+        </h1>
         <p dangerouslySetInnerHTML={{__html: t("description")}}></p>
         <p dangerouslySetInnerHTML={{__html: t("bookDescription")}}></p>
       </section>
