@@ -1,5 +1,6 @@
 import {Link} from "gatsby";
 import {Trans} from "gatsby-plugin-react-i18next";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 import * as React from "react";
 import Card from "./Card";
 import FlipCard from "./FlipCard";
@@ -20,7 +21,9 @@ const PostCard: React.FC<Props> = (props) => {
   return (
     <Card className={styles.postCard}>
       <p className={styles.title}>
-        <Link to={linkUrl}>{props.title}</Link>
+        <AniLink paintDrip to={linkUrl}>
+          {props.title}
+        </AniLink>
       </p>
       <div>
         <ul className={styles.tags}>
@@ -31,9 +34,9 @@ const PostCard: React.FC<Props> = (props) => {
       </div>
       <p className={styles.postCardBack}>{props.excerpt}</p>
       <div className="actions">
-        <Link to={linkUrl} className={styles.button}>
+        <AniLink paintDrip to={linkUrl} className={styles.button}>
           <Trans>read</Trans>
-        </Link>
+        </AniLink>
       </div>
     </Card>
   );

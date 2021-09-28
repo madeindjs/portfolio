@@ -10,6 +10,7 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-typescript",
     "gatsby-plugin-sass",
+    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-plugin-react-css-modules`,
       options: {
