@@ -42,14 +42,9 @@ const NavBar: React.FC = () => {
         <Trans>blog</Trans>
       </Link>
       <Link to="/books">
-        <Trans>book</Trans>
+        <Trans>books</Trans>
       </Link>
       <LanguageSelector></LanguageSelector>
-      {/* {% if site.lang == 'fr' %}
-  <a href="/en/">🇬🇧</a>
-  {% elsif site.lang == 'en' %}
-  <a href="/">🇫🇷</a>
-  {% endif %} */}
     </nav>
   );
 };

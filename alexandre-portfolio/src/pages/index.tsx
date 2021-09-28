@@ -1,3 +1,4 @@
+import {graphql} from "gatsby";
 import * as React from "react";
 import Avatar from "../component/Avatar";
 import Layout from "../component/Layout";
@@ -15,5 +16,18 @@ const IndexPage: React.FC = () => {
     </Layout>
   );
 };
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: {language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
 
 export default IndexPage;

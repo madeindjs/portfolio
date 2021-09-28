@@ -6,6 +6,7 @@ tags: [rails, stripe, api]
 categories: tutorial
 thumbnail: /img/blog/stripe.svg
 comments: true
+lang: fr
 ---
 
 Pour mon projet [iSignif](https://isignif.fr) j'ai voulu implémenter la fonctionnalité d' **accès restreint** au site uniquement si l'utilisateur bénéficie d'un **compte premium**. Le but final est que l’utilisateur doive souscrire un compte premium afin d'accéder à certaines pages.

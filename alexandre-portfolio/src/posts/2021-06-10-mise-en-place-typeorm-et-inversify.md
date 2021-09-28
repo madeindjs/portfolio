@@ -12,6 +12,7 @@ tags:
   - inversify
 categories: programming
 modified: 2021-06-10T12:53:20.368Z
+lang: fr
 ---
 
 Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API.

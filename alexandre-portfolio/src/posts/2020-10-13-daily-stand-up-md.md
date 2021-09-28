@@ -1,57 +1,58 @@
 ---
-title: Organisation du Daily Stand Up avec Markdown
-description: Comment j'utilise un simple fichier texte pour organiser mon Daily Stand-Up
+title: Organization of the Daily Stand Up with Markdown
+description: How I use a plain text file to organize my Daily Stand-Up
 layout: post
 date: 2020-10-13 12:00:00 +0200
 tags: [organisation, plaintext, scrum]
 categories: organization
+lang: en
 ---
 
-Les Stand-up sont des réunions préconisées par la [méthodologie SCRUM](https://en.wikipedia.org/wiki/Stand-up_meeting). Dans ces petites réunions de quinze minutes max, tout le monde prend la parole pour dire rapidement sur quoi il a travaillé la veille, le travail prévu pour le jour même et les points bloquants (s'il y en a).
+Stand-ups are meetings recommended by the [SCRUM methodology](https://en.wikipedia.org/wiki/Stand-up_meeting). In these small meetings of fifteen minutes maximum, everyone takes the floor to say quickly what they worked on the previous day, the work planned for the same day and the blocking points (if any).
 
-Le but est de rester concis car la principale dérive de ces réunions est de trainer en longueur et ainsi de [démotiver tout le monde](https://www.usehaystack.io/blog/we-cancelled-standups-and-let-the-team-build-heres-what-happened). C'est normalement le rôle du SCRUM master de gérer les temps de paroles mais afin de mieux gérer mon temps de parole j'utilise mon `daily.md`.
+The goal is to keep it short because the main drift of these meetings is to drag out the work and thus [demotivate everyone](https://www.usehaystack.io/blog/we-cancelled-standups-and-let-the-team-build-heres-what-happened). It is normally the role of the SCRUM master to manage speaking time but in order to better manage my speaking time I use my `daily.md`.
 
-Je commence donc la journée par me définir des tâches que je compte faire dans la journée dans un [fichier Markdown](https://commonmark.org/) comme ceci :
-
-```markdown
-Lundi 1 septembre
-
-- [ ] terminer feature
-- [ ] définir besoins pour telle feature
-```
-
-Ensuite au fur et à mesure de la journée je coche les tâches réalisées. Si j'ai effectué des tâches en plus, je les rajoutes.
+So I start the day by defining the tasks I want to do during the day in a [Markdown file](https://commonmark.org/) like this:
 
 ```markdown
-Lundi 1 septembre
+Monday, September 1st
 
-- [x] terminer feature
-- [x] debugger problème sur serveur de staging
-- [ ] définir besoins pour telle feature
+- [ ] end feature A
+- [ ] define requirements for a feature B
 ```
 
-Le lendemain, je fais la même chose en rajoutant la nouvelle journée. Toutes les tâches que je n'ai pas faite la veille peuvent se retrouver dans mes prévisions pour la journée.
+Then, as the day progresses, I tick off the tasks that have been completed. If I have completed additional tasks, I add them.
 
 ```markdown
-Lundi 1 septembre
+Monday, September 1st
 
-- [x] terminer feature
-- [x] debugger problème sur serveur de staging
-- [ ] définir besoins pour telle feature
-
-Mardi 2 septembre
-
-- [ ] définir besoins pour telle feature
-- [ ] commencer nouvelle feature
-- [ ] prendre ticket QA
+- [x] end feature
+- [x] debug problem on staging server
+- [ ] define requirements for a feature Be
 ```
 
-Ce qui est pratique, c'est que pour le Daily Stand je peux consulter ce fichier et ainsi être plus concis sur ce que j'ai fais sans essayer de me remémorer la veille ou le vendredi d'avant.
+The next day, I do the same thing by adding the new day. All the tasks I didn't do the day before can be found in my forecast for the day.
 
-Je trouve que cette méthode à plusieurs avantages :
+```markdown
+Monday, September 1st
 
-1. Elle permet de se fixer des objectifs pour la journée et ainsi de se motiver
-2. Elle permet de se garder une trace de tout ce qu'on a réalisé et permettra plus tard de construire facilement un bilan de compétences
-3. Elle est vraiment très rapide à mettre en place et ne requiert aucun logiciel
+- [x] end feature
+- [x] debug problem on staging server
+- [ ] define requirements for a feature B
 
-Je n'ai pas la prétention de dire qu'il s'agit de la méthode miracle mais elle me semble utile.
+Tuesday, September 2nd
+
+- [ ] define requirements for a feature B
+- [ ] start new feature C
+- [ ] take ticket QA
+```
+
+What is practical is that for the Daily Stand I can consult this file and thus be more concise about what I did without trying to remember the day before or the Friday before.
+
+I find that this method has several advantages:
+
+1. It allows you to set goals for the day and thus to motivate yourself.
+2. It allows you to keep track of everything you have achieved and will later allow you to easily build up a skills assessment.
+3. It is really very quick to set up and does not require any software.
+
+I don't pretend to say that it is the miracle method but it seems useful to me.

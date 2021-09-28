@@ -5,6 +5,7 @@ layout: post
 date: 2020-03-02 22:20:00 +0200
 tags: [bash, goaccess]
 categories: devops
+lang: fr
 ---
 
 Chez [iSignif](https://isignif.fr), j'ai [récemment décidé de remplacer Google Analytics par GoAccess](/devops/2019/11/06/go-access.html). Là ou Google Analytics envoie toutes les statistiques de ton site web en temps réel au géant américain, GoAccess analyse le traffic du site en s'appuyant sur les logs du serveur web.

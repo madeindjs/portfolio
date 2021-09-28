@@ -1,23 +1,24 @@
 ---
-title: Google OAuth with cURL
-description: This tutorial show you how to use cURl to get a Google access_token and refresh it.
+title: Authentification Google OAuth avec cURL
+description: Ce tutoriel montre comment obtenir et régénérer un jeton d'authentification Google en ligne de commande.
 layout: post
 date: 2020-10-28 20:00:00 +0200
 tags: [google, oauth, curl]
 categories: programming
+lang: fr
 ---
 
-This post purpose is to show you how (and help me to remember) how to use [Google OAuth](https://oauth.net/) without library. So I made theses steps :
+Ce billet a pour but de vous montrer (et m'aider à me souvenir) comment utiliser [Google OAuth](https://oauth.net/) sans librairies en 3 étapes :
 
-1. obtain a `code` token from browser
-2. use `cURL` to get a valid `access_token`
-3. use `cURL` again to exchange `refresh_token` to a brand new `access_token` without user interaction
+1. obtenir un _token_ `code` directement via le navigateur
+2. utilisez `cURL` pour obtenir un `access_token` valide
+3. utiliser `cURL` à nouveau pour échanger `refresh_token` contre un tout nouveau `access_token` sans interaction de l'utilisateur
 
-Although [it exists many client libraries](https://developers.google.com/identity/protocols/oauth2#libraries) to do so, I will show you how to make an OAuth request using command line tools only (cURL, Bash, etc..) without library. This helped me to understood OAuth workflow and it will allow you to reproduce this complete example on any environment.
+Bien qu'il existe de [nombreuses bibliothèques](https://developers.google.com/identity/protocols/oauth2#libraries) pour le faire, je vais vous montrer comment faire une requête OAuth en utilisant uniquement les outils en ligne de commande (cURL, Bash, etc...). Cela m'a aidé à comprendre le fonctionnement d'OAuth et vous permettra de reproduire cet exemple complet sur n'importe quel environnement.
 
-I do not explain how Oauth works because [many ressources exist](https://duckduckgo.com/?q=oauth+explained). So I suppose you have some basis about Oauth workflow. Ready ?
+Je n'expliquerai pas comment fonctionne Oauth car [de nombreuses ressources existent](https://duckduckgo.com/?q=oauth+expliqué). Je suppose donc que vous avez quelques bases sur le fonctionnement de Oauth. Vous êtes prêts ?
 
-I begin to set some Bash variables to use them during this session (this will also work with ZSH) :
+Je commence à définir quelques variables Bash pour les utiliser pendant cette session (cela fonctionnera aussi avec ZSH) :
 
 ```bash
 # client id and secret obtained from Google API Console: https://console.developers.google.com/apis/credentials
@@ -29,19 +30,19 @@ export G_REDIRECT="http://localhost"
 export G_SCOPE="https://www.googleapis.com/auth/webmasters.readonly"
 ```
 
-Now open a tab with your browser to connect with your Google Account. Google will ask you to select a Google user :
+Ouvrez maintenant un onglet avec votre navigateur pour vous connecter à votre compte Google :
 
 ```bash
 firefox "https://accounts.google.com/o/oauth2/auth?client_id=$G_CLIENT_ID&redirect_uri=$G_REDIRECT&scope=$G_SCOPE&response_type=code&access_type=offline"
 ```
 
-Google redirect once you accept scope. Quickly copy redirect URL and extract `code` HTTP params as is and export in Bash session :
+Google redirige l'utilisateur dès que vous acceptez le condition. Copiez rapidement l'URL de redirection et extrayez les paramètres HTTP du `code` tel quel et exportez-les dans une session Bash :
 
 ```bash
 export G_CODE="4/5gxxxx"
 ```
 
-This `code` allow us to obtain an `access_token`. You can't use it to now to have access of specified scope. So let's obtain an `access_token` with this cURL command :
+Ce `code` nous permet uniquement d'obtenir un `access_token` et un `refresh_token` une fois avec cette commande cURL :
 
 ```bash
 curl https://accounts.google.com/o/oauth2/token \
@@ -53,7 +54,7 @@ curl https://accounts.google.com/o/oauth2/token \
   -d grant_type=authorization_code
 ```
 
-You may obtain something like this:
+Vous devriez obtenir quelque chose de ce genre :
 
 ```json
 {
@@ -65,12 +66,12 @@ You may obtain something like this:
 }
 ```
 
-Some note about this command and result :
+Quelques notes à propos de ce qui vient de ce passer :
 
-1. Google will only send you this answer **once**. If you re-run this command you'll get [a tedious `invalid_grant` error](https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35).
-2. You may not receive `refresh_token` in this response. The `refresh_token` is only provided on the **first authorization** from the user. If so go to the page [showing Apps with access to your account](https://myaccount.google.com/permissions) and remove access of your application. The retry previous steps
+1. Google ne vous enverra cette réponse qu'une seule fois. Si vous relancez cette commande, vous obtiendrez [une difficile à interpreter: `invalid_grant`](https://blog.timekit.io/google-oauth-invalid-grant-nightmare-and-how-to-fix-it-9f4efaf1da35).
+2. Il se peut que vous ne receviez pas de `refresh_token`. En effet, il n'est fourni que lors de la **première autorisation** de l'utilisateur. Si c'est le cas, allez à la page [pour gérer les accès tiers à votre compte Google](https://myaccount.google.com/permissions) et supprimez l'accès à votre application. Ensuite reprenez tout depuis le début
 
-Alright, let's export value and validate token :
+Très bien, exportons la valeur et validons le jeton :
 
 ```bash
 export G_ACCESS_TOKEN="ya29.a0xxxx"
@@ -81,7 +82,7 @@ export G_REFRESH_TOKEN="1//03rWf_xxxx"
 curl -H "Authorization: Bearer $G_ACCESS_TOKEN" https://www.googleapis.com/oauth2/v3/tokeninfo
 ```
 
-You may obtain a response like this :
+Vous devriez avoir une réponse de ce type :
 
 ```json
 {
@@ -94,7 +95,7 @@ You may obtain a response like this :
 }
 ```
 
-So let's try to get a brand new `access_token` using `refresh_token` using this cURL command :
+Essayons maintenant d'échanger le `refresh_token` pour obtenir un tout nouveau `access_token` avec cette commande cURL :
 
 ```bash
 curl https://accounts.google.com/o/oauth2/token \
@@ -104,6 +105,8 @@ curl https://accounts.google.com/o/oauth2/token \
   -d refresh_token=$G_REFRESH_TOKEN \
   -d grant_type=refresh_token
 ```
+
+Si ça a fonctionné, vous devriez obtenir une réponse de ce type.
 
 So you'll obtain a response like this :
 
@@ -116,7 +119,7 @@ So you'll obtain a response like this :
 }
 ```
 
-So that's it !
+Et voilà !
 
 ## Links
 

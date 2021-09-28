@@ -5,6 +5,7 @@ date: 2018-06-20 19:00:00 +0200
 tags: [php, symfony, vagrant]
 categories: tutorial
 thumbnail: /img/blog/symfony.png
+lang: fr
 ---
 
 [Symfony][symfony] est le framework PHP le plus populaire en France. La version 4 est sortie en décembre et se veut plus légère et moins complexe que la précédente version. Voyons donc comment comment l'installer avec une machine virtuelle qui fera tourner un [serveur Apache](https://httpd.apache.org/).

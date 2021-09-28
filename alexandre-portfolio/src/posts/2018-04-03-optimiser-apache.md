@@ -6,6 +6,7 @@ date: 2018-04-03 18:00:00 +0200
 tags: [apache, linux, seo]
 categories: tutorial
 thumbnail: /img/blog/apache.svg
+lang: fr
 ---
 
 Dans mon [précédent article](/tutorial/2017/11/16/installer-apache.html) je vous

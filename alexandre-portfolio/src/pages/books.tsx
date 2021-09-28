@@ -1,3 +1,5 @@
+import {graphql} from "gatsby";
+import {Trans} from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import BookCard from "../component/BookCard";
 import Cards from "../component/Cards";
@@ -7,7 +9,9 @@ import Layout from "../component/Layout";
 const BooksPage = () => {
   return (
     <Layout>
-      <h1>Books</h1>
+      <h1>
+        <Trans>books</Trans>
+      </h1>
       <Cards>
         <BookCard
           name="API on Rails"
@@ -72,5 +76,19 @@ const BooksPage = () => {
     </Layout>
   );
 };
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: {language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
 
 export default BooksPage;

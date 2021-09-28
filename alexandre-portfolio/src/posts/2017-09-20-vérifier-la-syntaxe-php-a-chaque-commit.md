@@ -5,6 +5,7 @@ date: 2017-09-20 12:00:00 +0200
 tags: [git, bash, php]
 categories: programming
 comments: true
+lang: fr
 ---
 
 Afin d'automatiser et d'améliorer la qualité du code, il est possible de lancer certaines tâches lors de chaque commit avec Git. Des outils comme [GrumPHP](https://github.com/phpro/grumphp) permettent de faire cela mais il peut arriver qu'il soit incompatible avec votre projet PHP _(et puis c'est toujours intéressant de savoir le faire à la main)_.

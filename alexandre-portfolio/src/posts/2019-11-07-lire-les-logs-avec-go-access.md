@@ -5,6 +5,7 @@ date: 2019-11-07 1:00:00 +0200
 tags: [analytics, goaccess]
 thumbnail: https://goaccess.io/images/goaccess-dashboard.png
 categories: devops
+lang: fr
 ---
 
 J'ai décidé de supprimer Google Analytics de [iSignif](https://isignif.fr).

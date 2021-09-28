@@ -6,6 +6,7 @@ date: 2018-02-07 12:00:00 +0200
 tags: [rust, crate, crawler]
 categories: tutorial
 thumbnail: /img/blog/rust2.svg
+lang: fr
 ---
 
 Le but est de faire un **crawler** en [Rust][rust]. Un crawler est un script qui va **naviguer** sur un site donné. Cela permet de faire des **analyses de SEO** ou bien de repérer les pages qui mettent du temps à charger ou qui ne fonctionne pas (code 404, 500, etc..).

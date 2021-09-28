@@ -6,6 +6,7 @@ date: 2017-09-22 12:00:00 +0200
 tags: [ruby, rails, mysql, mariadb, raspberrypi]
 categories: development
 comments: true
+lang: fr
 ---
 
 Je ne me suis jamais posé la question et j'ai toujours utilisé **MySQL** pour mes projets **Ruby on Rails**. Jusqu'au jour ou j'ai acheté un **Raspberry Pi 3** pour remplacer mon serveur **Raspberry Pi 2**. Et là.. impossible de remettre la même configuration... Au lieu de m'en têter à installer MySSQL, j'ai décidé de migrer vers **MariaDB** qui est officiellement supporté par **Raspbian**.

@@ -5,6 +5,7 @@ tags: [ruby, haml, slim]
 categories: benchmarking
 date: 2018-11-12 08:00:00 +0200
 thumbnail: /img/blog/erb.png
+lang: fr
 ---
 
 Récemment, sur une application web, je me suis rendu compte que je commençais à avoir des **fichiers HTML** de plus en plus **compliqués**. HTML, étant un **langage de balisage** assez proche du XML, il est assez lourd. J'ai donc voulu tester et comparer les alternatives existantes.

@@ -15,13 +15,22 @@ const PostPageTemplate: React.FC<{data: any}> = (props) => {
 };
 
 export const postQuery = graphql`
-  query ($slug: String!) {
+  query ($slug: String!, $language: String!) {
     markdownRemark(fields: {slug: {eq: $slug}}) {
       html
       excerpt
       frontmatter {
         date
         title
+      }
+    }
+    locales: allLocale(filter: {language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
       }
     }
   }

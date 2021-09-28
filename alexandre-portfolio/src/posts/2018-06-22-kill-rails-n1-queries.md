@@ -5,6 +5,7 @@ date: 2018-06-22 17:30:00 +0200
 tags: [ruby, rails, sql, performance, optimization]
 thumbnail: /img/blog/n1query.png
 categories: tutorial
+lang: fr
 ---
 
 Les **requêtes N+1** sont une plaie qui peuvent avoir un **impact énorme sur les performances** d'une application. Ce phénomène se produit souvent lorsqu'on utilise un **ORM**.

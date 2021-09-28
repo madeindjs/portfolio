@@ -7,6 +7,7 @@ tags: [hack, kali, Wi-fi, wpa]
 categories: hacking
 thumbnail: /img/blog/wifi.png
 comments: true
+lang: fr
 ---
 
 Afin de tester, j'ai voulu cracker mon [routeur récemment installé](/network/2017/10/11/Installer_bridge_sfr_box-4k.html). Et c'est impressionnant de facilité!

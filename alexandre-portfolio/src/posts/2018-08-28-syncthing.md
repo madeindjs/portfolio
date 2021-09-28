@@ -5,6 +5,7 @@ date: 2018-08-28 12:00:00 +0200
 tags: [sync, selfhosted]
 categories: tutorial
 thumbnail: https://syncthing.net/images/logo-horizontal.svg
+lang: fr
 ---
 
 Récemment j'ai voulu trouver une solution pour synchroniser mes documents vers plusieurs PC. Par exemple, lorsque j'ajoute une musique sur mon ordinateur personnel, je veux qu'elle s'ajoute automatiquement sur mon smartphone et mon ordinateur professionnel.

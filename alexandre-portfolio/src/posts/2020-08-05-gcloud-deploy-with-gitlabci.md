@@ -1,28 +1,27 @@
 ---
-title: Déployer une application Frontent / Backend sur Google Cloud Plateform avec Gitlab CI
-description: Tutoriel pour utiliser Gitlab CI afin de créer les images Docker d'une application Backend + Frontend et de la déployer sur Google Cloud Computing avec Kubernetes.
+title: Deploy a fullstack application on Google Cloud Plateform with Gitlab CI
 layout: post
 date: 2020-08-05 15:00:00 +0200
 tags: [devops, gcloud, gitlabci, docker]
 categories: programming
-toc: true
+lang: en
 ---
 
-J'ai déployé une application Fullstack (c'est à dire Frontend / Backend) sur Google Cloud Plateform avec Kubernetes. Et comme [les développeur sont fainéant](https://www.forbes.com/sites/forbestechcouncil/2018/01/08/developers-are-lazy-and-thats-usually-a-good-thing/), j'ai tout automatisé avec Gitlab CI.
+I deployed a Fullstack application (i.e. Frontend / Backend) on Google Cloud Platform with Kubernetes. And since [developers are lazy](https://www.forbes.com/sites/forbestechcouncil/2018/01/08/developers-are-lazy-and-thats-usually-a-good-thing/), I automated everything with Gitlab CI.
 
-On est bien loin du PHP déployé à la main sur un serveur Apache. Si ça t'intéresse de passer à la vitesse supérieur et de voir comment ça marche, je t'invite à lire la suite.
+It's a far cry from PHP deployed by hand on an Apache server. If you're interested in moving up a gear and see how it works, read on.
 
-## Mon application
+## My application
 
-Mon projet sur lequel je travaille actuellement est découpé en trois partie : _Frontend_, _Backend_, _Job Queue_.
+My project I'm currently working on is divided into three parts: _Frontend_, _Backend_, _Job Queue_.
 
-Chaque partie tourne dans des _containers_ Docker bien séparés. Ils possèdent donc tous un `Dockerfile` :
+Each part runs in separate _containers_ Docker. So they all have a `Dockerfile':
 
-1. le _frontend_ utilise une image Node.js qui build **Angular 9** puis une image NGINX qui sert les fichiers statiques
-2. le _backend_ utilise une image **Node.js** qui lance un serveur web sur le port 3000
-3. la _job_queue_ utilise aussi une image Node.js qui lance un script **Node.js** qui communique avec la base Postgres et effectue des actions en différé
+1. the _frontend_ uses a Node.js image that builds **Angular 9** and then a NGINX image that serves the static files
+2. the _backend_ uses a **Node.js** image that launches a web server on port 3000
+3. the _job_queue_ also uses a Node.js image that launches a **Node.js** script that communicates with the Postgres database and performs offline actions.
 
-Mon projet à donc la structure suivante :
+So my project has the following structure:
 
 ```
 ├── backend
@@ -31,21 +30,21 @@ Mon projet à donc la structure suivante :
 └── frontend
 ```
 
-J'ai donc souhaiter construire ces images automatiquement lors d'un `git push` et la publier sur Google Cloud Plateform avec Kubernetes. Pour cela, j'ai utilisé **Gitlab CI** mais la logique doit être identique avec Circle CI de Github.
+So I wanted to build these images automatically during a `git push` and publish it on Google Cloud Platform with Kubernetes. For this, I used **Gitlab CI** but the logic must be identical with Github's Circle CI.
 
-> La base Postgres est indépendante de Kubernetes et fonctionne sur un service [Google Cloud SQL pour PostgreSQL](https://cloud.google.com/sql/docs/postgres). Je n'en parlerai pas ici.
+> The Postgres database is independent of Kubernetes and runs on a [Google Cloud SQL for PostgreSQL] service (https://cloud.google.com/sql/docs/postgres). I won't talk about it here..
 
-## Automatisation avec Gitlab CI
+## Automation with Gitlab CI
 
-Gitlab permet donc à travers un fichier `.gitlab-ci.yml` de définir un workflow de chose à faire lorsque tu pousse du code. Ceci est souvent intéressant pour lancer une _pipeline_ (suite d'actions) qui vont lancer les tests unitaires, linter le code, etc...
+Gitlab allows you to define a workflow of things to do when you push code through a `.gitlab-ci.yml` file. This is often useful for launching a _pipeline_ (a sequence of actions) that will run unit tests, linter code, etc...
+`
+In my case, I created the following actions :
 
-Dans mon cas, j'ai créé les actions suivantes :
+1. `test': launch unit tests
+2. `publish`: creation of a Docker image and publication in the GCloud's private image registry
+3. `deploy`: tells the GCloud to deploy the images previously _uploaded_.
 
-1. `test`: lancement des tests unitaires
-2. `publish`: création d'une image Docker et publication dans le registre d'image privé de GCloud
-3. `deploy`: demande à GCloud de déployer les images précédement _uploadé_
-
-Le structure du fichier `.gitlab-ci.yml` ressemble donc à cela :
+So the structure of the `.gitlab-ci.yml` file looks like this:
 
 ```yml
 # .gitlab-ci.yml
@@ -65,17 +64,17 @@ job:deploy-develop:backend:
   # ...
 ```
 
-> j'ai gardé que les job qui concernent `backend` pour simplifier.
+> I only kept the jobs that involve "backend" to simplify.
 
-Je te propose de passer en revue les différentes étapes. C'est partit.
+I'll walk you through the steps. Here we go.
 
-## `test`: lancement des tests unitaires
+## `test`: running unit tests
 
-Il s'agit de l'étape la plus facile. Je ne vais pas trop m'attarder dessus car beaucoup de tutoriels existent et ce n'est pas le sujet de cet article.
+This is the easiest step. I won't spend too much time on it because a lot of tutorials exist and that's not the subject of this article.
 
-On lance donc deux jobs :
+So we start two jobs:
 
-1. `job:test:backend` va initialiser l'application, connecter une base Postgres et lancer `yarn test`
+1. `job:test:backend` will initialize the application, connect a Postgres database and run `yarn test'.
 
 ```yml
 job:test:backend:
@@ -94,7 +93,7 @@ job:test:backend:
   script: yarn test
 ```
 
-2. `job:test:frontend` va initaliser l'application et lancer `yarn test` mais à partir d'une image contenant un driver Chrome pour émuler la navigation
+2. `job:test:frontend` will initialize the application and run `yarn test` but from an image containing a Chrome driver to emulate navigation.
 
 ```yml
 job:test:frontend:
@@ -106,31 +105,31 @@ job:test:frontend:
   script: yarn test
 ```
 
-Et voilà.
+There you go.
 
-## `publish`: création d'une image Docker et publication dans le registre d'image privé de GCloud
+## `publish`: creating a Docker image and publishing it in the private image registry of the GCloud.
 
-L'étape `publish` va construire les images Docker des différentes application et les publier sur [GCloud - Container Registry](https://cloud.google.com/container-registry). Pour cela on va créer un job par image à publier (`frontend`, `backend` et `worker`).
+The `publish` step will build docker images of the different applications and publish them to [GCloud - Container Registry](https://cloud.google.com/container-registry). To do this, we will create a job for each image to be published (frontend, backend and worker).
 
-Afin de construire les images et les publier, il faut utiliser:
+In order to build the images and publish them, we need to use:
 
-- l'image [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) qui permet de communiquer avec GCloud et ainsi de publier les images
-- le service [Docker-in-Docker](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-workflow-with-docker-executor) qui permet d'utiliser des commandes Docker dans un container Docker.
+- the image [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) which allows to communicate with GCloud and publish the images.
+- the [Docker-in-Docker] service (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-workflow-with-docker-executor) which allows you to use Docker commands in a Docker container.
 
-Il est ensuite possible d'utiliser la commande :
+It is then possible to use the :
 
-- `gcloud auth` pour se connecter à Gcloud dans le container
-- `gcloud auth configure-docker` pour connecter Docker à GCloud
-- `docker buil/push` pour créer l'image et la publier
+- `gcloud auth` to connect to Gcloud in the container.
+- gcloud auth configure-docker to connect Docker to GCloud
+- `docker buil/push` to create the image and publish it
 
-Une dernière chose à savoir: pour ce connecter à GCloud dans Gitlab CI il faut tout d'abord se connecter. Pour cela il faut ajouter les credentials des GCloud dans les paramètres de Gitlab CI dans la sections "Settings > Variables". Une fois que c'est fait, il est possible de se logger dans le job en utilisant la commande suivante:
+One last thing to know: to connect to the GCloud in Gitlab CI, you must first log in. To do so, you need to add the GCloud credentials in the Gitlab CI settings in the "Settings > Variables" section. Once this is done, it is possible to log into the job using the following command:
 
 ```bash
 echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
 ```
 
-Voici donc le résultat complet pour le job `job:publish:backend` :
+Bellow the final result for `job:publish:backend` :
 
 ```yml
 job:publish:backend:
@@ -157,21 +156,21 @@ job:publish:backend:
     - echo "us.gcr.io/${PROJECT_NAME}/${APP_NAME}-backend:${CI_COMMIT_SHA} image build with success and pushed"
 ```
 
-> je passe le détails des deux autres car ils sont très similaires.
+> I skip over the details of the other two because they're very similar.
 
-## `deploy`: demande à GCloud de déployer les images précédement _uploadé_
+## `deploy`: ask GCloud to deploy the images previously _uploaded_.
 
-Pour utiliser `kubectl` nous allons aussi utiliser l'image [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) qui contient l'utilitaire Kubernetes.
+To use `kubectl` we will also use the [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) image which contains the Kubernetes utility.
 
-Mais avant de commencer à code le script, il faut créer trois **deploiement** :
+But before we start coding the script, we need to create three **deployment** :
 
-1. `dpl-my-app-frontend` sur <https://my-app/>
-2. `dpl-my-app-backend` sur <https://api.my-app/>
-3. `dpl-my-app-worker` qui n'est pas exposé
+1. `dpl-my-app-frontend` on <https://my-app/>
+2. `dpl-my-app-backend` at <https://api.my-app/>.
+3. `dpl-my-app-worker` that is not exposed
 
-Pour les créer, tu peux passer par l'interface de GCloud ou bien utiliser directement `kubectl` sur ton PC (en n'oubliant pas de [configurer l'accès au cluster pour kubectl](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl?hl=fr)).
+To create them, you can use the GCloud interface or use `kubectl` directly on your PC (don't forget to [configure cluster access for kubectl](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl?hl=fr)).
 
-Pour la version en ligne de commande il faut utiliser `kubectl create deployment` :
+For the command line version, use `kubectl create deployment` :
 
 ```bash
 kubectl create deployment dpl-develop-data-frontend --image=us.gcr.io/<your-node>/data-k8s-frontend
@@ -179,16 +178,16 @@ kubectl create deployment dpl-develop-data-backend --image=us.gcr.io/<your-node>
 kubectl create deployment dpl-develop-data-worker --image=us.gcr.io/<your-node>/data-k8s-worker
 ```
 
-> On peut vérifier que tout s'est bien passé avec `kubectl get deployments` qui doit lister nos trois nouveaux déploiements.
+> We can check that everything went well with `kubectl get deployments` which should list our three new deployments.
 
-Ensuite, il ne reste plus que à créer les jobs qui vont s'occuper de mettre à jour les _containers_ sur ces déploiements et spécifier la redirection des ports.
+Then, we just have to create the jobs that will update the _containers_ on these deployments and specify the port forwarding.
 
-Pour cela il faut aussi utiliser `gcloud auth` comme tu l'as vu précédement. Ensuite, il suffit d'appeller les méthodes :
+To do this you also need to use `gcloud auth` as you saw before. Then, just call the methods :
 
-- `kubectl set image` pour mettre à jour l'image du container
-- `kubectl patch deployment` pour mettre à jour les information du container (ex: changer les metadata)
+- `kubectl set image` to update the container image.
+- `kubectl patch deployment` to update container information (e.g. change metadata)
 
-Voici la version complète pour `job:deploy-develop:backend`:
+Here is the full version for `job:deploy-develop:backend`:
 
 ```yml
 job:deploy-develop:backend:
@@ -206,19 +205,19 @@ job:deploy-develop:backend:
     - kubectl patch deployment ${APP_NAME}-backend -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"date\":\"`date +'%s'`\"}}}}}"
 ```
 
-Et voila.
+There you go.
 
-Il suffit ensuite de ce rendre dans l'interface GCloud dans la section "Kubernetes Engine > Workloads", retrouver les worklow correspondand et de créer les entrée DNS sur votre fournisseur de nom de domaine et de les faire pointer sur les déploiement correspondants.
+Then just go to the GCloud interface in the "Kubernetes Engine > Workloads" section, find the corresponding workloads and create the DNS entries on your domain name provider and point them to the corresponding deployments.
 
 ## Conclusion
 
-Pour ma part j'ai trouvé l'approche de Google Cloud Plateform très déroutante mais assez bien documenté. Le temps investis dans l'apprentissage de cette technologie me semble bien investis car l'architecture est vraiment _scalable_ et permet de réduire les cout de l'infrastructure.
+For my part I found the Google Cloud Platform approach very confusing but quite well documented. The time invested in learning this technology seems to me well invested because the architecture is really _scalable_ and allows to reduce the infrastructure costs.
 
-Le seul point noir pourrait être qu'on s'enferme chez un fournisseur mais je pense que Amazon Web Service ou Microsoft Azure partagent la même terminologi car leur technologie reposent aussi sur Kubernetes à mon avis.
+The only black point could be that we lock ourselves in a provider but I think that Amazon Web Service or Microsoft Azure share the same terminology because their technology is also based on Kubernetes in my opinion.
 
 ## Links
 
-- [Déployer une application Web en conteneur](https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app?hl=fr)
-- [Deploying a full stack application to Google Kubernetes Engine – Shine Solutions Group](https://shinesolutions.com/2018/10/25/deploying-a-full-stack-application-to-google-kubernetes-engine/)
+- [Deploying a Containerized Web Application](https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app?hl=fr)
+- [Deploying a full stack application to Google Kubernetes Engine - Shine Solutions Group](https://shinesolutions.com/2018/10/25/deploying-a-full-stack-application-to-google-kubernetes-engine/)
 - [Connect a Front End to a Back End Using a Service](https://kubernetes.io/docs/tasks/access-application-cluster/connecting-frontend-backend/)
-- [Building Docker images with GitLab CI/CD](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html)
+- Building Docker images with GitLab CI/CD](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html)

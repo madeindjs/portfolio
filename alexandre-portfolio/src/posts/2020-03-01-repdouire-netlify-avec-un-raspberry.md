@@ -4,6 +4,7 @@ layout: post
 date: 2020-03-01 11:20:00 +0200
 tags: [bash, jekyll]
 categories: devops
+lang: fr
 ---
 
 [Netlify](https://www.netlify.com/) permet, entre autre entre, de se brancher à Github et de builder ton site statique automatiquement à chaque commit et de le déployer sur un serveur. Ce service est vraiment top car tu n'as rien à faire. Netlify s'occupe de tout.

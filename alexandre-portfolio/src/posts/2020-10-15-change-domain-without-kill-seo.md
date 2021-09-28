@@ -1,80 +1,81 @@
 ---
-title: Changer de nom domain sans détruire ton référencement Google
+title: Change domain name without kill SEO
 description: This tutorial show you how to set Apache redirection and inform Google that you change domain name
 layout: post
 date: 2020-10-15 13:00:00 +0200
 tags: [seo, apache, google]
 categories: webmaster
+lang: en
 ---
 
-Récemment, j'ai changé le nom de domaine de mon site web de `rousseau-alexandre.fr` à `rsseau.fr`. Ce changement était un peu délicat car cela peut nuire au référencement du site. J'ai pensé que ce serait une bonne idée de conserver un document de ce que j'ai fait et de le partager. Peut-être que cela peut t'aider ?
+Recently I changed my website domain name from `rousseau-alexandre.fr` to `rsseau.fr`. This move was a little tricky because this may hurt your SEO if you miss something. So I think it may be a good idea to keep a document of what I did and share it. Maybe it can help you?
 
-Dans ce tutoriel, mon site web est construit avec [Jekyll](https://jekyllrb.com/) et hébergé sur un IP Raspberry derrière le routeur de mon FAI. Mon RPI sert des fichiers statiques avec un simple [serveur HTTP Apache](https://httpd.apache.org/). Ce tutoriel essaie d'être générique et il peut t'intéresser même si tu héberge ton site web d'un autre manière que la mienne.
+This tutorial tend to be generic and it may interesting you even if you host your website differently than me.
 
-Quoi qu'il en soit, dans cet article, je vais te montrer la démarche que j'ai suivie pour faire ce changement sans nuire au référencement. Pour suivre ce guide, tu dois avoir des connaissances de base sur le DNS, la configuration d'Apache (si tu l'utilise) et les outils Google (si tu les utilise aussi).
+On this tutorial, my website is build with [Jekyll](https://jekyllrb.com/) and hosted on a Raspberry PI behind my ISP router. My RPI serve static files with a simple [Apache HTTP Server](https://httpd.apache.org/). This is really a simple stack.
 
-Les principales étape sont :
+Anyway in this post I will show you step I followed to make this move without hurting SEO. To follow this guide, you need to have basic knowledge of DNS, Apache configuration (if you use it) and Google Tools (if you use it too).
 
-1. Acheter un nouveau domaine
-2. Créer un nouveau site web
-3. Créer une redirection
-4. Informez Google que vous avez mis à jour le domaine
+The main step will be :
 
-Allons-y.
+1. Buy new domain
+2. Setup new website
+3. Create a redirection
+4. Inform Google that you updated domain
 
-## Avant la migration
+Let's go.
 
-La migration de domaines consiste à **changer de domaine uniquement**. Vous ne devez pas migrer votre domaine **et** déplacer l'URL de la page en même temps. L'architecture du site web ne doit pas changer.
+## Before to make migration
 
-Google a également besoin d'un certain temps pour effectuer le changement de domaine.
+Domains migration consist of **only change domain**. You should not migrate your domain **and** moving page URL at the same time. Website architecture should not change.
 
-## Acheter un nom de domaine
+Also Google need some time to make domain change. So you should be sure to your new domain URL because you can't move again to a new one domain during a while.
 
-Cette première étape consiste à acheter un tout nouveau domaine. Pour ce faire, tu peux faire appel à n'importe quel revendeur de domaines. Lorsque c'est fait, mettez un enregistrement DNS de type "A" pour traduire ce domaine à l'adresse IP de votre serveur.
+## Buy domain name
 
-**Attention à bien conserver ton ancien nom de domaine**. Tu dois posséder les deux domaines pendant un certain temps. J'en reparlerai plus loin dans l'article.
+This first step is to buy a brand new domain. To do so you can use any domain reseller. When it's done, put a DNS record type `A` to translate this domain to your server IP.
 
-## Créer la nouvelle configuration Apache
+**Do no sell your previous domain name yet**. You must keep both domains during a time.
 
-Dans mon cas, ce site est un site statique construit avec [Jekyll](jekyllrb.com/). J'ai ensuite un serveur Apache qui définis plusieurs [_Virtual Host_](https://httpd.apache.org/docs/2.2/fr/vhosts/) pour servir plusieurs site (dont celui-ci). J'ai donc simplement crée un nouveau `VHost` à partir de l'ancien.
+## Create new Apache configuration
 
-J'ai donc copié l'ancienne configuration vers une nouvelle
+After you bought you domain name and configure DNS you should update your Apache configuration _(I speak about Apache because it's what I use but the logic is same for Nginx)_.
 
-Dès que tu as reçu ton nouveau nom de domaine, tu dois le faire pointer sur ton nouveau site.
+In my case I just copy old configuration...
 
 ```bash
 sudo cp /etc/apache2/sites-available/rousseau-alexandre.fr.conf /etc/apache2/sites-available/rsseau.fr.conf
 ```
 
-... et remplacé le `ServerName` et `ServerAlias` par le nouveau:
+... and replace `ServerName` and `ServerAlias` by new domain:
 
 ```bash
 sudo sed -i 's/rousseau-alexandre.fr/rsseau.fr/g' /etc/apache2/sites-available/rsseau.fr.conf
 ```
 
-Et ensuite il suffit d'activer la nouvelle configuration.
+Then activate the new configuration and restart server:
 
 ```bash
 sudo a2ensite rsseau.fr.conf
 sudo service apache2 restart
 ```
 
-A ce moment la, le nouveau site est disponible !
+You may also want to create a new HTTPS certificate. Using [Let's Encrypt](https://letsencrypt.org/). If so, it's probably simply as `sudo certbot --apache` (it was for me).
 
-Tu peux aussi avoir besoin de reconfigurer le certificat HTTPS. Avec [Let's Encrypt](https://letsencrypt.org/) c'est aussi simple que de lancer la commande `sudo certbot --apache`.
+## Update old Apache configuration
 
-## Mettre en place la redirection sur l'ancienne configuration Apache
+> if you are not concerned by server configuration, you can jump to next section
 
-Dès que le nouveau `Vhost` est mise en place et que le site fonctionne, tu as besoin de rediriger les page de ton ancien site vers le nouveau.
+When you new Vhost is set on Apache, you may want to redirect all traffic from previous domain to new one.
 
-Tu te demandes sûrement: "Mais pourquoi je ne garderais pas les deux site en même temps". Effectivement ça serait plus simple mais ce n'est pas une bonne idée :
+You may ask yourself: "why not keep both website like this?". This may be simpler but this is not a good idea:
 
-1. Google pourrait détecter un contenu dupliqué et pénaliser un voir les deux domaines
-2. Google t'oblige à mettre en place la redirection (on le verra plus tard)
-3. Tu as sans doute envie de suivre le traffic de ton site sans te prendre la tête a additionner les deux site à chaque fois
-4. C'est vraiment très facile à mettre en place
+1. Google may detect duplicate content between theses two websites and penalize your new domain
+2. You must make redirection to allow you to transfer Google property (next section)
+3. You may want to keep track of your traffic into a single domain
+4. This is really simple to make Apache redirection
 
-J'ai dis "vraiment simple" ? Et bien oui ! Avec la directive Apache `Redirect`. Tu as juste besoin de supprimer certaines directive et de les remplacer par `Redirect permanent` :
+I said "really simple"? Yes it is. With Apache `Redirect` directive. You just need to remove previous configuration and add `Redirect permanent` directive like this:
 
 ```diff
 # /etc/apache2/sites-available/rousseau-alexandre.fr.conf
@@ -93,7 +94,9 @@ J'ai dis "vraiment simple" ? Et bien oui ! Avec la directive Apache `Redirect`. 
 </VirtualHost>
 ```
 
-Et c'est tout! N'oublie pas de mettre aussi la configuration pour la versions HTTPS
+That's it.
+
+Also do not forget to update HTTPS configuration if you have one:
 
 ```diff
 # /etc/apache2/sites-available/rousseau-alexandre.fr-le-ssl.conf
@@ -118,61 +121,61 @@ Et c'est tout! N'oublie pas de mettre aussi la configuration pour la versions HT
 </IfModule>
 ```
 
-Et ensuite on redémarre le serveur.
+Then restart server:
 
 ```bash
 sudo a2ensite rsseau.fr.conf
 sudo service apache2 restart
 ```
 
-## Configurer Google Webmasters Tools
+## Update Your Website in Google Webmasters Tools
 
-A ce moment tu as :
+At this point you have :
 
-- un site qui fonctionne sur ton nouveau domaine
-- la redirection qui fonctionne pour rediriger vers le nouveau site
+- your website who works on new domain
+- redirection from old domain to new one
 
-Il est donc temps d'informer Google que tu as changé de nom de domaine. C'est vraiment important car tu vas aider Google à comprendre ce qui vient de ce passer.
+It's time to inform Google that you change domain for your current site. This is really important because Google will understand that it's not duplicate content.
 
-Tu dois commencer par ajouter ton site dans le propriétés de ton compte Google Webmaster Tool. Il y a plusieurs options et pour ma part j'ai choisis d'entrer une nouvelle propriété DNS comme la suivante:
+First you need to add a new property for your new domain. Google will verify that you own this domain by ask you to add a DNS property like this:
 
 ```
 IN TXT "google-site-verification=XXXXX"
 ```
 
-Ensuite tu n'as plus qu'à te rendre dans [les paramètres Google Webmaster](https://search.google.com/search-console/settings). Il y a une section _change domain of a property_ et la tu verra apparaître le nouveau nom de domaine.
+Then you simply need to go in [Google Webmaster settings](https://search.google.com/search-console/settings). There are a section to change domain of a property. Here you'll be able to select the new one.
 
 ![Settings to change property domain name](/img/blog/google-webmaster-prepare-update-domain.png)
 
-J'ai eu besoin d'attendre quelques heures afin que Google scanne mon nouveau site et j'ai pu envoyer le formulaire.
+I had to wait few hours to Google crawl redirection then I was able to submit form
 
 ![property domain updated !](/img/blog/google-webmaster-domain-updated.png)
 
-Et c'est tout.
+That's it.
 
-Que se passe-t-il maintenant ? Google va commencer à explorer ton nouveau site web et à modifier les résultats de recherche vers ton nouveau site. **Ce processus peut prendre 180 jours**.
+What happens now? Google will start to crawl your new website and begin to change result from your old website for the new one. **This process can take 180 days**.
 
-## Supprimer les domaines précédents
+## Delete previous domains
 
-Tu penses donc maintenant pouvoir supprimer ton ancien domaine et arrêter ton ancien site web. Je te le déconseille car :
+So now you think you can remove your old domain and stop your old website. I don't recommend it.
 
-- comme je l'ai dit plus haut, Google a besoin de [6 mois pour effectuer le transfert](https://support.google.com/webmasters/answer/9370220) et il continuera à afficher des résultats de recherche vers ton ancien site web
-- certains _backlink_ continuerons de pointer vers ton ancien site
-- quelqu'un peut vouloir acheter ton ancien nom de domaine pour rediriger les visiteurs vers un autre site. Pire, il peut utiliser ce domaine pour créer une attaque de phishing.
+- you need to keep your old website at [least 180 days](https://support.google.com/webmasters/answer/9370220) because Google will continue to display search result for your old website
+- back links we'll continue to link to your old website
+- someone may want to buy your old domain to redirect visitor to his website. Or worse, use this domain to create some phishing attack.
 
-Je pense donc que tu dois conserver ce nom de domaine. Pendant combien de temps ? Je n'ai pas la réponse mais je pense le plus longtemps possible.
+So I my opinion you should keep this domains for
 
-## Et après quelques semaines
+## And after some days
 
-Connectes toi donc sur [Google Search Console](https://search.google.com/search-console) après quelques semaines et regardez l'évolution du trafic du domaine précédent :
+So let's connect on [Google Search Console](https://search.google.com/search-console) after few weeks and take a look at traffic evolution of previous domain :
 
-![performance du trafic de l'ancien site web sur la Google Search Console](/img/blog/google-webmaster-old-domain.png)
+![Google Search Console traffic performance for old website](/img/blog/google-webmaster-old-domain.png)
 
-Super ! Tu vois que le trafic commence à diminuer à la date de la migration. Voyons donc l'évolution du trafic du nouveau domaine :
+Great! We see that traffic start to drop on migration date. So let take a look on traffic evolution of my new domain :
 
-![performance du trafic de la Google Search Console pour le nouveau site web](/img/blog/google-webmaster-new-domain.png)
+![Google Search Console traffic performance for new website](/img/blog/google-webmaster-new-domain.png)
 
-Ces informations montrent que tout mon trafic a été correctement transféré dans mon nouveau domaine ! Je reçois en moyenne le même nombre de clics sur mon nouveau site que sur l'ancien. Mais ces capture d'écran montrent aussi que même après quelques semaines, mon ancien site continue à recevoir du trafic de Google.
+Theses informations show that all my traffic was correctly transferred into my new domain ! I get average same amount of clicks on my new domains than my old one. But it show also that even after some weeks, my old domain continue to receive traffic from Google.
 
 ## Link
 

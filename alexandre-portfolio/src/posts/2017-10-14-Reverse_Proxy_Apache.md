@@ -6,6 +6,7 @@ date: 2017-10-14 23:00:00 +0200
 tags: [networking, apache]
 categories: network
 comments: true
+lang: fr
 ---
 
 Il arrive un moment ou vous voulez héberger plusieurs site sur plusieurs machines chez vous. Mais la, il y a un problème: vous n'avez qu'une adresse IP publique. A moins que vous payez deux abonnement internet, vous êtes dans le même cas que moi. Et j'ai la solution: [`mod_proxy_http`](https://httpd.apache.org/docs/2.4/fr/mod/mod_proxy_http.html).

@@ -11,6 +11,7 @@ tags:
 categories: devops
 thumbnail: /img/blog/postgres.svg
 modified: 2021-06-05T13:55:09.822Z
+lang: fr
 ---
 
 Récemment j'ai été amené à travailler avec le gestionnaire de base de données [PostgreSQL](https://postgresql.org/) et plus précisément la réplication des données sur plusieurs instance.

@@ -6,6 +6,7 @@ date: 2018-04-06 13:25:00 +0200
 tags: [rust, crate, crawler, thread]
 categories: tutorial
 thumbnail: /img/blog/rust2.svg
+lang: fr
 ---
 
 Dans un [précédent article][crawler_rust], nous avions crée un [Crawler en Rust][spider]. Dans cet article, nous allons pousser notre Crawler afin qu'il soit **multi-threadé**

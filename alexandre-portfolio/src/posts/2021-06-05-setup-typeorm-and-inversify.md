@@ -11,6 +11,7 @@ tags:
 categories: programming
 thumbnail: /img/blog/postgres.svg
 modified: 2021-06-10T12:46:39.739Z
+lang: en
 ---
 
 In this tutorial I will show how what is dependency injection, why you should care about and how you can implement it easily with [TypeORM](https://typeorm.io/) and [inversify](http://inversify.io/).

@@ -1,122 +1,121 @@
 ---
-title: Retour d'expérience sur la rédaction d'un livre technique
+title: Feedback about writing a technical book
 layout: post
 date: 2019-11-11 0:30:00 +0200
-tags: [rails, leanpub book]
+tags: [rails, leanpub, book]
 thumbnail: /img/blog/api_on_rails.png
 categories: story
+lang: en
 ---
 
-En début d'année 2019 j'ai été contacté par [Developpez.com](https://www.developpez.com/) qui cherchait des personnes pour écrire des articles. J'ai donc répondu positivement pour participer sur le sujet du framework Ruby on Rails.
+Early this year I was contacted by [Developpez.com](https://www.developpez.com/) to find people to write articles. So I answered to participate on the subject of the Ruby on Rails framework.
 
-On m'a ainsi proposé de traduire une partie du livre [APIs on Rails Building REST APIs with Rails](http://apionrails.icalialabs.com/) de Abraham Kuri Vargas. Ce livre est un grand tutoriel de plus de 200 pages pour construire une API évolutive avec Ruby on Rails en suivant les bonnes pratiques.
+I was asked to translate part of Abraham Kuri Vargas's book [APIs on Rails Building REST APIs with Rails](http://apionrails.icalialabs.com/). This book is a large tutorial of more than 200 pages to build a scalable API with Ruby on Rails following best practices.
 
-Je me suis dit que ça pouvait être une bonne expérience et je me suis lancé dans cette aventure.
+I thought it could be a good experience so I started.
 
-Le projet était non maintenu et la version du framework étudié obsolète. Les exemples n'étaient donc plus valides et il fallait les reprendre. **Le bordel**. J'ai essayé de contacter l'auteur mais en vain.
+The project was not maintained and the version of the framework studied was obsolete. Examples were therefore no longer valid and had to be repeated. **The mess**. I tried to contact the author but to no response.
 
-Je suis donc reparti de zéro et je me suis lancé dans la réécriture du livre. Et tant qu'à réécrire, je me suis dit que j'allais aussi le traduire dans la langue de Molière.
+So I started to rewriting the book from scratch. As long as I was rewriting, I thought about translate it into Molière's language.
 
-Voici donc mon retour d'expérience sur la rédaction d'un livre de plus de 200 pages en anglais et en français.
+Here is my feedback on the writing of a book of more than 200 pages in English and French.
 
-{% include promote-apionrails-fr.html %}
+{% include promote-apionrails-en.html %}
 
-## Comment écrire un livre?
+## How to write a book?
 
-Si tu veux écrire un livre, sache que c'est **chronophage**. J'ai donc fait en sorte que ça me prenne le moins de temps possible. Je ne prétends pas avoir la meilleure solution. Voici juste la mienne.
+If you want to write a book, know that it's a timeless thing. So I made sure it took me as little time as possible. I don't pretend to have the best solution. This is just mine.
 
-### Rédaction
+#### Writing
 
-Pour la rédaction je voulais un système qui me permette de **versionner mon travail** et qu'il puisse inclure des morceaux de code. **Beaucoup de morceaux de code**.
+For the writing I wanted a system that would allow me to **version my work** and that it could include pieces of code. **A lot of code pieces**.
 
-Je me suis donc tout d'abord tourné vers LaTeX qui s'est avéré **trop rigide**. Mon principal problème était d'avoir une bonne coloration syntaxique. Quelques solutions existent mais elles restent assez limitées.
+So I first turned to LaTeX which proved to be **too rigid**. My main problem was to have good syntax highlighting. Some solutions exist but they are still quite limited.
 
-Je me suis donc tourné vers le format Markdown avec l'outil [Pandoc](http://pandoc.org/). Cet outil est absolument génial mais j'ai fini par rencontrer les mêmes problèmes qu'avec LaTeX puisque Pandoc s'appuie sur une conversion en LaTeX pour ensuite la convertir en PDF.
+So I turned to the Markdown format with the [Pandoc](http://pandoc.org/) tool. This tool is absolutely brilliant but I ended up facing the same problems as with LaTeX since Pandoc relies on a conversion to LaTeX and then the conversion to PDF.
 
-Et puis j'ai découvert [Asciidoctor](https://asciidoctor.org). Il s'agit d'une syntaxe qui apporte des fonctionnalités supplémentaires au Markdown comme la gestion de différents fichiers, les notes de bas de page, les notes internes, les commentaires et j'en passe. Bref, c'est la syntaxe Markdown avec la puissance de LaTeX. Cela m'a aussi permis d'exporter mon livre en PDF, EPUB et MOBI facilement et de personnaliser le thème de mon livre.
+And then I discovered [Asciidoctor](https://asciidoctor.org). This is a syntax that provides additional features to the Markdown such as file management, footnotes, internal notes, comments and so on. In short, it's the Markdown syntax with the power of LaTeX. It also allowed me to export my book in PDF, EPUB and MOBI easily and to customize the theme of my book.
 
-Pour écrire, il suffit ensuite juste d'avoir un éditeur de texte classique comme VSCode, Atom ou même un Bloc Note sur Windows. Pour le versionner j'utilise Git et je [publie sur Github][repo] .
+To write, all you need is a classic text editor like VSCode, Atom or even a Notebook on Windows. For the versioning I use Git and I [publish on Github][repo] .
 
-### Workflow
+#### Workflow
 
-Le workflow que j'ai suivi était le suivant:
+The workflow I followed was as follows:
 
-1. refaire les exemples de code de mon côté dans [un projet Github séparé](https://github.com/madeindjs/market_place_api_6)
-2. retravailler la version anglaise en fonction des modifications que je venais d'apporter
-3. coller la version anglaise dans un fichier
-4. faire des traductions en mode copié / collé dans [Deepl](https://deepl.com)
-5. corriger la traduction (car c'est loin d'être parfait)
-6. coller la version française dans un fichier
+1. redo the code examples on my side in [a separate Github project](https://github.com/madeindjs/market_place_api_6)
+2. rework the English version according to the changes I had just made
+3. paste the English version into a file
+4. make translations in copy/paste mode in [Deepl](https://deepl.com)
+5. correct the translation (because it is far from perfect)
+6. paste the French version into a file
 
-Le premier problème que j'ai rencontré a été de gérer tout ce processus qui mêle l'écriture du livre en anglais et en français. En rajoutant la gestion du projet créé tout au long de ce livre ça a été difficile. Avec le recul j'aurais dû tout laisser en français et peut être traduire à la fin.
+The first problem I encountered was managing this whole process that involves writing the book in English and French. Adding the management of the project created throughout this book it was difficult. Looking back I should have left everything in English and maybe translated at the end.
 
-Ensuite je me suis fixé:
+Then I fixed myself:
 
-- deux **réécritures** par chapitre : une assez rapide et une plus approfondie
-- deux **relectures** par chapitre (dont une de ma copine qui m'a beaucoup aidé)
-- une partie promotion (j'en parlerai plus loin)
+- two **rewriting** per chapter in which I wrote quite quickly
+- two **reviews** per chapter (including one from my girlfriend who helped me a lot)
+- a promotion part (I will talk about it later)
 
 ## Open Source
 
-Le workflow de publication d'article sur développez.com m'a semblé vraiment compliqué a utiliser et il m'a découragé. Je me suis donc dit que j'allais le rendre Open Source sur Github en citant bien sûr l'oeuvre originale.
+The workflow of publishing articles on développez.com seemed really complicated to use and discouraged me. So I thought I would make it Open Source on Github, quoting of course the original work.
 
-J'ai été vraiment surpris de l'aide de la communauté open source. Voici les chiffres du [projet sur Github][repo].
+I was really surprised by the help of the open source community. Here are the figures of the [Github project][repo].
 
-- 8 contributeurs
+- 8 contributors
 - 17 pull requests
 - 92 stars
 - 21 fork
 
-J'ai reçu des pull request qui corrigeaient des erreurs de syntaxe, des liens cassés et des formulations douteuses. Pour anecdote, j'ai même été contacté par un russe qui était intéressé pour traduire le livre. Il a juste eu besoin de forker le projet et créer un dossier `ru`. C'était top.
+I received pull requests that corrected syntax errors, broken links and questionable formulations. I also received s and bad feedback. For an anecdote, I was even contacted by a Russian who was interested in translating the book. He just needed to forge the project and create a `ru` folder. That's great.
 
-L'open source donne vraiment la sensation que **le livre est vivant**.
+Open source really gives the feeling that **the book is alive**.
 
-Lorsque le livre est terminé ou que j'ai fixé des erreurs, je fais une _release_ sur Github et j'attache les fichiers PDF, EPUB et MOBI. Ainsi n'importe qui peut le lire **gratuitement** sur le **support de son choix**.
+When the book is finished or I have fixed things, I do a _release_ on Github and attach the PDF, EPUB and MOBI files. So anyone can read it **free of charge** on the **support of his choice**.
 
-## Publication du livre
+## Publication of the book
 
-Je me suis dit que tant qu'à faire, j'allais publier le livre. Cela m'a apporté une visibilité et m'a permis aussi de gagner un peu d'argent.
+I thought that as long as I had to do, I would publish the book. It gave me visibility and also allowed me to get some money back.
 
-J'ai regardé un peu du côté d'Amazon mais cela m'a semblé trop compliqué car il fallait se créer un compte, choisir la bonne taxe et le publier. Les commissions sont aussi bien plus élevées. J'ai donc abandonné rapidement, tant pis pour ce bon vieux Jeff.
+I looked a little bit at Amazon but it seemed more complicated to me to create an account, choose the right tax and publish. Commissions are also much higher. So I gave up quickly, too bad for good old Jeff.
 
-J'ai choisi Leanpub pour sa facilité et aussi le fait que le prix peut être libre.
+I chose Leanpub for its ease and also the fact that the price can be free.
 
-J'ai donc publié au total 4 versions:
+So I published a total of 4 versions:
 
-- une [version anglaise](https://leanpub.com/apionrails5) et une [version française](https://leanpub.com/apionrails5-fr) pour Ruby on Rails 5
-- une [version anglaise](https://leanpub.com/apionrails6) et une [version française](https://leanpub.com/apionrails6-fr) pour Ruby on Rails 6
+- one [English version](https://leanpub.com/apionrails5) and one [French version](https://leanpub.com/apionrails5-fr) for Ruby on Rails 5
+- one [English version](https://leanpub.com/apionrails6) and one [French version](https://leanpub.com/apionrails6-fr) for Ruby on Rails 6
 
-Au final, voici tous les chiffres des royalties, c'est à dire ce qui va dans ma poche après la commissions de Leanpub.
+In the end, here are all the royalty figures, i.e. what goes in my pocket after the Leanpub commissions.
 
-| Livre                                                     | Royalties |
+| Book                                                      | Royalties |
 | --------------------------------------------------------- | --------- |
-| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)    | $160.63   |
-| [API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | $15.98    |
-| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)    | $473.22   |
-| [API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | $20.78    |
-| Total                                                     | $670.61   |
+| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)    | \$160.63  |
+| [API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | \$15.98   |
+| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)    | \$473.22  |
+| [API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | \$20.78   |
+| Total                                                     | \$670.61  |
 
-J'ai été vraiment surpris de vendre "autant". Ces chiffres ont pour moi vraiment un côté motivant qui me pousse à maintenir le projet.
+I was really surprised to sell "so much". These figures really motivate me to keep the project going.
 
-Les chiffres sont aussi à remettre dans le contexte. Cela ma demandé énormément de travail qu'il est difficile de quantifier. A vu de nez je dirais entre **500 et 1000 heures**. Cela donne donc un **salaire horaire de 1.34 $ / heure**. Alors oui, clairement je ne fais pas ça pour l'argent. Mais ça a été pour moi plus une excellente **experience rémunérée**.
+The figures are also to be put into context. It took a lot of work on my part, which is difficult to quantify. From the nose I would say between **500 and 1000 hours**. This gives an hourly wage of \$1.34 / hour**. So yes, clearly I'm not doing this for the money. But it was for me plus an excellent **paid experience\*\*.
 
-On voit aussi que la version anglophone se vend **17 fois mieux** que la version francophone. La première conclusion que je peux donner c'est qu' **il faut traduire votre ouvrage dans la langue de Shakespeare**.
+We also see that the English version sells **17 times better** than the French version. The first sad conclusion I can give is that **you have to translate your book into Shakespeare's language**.
 
 ## Promotion
 
-Une fois le livre terminé commence la partie de la promotion. C'est une partie assez étrangère pour moi et j'ai fait un peu au feeling. J'en ai donc simplement parlé sur les réseaux sociaux spécialisés. C'est à dire:
+Once the book is finished, the promotion begins. It's a pretty foreign part for me and I did a little bit of a feeling. So I just talked on specialized social networks. That is to say:
 
-- [Hacker New](https://news.ycombinator.com/item?id=20736819) qui est une communauté très exigeante où j'ai eu très peu de retours
-- [Le journal du Hacker](https://www.journalduhacker.net/s/3b7gms/api_on_rails_6) qui est une communauté française donc beaucoup plus restreinte
-- [Reddit](https://www.reddit.com/r/rails/comments/csfjjf/api_on_rails_6/), qui est la communauté la plus active où j'ai eu le plus de retours
-
-J'ai eu des [retours négatifs](https://www.reddit.com/r/rails/comments/csfjjf/api_on_rails_6/exkbx5i) mais aussi d'excellents retour par mail qui sont très gratifiants.
+- [Hacker New](https://news.ycombinator.com/item?id=20736819) which is a very demanding community where I have had very little feedback
+- [Le journal du Hacker](https://www.journalduhacker.net/s/3b7gms/api_on_rails_6) which is a French community and therefore much smaller
+- [Reddit](https://www.reddit.com/r/rails/comments/csfjjf/api_on_rails_6/), which is the most active community where I have had the most feedback
 
 ## Conclusion
 
-En conclusion je pense que j'ai fait l'erreur de vouloir aller trop vite car j'ai entamé la publication alors que mon livre comportait des petites fautes d'orthographe et des erreurs de syntaxe. La communauté spécialisée (en particulier Hacker News) est assez intransigeante là dessus.
+In conclusion I think I made the mistake of wanting to go too fast because I started this promoting when my book had small spelling mistakes and syntax errors. The specialized community (in particular Hacker News) is quite uncompromising on this. I have had some negative feedback but also some excellent feedback by email which are very rewarding.
 
-C'est en revanche une expérience exceptionnelle qui m'a apporté beaucoup de satisfaction personnelle. Ce projet m'a aussi permis de mettre un pied dans l'open Source et de maintenir un petit projet.
+On the other hand, it was an exceptional experience that gave me a lot of personal satisfaction. This project also allowed me to set foot in open source and maintain a small project.
 
 [asciidoctor]: https://asciidoctor.org
 [repo]: https://github.com/madeindjs/api_on_rails

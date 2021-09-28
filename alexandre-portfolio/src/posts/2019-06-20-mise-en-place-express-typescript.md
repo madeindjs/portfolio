@@ -6,6 +6,7 @@ date: 2019-06-19 13:30:00 +0200
 tags: [typescript, express, sequelize]
 thumbnail: /img/blog/typescript.jpg
 categories: programming
+lang: fr
 ---
 
 Le but de cet article est de découvrir une mise en place d'une [API][api] [RESTfull][rest] en utilisant [TypeScript][typescript].

@@ -7,6 +7,7 @@ tags: [networking, routing, sfr]
 categories: network
 tumbnail: /img/blog/network_router_pi_sfr.png
 comments: true
+lang: fr
 ---
 
 Récemment, j'ai acheté un deuxième Raspberry PI pour transférer une partie de mes sites dessus. L'idée était de partager une partie de sites sur l'un et l'autre.

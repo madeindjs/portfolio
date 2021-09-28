@@ -7,6 +7,7 @@ tags: [apache, linux, lxc]
 categories: tutorial
 thumbnail: /img/blog/lxc_container.png
 comments: true
+lang: fr
 ---
 
 Apache est un serveur HTTP distribué sous licence libre. Avec quasiment [50% de part de marché](https://www.developpez.com/actu/129511/Serveurs-Web-Nginx-detient-desormais-un-tiers-des-parts-de-marche-tandis-qu-Apache-chute-en-dessous-des-50-pourcent-d-apres-W3Tech/) c'est un des serveur web les plus populaire.

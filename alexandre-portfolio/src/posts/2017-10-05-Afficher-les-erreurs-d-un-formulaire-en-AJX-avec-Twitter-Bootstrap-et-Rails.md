@@ -7,6 +7,7 @@ tags: [ruby, rails, twitter-bootstrap-3, jquery, javascript]
 categories: development
 thumbnail: /img/blog/ajax_error_form.gif
 comments: true
+lang: fr
 ---
 
 Voici mon controller avec deux simples actions _(j'ai volontairement simplifié l'exemple)_.

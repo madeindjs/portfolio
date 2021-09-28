@@ -7,7 +7,6 @@ import Layout from "../component/Layout";
 import PostCard from "../component/PostCard";
 
 const BlogPage: React.FC<{data: any}> = ({data}) => {
-  console.log(data);
   return (
     <Layout>
       <h1>
@@ -30,6 +29,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
 export const query = graphql`
   query ($language: String!) {
     allMarkdownRemark(
+      filter: {frontmatter: {lang: {eq: $language}}}
       sort: {order: DESC, fields: [frontmatter___date]}
       limit: 1000
     ) {

@@ -2,10 +2,11 @@
 layout: post
 title: Connecting a Rails application with Stripe
 date: 2019-02-02 12:30:00 +0200
-tags: rails stripe api
+tags: [rails, stripe, api]
 categories: tutorial
 thumbnail: /img/blog/stripe.svg
 comments: true
+lang: en
 ---
 
 For my [iSignif](https://isignif.fr) project I wanted to implement **restricted access** functionality for **premium account**. The ultimate goal is for the user to subscribe to a premium account in order to access certain pages.
