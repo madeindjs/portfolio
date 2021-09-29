@@ -14,7 +14,7 @@ I decided to hack my [my new router](/network/2017/10/11/Installer_bridge_sfr_bo
 
 So to make my tests I tried a famous Linux distribution: [Kali Linux](https://www.kali.org/). This distribution have many pre-instaled hacking tools who help us.
 
-![Logo de Kali Linux](/img/blog/kali.svg)
+![Logo de Kali Linux](./images/kali.svg)
 
 I installed Kali Linux in [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) but you can also use it in Live USB mode or with a virtual machine like [VirtualBox](https://www.virtualbox.org/).
 
@@ -145,7 +145,7 @@ aircrack-ng -a2 -b 18:D6:C7:85:7E:A0 -w /root/Desktop/passwords.txt /root/Deskto
 
 And after a while::
 
-![success](/img/blog/crack_wpa.png)
+![success](./images/crack_wpa.png)
 
 ## Conclusion
 

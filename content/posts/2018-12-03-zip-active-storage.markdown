@@ -109,7 +109,7 @@ end
 
 We now start the server with `rails server` and go to the URL `http://localhost:3000/users/new` to create a user:
 
-![Formulaire de création d'un utilisateur avec les fichiers](/img/blog/active_storage_create_user.png)
+![Formulaire de création d'un utilisateur avec les fichiers](./images/active_storage_create_user.png)
 
 You should see in the server console that the files are **loaded** when you validate the form with files
 

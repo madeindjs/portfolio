@@ -19,7 +19,7 @@ In order to implement this functionality, we first analyzed the need. The expect
 
 In order to implement this, I quickly went through the existing payment solutions (PayPal, BNP, etc...). It turned out that [Stripe](https://stripe.com) was the best compromise.
 
-![Stripe's logo](/img/blog/stripe.svg)
+![Stripe's logo](./images/stripe.svg)
 
 > Stripe is an American company that aims to simplify online payments. Created in 2010, Stripe now weighs more than 10 billion!
 
@@ -357,13 +357,13 @@ Once the first version is implemented, it is enough to test that everything is g
 
 To test, launch the Rails server and connect to <http://localhost:3000/charges/new>. A button will take you to Stripe's form:
 
-![Formulaire de paiement de Stripe](/img/blog/stripe_first_form.png)
+![Formulaire de paiement de Stripe](./images/stripe_first_form.png)
 
 I have voluntarily used the card number `4242 4242 4242 4242 4242 4242` which is a test card. Some credits cards numbers allow you to simulate errors. The complete list of test cards is available [here](https://stripe.com/docs/testing#cards)
 
 Once the form has been sent, you are redirected to the `charges#create` page which confirms your purchase. You can find the payment on Stripe in the section _payments_:
 
-![Formulaire de paiement de Stripe](/img/blog/stripe_first_payment.png)
+![Formulaire de paiement de Stripe](./images/stripe_first_payment.png)
 
 ### Save user's `cutomer_token`
 
@@ -584,7 +584,7 @@ We have set up a monthly payment but we want to be notified of the payments made
 
 Stripe sends a request to report that the payment has been made through the _hook_. _Webhooks_ are simply routes that we make available to receive requests from Stripe. Once the route is created, we must communicate the URL to Stripe via the Stripe administration interface (this is very easy).
 
-![Formulaire de création d'un Webhook](/img/blog/stripe_webhook.png)
+![Formulaire de création d'un Webhook](./images/stripe_webhook.png)
 
 > Note that I have chosen to receive only the signal `invoice.payment_succeeded` that is sent when an invoice is paid. Once again I'm not making anything up, everything is [in Stripe's documentation](https://stripe.com/docs/billing/webhooks#tracking)
 
@@ -614,7 +614,7 @@ Now it is enough to add a method in the controller that will receive Stripe's re
 
 It is always complicated to test API integration so I simply chose to simulate a request from Stripe and check if our controller adds credit to the user. To do that I simply copied/pasted the parameters sent by Stripe via their[webhooks test interface](https://dashboard.stripe.com/test/webhooks/).
 
-![Test d'envoie d'un Webhook via l'administration](/img/blog/stripe_webook_request.png)
+![Test d'envoie d'un Webhook via l'administration](./images/stripe_webook_request.png)
 
 Once the request was copied, I transformed it into a Ruby `Hash` and keep only parameters that interest me.
 

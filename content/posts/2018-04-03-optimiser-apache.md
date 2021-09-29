@@ -50,7 +50,7 @@ echo '<?php sleep(2); echo "loaded" ?>' > /var/www/test.fr/public/load.php
 On se rend sur <http://test.fr/load.php>. La page met plus de deux secondes à
 s'afficher (normal):
 
-![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_without_cache.png)
+![Affichage de test.fr/load.php sans mise en cache](./images/debian_apache_without_cache.png)
 
 Mettons maintenant en place ce cache. [Apache][apache] utilise deux modules pour
 ça: `headers` qui permet de modifier l'en-tête des réponses et `expires` qui
@@ -92,7 +92,7 @@ systemctl reload apache2
 
 Et lorsqu'on rafraîchis notre navigateur, la différence est flagrante!
 
-![Affichage de test.fr/load.php sans mise en cache](/img/blog/debian_apache_with_cache.png)
+![Affichage de test.fr/load.php sans mise en cache](./images/debian_apache_with_cache.png)
 
 ## La compression
 
@@ -138,7 +138,7 @@ systemctl reload apache2
 Sur le PC client, ouvrez l'inspecteur réseaux avec <kbd>F12</kbd> et actualisez
 la page.
 
-![Page d'accueil de test.fr](/img/blog/debian_apache_deflate.png)
+![Page d'accueil de test.fr](./images/debian_apache_deflate.png)
 
 L'inspecteur nous inique que sur 155,54 ko, **21,31 ko ont été transférés**! Il
 s'agit donc d'un gain à ne pas négliger car il fera la différence pour les

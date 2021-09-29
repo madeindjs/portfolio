@@ -14,7 +14,7 @@ Afin de tester, j'ai voulu cracker mon [routeur récemment installé](/network/2
 
 Afin de réaliser le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux qui apporte des outils de "hacking" pré-installé.
 
-![Logo de Kali Linux](/img/blog/kali.svg)
+![Logo de Kali Linux](./images/kali.svg)
 
 Je l'ai installé en [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) mais il est aussi possible de l'utiliser en Live USB ou en machine virtuelle avec [VirtualBox](https://www.virtualbox.org/).
 
@@ -143,7 +143,7 @@ aircrack-ng -a2 -b 18:D6:C7:85:7E:A0 -w /root/Desktop/passwords.txt /root/Deskto
 
 Et au bout de quelques temps:
 
-![success](/img/blog/crack_wpa.png)
+![success](./images/crack_wpa.png)
 
 ## Conclusion
 
