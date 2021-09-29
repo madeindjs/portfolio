@@ -16,7 +16,6 @@ module.exports = {
     "gatsby-plugin-typescript",
     "gatsby-plugin-sass",
     `gatsby-plugin-transition-link`,
-    `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-react-css-modules`,
       options: {

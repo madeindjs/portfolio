@@ -1,5 +1,5 @@
 {
-  "lead": "Hi, I'm Alexandre. I am a Fulstack developer.",
+  "lead": "Hi, I'm Alexandre. I am a software engineer.",
   "description": "I am passionate about programming and the world of open source software. I try to contribute to the open-source world at my personal projects and various contributions on <a href=\"https://github.com/madeindjs\">Github</a> / <a href=\"https://gitlab.com/alexandre.rousseau\">Gitlab</a>. I like to share my discoveries into my blog.",
   "bookDescription": "I have written two books under a free license. <a href=\"https://github.com/madeindjs/api_on_rails\">API on Rails</a> and <a href=\"https://github.com/madeindjs/rest-api.ts\">REST-API.ts</a> that teach best practices for building an API with Ruby on Rails or Node.js.",
   "readBlog": "Read my blog",

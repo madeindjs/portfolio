@@ -23,6 +23,19 @@ h1 {
 
 h2 {
   font-size: 2rem;
+
+  &::after {
+    content: "";
+    height: 1rem;
+    background-color: lighten($wisteria, 30%);
+    z-index: -1;
+    width: 10rem;
+    display: block;
+    position: relative;
+    top: -1rem;
+    left: -0.5rem;
+    clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+  }
 }
 
 h3 {
