@@ -1,17 +1,17 @@
 @import "../styles/_colors.scss";
 
 $nav_height: 5rem;
-$small_nav_height: 4rem;
+// $small_nav_height: 4rem;
 
 .navbar {
   height: $nav_height;
 
-  position: fixed;
+  // position: fixed;
   width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // z-index: 2;
 
   background-color: white;
 
@@ -27,19 +27,19 @@ $small_nav_height: 4rem;
 
   transition: height 0.5s;
 
-  &.lite {
-    height: $small_nav_height;
+  // &.lite {
+  //   height: $small_nav_height;
 
-    a.brand {
-      span {
-        width: 40px;
-        height: 40px;
-        padding: 6px;
-        border-radius: 5px;
-        font-size: 1.5rem;
-      }
-    }
-  }
+  //   a.brand {
+  //     span {
+  //       width: 40px;
+  //       height: 40px;
+  //       padding: 6px;
+  //       border-radius: 5px;
+  //       font-size: 1.5rem;
+  //     }
+  //   }
+  // }
 
   a,
   div {

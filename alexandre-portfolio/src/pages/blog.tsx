@@ -51,7 +51,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
       <input
         type="text"
         aria-label="Search"
-        placeholder="Type to filter posts..."
+        placeholder={t("searchPlaceholder")}
         onChange={(event) => handleInputChange(event.target.value)}
         className={styles.search}
         value={state.query}

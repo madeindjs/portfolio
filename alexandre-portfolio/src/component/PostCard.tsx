@@ -3,6 +3,7 @@ import * as React from "react";
 import Card from "./Card";
 // @ts-ignore
 import * as styles from "./PostCard.module.scss";
+import Tags from "./Tags";
 
 interface Props {
   slug: string;
@@ -21,13 +22,7 @@ const PostCard: React.FC<Props> = (props) => {
     <AniLink cover to={linkUrl} duration={0.6} bg="black">
       <Card className={styles.postCard}>
         <div>
-          <ul className={styles.tags}>
-            {props.tags.map((tag) => (
-              <li key={tag} onClick={() => props.onTagClick(tag)}>
-                {tag}
-              </li>
-            ))}
-          </ul>
+          <Tags tags={props.tags} />
         </div>
         <p className={styles.title}>{props.title}</p>
         <p className={styles.information}>{date}</p>

@@ -1,4 +1,32 @@
 .footer {
-  background: wheat;
   height: 5rem;
+  max-height: 5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.sitemap,
+.terms,
+.externals-links {
+  flex-grow: 1;
+  flex-basis: 30%;
+
+  & * {
+    font-size: 1rem;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.sitemap {
+}
+
+.terms {
+}
+
+.externals-links {
 }
