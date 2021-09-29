@@ -3,6 +3,8 @@ import {graphql} from "gatsby";
 import * as React from "react";
 import {Trans} from "react-i18next";
 import Layout from "./Layout";
+// @ts-ignore
+import * as styles from "./PostPageTemplate.module.scss";
 import SEO from "./SEO";
 import Tags from "./Tags";
 
@@ -30,7 +32,10 @@ const PostPageTemplate: React.FC<{data: any}> = (props) => {
         <Trans>publishedAt</Trans> {dateFormatted}
       </p>
 
-      <article dangerouslySetInnerHTML={{__html: html}} />
+      <article
+        className={styles.article}
+        dangerouslySetInnerHTML={{__html: html}}
+      />
     </Layout>
   );
 };
