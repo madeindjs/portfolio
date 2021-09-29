@@ -19,8 +19,6 @@ Je suis donc reparti de zéro et je me suis lancé dans la réécriture du livre
 
 Voici donc mon retour d'expérience sur la rédaction d'un livre de plus de 200 pages en anglais et en français.
 
-{% include promote-apionrails-fr.html %}
-
 ## Comment écrire un livre?
 
 Si tu veux écrire un livre, sache que c'est **chronophage**. J'ai donc fait en sorte que ça me prenne le moins de temps possible. Je ne prétends pas avoir la meilleure solution. Voici juste la mienne.
@@ -90,15 +88,15 @@ Au final, voici tous les chiffres des royalties, c'est à dire ce qui va dans ma
 
 | Livre                                                     | Royalties |
 | --------------------------------------------------------- | --------- |
-| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)    | $160.63   |
-| [API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | $15.98    |
-| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)    | $473.22   |
-| [API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | $20.78    |
-| Total                                                     | $670.61   |
+| [API on Rails 5 (EN)](https://leanpub.com/apionrails5)    | \$160.63  |
+| [API on Rails 5 (FR)](https://leanpub.com/apionrails5-fr) | \$15.98   |
+| [API on Rails 6 (EN)](https://leanpub.com/apionrails6)    | \$473.22  |
+| [API on Rails 6 (FR)](https://leanpub.com/apionrails6-fr) | \$20.78   |
+| Total                                                     | \$670.61  |
 
 J'ai été vraiment surpris de vendre "autant". Ces chiffres ont pour moi vraiment un côté motivant qui me pousse à maintenir le projet.
 
-Les chiffres sont aussi à remettre dans le contexte. Cela ma demandé énormément de travail qu'il est difficile de quantifier. A vu de nez je dirais entre **500 et 1000 heures**. Cela donne donc un **salaire horaire de 1.34 $ / heure**. Alors oui, clairement je ne fais pas ça pour l'argent. Mais ça a été pour moi plus une excellente **experience rémunérée**.
+Les chiffres sont aussi à remettre dans le contexte. Cela ma demandé énormément de travail qu'il est difficile de quantifier. A vu de nez je dirais entre **500 et 1000 heures**. Cela donne donc un **salaire horaire de 1.34 \$ / heure**. Alors oui, clairement je ne fais pas ça pour l'argent. Mais ça a été pour moi plus une excellente **experience rémunérée**.
 
 On voit aussi que la version anglophone se vend **17 fois mieux** que la version francophone. La première conclusion que je peux donner c'est qu' **il faut traduire votre ouvrage dans la langue de Shakespeare**.
 

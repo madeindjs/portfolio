@@ -1,4 +1,6 @@
 {
   "publishedAt": "Publié le",
-  "searchPlaceholder": "Type to filter posts..."
+  "searchPlaceholder": "Type to filter posts...",
+  "promoteApiOnRails": "Intéressé pour créer un API avec Ruby on Rails? Jette un coup d'œil à mon livre: <strong>API on Rails 6</strong>. Tu peux <a href=\"https://github.com/madeindjs/api_on_rails\" >télécharger une version gratuite au format PDF sur Github</a >. Si tu aimes mon travail <a href=\"https://leanpub.com/rest-api-ts-fr/\" >tu peux acheter un version payante sur Leanpub</a >.",
+  "promoteRestApiTs": "Intéressé pour créer un API avec Typescript / Node.js? Jette un coup d'œil à mon livre: <strong>REST-API.ts</strong>. Tu peux <a href=\"https://github.com/madeindjs/rest-api.ts\" >télécharger une version gratuite au format PDF sur Github</a >. Si tu aimes mon travail <a href=\"https://leanpub.com/rest-api-ts/\" >tu peux acheter un version payante sur Leanpub</a >."
 }

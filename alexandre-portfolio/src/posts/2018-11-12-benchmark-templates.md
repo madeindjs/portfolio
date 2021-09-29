@@ -10,8 +10,6 @@ lang: fr
 
 Récemment, sur une application web, je me suis rendu compte que je commençais à avoir des **fichiers HTML** de plus en plus **compliqués**. HTML, étant un **langage de balisage** assez proche du XML, il est assez lourd. J'ai donc voulu tester et comparer les alternatives existantes.
 
-{% include promote-apionrails-fr.html %}
-
 ## Templating?
 
 Les frameworks web utilisent un **langage de templating** qui permet de **générer** du HTML. Ainsi l'exemple suivant

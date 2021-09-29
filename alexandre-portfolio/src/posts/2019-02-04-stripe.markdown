@@ -36,8 +36,6 @@ In this article I will therefore retrace the development of the functionality by
 
 **TLDR**: Stripe is very simple to set up and really allows us to completely delegate payment management. This allows you to focus on your business and is invaluable for a project that is just beginning.
 
-{% include promote-apionrails-en.html %}
-
 ## Table of content
 
 - TOC

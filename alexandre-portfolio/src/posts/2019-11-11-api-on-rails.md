@@ -20,8 +20,6 @@ So I started to rewriting the book from scratch. As long as I was rewriting, I t
 
 Here is my feedback on the writing of a book of more than 200 pages in English and French.
 
-{% include promote-apionrails-en.html %}
-
 ## How to write a book?
 
 If you want to write a book, know that it's a timeless thing. So I made sure it took me as little time as possible. I don't pretend to have the best solution. This is just mine.

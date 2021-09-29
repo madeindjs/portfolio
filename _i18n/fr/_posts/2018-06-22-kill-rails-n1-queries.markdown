@@ -15,8 +15,6 @@ Les **requêtes N+1** sont une plaie qui peuvent avoir un **impact énorme sur l
 
 L'ORM génère **automatiquement** les requêtes SQL et nous évite ainsi de les taper à la main. Cet outil bien pratique est à **double tranchant** car il peut générer un **grand nombre** de requête SQL.
 
-{% include promote-apionrails-fr.html %}
-
 ## Exemple
 
 Voici un exemple où l'on veut récupérer tous les utilisateurs qui ont déjà créé une recette. Sans réfléchir, on serait tenté de faire plus ou moins comme ça:

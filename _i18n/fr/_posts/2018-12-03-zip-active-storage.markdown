@@ -23,8 +23,6 @@ Dans cet article nous allons:
 
 **TLDR**: Passé la complexité de l'implémentation du code, il est très facile de déplacer le code dans des méthodes réutilisables en utilisant les [`ActiveSupport::Concern`][concerns_api].
 
-{% include promote-apionrails-fr.html %}
-
 ## Sommaire
 
 - TOC

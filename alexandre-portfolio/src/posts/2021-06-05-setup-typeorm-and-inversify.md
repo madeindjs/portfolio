@@ -16,8 +16,6 @@ lang: en
 
 In this tutorial I will show how what is dependency injection, why you should care about and how you can implement it easily with [TypeORM](https://typeorm.io/) and [inversify](http://inversify.io/).
 
-{% include promote-restapits-en.html %}
-
 ## Initialize a basic project with Typescript
 
 Let's start by creating a basic Typescript application:
@@ -827,5 +825,3 @@ And there you go.
 And that's it, this tutorial is coming to an end.
 
 I hope that this article has helped demystify dependency injection and/or that you have learned some things here.
-
-{% include promote-restapits-en.html %}

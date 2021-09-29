@@ -3,8 +3,6 @@
 .layout {
   // margin-top: 6rem;
   min-height: calc(100vh - 10rem);
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .grid {
@@ -19,4 +17,11 @@
   }
 
   // min-height: calc(100vh - 200px);
+}
+
+@media (max-width: 600px) {
+  .layout {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }

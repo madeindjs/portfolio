@@ -1,7 +1,7 @@
 // src/component/PostPageTemplate.tsx
 import {graphql} from "gatsby";
+import {Trans, useI18next} from "gatsby-plugin-react-i18next";
 import * as React from "react";
-import {Trans} from "react-i18next";
 import Layout from "./Layout";
 // @ts-ignore
 import * as styles from "./PostPageTemplate.module.scss";
@@ -14,7 +14,29 @@ const PostPageTemplate: React.FC<{data: any}> = (props) => {
   const date = props.data.markdownRemark.frontmatter.date;
   const html = props.data.markdownRemark.html;
 
+  const {t} = useI18next();
+
   const dateFormatted = date.split(" ")[0];
+
+  let Promotions = [];
+
+  if (
+    tags.some((tag) => ["javascript", "typescript", "node.js"].includes(tag))
+  ) {
+    Promotions.push(
+      <p
+        className={styles.promotion}
+        dangerouslySetInnerHTML={{__html: t("promoteRestApiTs")}}
+      ></p>
+    );
+  } else if (tags.some((tag) => ["ruby", "rails"].includes(tag))) {
+    Promotions.push(
+      <p
+        className={styles.promotion}
+        dangerouslySetInnerHTML={{__html: t("promoteApiOnRails")}}
+      ></p>
+    );
+  }
 
   return (
     <Layout>
@@ -31,6 +53,8 @@ const PostPageTemplate: React.FC<{data: any}> = (props) => {
       <p>
         <Trans>publishedAt</Trans> {dateFormatted}
       </p>
+
+      {Promotions}
 
       <article
         className={styles.article}

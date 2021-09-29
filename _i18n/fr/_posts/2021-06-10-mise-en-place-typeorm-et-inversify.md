@@ -20,8 +20,6 @@ Nous allons mettre en place une API complète [RESTfull](https://fr.wikipedia.or
 
 Mais avant de commencer à tout mettre en place, je vais essayer ici de vous résumer ce qu'est l'injection de dépendance et à quoi ça sert.
 
-{% include promote-restapits-fr.html %}
-
 ## Pourquoi utiliser l'injection de dépendance
 
 Imaginons une classe `User` qui a besoin d'une classe `Database` pour être sauvegardé. On serait tenter d'initialiser la connection à la base de donnée dans le constructeur de l'utilisateur :
@@ -1449,5 +1447,3 @@ git add && git commit -m "Add functional tests"
 Et voilà, ce tutoriel touche à sa fin.
 
 J'espère que cet article aura permit de démystifier un peu l'injection de dépendance et/ou que vous aurez appris des choses ici.
-
-{% include promote-restapits-fr.html %}

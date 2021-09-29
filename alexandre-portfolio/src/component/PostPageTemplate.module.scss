@@ -5,15 +5,11 @@
   display: grid;
   grid-template-columns:
     1fr
-    min(70ch, 100%)
+    min(75ch, 100%)
     1fr;
 
   & > * {
     grid-column: 2;
-  }
-
-  > .gatsby-highlight {
-    background-color: blue;
   }
 
   // display list outside
@@ -38,5 +34,16 @@
 
   ol {
     list-style: decimal outside none;
+  }
+}
+
+.promotion {
+  background-color: $wisteria;
+  color: white;
+  padding: 1rem;
+
+  a {
+    color: white;
+    text-decoration: underline;
   }
 }

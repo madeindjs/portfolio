@@ -31,8 +31,6 @@ _Let's go_!
 
 > TL;DR: La grand liberté d'Express nous permet de décider nous même de l'architecture de notre application et TypeScript nous donne la possibilité de nous éclater avec des _design paterns_ pouvant faire palir un adepte de Java.
 
-{% include promote-restapits-fr.html %}
-
 ## Mise en place du projet
 
 Commençons donc par créer un nouveau projet avec [NPM](https://www.npmjs.com/) et [Git](https://git-scm.com/).

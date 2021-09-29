@@ -20,8 +20,6 @@ Je suis donc reparti de zéro et je me suis lancé dans la réécriture du livre
 
 Voici donc mon retour d'expérience sur la rédaction d'un livre de plus de 200 pages en anglais et en français.
 
-{% include promote-apionrails-fr.html %}
-
 ## Comment écrire un livre?
 
 Si tu veux écrire un livre, sache que c'est **chronophage**. J'ai donc fait en sorte que ça me prenne le moins de temps possible. Je ne prétends pas avoir la meilleure solution. Voici juste la mienne.
