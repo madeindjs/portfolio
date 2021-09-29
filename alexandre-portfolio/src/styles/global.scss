@@ -128,3 +128,27 @@ div.gatsby-highlight {
 ::-webkit-scrollbar-thumb:hover {
   background: darkgray;
 }
+
+// display list outside
+
+ul,
+ol {
+  padding-left: 0;
+}
+
+ul {
+  list-style: none;
+  position: relative;
+  li::before {
+    content: " - ";
+    position: absolute;
+    right: 100%;
+    margin-right: 1.2rem / 2;
+    display: inline-block;
+    text-align: right;
+  }
+}
+
+ol {
+  list-style: decimal outside none;
+}

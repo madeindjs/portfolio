@@ -1,4 +1,5 @@
 {
   "poweredByGatsby": "Ce site est propulsé par <a href=\"https://www.gatsbyjs.com/\">Gatsby</a>. Vous pouvez consulter le code source sur <a href=\"https://github.com/madeindjs/\">Github</a>",
-  "licence": "Tout le contenu est sous la license <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA 4.0</a>."
+  "licence": "Tout le contenu est sous la license <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC BY-NC-SA 4.0</a>.",
+  "cookie": "Ce site ne vous piste pas: Vous pouvez être serrein ici!!"
 }

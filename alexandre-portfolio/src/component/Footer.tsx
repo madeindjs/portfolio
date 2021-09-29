@@ -29,6 +29,7 @@ const Footer: React.FC = () => {
       <div className={styles.terms}>
         <p dangerouslySetInnerHTML={{__html: t("poweredByGatsby")}}></p>
         <p dangerouslySetInnerHTML={{__html: t("licence")}}></p>
+        <p dangerouslySetInnerHTML={{__html: t("cookie")}}></p>
       </div>
       <div className={styles.externalsLinks}>
         <p dangerouslySetInnerHTML={{__html: t("poweredByGatsby")}}></p>
