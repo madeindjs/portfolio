@@ -141,3 +141,71 @@ div.gatsby-highlight {
 ::-webkit-scrollbar-thumb:hover {
   background: darkgray;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+  }
+
+  h1 {
+    background-color: $wisteria;
+    color: white;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  li,
+  pre,
+  input,
+  th,
+  td {
+    color: white;
+  }
+
+  h2 {
+    &::after {
+      background-color: $wisteria;
+    }
+  }
+
+  .btn {
+    border-color: white;
+    background-image: linear-gradient(to bottom, black 50%, white 50%);
+
+    color: white;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  input {
+    background-color: black;
+    color: white;
+    border-color: white;
+    border-style: dashed;
+    border-width: 1px;
+
+    &:focus {
+      border-style: solid;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: white;
+  }
+
+  div.gatsby-highlight {
+    background-color: #2d2d2d;
+
+    pre {
+      color: white;
+      background-color: #2d2d2d;
+    }
+  }
+}

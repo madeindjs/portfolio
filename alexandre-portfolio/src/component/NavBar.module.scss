@@ -1,22 +1,14 @@
 @import "../styles/_colors.scss";
 
 $nav_height: 5rem;
-// $small_nav_height: 4rem;
 
 .navbar {
   height: $nav_height;
 
-  // position: fixed;
   width: 100%;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // z-index: 2;
-
   background-color: white;
 
   display: flex;
-
   justify-content: space-around;
   align-items: center;
 
@@ -26,24 +18,10 @@ $nav_height: 5rem;
 
   transition: height 0.5s;
 
-  // &.lite {
-  //   height: $small_nav_height;
-
-  //   a.brand {
-  //     span {
-  //       width: 40px;
-  //       height: 40px;
-  //       padding: 6px;
-  //       border-radius: 5px;
-  //       font-size: 1.5rem;
-  //     }
-  //   }
-  // }
-
   a,
   div {
-    text-decoration: none;
     color: black;
+    text-decoration: none;
     height: $nav_height;
     line-height: 80px;
     font-size: 1.5rem;
@@ -84,4 +62,16 @@ $nav_height: 5rem;
   border: none;
   background: transparent;
   font-size: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-color: black;
+    box-shadow: none;
+
+    a,
+    div {
+      color: white;
+    }
+  }
 }

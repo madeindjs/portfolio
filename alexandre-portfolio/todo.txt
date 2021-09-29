@@ -7,5 +7,5 @@ x 2021-09-29 favicon
 x 2021-09-29 seo
 x 2021-09-29 code block
 x 2021-09-29 footer
-dark mode
+x 2021-09-29 dark mode
 resume
