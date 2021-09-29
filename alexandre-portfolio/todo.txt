@@ -8,3 +8,4 @@ x 2021-09-29 seo
 code block
 footer
 dark mode
+resume

@@ -1,7 +1,11 @@
 @import "../styles/_colors.scss";
 
 .layout {
-  margin-top: 100px;
+  margin-top: 6rem;
+  min-height: calc(100vh - 12rem);
+}
+
+.grid {
   display: grid;
   grid-template-columns:
     1fr

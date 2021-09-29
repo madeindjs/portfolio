@@ -1,16 +1,22 @@
-import React from "react";
+import React, {CSSProperties} from "react";
 import Footer from "./Footer";
 // @ts-ignore
 import * as styles from "./Layout.module.scss";
 import NavBar from "./NavBar";
 
-const Layout: React.FC = (props) => {
+interface Props {
+  layoutStyle?: CSSProperties;
+}
+
+const Layout: React.FC<Props> = (props) => {
   return (
     <>
       <header>
         <NavBar />
       </header>
-      <main className={styles.layout}>{props.children}</main>
+      <div className={styles.layout} style={props.layoutStyle}>
+        <main className={styles.grid}>{props.children}</main>
+      </div>
       <Footer />
     </>
   );

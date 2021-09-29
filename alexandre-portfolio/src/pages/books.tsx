@@ -3,6 +3,7 @@ import {StaticImage} from "gatsby-plugin-image";
 import {Trans, useI18next} from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import Layout from "../component/Layout";
+import SEO from "../component/SEO";
 // @ts-ignore
 import * as styles from "./books.module.scss";
 
@@ -13,6 +14,7 @@ const BooksPage = () => {
   const isEn = i18n.language === "en";
   return (
     <Layout>
+      <SEO title={t("books")} />
       <h1>
         <Trans>books</Trans>
       </h1>

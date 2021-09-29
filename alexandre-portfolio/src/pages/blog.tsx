@@ -1,14 +1,18 @@
 // src/pages/blog.tsx
 import {graphql} from "gatsby";
-import {Trans} from "gatsby-plugin-react-i18next";
+import {Trans, useI18next} from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import {useState} from "react";
 import Cards from "../component/Cards";
 import Layout from "../component/Layout";
 import PostCard from "../component/PostCard";
+import SEO from "../component/SEO";
+// @ts-ignore
+import * as styles from "./blog.module.scss";
 
 const BlogPage: React.FC<{data: any}> = ({data}) => {
   const allPosts = data.allMarkdownRemark.edges;
+  const {t} = useI18next("books");
 
   const emptyQuery = "";
 
@@ -40,6 +44,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
 
   return (
     <Layout>
+      <SEO title={t("blog")} />
       <h1>
         <Trans>blog</Trans>
       </h1>
@@ -48,6 +53,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
         aria-label="Search"
         placeholder="Type to filter posts..."
         onChange={(event) => handleInputChange(event.target.value)}
+        className={styles.search}
         value={state.query}
       />
       <Cards>
@@ -58,13 +64,12 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
             tags={node.frontmatter.tags}
             slug={node.fields.slug}
             title={node.frontmatter.title}
-            excerpt={node.excerpt}
             date={node.frontmatter.date}
           />
         ))}
       </Cards>
       {posts.length > state.maxPost && (
-        <button onClick={() => displayMore()}>
+        <button className="btn" onClick={() => displayMore()}>
           <Trans>displayMore</Trans>
         </button>
       )}
@@ -81,7 +86,6 @@ export const query = graphql`
     ) {
       edges {
         node {
-          excerpt(pruneLength: 200)
           frontmatter {
             title
             date

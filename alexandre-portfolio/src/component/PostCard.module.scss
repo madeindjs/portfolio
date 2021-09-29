@@ -1,4 +1,5 @@
 @import "../styles/_colors.scss";
+@import "../styles/_mixins.scss";
 
 .post-card-link {
   text-decoration: none;
@@ -6,18 +7,42 @@
 }
 
 .post-card {
-  width: 300px;
-  height: 300px;
+  width: 18rem;
+  height: 18rem;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-decoration: none;
   color: black;
+
+  display: flex;
+
+  transition: background-position ease-in-out 0.2s, color ease-in-out 0.2s;
+  text-transform: uppercase;
+  background-image: linear-gradient(to bottom, white 50%, black 50%);
+  background-size: 100% 200%;
+
+  text-transform: unset;
+
+  &:hover {
+    color: white;
+    background-position: 0 -100%;
+  }
 }
 
 .title {
   text-align: center;
   font-weight: 700;
+  text-transform: uppercase;
+  flex-grow: 3;
+  @extend %flex-center;
+  align-items: center;
+}
+
+.information {
+  text-align: right;
+  flex-basis: 1rem;
+  font-size: 1rem;
 }
 
 .tags {
@@ -25,11 +50,11 @@
 
   display: flex;
   flex-wrap: wrap;
-  font-weight: normal;
   justify-content: flex-end;
 
   li {
     cursor: pointer;
+    font-size: 1rem;
     margin-left: 1rem;
     &:before {
       content: "#";

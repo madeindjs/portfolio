@@ -35,6 +35,15 @@ h5 {
   font-size: 1.2rem;
 }
 
+p,
+a li,
+pre,
+input,
+th,
+td {
+  font-size: 1.2rem;
+}
+
 a {
   // color: white;
   // background-color: black;
@@ -54,18 +63,21 @@ hr {
 }
 
 .btn {
-  background-color: white;
   border: 5px solid black;
   color: black;
   margin: 0.5rem;
   padding: 0.5rem;
 
-  transition: background-color ease-in-out 0.2s;
+  cursor: pointer;
+
+  transition: background-position ease-in-out 0.2s, color ease-in-out 0.2s;
   text-transform: uppercase;
+  background-image: linear-gradient(to bottom, white 50%, black 50%);
+  background-size: 100% 200%;
 
   &:hover {
-    background-color: black;
     color: white;
+    background-position: 0 -100%;
   }
 
   &-lg {

@@ -1,6 +1,7 @@
 // src/component/PostPageTemplate.tsx
 import {graphql} from "gatsby";
 import * as React from "react";
+import {Trans} from "react-i18next";
 import Layout from "./Layout";
 import SEO from "./SEO";
 
@@ -9,6 +10,9 @@ const PostPageTemplate: React.FC<{data: any}> = (props) => {
   const tags = props.data.markdownRemark.frontmatter.tags;
   const date = props.data.markdownRemark.frontmatter.date;
   const html = props.data.markdownRemark.html;
+
+  const dateFormatted = date.split(" ")[0];
+
   return (
     <Layout>
       <SEO
@@ -19,6 +23,14 @@ const PostPageTemplate: React.FC<{data: any}> = (props) => {
         dateModified={date}
       />
       <h1>{title}</h1>
+      <p>
+        <Trans>publishedAt</Trans> {dateFormatted}
+      </p>
+      <ul>
+        {tags.map((tag) => (
+          <li key={tag}>{tag}</li>
+        ))}
+      </ul>
       <article dangerouslySetInnerHTML={{__html: html}} />
     </Layout>
   );
