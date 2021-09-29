@@ -9,3 +9,4 @@ x 2021-09-29 code block
 x 2021-09-29 footer
 x 2021-09-29 dark mode
 x 2021-09-29 resume
+fix images
