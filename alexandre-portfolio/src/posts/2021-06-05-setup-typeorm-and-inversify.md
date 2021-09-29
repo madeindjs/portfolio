@@ -20,7 +20,7 @@ In this tutorial I will show how what is dependency injection, why you should ca
 
 Let's start by creating a basic Typescript application:
 
-```sh
+```bash
 mkdir dependecy-injection-example
 cd dependecy-injection-example
 npm init
@@ -29,7 +29,7 @@ git init # Initialize Git repository (optional)
 
 Now we need to install Typescript:
 
-```sh
+```bash
 npm add typescript @types/node --save-dev
 ```
 
@@ -85,7 +85,7 @@ That's much code but the two directives to remember here are: `rootDir` and `out
 
 Now you can try everything works with:
 
-```sh
+```bash
 npm start
 > dependecy-injection-example@1.0.0 start /home/alexandre/github/madeindjs/dependecy-injection-example
 > tsc && node dist/main.js
@@ -450,7 +450,7 @@ touch .env
 
 And let's start by defining https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md#using-environment-variables[TypeORM environment variables] for a basic connection to an SQLite database:
 
-```console
+```bash
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=db/development.sqlite
 TYPEORM_LOGGING=true

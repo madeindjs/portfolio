@@ -13,7 +13,7 @@
 
     Use the Gatsby CLI to create a new site, specifying the minimal starter.
 
-    ```shell
+    ```bash
     # create a new Gatsby site using the minimal starter
     npm init gatsby
     ```
@@ -22,7 +22,7 @@
 
     Navigate into your new site’s directory and start it up.
 
-    ```shell
+    ```bash
     cd my-gatsby-site/
     npm run develop
     ```

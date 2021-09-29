@@ -62,6 +62,7 @@ $nav_height: 5rem;
   border: none;
   background: transparent;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,6 +73,13 @@ $nav_height: 5rem;
     a,
     div {
       color: white;
+    }
+  }
+
+  a.brand {
+    span {
+      background-color: white !important;
+      color: black !important;
     }
   }
 }

@@ -149,7 +149,7 @@ Nous allons utiliser [TypeORM](https://typeorm.io/) et [Express.js](https://expr
 
 Commençons par créer un projet Node.js versionné avec Git:
 
-```sh
+```bash
 mkdir dependecy-injection-example
 cd dependecy-injection-example
 npm init
@@ -158,7 +158,7 @@ git init # Initialize Git repository (optional)
 
 Installons maintenant Typescript:
 
-```sh
+```bash
 npm add typescript @types/node --save-dev
 ```
 
@@ -218,7 +218,7 @@ On ajoute maintenant un script dans le `package.json` pour compiler et executer 
 
 On peut vérifier que tout fonctionne en executant le script:
 
-```sh
+```bash
 npm start
 > dependecy-injection-example@1.0.0 start /home/alexandre/github/madeindjs/dependecy-injection-example
 > tsc && node dist/main.js
@@ -288,7 +288,7 @@ Nous allons commencer par mettre en place un Logger qui pourra être injecté da
 
 Installons donc `inversify`:
 
-```sh
+```bash
 npm install inversify --save
 ```
 
@@ -348,7 +348,7 @@ On commence par installer la librairie. On va aussi ajouter `body-parser` qui va
 
 Pour l'installer, c'est très facile. Il suffit de suivre la https://github.com/inversify/inversify-express-utils[documentation officielle]. On commence donc par installer quelques librairies.
 
-```sh
+```bash
 npm install inversify-express-utils reflect-metadata body-parse --save
 ```
 
@@ -462,19 +462,19 @@ Pour l'installer c'est très facile. Nous allons installer la librairie TypeORM 
 
 C'est parti:
 
-```sh
+```bash
 npm add typeorm sqlite3 dotenv --save
 ```
 
 Nous allons maintenant générer notre fichier de configuration. Par défault, `dotenv` va chercher un fichier nomé `.env`. Créons le:
 
-```sh
+```bash
 touch .env
 ```
 
 Et commençons par définir [les variables d'environnement de TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md#using-environment-variables) pour une connexion basique à une base de donnée SQLite:
 
-```console
+```bash
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=db/development.sqlite
 TYPEORM_LOGGING=true
@@ -604,7 +604,7 @@ Pour l'instant notre travail n'est pas très visible mais tenez bon car vous all
 
 Nous pouvons commiter les changements effectuées jusqu'à maintenant:
 
-```sh
+```bash
 git add .
 git commit -m "Setup TypeORM"
 ```
@@ -660,7 +660,7 @@ import {Logger} from '../services/logger.service';
 
 Et voilà. Lancez la commande `npm run start:watch` pour démarrer le serveur si vous l'avez arrêté et testons la fonctionnalité avec `cURL`:
 
-```sh
+```bash
 curl http://localhost:3000/users
 ```
 
@@ -729,7 +729,7 @@ Cela fait un peut de code mais pas de panique. `CreateUserBody` est une interfac
 
 Testons que tout cela fonctionne:
 
-```sh
+```bash
 curl -X POST -d "email=test@test.fr" -d "password=test" http://localhost:3000/users
 ```
 
@@ -761,7 +761,7 @@ L'implémentation est vraiment très simple. Il faut simplement retourner un obj
 
 Essayons pour voir:
 
-```sh
+```bash
 curl http://localhost:3000/users/1
 {"id":1,"email":"test@test.fr","password":"test"}
 ```
@@ -866,7 +866,7 @@ git commit -am "Implement CRUD actions on user"
 
 Tout semble fonctionner mais il rest une problème: nous ne validons pas les données que nous insérons en base. Ainsi, il est possible de créer un utilisateur avec un email faux :
 
-```sh
+```bash
 curl -X POST -d "whatever" -d "password=test" http://localhost:3000/users
 ```
 
@@ -874,7 +874,7 @@ Encore une fois, nous allons avoir recours a une librairie toute faite: `class-v
 
 Installons la avec NPM :
 
-```sh
+```bash
 npm install class-validator --save
 ```
 
@@ -1288,7 +1288,7 @@ Quelques explications sur cette commande:
 
 Lorsque nous testons notre application, nous ne voulons pas polluer notre base de données avec des données que nous créons pendant les tests. C'est donc une bonne pratique de créer une base de donnée dédiée. Dans notre cas, nous allons utiliser une base SQLite _in memory_. C'est a dire qu'elle n'est pas stockée sur le disque dur mais directement dans la mémoire vive. Voici donc le fichier `.test.env`:
 
-```console
+```bash
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=:memory:
 TYPEORM_LOGGING=true
@@ -1395,7 +1395,7 @@ describe("UsersController", () => {
 
 Le test est vraiment très simple et la syntaxe de `supertest` rend le test très lisible. Ce test veut dire "envoie une requête HTTP de type `Get` et attends toi à recevoir une réponse de type `200`". Essayons de lancer les tests
 
-```sh
+```bash
 npm test
 ...
   UsersController
@@ -1439,7 +1439,7 @@ Ce test est très simple et vous pouvez en rajouter d'autres comme _"should not 
 
 Vous pouvez maintenant commiter les changements:
 
-```sh
+```bash
 git add && git commit -m "Add functional tests"
 ```
 

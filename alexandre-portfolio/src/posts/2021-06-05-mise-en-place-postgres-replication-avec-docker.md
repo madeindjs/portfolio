@@ -137,7 +137,7 @@ Et voici les explications:
 
 Comme je l'ai dit plus haut, ce fichier va effectuer des actions différentes en fonction de `$REPLICATION_ROLE`. Il va donc se caractériser comme ceci:
 
-```sh
+```bash
 #!/bin/bash
 set -e
 
@@ -154,7 +154,7 @@ echo [*] $REPLICATION_ROLE instance configured!
 
 Pour le serveur `master` c'est très simple, il suffit de créer l'utilisateur en charge de la réplication avec le rôle `REPLICATION` et `LOGIN`. On peut le faire directement en une seule ligne avec la commande `psql`:
 
-```sh
+```bash
 # ...
 if [ $REPLICATION_ROLE = "master" ]; then
   psql -U $POSTGRES_USER -c "CREATE ROLE $REPLICATION_USER WITH REPLICATION PASSWORD '$REPLICATION_PASSWORD' LOGIN"
@@ -177,7 +177,7 @@ Mais avant de pouvoir écraser les données, nous devons stopper l'instance et s
 
 Voici donc le script complet:
 
-```sh
+```bash
 # ...
 if [ $REPLICATION_ROLE = "master" ]; then
   # ...
@@ -216,7 +216,7 @@ Maintenant que tout est en place, nous allons tester que tout fonctionne.
 
 Pour tout tester manuellement, nous pouvons utiliser Docker compose. Avant d'écrire le `docker-compose.yml`, nous devons construire l'image avec `docker build`:
 
-```sh
+```bash
 docker build  -t "postgres-replication:12.3" .
 ```
 
@@ -254,7 +254,7 @@ Il suffit ensuite de lancer `docker-compose up` et d'admirer les logs.
 
 Un fois que tout est initialisé, essayons de lancer quelques commandes sur le serveur `master`. Pour ce connecter à l'instance il suffit de lancer la commande suivante:
 
-```sh
+```bash
 docker exec -it docker-postgres-replication_postgres-master_1 psql -U arousseau
 ```
 
@@ -269,7 +269,7 @@ test=# insert into posts values ('it works');
 
 Pour vérifier que les changement on été fait sur le serveur `standby`, nous pouvons exécuter la requête suivante:
 
-```sh
+```bash
 docker exec docker-postgres-replication_postgres-slave_1 psql -U arousseau test -c 'select * from posts'
   title
 ----------
@@ -292,7 +292,7 @@ En programmation, on aime bien mettre en place des tests unitaires qui vérifie 
 
 Voici donc le résultat.
 
-```sh
+```bash
 #!/usr/bin/env bash
 
 IMAGE="postgres-replication:test"
