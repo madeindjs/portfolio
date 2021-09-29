@@ -24,7 +24,7 @@ module.exports = {
         // add `postcss-scss` to your project's devDependencies
         // and add the following option here:
         filetypes: {
-          ".scss": {syntax: `postcss-scss`},
+          ".scss": { syntax: `postcss-scss` },
         },
 
         // Exclude global styles from the plugin using a RegExp:
@@ -52,7 +52,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/posts`,
+        path: `${__dirname}/content/posts`,
         name: `posts`,
       },
     },
@@ -104,14 +104,14 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({query: {site, allMarkdownRemark}}) => {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{"content:encoded": edge.node.html}],
+                  custom_elements: [{ "content:encoded": edge.node.html }],
                 });
               });
             },

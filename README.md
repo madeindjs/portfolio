@@ -1,8 +1,25 @@
 # Portfolio
 
-My portfolio build [Gatsby](https://www.gatsbyjs.com/).
+My portfolio build [Gatsby](https://www.gatsbyjs.com/). See me in action at <https://rsseau.fr>.
 
-See me in action at <https://rsseau.fr>.
+## Setup
+
+~~~sh
+npm install
+~~~
+
+Then start development server
+
+~~~sh
+npm run develop
+~~~
+
+or build webiste
+
+~~~sh
+npm run build
+~~~
+
 
 ## License
 

@@ -9,8 +9,7 @@ BASE=$(git merge-base @ "$UPSTREAM")
 
 if [ $LOCAL = $BASE ]; then
   git pull origin master
-  ~/.rvm/gems/ruby-2.4.0/wrappers/jekyll build
+  npm run build
   rm -rf /var/www/portfolio/*
-  cp -r _site/* /var/www/portfolio/
-  cp -r _site/.well-known /var/www/portfolio/
+  cp -r public/* /var/www/portfolio/
 fi
