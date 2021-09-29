@@ -3,7 +3,12 @@
 module.exports = {
   siteMetadata: {
     siteUrl: "https://rsseau.fr",
-    title: "Alexandre portfolio",
+    title: "Alexandre's portfolio",
+    siteName: "Alexandre's website",
+    logo: "https://rsseau.fr/favicon",
+    description: "Blog about programming, devops and other interesting stuffs.",
+    lang: "en",
+    author: "Alexandre ROUSSEAU",
   },
   plugins: [
     "gatsby-plugin-image",

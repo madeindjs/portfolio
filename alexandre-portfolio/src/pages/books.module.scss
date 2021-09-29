@@ -1,8 +1,9 @@
+@import "../styles/_mixins";
+
 .books {
   grid-column: 1 / 4 !important;
-  display: flex;
+  @extend %flex-center;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .book {
@@ -12,4 +13,8 @@
   max-width: 500px;
   flex-direction: column;
   margin: 1rem;
+}
+
+.actions {
+  @extend %flex-center;
 }

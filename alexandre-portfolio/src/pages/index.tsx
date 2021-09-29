@@ -3,12 +3,14 @@ import {Trans, useI18next} from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import Avatar from "../component/Avatar";
 import Layout from "../component/Layout";
+import SEO from "../component/SEO";
 
 // markup
 const IndexPage: React.FC = () => {
   const {t} = useI18next("home");
   return (
     <Layout>
+      <SEO />
       <section>
         <div>
           <Avatar></Avatar>

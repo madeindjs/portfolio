@@ -1,7 +1,8 @@
+@import "../styles/_mixins";
+
 .cards {
-  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  @extend %flex-center;
   grid-column: 1 / 4 !important;
 
   > * {

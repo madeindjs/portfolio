@@ -1,9 +1,10 @@
 {% include promote-restapits-en.html %}
-books button
+x 2021-09-29 books button
 broken post links
 rss
 page title
 favicon
-seo
+x 2021-09-29 seo
 code block
 footer
+dark mode

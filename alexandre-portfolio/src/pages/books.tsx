@@ -29,13 +29,20 @@ const BooksPage = () => {
           <p>
             <Trans>api-on-rails-description</Trans>
           </p>
-          <div className="action">
+          <div className={styles.actions}>
             <a href="https://github.com/madeindjs/api_on_rails" className="btn">
               Github
             </a>
-            <a href="https://github.com/madeindjs/api_on_rails" className="btn">
-              <Trans>buyOnLeanpub</Trans>
-            </a>
+            {isFr && (
+              <a href="https://leanpub.com/apionrails6-fr" className="btn">
+                <Trans>buyOnLeanpub</Trans>(🇫🇷)
+              </a>
+            )}
+            {isEn && (
+              <a href="https://leanpub.com/apionrails6" className="btn">
+                <Trans>buyOnLeanpub</Trans>(🇬🇧)
+              </a>
+            )}
           </div>
         </section>
         <section className={styles.book}>
@@ -49,6 +56,14 @@ const BooksPage = () => {
           <p>
             <Trans>rest-api-ts-description</Trans>
           </p>
+          <div className={styles.actions}>
+            <a href="https://github.com/madeindjs/rest-api.ts/" className="btn">
+              Github
+            </a>
+            <a href="https://leanpub.com/rest-api-ts/" className="btn">
+              <Trans>buyOnLeanpub</Trans>(🇬🇧)
+            </a>
+          </div>
         </section>
       </div>
     </Layout>

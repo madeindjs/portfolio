@@ -53,6 +53,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
       <Cards>
         {posts.slice(0, state.maxPost).map(({node}) => (
           <PostCard
+            key={node.fields.slug}
             onTagClick={(tag) => handleInputChange(tag)}
             tags={node.frontmatter.tags}
             slug={node.fields.slug}

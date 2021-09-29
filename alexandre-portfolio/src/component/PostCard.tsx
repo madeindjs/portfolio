@@ -26,11 +26,13 @@ const PostCard: React.FC<Props> = (props) => {
       <div>
         <ul className={styles.tags}>
           {props.tags.map((tag) => (
-            <li onClick={() => props.onTagClick(tag)}>{tag}</li>
+            <li key={tag} onClick={() => props.onTagClick(tag)}>
+              {tag}
+            </li>
           ))}
         </ul>
       </div>
-      <p className={styles.postCardBack}>{props.excerpt}</p>
+      <p>{props.excerpt}</p>
       <div className="actions">
         <AniLink
           paintDrip

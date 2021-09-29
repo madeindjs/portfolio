@@ -1,4 +1,4 @@
-@import "./colors.scss";
+@import "./_colors.scss";
 
 body {
   margin: 0;
@@ -51,4 +51,24 @@ hr {
   border-radius: 5px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.btn {
+  background-color: white;
+  border: 5px solid black;
+  color: black;
+  margin: 0.5rem;
+  padding: 0.5rem;
+
+  transition: background-color ease-in-out 0.2s;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+
+  &-lg {
+    font-size: 2rem;
+  }
 }
