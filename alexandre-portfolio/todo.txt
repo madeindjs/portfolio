@@ -2,10 +2,10 @@
 x 2021-09-29 books button
 broken post links
 rss
-page title
-favicon
+x 2021-09-29 page title
+x 2021-09-29 favicon
 x 2021-09-29 seo
-code block
-footer
+x 2021-09-29 code block
+x 2021-09-29 footer
 dark mode
 resume
