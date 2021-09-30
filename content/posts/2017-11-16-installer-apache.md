@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Installer Apache dans un container LXC
 description: Participez au développement de votre navigateur preéferé
 date: 2017-11-16 08:00:00 +0200

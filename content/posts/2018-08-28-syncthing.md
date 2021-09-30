@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Synchroniser ses fichiers avec Syncthing
 date: 2018-08-28 12:00:00 +0200
 tags: [sync, selfhosted]

@@ -2,7 +2,7 @@
 title: Setup dependency injection with Node.js / Typescript
 description: This tutorial show you how to setup dependency injection with
   TypeORM and Inversify libraries
-layout: post
+
 date: 2021-06-05 15:00:00 +0200
 tags:
   - typeorm

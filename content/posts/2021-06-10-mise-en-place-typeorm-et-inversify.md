@@ -2,7 +2,7 @@
 title: Mise en place de l'injection de dépendance dans une API avec Inversify
 description: Ce tutoriel vous montre comment mettre en place une API RESTfull
   complète en utilisant l'injection de dépendances Inversify.
-layout: post
+
 date: 2021-06-10 12:00:00 +0200
 tags:
   - node.js
@@ -11,7 +11,6 @@ tags:
   - expressjs
   - inversify
 categories: programming
-modified: 2021-06-10T12:53:20.368Z
 lang: fr
 ---
 

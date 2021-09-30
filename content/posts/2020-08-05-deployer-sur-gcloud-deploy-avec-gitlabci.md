@@ -1,7 +1,7 @@
 ---
 title: Déployer une application Frontent / Backend sur Google Cloud Plateform avec Gitlab CI
 description: Tutoriel pour utiliser Gitlab CI afin de créer les images Docker d'une application Backend + Frontend et de la déployer sur Google Cloud Computing avec Kubernetes.
-layout: post
+
 date: 2020-08-05 15:00:00 +0200
 tags: [devops, gcloud, gitlabci, docker]
 categories: programming

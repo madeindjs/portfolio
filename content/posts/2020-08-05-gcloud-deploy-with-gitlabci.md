@@ -1,6 +1,6 @@
 ---
 title: Deploy a fullstack application on Google Cloud Plateform with Gitlab CI
-layout: post
+
 date: 2020-08-05 15:00:00 +0200
 tags: [devops, gcloud, gitlabci, docker]
 categories: programming

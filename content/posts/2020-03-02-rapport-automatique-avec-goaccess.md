@@ -1,7 +1,7 @@
 ---
 title: Rapport automatisé par mail avec GoAccess
 description: Envoyer des statistiques de ton site en respectant la vie privée de tes utilisateurs avec GoAccess.
-layout: post
+
 date: 2020-03-02 22:20:00 +0200
 tags: [bash, goaccess]
 categories: devops

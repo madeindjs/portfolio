@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Afficher les erreurs d'un formulaire en AJAX avec Twitter Bootstrap et Rails
 description: Participez au développement de votre navigateur preéferé
 date: 2017-09-22 12:00:00 +0200

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Installer un reverse Proxy
 description: Soyez le roi des redirection
 date: 2017-10-14 23:00:00 +0200

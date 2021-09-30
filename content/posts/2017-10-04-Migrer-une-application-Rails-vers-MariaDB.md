@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Migrer une application Rails vers MariaDB
 description: Participez au développement de votre navigateur preéferé
 date: 2017-09-22 12:00:00 +0200

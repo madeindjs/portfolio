@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Un Crawler en Rust
 description: Créez votre premier crate en Rust
 date: 2018-02-07 12:00:00 +0200

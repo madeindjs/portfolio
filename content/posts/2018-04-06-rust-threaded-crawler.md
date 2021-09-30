@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Créer un Crawler multi-thread en Rust
 description: nous allons pousser notre Crawler afin qu'il soit Mult-threadé
 date: 2018-04-06 13:25:00 +0200

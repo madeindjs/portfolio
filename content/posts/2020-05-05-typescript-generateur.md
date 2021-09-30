@@ -1,7 +1,7 @@
 ---
 title: Les générateurs en Javascript
 description: Utiliser les générateur Javascript afin d'optimiser la consommation mémoire de ton script ou de ton application.
-layout: post
+
 date: 2020-05-04 19:00:00 +0200
 tags: [typescript, nodejs, javascript]
 thumbnail: ./images/typescript.jpg

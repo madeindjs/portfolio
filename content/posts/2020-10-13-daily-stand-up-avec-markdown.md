@@ -1,7 +1,7 @@
 ---
 title: Organisation du Daily Stand Up avec Markdown
 description: Comment j'utilise un simple fichier texte pour organiser mon Daily Stand-Up
-layout: post
+
 date: 2020-10-13 12:00:00 +0200
 tags: [organisation, plaintext, scrum]
 categories: organization

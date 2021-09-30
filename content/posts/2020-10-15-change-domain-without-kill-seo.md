@@ -1,7 +1,7 @@
 ---
 title: Change domain name without kill SEO
 description: This tutorial show you how to set Apache redirection and inform Google that you change domain name
-layout: post
+
 date: 2020-10-15 13:00:00 +0200
 tags: [seo, apache, google]
 categories: webmaster

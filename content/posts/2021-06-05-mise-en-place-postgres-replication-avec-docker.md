@@ -2,7 +2,7 @@
 title: Réplication de PostgreSQL avec Docker
 description: Ce tutoriel montre comment mettre en place la réplication des
   données à travers un exemple avec Docker
-layout: post
+
 date: 2021-06-05 12:00:00 +0200
 tags:
   - docker

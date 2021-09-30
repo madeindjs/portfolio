@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: J'ai tenté de créer un bridge avec ma Box SFR (spoiler, j'ai reussi!)
 description: Participez au développement de votre navigateur preéferé
 date: 2017-10-11 12:00:00 +0200

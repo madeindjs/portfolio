@@ -1,7 +1,7 @@
 ---
 title: Authentification Google OAuth avec cURL
 description: Ce tutoriel montre comment obtenir et régénérer un jeton d'authentification Google en ligne de commande.
-layout: post
+
 date: 2020-10-28 20:00:00 +0200
 tags: [google, oauth, curl]
 categories: programming

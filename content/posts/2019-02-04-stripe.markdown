@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Connecting a Rails application with Stripe
 date: 2019-02-02 12:30:00 +0200
 tags: [rails, stripe, api]

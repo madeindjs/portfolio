@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Vérifier la syntaxe PHP à chaque commit"
 date: 2017-09-20 12:00:00 +0200
 tags: [git, bash, php]

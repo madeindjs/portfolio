@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: Mettre à jour un Package Pypi
 description: Tutoriel pour mettre à jour un package sur Pypi
 date: 2017-09-19 11:23:00 +0200
