@@ -4,7 +4,7 @@ title: Connecter une application Rails avec Stripe
 date: 2019-02-02 12:30:00 +0200
 tags: [rails, stripe, api]
 categories: tutorial
-thumbnail: /img/blog/stripe.svg
+thumbnail: ./images/stripe.svg
 comments: true
 lang: fr
 ---

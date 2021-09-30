@@ -5,7 +5,7 @@ description: Participez au développement de votre navigateur preéferé
 date: 2017-10-11 12:00:00 +0200
 tags: [networking, routing, sfr]
 categories: network
-tumbnail: /img/blog/network_router_pi_sfr.png
+tumbnail: ./images/network_router_pi_sfr.png
 comments: true
 lang: fr
 ---

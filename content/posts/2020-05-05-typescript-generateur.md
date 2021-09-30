@@ -4,7 +4,7 @@ description: Utiliser les générateur Javascript afin d'optimiser la consommati
 layout: post
 date: 2020-05-04 19:00:00 +0200
 tags: [typescript, nodejs, javascript]
-thumbnail: /img/blog/typescript.jpg
+thumbnail: ./images/typescript.jpg
 categories: programming
 lang: fr
 ---

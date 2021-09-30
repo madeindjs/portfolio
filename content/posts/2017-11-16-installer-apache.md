@@ -5,7 +5,7 @@ description: Participez au développement de votre navigateur preéferé
 date: 2017-11-16 08:00:00 +0200
 tags: [apache, linux, lxc]
 categories: tutorial
-thumbnail: /img/blog/lxc_container.png
+thumbnail: ./images/lxc_container.png
 comments: true
 lang: fr
 ---

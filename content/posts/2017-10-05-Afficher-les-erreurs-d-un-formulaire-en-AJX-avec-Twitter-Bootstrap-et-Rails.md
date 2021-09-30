@@ -5,7 +5,7 @@ description: Participez au développement de votre navigateur preéferé
 date: 2017-09-22 12:00:00 +0200
 tags: [ruby, rails, twitter-bootstrap-3, jquery, javascript]
 categories: development
-thumbnail: /img/blog/ajax_error_form.gif
+thumbnail: ./images/ajax_error_form.gif
 comments: true
 lang: fr
 ---

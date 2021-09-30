@@ -4,7 +4,7 @@ layout: post
 tags: [ruby, haml, slim]
 categories: benchmarking
 date: 2018-11-12 08:00:00 +0200
-thumbnail: /img/blog/erb.png
+thumbnail: ./images/erb.png
 lang: fr
 ---
 

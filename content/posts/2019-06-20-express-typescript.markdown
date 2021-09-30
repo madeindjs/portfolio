@@ -4,7 +4,7 @@ title: Building an API with TypeScript, Express.js and Sequelize
 description: Construction of a REST API with TypeScript, Express and Sequelize that will be used to draw graphs with Mermaid.js
 date: 2019-06-19 13:30:00 +0200
 tags: [typescript, express, sequelize]
-thumbnail: /img/blog/typescript.jpg
+thumbnail: ./images/typescript.jpg
 categories: programming
 lang: en
 ---

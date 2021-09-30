@@ -3,7 +3,7 @@ title: Retour d'expérience sur la rédaction d'un livre technique
 layout: post
 date: 2019-11-11 0:30:00 +0200
 tags: [rails, leanpub book]
-thumbnail: /img/blog/api_on_rails.png
+thumbnail: ./images/api_on_rails.png
 categories: story
 lang: fr
 ---

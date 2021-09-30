@@ -5,7 +5,7 @@ description: Use Kali Linux to get WPA/WPA2 password of Wi-fi
 date: 2020-08-06 17:00:00 +0200
 tags: [hack, kali, Wi-fi, wpa]
 categories: hacking
-thumbnail: /img/blog/wifi.png
+thumbnail: ./images/wifi.png
 comments: true
 lang: en
 ---

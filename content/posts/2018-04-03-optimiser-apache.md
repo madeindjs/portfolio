@@ -5,7 +5,7 @@ description: Optimisation des performances d'Apache
 date: 2018-04-03 18:00:00 +0200
 tags: [apache, linux, seo]
 categories: tutorial
-thumbnail: /img/blog/apache.svg
+thumbnail: ./images/apache.svg
 lang: fr
 ---
 
