@@ -9,5 +9,6 @@ x 2021-09-29 code block
 x 2021-09-29 footer
 x 2021-09-29 dark mode
 x 2021-09-29 resume
-fix images
+x 2021-09-30 fix images
 include dendron and post in a submodule
+add related
