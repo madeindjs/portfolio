@@ -1,3 +1,0 @@
-Contact: mailto:contact@rousseau-alexandre.fr
-Encryption: https://rsseau.fr/pgp.txt
-Preferred-Languages: en, fr

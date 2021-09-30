@@ -1,0 +1,27 @@
+@import "../styles/_colors.scss";
+
+.layout {
+  // margin-top: 6rem;
+  min-height: calc(100vh - 9rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns:
+    1fr
+    min(75ch, 100%)
+    1fr;
+
+  & > * {
+    grid-column: 2;
+  }
+
+  // min-height: calc(100vh - 200px);
+}
+
+@media (max-width: 600px) {
+  .layout {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

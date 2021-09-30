@@ -1,0 +1,14 @@
+x 2021-09-29 {% include promote-restapits-en.html %}
+x 2021-09-29 books button
+x 2021-09-30 broken post links
+x 2021-09-29 rss
+x 2021-09-29 page title
+x 2021-09-29 favicon
+x 2021-09-29 seo
+x 2021-09-29 code block
+x 2021-09-29 footer
+x 2021-09-29 dark mode
+x 2021-09-29 resume
+x 2021-09-30 fix images
+include dendron and post in a submodule
+x 2021-09-30 add related
