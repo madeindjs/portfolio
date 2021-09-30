@@ -11,4 +11,4 @@ x 2021-09-29 dark mode
 x 2021-09-29 resume
 x 2021-09-30 fix images
 include dendron and post in a submodule
-add related
+x 2021-09-30 add related

@@ -9,6 +9,7 @@ BASE=$(git merge-base @ "$UPSTREAM")
 
 if [ $LOCAL = $BASE ]; then
   git pull origin master
+  npm install
   npm run build
   rm -rf /var/www/portfolio/*
   cp -r public/* /var/www/portfolio/
