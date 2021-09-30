@@ -3,15 +3,19 @@ import {graphql} from "gatsby";
 import {Trans, useI18next} from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import {useState} from "react";
-import Cards from "../component/Cards";
 import Layout from "../component/Layout";
-import PostCard from "../component/PostCard";
+import Posts from "../component/Posts";
 import SEO from "../component/SEO";
+import {Post} from "../interfaces/post.interface";
 // @ts-ignore
 import * as styles from "./blog.module.scss";
 
-const BlogPage: React.FC<{data: any}> = ({data}) => {
-  const allPosts = data.allMarkdownRemark.edges;
+interface Props {
+  data: {posts: {edges: {node: Post}[]}};
+}
+
+const BlogPage: React.FC<Props> = ({data}) => {
+  const allPosts = data.posts.edges;
   const {t} = useI18next("books");
 
   const emptyQuery = "";
@@ -25,7 +29,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
   const displayMore = () => setState({...state, maxPost: state.maxPost + 10});
 
   const handleInputChange = (query: string) => {
-    const posts = data.allMarkdownRemark.edges || [];
+    const posts = data.posts.edges || [];
 
     const filteredData = posts.filter((post) => {
       const {title, tags} = post.node.frontmatter;
@@ -40,7 +44,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
 
   const {filteredData, query} = state;
   const hasSearchResults = filteredData && query !== emptyQuery;
-  const posts: Array<any> = hasSearchResults ? filteredData : allPosts;
+  const posts: Array<{node: Post}> = hasSearchResults ? filteredData : allPosts;
 
   return (
     <Layout>
@@ -56,18 +60,10 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
         className={styles.search}
         value={state.query}
       />
-      <Cards>
-        {posts.slice(0, state.maxPost).map(({node}) => (
-          <PostCard
-            key={node.fields.slug}
-            onTagClick={(tag) => handleInputChange(tag)}
-            tags={node.frontmatter.tags}
-            slug={node.fields.slug}
-            title={node.frontmatter.title}
-            date={node.frontmatter.date}
-          />
-        ))}
-      </Cards>
+      <Posts
+        posts={posts.slice(0, state.maxPost).map(({node}) => node)}
+      ></Posts>
+
       {posts.length > state.maxPost && (
         <button className="btn" onClick={() => displayMore()}>
           <Trans>displayMore</Trans>
@@ -79,7 +75,7 @@ const BlogPage: React.FC<{data: any}> = ({data}) => {
 
 export const query = graphql`
   query ($language: String!) {
-    allMarkdownRemark(
+    posts: allMarkdownRemark(
       filter: {frontmatter: {lang: {eq: $language}}}
       sort: {order: DESC, fields: [frontmatter___date]}
       limit: 1000

@@ -10,7 +10,7 @@ interface Props {
   title: string;
   date: string;
   tags: Array<string>;
-  onTagClick: (tag: string) => void;
+  onTagClick?: (tag: string) => void;
 }
 
 const PostCard: React.FC<Props> = (props) => {
@@ -22,7 +22,12 @@ const PostCard: React.FC<Props> = (props) => {
     <AniLink cover to={linkUrl} duration={0.6} bg="black">
       <Card className={styles.postCard}>
         <div>
-          <Tags tags={props.tags} />
+          <Tags
+            tags={props.tags}
+            onTagClick={(tag) =>
+              props.onTagClick !== undefined && props.onTagClick(tag)
+            }
+          />
         </div>
         <p className={styles.title}>{props.title}</p>
         <p className={styles.information}>{date}</p>

@@ -2,5 +2,6 @@
   "publishedAt": "Published at",
   "searchPlaceholder": "Tapez du texte pour trier les articles...",
   "promoteApiOnRails": "Interested about building and API using Ruby on Rails? Take a look on my brand new Book: <strong>API on Rails 6</strong>. You can <a href=\"https://github.com/madeindjs/api_on_rails\" >grab a free PDF version on Github</a >. If you like my work, you can <a href=\"https://leanpub.com/apionrails6/\">buy a paid version on Leanpub</a >.",
-  "promoteRestApiTs": "Interested about building and API using Node.js / Typescript ? Take a look on my brand new Book: <strong>REST-API.ts</strong>. You can <a href=\"https://github.com/madeindjs/rest-api.ts\" >grab a free PDF version on Github</a >. If you like my work, you can <a href=\"https://leanpub.com/rest-api-ts/\">buy a paid version on Leanpub</a>."
+  "promoteRestApiTs": "Interested about building and API using Node.js / Typescript ? Take a look on my brand new Book: <strong>REST-API.ts</strong>. You can <a href=\"https://github.com/madeindjs/rest-api.ts\" >grab a free PDF version on Github</a >. If you like my work, you can <a href=\"https://leanpub.com/rest-api-ts/\">buy a paid version on Leanpub</a>.",
+  "relatedPosts": "Related posts"
 }
