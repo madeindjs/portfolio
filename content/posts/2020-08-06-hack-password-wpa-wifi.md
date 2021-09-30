@@ -1,5 +1,4 @@
 ---
-
 title: Hack protected WPA/WPA2 Wi-fi
 description: Use Kali Linux to get WPA/WPA2 password of Wi-fi
 date: 2020-08-06 17:00:00 +0200
@@ -10,7 +9,7 @@ comments: true
 lang: en
 ---
 
-I decided to hack my [my new router](/network/2017/10/11/Installer_bridge_sfr_box-4k.html) just to try and have a fun. Spoiler : it was really easy.
+I decided to hack my [my new router](./2017-10-11-installer-bridge-sfr-box-4k.md) just to try and have a fun. Spoiler : it was really easy.
 
 So to make my tests I tried a famous Linux distribution: [Kali Linux](https://www.kali.org/). This distribution have many pre-instaled hacking tools who help us.
 

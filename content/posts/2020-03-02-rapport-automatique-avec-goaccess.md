@@ -8,7 +8,7 @@ categories: devops
 lang: fr
 ---
 
-Chez [iSignif](https://isignif.fr), j'ai [récemment décidé de remplacer Google Analytics par GoAccess](/devops/2019/11/06/go-access.html). Là ou Google Analytics envoie toutes les statistiques de ton site web en temps réel au géant américain, GoAccess analyse le traffic du site en s'appuyant sur les logs du serveur web.
+Chez [iSignif](https://isignif.fr), j'ai [récemment décidé de remplacer Google Analytics par GoAccess](./2019-11-2019-11-07-lire-les-logs-avec-go-access). Là ou Google Analytics envoie toutes les statistiques de ton site web en temps réel au géant américain, GoAccess analyse le traffic du site en s'appuyant sur les logs du serveur web.
 
 Au delà de respecter la vie privée de nos utilisateurs en évitant d'engrosser les californiens, cela permet aussi de [retirer le popup ultra-énervant pour accepter les cookies](https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi). Cela contribue donc très certainement à faire d'internet un lieu plus sympa. Rien que ça!
 

@@ -1,5 +1,4 @@
 ---
-
 title: Optimiser Apache
 description: Optimisation des performances d'Apache
 date: 2018-04-03 18:00:00 +0200
@@ -9,7 +8,7 @@ image: ./images/apache.svg
 lang: fr
 ---
 
-Dans mon [précédent article](/tutorial/2017/11/16/installer-apache.html) je vous
+Dans mon [précédent article](./2017-11-16-installer-apache) je vous
 expliquait comment installer un serveur[Apache][apache] dans un container [LXC][lxc].
 
 La configuration de base est d'[Apache][apache] est souvent suffisante mais une

@@ -1,5 +1,4 @@
 ---
-
 title: Un Crawler en Rust
 description: Créez votre premier crate en Rust
 date: 2018-02-07 12:00:00 +0200
@@ -15,7 +14,7 @@ Le principe est assez simple. Le crawler possède une file d’attente d'URL à 
 
 Un langage performant n'est pas nécessairement un bon critère ici, car le crawler passe la majorité de son temps à **attendre** la page du serveur. Le **multi-threading** est un des critères les plus importants. Vu qu'il s'agit d'un point fort de [Rust][rust] (et que je fais ce que je veux vu que c'est mon post), j'ai choisi ce langage.
 
-> Si vous ne connaissez pas encore [Rust][rust], je vous invite à lire mon article sur [l'introduction à Rust](/tutorial/2017/11/28/rust.html).
+> Si vous ne connaissez pas encore [Rust][rust], je vous invite à lire mon article sur [l'introduction à Rust](./2018-02-07-rust.html).
 
 ## Sommaire
 
