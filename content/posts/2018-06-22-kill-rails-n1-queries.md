@@ -3,7 +3,7 @@
 title: A la chasse aux requêtes N+1 avec Ruby on Rail
 date: 2018-06-22 17:30:00 +0200
 tags: [ruby, rails, sql, performance, optimization]
-thumbnail: ./images/n1query.png
+image: ./images/n1query.png
 categories: tutorial
 lang: fr
 ---

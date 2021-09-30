@@ -5,7 +5,7 @@ description: l'occasion de mettre ma pierre à l'édifice des Benchmarks existan
 date: 2017-10-15 12:00:00 +0200
 tags: [benchmark, raspberry, apache, ruby]
 categories: network
-thumbnail: ./images/RPI2_vs_RPI3.png
+image: ./images/RPI2_vs_RPI3.png
 comments: true
 lang: fr
 ---

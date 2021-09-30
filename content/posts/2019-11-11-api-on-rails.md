@@ -3,7 +3,7 @@ title: Feedback about writing a technical book
 
 date: 2019-11-11 0:30:00 +0200
 tags: [rails, leanpub, book]
-thumbnail: ./images/api_on_rails.png
+image: ./images/api_on_rails.png
 categories: story
 lang: en
 ---

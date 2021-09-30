@@ -4,7 +4,7 @@ title: Implémenter Phinx dans une application PHP
 date: 2018-08-03 12:00:00 +0200
 tags: [php, phinx, sql]
 categories: tutorial
-thumbnail: ./images/cakephp.gif
+image: ./images/cakephp.gif
 lang: fr
 ---
 

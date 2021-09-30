@@ -5,7 +5,7 @@ description: Utilisez Kali Linux pour hacker un Wi-fi protégé par WPA/WPA2
 date: 2017-10-31 20:00:00 +0200
 tags: [hack, kali, Wi-fi, wpa]
 categories: hacking
-thumbnail: ./images/wifi.png
+image: ./images/wifi.png
 comments: true
 lang: fr
 ---

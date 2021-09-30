@@ -3,7 +3,7 @@ title: Remplacement de Google Analytics par GoAccess
 
 date: 2019-11-07 1:00:00 +0200
 tags: [analytics, goaccess]
-thumbnail: https://goaccess.io/images/goaccess-dashboard.png
+image: https://goaccess.io/images/goaccess-dashboard.png
 categories: devops
 lang: fr
 ---
