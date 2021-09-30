@@ -16,21 +16,18 @@ interface Props {
 }
 
 const PostPageTemplate: React.FC<Props> = (props) => {
-  const {post, posts} = props.data;
+  const {t} = useI18next();
 
-  const tags = post.frontmatter.tags;
-  const title = post.frontmatter.title;
-  const date = post.frontmatter.date;
-  const html = post.html;
+  const {post, posts} = props.data;
+  const {tags, title, date} = post.frontmatter;
   const image = post.frontmatter.image?.childImageSharp?.fluid;
+
+  const dateFormatted = date.split(" ")[0];
 
   const relatedPosts = posts.edges
     .map((edge) => edge.node)
+    .filter((p) => p.fields.slug !== post.fields.slug)
     .filter((p) => p.frontmatter.tags.some((t) => tags.includes(t)));
-
-  const {t} = useI18next();
-
-  const dateFormatted = date.split(" ")[0];
 
   let Promotions = [];
 
@@ -73,7 +70,7 @@ const PostPageTemplate: React.FC<Props> = (props) => {
 
       <article
         className={styles.article}
-        dangerouslySetInnerHTML={{__html: html}}
+        dangerouslySetInnerHTML={{__html: post.html}}
       />
 
       {relatedPosts.length > 0 && (
@@ -92,6 +89,9 @@ export const postQuery = graphql`
   query ($slug: String!, $language: String!) {
     post: markdownRemark(fields: {slug: {eq: $slug}}) {
       html
+      fields {
+        slug
+      }
       frontmatter {
         date
         title

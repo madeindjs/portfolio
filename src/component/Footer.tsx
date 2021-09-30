@@ -5,7 +5,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "gatsby";
 import {useI18next} from "gatsby-plugin-react-i18next";
 import React from "react";
 // @ts-ignore
@@ -21,18 +20,18 @@ const Footer: React.FC = () => {
         <p dangerouslySetInnerHTML={{__html: t("cookie")}}></p>
       </div>
       <div className={styles.externalsLinks}>
-        <Link to="https://stackoverflow.com/users/5935198/rousseaualexandre">
+        <a href="https://stackoverflow.com/users/5935198/rousseaualexandre">
           <FontAwesomeIcon icon={faStackOverflow} />
-        </Link>
-        <Link to="https://github.com/madeindjs">
+        </a>
+        <a href="https://github.com/madeindjs">
           <FontAwesomeIcon icon={faGithub} />
-        </Link>
-        <Link to="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">
+        </a>
+        <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">
           <FontAwesomeIcon icon={faLinkedin} />
-        </Link>
-        <Link to="mailto:alexandre@rsseau.fr">
+        </a>
+        <a href="mailto:alexandre@rsseau.fr">
           <FontAwesomeIcon icon={faEnvelope} />
-        </Link>
+        </a>
       </div>
     </footer>
   );

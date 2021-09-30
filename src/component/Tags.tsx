@@ -10,7 +10,7 @@ interface Props {
 const Tags: React.FC<Props> = ({tags, onTagClick}) => {
   return (
     <ul className={styles.tags}>
-      {tags.map((tag) => (
+      {tags.sort().map((tag) => (
         <li
           key={tag}
           onClick={() => onTagClick !== undefined && onTagClick(tag)}
