@@ -10,4 +10,6 @@ export interface Post {
   };
   html: string;
   experp: string;
+  category: string;
+  lang: string;
 }

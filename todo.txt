@@ -12,3 +12,51 @@ x 2021-09-29 resume
 x 2021-09-30 fix images
 include dendron and post in a submodule
 x 2021-09-30 add related
+x 2021-09-30 robot.txt
+sitemap
+fix svgs issues
+x 2021-10-01 2017-09-19-mettre-a-jour-un-package-sur-pipy
+x 2021-10-01 2017-09-20-vérifier-la-syntaxe-php-a-chaque-commit
+x 2021-10-01 2017-10-04-migrer-une-application-rails-vers-mariadb
+x 2021-10-01 2017-10-05-afficher-les-erreurs-d-un-formulaire-en-ajax-avec-twitter-bootstrap-et-rails
+x 2021-10-01 2017-10-11-installer-bridge-sfr-box-4k
+x 2021-10-01 2017-10-14-reverse-proxy-apache
+x 2021-10-01 2017-10-15-comparaison-server-apache-ruby-rpi2-vs-rp3
+x 2021-10-01 2017-10-31-hacker-password-wpa-wifi
+x 2021-10-01 2017-11-16-installer-apache
+x 2021-10-01 2017-11-28-rust
+x 2021-10-01 2018-02-07-rust-web-spider-crate
+x 2021-10-01 2018-04-03-optimiser-apache
+x 2021-10-01 2018-04-06-rust-threaded-crawler
+x 2021-10-01 2018-06-20-new-symfony-project-with-vagrant
+x 2021-10-01 2018-06-22-kill-rails-n1-queries
+x 2021-10-01 2018-08-03-setup-phinx
+x 2021-10-01 2018-08-28-syncthing
+x 2021-10-01 2018-10-02-kvm
+x 2021-10-01 2018-10-10-gateway
+x 2021-10-01 2018-11-12-benchmark-templates
+x 2021-10-01 2018-12-03-zip-active-storage.markdown
+x 2021-10-01 2018-12-03-zip-active-storage
+x 2021-10-01 2019-02-04-mise-en-place-stripe
+x 2021-10-01 2019-02-04-stripe.markdown
+x 2021-10-01 2019-06-20-express-typescript.markdown
+x 2021-10-01 2019-06-20-mise-en-place-express-typescript
+x 2021-10-01 2019-11-07-lire-les-logs-avec-go-access
+x 2021-10-01 2019-11-11-api-on-rails
+x 2021-10-01 2019-11-11-retour-experience-api-on-rails
+x 2021-10-01 2020-03-01-repdouire-netlify-avec-un-raspberry
+x 2021-10-01 2020-03-02-rapport-automatique-avec-goaccess
+x 2021-10-01 2020-05-05-typescript-generateur
+x 2021-10-01 2020-08-05-deployer-sur-gcloud-deploy-avec-gitlabci
+x 2021-10-01 2020-08-05-gcloud-deploy-with-gitlabci
+x 2021-10-01 2020-08-06-hack-password-wpa-wifi
+x 2021-10-01 2020-10-13-daily-stand-up-avec-markdown
+x 2021-10-01 2020-10-13-daily-stand-up-md
+x 2021-10-01 2020-10-15-change-domain-without-kill-seo
+x 2021-10-01 2020-10-15-changer-de-domain-sans-tuer-le-seo
+x 2021-10-01 2021-06-05-setup-typeorm-and-inversify
+x 2021-10-01 2021-09-30-migration-jekyll-gatsby
+x 2021-10-01 2021-06-10-mise-en-place-typeorm-et-inversify
+x 2021-10-01 2020-10-28-google-oauth
+x 2021-10-01 2021-06-05-mise-en-place-postgres-replication-avec-docker
+2020-10-28-authentification-google-oauth
