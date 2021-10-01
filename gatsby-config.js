@@ -219,6 +219,13 @@ module.exports = {
             resolve: `gatsby-remark-prismjs`,
           },
           {
+            resolve: "gatsby-remark-obsidian",
+            options: {
+              markdownFolder: `${__dirname}/content/notes/vault`,
+              //   titleToURLPath: `${__dirname}/src/lib/dendron-parse-url.js`,
+            },
+          },
+          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
