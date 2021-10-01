@@ -123,6 +123,13 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        path: "./content/notes/vault",
+        name: `notes`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "pages",
         path: "./src/pages/",
       },
@@ -215,6 +222,7 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
+              showCaptions: true,
             },
           },
         ],

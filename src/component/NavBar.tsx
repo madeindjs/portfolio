@@ -43,6 +43,9 @@ const NavBar: React.FC = () => {
       <Link to="/books">
         <Trans>books</Trans>
       </Link>
+      <Link to="/notes">
+        <Trans>notes</Trans>
+      </Link>
       <LanguageSelector></LanguageSelector>
     </nav>
   );

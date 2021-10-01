@@ -16,7 +16,7 @@ interface Props {
 const PostCard: React.FC<Props> = (props) => {
   const linkUrl = `/${props.slug}`;
 
-  const date = props.date.split(" ")[0];
+  const date = props.date?.split("T")[0] ?? "???";
 
   return (
     <AniLink cover to={linkUrl} duration={0.6} bg="black">

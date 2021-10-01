@@ -21,8 +21,9 @@ const PostPageTemplate: React.FC<Props> = (props) => {
   const {post, posts} = props.data;
   const {tags, title, date} = post.frontmatter;
   const image = post.frontmatter.image?.childImageSharp?.fluid;
+  console.log(date);
 
-  const dateFormatted = date.split(" ")[0];
+  const dateFormatted = date?.split("T")[0] ?? "";
 
   const relatedPosts = posts.edges
     .map((edge) => edge.node)
@@ -87,7 +88,7 @@ const PostPageTemplate: React.FC<Props> = (props) => {
 
 export const postQuery = graphql`
   query ($slug: String!, $language: String!) {
-    post: markdownRemark(fields: {slug: {eq: $slug}}) {
+    post: markdownRemark(fields: {slug: {eq: $slug}, type: {eq: "post"}}) {
       html
       fields {
         slug
@@ -105,7 +106,12 @@ export const postQuery = graphql`
         }
       }
     }
-    posts: allMarkdownRemark(filter: {frontmatter: {lang: {eq: $language}}}) {
+    posts: allMarkdownRemark(
+      filter: {
+        frontmatter: {lang: {eq: $language}}
+        fields: {type: {eq: "post"}}
+      }
+    ) {
       edges {
         node {
           frontmatter {

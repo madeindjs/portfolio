@@ -2,7 +2,7 @@ export interface Post {
   frontmatter: {
     title: string;
     tags: string[];
-    date: string;
+    date?: string;
     image?: any;
   };
   fields: {

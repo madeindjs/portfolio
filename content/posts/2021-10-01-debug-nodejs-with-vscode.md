@@ -7,6 +7,7 @@ tags:
   - typescript
   - docker
   - vscode
+  - markdown
 lang: en
 image: ./images/debugging-using-console-log.png
 ---

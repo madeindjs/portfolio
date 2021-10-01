@@ -48,9 +48,9 @@ const BlogPage: React.FC<Props> = ({data}) => {
 
   return (
     <Layout>
-      <SEO title={t("blog")} />
+      <SEO title={t("notes")} />
       <h1>
-        <Trans>blog</Trans>
+        <Trans>notes</Trans>
       </h1>
       <input
         type="text"
@@ -78,7 +78,7 @@ export const query = graphql`
     posts: allMarkdownRemark(
       filter: {
         frontmatter: {lang: {eq: $language}}
-        fields: {type: {eq: "post"}}
+        fields: {type: {eq: "note"}}
       }
       sort: {order: DESC, fields: [frontmatter___date]}
       limit: 1000
