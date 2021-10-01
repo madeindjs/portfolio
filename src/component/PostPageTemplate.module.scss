@@ -22,18 +22,25 @@
   ul {
     list-style: none;
     position: relative;
-    li::before {
-      content: " - ";
-      position: absolute;
-      right: 100%;
-      margin-right: 1.2rem / 2;
-      display: inline-block;
-      text-align: right;
+
+    li {
+      margin-bottom: 1rem;
+      &::before {
+        content: " - ";
+        position: absolute;
+        right: 100%;
+        margin-right: 0.8rem;
+        display: inline-block;
+        text-align: right;
+      }
     }
   }
 
   ol {
     list-style: decimal outside none;
+    li {
+      margin-bottom: 1rem;
+    }
   }
 }
 
