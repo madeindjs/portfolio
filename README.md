@@ -2,24 +2,25 @@
 
 My portfolio build [Gatsby](https://www.gatsbyjs.com/). See me in action at <https://rsseau.fr>.
 
+![screenchot](./public/screenshot.png)
+
 ## Setup
 
-~~~sh
+```sh
 npm install
-~~~
+```
 
 Then start development server
 
-~~~sh
+```sh
 npm run develop
-~~~
+```
 
 or build webiste
 
-~~~sh
+```sh
 npm run build
-~~~
-
+```
 
 ## License
 

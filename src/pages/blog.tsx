@@ -14,6 +14,16 @@ interface Props {
   data: {posts: {edges: {node: Post}[]}};
 }
 
+function getQueryParameter(key: string): string | undefined {
+  const match = window.location.search.match(/(\?|&)taest\=([^&]*)/);
+
+  if (match === null) {
+    return undefined;
+  }
+
+  return decodeURIComponent(match[2]);
+}
+
 const BlogPage: React.FC<Props> = ({data}) => {
   const allPosts = data.posts.edges;
   const {t} = useI18next("books");
@@ -22,7 +32,7 @@ const BlogPage: React.FC<Props> = ({data}) => {
 
   const [state, setState] = useState({
     filteredData: [],
-    query: emptyQuery,
+    query: getQueryParameter("q") ?? emptyQuery,
     maxPost: 10,
   });
 

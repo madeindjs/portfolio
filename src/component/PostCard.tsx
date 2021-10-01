@@ -14,7 +14,7 @@ interface Props {
 }
 
 const PostCard: React.FC<Props> = (props) => {
-  const linkUrl = `/posts/${props.slug}`;
+  const linkUrl = `/${props.slug}`;
 
   const date = props.date.split(" ")[0];
 

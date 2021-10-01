@@ -222,4 +222,4 @@ Le seul point noir pourrait être qu'on s'enferme chez un fournisseur mais je pe
 - [Déployer une application Web en conteneur](https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app?hl=fr)
 - [Deploying a full stack application to Google Kubernetes Engine – Shine Solutions Group](https://shinesolutions.com/2018/10/25/deploying-a-full-stack-application-to-google-kubernetes-engine/)
 - [Connect a Front End to a Back End Using a Service](https://kubernetes.io/docs/tasks/access-application-cluster/connecting-frontend-backend/)
-- [Building Docker images with GitLab CI/CD](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html)
+- <https://docs.gitlab.com/ee/ci/docker/using_docker_build.html>
