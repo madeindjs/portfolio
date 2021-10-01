@@ -1,10 +1,9 @@
 ---
-
 title: Connecter une application Rails avec Stripe
 date: 2019-02-02 12:30:00 +0200
 tags: [rails, stripe, api]
 categories: tutorial
-image: ./images/stripe.svg
+image: ./images/stripe.svg.png
 comments: true
 lang: fr
 ---
@@ -19,7 +18,7 @@ Afin d'implémenter cette fonctionnalité, nous avons commencé par analyser le 
 
 Afin d'implémenter cela, j'ai rapidement fait le tour des solutions de paiement existantes (PayPal, BNP, etc..). Il s'est avéré que [Stripe](https://stripe.com) était le meilleur compromis.
 
-![Logo de Stripe](./images/stripe.svg)
+![Logo de Stripe](./images/stripe.svg.png)
 
 > Stripe est une société américaine qui a pour but de simplifier les paiements en ligne. Créée en 2010, Stripe pèse maintenant plus de 10 milliards!
 

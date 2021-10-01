@@ -13,7 +13,7 @@ I decided to hack my [my new router](./2017-10-11-installer-bridge-sfr-box-4k.md
 
 So to make my tests I tried a famous Linux distribution: [Kali Linux](https://www.kali.org/). This distribution have many pre-instaled hacking tools who help us.
 
-![Logo de Kali Linux](./images/kali.svg)
+![Logo de Kali Linux](./images/kali.svg.png)
 
 I installed Kali Linux in [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) but you can also use it in Live USB mode or with a virtual machine like [VirtualBox](https://www.virtualbox.org/).
 

@@ -1,11 +1,10 @@
 ---
-
 title: Créer un Crawler multi-thread en Rust
 description: nous allons pousser notre Crawler afin qu'il soit Mult-threadé
 date: 2018-04-06 13:25:00 +0200
 tags: [rust, crate, crawler, thread]
 categories: tutorial
-image: ./images/rust2.svg
+image: ./images/rust2.svg.png
 lang: fr
 ---
 

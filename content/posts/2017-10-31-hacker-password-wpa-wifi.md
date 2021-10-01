@@ -13,7 +13,7 @@ Afin de tester, j'ai voulu cracker mon [routeur récemment installé](./2017-10-
 
 Afin de réaliser le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux qui apporte des outils de "hacking" pré-installé.
 
-![Logo de Kali Linux](./images/kali.svg)
+![Logo de Kali Linux](./images/kali.svg.png)
 
 Je l'ai installé en [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) mais il est aussi possible de l'utiliser en Live USB ou en machine virtuelle avec [VirtualBox](https://www.virtualbox.org/).
 

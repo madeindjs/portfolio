@@ -23,7 +23,7 @@ const BooksPage = () => {
         <section className={styles.book}>
           <h2>API On Rails</h2>
           <StaticImage
-            src="../images/books/api-on-rails.svg"
+            src="../images/books/api-on-rails.svg.png"
             alt={t("api-on-rails-alt")}
             height={526}
             width={372}
@@ -50,7 +50,7 @@ const BooksPage = () => {
         <section className={styles.book}>
           <h2>REST-API.ts</h2>
           <StaticImage
-            src="../images/books/rest-api-ts.svg"
+            src="../images/books/rest-api-ts.svg.png"
             alt={t("rest-api-ts-alt")}
             height={526}
             width={372}

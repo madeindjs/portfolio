@@ -14,7 +14,7 @@ include dendron and post in a submodule
 x 2021-09-30 add related
 x 2021-09-30 robot.txt
 sitemap
-fix svgs issues
+x 2021-10-01 fix svgs issues
 x 2021-10-01 2017-09-19-mettre-a-jour-un-package-sur-pipy
 x 2021-10-01 2017-09-20-vérifier-la-syntaxe-php-a-chaque-commit
 x 2021-10-01 2017-10-04-migrer-une-application-rails-vers-mariadb
@@ -59,4 +59,4 @@ x 2021-10-01 2021-09-30-migration-jekyll-gatsby
 x 2021-10-01 2021-06-10-mise-en-place-typeorm-et-inversify
 x 2021-10-01 2020-10-28-google-oauth
 x 2021-10-01 2021-06-05-mise-en-place-postgres-replication-avec-docker
-2020-10-28-authentification-google-oauth
+x 2021-10-01 2020-10-28-authentification-google-oauth
