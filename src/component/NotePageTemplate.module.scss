@@ -1,0 +1,56 @@
+@import "../styles/_colors";
+
+.article {
+  grid-column: 1 / 4 !important;
+  display: grid;
+  grid-template-columns:
+    1fr
+    min(75ch, 100%)
+    1fr;
+
+  & > * {
+    grid-column: 2;
+  }
+
+  // display list outside
+
+  ul,
+  ol {
+    padding-left: 0;
+  }
+
+  ul {
+    list-style: none;
+    position: relative;
+
+    li {
+      margin-bottom: 1rem;
+      &::before {
+        content: " - ";
+        position: absolute;
+        right: 100%;
+        margin-right: 0.8rem;
+        display: inline-block;
+        text-align: right;
+      }
+    }
+  }
+
+  ol {
+    list-style: decimal outside none;
+    li {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.promotion {
+  background-color: $wisteria;
+  color: white;
+  padding: 1rem;
+
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+}

@@ -77,7 +77,7 @@ export const query = graphql`
   query ($language: String!) {
     posts: allMarkdownRemark(
       filter: {
-        frontmatter: {lang: {eq: $language}}
+        frontmatter: {lang: {eq: $language}, public: {eq: true}}
         fields: {type: {eq: "note"}}
       }
       sort: {order: DESC, fields: [frontmatter___date]}
@@ -92,6 +92,7 @@ export const query = graphql`
           }
           fields {
             slug
+            type
           }
         }
       }

@@ -7,6 +7,7 @@ export interface Post {
   };
   fields: {
     slug: string;
+    type: "note" | "post";
   };
   html: string;
   experp: string;

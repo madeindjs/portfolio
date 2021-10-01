@@ -51,6 +51,7 @@ exports.createSchemaCustomization = ({actions, schema}) => {
         // fallback to updated if date not defined
         title: {type: "String"},
         image: {type: "File"},
+        public: {type: "Boolean"},
         lang: {
           type: "String",
           resolve(source, args, context, info) {
@@ -107,6 +108,9 @@ exports.createPages = async ({graphql, actions, reporter}) => {
               slug
               type
             }
+            frontmatter {
+              public
+            }
           }
         }
       }
@@ -117,14 +121,26 @@ exports.createPages = async ({graphql, actions, reporter}) => {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query');
   }
 
-  // Create blog post pages.
-  const posts = result.data.allMarkdownRemark.edges;
+  const edges = result.data.allMarkdownRemark.edges;
 
-  posts.forEach(({node}, index) => {
-    createPage({
-      path: `/${node.fields.slug}`,
-      component: path.resolve(`./src/component/PostPageTemplate.tsx`),
-      context: {slug: node.fields.slug},
-    });
+  edges.forEach(({node}, index) => {
+    if (node.fields.type === "post") {
+      const uri = `/${node.fields.slug}`;
+
+      createPage({
+        path: uri,
+        component: path.resolve(`./src/component/PostPageTemplate.tsx`),
+        context: {slug: node.fields.slug},
+      });
+      reporter.info(`\tcreatePages POST ${uri}`);
+    } else if (node.fields.type === "note" && node.frontmatter.public) {
+      const uri = `/notes/${node.fields.slug}`;
+      createPage({
+        path: uri,
+        component: path.resolve(`./src/component/NotePageTemplate.tsx`),
+        context: {slug: node.fields.slug},
+      });
+      reporter.info(`\tcreatePages NOTE ${uri}`);
+    }
   });
 };

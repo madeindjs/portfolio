@@ -14,6 +14,7 @@ const Posts: React.FC<Props> = ({posts}) => {
         <PostCard
           key={post.fields.slug}
           tags={post.frontmatter.tags}
+          type={post.fields.type}
           slug={post.fields.slug}
           title={post.frontmatter.title}
           date={post.frontmatter.date}

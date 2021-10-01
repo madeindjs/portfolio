@@ -9,12 +9,14 @@ interface Props {
   slug: string;
   title: string;
   date: string;
+  type: "note" | "post";
   tags: Array<string>;
   onTagClick?: (tag: string) => void;
 }
 
 const PostCard: React.FC<Props> = (props) => {
-  const linkUrl = `/${props.slug}`;
+  const linkUrl =
+    props.type === "post" ? `/${props.slug}` : `/notes/${props.slug}`;
 
   const date = props.date?.split("T")[0] ?? "???";
 
