@@ -13,4 +13,6 @@ if [ $LOCAL = $BASE ]; then
   npm run build
   rm -rf /var/www/portfolio/*
   cp -r public/* /var/www/portfolio/
+  cp -r public/.well-known /var/www/portfolio/
+  cp public/.htaccess /var/www/portfolio
 fi
