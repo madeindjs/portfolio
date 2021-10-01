@@ -9,7 +9,7 @@ tags:
   - node.js
   - typescript
 categories: programming
-image: ./images/postgres.svg
+image: ./images/postgres.png
 modified: 2021-06-10T12:46:39.739Z
 lang: en
 ---
