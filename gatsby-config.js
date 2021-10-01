@@ -47,8 +47,6 @@ module.exports = {
             Redirect permanent /en/tag/(.*).html /blog?q=$1
             Redirect permanent /en/tutorial/2018/12/03/zip-active-storage.html /2018-12-03-zip-active-storage-en
             Redirect permanent /en/tutorial/2019/02/02/stripe.html /2019-02-04-stripe-en
-            Redirect permanent /en/tutorial/2019/02/02/stripe.html#implementation-of-the-premium-mode
-            Redirect permanent /en/tutorial/2019/02/02/stripe.html#punctual-payment
             Redirect permanent /en/webmaster/2020/10/15/change-domain-without-kill-seo.html /2020-10-15-changer-de-domain-sans-tuer-le-seo
             Redirect gone /fonts/
             Redirect permanent /hacking/2017/10/31/hacker-password-wpa-wifi.html /2017-10-31-hacker-password-wpa-wifi
