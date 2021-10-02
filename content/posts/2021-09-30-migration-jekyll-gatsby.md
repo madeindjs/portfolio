@@ -1,6 +1,6 @@
 ---
 title: Migration de mon site de Jekyll à Gatsby
-description: Je viens de migrer mon site de Jekyll à Gatsby
+description: Cette article est mon retour d'expérience sur la migration de mon site de Jekyll à Gatsby.
 date: 2021-09-30 12:00:00 +0200
 tags:
   - gatsby
