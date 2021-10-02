@@ -1,9 +1,9 @@
 // src/component/PostPageTemplate.tsx
-import {graphql} from "gatsby";
+import { graphql } from "gatsby";
 import Img from "gatsby-image";
-import {Trans, useI18next} from "gatsby-plugin-react-i18next";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import * as React from "react";
-import {Post} from "../interfaces/post.interface";
+import { Post } from "../interfaces/post.interface";
 import Layout from "./Layout";
 // @ts-ignore
 import * as styles from "./NotePageTemplate.module.scss";
@@ -12,14 +12,14 @@ import SEO from "./SEO";
 import Tags from "./Tags";
 
 interface Props {
-  data: {post: Post; posts: {edges: {node: Post}[]}};
+  data: { post: Post; posts: { edges: { node: Post }[] } };
 }
 
 const NotePageTemplate: React.FC<Props> = (props) => {
-  const {t} = useI18next();
+  const { t } = useI18next();
 
-  const {post, posts} = props.data;
-  const {tags, title, date} = post.frontmatter;
+  const { post, posts } = props.data;
+  const { tags, title, date } = post.frontmatter;
   const image = post.frontmatter.image?.childImageSharp?.fluid;
   console.log(date);
 
@@ -32,33 +32,15 @@ const NotePageTemplate: React.FC<Props> = (props) => {
 
   let Promotions = [];
 
-  if (
-    tags.some((tag) => ["javascript", "typescript", "node.js"].includes(tag))
-  ) {
-    Promotions.push(
-      <p
-        className={styles.promotion}
-        dangerouslySetInnerHTML={{__html: t("promoteRestApiTs")}}
-      ></p>
-    );
+  if (tags.some((tag) => ["javascript", "typescript", "node.js"].includes(tag))) {
+    Promotions.push(<p className={styles.promotion} dangerouslySetInnerHTML={{ __html: t("promoteRestApiTs") }}></p>);
   } else if (tags.some((tag) => ["ruby", "rails"].includes(tag))) {
-    Promotions.push(
-      <p
-        className={styles.promotion}
-        dangerouslySetInnerHTML={{__html: t("promoteApiOnRails")}}
-      ></p>
-    );
+    Promotions.push(<p className={styles.promotion} dangerouslySetInnerHTML={{ __html: t("promoteApiOnRails") }}></p>);
   }
 
   return (
     <Layout>
-      <SEO
-        article={true}
-        title={title}
-        tags={tags}
-        datePublished={date}
-        dateModified={date}
-      />
+      <SEO article={true} title={title} tags={tags} datePublished={date} dateModified={date} />
       <h1>{title}</h1>
       {image && <Img fluid={image} />}
 
@@ -69,10 +51,7 @@ const NotePageTemplate: React.FC<Props> = (props) => {
 
       {Promotions}
 
-      <article
-        className={styles.article}
-        dangerouslySetInnerHTML={{__html: post.html}}
-      />
+      <article className={styles.article} dangerouslySetInnerHTML={{ __html: post.html }} />
 
       {relatedPosts.length > 0 && (
         <>
@@ -88,10 +67,7 @@ const NotePageTemplate: React.FC<Props> = (props) => {
 
 export const postQuery = graphql`
   query ($slug: String!, $language: String!) {
-    post: markdownRemark(
-      fields: {slug: {eq: $slug}, type: {eq: "note"}}
-      frontmatter: {public: {eq: true}}
-    ) {
+    post: markdownRemark(fields: { slug: { eq: $slug }, type: { eq: "note" } }, frontmatter: { public: { eq: true } }) {
       html
       fields {
         slug
@@ -109,12 +85,7 @@ export const postQuery = graphql`
         }
       }
     }
-    posts: allMarkdownRemark(
-      filter: {
-        frontmatter: {lang: {eq: $language}}
-        fields: {type: {eq: "post"}}
-      }
-    ) {
+    posts: allMarkdownRemark(filter: { frontmatter: { lang: { eq: $language } }, fields: { type: { eq: "post" } } }) {
       edges {
         node {
           frontmatter {
@@ -129,7 +100,7 @@ export const postQuery = graphql`
       }
     }
 
-    locales: allLocale(filter: {language: {eq: $language}}) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
       edges {
         node {
           ns

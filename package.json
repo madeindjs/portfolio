@@ -34,7 +34,6 @@
     "gatsby-plugin-transition-link": "^1.20.5",
     "gatsby-remark-double-brackets-link": "^0.1.11",
     "gatsby-remark-images": "^5.11.0",
-    "gatsby-remark-obsidian": "^0.5.0",
     "gatsby-remark-prismjs": "^5.11.0",
     "gatsby-source-filesystem": "^3.14.0",
     "gatsby-transformer-remark": "^4.11.0",

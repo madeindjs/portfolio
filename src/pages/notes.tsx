@@ -33,7 +33,9 @@ const BlogPage: React.FC<Props> = ({ data }) => {
 
     const filteredData = posts.filter((post) => {
       const { title, tags } = post.node.frontmatter;
+      const { slug } = post.node.fields;
       return (
+        slug.toLowerCase().includes(query.toLowerCase()) ||
         title.toLowerCase().includes(query.toLowerCase()) ||
         (tags && tags.join("").toLowerCase().includes(query.toLowerCase()))
       );
@@ -78,7 +80,7 @@ export const query = graphql`
   query ($language: String!) {
     posts: allMarkdownRemark(
       filter: { frontmatter: { lang: { eq: $language }, public: { eq: true } }, fields: { type: { eq: "note" } } }
-      sort: { order: DESC, fields: [frontmatter___date] }
+      sort: { order: ASC, fields: [fields___slug] }
       limit: 1000
     ) {
       edges {

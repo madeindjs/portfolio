@@ -3,7 +3,6 @@ import * as React from "react";
 import Card from "./Card";
 // @ts-ignore
 import * as styles from "./NoteCard.module.scss";
-import Tags from "./Tags";
 
 interface Props {
   slug: string;
@@ -21,9 +20,6 @@ const NoteCard: React.FC<Props> = (props) => {
   return (
     <AniLink cover to={linkUrl} duration={0.6} bg="black">
       <Card className={styles.postCard}>
-        <div>
-          <Tags tags={props.tags} onTagClick={(tag) => props.onTagClick !== undefined && props.onTagClick(tag)} />
-        </div>
         <div className={styles.title}>
           <ul>
             {props.slug.split(".").map((word, i) => (
@@ -31,7 +27,6 @@ const NoteCard: React.FC<Props> = (props) => {
             ))}
           </ul>
         </div>
-        <p className={styles.information}>{date}</p>
       </Card>
     </AniLink>
   );

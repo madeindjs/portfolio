@@ -60,3 +60,5 @@ x 2021-10-01 2021-06-10-mise-en-place-typeorm-et-inversify
 x 2021-10-01 2020-10-28-google-oauth
 x 2021-10-01 2021-06-05-mise-en-place-postgres-replication-avec-docker
 x 2021-10-01 2020-10-28-authentification-google-oauth
+correct nested list css
+handle wiki links
