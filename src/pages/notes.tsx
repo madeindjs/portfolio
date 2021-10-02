@@ -1,22 +1,22 @@
 // src/pages/blog.tsx
-import {graphql} from "gatsby";
-import {Trans, useI18next} from "gatsby-plugin-react-i18next";
+import { graphql } from "gatsby";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 import * as React from "react";
-import {useState} from "react";
+import { useState } from "react";
 import Layout from "../component/Layout";
-import Posts from "../component/Posts";
+import Notes from "../component/Notes";
 import SEO from "../component/SEO";
-import {Post} from "../interfaces/post.interface";
+import { Post } from "../interfaces/post.interface";
 // @ts-ignore
 import * as styles from "./blog.module.scss";
 
 interface Props {
-  data: {posts: {edges: {node: Post}[]}};
+  data: { posts: { edges: { node: Post }[] } };
 }
 
-const BlogPage: React.FC<Props> = ({data}) => {
+const BlogPage: React.FC<Props> = ({ data }) => {
   const allPosts = data.posts.edges;
-  const {t} = useI18next("books");
+  const { t } = useI18next("notes");
 
   const emptyQuery = "";
 
@@ -26,25 +26,25 @@ const BlogPage: React.FC<Props> = ({data}) => {
     maxPost: 10,
   });
 
-  const displayMore = () => setState({...state, maxPost: state.maxPost + 10});
+  const displayMore = () => setState({ ...state, maxPost: state.maxPost + 10 });
 
   const handleInputChange = (query: string) => {
     const posts = data.posts.edges || [];
 
     const filteredData = posts.filter((post) => {
-      const {title, tags} = post.node.frontmatter;
+      const { title, tags } = post.node.frontmatter;
       return (
         title.toLowerCase().includes(query.toLowerCase()) ||
         (tags && tags.join("").toLowerCase().includes(query.toLowerCase()))
       );
     });
 
-    setState({query, filteredData, maxPost: state.maxPost});
+    setState({ query, filteredData, maxPost: state.maxPost });
   };
 
-  const {filteredData, query} = state;
+  const { filteredData, query } = state;
   const hasSearchResults = filteredData && query !== emptyQuery;
-  const posts: Array<{node: Post}> = hasSearchResults ? filteredData : allPosts;
+  const notes: Array<{ node: Post }> = hasSearchResults ? filteredData : allPosts;
 
   return (
     <Layout>
@@ -52,6 +52,9 @@ const BlogPage: React.FC<Props> = ({data}) => {
       <h1>
         <Trans>notes</Trans>
       </h1>
+      <p>
+        <Trans ns="notes">lead</Trans>
+      </p>
       <input
         type="text"
         aria-label="Search"
@@ -60,11 +63,9 @@ const BlogPage: React.FC<Props> = ({data}) => {
         className={styles.search}
         value={state.query}
       />
-      <Posts
-        posts={posts.slice(0, state.maxPost).map(({node}) => node)}
-      ></Posts>
+      <Notes notes={notes.slice(0, state.maxPost).map(({ node }) => node)} />
 
-      {posts.length > state.maxPost && (
+      {notes.length > state.maxPost && (
         <button className="btn" onClick={() => displayMore()}>
           <Trans>displayMore</Trans>
         </button>
@@ -76,11 +77,8 @@ const BlogPage: React.FC<Props> = ({data}) => {
 export const query = graphql`
   query ($language: String!) {
     posts: allMarkdownRemark(
-      filter: {
-        frontmatter: {lang: {eq: $language}, public: {eq: true}}
-        fields: {type: {eq: "note"}}
-      }
-      sort: {order: DESC, fields: [frontmatter___date]}
+      filter: { frontmatter: { lang: { eq: $language }, public: { eq: true } }, fields: { type: { eq: "note" } } }
+      sort: { order: DESC, fields: [frontmatter___date] }
       limit: 1000
     ) {
       edges {
@@ -97,7 +95,7 @@ export const query = graphql`
         }
       }
     }
-    locales: allLocale(filter: {language: {eq: $language}}) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
       edges {
         node {
           ns

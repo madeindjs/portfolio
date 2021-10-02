@@ -1,3 +1,5 @@
 {
-  "notes": "Notes"
+  "notes": "Notes",
+  "lead": "Lorem ipsum",
+  "searchPlaceholder": "Type to filter notes..."
 }

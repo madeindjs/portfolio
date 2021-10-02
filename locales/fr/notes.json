@@ -1,3 +1,5 @@
 {
-  "notes": "Notes"
+  "notes": "Notes",
+  "lead": "Lorem ipsum",
+  "searchPlaceholder": "Tapez du texte pour trier les notes..."
 }

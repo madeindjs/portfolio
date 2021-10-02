@@ -1,17 +1,17 @@
 import React from "react";
 import { Post } from "../interfaces/post.interface";
 import Cards from "./Cards";
-import PostCard from "./PostCard";
+import NoteCard from "./NoteCard";
 
 interface Props {
-  posts: Post[];
+  notes: Post[];
 }
 
-const Posts: React.FC<Props> = ({ posts }) => {
+const Notes: React.FC<Props> = ({ notes }) => {
   return (
     <Cards>
-      {posts.map((post) => (
-        <PostCard
+      {notes.map((post) => (
+        <NoteCard
           key={post.fields.slug}
           tags={post.frontmatter.tags}
           slug={post.fields.slug}
@@ -23,4 +23,4 @@ const Posts: React.FC<Props> = ({ posts }) => {
   );
 };
 
-export default Posts;
+export default Notes;

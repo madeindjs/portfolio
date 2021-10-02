@@ -2,7 +2,7 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 import * as React from "react";
 import Card from "./Card";
 // @ts-ignore
-import * as styles from "./PostCard.module.scss";
+import * as styles from "./NoteCard.module.scss";
 import Tags from "./Tags";
 
 interface Props {
@@ -13,8 +13,8 @@ interface Props {
   onTagClick?: (tag: string) => void;
 }
 
-const PostCard: React.FC<Props> = (props) => {
-  const linkUrl = `/${props.slug}`;
+const NoteCard: React.FC<Props> = (props) => {
+  const linkUrl = `/notes/${props.slug}`;
 
   const date = props.date?.split("T")[0] ?? "???";
 
@@ -24,11 +24,17 @@ const PostCard: React.FC<Props> = (props) => {
         <div>
           <Tags tags={props.tags} onTagClick={(tag) => props.onTagClick !== undefined && props.onTagClick(tag)} />
         </div>
-        <p className={styles.title}>{props.title}</p>
+        <div className={styles.title}>
+          <ul>
+            {props.slug.split(".").map((word, i) => (
+              <li key={i}>{word}</li>
+            ))}
+          </ul>
+        </div>
         <p className={styles.information}>{date}</p>
       </Card>
     </AniLink>
   );
 };
 
-export default PostCard;
+export default NoteCard;
