@@ -1,4 +1,5 @@
 @import "../styles/_colors.scss";
+@import "../styles/_sizes.scss";
 
 .navbar {
   height: 100%;
@@ -10,8 +11,8 @@
   justify-content: space-around;
   align-items: center;
 
-  padding-left: 10%;
-  padding-right: 10%;
+  // padding-left: 5rem;
+  // padding-right: 5rem;
   box-shadow: 2px 4px 4px rgba(50, 50, 50, 0.2);
 
   transition: height 0.5s;
@@ -25,6 +26,7 @@
     font-size: 1.5rem;
     flex-grow: 1;
     text-transform: lowercase;
+    text-align: center;
   }
 
   a:hover {
@@ -56,6 +58,10 @@
   }
 }
 
+.language-selector {
+  // text-align: right;
+}
+
 .language {
   border: none;
   background: transparent;
@@ -78,6 +84,22 @@
     span {
       background-color: white !important;
       color: black !important;
+    }
+  }
+}
+
+@media (max-width: $break-point-sm) {
+  .navbar {
+    a.brand {
+      font-size: 1.5rem;
+
+      span {
+        width: 30px;
+        background-color: black;
+        color: white;
+        height: 30px;
+        padding: 5px;
+      }
     }
   }
 }
