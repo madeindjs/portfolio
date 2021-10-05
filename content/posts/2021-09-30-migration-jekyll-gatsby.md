@@ -14,33 +14,35 @@ Je viens tout juste de migrer mon site qui utilisait [Jekyll](https://jekyllrb.c
 - comment j'ai pu réaliser cette migration?
 - quels on été les bénéfices?
 
-**TLDR**: Gatsby est un outil avec une courbe d'apprentissage bien plus longue que Jekyll. Il ne fait pas tout prêt à l’emploi mais c'est un plaisir de développer avec cet environnement. Si tu souhaite faire un site et _basta_, il vaut mieux se tourner vers Jekyll. Si tu veux travailler avec un écosystème moderne, alors Gatsby est un meilleur choix.
+**TLDR**: Gatsby est un outil avec une courbe d'apprentissage bien plus longue que Jekyll. Il ne fait pas tout _out of the box_ mais c'est un plaisir de développer avec cet outil. Si tu souhaite faire un site et _basta_, il vaut mieux se tourner vers Jekyll. Si tu veux travailler avec un écosystème moderne, alors Gatsby est un meilleur choix.
 
 ## Un site statique
 
 Pour mon site j'ai fais le choix d'utiliser un outil de générateur de site statique.
 
-Si tu ne connais pas le principe, un générateur de site statique consiste à générer un site sous forme de fichier HTML / CSS / JavaScript lors d'**une étape de compilation**. Une fois que c'est fait, le site peut fonctionner sans interprétation côté serveur. En d'autre terme, plus besoins de PHP, Ruby ou autre. Il suffira juste déplacer les fichiers sur ton serveur web statique.
+Si tu ne connais pas le principe, un générateur de site statique consiste à générer un site sous forme de fichier HTML / CSS / JavaScript lors d'**une étape de compilation**[^1]. Une fois que c'est fait, le site peut fonctionner sans interprétation côté serveur. En d'autre terme, plus besoins de PHP, Ruby ou autre. Il suffira juste déplacer les fichiers sur ton serveur web statique.
+
+[^1]: le terme "compilation" n'est pas tout à fait exacte. L'étape de _build_ est en fait une **transpilation** puisqu'on n'obtient pas un binaire mais du HTML/CCS/JS. Afin de vulgariser, je préfère parler de **compilation**.
 
 Les sites statiques te proposent souvent de rédiger le contenu sous forme de [Markdown](https://www.markdownguide.org/cheat-sheet/) qui est un langage de balisage très accessible.
 
 Un site statique possède beaucoup d'avantages. **L'avantage principal est qu'il n'y a pas de base de données ni de langage interprété côté serveur**. Donc
 
-1. **La sécurité est renforcé**. La plupart des failles de sécurité reposent sur le langage interprété côté serveur.
+1. **La sécurité est renforcée**. La plupart des failles de sécurité reposent sur le langage interprété côté serveur.
 2. **Le coût du serveur est réduit**. J'utilise un simple [VPS chez OVH](https://www.ovhcloud.com/fr/vps/) à 3€/mois qui héberge aussi d'autres sites statiques. Et avant de passer chez OVH, j’utilisai [un Raspberry PI branché à ma box SFR](2017-10-11-installer-bridge-sfr-box-4k)
 3. **Les performances sont excellentes** car le serveur n'a pas besoin d’interpréter un langage ni de faire des requêtes en base de données.
-4. **Le SEO** qui dépend directement de la performance du site et notamment du temps de réponse
+4. **Le positionnement dans les moteurs de recherche est amélioré**, car il dépend directement de la performance du site et notamment du temps de réponse
 
-Je peux te prouver le résultat avec cette commande cURL qui montre le temps de réponse de mon site comparé à <https://wordpress.com/> (qui est site fonctionnant avec un CMS et une base de données):
+Je peux te prouver le résultat avec cette commande cURL qui montre le temps de réponse de mon site comparé à [wordpress.com](https://wordpress.com/) (qui est site fonctionnant avec un CMS et une base de données):
 
 ```bash
 curl -w %{time_total} -s -o /dev/null https://rsseau.fr      # 0.010383
 curl -w %{time_total} -s -o /dev/null https://wordpress.com/ # 0.467470
 ```
 
-On voit donc que mon site répond en 10ms alors que Wordpress en presque une demie seconde. Donc un site statique répond **45 fois plus vite qu'un CMS classique** [^1].
+On voit donc que mon site répond en 10ms alors que Wordpress en presque une demie seconde. Donc un site statique répond **45 fois plus vite qu'un CMS classique** [^2].
 
-[^1]: mon test n'est vraiment pas poussé car il faudrait bombarder de plusieurs requêtes et lisser les résultats.
+[^2]: mon test n'est vraiment pas poussé car il faudrait bombarder de plusieurs requêtes et lisser les résultats.
 
 Cette performance se retranscrit très bien avec le résultat de [l'outil PageSpeed de Google](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Frsseau.fr) qui parlent d'eux même:
 
@@ -76,19 +78,19 @@ Il existe plus de [300 générateur de site statique](https://jamstack.org/gener
 2. la complexité du site que tu cherches à développer
 3. la taille de ton site. Certains outils sont plus adapté au très gros sites.
 
-Je travaille beaucoup avec l'écosystème JavaScript et **j'ai donc choisis Gatsby!**
+Je travaille beaucoup avec l'écosystème JavaScript et **j'ai donc choisis Gatsby!**.
 
-Gatsby est est un outil reposant sur React et GrahQL. En plus de React, il intègre une surcouche qui va améliorer les performances et intégrer des outils pour construire ton site statique. Au lieu de te décrire ce qu'est Gatsby, laisse moi te montrer pourquoi je l'ai choisis.
+Gatsby est est un outil reposant sur [React](https://fr.reactjs.org/). En plus de React, il intègre une surcouche qui va optimiser les performances et intégrer des outils pour construire ton site statique. Au lieu de te décrire ce qu'est Gatsby, laisse moi te montrer pourquoi je l'ai choisis.
 
 ### Utiliser du JavaScript moderne sans générer une application web lourde
 
-A l'heure du [Green IT](https://www.google.com/url?q=https://en.m.wikipedia.org/wiki/Green_computing), on entend beaucoup parler d'**éco-conception de site**. Cela consiste à limiter les ressources côté serveur et côté client nécessaire à notre site. C'était un critère important pour moi car je souhaite de faire mon maximum pour que mon site soit efficient [^2]
+A l'heure du [Green IT](https://www.google.com/url?q=https://en.m.wikipedia.org/wiki/Green_computing), on entend beaucoup parler d'**éco-conception de site**. Cela consiste à limiter les ressources côté serveur et côté client nécessaire à notre site. C'était un critère important pour moi car je souhaite de faire mon maximum pour que mon site soit efficient [^3]
 
 Les frameworks web-moderne comme React, Vue.js ou Angular sont de superbes outils pour des applications web mais ils peuvent générer des sites nécessitant de télécharger et d’exécuter **plusieurs méga-octets de JavaScript**. Je trouve que c'est un non-sens pour un simple blog. Les librairies qu'on charge sur un site représentent une grande quantité de données.
 
 ![Les librairies JavaScript pèse lourd](./images/node-modules-meme.png)
 
-[^2]: C'est d’ailleurs une des raison pour laquelle j'ai choisis de ne pas intégrer de module de tracking et que je [m'appuie sur les logs](./2019-11-07-lire-les-logs-avec-go-access.md) pour analyser les pages les plus consultées.
+[^3]: C'est d’ailleurs une des raison pour laquelle j'ai choisis de ne pas intégrer de module de tracking et que je [m'appuie sur les logs](./2019-11-07-lire-les-logs-avec-go-access.md) pour analyser les pages les plus consultées.
 
 Gatsby répond parfaitement à cela car il effectue tout un tas d'optimisations par défaut:
 
@@ -132,9 +134,9 @@ Ensuite, concernant la migration du contenu est très facile car Jekyll et Gatsb
 
 ## Gérer la transition pour le SEO
 
-Il est important de prendre en compte le SEO lorsqu'on change l'architecture d'un site [^3]. Dans mon cas j'avais plusieurs choses à faire:
+Il est important de prendre en compte le SEO lorsqu'on change l'architecture d'un site [^4]. Dans mon cas j'avais plusieurs choses à faire:
 
-[^3]: J'ai fait le choix de changer les URL de mes articles mais il est possible de reproduire la même architecture en pimpant `gatsby-node.js`.
+[^4]: J'ai fait le choix de changer les URL de mes articles mais il est possible de reproduire la même architecture en pimpant `gatsby-node.js`.
 
 1. rediriger les pages ayant changés d'URL avec un statut HTTP `301 - redirect permanent`
 2. indiquer les pages ayant disparues avec un statut HTTP `410 - Gone`
