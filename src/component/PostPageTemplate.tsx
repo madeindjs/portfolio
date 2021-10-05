@@ -19,7 +19,7 @@ const PostPageTemplate: React.FC<Props> = (props) => {
   const {t} = useI18next();
 
   const {post, posts} = props.data;
-  const {tags, title, date} = post.frontmatter;
+  const {tags, title, date, lang} = post.frontmatter;
   const image = post.frontmatter.image?.childImageSharp?.fluid;
 
   const dateFormatted = date.split(" ")[0];
@@ -57,6 +57,7 @@ const PostPageTemplate: React.FC<Props> = (props) => {
         tags={tags}
         datePublished={date}
         dateModified={date}
+        lang={lang}
       />
       <h1>{title}</h1>
       {image && <Img fluid={image} />}
@@ -96,6 +97,7 @@ export const postQuery = graphql`
         date
         title
         tags
+        lang
         image {
           childImageSharp {
             fluid(maxWidth: 800) {

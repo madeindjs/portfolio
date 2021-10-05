@@ -10,10 +10,10 @@ import * as styles from "./index.module.scss";
 
 // markup
 const IndexPage: React.FC = () => {
-  const {t} = useI18next("home");
+  const {t, language} = useI18next("home");
   return (
     <Layout>
-      <SEO />
+      <SEO lang={language} />
       <section className={styles.section}>
         <div>
           <Avatar></Avatar>

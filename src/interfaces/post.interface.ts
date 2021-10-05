@@ -4,6 +4,7 @@ export interface Post {
     tags: string[];
     date: string;
     image?: any;
+    lang: string;
   };
   fields: {
     slug: string;

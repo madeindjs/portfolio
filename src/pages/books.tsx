@@ -9,12 +9,12 @@ import * as styles from "./books.module.scss";
 
 // markup
 const BooksPage = () => {
-  const {t, i18n} = useI18next();
-  const isFr = i18n.language === "fr";
-  const isEn = i18n.language === "en";
+  const {t, language} = useI18next();
+  const isFr = language === "fr";
+  const isEn = language === "en";
   return (
     <Layout>
-      <SEO title={t("books")} />
+      <SEO title={t("books")} lang={language} />
       <h1>
         <Trans>books</Trans>
       </h1>

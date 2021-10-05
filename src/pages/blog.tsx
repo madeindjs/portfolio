@@ -16,7 +16,7 @@ interface Props {
 
 const BlogPage: React.FC<Props> = ({data}) => {
   const allPosts = data.posts.edges;
-  const {t} = useI18next("books");
+  const {t, language} = useI18next("books");
 
   const emptyQuery = "";
 
@@ -48,7 +48,7 @@ const BlogPage: React.FC<Props> = ({data}) => {
 
   return (
     <Layout>
-      <SEO title={t("blog")} />
+      <SEO title={t("blog")} lang={language} />
       <h1>
         <Trans>blog</Trans>
       </h1>

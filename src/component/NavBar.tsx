@@ -10,7 +10,7 @@ const LanguageSelector: React.FC = () => {
   const isEn = i18n.language === "en";
 
   return (
-    <div className={styles.languageSelector}>
+    <div>
       {isFr && (
         <button
           className={styles.language}

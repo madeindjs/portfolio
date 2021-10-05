@@ -11,6 +11,7 @@ interface Props {
   article?: boolean;
   datePublished?: string;
   dateModified?: string;
+  lang?: string;
   tags?: string[];
   meta?: string[];
 }
@@ -22,6 +23,7 @@ const SEO: React.FC<Props> = ({
   article,
   datePublished,
   dateModified,
+  lang,
   tags = [],
   meta = [],
 }) => {
@@ -32,10 +34,7 @@ const SEO: React.FC<Props> = ({
       site {
         siteMetadata {
           title
-          lang
-          logo
           description
-          author
           siteUrl
           siteName
         }
@@ -49,7 +48,7 @@ const SEO: React.FC<Props> = ({
   return (
     // @ts-ignore
     <Helmet
-      htmlAttributes={{lang: site.siteMetadata.lang}}
+      htmlAttributes={{lang: lang ?? "en"}}
       title={title || defaultTitle}
       meta={[
         {
