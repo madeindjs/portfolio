@@ -1,16 +1,14 @@
+@import "../styles/_sizes";
+
 .footer {
   // height: 4rem;
   display: grid;
   grid-template-columns: 1fr auto;
 }
 
-.sitemap,
-.terms,
-.externals-links {
-  // flex-grow: 1;
-  // flex-basis: 30%;
-  margin-left: 1rem;
-  margin-right: 1rem;
+.terms {
+  text-align: justify;
+  font-style: italic;
 
   & * {
     font-size: 1rem;
@@ -18,17 +16,14 @@
 
   p {
     display: inline;
+    margin-right: 0.5rem;
   }
 }
 
-.terms {
-  flex-grow: 0;
-}
-
 .externals-links {
-  // flex-basis: 22rem;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   a {
     padding-left: 1rem;
   }
@@ -37,12 +32,14 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: $break-point-sm) {
   .footer {
-    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-  .externals-links {
-    margin-top: 1rem;
-    justify-content: center;
+}
+@media (max-width: $break-point-sm) {
+  .footer {
+    grid-template-columns: 1fr 6rem;
   }
 }

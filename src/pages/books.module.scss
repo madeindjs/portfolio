@@ -1,4 +1,5 @@
 @import "../styles/_mixins";
+@import "../styles/_sizes";
 
 .books {
   grid-column: 1 / 4 !important;
@@ -9,7 +10,7 @@
 .book {
   display: flex;
   flex-grow: 1;
-  flex-basis: 75ch;
+  flex-basis: $content-width;
   max-width: 500px;
   flex-direction: column;
   margin: 1rem;

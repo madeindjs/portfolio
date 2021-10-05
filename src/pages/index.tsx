@@ -12,7 +12,7 @@ import * as styles from "./index.module.scss";
 const IndexPage: React.FC = () => {
   const {t} = useI18next("home");
   return (
-    <Layout layoutStyle={{display: "flex"}}>
+    <Layout>
       <SEO />
       <section className={styles.section}>
         <div>

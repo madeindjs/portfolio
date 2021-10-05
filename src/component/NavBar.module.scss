@@ -1,9 +1,7 @@
 @import "../styles/_colors.scss";
 
-$nav_height: 5rem;
-
 .navbar {
-  height: $nav_height;
+  height: 100%;
 
   width: 100%;
   background-color: white;
@@ -22,7 +20,7 @@ $nav_height: 5rem;
   div {
     color: black;
     text-decoration: none;
-    height: $nav_height;
+    height: 100%;
     line-height: 80px;
     font-size: 1.5rem;
     flex-grow: 1;

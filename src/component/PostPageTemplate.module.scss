@@ -1,11 +1,12 @@
 @import "../styles/_colors";
+@import "../styles/_sizes";
 
 .article {
   grid-column: 1 / 4 !important;
   display: grid;
   grid-template-columns:
     1fr
-    min(75ch, 100%)
+    min($content-width, 100%)
     1fr;
 
   & > * {
@@ -17,6 +18,10 @@
   ul,
   ol {
     padding-left: 0;
+
+    li {
+      margin-bottom: 1rem;
+    }
   }
 
   ul {
@@ -24,7 +29,6 @@
     position: relative;
 
     li {
-      margin-bottom: 1rem;
       &::before {
         content: " - ";
         position: absolute;
@@ -38,9 +42,6 @@
 
   ol {
     list-style: decimal outside none;
-    li {
-      margin-bottom: 1rem;
-    }
   }
 }
 
@@ -52,5 +53,26 @@
   a {
     color: white;
     text-decoration: underline;
+  }
+}
+
+@media (max-width: $break-point-sm) {
+  .article {
+    ul,
+    ol {
+      padding-left: 2rem;
+    }
+
+    ul {
+      li {
+        margin-bottom: 1rem;
+        &::before {
+          margin-right: -1rem;
+        }
+      }
+    }
+    ol {
+      list-style-position: unset;
+    }
   }
 }
