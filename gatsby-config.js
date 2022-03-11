@@ -91,7 +91,7 @@ module.exports = {
       resolve: `gatsby-plugin-react-css-modules`,
       options: {
         filetypes: {
-          ".scss": {syntax: `postcss-scss`},
+          ".scss": { syntax: `postcss-scss` },
         },
         exclude: `\/global\/`,
       },
@@ -168,14 +168,14 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({query: {site, allMarkdownRemark}}) => {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
               return allMarkdownRemark.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  custom_elements: [{"content:encoded": edge.node.html}],
+                  custom_elements: [{ "content:encoded": edge.node.html }],
                 });
               });
             },
@@ -218,6 +218,14 @@ module.exports = {
               showCaptions: true,
               markdownCaptions: true,
               backgroundColor: "transparent",
+            },
+          },
+          {
+            resolve: "gatsby-plugin-matomo",
+            options: {
+              siteId: "1",
+              matomoUrl: "https://rsseau.matomo.cloud/",
+              siteUrl: "https://rsseau.fr",
             },
           },
         ],
