@@ -9,8 +9,6 @@ tags:
 lang: en
 ---
 
-# Deploy a Rails application in production with Capistrano and Phusion Passenger
-
 Recently, I deployed a new brand new Rails application in my small VPS: https://killer.rsseau.fr . Doing so is alway a complex exercice because it requires to take care of many things. In this post, I will retrace everything I did.
 
 In my case, I have the following stack:
