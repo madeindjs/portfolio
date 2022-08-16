@@ -52,7 +52,7 @@ This code is really basic and will just be used to check that the transpilation 
 
 To use Typescript transpilation, we need to define a configuration file `tsconfig.json`. Here is a basic one:
 
-```jsonc
+```json
 // tsconfig.json
 {
   "compilerOptions": {
@@ -72,7 +72,7 @@ To use Typescript transpilation, we need to define a configuration file `tsconfi
 
 That's much code but the two directives to remember here are: `rootDir` and `outDir`. They will specify where the Typescript files are (`rootDir`) and where the Javascript files resulting from the transpilation are (`outDir`).
 
-```jsonc
+```json
 // package.json
 {
   // ...
@@ -121,7 +121,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({unique: true})
+  @Column({ unique: true })
   email: string;
 }
 
@@ -282,7 +282,7 @@ export class Logger {
 To make it injectable, you need to add a `@injectable` decorator to it. This decorator will simply https://github.com/inversify/InversifyJS/blob/master/src/annotation/injectable.ts#L12[add metadata] to our class so that it can be injected into our future dependencies.
 
 ```ts
-import {injectable} from "inversify";
+import { injectable } from "inversify";
 
 @injectable()
 export class Logger {
@@ -294,7 +294,7 @@ And there you go. Now we just have to create the container that will register th
 
 ```ts
 // src/core/types.core.ts
-export const TYPES = {Logger: Symbol.for("Logger")};
+export const TYPES = { Logger: Symbol.for("Logger") };
 ```
 
 NOTE: A https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol[`Symbol`] is a primitive type that allows you to have a unique reference.
@@ -303,9 +303,9 @@ Now we can use this symbol to save our logger in a new `container.core.ts` file.
 
 ```ts
 // src/core/container.core.ts
-import {Container} from "inversify";
-import {Logger} from "../services/logger.service";
-import {TYPES} from "./types.core";
+import { Container } from "inversify";
+import { Logger } from "../services/logger.service";
+import { TYPES } from "./types.core";
 
 export const container = new Container();
 container.bind(TYPES.Logger).to(Logger);
@@ -335,12 +335,12 @@ Before writing our first controller, it is necessary to make some modifications 
 ```ts
 // src/core/server.ts
 import * as bodyParser from "body-parser";
-import {InversifyExpressServer} from "inversify-express-utils";
-import {container} from "./container.core";
+import { InversifyExpressServer } from "inversify-express-utils";
+import { container } from "./container.core";
 
 export const server = new InversifyExpressServer(container);
 server.setConfig((app) => {
-  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 });
 ```
@@ -350,15 +350,13 @@ As you can see, we are now using an instance of `InversifyExpressServer`. The `s
 ```ts
 // src/main.ts
 import "reflect-metadata";
-import {container} from "./core/container.core";
-import {server} from "./core/server";
-import {TYPES} from "./core/types.core";
+import { container } from "./core/container.core";
+import { server } from "./core/server";
+import { TYPES } from "./core/types.core";
 
 const port = 3000;
 
-server
-  .build()
-  .listen(port, () => console.log(`Listen on http://localhost:${port}/`));
+server.build().listen(port, () => console.log(`Listen on http://localhost:${port}/`));
 ```
 
 And there you go. Now we can tackle our first controller.
@@ -369,7 +367,7 @@ Let's go straight to the implementation to make it more meaningful:
 
 ```ts
 // src/controllers/home.controller.ts
-import {controller, httpGet} from "inversify-express-utils";
+import { controller, httpGet } from "inversify-express-utils";
 
 @controller("/")
 export class HomeController {
@@ -390,8 +388,8 @@ Now let's try to inject the `Logger` to display a message when this route is use
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import {TYPES} from "../core/types.core";
-import {Logger} from "../services/logger.service";
+import { TYPES } from "../core/types.core";
+import { Logger } from "../services/logger.service";
 
 @controller("/")
 export class HomeController {
@@ -462,7 +460,7 @@ As you can see, we define that we will use SQLite and that the database will be 
 
 All we have to do is configure `dotenv` to load this file. To do this, I use Node.js flag `--require`, which allows us to pre-load a library. You just have to modify the `package.json`:
 
-```jsonc
+```json
 {
   // ...
   "scripts": {
@@ -528,8 +526,8 @@ export const TYPES = {
 
 ```ts
 // src/core/container.core.ts
-import {Container} from "inversify";
-import {DatabaseService} from "../services/database.service";
+import { Container } from "inversify";
+import { DatabaseService } from "../services/database.service";
 // ...
 export const container = new Container();
 // ...
@@ -554,7 +552,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({unique: true})
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -590,18 +588,16 @@ Here is the implementation of our controller:
 
 ```ts
 // src/controllers/users.controller.ts
-import {Request, Response} from "express";
-import {inject} from "inversify";
-import {controller, httpGet} from "inversify-express-utils";
-import {TYPES} from "../core/types.core";
-import {UserRepository} from "../entities/user.entity";
-import {DatabaseService} from "../services/database.service";
+import { Request, Response } from "express";
+import { inject } from "inversify";
+import { controller, httpGet } from "inversify-express-utils";
+import { TYPES } from "../core/types.core";
+import { UserRepository } from "../entities/user.entity";
+import { DatabaseService } from "../services/database.service";
 
 @controller("/users")
 export class UsersController {
-  public constructor(
-    @inject(TYPES.DatabaseService) private readonly database: DatabaseService
-  ) {}
+  public constructor(@inject(TYPES.DatabaseService) private readonly database: DatabaseService) {}
 
   @httpGet("/")
   public async index(req: Request, res: Response) {
@@ -656,12 +652,7 @@ Now that our entire structure has been put in place, the rest will go much faste
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import {
-  controller,
-  httpGet,
-  httpPost,
-  requestBody,
-} from "inversify-express-utils";
+import { controller, httpGet, httpPost, requestBody } from "inversify-express-utils";
 // ...
 
 interface CreateUserBody {
@@ -673,11 +664,7 @@ interface CreateUserBody {
 export class UsersController {
   // ...
   @httpPost("/")
-  public async create(
-    @requestBody() body: CreateUserBody,
-    req: Request,
-    res: Response
-  ) {
+  public async create(@requestBody() body: CreateUserBody, req: Request, res: Response) {
     const repository = await this.database.getRepository(UserRepository);
     const user = new User();
     user.email = body.email;
@@ -792,11 +779,7 @@ The `delete` method is the easiest. Just retrieve the user and call the `reposit
 export class UsersController {
   // ...
   @httpDelete("/:userId")
-  public async destroy(
-    @requestParam("userId") userId: number,
-    req: Request,
-    res: Response
-  ) {
+  public async destroy(@requestParam("userId") userId: number, req: Request, res: Response) {
     const repository = await this.database.getRepository(UserRepository);
     const user = await repository.findOneOrFail(userId);
     await repository.delete(user);
