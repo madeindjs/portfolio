@@ -1,5 +1,6 @@
 ---
 title: Connecter une application Rails avec Stripe
+description: Mise en place des paiement Stripe sur une application Ruby on Rails
 date: 2019-02-02 12:30:00 +0200
 tags: [rails, stripe, api]
 categories: tutorial

@@ -1,6 +1,6 @@
 ---
 title: Remplacement de Google Analytics par GoAccess
-
+description: Analyser les logs d'un serveur web avec GoAccess
 date: 2019-11-07 1:00:00 +0200
 tags: [analytics, goaccess]
 image: https://goaccess.io/images/goaccess-dashboard.png
