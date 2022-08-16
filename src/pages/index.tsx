@@ -1,7 +1,6 @@
-import {graphql} from "gatsby";
-import {Trans, useI18next} from "gatsby-plugin-react-i18next";
+import { graphql } from "gatsby";
+import { Link, Trans, useI18next } from "gatsby-plugin-react-i18next";
 import * as React from "react";
-import AnimatedLink from "../component/AnimatedLink";
 import Avatar from "../component/Avatar";
 import Layout from "../component/Layout";
 import SEO from "../component/SEO";
@@ -10,7 +9,7 @@ import * as styles from "./index.module.scss";
 
 // markup
 const IndexPage: React.FC = () => {
-  const {t, language} = useI18next("home");
+  const { t, language } = useI18next("home");
   return (
     <Layout>
       <SEO lang={language} />
@@ -22,16 +21,16 @@ const IndexPage: React.FC = () => {
         <h1>
           <Trans>lead</Trans>
         </h1>
-        <p dangerouslySetInnerHTML={{__html: t("description")}}></p>
+        <p dangerouslySetInnerHTML={{ __html: t("description") }}></p>
 
         <div className={styles.actions}>
-          <AnimatedLink className="btn" to="/blog">
+          <Link className="btn" to="/blog">
             <Trans>readBlog</Trans>
-          </AnimatedLink>
+          </Link>
 
-          <AnimatedLink className="btn" to="/blog">
+          <Link className="btn" to="/blog">
             <Trans>readBooks</Trans>
-          </AnimatedLink>
+          </Link>
         </div>
       </section>
     </Layout>
@@ -39,7 +38,7 @@ const IndexPage: React.FC = () => {
 };
 export const query = graphql`
   query ($language: String!) {
-    locales: allLocale(filter: {language: {eq: $language}}) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
       edges {
         node {
           ns

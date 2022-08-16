@@ -1,4 +1,4 @@
-import AniLink from "gatsby-plugin-transition-link/AniLink";
+import { Link } from "gatsby-plugin-react-i18next";
 import * as React from "react";
 import Card from "./Card";
 // @ts-ignore
@@ -19,20 +19,15 @@ const PostCard: React.FC<Props> = (props) => {
   const date = props.date.split(" ")[0];
 
   return (
-    <AniLink cover to={linkUrl} duration={0.6} bg="black">
+    <Link to={linkUrl}>
       <Card className={styles.postCard}>
         <div>
-          <Tags
-            tags={props.tags}
-            onTagClick={(tag) =>
-              props.onTagClick !== undefined && props.onTagClick(tag)
-            }
-          />
+          <Tags tags={props.tags} onTagClick={(tag) => props.onTagClick !== undefined && props.onTagClick(tag)} />
         </div>
         <p className={styles.title}>{props.title}</p>
         <p className={styles.information}>{date}</p>
       </Card>
-    </AniLink>
+    </Link>
   );
 };
 
