@@ -220,14 +220,6 @@ module.exports = {
               backgroundColor: "transparent",
             },
           },
-          {
-            resolve: "gatsby-plugin-matomo",
-            options: {
-              siteId: "1",
-              matomoUrl: "https://rsseau.matomo.cloud/",
-              siteUrl: "https://rsseau.fr",
-            },
-          },
         ],
       },
     },
