@@ -6,19 +6,19 @@ My portfolio build [Gatsby](https://www.gatsbyjs.com/). See me in action at <htt
 
 ## Setup
 
-```sh
+```bash
 npm install
 ```
 
 Then start development server
 
-```sh
+```bash
 npm run develop
 ```
 
 or build webiste
 
-```sh
+```bash
 npm run build
 ```
 

@@ -116,7 +116,7 @@ npx tsc --init
 
 ### Attach
 
-```sh
+```bash
 node -r ts-node/register --inspect src/index.ts
 ```
 
