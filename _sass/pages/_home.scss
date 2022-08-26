@@ -2,13 +2,10 @@
 @import "../components/avatar.scss";
 
 #home {
-
-  .section {
-    @extend %flex-center;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-  }
+  @extend %flex-center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 
   .actions {
     margin-top: 2rem;

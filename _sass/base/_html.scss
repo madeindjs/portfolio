@@ -81,8 +81,14 @@ hr {
 }
 
 main {
-  max-width: 85ch;
-  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 85ch 1fr;
+  grid-template-rows: auto 1fr;
+
+  * {
+    grid-column-start: 2;
+    grid-column-end: 2;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

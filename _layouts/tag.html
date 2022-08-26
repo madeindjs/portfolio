@@ -9,6 +9,7 @@
     <main>
       <h1>{% t tag_results %}: {{ page.tag }}</h1>
       {% include posts-cards.html posts=page.posts %}
+      <p><a class="btn" href="{{ '/blog' | prepend: site.baseurl }}">{% t see_more %}</a></p>
     </main>
     {% include footer.html %}
   </body>

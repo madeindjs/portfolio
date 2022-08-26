@@ -46,7 +46,7 @@
 
   &:hover {
     color: white;
-    // TODO not works
+
     .post-card__title a,
     .tags a {
       color: $primary-light-40 !important;
@@ -61,8 +61,11 @@
     background-image: linear-gradient(to bottom, black 50%, white 50%);
 
     &:hover {
-      * {
-        color: black !important;
+      color: black !important;
+
+      .post-card__title a,
+      .tags a {
+        color: $primary-dark-40 !important;
       }
     }
   }

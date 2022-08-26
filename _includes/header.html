@@ -1,8 +1,8 @@
 <header>
   <nav class="navbar">
     <a href="{{ '/' | prepend: site.baseurl }}" class="brand"><span>AR</span></a>
-      <a href="{{ '/blog' | prepend: site.baseurl }}">Blog</a>
-      <a href="/books">Books</a>
+      <a href="{{ '/blog' | prepend: site.baseurl }}">{% t blog %}</a>
+      <a href="/books">{% t books %}</a>
       {% if site.lang == 'fr' %}
       <a href="/en/">🇬🇧</a>
       {% elsif site.lang == 'en' %}
