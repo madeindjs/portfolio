@@ -27,12 +27,11 @@ Static sites often propose you to write the content in [Markdown](https://www.ma
 A static site has many advantages. **The main advantage is that there is no database or server-side interpreted language**. So
 
 1. **Security is reinforced**. Most of the security flaws are based on the server side interpreted language.
-2. **The server cost is reduced**. I use a simple [VPS at OVH](https://www.ovhcloud.com/fr/vps/) at 3€/month which also hosts other static sites. And before going to OVH, I was using [a Raspberry PI connected to my SFR box](2017-10-11-installer-bridge-sfr-box-4k)
+2. **The server cost is reduced**. I use a simple [VPS at OVH](https://www.ovhcloud.com/fr/vps/) at 3€/month which also hosts other static sites. And before going to OVH, I was using [a Raspberry PI connected to my SFR box](../../_i18n/fr/_posts/2017-10-11-installer-bridge-sfr-box-4k.md)
 3. **Performance is excellent** because the server doesn't need to interpret a language or make database queries.
 4. **The SEO** which depends directly on the performance of the site and especially the response time
 
 I can prove you the result with this cURL command which shows the response time of my site compared to <https://wordpress.com/> (which is site running with a CMS and a database):
-
 
 ```bash
 curl -w %{time_total} -s -o /dev/null https://rsseau.fr      # 0.010383
@@ -57,7 +56,7 @@ Being a fan of the Ruby language, I had initially chosen [Jekyll](https://jekyll
 
 I set myself the goal of getting better at **design**. So I decided to completely redesign my site. I quickly encountered difficulties.
 
-I am used to **frontend frameworks**. I don't know how to do HTML/CSS "the old way" anymore. I got used to the component-based architecture. Jekyll's philosophy to use native HTML/CSS slowed me down. Also, I work mostly with the JavaScript ecosystem. **I don't like to write "old school" JavaScript (a.k.a `document.querySelector` and other gimmicks). This is totally objective but I wanted to go for a modern way of doing things.
+I am used to **frontend frameworks**. I don't know how to do HTML/CSS "the old way" anymore. I got used to the component-based architecture. Jekyll's philosophy to use native HTML/CSS slowed me down. Also, I work mostly with the JavaScript ecosystem. \*\*I don't like to write "old school" JavaScript (a.k.a `document.querySelector` and other gimmicks). This is totally objective but I wanted to go for a modern way of doing things.
 
 My second point is that **Jekyll gets more complicated when you want to go outside the box**. Here are for example some features that were complicated for me to develop:
 
@@ -80,9 +79,6 @@ There are more than [300 static site generators](https://jamstack.org/generators
 I work a lot with the JavaScript ecosystem and **so I chose Gatsby!**
 
 Gatsby is a tool based on React and GrahQL. In addition to React, it integrates an overlay that will improve performance and integrate tools to build your static site. Instead of describing you what Gatsby is, let me show you why I chose it.
-
-
-
 
 ### Using modern JavaScript without generating a heavy web application
 

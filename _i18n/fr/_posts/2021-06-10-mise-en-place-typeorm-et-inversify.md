@@ -2,7 +2,7 @@
 title: Mise en place de l'injection de dépendance dans une API avec Inversify
 description: Ce tutoriel vous montre comment mettre en place une API RESTfull
   complète en utilisant l'injection de dépendances Inversify.
-layout: post
+
 date: 2021-06-10 12:00:00 +0200
 tags:
   - node.js
@@ -11,7 +11,7 @@ tags:
   - expressjs
   - inversify
 categories: programming
-modified: 2021-06-10T12:53:20.368Z
+lang: fr
 ---
 
 Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API.
@@ -19,8 +19,6 @@ Dans cet article nous allons voir pourquoi et comment mettre en place l'injectio
 Nous allons mettre en place une API complète [RESTfull](https://fr.wikipedia.org/wiki/Representational_state_transfer) pour gérer des utilisateurs avec les actions basiques (consultation, création, edition, suppression). Et tant qu'à faire, nous allons mettre des tests unitaires et fonctionnels.
 
 Mais avant de commencer à tout mettre en place, je vais essayer ici de vous résumer ce qu'est l'injection de dépendance et à quoi ça sert.
-
-{% include promote-restapits-fr.html %}
 
 ## Pourquoi utiliser l'injection de dépendance
 
@@ -150,7 +148,7 @@ Nous allons utiliser [TypeORM](https://typeorm.io/) et [Express.js](https://expr
 
 Commençons par créer un projet Node.js versionné avec Git:
 
-```sh
+```bash
 mkdir dependecy-injection-example
 cd dependecy-injection-example
 npm init
@@ -159,7 +157,7 @@ git init # Initialize Git repository (optional)
 
 Installons maintenant Typescript:
 
-```sh
+```bash
 npm add typescript @types/node --save-dev
 ```
 
@@ -182,7 +180,7 @@ Ce code est vraiment très basique et va juste nous servir a vérifier que la tr
 
 Afin d'utiliser la transpilation de Typescript, nous avons besoin de définir un fichier de configuration `tsconfig.json`. En voici un basique:
 
-```jsonc
+```json
 // tsconfig.json
 {
   "compilerOptions": {
@@ -206,7 +204,7 @@ Dans notre cas je place tous les fichiers Typescript dans le dossier `src` et le
 
 On ajoute maintenant un script dans le `package.json` pour compiler et executer notre application:
 
-```jsonc
+```json
 // package.json
 {
   // ...
@@ -219,7 +217,7 @@ On ajoute maintenant un script dans le `package.json` pour compiler et executer 
 
 On peut vérifier que tout fonctionne en executant le script:
 
-```sh
+```bash
 npm start
 > dependecy-injection-example@1.0.0 start /home/alexandre/github/madeindjs/dependecy-injection-example
 > tsc && node dist/main.js
@@ -250,7 +248,7 @@ Et maintenant nous pouvons instancier notre serveur dans le fichier `main.ts`
 
 ```ts
 // src/main.ts
-import express, {Request, Response} from "express";
+import express, { Request, Response } from "express";
 
 const app = express();
 const port = 3000;
@@ -289,7 +287,7 @@ Nous allons commencer par mettre en place un Logger qui pourra être injecté da
 
 Installons donc `inversify`:
 
-```sh
+```bash
 npm install inversify --save
 ```
 
@@ -310,7 +308,7 @@ export class Logger {
 Pour la rendre injectable, il faut lui ajouter un décorateur `@injectable`. Ce décorateur va simplement [ajouter une metadata](https://github.com/inversify/InversifyJS/blob/5.1.1/src/annotation/injectable.ts#L12) a notre classe afin qu'elle puisse être injectée dans nos futures dépendances.
 
 ```ts
-import {injectable} from "inversify";
+import { injectable } from "inversify";
 
 @injectable()
 export class Logger {
@@ -322,7 +320,7 @@ Et voilà. Il ne nous reste plus qu'à créer le container qui va enregistrer ce
 
 ```ts
 // src/core/types.core.ts
-export const TYPES = {Logger: Symbol.for("Logger")};
+export const TYPES = { Logger: Symbol.for("Logger") };
 ```
 
 NOTE: Un [`Symbol`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) est un type primitif qui permet d'avoir une référence unique.
@@ -331,9 +329,9 @@ Maintenant nous pouvons utiliser ce symbole pour enregistrer notre logger dans u
 
 ```ts
 // src/core/container.core.ts
-import {Container} from "inversify";
-import {Logger} from "../services/logger.service";
-import {TYPES} from "./types.core";
+import { Container } from "inversify";
+import { Logger } from "../services/logger.service";
+import { TYPES } from "./types.core";
 
 export const container = new Container();
 container.bind(TYPES.Logger).to(Logger);
@@ -349,7 +347,7 @@ On commence par installer la librairie. On va aussi ajouter `body-parser` qui va
 
 Pour l'installer, c'est très facile. Il suffit de suivre la https://github.com/inversify/inversify-express-utils[documentation officielle]. On commence donc par installer quelques librairies.
 
-```sh
+```bash
 npm install inversify-express-utils reflect-metadata body-parse --save
 ```
 
@@ -361,12 +359,12 @@ Avant d'écrire notre premier contrôleur, il est nécessaire de faire quelques 
 ```ts
 // src/core/server.ts
 import * as bodyParser from "body-parser";
-import {InversifyExpressServer} from "inversify-express-utils";
-import {container} from "./container.core";
+import { InversifyExpressServer } from "inversify-express-utils";
+import { container } from "./container.core";
 
 export const server = new InversifyExpressServer(container);
 server.setConfig((app) => {
-  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 });
 ```
@@ -376,15 +374,13 @@ Comme vous pouvez le voir, nous utilisons maintenant une instance de `InversifyE
 ```ts
 // src/main.ts
 import "reflect-metadata";
-import {container} from "./core/container.core";
-import {server} from "./core/server";
-import {TYPES} from "./core/types.core";
+import { container } from "./core/container.core";
+import { server } from "./core/server";
+import { TYPES } from "./core/types.core";
 
 const port = 3000;
 
-server
-  .build()
-  .listen(port, () => console.log(`Listen on http://localhost:${port}/`));
+server.build().listen(port, () => console.log(`Listen on http://localhost:${port}/`));
 ```
 
 Et voilà. Nous pouvons maintenant nous attaquer à notre premier contrôleur.
@@ -395,7 +391,7 @@ Passons directement à l'implémentation afin que cela soit plus parlant:
 
 ```ts
 // src/controllers/home.controller.ts
-import {controller, httpGet} from "inversify-express-utils";
+import { controller, httpGet } from "inversify-express-utils";
 
 @controller("/")
 export class HomeController {
@@ -416,8 +412,8 @@ Maintenant essayons d'injecter le `Logger` afin d'afficher un message lorsque ce
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import {TYPES} from "../core/types.core";
-import {Logger} from "../services/logger.service";
+import { TYPES } from "../core/types.core";
+import { Logger } from "../services/logger.service";
 
 @controller("/")
 export class HomeController {
@@ -463,19 +459,19 @@ Pour l'installer c'est très facile. Nous allons installer la librairie TypeORM 
 
 C'est parti:
 
-```sh
+```bash
 npm add typeorm sqlite3 dotenv --save
 ```
 
 Nous allons maintenant générer notre fichier de configuration. Par défault, `dotenv` va chercher un fichier nomé `.env`. Créons le:
 
-```sh
+```bash
 touch .env
 ```
 
 Et commençons par définir [les variables d'environnement de TypeORM](https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md#using-environment-variables) pour une connexion basique à une base de donnée SQLite:
 
-```console
+```bash
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=db/development.sqlite
 TYPEORM_LOGGING=true
@@ -487,7 +483,7 @@ Comme vous pouvez le voir on définis que nous utiliserons Sqlite et que la base
 
 Il ne nous reste plus qu'a configurer `dotenv` pour charger ce fichier. Pour faire cela, j'utilise le _flag_ `--require` de Node.js qui permet de pré-charger une librairie. Il suffit donc de modifier le `package.json`:
 
-```jsonc
+```json
 {
   // ...
   "scripts": {
@@ -503,10 +499,10 @@ Nous allons maintenant créer un service `DatabaseService` qu va s'occuper de co
 
 ```ts
 // src/services/database.service.ts
-import {inject, injectable} from "inversify";
-import {Connection, createConnection, ObjectType} from "typeorm";
-import {TYPES} from "../core/types.core";
-import {Logger} from "./logger.service";
+import { inject, injectable } from "inversify";
+import { Connection, createConnection, ObjectType } from "typeorm";
+import { TYPES } from "../core/types.core";
+import { Logger } from "./logger.service";
 
 @injectable()
 export class DatabaseService {
@@ -556,8 +552,8 @@ export const TYPES = {
 
 ```ts
 // src/core/container.core.ts
-import {Container} from "inversify";
-import {DatabaseService} from "../services/database.service";
+import { Container } from "inversify";
+import { DatabaseService } from "../services/database.service";
 // ...
 export const container = new Container();
 // ...
@@ -575,20 +571,14 @@ Afin de simplifier l'exemple, je vais mettre ces deux classes dans le même fich
 
 ```ts
 // src/entities/user.entity.ts
-import {
-  Column,
-  Entity,
-  EntityRepository,
-  PrimaryGeneratedColumn,
-  Repository,
-} from "typeorm";
+import { Column, Entity, EntityRepository, PrimaryGeneratedColumn, Repository } from "typeorm";
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({unique: true})
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -605,7 +595,7 @@ Pour l'instant notre travail n'est pas très visible mais tenez bon car vous all
 
 Nous pouvons commiter les changements effectuées jusqu'à maintenant:
 
-```sh
+```bash
 git add .
 git commit -m "Setup TypeORM"
 ```
@@ -624,18 +614,16 @@ Voici l'implémentation de notre contrôleur:
 
 ```ts
 // src/controllers/users.controller.ts
-import {Request, Response} from "express";
-import {inject} from "inversify";
-import {controller, httpGet} from "inversify-express-utils";
-import {TYPES} from "../core/types.core";
-import {UserRepository} from "../entities/user.entity";
-import {DatabaseService} from "../services/database.service";
+import { Request, Response } from "express";
+import { inject } from "inversify";
+import { controller, httpGet } from "inversify-express-utils";
+import { TYPES } from "../core/types.core";
+import { UserRepository } from "../entities/user.entity";
+import { DatabaseService } from "../services/database.service";
 
 @controller("/users")
 export class UsersController {
-  public constructor(
-    @inject(TYPES.DatabaseService) private readonly database: DatabaseService
-  ) {}
+  public constructor(@inject(TYPES.DatabaseService) private readonly database: DatabaseService) {}
 
   @httpGet("/")
   public async index(req: Request, res: Response) {
@@ -661,7 +649,7 @@ import {Logger} from '../services/logger.service';
 
 Et voilà. Lancez la commande `npm run start:watch` pour démarrer le serveur si vous l'avez arrêté et testons la fonctionnalité avec `cURL`:
 
-```sh
+```bash
 curl http://localhost:3000/users
 ```
 
@@ -694,12 +682,7 @@ Maintenant que toute notre structure a été mise en place, la suite va aller be
 ```ts
 // src/controllers/home.controller.ts
 // ...
-import {
-  controller,
-  httpGet,
-  httpPost,
-  requestBody,
-} from "inversify-express-utils";
+import { controller, httpGet, httpPost, requestBody } from "inversify-express-utils";
 // ...
 
 interface CreateUserBody {
@@ -711,11 +694,7 @@ interface CreateUserBody {
 export class UsersController {
   // ...
   @httpPost("/")
-  public async create(
-    @requestBody() body: CreateUserBody,
-    req: Request,
-    res: Response
-  ) {
+  public async create(@requestBody() body: CreateUserBody, req: Request, res: Response) {
     const repository = await this.database.getRepository(UserRepository);
     const user = new User();
     user.email = body.email;
@@ -730,7 +709,7 @@ Cela fait un peut de code mais pas de panique. `CreateUserBody` est une interfac
 
 Testons que tout cela fonctionne:
 
-```sh
+```bash
 curl -X POST -d "email=test@test.fr" -d "password=test" http://localhost:3000/users
 ```
 
@@ -762,7 +741,7 @@ L'implémentation est vraiment très simple. Il faut simplement retourner un obj
 
 Essayons pour voir:
 
-```sh
+```bash
 curl http://localhost:3000/users/1
 {"id":1,"email":"test@test.fr","password":"test"}
 ```
@@ -831,11 +810,7 @@ La méthode `delete` est la plus facile. Il suffit de récupérer l'utilisateur 
 export class UsersController {
   // ...
   @httpDelete("/:userId")
-  public async destroy(
-    @requestParam("userId") userId: number,
-    req: Request,
-    res: Response
-  ) {
+  public async destroy(@requestParam("userId") userId: number, req: Request, res: Response) {
     const repository = await this.database.getRepository(UserRepository);
     const user = await repository.findOneOrFail(userId);
     await repository.delete(user);
@@ -867,7 +842,7 @@ git commit -am "Implement CRUD actions on user"
 
 Tout semble fonctionner mais il rest une problème: nous ne validons pas les données que nous insérons en base. Ainsi, il est possible de créer un utilisateur avec un email faux :
 
-```sh
+```bash
 curl -X POST -d "whatever" -d "password=test" http://localhost:3000/users
 ```
 
@@ -875,7 +850,7 @@ Encore une fois, nous allons avoir recours a une librairie toute faite: `class-v
 
 Installons la avec NPM :
 
-```sh
+```bash
 npm install class-validator --save
 ```
 
@@ -932,7 +907,7 @@ export class UsersController {
     // ...
     const errors = await validate(user);
     if (errors.length !== 0) {
-      return res.status(400).json({errors});
+      return res.status(400).json({ errors });
     }
 
     return repository.save(user);
@@ -943,7 +918,7 @@ export class UsersController {
     // ...
     const errors = await validate(user);
     if (errors.length !== 0) {
-      return res.status(400).json({errors});
+      return res.status(400).json({ errors });
     }
     return repository.save(user);
   }
@@ -974,32 +949,26 @@ Pendant la mise en place, vous avez sans doute remarqué que la méthode `show`,
 
 Pour factoriser ce code il y aurait deux solutions :
 
-. déplacer le bout de code dans un méthode privée et l'appeler
-. créer un _Middleware_ qui va être exécuté avant le contrôleur
+- déplacer le bout de code dans un méthode privée et l'appeler
+- créer un _Middleware_ qui va être exécuté avant le contrôleur
 
 J'ai choisi la deuxième option car elle permet de réduire le code et la responsabilité du contrôleur. De plus, avec `inversify-express-utils` c'est très facile. Laissez moi vous montrer :
 
 ```typescript
-import {NextFunction, Request, Response} from "express";
-import {inject, injectable} from "inversify";
-import {BaseMiddleware} from "inversify-express-utils";
-import {TYPES} from "../core/types.core";
-import {User, UserRepository} from "../entities/user.entity";
-import {DatabaseService} from "../services/database.service";
+import { NextFunction, Request, Response } from "express";
+import { inject, injectable } from "inversify";
+import { BaseMiddleware } from "inversify-express-utils";
+import { TYPES } from "../core/types.core";
+import { User, UserRepository } from "../entities/user.entity";
+import { DatabaseService } from "../services/database.service";
 
 @injectable()
 export class FetchUserMiddleware extends BaseMiddleware {
-  constructor(
-    @inject(TYPES.DatabaseService) private readonly database: DatabaseService
-  ) {
+  constructor(@inject(TYPES.DatabaseService) private readonly database: DatabaseService) {
     super();
   }
 
-  public async handler(
-    req: Request & {user: User},
-    res: Response,
-    next: NextFunction
-  ): Promise<void | Response> {
+  public async handler(req: Request & { user: User }, res: Response, next: NextFunction): Promise<void | Response> {
     const userId = req.query.userId ?? req.params.userId;
     const repository = await this.database.getRepository(UserRepository);
     req.user = await repository.findOne(Number(userId));
@@ -1096,7 +1065,7 @@ git commit -m "Factorize user controller with middleware"
 Nous allons utiliser la librairie de base de Node.js : https://nodejs.org/api/crypto.html[Crypto]. Voici un exemple d'une méthode pour hasher le mot de pass:
 
 ```ts
-import {createHash} from "crypto";
+import { createHash } from "crypto";
 
 function hashPassword(password: string): string {
   return createHash("sha256").update(password).digest("hex");
@@ -1109,7 +1078,7 @@ console.log(hashPassword("$uper_u$er_p@ssw0rd"));
 Et voilà! Pour savoir si le mot de passe correspond il suffit de vérifier si le hash correspond au précédent :
 
 ```ts
-import {createHash} from "crypto";
+import { createHash } from "crypto";
 
 function hashPassword(password: string): string {
   return createHash("sha256").update(password).digest("hex");
@@ -1132,7 +1101,7 @@ Si vos mots de passe fuite, il sera assez facile à retrouver le mot de passe co
 Le sel de hachage consiste a rajouter un texte définis à chaque mot de passe. Voici la modification :
 
 ```ts
-import {createHash} from "crypto";
+import { createHash } from "crypto";
 
 const salt = "my private salt";
 
@@ -1158,7 +1127,7 @@ Maintenant que nous avons vu la théorie, passons à la pratique. Nous allons ut
 
 ```ts
 // src/utils/password.utils.ts
-import {createHash} from "crypto";
+import { createHash } from "crypto";
 
 const salt = "my private salt";
 
@@ -1176,7 +1145,7 @@ Nous allons maintenant utiliser la méthode `hashPassword` dans l'entité `User`
 ```ts
 // src/entities/user.entity.ts
 // ...
-import {hashPassword} from "../utils/password.utils";
+import { hashPassword } from "../utils/password.utils";
 
 @Entity()
 export class User {
@@ -1253,8 +1222,8 @@ Nous voici prêt à créer notre premier test :
 ```ts
 // src/entities/user.entity.spec.ts
 import assert from "assert";
-import {hashPassword} from "../utils/password.utils";
-import {User} from "./user.entity";
+import { hashPassword } from "../utils/password.utils";
+import { User } from "./user.entity";
 
 describe("User", () => {
   it("should hash password", () => {
@@ -1289,7 +1258,7 @@ Quelques explications sur cette commande:
 
 Lorsque nous testons notre application, nous ne voulons pas polluer notre base de données avec des données que nous créons pendant les tests. C'est donc une bonne pratique de créer une base de donnée dédiée. Dans notre cas, nous allons utiliser une base SQLite _in memory_. C'est a dire qu'elle n'est pas stockée sur le disque dur mais directement dans la mémoire vive. Voici donc le fichier `.test.env`:
 
-```console
+```bash
 TYPEORM_CONNECTION=sqlite
 TYPEORM_DATABASE=:memory:
 TYPEORM_LOGGING=true
@@ -1316,7 +1285,7 @@ Et tant qu'à faire, nous pouvons aussi ajouter un autre test unitaire sur la m�
 ```ts
 // src/utils/password.utils.spec.ts
 import assert from "assert";
-import {hashPassword, isPasswordMatch} from "./password.utils";
+import { hashPassword, isPasswordMatch } from "./password.utils";
 
 describe("isPasswordMatch", () => {
   const hash = hashPassword("good");
@@ -1368,8 +1337,8 @@ Maintenant créons notre agent qui sera utilisé dans tous nos tests:
 
 ```ts
 // src/tests/supertest.utils.ts
-import supertest, {SuperTest, Test} from "supertest";
-import {server} from "../core/server";
+import supertest, { SuperTest, Test } from "supertest";
+import { server } from "../core/server";
 
 export const agent: SuperTest<Test> = supertest(server.build());
 ```
@@ -1378,10 +1347,10 @@ Et maintenant commençons pas créer notre premier test pour la méthode `index`
 
 ```ts
 // src/controllers/users.controller.spec.ts
-import {container} from "../core/container.core";
-import {TYPES} from "../core/types.core";
-import {UserRepository} from "../entities/user.entity";
-import {agent} from "../tests/supertest.utils";
+import { container } from "../core/container.core";
+import { TYPES } from "../core/types.core";
+import { UserRepository } from "../entities/user.entity";
+import { agent } from "../tests/supertest.utils";
 
 describe("UsersController", () => {
   let userRepository: UserRepository;
@@ -1396,7 +1365,7 @@ describe("UsersController", () => {
 
 Le test est vraiment très simple et la syntaxe de `supertest` rend le test très lisible. Ce test veut dire "envoie une requête HTTP de type `Get` et attends toi à recevoir une réponse de type `200`". Essayons de lancer les tests
 
-```sh
+```bash
 npm test
 ...
   UsersController
@@ -1418,12 +1387,12 @@ describe("UsersController", () => {
   describe("create", () => {
     it("should create user", (done) => {
       const email = `${new Date().getTime()}@test.io`;
-      agent.post("/users").send({email, password: "toto"}).expect(201, done);
+      agent.post("/users").send({ email, password: "toto" }).expect(201, done);
     });
 
     it("should not create user with missing email", (done) => {
       const email = `${new Date().getTime()}@test.io`;
-      agent.post("/users").send({email}).expect(400, done);
+      agent.post("/users").send({ email }).expect(400, done);
     });
   });
 });
@@ -1440,7 +1409,7 @@ Ce test est très simple et vous pouvez en rajouter d'autres comme _"should not 
 
 Vous pouvez maintenant commiter les changements:
 
-```sh
+```bash
 git add && git commit -m "Add functional tests"
 ```
 
@@ -1449,5 +1418,3 @@ git add && git commit -m "Add functional tests"
 Et voilà, ce tutoriel touche à sa fin.
 
 J'espère que cet article aura permit de démystifier un peu l'injection de dépendance et/ou que vous aurez appris des choses ici.
-
-{% include promote-restapits-fr.html %}

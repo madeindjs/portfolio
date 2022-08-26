@@ -9,7 +9,7 @@ comments: true
 lang: fr
 ---
 
-Afin de tester, j'ai voulu cracker mon [routeur récemment installé](./2017-10-11-installer-bridge-sfr-box-4k). Et c'est impressionnant de facilité!
+Afin de tester, j'ai voulu cracker mon [routeur récemment installé](../../_i18n/fr/_posts/2017-10-11-installer-bridge-sfr-box-4k.md). Et c'est impressionnant de facilité!
 
 Afin de réaliser le test, j'ai installé [Kali Linux](https://www.kali.org/), une célèbre distribution Linux qui apporte des outils de "hacking" pré-installé.
 

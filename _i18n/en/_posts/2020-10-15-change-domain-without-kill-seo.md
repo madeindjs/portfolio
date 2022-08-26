@@ -1,10 +1,11 @@
 ---
 title: Change domain name without kill SEO
 description: This tutorial show you how to set Apache redirection and inform Google that you change domain name
-layout: post
+
 date: 2020-10-15 13:00:00 +0200
 tags: [seo, apache, google]
 categories: webmaster
+lang: en
 ---
 
 Recently I changed my website domain name from `rousseau-alexandre.fr` to `rsseau.fr`. This move was a little tricky because this may hurt your SEO if you miss something. So I think it may be a good idea to keep a document of what I did and share it. Maybe it can help you?
@@ -144,11 +145,11 @@ IN TXT "google-site-verification=XXXXX"
 
 Then you simply need to go in [Google Webmaster settings](https://search.google.com/search-console/settings). There are a section to change domain of a property. Here you'll be able to select the new one.
 
-![Settings to change property domain name](/img/blog/google-webmaster-prepare-update-domain.png)
+![Settings to change property domain name](./images/google-webmaster-prepare-update-domain.png)
 
 I had to wait few hours to Google crawl redirection then I was able to submit form
 
-![property domain updated !](/img/blog/google-webmaster-domain-updated.png)
+![property domain updated !](./images/google-webmaster-domain-updated.png)
 
 That's it.
 
@@ -168,11 +169,11 @@ So I my opinion you should keep this domains for
 
 So let's connect on [Google Search Console](https://search.google.com/search-console) after few weeks and take a look at traffic evolution of previous domain :
 
-![Google Search Console traffic performance for old website](/img/blog/google-webmaster-old-domain.png)
+![Google Search Console traffic performance for old website](./images/google-webmaster-old-domain.png)
 
 Great! We see that traffic start to drop on migration date. So let take a look on traffic evolution of my new domain :
 
-![Google Search Console traffic performance for new website](/img/blog/google-webmaster-new-domain.png)
+![Google Search Console traffic performance for new website](./images/google-webmaster-new-domain.png)
 
 Theses informations show that all my traffic was correctly transferred into my new domain ! I get average same amount of clicks on my new domains than my old one. But it show also that even after some weeks, my old domain continue to receive traffic from Google.
 

@@ -1,9 +1,10 @@
 ---
 title: Deploy a fullstack application on Google Cloud Plateform with Gitlab CI
-layout: post
+
 date: 2020-08-05 15:00:00 +0200
 tags: [devops, gcloud, gitlabci, docker]
 categories: programming
+lang: en
 ---
 
 I deployed a Fullstack application (i.e. Frontend / Backend) on Google Cloud Platform with Kubernetes. And since [developers are lazy](https://www.forbes.com/sites/forbestechcouncil/2018/01/08/developers-are-lazy-and-thats-usually-a-good-thing/), I automated everything with Gitlab CI.
@@ -113,7 +114,7 @@ The `publish` step will build docker images of the different applications and pu
 In order to build the images and publish them, we need to use:
 
 - the image [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) which allows to communicate with GCloud and publish the images.
-- the [Docker-in-Docker] service (https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-workflow-with-docker-executor) which allows you to use Docker commands in a Docker container.
+- the [Docker-in-Docker service](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-workflow-with-docker-executor) which allows you to use Docker commands in a Docker container.
 
 It is then possible to use the :
 

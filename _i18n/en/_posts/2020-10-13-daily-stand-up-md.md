@@ -1,10 +1,11 @@
 ---
 title: Organization of the Daily Stand Up with Markdown
 description: How I use a plain text file to organize my Daily Stand-Up
-layout: post
+
 date: 2020-10-13 12:00:00 +0200
 tags: [organisation, plaintext, scrum]
 categories: organization
+lang: en
 ---
 
 Stand-ups are meetings recommended by the [SCRUM methodology](https://en.wikipedia.org/wiki/Stand-up_meeting). In these small meetings of fifteen minutes maximum, everyone takes the floor to say quickly what they worked on the previous day, the work planned for the same day and the blocking points (if any).

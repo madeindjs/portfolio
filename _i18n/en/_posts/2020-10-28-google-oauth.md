@@ -1,10 +1,11 @@
 ---
 title: Google OAuth with cURL
 description: This tutorial show you how to use cURl to get a Google access_token and refresh it.
-layout: post
+
 date: 2020-10-28 20:00:00 +0200
 tags: [google, oauth, curl]
 categories: programming
+lang: en
 ---
 
 This post purpose is to show you how (and help me to remember) how to use [Google OAuth](https://oauth.net/) without library. So I made theses steps :

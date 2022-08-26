@@ -1,10 +1,11 @@
 ---
 title: Feedback about writing a technical book
-layout: post
+description: Quick analysis of writing and publishing a technical e-book on Leanpub
 date: 2019-11-11 0:30:00 +0200
-tags: rails leanpub book
-thumbnail: /img/blog/api_on_rails.png
+tags: [rails, leanpub, book]
+image: ./images/api_on_rails.png
 categories: story
+lang: en
 ---
 
 Early this year I was contacted by [Developpez.com](https://www.developpez.com/) to find people to write articles. So I answered to participate on the subject of the Ruby on Rails framework.
@@ -18,8 +19,6 @@ The project was not maintained and the version of the framework studied was obso
 So I started to rewriting the book from scratch. As long as I was rewriting, I thought about translate it into Molière's language.
 
 Here is my feedback on the writing of a book of more than 200 pages in English and French.
-
-{% include promote-apionrails-en.html %}
 
 ## How to write a book?
 

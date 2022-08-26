@@ -1,11 +1,12 @@
 ---
-layout: post
+
 title: Building an API with TypeScript, Express.js and Sequelize
 description: Construction of a REST API with TypeScript, Express and Sequelize that will be used to draw graphs with Mermaid.js
 date: 2019-06-19 13:30:00 +0200
-tags: typescript express sequelize
-thumbnail: /img/blog/typescript.jpg
+tags: [typescript, express, sequelize]
+image: ./images/typescript.jpg
 categories: programming
+lang: en
 ---
 
 The purpose of this article is to discover an implementation of an[API][api][RESTfull][rest] using[TypeScript][typescript].
@@ -28,8 +29,6 @@ _Let's go_!
 > NOTE: I'm going to go a little fast because it's a bit of a reminder for myself. All the code is available on the [_repository_ Github `graph_api.ts`][github_repo]
 
 > TL;DR: Express great freedom allows us to decide for ourselves the architecture of our application and TypeScript gives us the possibility to create real _design paterns_.
-
-{% include promote-restapits-en.html %}
 
 ## Setup project
 

@@ -29,7 +29,7 @@ Les sites statiques te proposent souvent de rédiger le contenu sous forme de [M
 Un site statique possède beaucoup d'avantages. **L'avantage principal est qu'il n'y a pas de base de données ni de langage interprété côté serveur**. Donc
 
 1. **La sécurité est renforcée**. La plupart des failles de sécurité reposent sur le langage interprété côté serveur.
-2. **Le coût du serveur est réduit**. J'utilise un simple [VPS chez OVH](https://www.ovhcloud.com/fr/vps/) à 3€/mois qui héberge aussi d'autres sites statiques. Et avant de passer chez OVH, j’utilisai [un Raspberry PI branché à ma box SFR](2017-10-11-installer-bridge-sfr-box-4k)
+2. **Le coût du serveur est réduit**. J'utilise un simple [VPS chez OVH](https://www.ovhcloud.com/fr/vps/) à 3€/mois qui héberge aussi d'autres sites statiques. Et avant de passer chez OVH, j’utilisai [un Raspberry PI branché à ma box SFR](../../_i18n/fr/_posts/2017-10-11-installer-bridge-sfr-box-4k.md)
 3. **Les performances sont excellentes** car le serveur n'a pas besoin d’interpréter un langage ni de faire des requêtes en base de données.
 4. **Le positionnement dans les moteurs de recherche est amélioré**, car il dépend directement de la performance du site et notamment du temps de réponse
 
@@ -90,7 +90,7 @@ Les frameworks web-moderne comme React, Vue.js ou Angular sont de superbes outil
 
 ![Les librairies JavaScript pèse lourd](./images/node-modules-meme.png)
 
-[^3]: C'est d’ailleurs une des raison pour laquelle j'ai choisis de ne pas intégrer de module de tracking et que je [m'appuie sur les logs](./2019-11-07-lire-les-logs-avec-go-access.md) pour analyser les pages les plus consultées.
+[^3]: C'est d’ailleurs une des raison pour laquelle j'ai choisis de ne pas intégrer de module de tracking et que je [m'appuie sur les logs](../../_i18n/fr/_posts/2019-11-07-lire-les-logs-avec-go-access.md) pour analyser les pages les plus consultées.
 
 Gatsby répond parfaitement à cela car il effectue tout un tas d'optimisations par défaut:
 

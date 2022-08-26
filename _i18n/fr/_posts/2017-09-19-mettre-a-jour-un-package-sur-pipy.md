@@ -1,14 +1,14 @@
 ---
-layout: post
 title: Mettre à jour un Package Pypi
 description: Tutoriel pour mettre à jour un package sur Pypi
 date: 2017-09-19 11:23:00 +0200
-tags: python pipy
+tags: [python, pipy]
 categories: programming
 comments: true
+lang: fr
 ---
 
-Récement j'ai reçu un Pull request qui incrémentait la version d'un [vieux package Python que j'avais crée](https://github.com/madeindjs/Super-Markdown). Je l'ai accépeté en deux minutes sur Github mais impossible de le mettre à jour sur Pypi!
+Récemment j'ai reçu un Pull request qui incrémentait la version d'un [vieux package Python que j'avais crée](https://github.com/madeindjs/Super-Markdown). Je l'ai accepté en deux minutes sur Github mais impossible de le mettre à jour sur Pypi!
 
 Après quelques recherches, voici la procédure à suivre.
 
