@@ -1,0 +1,28 @@
+<section>
+  <h2>
+    <!-- {{ include.post.title }} -->
+    <a href="{{ include.post.url | prepend: site.baseurl }}"
+      >{{ include.post.title }}</a
+    >
+  </h2>
+  <ul class="list-inline">
+    <li><date>{{ include.post.date | date: "%Y-%m-%d" }}</date></li>
+    <li>
+      {% for tag in include.post.tags %}
+      <a
+        href="{{ '/tag/' | append: tag | append: '.html' | prepend: site.baseurl }}"
+        >#{{ tag }}</a
+      >
+      {% endfor %}
+    </li>
+    <li>@{{ include.post.categories }}</li>
+  </ul>
+  {{ include.post.excerpt }}
+  <p class="text-justify">
+    <a href="{{ include.post.url | prepend: site.baseurl }}"
+      >{{ site.translations[site.lang]['see_more'] }}</a
+    >
+  </p>
+</section>
+
+<hr />
