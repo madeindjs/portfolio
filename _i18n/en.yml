@@ -21,3 +21,35 @@ description:
   - Besides that, I like to share my findings via <a href="/en/blog">posts on my blog</a>.
 
 footer: You can contact me <a href="mailto:contact@rousseau-alexandre.fr">by email</a> (<a href="/pgp.txt">GPG</a>) or via <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">LinkedIn</a>. If you are interested in working with me, you can <a href="/resume">view my resume</a> or <a href="/resume/alexandre-rousseau.pdf">download a PDF version</a>.
+
+
+books: Books
+blog: Posts
+read: Read
+displayMore: 'Display more'
+
+books:
+  api-on-rails-description: 'Learn best practices to build an API using Ruby on Rails 5/6. The intention with this book it’s not only to teach you how to build an API with Rails. The purpose is also to teach you how to build scalable and maintainable API with Rails which means improve your current Rails knowledge.'
+  api-on-rails-alt: 'Cover of API on Rails book'
+  rest-api-ts-description: 'Learn best practices to build an API using Node.js / Typescript. The intention with this book it’s not only to teach you how to build an API. The purpose is also to teach you how to build scalable and maintainable API with Rails which means improve your current Rails knowledge.'
+  rest-api-ts-alt: 'Cover of REST-API.ts book'
+  buyOnLeanpub: 'Buy a paid version'
+
+footer:
+  poweredBy: 'This website is powered by <a href="https://jekyllrb.com/">Jekyll</a>. You can find complete source code on <a href="https://github.com/madeindjs/">my github repository</a>.'
+  licence: 'All this content is under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> licence.'
+  cookie: 'This site does not track you, there are no cookies or google analytics.'
+
+home:
+  lead: 'Hi, I''m Alexandre. I am a software engineer.'
+  description: 'I am passionate about programming and the world of open source software. I try to contribute to the open-source world at my personal projects and various contributions on <a href="https://github.com/madeindjs">Github</a> / <a href="https://gitlab.com/alexandre.rousseau">Gitlab</a>. I like to share my discoveries into my blog.'
+  bookDescription: 'I have written two books under a free license. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> and <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> that teach best practices for building an API with Ruby on Rails or Node.js.'
+  readBlog: 'Read my blog'
+  readBooks: 'Check my books'
+
+post:
+  publishedAt: 'Published at'
+  searchPlaceholder: 'Type to filter posts...'
+  promoteApiOnRails: 'Interested about building and API using Ruby on Rails? Take a look on my brand new Book: <strong>API on Rails 6</strong>. You can <a href="https://github.com/madeindjs/api_on_rails" >grab a free PDF version on Github</a >. If you like my work, you can <a href="https://leanpub.com/apionrails6/">buy a paid version on Leanpub</a >.'
+  promoteRestApiTs: 'Interested about building and API using Node.js / Typescript ? Take a look on my brand new Book: <strong>REST-API.ts</strong>. You can <a href="https://github.com/madeindjs/rest-api.ts" >grab a free PDF version on Github</a >. If you like my work, you can <a href="https://leanpub.com/rest-api-ts/">buy a paid version on Leanpub</a>.'
+  relatedPosts: 'Related posts'

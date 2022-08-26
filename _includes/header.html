@@ -1,13 +1,12 @@
 <header>
-  <nav>
-    <ul>
-      <li><a href="{{ '/' | prepend: site.baseurl }}">{{ site.title }}</a></li>
-      <li><a href="{{ '/blog' | prepend: site.baseurl }}">Blog</a></li>
-      <li><a href="/books">Books</a></li>
+  <nav class="navbar">
+    <a href="{{ '/' | prepend: site.baseurl }}" class="brand"><span>AR</span></a>
+      <a href="{{ '/blog' | prepend: site.baseurl }}">Blog</a>
+      <a href="/books">Books</a>
       {% if site.lang == 'fr' %}
-      <li><a href="/en/">English version</a></li>
+      <a href="/en/">🇬🇧</a>
       {% elsif site.lang == 'en' %}
-      <li><a href="/">French version</a></li>
+      <a href="/">🇫🇷</a>
       {% endif %}
     </ul>
   </nav>

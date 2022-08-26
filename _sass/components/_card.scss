@@ -1,0 +1,50 @@
+@import "../_mixins";
+@import "../_colors";
+
+.cards {
+  flex-wrap: wrap;
+  @extend %flex-center;
+  grid-column: 1 / 4 !important;
+
+  >* {
+    margin: 1rem;
+  }
+}
+
+
+.card {
+  border: 3px solid black;
+  padding: 1rem;
+  background-color: white;
+  color: black;
+  // transition: background-position ease-in-out 0.2s, color ease-in-out 0.2s;
+  // background-image: linear-gradient(to bottom, white 50%, black 50%);
+  // background-size: 100% 200%;
+
+  // &:hover {
+  //   color: white;
+  //   a {
+  //     color: $primary-light-40 !important;
+  //   }
+  //   background-position: 0 -100%;
+  // }
+
+  // &-title {
+  //   font-weight: 800;
+  // }
+}
+
+// @media (prefers-color-scheme: dark) {
+//   .card {
+//     color: white;
+//     border-color: white;
+//     background-color: black;
+//     background-image: linear-gradient(to bottom, black 50%, white 50%);
+
+//     &:hover {
+//       * {
+//         color: black !important;
+//       }
+//     }
+//   }
+// }

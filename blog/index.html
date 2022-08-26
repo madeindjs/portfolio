@@ -2,12 +2,9 @@
 layout: main
 title: Blog
 ---
-<h1>Blog</h1>
+<h1>{% t blog %}</h1>
 
-
-{% for post in paginator.posts %}
-  {% include posts.html post=post %}
-{% endfor %}
+{% include posts-cards.html posts=paginator.posts %}
 
 <!-- Pagination links -->
 <nav>

@@ -15,9 +15,9 @@ const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.terms}>
-        <p dangerouslySetInnerHTML={{__html: t("poweredByGatsby")}}></p>
-        <p dangerouslySetInnerHTML={{__html: t("licence")}}></p>
-        <p dangerouslySetInnerHTML={{__html: t("cookie")}}></p>
+        <p dangerouslySetInnerHTML={{ __html: t("poweredBy") }}></p>
+        <p dangerouslySetInnerHTML={{ __html: t("licence") }}></p>
+        <p dangerouslySetInnerHTML={{ __html: t("cookie") }}></p>
       </div>
       <div className={styles.externalsLinks}>
         <a href="https://stackoverflow.com/users/5935198/rousseaualexandre">

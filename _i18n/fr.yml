@@ -24,3 +24,35 @@ description:
   - A côté de ça, j'aime partager mes découvertes via <a href="/blog">des articles sur mon blog</a>.
 
 footer: Vous pouvez me contacter <a href="mailto:contact@rousseau-alexandre.fr">par mail</a> (<a href="/pgp.txt">GPG</a>) ou bien via <a href="https://www.linkedin.com/in/alexandre-rousseau-a55a9464/">LinkedIn</a>. Si vous êtes intéressé pour travailler avec moi, vous pouvez <a href="/resume">consulter mon CV</a> ou bien <a href="/resume/alexandre-rousseau.pdf">télécharger une version PDF</a>.
+
+books:
+  api-on-rails-description: 'Apprenez les meilleures pratiques pour construire une API en utilisant Ruby on Rails 6. L''intention avec ce livre n''est pas seulement de vous apprendre comment construire une API avec Rails, le but est de vous apprendre à construire des API évolutives et maintenables avec Rails. Cela signifie améliorer vos connaissances actuelles sur les rails'
+  api-on-rails-alt: 'Couverture du livre API on Rails'
+  rest-api-ts-description: 'Apprenez les meilleures pratiques pour construire une API en utilisant Node.js / Typescript. L''objectif de ce livre n''est pas seulement de vous apprendre à construire une API. Le but est également de vous apprendre à construire une API évolutive et maintenable avec Rails, ce qui signifie améliorer vos connaissances actuelles.'
+  rest-api-ts-alt: 'Couverture du livre REST-API.ts'
+  buyOnLeanpub: 'Buy a paid version'
+
+footer:
+  poweredBy: 'Ce site est propulsé par <a href="https://jekyllrb.com/">Jekyll</a>. Vous pouvez consulter le code source sur <a href="https://github.com/madeindjs/">Github</a>.'
+  licence: 'Tout le contenu est sous la license <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.'
+  cookie: 'Ce site ne vous piste pas, il n''y a pas de cookies ni de google analytics.'
+
+home:
+  lead: 'Hello, je m''appelle Alexandre. Je suis un développeur fullstack.'
+  description: 'Je suis passionné par la programmation et le monde du logiciel libre. J''essaie de contribuer au monde de l''Open-source à mes projets personnels et différentes contributions sur <a href="https://github.com/madeindjs">Github</a> / <a href="https://gitlab.com/alexandre.rousseau">Gitlab</a>. J''aime partager mon expérience.'
+  bookDescription: 'J''ai écris deux livres sous licence libre. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> et <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> qui enseignent les meilleurs pratiques pour construire une API avec Ruby on Rails ou Node.js'
+  readBlog: 'Lire mon blog'
+  readBooks: 'Consulter mes livres'
+
+post:
+  publishedAt: 'Publié le'
+  searchPlaceholder: 'Tapez du texte pour trier les articles...'
+  promoteApiOnRails: 'Intéressé pour créer un API avec Ruby on Rails? Jette un coup d''œil à mon livre: <strong>API on Rails 6</strong>. Tu peux <a href="https://github.com/madeindjs/api_on_rails" >télécharger une version gratuite au format PDF sur Github</a >. Si tu aimes mon travail <a href="https://leanpub.com/rest-api-ts-fr/" >tu peux acheter un version payante sur Leanpub</a >.'
+  promoteRestApiTs: 'Intéressé pour créer un API avec Typescript / Node.js? Jette un coup d''œil à mon livre: <strong>REST-API.ts</strong>. Tu peux <a href="https://github.com/madeindjs/rest-api.ts" >télécharger une version gratuite au format PDF sur Github</a >. Si tu aimes mon travail <a href="https://leanpub.com/rest-api-ts/" >tu peux acheter un version payante sur Leanpub</a >.'
+  relatedPosts: 'Articles liés'
+
+books: Livres
+blog: Articles
+read: Voir
+displayMore: 'Afficher plus'
+

@@ -1,0 +1,10 @@
+<section class="card post-card">
+  {% include tags.html tags=include.post.tags %}
+
+  <p class="post-card__title">
+    <!-- {{ include.post.title }} -->
+    <a href="{{ include.post.url | prepend: site.baseurl }}">{{ include.post.title }}</a>
+  </p>
+
+  <p class="post-card__date">{{ post.date }}</p>
+</section>

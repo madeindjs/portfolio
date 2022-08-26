@@ -14,11 +14,13 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Alexandre Rousseau
-email: contact@rousseau-alexandre.fr
+email: alexandre@rsseau.fr
 description: Mon Portfolio
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://rousseau-alexandre.fr" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://rsseau.fr" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: madeindjs
+
+permalink: /blog/:title
 
 # Build settings
 markdown: kramdown
@@ -60,6 +62,9 @@ mermaid:
 include:
   - .well-known
   - favicon.ico
+
+sass:
+  sass_dir: _sass
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

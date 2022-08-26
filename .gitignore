@@ -3,3 +3,4 @@ node_modules/
 public
 .sass-cache
 _site
+.DS_Store

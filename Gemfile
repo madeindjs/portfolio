@@ -11,7 +11,6 @@ source "https://rubygems.org"
 gem "jekyll", "~> 3.5"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.0"
 gem "redcarpet"
 gem "kramdown-parser-gfm"
 
@@ -33,3 +32,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "jekyll-toc", "~> 0.15.0"
+
+gem "minima", "~> 2.5"
+
+gem "webrick", "~> 1.7"

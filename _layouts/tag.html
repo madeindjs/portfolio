@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr_FR">
+<html lang="{{ site.lang }}">
   <head>
     {% include head.html %}
   </head>
 
-  <body class="readable-content">
+  <body class="layout">
     {% include header.html %}
-    <h1>{{ site.translations[site.lang]['tag_results'] }}: {{ page.tag }}</h1>
-    {% for post in page.posts %} {% include posts.html post=post %} {% endfor %}
+    <main>
+      <h1>{% t tag_results %}: {{ page.tag }}</h1>
+      {% include posts-cards.html posts=page.posts %}
+    </main>
     {% include footer.html %}
   </body>
 </html>
