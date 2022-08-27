@@ -93,7 +93,7 @@ main {
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: black;
+    background-color: $background-dark;
   }
 
   h1 {
@@ -130,20 +130,6 @@ main {
 
     &:focus {
       border-style: solid;
-    }
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: white;
-  }
-
-  div.gatsby-highlight {
-    background-color: #2d2d2d;
-
-    pre {
-      color: white;
-      background-color: #2d2d2d;
-      padding: 0;
     }
   }
 }

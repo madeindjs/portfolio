@@ -1,6 +1,19 @@
+@import '../colors';
+
 #post {
-  article {
-    max-width: 85ch;
-    margin: auto;
+  // article {
+  //   max-width: 85ch;
+  //   margin: auto;
+  // }
+  h2 {
+    position: sticky;
+    top: 0px;
+
+    background-color: $background-light;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $background-dark;
+    }
   }
 }
+

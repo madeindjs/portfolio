@@ -10,9 +10,6 @@ title: Blog
 <nav class="pagination">
   {% if paginator.previous_page %}
   <a class="btn" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Précédent</a>
-  {% else %}
-  <!-- TODO -->
-  <span>Précédent</span>
   {% endif %}
 
   {% for page in (1..paginator.total_pages) %}
@@ -26,9 +23,6 @@ title: Blog
   {% endfor %}
   {% if paginator.next_page %}
   <a class="btn" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Suivant</a>
-  {% else %}
-  <!-- TODO -->
-  <span>Suivant</span>
   {% endif %}
   </ul>
 </nav>

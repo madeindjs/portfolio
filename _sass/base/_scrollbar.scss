@@ -17,3 +17,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: darkgray;
 }
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: white;
+  }
+}
