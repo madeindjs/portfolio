@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: rsseau.fr
-Token: 0700d248335e910ea774aa0343d019fe9f87cc255678f5cebe046e3e17b6fd48

@@ -1,7 +1,7 @@
-@import "../styles/_mixins";
-@import "../styles/_sizes";
+@import "../_mixins";
+@import "../_sizes";
 
-.books {
+#books {
   grid-column: 1 / 4 !important;
   @extend %flex-center;
   flex-wrap: wrap;
