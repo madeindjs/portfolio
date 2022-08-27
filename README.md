@@ -1,25 +1,25 @@
 # Portfolio
 
-My portfolio build [Gatsby](https://www.gatsbyjs.com/). See me in action at <https://rsseau.fr>.
+My portfolio build [Jekyll](https://jekyllrb.com/). See me in action at <https://rsseau.fr>.
 
-![screenchot](./public/screenshot.png)
+![screenshot](./public/screenshot.png)
 
 ## Setup
 
 ```bash
-npm install
+bundle install
 ```
 
 Then start development server
 
 ```bash
-npm run develop
+jekyll serve
 ```
 
 or build webiste
 
 ```bash
-npm run build
+jekyll build
 ```
 
 ## License
