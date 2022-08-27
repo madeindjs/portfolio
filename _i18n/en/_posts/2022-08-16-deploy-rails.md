@@ -1,7 +1,7 @@
 ---
 title: Deploy a Rails application in production with Capistrano and Phusion Passenger
 description: A step by step guide to self-host a Ruby on Rails application
-date: 2022-09-16 18:00:00 +0200
+date: 2022-08-16 18:00:00 +0200
 tags:
   - rails
   - apache

@@ -49,9 +49,10 @@ exclude_from_localizations: [js, img, css]
 
 defaults:
   - scope:
-      path: ""
+      path: "_i18n"
     values:
       toc: true
+      layout: post
 
 toc:
   max_level: 2
