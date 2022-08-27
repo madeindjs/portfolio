@@ -16,7 +16,7 @@ Then start development server
 jekyll serve
 ```
 
-or build webiste
+or build website
 
 ```bash
 jekyll build
