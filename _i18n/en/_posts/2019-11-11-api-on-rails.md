@@ -6,6 +6,8 @@ tags: [rails, leanpub, book]
 image: /img/blog/api_on_rails.png
 categories: story
 lang: en
+translations:
+  fr: retour-experience-api-on-rails
 ---
 
 Early this year I was contacted by [Developpez.com](https://www.developpez.com/) to find people to write articles. So I answered to participate on the subject of the Ruby on Rails framework.

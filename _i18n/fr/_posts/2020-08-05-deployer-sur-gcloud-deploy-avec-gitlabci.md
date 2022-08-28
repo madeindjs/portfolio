@@ -7,6 +7,8 @@ tags: [devops, gcloud, gitlabci, docker]
 categories: programming
 toc: true
 lang: fr
+translations:
+  en: gcloud-deploy-with-gitlabci
 ---
 
 J'ai déployé une application Fullstack (c'est à dire Frontend / Backend) sur Google Cloud Plateform avec Kubernetes. Et comme [les développeur sont fainéant](https://www.forbes.com/sites/forbestechcouncil/2018/01/08/developers-are-lazy-and-thats-usually-a-good-thing/), j'ai tout automatisé avec Gitlab CI.

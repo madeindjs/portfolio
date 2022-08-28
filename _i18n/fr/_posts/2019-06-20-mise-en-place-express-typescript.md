@@ -6,6 +6,8 @@ tags: [typescript, express, sequelize]
 image: /img/blog/typescript.jpg
 categories: programming
 lang: fr
+translations:
+  en: express-typescript
 ---
 
 Le but de cet article est de découvrir une mise en place d'une [API][api] [RESTfull][rest] en utilisant [TypeScript][typescript].

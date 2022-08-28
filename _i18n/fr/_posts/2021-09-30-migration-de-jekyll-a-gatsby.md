@@ -6,6 +6,8 @@ tags:
   - gatsby
   - jekyll
 lang: fr
+translations:
+  en: migrate-from-jekyll-to-gatsby
 ---
 
 Je viens tout juste de migrer mon site qui utilisait [Jekyll](https://jekyllrb.com/) vers [Gatsby](https://www.gatsbyjs.com/). Dans cet article je vais essayer de faire le bilan de cette migration:

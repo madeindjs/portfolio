@@ -9,6 +9,8 @@ tags:
   - vscode
 lang: fr
 image: /img/blog/debugging-using-console-log.png
+translations:
+  en: debug-nodejs-with-vscode
 ---
 
 Je galère toujours à utiliser le débogueur de VSCode lorsque je souhaite mettre des points d'arrêts dans un script ou une application Node.js. Dans certains cas je finis même par mettre des `console.log`.

@@ -82,13 +82,18 @@ hr {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 85ch 1fr;
+  // weird bug, see https://github.com/sass/node-sass/issues/2815#issuecomment-574038619
+  grid-template-columns: 1fr #{"min(85ch, 100%)"} 1fr;
   grid-template-rows: auto 1fr;
 
   * {
     grid-column-start: 2;
     grid-column-end: 2;
   }
+}
+
+img {
+  max-width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {

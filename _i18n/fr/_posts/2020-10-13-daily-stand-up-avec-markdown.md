@@ -6,6 +6,8 @@ date: 2020-10-13 12:00:00 +0200
 tags: [organisation, plaintext, scrum]
 categories: organization
 lang: fr
+translations:
+  fr: daily-stand-up-with-markdown
 ---
 
 Les Stand-up sont des réunions préconisées par la [méthodologie SCRUM](https://en.wikipedia.org/wiki/Stand-up_meeting). Dans ces petites réunions de quinze minutes max, tout le monde prend la parole pour dire rapidement sur quoi il a travaillé la veille, le travail prévu pour le jour même et les points bloquants (s'il y en a).

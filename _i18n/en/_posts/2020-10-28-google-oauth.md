@@ -6,6 +6,8 @@ date: 2020-10-28 20:00:00 +0200
 tags: [google, oauth, curl]
 categories: programming
 lang: en
+translations:
+  fr: authentification-google-oauth
 ---
 
 This post purpose is to show you how (and help me to remember) how to use [Google OAuth](https://oauth.net/) without library. So I made theses steps :

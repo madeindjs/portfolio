@@ -6,6 +6,8 @@ date: 2020-10-15 13:00:00 +0200
 tags: [seo, apache, google]
 categories: webmaster
 lang: en
+translations:
+  fr: changer-de-domain-sans-tuer-le-seo
 ---
 
 Recently I changed my website domain name from `rousseau-alexandre.fr` to `rsseau.fr`. This move was a little tricky because this may hurt your SEO if you miss something. So I think it may be a good idea to keep a document of what I did and share it. Maybe it can help you?

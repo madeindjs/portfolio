@@ -1,11 +1,13 @@
 ---
-title: Migrate a website from Jekyll   to Gatsby
+title: Migrate a website from Jekyll to Gatsby
 description: This article is my feedback on the migration of my site from Jekyll to Gatsby.
 date: 2021-10-02 09:00:00 +0200
 tags:
   - gatsby
   - jekyll
 lang: en
+translations:
+  fr: migration-de-jekyll-a-gatsby
 ---
 
 I have just migrated my site from [Jekyll](https://jekyllrb.com/) to [Gatsby](https://www.gatsbyjs.com/). In this article I'll try to make an assessment of this migration:

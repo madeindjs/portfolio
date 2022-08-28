@@ -7,6 +7,8 @@ categories: hacking
 image: /img/blog/wifi.png
 comments: true
 lang: fr
+translations:
+  en: hack-password-wpa-wifi
 ---
 
 Afin de tester, j'ai voulu cracker mon [routeur récemment installé](./2017-10-11-installer-bridge-sfr-box-4k.md). Et c'est impressionnant de facilité!

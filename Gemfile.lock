@@ -88,7 +88,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  jekyll (~> 4.0)
+  jekyll
   jekyll-feed
   jekyll-mermaid
   jekyll-multiple-languages-plugin

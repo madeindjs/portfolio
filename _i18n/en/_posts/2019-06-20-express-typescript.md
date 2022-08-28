@@ -6,6 +6,8 @@ tags: [typescript, express, sequelize]
 image: /img/blog/typescript.jpg
 categories: programming
 lang: en
+translations:
+  fr: mise-en-place-express-typescript
 ---
 
 The purpose of this article is to discover an implementation of an[API][api][RESTfull][rest] using[TypeScript][typescript].

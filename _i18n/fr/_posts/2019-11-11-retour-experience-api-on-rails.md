@@ -6,6 +6,8 @@ tags: [rails, leanpub book]
 image: /img/blog/api_on_rails.png
 categories: story
 lang: fr
+translations:
+  en: api-on-rails
 ---
 
 En début d'année 2019 j'ai été contacté par [Developpez.com](https://www.developpez.com/) qui cherchait des personnes pour écrire des articles. J'ai donc répondu positivement pour participer sur le sujet du framework Ruby on Rails.

@@ -12,6 +12,8 @@ tags:
   - inversify
 categories: programming
 lang: fr
+translations:
+  en: setup-typeorm-and-inversify
 ---
 
 Dans cet article nous allons voir pourquoi et comment mettre en place l'injection de dépendance dans une API.

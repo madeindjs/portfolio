@@ -6,6 +6,8 @@ categories: tutorial
 image: /img/blog/rails_zip.svg.png
 comments: true
 lang: en
+translations:
+  fr: zip-active-storage
 ---
 
 Recently for my [iSignif.fr](https://isignif.fr) project I wanted to implement a feature that allows me to **download an archive** `.zip` of several files. Nothing very complicated except that I use [**ActiveStorage**][active_storage_guide]. Active Storage is part of new features of Rails 5.2 (released in January 2018) which allows you to **attach** a file to a template using **various storage services** such as [Amazon S3](https://aws.amazon.com/fr/s3/), [Google Cloud Storage](https://cloud.google.com/storage/) or [Microsoft Azure Storage](https://azure.microsoft.com/en-us/services/storage/).

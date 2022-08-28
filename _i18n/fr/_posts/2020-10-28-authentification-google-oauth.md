@@ -6,6 +6,8 @@ date: 2020-10-28 20:00:00 +0200
 tags: [google, oauth, curl]
 categories: programming
 lang: fr
+translations:
+  en: google-oauth
 ---
 
 Ce billet a pour but de vous montrer (et m'aider à me souvenir) comment utiliser [Google OAuth](https://oauth.net/) sans librairies en 3 étapes :

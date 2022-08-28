@@ -9,6 +9,8 @@ tags:
   - vscode
 lang: en
 image: /img/blog/debugging-using-console-log.png
+translations:
+  fr: deboguer-nodejs-avec-vscode
 ---
 
 I always have trouble using the VSCode debugger when I want to put breakpoints in a script or a Node.js application. In some cases I even end up putting `console.log`.

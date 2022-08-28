@@ -4,21 +4,31 @@
     {% include head.html %}
   </head>
 
-  <body id="post" class="layout">
+  <body id="post">
     {% include header.html %}
     <main>
       <h1>{{ page.title }}</h1>
       {% include tags.html tags=page.tags %}
       <date>{{ page.date | date: "%Y-%m-%d" }}</date>
-
-      {% if page.thumbnail %}
+      <!-- EN post link -->
+      {% if page.translations.en %}
+      <p class="alert alert--info">
+        <a href="/blog/{{ page.translations.en }}">🇬🇧 Cet article est aussi disponible en anglais!</a>
+      </p>
+      {% endif %}
+      <!-- FR post link  -->
+      {% if page.translations.fr %}
+      <p class="alert alert--info">
+        <a href="/fr/blog/{{ page.translations.fr }}">🇫🇷 This post is also available in french!</a>
+      </p>
+      {% endif %} {% if page.thumbnail %}
       <p class="text-center">
         <img src="{{ page.thumbnail }}" class="center-block grey" />
       </p>
       {% endif %}
 
-      <nav>
-        <p>{{ site.translations[site.lang]['toc'] }}</p>
+      <nav class="toc">
+        <p class="toc__title">{{ site.translations[site.lang]['toc'] }}</p>
         {{ content | toc_only }}
       </nav>
 

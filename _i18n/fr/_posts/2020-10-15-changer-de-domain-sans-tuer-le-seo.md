@@ -6,6 +6,8 @@ date: 2020-10-15 13:00:00 +0200
 tags: [seo, apache, google]
 categories: webmaster
 lang: fr
+translations:
+  en: change-domain-without-kill-seo
 ---
 
 Récemment, j'ai changé le nom de domaine de mon site web de `rousseau-alexandre.fr` à `rsseau.fr`. Ce changement était un peu délicat car cela peut nuire au référencement du site. J'ai pensé que ce serait une bonne idée de conserver un document de ce que j'ai fait et de le partager. Peut-être que cela peut t'aider ?
