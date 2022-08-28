@@ -23,15 +23,15 @@ title: Blog
 
   {% for page in (1..paginator.total_pages) %}
   {% if page == paginator.page %}
-  <a class="btn" href="{{ paginator.previous_page_path | relative_url | prepend: site.baseurl }}">{{ page }}</a>
+  <a class="btn" href="{% if site.lang == 'fr' %}/fr{% endif %}{{ paginator.previous_page_path | prepend: site.baseurl }}">{{ page }}</a>
   {% elsif page == 1 %}
-  <a class="btn" href="{{ paginator.previous_page_path | relative_url | prepend: site.baseurl }}">{{ page }}</a>
+  <a class="btn" href="{% if site.lang == 'fr' %}/fr{% endif %}{{ paginator.previous_page_path | prepend: site.baseurl }}">{{ page }}</a>
   {% else %}
-  <a class="btn" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+  <a class="btn" href="{% if site.lang == 'fr' %}/fr{% endif %}{{ site.paginate_path | replace: ':num', page }}">{{ page }}</a>
   {% endif %}
   {% endfor %}
   {% if paginator.next_page %}
-  <a class="btn" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Suivant</a>
+  <a class="btn" href="{% if site.lang == 'fr' %}/fr{% endif %}{{ paginator.next_page_path | prepend: site.baseurl }}">Suivant</a>
   {% endif %}
   </ul>
 </nav>
