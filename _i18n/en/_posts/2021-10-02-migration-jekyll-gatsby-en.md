@@ -27,7 +27,7 @@ Static sites often propose you to write the content in [Markdown](https://www.ma
 A static site has many advantages. **The main advantage is that there is no database or server-side interpreted language**. So
 
 1. **Security is reinforced**. Most of the security flaws are based on the server side interpreted language.
-2. **The server cost is reduced**. I use a simple [VPS at OVH](https://www.ovhcloud.com/fr/vps/) at 3€/month which also hosts other static sites. And before going to OVH, I was using [a Raspberry PI connected to my SFR box](../../_i18n/fr/_posts/2017-10-11-installer-bridge-sfr-box-4k.md)
+2. **The server cost is reduced**. I use a simple [VPS at OVH](https://www.ovhcloud.com/fr/vps/) at 3€/month which also hosts other static sites. And before going to OVH, I was using [a Raspberry PI connected to my SFR box](../fr/2017-10-11-installer-bridge-sfr-box-4k.md)
 3. **Performance is excellent** because the server doesn't need to interpret a language or make database queries.
 4. **The SEO** which depends directly on the performance of the site and especially the response time
 

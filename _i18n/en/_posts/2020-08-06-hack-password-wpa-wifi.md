@@ -9,7 +9,7 @@ comments: true
 lang: en
 ---
 
-I decided to hack my [my new router](../../_i18n/fr/_posts/2017-10-11-installer-bridge-sfr-box-4k.md) just to try and have a fun. Spoiler : it was really easy.
+I decided to hack my [my new router](../fr/2017-10-11-installer-bridge-sfr-box-4k.md) just to try and have a fun. Spoiler : it was really easy.
 
 So to make my tests I tried a famous Linux distribution: [Kali Linux](https://www.kali.org/). This distribution have many pre-instaled hacking tools who help us.
 
