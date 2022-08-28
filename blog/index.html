@@ -4,6 +4,15 @@ title: Blog
 ---
 <h1>{% t blog %}</h1>
 
+<p>
+  {% t blog-description %}.
+  {% if site.lang == 'fr' %}
+  <a href="/blog/">{% t blog-see-en %}</a>
+  {% elsif site.lang == 'en' %}
+  <a href="/fr/blog/">{% t blog-see-fr %}</a>
+  {% endif %}.
+</p>
+
 {% include posts-cards.html posts=paginator.posts %}
 
 <!-- Pagination links -->
