@@ -1,51 +1,19 @@
 @import "../_sizes";
+@import "../_mixins.scss";
 
 .footer {
-  // height: 4rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
+  padding: 1rem;
 
+  * {
+    font-size: small;
+  }
 
   &__terms {
-    text-align: justify;
-    font-style: italic;
-
-    & * {
-      font-size: 1rem;
-    }
-
-    p {
-      display: inline;
-      margin-right: 0.5rem;
-    }
+    margin-bottom: 0;
   }
 
   &__externals-links {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-
-    a {
-      padding-left: 1rem;
-    }
-
-    svg {
-      font-size: 2rem;
-    }
-  }
-
-}
-
-
-@media (min-width: $break-point-sm) {
-  .footer {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-@media (max-width: $break-point-sm) {
-  .footer {
-    grid-template-columns: 1fr 6rem;
+    @extend %list-inline;
+    font-size: small;
   }
 }
