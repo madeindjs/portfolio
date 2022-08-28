@@ -8,7 +8,7 @@ tags:
   - docker
   - vscode
 lang: fr
-image: ./images/debugging-using-console-log.png
+image: /img/blog/debugging-using-console-log.png
 ---
 
 Je galère toujours à utiliser le débogueur de VSCode lorsque je souhaite mettre des points d'arrêts dans un script ou une application Node.js. Dans certains cas je finis même par mettre des `console.log`.

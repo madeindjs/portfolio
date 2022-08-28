@@ -4,7 +4,7 @@ description: Créez votre premier crate en Rust
 date: 2018-02-07 12:00:00 +0200
 tags: [rust, crate, crawler]
 categories: tutorial
-image: ./images/rust2.svg.png
+image: /img/blog/rust2.svg.png
 lang: fr
 ---
 

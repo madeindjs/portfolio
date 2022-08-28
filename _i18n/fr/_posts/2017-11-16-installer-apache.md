@@ -1,11 +1,10 @@
 ---
-
 title: Installer Apache dans un container LXC
 description: Participez au développement de votre navigateur preéferé
 date: 2017-11-16 08:00:00 +0200
 tags: [apache, linux, lxc]
 categories: tutorial
-image: ./images/lxc_container.png
+image: /img/blog/lxc_container.png
 comments: true
 lang: fr
 ---
@@ -56,7 +55,7 @@ apt install apache2
 
 Afin de connaître l'adresse IP de notre machine on lance un `ìfconfig`. On ouvre donc notre navigateur et on tape directement [http://10.0.3.416](http://10.0.3.416) (en remplaçant par votre IP). La page d'accueil par défaut apparaît!
 
-![Page par défaut d'Apache](./images/debian_apache_works.png)
+![Page par défaut d'Apache](/img/blog/debian_apache_works.png)
 
 Ce n'est pas de la magie, la page par défaut est située ici.
 
@@ -148,7 +147,7 @@ systemctl reload apache2
 
 Et de se rendre sur [http://test.fr](http://test.fr).
 
-![Page d'acceuil de test.fr](./images/debian_apache_hello_world.png)
+![Page d'acceuil de test.fr](/img/blog/debian_apache_hello_world.png)
 
 Dans un prochain article on verra comment améliorer la configuration de base d'[Apache][apache]
 

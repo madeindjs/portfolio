@@ -44,7 +44,7 @@ So we can see that my site responds in 10ms while Wordpress in almost half a sec
 
 This performance is very well reflected in the results of [Google's PageSpeed tool](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Frsseau.fr) which speak for themselves:
 
-![Screenshot of my PageSpeed result](./images/gastby-pagespeed.png)
+![Screenshot of my PageSpeed result](/img/blog/gastby-pagespeed.png)
 
 In short, if your content is not destined to evolve every day and you have the possibility to write it in a static site generator is the solution.
 
@@ -86,7 +86,7 @@ At the time of [Green IT](https://www.google.com/url?q=https://en.m.wikipedia.or
 
 Modern web frameworks like React, Vue.js or Angular are great tools for web applications but they can generate sites that need to download and run **several megabytes of JavaScript**. I find this nonsense for a simple blog. The libraries that are loaded on a site represent a large amount of data.
 
-The JavaScript libraries are heavy](./images/node-modules-meme.png)
+The JavaScript libraries are heavy](/img/blog/node-modules-meme.png)
 
 [^2]: This is one of the reasons why I chose not to integrate a tracking module and that I [rely on logs](./2019-11-07-read-logs-with-go-access.md) to analyze the most visited pages.
 
@@ -102,7 +102,7 @@ Google indexes web pages with its robot that crawls the web from link to link. B
 
 Modern JavaScript frameworks suffer from this problem because without JavaScript, HTML content cannot be built. Here is an example with Twitter:
 
-![Screenshot of Twitter with JavaScript disabled](./images/twitter-need-js.png)
+![Screenshot of Twitter with JavaScript disabled](/img/blog/twitter-need-js.png)
 
 There are several ways to get around this problem but it is often very complicated to implement.
 
@@ -128,7 +128,7 @@ Then, concerning the migration of the content is very easy because Jekyll and Ga
 
 - To standardize the _frontmater_ header of the Markdown files. All articles must have the same keys like `date`, `title`, etc...
 - links between posts can change. Gatsby uses relative links like `[title](./other-post)`
-- the URLs of the images can change too. In my case I created a folder `content/posts/images` and I use its images by doing `![alt](./images/dog.png)`
+- the URLs of the images can change too. In my case I created a folder `content/posts/images` and I use its images by doing `![alt](/img/blog/dog.png)`
 
 ## Manage the transition for SEO
 

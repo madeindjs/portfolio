@@ -1,10 +1,9 @@
 ---
-
 title: Création d'un projet sous Symfony 4 avec Vagrant
 date: 2018-06-20 19:00:00 +0200
 tags: [php, symfony, vagrant]
 categories: tutorial
-image: ./images/symfony.png
+image: /img/blog/symfony.png
 lang: fr
 ---
 

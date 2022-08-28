@@ -3,7 +3,7 @@ title: Créer une gem pour zipper les ActiveStorages de Rails
 date: 2018-12-03 13:30:00 +0200
 tags: [rails, activestorage, zip]
 categories: tutorial
-image: ./images/rails_zip.svg.png
+image: /img/blog/rails_zip.svg.png
 comments: true
 lang: fr
 ---
@@ -108,7 +108,7 @@ end
 
 On démarre maintenant le serveur avec `rails server` et on se rend à l'URL `http://localhost:3000/users/new` pour créer un utilisateur:
 
-![Formulaire de création d'un utilisateur avec les fichiers](./images/active_storage_create_user.png)
+![Formulaire de création d'un utilisateur avec les fichiers](/img/blog/active_storage_create_user.png)
 
 Lorsqu'on valide le formulaire avec des fichiers, on voit dans la console du serveur que les fichiers sont **chargés**:
 

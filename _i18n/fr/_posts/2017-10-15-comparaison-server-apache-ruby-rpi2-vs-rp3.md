@@ -1,11 +1,10 @@
 ---
-
 title: Benchmark d'un serveur Web Raspberry PI 2 B+ vs Raspberry PI 3
 description: l'occasion de mettre ma pierre à l'édifice des Benchmarks existants
 date: 2017-10-15 12:00:00 +0200
 tags: [benchmark, raspberry, apache, ruby]
 categories: network
-image: ./images/RPI2_vs_RPI3.png
+image: /img/blog/RPI2_vs_RPI3.png
 comments: true
 lang: fr
 ---

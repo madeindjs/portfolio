@@ -1,10 +1,9 @@
 ---
-
 title: Construction d'une API avec TypeScript, Express.js et Sequelize
 description: Construction d'une API REST avec TypeScript, Express et Sequelize qui aura pour but de dessiner des graphs avec Mermaid.js
 date: 2019-06-19 13:30:00 +0200
 tags: [typescript, express, sequelize]
-image: ./images/typescript.jpg
+image: /img/blog/typescript.jpg
 categories: programming
 lang: fr
 ---
@@ -75,7 +74,7 @@ Maintenant nous allons créer le `lib/app.ts`. Ce dernier se chargera de la conf
 // lib/app.ts
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import {Routes} from "./config/routes";
+import { Routes } from "./config/routes";
 
 class App {
   public app: express.Application;
@@ -89,7 +88,7 @@ class App {
 
   private config(): void {
     this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({extended: false}));
+    this.app.use(bodyParser.urlencoded({ extended: false }));
   }
 }
 
@@ -100,7 +99,7 @@ Comme vous pouvez le remarquer, nous chargeons les routes pour définir les cont
 
 ```typescript
 // lib/controllers/nodes.controller.ts
-import {Request, Response} from "express";
+import { Request, Response } from "express";
 
 export class NodesController {
   public index(req: Request, res: Response) {
@@ -115,8 +114,8 @@ Nous allons maintenant séparer les routes dans un fichier à part:
 
 ```typescript
 // lib/config/routes.ts
-import {Request, Response} from "express";
-import {NodesController} from "../controllers/nodes.controller";
+import { Request, Response } from "express";
+import { NodesController } from "../controllers/nodes.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -165,7 +164,7 @@ Ensuite, nous allons créer un fichier _lib/config/database.ts_ pour configurer 
 
 ```ts
 // lib/config/database.ts
-import {Sequelize} from "sequelize";
+import { Sequelize } from "sequelize";
 
 export const database = new Sequelize({
   database: "some_db",
@@ -180,8 +179,8 @@ Ensuite, nous pourrons créer un **modèle**. Nous commencerons par le modèle *
 
 ```ts
 // lib/models/node.model.ts
-import {Sequelize, Model, DataTypes, BuildOptions} from "sequelize";
-import {database} from "../config/database";
+import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
+import { database } from "../config/database";
 
 export class Node extends Model {
   public id!: number;
@@ -217,7 +216,7 @@ Node.init(
   }
 );
 
-Node.sync({force: true}).then(() => console.log("Node table created"));
+Node.sync({ force: true }).then(() => console.log("Node table created"));
 ```
 
 C'est tout! Lorsque vous démarrez le serveur `npm run dev` vous verrez que la table est automatiquement créée.
@@ -238,8 +237,8 @@ Récupérer tous les enregistrements est assez facile Nous utilisons la méthode
 
 ```ts
 // lib/controllers/nodes.controller.ts
-import {Request, Response} from "express";
-import {Node} from "../models/node.model";
+import { Request, Response } from "express";
+import { Node } from "../models/node.model";
 
 export class NodesController {
   public index(req: Request, res: Response) {
@@ -254,8 +253,8 @@ Comme précédemment, nous devons ajouter la route:
 
 ```ts
 // lib/config/routes.ts
-import {Request, Response} from "express";
-import {NodesController} from "../controllers/nodes.controller";
+import { Request, Response } from "express";
+import { NodesController } from "../controllers/nodes.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -293,7 +292,7 @@ Maintenant, revenons au contrôleur. Nous appelons simplement la méthode `Node.
 ```ts
 // lib/controllers/nodes.controller.ts
 // ...
-import {Node, NodeInterface} from "../models/node.model";
+import { Node, NodeInterface } from "../models/node.model";
 
 export class NodesController {
   // ...
@@ -316,10 +315,7 @@ export class Routes {
   // ...
   public routes(app): void {
     // ...
-    app
-      .route("/nodes")
-      .get(this.nodesController.index)
-      .post(this.nodesController.create);
+    app.route("/nodes").get(this.nodesController.index).post(this.nodesController.create);
   }
 }
 ```
@@ -373,7 +369,7 @@ export class NodesController {
         if (node) {
           res.json(node);
         } else {
-          res.status(404).json({errors: ["Node not found"]});
+          res.status(404).json({ errors: ["Node not found"] });
         }
       })
       .catch((err: Error) => res.status(500).json(err));
@@ -401,10 +397,7 @@ export class Routes {
   // ...
   public routes(app): void {
     // ...
-    app
-      .route("/nodes/:id")
-      .get(this.nodesController.show)
-      .put(this.nodesController.update);
+    app.route("/nodes/:id").get(this.nodesController.show).put(this.nodesController.update);
   }
 }
 ```
@@ -418,7 +411,7 @@ Puis `Node.update` retourne une _Promesse_ comme beaucoup de méthodes Sequelize
 
 ```ts
 // lib/controllers/nodes.controller.ts
-import {UpdateOptions} from "sequelize";
+import { UpdateOptions } from "sequelize";
 // ...
 export class NodesController {
   // ...
@@ -427,12 +420,12 @@ export class NodesController {
     const params: NodeInterface = req.body;
 
     const update: UpdateOptions = {
-      where: {id: nodeId},
+      where: { id: nodeId },
       limit: 1,
     };
 
     Node.update(params, update)
-      .then(() => res.status(202).json({data: "success"}))
+      .then(() => res.status(202).json({ data: "success" }))
       .catch((err: Error) => res.status(500).json(err));
   }
 }
@@ -472,19 +465,19 @@ Pour la méthode `destroy` nous allons appeler la méthode `Node.destroy` qui pr
 ```ts
 // lib/controllers/nodes.controller.ts
 // ...
-import {UpdateOptions, DestroyOptions} from "sequelize";
+import { UpdateOptions, DestroyOptions } from "sequelize";
 
 export class NodesController {
   // ...
   public delete(req: Request, res: Response) {
     const nodeId: number = req.params.id;
     const options: DestroyOptions = {
-      where: {id: nodeId},
+      where: { id: nodeId },
       limit: 1,
     };
 
     Node.destroy(options)
-      .then(() => res.status(204).json({data: "success"}))
+      .then(() => res.status(204).json({ data: "success" }))
       .catch((err: Error) => res.status(500).json(err));
   }
 }
@@ -513,9 +506,9 @@ Le modèle:
 
 ```ts
 // lib/models/node.model.ts
-import {Model, DataTypes} from "sequelize";
-import {database} from "../config/database";
-import {Node} from "./node.model";
+import { Model, DataTypes } from "sequelize";
+import { database } from "../config/database";
+import { Node } from "./node.model";
 
 export class Link extends Model {
   public id!: number;
@@ -554,16 +547,16 @@ Link.init(
   }
 );
 
-Link.sync({force: true}).then(() => console.log("Link table created"));
+Link.sync({ force: true }).then(() => console.log("Link table created"));
 ```
 
 Le contrôleur:
 
 ```ts
 // lib/controllers/links.controller.ts
-import {Request, Response} from "express";
-import {Link, LinkInterface} from "../models/link.model";
-import {UpdateOptions, DestroyOptions} from "sequelize";
+import { Request, Response } from "express";
+import { Link, LinkInterface } from "../models/link.model";
+import { UpdateOptions, DestroyOptions } from "sequelize";
 
 export class LinksController {
   public index(_req: Request, res: Response) {
@@ -588,7 +581,7 @@ export class LinksController {
         if (link) {
           res.json(link);
         } else {
-          res.status(404).json({errors: ["Link not found"]});
+          res.status(404).json({ errors: ["Link not found"] });
         }
       })
       .catch((err: Error) => res.status(500).json(err));
@@ -599,24 +592,24 @@ export class LinksController {
     const params: LinkInterface = req.body;
 
     const options: UpdateOptions = {
-      where: {id: linkId},
+      where: { id: linkId },
       limit: 1,
     };
 
     Link.update(params, options)
-      .then(() => res.status(202).json({data: "success"}))
+      .then(() => res.status(202).json({ data: "success" }))
       .catch((err: Error) => res.status(500).json(err));
   }
 
   public delete(req: Request, res: Response) {
     const linkId: number = req.params.id;
     const options: DestroyOptions = {
-      where: {id: linkId},
+      where: { id: linkId },
       limit: 1,
     };
 
     Link.destroy(options)
-      .then(() => res.status(204).json({data: "success"}))
+      .then(() => res.status(204).json({ data: "success" }))
       .catch((err: Error) => res.status(500).json(err));
   }
 }
@@ -626,9 +619,9 @@ Les routes:
 
 ```ts
 // lib/config/routes.ts
-import {Request, Response} from "express";
-import {NodesController} from "../controllers/nodes.controller";
-import {LinksController} from "../controllers/links.controller";
+import { Request, Response } from "express";
+import { NodesController } from "../controllers/nodes.controller";
+import { LinksController } from "../controllers/links.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -636,10 +629,7 @@ export class Routes {
 
   public routes(app): void {
     // ...
-    app
-      .route("/links")
-      .get(this.linksController.index)
-      .post(this.linksController.create);
+    app.route("/links").get(this.linksController.index).post(this.linksController.create);
 
     app
       .route("/links/:id")
@@ -666,7 +656,7 @@ Avec sequelize nous pouvons facilement construire des relations entre les modèl
 
 ```ts
 // lib/models/node.model.ts
-import {Link} from "./link.model";
+import { Link } from "./link.model";
 // ...
 
 Node.hasMany(Link, {
@@ -681,7 +671,7 @@ Node.hasMany(Link, {
   as: "nextLinks",
 });
 
-Node.sync({force: true}).then(() => console.log("Node table created"));
+Node.sync({ force: true }).then(() => console.log("Node table created"));
 ```
 
 Maintenant relancez le serveur en utilisant `npm run dev`. Vous devriez voir passer la requête SQL query qui vient de créer la table:
@@ -734,7 +724,7 @@ C'est très simple. Créez une nouvelle route liée à un nouveau contrôleur.
 ```ts
 // lib/config/routes.ts
 // ...
-import {GraphController} from "../controllers/graph.controller";
+import { GraphController } from "../controllers/graph.controller";
 
 export class Routes {
   public nodesController: NodesController = new NodesController();
@@ -754,9 +744,9 @@ Je déplace tout le code dans une **Promesse** pour améliorer la lisibilité et
 
 ```ts
 // lib/controllers/build.controller.ts
-import {Request, Response} from "express";
-import {Link} from "../models/link.model";
-import {Node} from "../models/node.model";
+import { Request, Response } from "express";
+import { Link } from "../models/link.model";
+import { Node } from "../models/node.model";
 
 export class GraphController {
   public mermaid(_req: Request, res: Response) {
@@ -785,9 +775,7 @@ export class GraphController {
     });
 
     // call promise and return plain text
-    getMermaid
-      .then((graph: string) => res.send(graph))
-      .catch((err: Error) => res.status(500).json(err));
+    getMermaid.then((graph: string) => res.send(graph)).catch((err: Error) => res.status(500).json(err));
   }
 }
 ```

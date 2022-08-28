@@ -1,11 +1,10 @@
 ---
-
 title: Afficher les erreurs d'un formulaire en AJAX avec Twitter Bootstrap et Rails
 description: Participez au développement de votre navigateur preéferé
 date: 2017-09-22 12:00:00 +0200
 tags: [ruby, rails, twitter-bootstrap-3, jquery, javascript]
 categories: development
-image: ./images/ajax_error_form.gif
+image: /img/blog/ajax_error_form.gif
 comments: true
 lang: fr
 ---
@@ -53,33 +52,25 @@ Et voici mon formulaire
 
 ```javascript
 // app/assets/javascripts/dishes.js
-$(document).on(
-  "ajax:success",
-  "form.edit_dish",
-  function (e, data, status, xhr) {
-    // le formulaire a été envoyé correctement et le plat a été mis à jour
-    // on récupère donc le résultat et on met à jour la liste des plats
-    $("#dishes-list").html(xhr.responseText);
-    // on ferme le jquery-ui dialog
-    $(".ui-dialog").remove();
-  }
-);
+$(document).on("ajax:success", "form.edit_dish", function (e, data, status, xhr) {
+  // le formulaire a été envoyé correctement et le plat a été mis à jour
+  // on récupère donc le résultat et on met à jour la liste des plats
+  $("#dishes-list").html(xhr.responseText);
+  // on ferme le jquery-ui dialog
+  $(".ui-dialog").remove();
+});
 ```
 
 - le formulaire contient une erreur.
 
 ```javascript
 // app/assets/javascripts/dishes.js
-$(document).on(
-  "ajax:error",
-  "form.edit_dish",
-  function (e, xhr, status, error) {
-    // le plat n'a pas été mis à jour, sûrement à cause d'une erreur de donnée,
-    // on récupère donc le formulaire renvoyé par notre controlleur et on écrase l'ancien
-    var form = $(this);
-    form.parent().html(xhr.responseText);
-  }
-);
+$(document).on("ajax:error", "form.edit_dish", function (e, xhr, status, error) {
+  // le plat n'a pas été mis à jour, sûrement à cause d'une erreur de donnée,
+  // on récupère donc le formulaire renvoyé par notre controlleur et on écrase l'ancien
+  var form = $(this);
+  form.parent().html(xhr.responseText);
+});
 ```
 
 **Ruby on Rails** est magique!

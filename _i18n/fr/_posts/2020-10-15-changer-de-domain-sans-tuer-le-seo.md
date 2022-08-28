@@ -143,11 +143,11 @@ IN TXT "google-site-verification=XXXXX"
 
 Ensuite tu n'as plus qu'à te rendre dans [les paramètres Google Webmaster](https://search.google.com/search-console/settings). Il y a une section _change domain of a property_ et la tu verra apparaître le nouveau nom de domaine.
 
-![Settings to change property domain name](./images/google-webmaster-prepare-update-domain.png)
+![Settings to change property domain name](/img/blog/google-webmaster-prepare-update-domain.png)
 
 J'ai eu besoin d'attendre quelques heures afin que Google scanne mon nouveau site et j'ai pu envoyer le formulaire.
 
-![property domain updated !](./images/google-webmaster-domain-updated.png)
+![property domain updated !](/img/blog/google-webmaster-domain-updated.png)
 
 Et c'est tout.
 
@@ -167,11 +167,11 @@ Je pense donc que tu dois conserver ce nom de domaine. Pendant combien de temps 
 
 Connectes toi donc sur [Google Search Console](https://search.google.com/search-console) après quelques semaines et regardez l'évolution du trafic du domaine précédent :
 
-![performance du trafic de l'ancien site web sur la Google Search Console](./images/google-webmaster-old-domain.png)
+![performance du trafic de l'ancien site web sur la Google Search Console](/img/blog/google-webmaster-old-domain.png)
 
 Super ! Tu vois que le trafic commence à diminuer à la date de la migration. Voyons donc l'évolution du trafic du nouveau domaine :
 
-![performance du trafic de la Google Search Console pour le nouveau site web](./images/google-webmaster-new-domain.png)
+![performance du trafic de la Google Search Console pour le nouveau site web](/img/blog/google-webmaster-new-domain.png)
 
 Ces informations montrent que tout mon trafic a été correctement transféré dans mon nouveau domaine ! Je reçois en moyenne le même nombre de clics sur mon nouveau site que sur l'ancien. Mais ces capture d'écran montrent aussi que même après quelques semaines, mon ancien site continue à recevoir du trafic de Google.
 

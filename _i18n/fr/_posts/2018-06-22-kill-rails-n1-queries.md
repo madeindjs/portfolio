@@ -1,9 +1,8 @@
 ---
-
 title: A la chasse aux requêtes N+1 avec Ruby on Rail
 date: 2018-06-22 17:30:00 +0200
 tags: [ruby, rails, sql, performance, optimization]
-image: ./images/n1query.png
+image: /img/blog/n1query.png
 categories: tutorial
 lang: fr
 ---
@@ -88,6 +87,6 @@ end
 
 Ici j'ai seulement activé une [`window.alert`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert) JavaScript. Il suffit ensuite d'utiliser l'application normalement et lorsque l'on rencontrera une requête N+1:
 
-![Affichage de test.fr/load.php sans mise en cache](./images/bullet_notification.png)
+![Affichage de test.fr/load.php sans mise en cache](/img/blog/bullet_notification.png)
 
 [bullet]: https://github.com/flyerhzm/bullet

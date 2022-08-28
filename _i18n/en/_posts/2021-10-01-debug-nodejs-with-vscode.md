@@ -8,7 +8,7 @@ tags:
   - docker
   - vscode
 lang: en
-image: ./images/debugging-using-console-log.png
+image: /img/blog/debugging-using-console-log.png
 ---
 
 I always have trouble using the VSCode debugger when I want to put breakpoints in a script or a Node.js application. In some cases I even end up putting `console.log`.

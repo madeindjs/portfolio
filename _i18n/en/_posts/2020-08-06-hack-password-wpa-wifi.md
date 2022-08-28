@@ -4,7 +4,7 @@ description: Use Kali Linux to get WPA/WPA2 password of Wi-fi
 date: 2020-08-06 17:00:00 +0200
 tags: [hack, kali, Wi-fi, wpa]
 categories: hacking
-image: ./images/wifi.png
+image: /img/blog/wifi.png
 comments: true
 lang: en
 ---
@@ -13,7 +13,7 @@ I decided to hack my [my new router](../fr/2017-10-11-installer-bridge-sfr-box-4
 
 So to make my tests I tried a famous Linux distribution: [Kali Linux](https://www.kali.org/). This distribution have many pre-instaled hacking tools who help us.
 
-![Logo de Kali Linux](./images/kali.svg.png)
+![Logo de Kali Linux](/img/blog/kali.svg.png)
 
 I installed Kali Linux in [dual-boot](https://fr.wikipedia.org/wiki/Multiboot) but you can also use it in Live USB mode or with a virtual machine like [VirtualBox](https://www.virtualbox.org/).
 
@@ -144,7 +144,7 @@ aircrack-ng -a2 -b 18:D6:C7:85:7E:A0 -w /root/Desktop/passwords.txt /root/Deskto
 
 And after a while::
 
-![success](./images/crack_wpa.png)
+![success](/img/blog/crack_wpa.png)
 
 ## Conclusion
 

@@ -9,7 +9,7 @@ tags:
   - postgres
   - bash
 categories: devops
-image: ./images/postgres.png
+image: /img/blog/postgres.png
 modified: 2021-06-05T13:55:09.822Z
 lang: fr
 ---

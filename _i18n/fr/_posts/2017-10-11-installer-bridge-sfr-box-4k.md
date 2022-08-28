@@ -4,7 +4,7 @@ description: Participez au développement de votre navigateur preéferé
 date: 2017-10-11 12:00:00 +0200
 tags: [networking, routing, sfr]
 categories: network
-tumbnail: ./images/network_router_pi_sfr.png
+tumbnail: /img/blog/network_router_pi_sfr.png
 comments: true
 lang: fr
 ---
@@ -15,7 +15,7 @@ La Box SFR 4K étant ~~une vraie merde~~ un peu limitée, j'ai investis dans un 
 
 L'idée est la suivante:
 
-![Schéma du réseau à programmer](./images/network_router_pi_sfr_schema.png)
+![Schéma du réseau à programmer](/img/blog/network_router_pi_sfr_schema.png)
 
 Au cas ou vous n'avez pas compris, si un utilisateur demande la page:
 
@@ -57,7 +57,7 @@ On commence par trouver les Raspberry Pi avec un bon vieux **nmap**
 sudo nmap -n -sP 192.168.1.*
 ```
 
-![Résultat du nmap](./images/network_nmap_raspberry.gif)
+![Résultat du nmap](/img/blog/network_nmap_raspberry.gif)
 
 Il nous suffit donc de se connecter au Raspberry PI via **SSH**:
 
@@ -88,7 +88,7 @@ On va donc se connecter au résaux TP Link afin d'accéder à l'interface d'admi
 
 On se rend dans l'onglet _Forwarding > Virtual Server_
 
-![Interface de redirection des ports de TP Link](./images/ip_link_forward.png)
+![Interface de redirection des ports de TP Link](/img/blog/ip_link_forward.png)
 
 A partir de maintenant, le site [rousseau-alexandre.fr](http://rousseau-alexandre.fr) est accessible depuis votre navigateur.
 

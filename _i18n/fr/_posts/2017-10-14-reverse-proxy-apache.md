@@ -1,5 +1,4 @@
 ---
-
 title: Installer un reverse Proxy
 description: Soyez le roi des redirection
 date: 2017-10-14 23:00:00 +0200
@@ -17,12 +16,12 @@ Le principe est simple. Vous avez deux serveurs (ou plus) dont un jouera le rôl
 
 Admettons le schéma suivant:
 
-![Interface de redirection des ports de TP Link](./images/network_apache_proxy.png)
+![Interface de redirection des ports de TP Link](/img/blog/network_apache_proxy.png)
 
 Deux cas sont alors possibles
 
-![Interface de redirection des ports de TP Link](./images/network_apache_proxy_rc.png)
-![Interface de redirection des ports de TP Link](./images/network_apache_proxy_ar.png)
+![Interface de redirection des ports de TP Link](/img/blog/network_apache_proxy_rc.png)
+![Interface de redirection des ports de TP Link](/img/blog/network_apache_proxy_ar.png)
 
 ## La pratique!
 

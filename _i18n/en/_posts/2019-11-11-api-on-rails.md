@@ -3,7 +3,7 @@ title: Feedback about writing a technical book
 description: Quick analysis of writing and publishing a technical e-book on Leanpub
 date: 2019-11-11 0:30:00 +0200
 tags: [rails, leanpub, book]
-image: ./images/api_on_rails.png
+image: /img/blog/api_on_rails.png
 categories: story
 lang: en
 ---

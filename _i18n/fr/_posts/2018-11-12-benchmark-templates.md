@@ -4,7 +4,7 @@ title: Un comparatif des librairies de templating
 tags: [ruby, haml, slim]
 categories: benchmarking
 date: 2018-11-12 08:00:00 +0200
-image: ./images/erb.png
+image: /img/blog/erb.png
 lang: fr
 ---
 

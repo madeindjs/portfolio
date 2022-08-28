@@ -4,7 +4,7 @@ description: Utiliser les générateur Javascript afin d'optimiser la consommati
 
 date: 2020-05-04 19:00:00 +0200
 tags: [typescript, nodejs, javascript]
-image: ./images/typescript.jpg
+image: /img/blog/typescript.jpg
 categories: programming
 lang: fr
 ---
@@ -21,10 +21,7 @@ Imagine une classe qui représente un utilisateur avec un `firstname`, `lastname
 class User {
   public birthDate: Date;
 
-  public constructor(
-    public readonly firstname: string = "Alexandre",
-    public readonly lastname: string = "Rousseau"
-  ) {
+  public constructor(public readonly firstname: string = "Alexandre", public readonly lastname: string = "Rousseau") {
     const birthYear = Math.floor(Math.random() * 50 + 1970);
     this.birthDate = new Date(birthYear, 1, 1);
   }
@@ -102,10 +99,8 @@ En faisant cela le code fera plus de requêtes SQL mais il sera plus performants
 Voici donc un exemple plus parlant:
 
 ```ts
-async function* getUsers(
-  perPage: number = 20
-): AsyncGenerator<User, void, unknown> {
-  const userCount = await User.count({where});
+async function* getUsers(perPage: number = 20): AsyncGenerator<User, void, unknown> {
+  const userCount = await User.count({ where });
   let nbFetched = 0;
 
   while (nbFetched < userCount) {
