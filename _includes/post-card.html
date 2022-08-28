@@ -6,5 +6,5 @@
     <a href="{{ include.post.url | prepend: site.baseurl }}">{{ include.post.title }}</a>
   </p>
 
-  <p class="post-card__date">{{ post.date }}</p>
+  <p class="post-card__date">{{ post.date | date: "%F" }}</p>
 </section>
