@@ -16,8 +16,12 @@
     background-position: 0 -100%;
   }
 
-  &-lg {
+  &--lg {
     font-size: 2rem;
+  }
+
+  &--active {
+    border-color: $primary;
   }
 }
 
@@ -27,6 +31,10 @@
     background-image: linear-gradient(to bottom, black 50%, white 50%);
 
     color: white;
+
+    &--active {
+      border-color: $primary;
+    }
 
     &:hover {
       color: black;

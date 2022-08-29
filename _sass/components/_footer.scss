@@ -2,10 +2,12 @@
 @import "../_mixins.scss";
 
 .footer {
+  $font-size: 1rem;
   padding: 1rem;
+  text-align: center;
 
   * {
-    font-size: small;
+    font-size: $font-size-small;
   }
 
   &__terms {
@@ -14,6 +16,6 @@
 
   &__externals-links {
     @extend %list-inline;
-    font-size: small;
+    font-size: $font-size-small;
   }
 }
