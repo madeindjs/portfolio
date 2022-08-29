@@ -27,6 +27,7 @@ group :jekyll_plugins do
   gem 'jekyll-multiple-languages-plugin'
   gem 'jekyll-tagging'
   gem "jekyll-toc"
+  gem 'jekyll-tagging-related_posts'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

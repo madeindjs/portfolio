@@ -37,6 +37,7 @@ plugins:
   - jekyll-paginate
   - jekyll-multiple-languages-plugin
   - jekyll-toc
+  - jekyll-tagging-related_posts
 
 tag_page_layout: tag
 tag_page_dir: tag
