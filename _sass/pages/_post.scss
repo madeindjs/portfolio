@@ -9,10 +9,10 @@
     position: sticky;
     top: 0px;
 
-    background-color: $background-light;
+    background-color: $colors-background-light;
 
     @media (prefers-color-scheme: dark) {
-      background-color: $background-dark;
+      background-color: $colors-background-dark;
     }
   }
 }

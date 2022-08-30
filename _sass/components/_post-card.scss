@@ -9,18 +9,21 @@
 .post-card {
   width: 18rem;
   height: 18rem;
+  padding: 1rem;
+
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-decoration: none;
   display: flex;
 
-  // border: 3px solid black;
-  // padding: 1rem;
-  background-color: white;
-  color: black;
+  border: 3px solid black;
+
+  background-color: $colors-background-light;
+  color: $colors-background-dark;
+
   transition: background-position ease-in-out 0.2s, color ease-in-out 0.2s;
-  background-image: linear-gradient(to bottom, white 50%, black 50%);
+  background-image: linear-gradient(to bottom, $colors-background-light 50%, $colors-background-dark 50%);
   background-size: 100% 200%;
 
   &__title {
@@ -39,33 +42,38 @@
     font-size: 1rem;
   }
 
+  .post-card__date,
   .post-card__title a,
   .tags a {
     transition: color ease-in-out 0.2s, color ease-in-out 0.2s;
   }
 
   &:hover {
-    color: white;
+    color: $colors-text-dark;
 
     .post-card__title a,
     .tags a {
-      color: $primary-light-40 !important;
+      color: $colors-primary-dark !important;
     }
     background-position: 0 -100%;
   }
 
   @media (prefers-color-scheme: dark) {
-    color: white;
-    border-color: white;
-    background-color: black;
-    background-image: linear-gradient(to bottom, black 50%, white 50%);
+    color: $colors-text-dark;
+    border-color: $colors-text-dark;
+    background-color: $colors-background-dark;
+    background-image: linear-gradient(to bottom, $colors-background-dark 50%, $colors-background-light 50%);
 
     &:hover {
-      color: black !important;
+      color: $colors-text-light !important;
+
+      .post-card__date {
+        color: $colors-text-light;
+      }
 
       .post-card__title a,
       .tags a {
-        color: $primary-dark-40 !important;
+        color: $colors-primary !important;
       }
     }
   }

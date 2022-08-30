@@ -9,10 +9,10 @@ tags:
 lang: en
 translations:
   fr: deployer-rails-avec-capistrano
-modified: 2022-08-29T08:03:21.004Z
+modified: 2022-08-29T15:44:15.396Z
 ---
 
-Recently, I deployed a new brand new Rails application in my small VPS: https://killer.rsseau.fr . Doing so is alway a complex exercice because it requires to take care of many things. In this post, I will retrace everything I did.
+Recently, I deployed a new brand new Rails application in my small VPS: <https://killer.rsseau.fr> . Doing so is alway a complex exercice because it requires to take care of many things. In this post, I will retrace everything I did.
 
 In my case, I have the following stack:
 

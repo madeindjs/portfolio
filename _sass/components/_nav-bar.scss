@@ -59,9 +59,6 @@
   }
 }
 
-.language-selector {
-  // text-align: right;
-}
 
 .language {
   border: none;
@@ -74,6 +71,8 @@
   .navbar {
     background-color: black;
     box-shadow: none;
+
+    border-bottom: 1px solid white;
 
     a,
     div {

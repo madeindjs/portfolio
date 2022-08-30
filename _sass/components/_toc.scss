@@ -1,11 +1,11 @@
 @import "../_colors.scss";
 
 .toc {
-  background-color: $primary-light-40;
+  background-color: $colors-primary-light-40;
   // padding: 1rem;
 
   @media (prefers-color-scheme: dark) {
-    background-color: $primary-dark-40;
+    background-color: $colors-primary-dark-40;
   }
 
   &__title,
@@ -19,11 +19,11 @@
     font-size: 1.5rem;
     // font-weight: 600;
 
-    background-color: $primary-light-30;
+    background-color: $colors-primary-light-30;
     padding: 1rem;
 
     @media (prefers-color-scheme: dark) {
-      background-color: $primary-dark-30;
+      background-color: $colors-primary-dark-30;
     }
   }
 

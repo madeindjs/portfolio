@@ -28,11 +28,21 @@ $light_black: $midnight_blue;
 $light_blue: $peter_river;
 $blue: $belize_hole;
 
-$primary: $wisteria;
-$primary-light-30: lighten($wisteria, 30%);
-$primary-light-40: lighten($wisteria, 40%);
-$primary-dark-30: darken($wisteria, 30%);
-$primary-dark-40: darken($wisteria, 40%);
+$colors-primary: $wisteria;
 
-$background-dark: black;
-$background-light: white;
+
+$colors-background-light: white;
+$colors-text-light: black;
+
+$colors-background-dark: black;
+$colors-text-dark: white;
+
+$colors-primary-dark: $amethyst;
+
+$colors-primary-light-30: lighten($wisteria, 30%);
+$colors-primary-light-40: lighten($wisteria, 40%);
+$colors-primary-dark-30: darken($wisteria, 30%);
+$colors-primary-dark-40: darken($wisteria, 40%);
+
+$colors-background-dark: black;
+$colors-background-light: white;
