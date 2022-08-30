@@ -1,0 +1,26 @@
+%flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+%list-inline {
+  list-style: none;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  padding-left: 0;
+
+  li {
+    &:not(:first-child) {
+      &:before {
+        content: "∙";
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        font-weight: lighter;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

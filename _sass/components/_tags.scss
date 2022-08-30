@@ -1,0 +1,10 @@
+@import "../_colors.scss";
+@import "../_mixins.scss";
+
+.tags {
+  @extend %list-inline;
+
+  li {
+    font-size: 1rem;
+  }
+}

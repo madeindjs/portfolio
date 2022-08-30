@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+  <head>
+    {% include head.html %}
+  </head>
+
+  <body class="layout" {% if page.css_id %} id="{{ page.css_id  }}" {% endif %} >
+    {% include header.html %}
+    <main>{{ content }}</main>
+    {% include footer.html %}
+  </body>
+</html>

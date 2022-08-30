@@ -1,0 +1,146 @@
+@import "../colors";
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+main {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background-color: $colors-primary-dark;
+  color: $colors-text-dark;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+  transition: clip-path ease-in-out 0.2s;
+
+  &:hover {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $colors-primary;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+
+  &::after {
+    content: "";
+    height: 1rem;
+    background-color: $colors-primary-light-30;
+    z-index: -1;
+    width: 10rem;
+    display: block;
+    position: relative;
+    top: -1rem;
+    left: -0.5rem;
+    clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $colors-primary;
+    }
+  }
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4,
+h5,
+h5 {
+  font-size: 1.2rem;
+}
+
+p,
+li,
+pre,
+input,
+th,
+td {
+  font-size: 1.2rem;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: $colors-primary;
+
+  @media (prefers-color-scheme: dark) {
+    color: $colors-primary-dark;
+  }
+}
+
+hr {
+  display: block;
+  height: 8px;
+  background-color: $silver;
+  width: 60px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+main {
+  display: grid;
+  // weird bug, see https://github.com/sass/node-sass/issues/2815#issuecomment-574038619
+  grid-template-columns: 1fr #{"min(85ch, 100%)"} 1fr;
+  grid-template-rows: auto 1fr;
+
+  * {
+    grid-column-start: 2;
+    grid-column-end: 2;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: $colors-background-dark;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  pre,
+  input,
+  th,
+  td {
+    color: $colors-text-dark;
+  }
+
+  h2 {
+    &::after {
+      background-color: $wisteria;
+    }
+  }
+
+  input {
+    background-color: black;
+    color: $colors-background-light;
+    border-color: white;
+    border-style: dashed;
+    border-width: 1px;
+
+    &:focus {
+      border-style: solid;
+    }
+  }
+}

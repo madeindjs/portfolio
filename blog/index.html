@@ -1,0 +1,31 @@
+---
+layout: main
+title: Blog
+css_id: blog
+---
+<h1>{% t blog %}</h1>
+
+<p>
+  {% t blog-description %}.
+  {% if site.lang == 'fr' %}
+  <a href="/blog/">{% t blog-see-en %}</a>
+  {% elsif site.lang == 'en' %}
+  <a href="/fr/blog/">{% t blog-see-fr %}</a>
+  {% endif %}.
+</p>
+
+{% include posts-cards.html posts=paginator.posts %}
+
+<!-- Pagination links -->
+<nav class="pagination">
+  {% for page in (1..paginator.total_pages) %}
+  {% if page == paginator.page %}
+   <a class="btn btn--active" href="{% if site.lang == 'fr' %}/fr{% endif %}{{ paginator.previous_page_path }}">{{ page }}</a>
+  {% elsif page == 1 %}
+  <a class="btn" href="{% if site.lang == 'fr' %}/fr{% endif %}/blog">{{ page }}</a>
+  {% else %}
+  <a class="btn" href="{% if site.lang == 'fr' %}/fr{% endif %}{{ site.paginate_path | replace: ':num', page }}">{{ page }}</a>
+  {% endif %}
+  {% endfor %}
+  </ul>
+</nav>

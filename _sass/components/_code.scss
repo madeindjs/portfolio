@@ -1,0 +1,22 @@
+@import "../colors";
+
+// inline code
+pre.highlight,
+pre {
+  overflow-x: auto;
+  border: 1px solid $colors-primary-light-40;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+// inline code
+code.highlighter-rouge {
+  background-color: $colors-primary-light-40;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  border-radius: 0.5rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $colors-primary-dark-40;
+  }
+}

@@ -1,0 +1,80 @@
+@import "../_colors.scss";
+@import "../_mixins.scss";
+
+.post-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-card {
+  width: 18rem;
+  height: 18rem;
+  padding: 1rem;
+
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
+  display: flex;
+
+  border: 3px solid black;
+
+  background-color: $colors-background-light;
+  color: $colors-background-dark;
+
+  transition: background-position ease-in-out 0.2s, color ease-in-out 0.2s;
+  background-image: linear-gradient(to bottom, $colors-background-light 50%, $colors-background-dark 50%);
+  background-size: 100% 200%;
+
+  &__title {
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    flex-grow: 3;
+    @extend %flex-center;
+    align-items: center;
+    font-weight: 800;
+  }
+
+  &__date {
+    text-align: right;
+    flex-basis: 1rem;
+    font-size: 1rem;
+  }
+
+  .post-card__date,
+  .post-card__title a,
+  .tags a {
+    transition: color ease-in-out 0.2s, color ease-in-out 0.2s;
+  }
+
+  &:hover {
+    color: $colors-text-dark;
+
+    .post-card__title a,
+    .tags a {
+      color: $colors-primary-dark !important;
+    }
+    background-position: 0 -100%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: $colors-text-dark;
+    border-color: $colors-text-dark;
+    background-color: $colors-background-dark;
+    background-image: linear-gradient(to bottom, $colors-background-dark 50%, $colors-background-light 50%);
+
+    &:hover {
+      color: $colors-text-light !important;
+
+      .post-card__date {
+        color: $colors-text-light;
+      }
+
+      .post-card__title a,
+      .tags a {
+        color: $colors-primary !important;
+      }
+    }
+  }
+}

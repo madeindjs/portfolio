@@ -1,0 +1,10 @@
+@import "../_colors.scss";
+
+.alert {
+  background-color: $colors-primary-light-40;
+  padding: 1rem;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $colors-primary-dark-40;
+  }
+}

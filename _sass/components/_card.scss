@@ -1,0 +1,12 @@
+@import "../_mixins";
+@import "../_colors";
+
+.cards {
+  flex-wrap: wrap;
+  @extend %flex-center;
+  grid-column: 1 / 4 !important;
+
+  > * {
+    margin: 1rem;
+  }
+}

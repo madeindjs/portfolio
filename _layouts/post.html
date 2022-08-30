@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+  <head>
+    {% include head.html %}
+  </head>
+
+  <body id="post">
+    {% include header.html %}
+    <main>
+      <h1>{{ page.title }}</h1>
+      {% include tags.html tags=page.tags %}
+      <date>{{ page.date | date: "%Y-%m-%d" }}</date>
+      <!-- EN post link -->
+      {% if page.translations.en %}
+      <p class="alert alert--info">
+        <a hreflang="en" href="/blog/{{ page.translations.en }}">🇬🇧 Cet article est aussi disponible en anglais!</a>
+      </p>
+      {% endif %}
+      <!-- FR post link  -->
+      {% if page.translations.fr %}
+      <p class="alert alert--info">
+        <a hreflang="fr" href="/fr/blog/{{ page.translations.fr }}">🇫🇷 This post is also available in french!</a>
+      </p>
+      {% endif %} {% if page.thumbnail %}
+      <p class="text-center">
+        <img src="{{ page.thumbnail }}" class="center-block grey" />
+      </p>
+      {% endif %}
+
+      <nav class="toc">
+        <p class="toc__title">{{ site.translations[site.lang]['toc'] }}</p>
+        <div class="toc__content">{{ content | toc_only }}</div>
+      </nav>
+
+      {{ content }} {% if site.related_posts.size >= 1 %}
+      <div>
+        <h2>Related Posts</h2>
+        <div class="cards">
+          {% for related_post in site.related_posts limit: 3 %} {% include post-card.html post=related_post %} {% endfor
+          %}
+        </div>
+      </div>
+      {% endif %}
+    </main>
+    {% include footer.html %}
+    <link href="/css/pygments/custom.css" rel="stylesheet" />
+     <!-- from https://mincong.io/2018/08/22/create-json-ld-structured-data-in-jekyll/  -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "{{ site.url }}{{ page.url }}",
+        "name": {{ page.title | jsonify }},
+        "headline": {{ page.title | jsonify }},
+        "keywords": {{ page.tags | join: ',' | jsonify }},
+        "description": {{ page.description | jsonify }},
+        "datePublished": {{ page.date | jsonify }},
+        "dateModified": {{ page.last_modified_at | default: page.date | jsonify }},
+        "inLanguage": {{ site.lang | jsonify }}
+        "author": {
+          "@type": "Person",
+          "givenName": {{ site.data.profil.firstname | jsonify }},
+          "familyName": {{ site.data.profil.lastname | jsonify }},
+          "email": {{ site.email | jsonify }}
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": {{ site.title | jsonify }},
+          "url": "{{ site.url }}",
+          "logo": {
+            "@type": "ImageObject",
+            "width": 32,
+            "height": 32,
+            "url": "{{ site.url }}/img/favicons/favicon-32x32.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ site.url }}{{ page.url }}"
+        },
+        {% if page.thumbnail %}
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ site.url }}{{ page.thumbnail }}"
+        }
+        {% endif %}
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+@import "../_sizes";
+@import "../_mixins.scss";
+
+.footer {
+  $font-size: 1rem;
+  padding: 1rem;
+  text-align: center;
+
+  * {
+    font-size: $font-size-small;
+  }
+
+  &__terms {
+    margin-bottom: 0;
+  }
+
+  &__externals-links {
+    @extend %list-inline;
+    font-size: $font-size-small;
+  }
+}

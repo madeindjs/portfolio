@@ -1,0 +1,10 @@
+<footer class="footer">
+  <hr />
+  <ul class="footer__externals-links">
+    {% for link in site.data.profil.external-links %}
+      <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+    {% endfor %}
+    <li><a href="mailto:{{ site.data.profil.email }}">{{ site.data.profil.email }}</a></li>
+  </ul>
+  <p class="footer__terms">{% t footer.poweredBy %} {% t footer.licence %} {% t footer.cookie %}</p>
+</footer>

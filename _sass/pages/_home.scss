@@ -1,0 +1,21 @@
+@import "../_mixins";
+@import "../components/avatar.scss";
+@import "../mixins";
+
+#home {
+  main {
+    @extend %flex-center;
+    align-items: center;
+    section {
+      max-width: 70ch;
+    }
+  }
+  // flex-direction: column;
+  // align-items: center;
+  // height: 100%;
+
+  // .actions {
+  //   margin-top: 2rem;
+  //   @extend %flex-center;
+  // }
+}
