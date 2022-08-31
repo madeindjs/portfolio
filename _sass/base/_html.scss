@@ -3,6 +3,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: var(--colors-background);
 }
 
 main {
@@ -12,8 +13,8 @@ main {
 
 h1 {
   font-size: 2.5rem;
-  background-color: $colors-primary-dark;
-  color: $colors-text-dark;
+  background-color: var(--colors-primary);
+  color: white;
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 5px;
@@ -24,10 +25,6 @@ h1 {
   &:hover {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $colors-primary;
-  }
 }
 
 h2 {
@@ -36,7 +33,7 @@ h2 {
   &::after {
     content: "";
     height: 1rem;
-    background-color: $colors-primary-light-30;
+    background-color: var(--colors-primary-light);
     z-index: -1;
     width: 10rem;
     display: block;
@@ -44,10 +41,6 @@ h2 {
     top: -1rem;
     left: -0.5rem;
     clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
-
-    @media (prefers-color-scheme: dark) {
-      background-color: $colors-primary;
-    }
   }
 }
 
@@ -73,11 +66,21 @@ td {
 a {
   text-decoration: none;
   font-weight: bold;
-  color: $colors-primary;
+  color: var(--colors-primary);
+}
 
-  @media (prefers-color-scheme: dark) {
-    color: $colors-primary-dark;
-  }
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+pre,
+input,
+th,
+td {
+  color: var(--colors-text);
 }
 
 hr {
@@ -105,42 +108,4 @@ main {
 
 img {
   max-width: 100%;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: $colors-background-dark;
-  }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  li,
-  pre,
-  input,
-  th,
-  td {
-    color: $colors-text-dark;
-  }
-
-  h2 {
-    &::after {
-      background-color: $wisteria;
-    }
-  }
-
-  input {
-    background-color: black;
-    color: $colors-background-light;
-    border-color: white;
-    border-style: dashed;
-    border-width: 1px;
-
-    &:focus {
-      border-style: solid;
-    }
-  }
 }

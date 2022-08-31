@@ -1,0 +1,17 @@
+@import "./colors";
+
+:root {
+  --colors-background: white;
+  --colors-text: black;
+  --colors-primary: #{$wisteria};
+  --colors-primary-light: #{lighten($wisteria, 30%)};
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --colors-background: black;
+    --colors-text: white;
+    --colors-primary: #{$amethyst};
+    --colors-primary-light: #{lighten($amethyst, 30%)};
+  }
+}

@@ -17,13 +17,13 @@
   text-decoration: none;
   display: flex;
 
-  border: 3px solid black;
+  border: 3px solid var(--colors-text);
 
-  background-color: $colors-background-light;
-  color: $colors-background-dark;
+  background-color: var(--colors-background);
+  color: var(--colors-text);
 
   transition: background-position ease-in-out 0.2s, color ease-in-out 0.2s;
-  background-image: linear-gradient(to bottom, $colors-background-light 50%, $colors-background-dark 50%);
+  background-image: linear-gradient(to bottom, var(--colors-background) 50%, var(--colors-text) 50%);
   background-size: 100% 200%;
 
   &__title {
@@ -49,32 +49,12 @@
   }
 
   &:hover {
-    color: $colors-text-dark;
+    color: var(--colors-background);
 
     .post-card__title a,
     .tags a {
-      color: $colors-primary-dark !important;
+      color: var(--colors-primary) !important;
     }
     background-position: 0 -100%;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: $colors-text-dark;
-    border-color: $colors-text-dark;
-    background-color: $colors-background-dark;
-    background-image: linear-gradient(to bottom, $colors-background-dark 50%, $colors-background-light 50%);
-
-    &:hover {
-      color: $colors-text-light !important;
-
-      .post-card__date {
-        color: $colors-text-light;
-      }
-
-      .post-card__title a,
-      .tags a {
-        color: $colors-primary !important;
-      }
-    }
   }
 }
