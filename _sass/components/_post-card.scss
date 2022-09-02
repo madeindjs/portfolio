@@ -55,6 +55,11 @@
     .tags a {
       color: var(--colors-primary) !important;
     }
+
+    .post-card__date {
+      color: var(--colors-background);
+    }
+
     background-position: 0 -100%;
   }
 }
