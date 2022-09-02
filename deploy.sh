@@ -6,6 +6,10 @@ UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
 
+if [ $1 == "force" ]; then
+  LOCAL=""
+fi
+
 if [ $LOCAL != $REMOTE ]; then
   git pull origin master
   RUBY_VERSION=$(cat .ruby-version)
