@@ -1,6 +1,6 @@
 @import "../_colors.scss";
 
 .alert {
-  background-color: var(--colors-primary-light);
+  border: 1px solid var(--colors-primary-light);
   padding: 1rem;
 }

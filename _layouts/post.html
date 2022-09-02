@@ -13,7 +13,9 @@
       <!-- EN post link -->
       {% if page.translations.en %}
       <p class="alert alert--info">
-        <a hreflang="en" href="/blog/{{ page.translations.en }}.html">🇬🇧 Cet article est aussi disponible en anglais!</a>
+        <a hreflang="en" href="/blog/{{ page.translations.en }}.html"
+          >🇬🇧 Cet article est aussi disponible en anglais!</a
+        >
       </p>
       {% endif %}
       <!-- FR post link  -->
@@ -27,10 +29,10 @@
       </p>
       {% endif %}
 
-      <nav class="toc">
-        <p class="toc__title">{{ site.translations[site.lang]['toc'] }}</p>
+      <details class="toc">
+        <summary>{{ site.translations[site.lang]['toc'] }}</summary>
         <div class="toc__content">{{ content | toc_only }}</div>
-      </nav>
+      </details>
 
       {{ content }} {% if site.related_posts.size >= 1 %}
       <div>
@@ -44,7 +46,7 @@
     </main>
     {% include footer.html %}
     <link href="/css/pygments/custom.css" rel="stylesheet" />
-     <!-- from https://mincong.io/2018/08/22/create-json-ld-structured-data-in-jekyll/  -->
+    <!-- from https://mincong.io/2018/08/22/create-json-ld-structured-data-in-jekyll/  -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

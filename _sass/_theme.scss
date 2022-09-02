@@ -5,6 +5,7 @@
   --colors-text: black;
   --colors-primary: #{$wisteria};
   --colors-primary-light: #{lighten($wisteria, 30%)};
+  --colors-grey: rgb(170, 170, 170);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +13,7 @@
     --colors-background: black;
     --colors-text: white;
     --colors-primary: #{$amethyst};
-    --colors-primary-light: #{lighten($amethyst, 30%)};
+    --colors-primary-light: #{darken($amethyst, 20%)};
+    --colors-grey: rgb(68, 68, 68);
   }
 }

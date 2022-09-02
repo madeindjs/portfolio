@@ -59,7 +59,8 @@ li,
 pre,
 input,
 th,
-td {
+td,
+summary {
   font-size: 1.2rem;
 }
 
@@ -79,7 +80,8 @@ li,
 pre,
 input,
 th,
-td {
+td,
+summary {
   color: var(--colors-text);
 }
 
@@ -108,4 +110,18 @@ main {
 
 img {
   max-width: 100%;
+}
+
+details {
+  border: 5px solid var(--colors-text);
+
+  summary {
+    border-bottom: 1px solid var(--colors-text);
+    padding: 0.5rem;
+    color: var(--colors-text);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+  }
 }
