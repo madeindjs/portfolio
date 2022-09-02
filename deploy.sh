@@ -2,11 +2,10 @@
 
 git fetch origin
 
-UPSTREAM=${1:-'@{u}'}
 LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse "$UPSTREAM")
+REMOTE=$(git rev-parse "@{u}")
 
-if [ $1 == "force" ]; then
+if [ "$1" == "force" ]; then
   LOCAL=""
 fi
 
