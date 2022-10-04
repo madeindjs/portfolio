@@ -1,26 +1,59 @@
 <title>{% if page.title %}{{ page.title }} - {% endif %}Alexandre Rousseau</title>
-<meta name="description" content="{{ page.description }}">
+<meta name="description" content="{{ page.description }}" />
 <!-- CEO Stuffs -->
-<link rel="canonical" href="{{ site.url }}">
+<link rel="canonical" href="{{ site.url }}" />
 
-<meta property="rv" content="contact@rousseau-alexandre.fr">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:type" content="website">
-<meta property="og:title" content="{{ page.title | default: site.title }}">
-<meta property="og:url" content="{{ site.url }}">
-<meta property="og:site_name" content="{{ site.title }}">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ page.title | default: site.title }}">
-<meta name="twitter:description" content="{{ page.description }}">
+<meta property="rv" content="contact@rousseau-alexandre.fr" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ page.title | default: site.title }}" />
+<meta property="og:url" content="{{ site.url }}" />
+<meta property="og:site_name" content="{{ site.title }}" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{{ page.title | default: site.title }}" />
+<meta name="twitter:description" content="{{ page.description }}" />
 <!-- compatibilities -->
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
 
 <!-- favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png" />
 
 <!-- CSS -->
-<link href="/css/stylesheet.css" rel="stylesheet">
+<link href="/css/stylesheet.css" rel="stylesheet" />
+
+<script type="text/javascript">
+  //some default pre init
+  var Countly = Countly || {};
+  Countly.q = Countly.q || [];
+
+  //provide countly initialization parameters
+  Countly.app_key = "633bd7d841f4d33bdc0026e5";
+  Countly.url = "http://countly.rsseau.fr";
+
+  Countly.q.push(["track_sessions"]);
+  Countly.q.push(["track_pageview"]);
+  Countly.q.push(["track_clicks"]);
+  Countly.q.push(["track_scrolls"]);
+  Countly.q.push(["track_errors"]);
+  Countly.q.push(["track_links"]);
+  Countly.q.push(["track_forms"]);
+  Countly.q.push(["collect_from_forms"]);
+
+  //load countly script asynchronously
+  (function () {
+    var cly = document.createElement("script");
+    cly.type = "text/javascript";
+    cly.async = true;
+    //enter url of script here
+    cly.src = "https://cdnjs.cloudflare.com/ajax/libs/countly-sdk-web/20.4.0/countly.min.js";
+    cly.onload = function () {
+      Countly.init();
+    };
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(cly, s);
+  })();
+</script>
