@@ -1,0 +1,25 @@
+---
+import Card from "./Card.astro";
+
+type Props = { slug: string; lang: string };
+
+const { lang, slug } = Astro.props;
+
+const flag = lang === "en" ? "🇬🇧" : "🇫🇷";
+const title = lang === "en" ? "Hello" : "Bonjour";
+const description =
+  lang === "en" ? "Cet article est aussi disponible en anglais!" : "This post is also available in french!";
+---
+
+<Card>
+  <p slot="title" class="article-exists-in-other-lang__title">{flag}&nbsp;{title}</p>
+  <p slot="content">
+    <a hreflang={lang} href={`/${lang}/blog/${slug}`}> {description}</a>
+  </p>
+</Card>
+
+<style>
+  .article-exists-in-other-lang__title {
+    margin: 0;
+  }
+</style>

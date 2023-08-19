@@ -1,0 +1,18 @@
+---
+import Card from "./Card.astro";
+
+type Props = { title: string; description: string };
+
+const { title, description } = Astro.props;
+---
+
+<Card>
+  <p slot="title" class="promote-book__title">{title}</p>
+  <p slot="content" set:html={description} />
+</Card>
+
+<style>
+  .promote-book__title {
+    margin: 0;
+  }
+</style>

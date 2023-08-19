@@ -7,11 +7,10 @@ REMOTE=$(git rev-parse "@{u}")
 
 if [ "$LOCAL" != "$REMOTE" ] || [ "$1" = "force" ]; then
   git pull origin master
-  RUBY_VERSION=$(cat .ruby-version)
-  ~/.rvm/gems/$RUBY_VERSION/wrappers/jekyll build
+  npm run build
   rm -rf /var/www/portfolio/*
-  cp -r _site/* /var/www/portfolio/
-  cp -r _site/.well-known /var/www/portfolio/
+  cp -r dist/* /var/www/portfolio/
+  cp -r dist/.well-known /var/www/portfolio/
 else
   echo "Deployment skipped"
 fi

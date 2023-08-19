@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+import Card from "../../../components/Card.astro";
+import CardsGrid from "../../../components/CardsGrid.astro";
+import PostCards from "../../../components/PostCards.astro";
+import { SITE_DESCRIPTION } from "../../../consts";
+import { Langages, defaultLang } from "../../../i18n/ui";
+import { useTranslationsObject } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+import type { Post } from "../../../model";
+
+type Prop = { posts: Post[] };
+
+export async function getStaticPaths() {
+  const pages = await getCollection("blog");
+
+  return Object.values(Langages).map((lang) => ({
+    params: {
+      lang,
+      path: lang,
+    },
+    props: {
+      posts: pages
+        .filter((p) => p.slug.startsWith(`${lang}/`))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+const { posts } = Astro.props as Prop;
+
+const postsByYear = posts.reduce<Record<number, Post[]>>((acc, post) => {
+  const year = post.data.date.getFullYear();
+  acc[year] ??= [];
+  acc[year].push(post);
+  return acc;
+}, {});
+
+const t = useTranslationsObject(lang);
+---
+
+<Layout title={String(t.blog)} description={SITE_DESCRIPTION} lang={lang}>
+  <section class="blog">
+    <!-- <div class="blog__header"> -->
+    <h1>{t.blog}</h1>
+    <!-- </div> -->
+
+    <CardsGrid>
+      {
+        Object.entries(postsByYear)
+          .sort(([aYear], [bYear]) => Number(bYear) - Number(aYear))
+          .map(([year, posts]) => (
+            <Card noTitle={true}>
+              <div slot="content">
+                <h2 slot="title">{year}</h2>
+                <PostCards posts={posts} noShaddow />
+              </div>
+            </Card>
+          ))
+      }
+    </CardsGrid>
+  </section>
+</Layout>
+
+<style>
+  .blog {
+    padding: var(--spacing);
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blog__year__title {
+    /* border-top: 2px solid var(--colors-text);
+    padding: var(--spacing);
+    margin-bottom: var(--spacing); */
+    font-size: calc(var(--font-size-base) * 2);
+    margin: 0;
+  }
+</style>

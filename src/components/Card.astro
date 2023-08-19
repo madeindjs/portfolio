@@ -1,0 +1,54 @@
+---
+type Prop = { className?: string; noTitle?: boolean; noShaddow?: boolean };
+const { className, noTitle, noShaddow } = Astro.props;
+---
+
+<article class:list={["card", className, noShaddow ? "card--no-shaddow" : ""]}>
+  {
+    !noTitle && (
+      <div class="card__title">
+        <slot name="title" />
+      </div>
+    )
+  }
+  <div class="card__content">
+    <slot name="content" />
+  </div>
+</article>
+
+<style>
+  .card {
+    --shadow-offset: calc(var(--spacing) / 2);
+
+    border: 2px solid var(--colors-text);
+    border-radius: calc(var(--spacing) / 2);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--colors-secondary);
+    margin-bottom: var(--shadow-offset);
+    overflow: hidden;
+  }
+
+  .card--no-shaddow {
+    box-shadow: unset;
+    margin-bottom: 0;
+  }
+
+  .card__title,
+  .card__content {
+    padding: var(--spacing);
+    /* font-size: calc(var(--font-size-base) * 1.5); */
+  }
+
+  .card__title {
+    border-bottom: 2px solid var(--colors-text);
+    background-color: var(--colors-primary);
+  }
+
+  .card__content {
+    color: var(--colors-text);
+    background-color: var(--colors-background);
+  }
+
+  .card::selection {
+    background-color: var(--colors-primary);
+  }
+</style>

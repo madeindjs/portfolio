@@ -1,0 +1,21 @@
+---
+import { getLangFromUrl, useTranslationsObject } from "../i18n/utils";
+import PromoteBook from "./PromoteBook.astro";
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = useTranslationsObject(lang, {
+  en: {
+    title: "Interested about building and API using Ruby on Rails?",
+    description:
+      'Take a look on my brand new Book: <strong>API on Rails 6</strong>. You can <a href="https://github.com/madeindjs/api_on_rails">grab a free PDF version on Github</a>. If you like my work, you can <a href="https://leanpub.com/apionrails6/">buy a paid version on Leanpub</a>.',
+  },
+  fr: {
+    title: "Intéressé pour créer un API avec Ruby on Rails?",
+    description:
+      'Jette un coup d\'œil à mon livre: <strong>API on Rails 6</strong>. Tu peux <a href="https://github.com/madeindjs/api_on_rails">télécharger une version gratuite au format PDF sur Github</a>. Si tu aimes mon travail <a href="https://leanpub.com/rest-api-ts-fr/">tu peux acheter un version payante sur Leanpub</a>.',
+  },
+});
+---
+
+<PromoteBook title={t.title} description={t.description} />

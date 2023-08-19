@@ -1,0 +1,31 @@
+---
+import { defaultLang, Langages } from "../../i18n/ui";
+import { useTranslationsObject } from "../../i18n/utils";
+import type { Project } from "../../model";
+import { convertGithubRepoToProject, fetchGithubRepositoryInfo, fetchMyRepositories } from "../../utils/github";
+import CardsGrid from "../CardsGrid.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+
+const t = useTranslationsObject(lang);
+
+const repositories = await fetchMyRepositories();
+
+repositories.push(await fetchGithubRepositoryInfo("spider-rs/spider"));
+
+const projects: Project[] = repositories
+  .map(convertGithubRepoToProject)
+  .filter((a) => (a.githubStars ?? 0) > 50)
+  .sort((a, b) => (b.githubStars ?? 0) - (a.githubStars ?? 0));
+---
+
+{
+  projects.length > 0 && (
+    <CardsGrid>
+      {projects.map((project) => (
+        <ProjectCard {...project} description={project.description} />
+      ))}
+    </CardsGrid>
+  )
+}

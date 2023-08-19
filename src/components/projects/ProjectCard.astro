@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+import { defaultLang, Langages } from "../../i18n/ui";
+import type { Project } from "../../model";
+import ButtonLink from "../ButtonLink.astro";
+import Card from "../Card.astro";
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+
+type Props = Project;
+
+const { description, title, github, githubStars, url, topics, image } = Astro.props;
+---
+
+<Card>
+  <div slot="title">
+    <p class="project-card__title">{title}</p>
+  </div>
+  <div slot="content">
+    <p>
+      {description[lang]}
+    </p>
+    {
+      topics.length > 0 && (
+        <ul class="project-card__topics">
+          {topics.map((topic) => (
+            <li>#{topic}</li>
+          ))}
+        </ul>
+      )
+    }
+    {image && <Image src={image} alt={`Screenshot of ${title}`} loading="lazy" height={300} />}
+    <div class="project-card__actions">
+      {url && <ButtonLink href={url}>website</ButtonLink>}
+      {github && <ButtonLink href={github}>Github {githubStars ? `(${githubStars}★)` : ""}</ButtonLink>}
+    </div>
+  </div>
+</Card>
+
+<style>
+  .project-card__title {
+    margin: 0;
+  }
+  .project-card__actions {
+    display: flex;
+    gap: var(--spacing);
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .project-card__topics {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-0_5);
+    justify-content: flex-end;
+  }
+</style>

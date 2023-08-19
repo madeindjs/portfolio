@@ -1,0 +1,91 @@
+---
+import { getCollection } from "astro:content";
+import ArticleExistsInOtherLang from "../../../components/ArticleExistsInOtherLang.astro";
+import PostCards from "../../../components/PostCards.astro";
+import PromoteBookApiOnRails from "../../../components/PromoteBookApiOnRails.astro";
+import PromoteBookRestApiTs from "../../../components/PromoteBookRestApiTs.astro";
+import { Langages, defaultLang } from "../../../i18n/ui";
+import { useTranslationsObject } from "../../../i18n/utils";
+import BlogPost from "../../../layouts/BlogPost.astro";
+import type { Post } from "../../../model";
+import { getPostLanguage, getPostSlug, getSimilarPosts } from "../../../utils/post.utils";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("blog");
+
+  const paths = pages.map((page) => {
+    const [lang] = page.slug.split("/");
+
+    const postsInSameLang = pages.filter((p) => getPostLanguage(p.slug) === lang);
+
+    let shouldPromoteApiOnRails = false;
+    let shouldPromoteRestApiTs = false;
+
+    for (const tag of page.data.tags) {
+      if (["typescript"].includes(tag)) {
+        shouldPromoteRestApiTs = true;
+      }
+      if (["ruby", "rails"].includes(tag)) {
+        shouldPromoteApiOnRails = true;
+      }
+    }
+
+    return {
+      params: { lang, slug: getPostSlug(page.slug) },
+      props: {
+        post: page,
+        similarPosts: getSimilarPosts(page, postsInSameLang).slice(0, 2),
+        shouldPromoteApiOnRails,
+        shouldPromoteRestApiTs,
+      },
+    };
+  });
+
+  return paths;
+}
+type Props = { post: Post; similarPosts: Post[]; shouldPromoteApiOnRails: boolean; shouldPromoteRestApiTs: boolean };
+
+const { post, similarPosts, shouldPromoteApiOnRails, shouldPromoteRestApiTs } = Astro.props;
+
+const { translations } = post.data;
+const hasNotices = translations?.fr || post.data.translations?.en || shouldPromoteApiOnRails || shouldPromoteRestApiTs;
+
+const { Content } = await post.render();
+
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+const t = useTranslationsObject(lang, {
+  en: { similarPosts: "See other related posts" },
+  fr: { similarPosts: "Voir les autres articles liés" },
+});
+---
+
+<BlogPost post={post}>
+  {
+    hasNotices && (
+      <div class="blog-post__notices">
+        {shouldPromoteApiOnRails && <PromoteBookApiOnRails />}
+        {shouldPromoteRestApiTs && <PromoteBookRestApiTs />}
+        {translations?.fr && <ArticleExistsInOtherLang lang="fr" slug={translations?.fr} />}
+        {translations?.en && <ArticleExistsInOtherLang lang="en" slug={translations?.en} />}
+      </div>
+    )
+  }
+  <Content />
+  {
+    similarPosts.length > 0 && (
+      <>
+        <h2>{t.similarPosts}</h2>
+        <PostCards posts={similarPosts} />
+      </>
+    )
+  }
+</BlogPost>
+
+<style>
+  .blog-post__notices {
+    margin-bottom: var(--spacing-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+</style>

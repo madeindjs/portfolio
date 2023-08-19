@@ -1,0 +1,64 @@
+---
+import { getLangFromUrl, useTranslationsObject } from "../i18n/utils";
+import ButtonLink from "./ButtonLink.astro";
+const today = new Date();
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = useTranslationsObject(lang, { en: { resume: "Resume" }, fr: { resume: "CV" } });
+
+const externalLinks = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/alexandre-rousseau-a55a9464/",
+  },
+  {
+    name: "Github",
+    url: "https://github.com/madeindjs/",
+  },
+  {
+    name: "Stack Overflow",
+    url: "https://stackoverflow.com/users/5935198/rousseaualexandre",
+  },
+  {
+    name: t.resume,
+    url: `/${lang}/resume`,
+  },
+];
+---
+
+<footer class="footer">
+  <div class="footer__content">
+    <p class="footer__content__links">
+      {externalLinks.map(({ name, url }) => <ButtonLink href={url}>{name}</ButtonLink>)}
+    </p>
+    <p>
+      &copy; {today.getFullYear()} Alexandre Rousseau. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: var(--spacing);
+    background-color: var(--colors-secondary);
+    border-top: 2px solid var(--colors-text);
+  }
+
+  .footer__content {
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer__content p {
+    color: var(--colors-black);
+  }
+
+  .footer__content__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+    justify-content: center;
+  }
+</style>
