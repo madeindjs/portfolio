@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import PostCardTags from "../../../components/PostCardTags.astro";
-import { SITE_DESCRIPTION } from "../../../consts";
 import { Langages, defaultLang } from "../../../i18n/ui";
 import { useTranslationsObject } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
@@ -38,10 +37,13 @@ export async function getStaticPaths() {
 const lang = (Astro.params.lang ?? defaultLang) as Langages;
 const { tags } = Astro.props;
 
-const t = useTranslationsObject(lang);
+const t = useTranslationsObject(lang, {
+  fr: { tags: { title: "Liste des tags", desc: "Liste des tags relatifs à mes articles." } },
+  en: { tags: { title: "List of tags", desc: "List of my pots tags." } },
+});
 ---
 
-<Layout title={String(t.blog)} description={SITE_DESCRIPTION} lang={lang}>
+<Layout title={t.tags.title} description={t.tags.desc} lang={lang}>
   <section class="blog">
     <h1>Tags</h1>
     <PostCardTags tags={tags} />

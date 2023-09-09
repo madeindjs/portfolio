@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import ButtonLink from "../../components/ButtonLink.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import { useTranslationsObject } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 
@@ -21,6 +20,8 @@ const lang = (Astro.params.lang ?? defaultLang) as Langages;
 const t = useTranslationsObject(lang, {
   fr: {
     booksPage: {
+      title: "Mes livres",
+      desc: "J'écris quelques livres / tutoriel libres afin de créer des applications web.",
       bookDescription:
         'J\'ai écris deux livres sous licence libre. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> et <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> qui enseignent les meilleurs pratiques pour construire une API avec Ruby on Rails ou Node.js',
       bookCover: "Book cover",
@@ -35,6 +36,8 @@ const t = useTranslationsObject(lang, {
   },
   en: {
     booksPage: {
+      title: "My books",
+      desc: "I have written some free books about building web application. Did I say it's free ?",
       bookDescription:
         'I have written two books under a free license. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> and <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> that teach best practices for building an API with Ruby on Rails or Node.js.',
       bookCover: "Book cover",
@@ -50,7 +53,7 @@ const t = useTranslationsObject(lang, {
 });
 ---
 
-<Layout title={SITE_TITLE} description={SITE_DESCRIPTION} lang={lang}>
+<Layout title={t.booksPage.title} description={t.booksPage.desc} lang={lang}>
   <div class="books">
     <div class="books__lead">
       <div class="books__lead__content">

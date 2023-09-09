@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import Card from "../../../components/Card.astro";
 import CardsGrid from "../../../components/CardsGrid.astro";
 import PostCards from "../../../components/PostCards.astro";
-import { SITE_DESCRIPTION } from "../../../consts";
 import { Langages, defaultLang } from "../../../i18n/ui";
 import { useTranslationsObject } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
@@ -37,10 +36,13 @@ const postsByYear = posts.reduce<Record<number, Post[]>>((acc, post) => {
   return acc;
 }, {});
 
-const t = useTranslationsObject(lang);
+const t = useTranslationsObject(lang, {
+  fr: { blogPage: { desc: "Liste des mes articles." } },
+  en: { blogPage: { desc: "List of my pots tags." } },
+});
 ---
 
-<Layout title={String(t.blog)} description={SITE_DESCRIPTION} lang={lang}>
+<Layout title={String(t.blog)} description={t.blogPage.desc} lang={lang}>
   <section class="blog">
     <!-- <div class="blog__header"> -->
     <h1>{t.blog}</h1>

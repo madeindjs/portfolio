@@ -1,6 +1,6 @@
 /**
  * @param {string} completeSlug
- * @returns {'en' | 'fr'}
+ * @returns {Langages}
  */
 export function getPostLanguage(completeSlug) {
   const [lang] = completeSlug.split("/");

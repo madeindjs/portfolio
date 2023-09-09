@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import PostCards from "../../../components/PostCards.astro";
-import { SITE_DESCRIPTION } from "../../../consts";
 import { Langages, defaultLang } from "../../../i18n/ui";
 import { useTranslationsObject } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
@@ -35,10 +34,13 @@ const tag = Astro.params.tag;
 
 const { posts } = Astro.props;
 
-const t = useTranslationsObject(lang);
+const t = useTranslationsObject(lang, {
+  fr: { tag: { desc: `Liste des articles liés au tag: ${tag}` } },
+  en: { tag: { desc: `List of posts about the tag: ${tag}` } },
+});
 ---
 
-<Layout title={String(t.blog)} description={SITE_DESCRIPTION} lang={lang}>
+<Layout title={String(t.blog)} description={t.tag.desc} lang={lang}>
   <section class="blog">
     <h1>{t.tagResult}: {tag}</h1>
     <PostCards posts={posts} />

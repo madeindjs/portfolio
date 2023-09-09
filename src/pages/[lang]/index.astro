@@ -4,7 +4,6 @@ import ButtonLink from "../../components/ButtonLink.astro";
 import GridTwoColumnsColor from "../../components/GridTwoColumnsColor.astro";
 import GtihubProjectCards from "../../components/projects/GithubProjectCards.astro";
 import ProjectCards from "../../components/projects/ProjectCards.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import { Langages, defaultLang } from "../../i18n/ui";
 import { useTranslationsObject } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
@@ -19,6 +18,8 @@ const lang = (Astro.params.lang ?? defaultLang) as Langages;
 
 const t = useTranslationsObject(lang, {
   fr: {
+    title: "Alexandre Rousseau",
+    desc: "Le blog d'un developpeur qui parle de technologie et d'autres trucs.",
     projects: "Mes projets",
     projectsDescription: "Quelques projets que j'ai réalisé pour le fun.",
     lead: "Je suis un développeur fullstack.",
@@ -30,6 +31,8 @@ const t = useTranslationsObject(lang, {
     popularRepositoriesOnGithub: "Mes repositories populaires sur Github",
   },
   en: {
+    title: "Alexandre Rousseau",
+    desc: "The blog of another developper who speaks about technologies and other stuffs.",
     projects: "My projects",
     projectsDescription: "Random projects I did for the fun.",
     lead: "I am a software engineer.",
@@ -43,7 +46,7 @@ const t = useTranslationsObject(lang, {
 });
 ---
 
-<Layout title={SITE_TITLE} description={SITE_DESCRIPTION} lang={lang}>
+<Layout title={t.title} description={t.desc} lang={lang}>
   <GridTwoColumnsColor>
     <div slot="left" class="home__left__content">
       <h1>{t.lead}</h1>
