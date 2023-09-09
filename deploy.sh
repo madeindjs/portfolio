@@ -7,6 +7,7 @@ REMOTE=$(git rev-parse "@{u}")
 
 if [ "$LOCAL" != "$REMOTE" ] || [ "$1" = "force" ]; then
   git pull origin master
+  npm ci
   npm run build
   rm -rf /var/www/portfolio/*
   cp -r dist/* /var/www/portfolio/

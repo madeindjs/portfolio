@@ -1,10 +1,12 @@
 ---
-title: Déployer son site statique automatiquement sur un Raspberry à la manière de Netlify
+title: Déployer son site statique automatiquement avec un script bash
 
 date: 2020-03-01 11:20:00 +0200
-tags: [bash, jekyll]
+tags: [bash]
 categories: devops
 lang: fr
+translations:
+  en: deploy-static-website-like-netlify-in-bash
 ---
 
 [Netlify](https://www.netlify.com/) permet, entre autre entre, de se brancher à Github et de builder ton site statique automatiquement à chaque commit et de le déployer sur un serveur. Ce service est vraiment top car tu n'as rien à faire. Netlify s'occupe de tout.
@@ -21,20 +23,21 @@ Ca tiens en 13 lignes de code. Voilà ce que ça donne:
 
 ```bash
 #!/bin/bash
-# deploy.sh
-
-UPSTREAM=${1:-'@{u}'}
-LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse "$UPSTREAM")
-BASE=$(git merge-base @ "$UPSTREAM")
 
 git fetch origin
 
-if [ $LOCAL = $BASE ]; then
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse "@{u}")
+
+if [ "$LOCAL" != "$REMOTE" ] || [ "$1" = "force" ]; then
   git pull origin master
-  /home/pi/.rvm/gems/ruby-2.4.0/wrappers/jekyll build
+  npm ci
+  npm run build
   rm -rf /var/www/portfolio/*
-  cp -r _site/* /var/www/portfolio/
+  cp -r dist/* /var/www/portfolio/
+  cp -r dist/.well-known /var/www/portfolio/
+else
+  echo "Deployment skipped"
 fi
 ```
 

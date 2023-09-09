@@ -4,7 +4,7 @@ description: Use GNU Parallel to multithread work easily.
 tags:
   - bash
 lang: en
-date: 2023-09-09T22:00:00
+date: 2023-09-09 22:00:00 +0200
 ---
 
 Recently, I tried to create a quick Bash script to convert my big music library of lossless files (+4K FLAC files) to a lossy format (MP3).
