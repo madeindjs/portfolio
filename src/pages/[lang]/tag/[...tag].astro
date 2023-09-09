@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import PostCards from "../../../components/PostCards.astro";
+import { SITE_DESCRIPTION } from "../../../consts";
+import { Langages, defaultLang } from "../../../i18n/ui";
+import { useTranslationsObject } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+import type { Post } from "../../../model";
+import { getPostLanguage } from "../../../utils/post.utils";
+
+type Prop = { posts: Post[] };
+
+export async function getStaticPaths() {
+  const pages = await getCollection("blog");
+
+  const langTag = pages.reduce<Set<[Langages, String]>>((acc, page) => {
+    page.data.tags.forEach((tag) => acc.add([getPostLanguage(page.slug), tag]));
+    return acc;
+  }, new Set());
+
+  return [...langTag].map(([lang, tag]) => ({
+    params: {
+      lang,
+      tag,
+    },
+    props: {
+      posts: pages
+        .filter((p) => p.slug.startsWith(`${lang}/`) && p.data.tags.includes(tag as any))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+const tag = Astro.params.tag;
+
+const { posts } = Astro.props;
+
+const t = useTranslationsObject(lang);
+---
+
+<Layout title={String(t.blog)} description={SITE_DESCRIPTION} lang={lang}>
+  <section class="blog">
+    <h1>{t.tagResult}: {tag}</h1>
+    <PostCards posts={posts} />
+  </section>
+</Layout>
+
+<style>
+  .blog {
+    padding-top: var(--spacing);
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

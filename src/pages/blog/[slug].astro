@@ -1,0 +1,21 @@
+---
+// do redirection from Jekyll
+import { getCollection } from "astro:content";
+import { getPostSlug } from "../../utils/post.utils";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("blog");
+
+  return pages
+    .filter((page) => page.slug.startsWith("en/"))
+    .map((page) => getPostSlug(page.slug))
+    .filter(Boolean)
+    .map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+
+const content = `0;url=/en/blog/${slug}`;
+---
+
+<meta http-equiv="refresh" content={content} />

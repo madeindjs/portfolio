@@ -1,0 +1,50 @@
+---
+import type {HTMLAttributes} from "astro/types";
+import {Langages} from "../i18n/ui";
+
+type Props = HTMLAttributes<"a">;
+
+const { href, class: className, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+
+let isActive = href === pathname || href === pathname.replace(/\/$/, "");
+
+if (!isActive) {
+  const isBlogPost = (url: string) => Object.values(Langages).some((lang) => url.startsWith(`/${lang}/blog`));
+
+  isActive = isBlogPost(String(href)) && isBlogPost(pathname);
+}
+---
+
+<a href={href} class:list={[className, { active: isActive }]} {...props}>
+  <slot />
+</a>
+<style>
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding-left: var(--spacing);
+    padding-right: var(--spacing);
+    font-size: var(--font-size-base);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    box-sizing: border-box;
+  }
+
+  a:hover {
+    background-color: var(--colors-secondary);
+  }
+
+  a.active {
+    font-weight: bolder;
+    text-decoration: underline;
+    background-color: var(--colors-primary);
+    color: var(--colors-white);
+    border-left: 2px solid var(--colors-text);
+    border-right: 2px solid var(--colors-text);
+  }
+</style>

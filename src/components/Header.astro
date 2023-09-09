@@ -1,0 +1,159 @@
+---
+import {Langages} from "../i18n/ui";
+import {getLangFromUrl, useTranslationsObject} from "../i18n/utils";
+import HeaderLink from "./HeaderLink.astro";
+
+const lang = getLangFromUrl(Astro.url);
+
+const t = useTranslationsObject(lang);
+---
+
+<header>
+  <nav class="navbar">
+
+    <input type="checkbox" id="navbar__right__expand" />
+    <div class="navbar__brand">
+      <HeaderLink href={`/${lang}`}>Alexandre R.</HeaderLink>
+    </div>
+
+    <div class="navbar__collapse">
+      <HeaderLink href={`/${lang}/blog`}>{t.blog}</HeaderLink>
+      <HeaderLink href={`/${lang}/books`}>{t.books}</HeaderLink>
+    </div>
+    <div class="navbar__right">
+      {lang === Langages.en && <HeaderLink href="/fr">🇫🇷</HeaderLink>}
+      {lang === Langages.fr && <HeaderLink href="/en">🇬🇧</HeaderLink>}
+      <label for="navbar__right__expand" class="navbar__right__expand">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </nav>
+</header>
+
+<style>
+
+  :root {
+    --height: 80px;
+  }
+
+  .header {
+    max-width: 100%;
+  }
+
+  .navbar {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--colors-background);
+    color: var(--colors-text);
+
+    border-bottom: 2px solid var(--colors-text);
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: var(--spacing);
+  }
+
+  .navbar__brand, .navbar__collapse, .navbar__right {
+    display: flex;
+    gap: var(--spacing);
+    align-items: center;
+  }
+
+  .navbar__right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: var(--spacing);
+  }
+
+  .navbar a {
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    line-height: var(--height);
+  }
+
+  .language {
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  #navbar__right__expand {
+    display: none;
+  }
+
+  .navbar__right__expand {
+    display: none;
+  }
+
+  .navbar__right__expand span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--colors-text);
+    transition: all 0.4s ease-in-out;
+  }
+
+
+  @media (max-width: 700px) {
+    .navbar__right__expand {
+      display: block;
+    }
+
+    .navbar {
+      grid-template-columns: auto 1fr;
+    }
+
+    .navbar__collapse {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      flex-direction: column;
+      display: none;
+      gap: unset;
+    }
+
+    .navbar__collapse > * {
+      width: 100%;
+      border-top: 2px solid var(--colors-text);
+    }
+
+    .navbar__right__expand {
+      display: flex;
+      gap: calc(var(--spacing) / 4);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: calc(var(--height) / 3 );
+      height: calc(var(--height) / 3 );
+      line-height: var(--height);
+      border: 2px solid var(--colors-text);
+      color: var(--colors-text);
+      padding: var(--spacing-0_5) var(--spacing);
+      cursor: pointer;
+    }
+
+    #navbar__right__expand:checked ~ .navbar__right .navbar__right__expand span:first-child  {
+      transform: rotate(45deg);
+      position: relative;
+      top: calc(50% - 10px);
+    }
+    #navbar__right__expand:checked ~ .navbar__right .navbar__right__expand span:last-child  {
+      transform: rotate(-45deg);
+      position: relative;
+      bottom: calc(50% - 10px);
+    }
+    #navbar__right__expand:checked ~ .navbar__right .navbar__right__expand span:nth-child(2)  {
+      display: none;
+    }
+
+    #navbar__right__expand:checked ~ .navbar__collapse {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>

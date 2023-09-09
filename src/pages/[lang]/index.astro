@@ -1,0 +1,105 @@
+---
+import AvatarBlob from "../../components/AvatarBlob.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+import GridTwoColumnsColor from "../../components/GridTwoColumnsColor.astro";
+import GtihubProjectCards from "../../components/projects/GithubProjectCards.astro";
+import ProjectCards from "../../components/projects/ProjectCards.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { Langages, defaultLang } from "../../i18n/ui";
+import { useTranslationsObject } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  return Object.values(Langages).map((lang) => ({
+    params: { lang, path: lang },
+  }));
+}
+
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+
+const t = useTranslationsObject(lang, {
+  fr: {
+    projects: "Mes projets",
+    projectsDescription: "Quelques projets que j'ai réalisé pour le fun.",
+    lead: "Je suis un développeur fullstack.",
+    description:
+      'Je suis passionné par la programmation et le monde du logiciel libre. J\'essaie de contribuer au monde de l\'Open-source à mes projets personnels et différentes contributions sur <a href="https://github.com/madeindjs">Github</a> / <a href="https://gitlab.com/alexandre.rousseau">Gitlab</a>. J\'aime partager mon expérience.',
+
+    readBlog: "Lire mon blog",
+    readBooks: "Consulter mes livres",
+    popularRepositoriesOnGithub: "Mes repositories populaires sur Github",
+  },
+  en: {
+    projects: "My projects",
+    projectsDescription: "Random projects I did for the fun.",
+    lead: "I am a software engineer.",
+    description:
+      'I am passionate about programming and the world of open source software. I try to contribute to the open-source world at my personal projects and various contributions on <a href="https://github.com/madeindjs">Github</a> / <a href="https://gitlab.com/alexandre.rousseau">Gitlab</a>. I like to share my discoveries into my blog.',
+
+    readBlog: "Read my blog",
+    readBooks: "Check my books",
+    popularRepositoriesOnGithub: "My popular repositories on Github",
+  },
+});
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION} lang={lang}>
+  <GridTwoColumnsColor>
+    <div slot="left" class="home__left__content">
+      <h1>{t.lead}</h1>
+      <p set:html={t.description} />
+      <div class="home__left__links">
+        <ButtonLink href="/blog">{t.readBlog}</ButtonLink>
+        <ButtonLink href="/books">{t.readBooks}</ButtonLink>
+      </div>
+    </div>
+    <div slot="right" class="home__right">
+      <AvatarBlob />
+    </div>
+  </GridTwoColumnsColor>
+  <section class="home">
+    <div class="home__head">
+      <div class="projects">
+        <h2>{t.popularRepositoriesOnGithub}</h2>
+        <GtihubProjectCards />
+        <h2>{t.projects}</h2>
+        <p>{t.projectsDescription}</p>
+        <ProjectCards />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .home {
+    margin-bottom: var(--spacing-2);
+  }
+  .home__left__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+  }
+
+  .home__left__content p,
+  .home__left__content h1 {
+    color: var(--colors-black) !important;
+  }
+
+  .home__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .home__head {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--colors-black);
+    padding-top: var(--spacing-2);
+  }
+
+  .projects {
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

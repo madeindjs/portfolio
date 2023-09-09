@@ -1,0 +1,78 @@
+---
+import isignifImage from "../../assets/img/projects/isignif.fr.png";
+import lotoRsseauImage from "../../assets/img/projects/loto.rsseau.fr.png";
+import natureCoiffureImage from "../../assets/img/projects/nature-coiffure-martine.fr.png";
+import killerOnlineImage from "../../assets/img/projects/the-killer.online.png";
+
+import { defaultLang, Langages } from "../../i18n/ui";
+import { useTranslationsObject } from "../../i18n/utils";
+import type { Project } from "../../model";
+import { fetchGithubRepositoryInfo, fetchMyRepositories } from "../../utils/github";
+import CardsGrid from "../CardsGrid.astro";
+import ProjectCard from "./ProjectCard.astro";
+
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+const { tags } = Astro.props;
+
+const t = useTranslationsObject(lang);
+
+const repositories = await fetchMyRepositories();
+
+repositories.push(await fetchGithubRepositoryInfo("spider-rs/spider"));
+
+const projects: Project[] = [
+  {
+    title: "nature coiffure martine",
+    description: {
+      en: "Build a showcase website for an hair salon",
+      fr: "Site vitrine pour un salon de coiffure.",
+    },
+    topics: ["jekyll", "bootstrap"],
+    github: "https://github.com/madeindjs/nature_coiffure",
+    url: "http://nature-coiffure-martine.fr/",
+    image: natureCoiffureImage,
+  },
+  {
+    title: "Aurais-je gagné à la loterie (bordel)?!",
+    description: {
+      en: "Single Page Application (SPA) to compute opendata to check the wining combinaison of french lottery.",
+      fr: "Single Page Application (SPA) pour trouver les combinaisons gagnantes à la lotterie en utilisant les données OpenData",
+    },
+    topics: ["javascript", "stencil", "webworker"],
+    github: "http://loto.rsseau.fr/github.com/madeindjs/loto-tester",
+    url: "http://loto.rsseau.fr/",
+    image: lotoRsseauImage,
+  },
+  {
+    title: "iSignif",
+    description: {
+      en: "Startup company who simplifies the signification process between bailiffs and advocates. We already handled more than 8k significations!",
+      fr: "Startup qui simplifie le processus de significations entre les huissiers de justice et les avocats. Nous avons traité plus de 8000 significations!",
+    },
+    topics: ["rails"],
+    url: "https://isignif.fr/",
+    image: isignifImage,
+  },
+  {
+    title: "The Killer online",
+    description: {
+      en: "I created this application to manage a game of Killer with more than 60 players during my birthday party.",
+      fr: "J'ai créé cette application pour gérer une partie de Killer à plus de 60 lors de mon anniversaire.",
+    },
+    topics: ["rails"],
+    github: "J'ai créé cette application pour gérer une partie de Killer à plus de 60.",
+    url: "https://the-killer.online/",
+    image: killerOnlineImage,
+  },
+];
+---
+
+{
+  projects.length > 0 && (
+    <CardsGrid>
+      {projects.map((project) => (
+        <ProjectCard {...project} description={project.description} />
+      ))}
+    </CardsGrid>
+  )
+}

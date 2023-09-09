@@ -1,0 +1,24 @@
+---
+import type { Post } from "../model";
+import CardsGrid from "./CardsGrid.astro";
+import PostCard from "./PostCard.astro";
+
+type Props = { posts: Post[]; noShaddow?: boolean };
+
+const { posts, noShaddow } = Astro.props;
+---
+
+<CardsGrid>
+  {
+    posts.map((post) => (
+      <PostCard
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.date}
+        tags={post.data.tags}
+        slug={post.slug}
+        noShaddow={noShaddow}
+      />
+    ))
+  }
+</CardsGrid>

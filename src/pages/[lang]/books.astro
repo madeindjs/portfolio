@@ -1,0 +1,143 @@
+---
+import { Image } from "astro:assets";
+import ButtonLink from "../../components/ButtonLink.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { useTranslationsObject } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+import apiOnRailsImage from "../../assets/img/books/api-on-rails.svg";
+import restApiTSImage from "../../assets/img/books/rest-api-ts.svg";
+import GridTwoColumnsColor from "../../components/GridTwoColumnsColor.astro";
+import { Langages, defaultLang } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.values(Langages).map((lang) => ({
+    params: { lang, path: lang },
+  }));
+}
+
+const lang = (Astro.params.lang ?? defaultLang) as Langages;
+
+const t = useTranslationsObject(lang, {
+  fr: {
+    booksPage: {
+      bookDescription:
+        'J\'ai écris deux livres sous licence libre. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> et <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> qui enseignent les meilleurs pratiques pour construire une API avec Ruby on Rails ou Node.js',
+      bookCover: "Book cover",
+      apiOnRailsDescription:
+        "Apprenez les meilleures pratiques pour construire une API en utilisant Ruby on Rails 6. L'intention avec ce livre n'est pas seulement de vous apprendre comment construire une API avec Rails, le but est de vous apprendre à construire des API évolutives et maintenables avec Rails. Cela signifie améliorer vos connaissances actuelles sur les rails",
+      "api-on-rails-alt": "Couverture du livre API on Rails",
+      restApiTsDescription:
+        "Apprenez les meilleures pratiques pour construire une API en utilisant Node.js / Typescript. L'objectif de ce livre n'est pas seulement de vous apprendre à construire une API. Le but est également de vous apprendre à construire une API évolutive et maintenable avec Rails, ce qui signifie améliorer vos connaissances actuelles.",
+      "rest-api-ts-alt": "Couverture du livre REST-API.ts",
+      buyOnLeanpub: "Buy a paid version",
+    },
+  },
+  en: {
+    booksPage: {
+      bookDescription:
+        'I have written two books under a free license. <a href="https://github.com/madeindjs/api_on_rails">API on Rails</a> and <a href="https://github.com/madeindjs/rest-api.ts">REST-API.ts</a> that teach best practices for building an API with Ruby on Rails or Node.js.',
+      bookCover: "Book cover",
+      apiOnRailsDescription:
+        "Learn best practices to build an API using Ruby on Rails 5/6. The intention with this book it’s not only to teach you how to build an API with Rails. The purpose is also to teach you how to build scalable and maintainable API with Rails which means improve your current Rails knowledge.",
+      "api-on-rails-alt": "Cover of API on Rails book",
+      restApiTsDescription:
+        "Learn best practices to build an API using Node.js / Typescript. The intention with this book it’s not only to teach you how to build an API. The purpose is also to teach you how to build scalable and maintainable API with Rails which means improve your current Rails knowledge.",
+      "rest-api-ts-alt": "Cover of REST-API.ts book",
+      buyOnLeanpub: "Buy a paid version",
+    },
+  },
+});
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION} lang={lang}>
+  <div class="books">
+    <div class="books__lead">
+      <div class="books__lead__content">
+        <h1>{t.books}</h1>
+        <p set:html={t.booksPage.bookDescription} />
+      </div>
+    </div>
+
+    <GridTwoColumnsColor>
+      <section class="book" slot="left">
+        <h2>API On Rails</h2>
+        <Image src={apiOnRailsImage} alt={t.booksPage.bookCover} height="526" width="372" class="books__cover-blob-2" />
+        <p>{t.booksPage.apiOnRailsDescription}</p>
+        <div class="actions">
+          <ButtonLink href="https://github.com/madeindjs/api_on_rails">Github</ButtonLink>
+          <ButtonLink href="https://leanpub.com/apionrails6-fr">{t.booksPage.buyOnLeanpub}(🇫🇷)</ButtonLink>
+          <ButtonLink href="https://leanpub.com/apionrails6">{t.booksPage.buyOnLeanpub}(🇬🇧)</ButtonLink>
+        </div>
+      </section>
+
+      <section class="book" slot="right">
+        <h2>REST-API.ts</h2>
+        <Image src={restApiTSImage} alt={t.booksPage.bookCover} height="526" width="372" class="books__cover-blob-1" />
+        <p>{t.booksPage.restApiTsDescription}</p>
+        <div class="actions">
+          <ButtonLink href="https://github.com/madeindjs/rest-api.ts">Github</ButtonLink>
+          <ButtonLink href="https://leanpub.com/rest-api-ts/">{t.booksPage.buyOnLeanpub}(🇬🇧)</ButtonLink>
+        </div>
+      </section>
+    </GridTwoColumnsColor>
+
+    <div class="books__list"></div>
+  </div>
+</Layout>
+<svg viewBox="0 0 430.8 463.2" width="0" height="0">
+  <clipPath id="blob4" clipPathUnits="objectBoundingBox" transform="scale(0.002326, 0.002158)">
+    <path
+      class="st0"
+      d="M289.3,71.3c41.2,2.8,97.9,5.3,124,30.9c26,25.7,21.4,74.5-2.1,108.7c-23.4,34.3-65.8,53.9-91.8,92.2
+	c-26,38.4-35.7,95.6-67.5,128s-85.7,40.1-130.8,24c-45-16.2-81.2-56.1-101.4-99C-0.6,313.2-5,267.4,5.7,229.8
+	c10.8-37.6,36.7-67,45.6-111.5c8.9-44.4,0.8-104,22.2-115.9C94.9-9.5,145.7,26.3,184,45.7C222.3,65.2,248,68.5,289.3,71.3z"
+    ></path>
+  </clipPath>
+</svg>
+
+<svg viewBox="0 0 440.8 443.8" width="0" height="0">
+  <clipPath id="blob6" clipPathUnits="objectBoundingBox" transform="scale(0.002268, 0.002253)">
+    <path
+      class="st0"
+      d="M376.6,20.7c37.3,20,65.3,58.5,64.2,98.1c-1.1,39.5-31.1,79.9-49.1,113.7c-18.1,33.7-24.1,60.7-33.3,102
+	c-9.2,41.2-21.6,96.7-48.9,107.4c-27.3,10.6-69.5-23.6-100.7-52.3c-31.2-28.8-51.4-52-90.7-72.6c-39.3-20.5-97.8-38.3-113.4-69.5
+	c-15.7-31.1,11.4-75.6,35.9-117.9C65.2,87.3,87.2,47.2,121,25.7C154.8,4.1,200.4,1.1,246.5,0.2C292.7-0.6,339.4,0.7,376.6,20.7z"
+    ></path>
+  </clipPath>
+</svg>
+
+<style>
+  .books__lead {
+    border-bottom: 2px solid var(--colors-text);
+    padding: var(--spacing);
+  }
+  .books__lead__content {
+    max-width: 80ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+  }
+
+  .books__cover-blob-1,
+  .books__cover-blob-2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .books__cover-blob-1 {
+    clip-path: url("#blob6");
+  }
+
+  .books__cover-blob-2 {
+    clip-path: url("#blob4");
+  }
+</style>

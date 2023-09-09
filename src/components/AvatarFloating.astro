@@ -1,0 +1,115 @@
+---
+import image from "../assets/img/me.png";
+---
+
+<div class="avatar-wrapper">
+  <div class="avatar">
+    <div class="avatar__circle-1">
+      <div class="avatar__circle-2"></div>
+    </div>
+    <div class="avatar__photo" style={{ "background-image": `url(${image.src})` }}></div>
+  </div>
+</div>
+
+<style>
+  :root {
+    --circle-height: 200px;
+    --circle-witdh: 200px;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: scale(1.2) rotate(70deg);
+    }
+
+    to {
+      transform: scale(1) rotate(90deg);
+    }
+  }
+
+  .avatar-wrapper {
+    position: relative;
+    width: calc(var(--circle-witdh) + 4px);
+    height: calc(var(--circle-height) + 4px);
+  }
+
+  .avatar:hover {
+    transition: opacity ease-in-out 0.5s;
+  }
+
+  .avatar:hover .avatar__circle-1,
+  .avatar:hover .avatar__circle-2 {
+    opacity: 0%;
+  }
+
+  .avatar:hover .avatar-photo {
+    clip-path: circle(100%);
+  }
+
+  .avatar__circle-1 {
+    width: var(--circle-witdh);
+    height: var(--circle-height);
+    border-top-left-radius: 47%;
+    border-top-right-radius: 47%;
+    border-bottom-left-radius: 47%;
+    border-bottom-right-radius: 47%;
+    background: #95d7f3;
+    position: absolute;
+    top: 2px;
+    transition: opacity ease-in-out 0.5s;
+    animation: rotating 2s linear infinite;
+  }
+
+  .avatar__circle-2 {
+    width: var(--circle-witdh);
+    height: var(--circle-height);
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background: #95d7f3;
+    position: absolute;
+    transition: opacity ease-in-out 0.5s;
+  }
+
+  .avatar__photo {
+    width: var(--circle-witdh);
+    height: var(--circle-height);
+    clip-path: circle(50%);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+
+    transition: clip-path ease-in-out 0.5s;
+  }
+
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .rotating {
+    animation: rotating 2s linear infinite;
+  }
+
+  @media (prefers-reduced-motion) {
+    .rotating {
+      animation-name: dissolve;
+    }
+
+    .avatar__circle-1,
+    .avatar__circle-2 {
+      display: none;
+    }
+  }
+</style>

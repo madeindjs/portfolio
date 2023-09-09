@@ -1,0 +1,37 @@
+---
+import "@fontsource/outfit";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import type { Langages } from "../i18n/ui";
+
+type Props = { title: string; description: string; lang: Langages };
+
+const { title, description, lang } = Astro.props;
+---
+
+<!DOCTYPE html>
+<head lang={lang}>
+  <head>
+    <BaseHead title={title} description={description ?? ""} />
+  </head>
+
+  <body class="layout">
+    <Header />
+    <div transition:animate="slide">
+      <slot />
+    </div>
+    <Footer />
+  </body>
+</head>
+
+<style>
+  .layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    padding: 0;
+    margin: 0;
+  }
+</style>

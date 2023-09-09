@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPostUrl } from "../utils/post.utils";
+import Card from "./Card.astro";
+import FormattedDate from "./FormattedDate.astro";
+import PostCardTags from "./PostCardTags.astro";
+
+type Post = CollectionEntry<"blog">;
+type Props = CollectionEntry<"blog">["data"] & { slug: string; noShaddow?: boolean };
+
+const { title, date, tags, slug, description, noShaddow } = Astro.props;
+---
+
+<Card noShaddow={noShaddow}>
+  <p slot="title" class="post-card__title">
+    <a href={getPostUrl(slug)} class="post-card__link">{title}</a>
+  </p>
+  <div slot="content">
+    {tags && <PostCardTags tags={tags} />}
+    <p>{description}</p>
+    <p class="post-card__date"><FormattedDate date={date} /></p>
+  </div>
+</Card>
+
+<style>
+  .post-card__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-card__title {
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    /* flex-grow: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* font-weight: 800; */
+  }
+
+  .post-card__date {
+    text-align: right;
+    flex-basis: 1rem;
+    font-size: 1rem;
+  }
+
+  .post-card__date,
+  .post-card__title a,
+  .tags a {
+    transition: color ease-in-out 0.2s, color ease-in-out 0.2s;
+  }
+</style>

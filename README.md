@@ -7,19 +7,19 @@ My portfolio build [Jekyll](https://jekyllrb.com/). See me in action at <https:/
 ## Setup
 
 ```bash
-bundle install
+npm i
 ```
 
 Then start development server
 
 ```bash
-jekyll serve
+npm run dev
 ```
 
 or build website
 
 ```bash
-jekyll build
+npm run build
 ```
 
 ## License

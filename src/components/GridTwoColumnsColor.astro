@@ -1,0 +1,59 @@
+---
+---
+
+<section class="grid">
+  <div class="grid__left">
+    <slot name="left" />
+  </div>
+  <div class="grid__right">
+    <slot name="right" />
+  </div>
+</section>
+
+<style is:global>
+  .grid__left,
+  .grid__right {
+    color: var(--colors-text);
+  }
+</style>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto 1fr;
+  }
+
+  .grid__left,
+  .grid__right {
+    padding: var(--spacing-2) var(--spacing);
+    border-bottom: 1px solid var(--colors-text);
+  }
+
+  .grid__left {
+    border-right: 1px solid var(--colors-text);
+    background-color: var(--colors-secondary);
+    color: var(--colors-background);
+    display: flex;
+    align-items: center;
+  }
+
+  .grid__right {
+    border-left: 1px solid var(--colors-text);
+    background-color: var(--colors-primary);
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .grid__left {
+      border-right: unset;
+    }
+
+    .grid__right {
+      border-top: 1px solid var(--colors-text);
+      border-left: unset;
+    }
+  }
+</style>

@@ -1,0 +1,171 @@
+:root {
+
+	--colors-black: black;
+	--colors-white: white;
+
+	--colors-background: var(--colors-white);
+	--colors-text: var(--colors-black);
+	--colors-primary: #8e44ad;
+	--colors-primary-light: #8e44ad;
+	--colors-secondary: #60c6f5;
+	--colors-grey: #bdc3c7;
+
+	--size-content-width: 100%;
+	--size-break-point-sm: 20rem;
+
+	--font-size-base: 1.4rem;
+
+	--spacing: var(--font-size-base);
+	--spacing-0_5: calc(var(--spacing) / 2);
+	--spacing-2: calc(var(--spacing) * 2);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--colors-background: var(--colors-black);
+		--colors-text: var(--colors-white);
+		/* --colors-primary: #9b59b6; */
+		/* --colors-primary-light: #9b59b6; */
+		--colors-grey: rgb(68, 68, 68);
+	}
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	background-color: var(--colors-background);
+}
+
+main {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+h1 {
+	font-family: "Outfit";
+	font-size: calc(var(--font-size-base) * 2.5);
+	margin: 0;
+	margin-bottom: var(--spacing-2);
+}
+
+h2 {
+	font-family: "Outfit";
+	font-size: calc(var(--font-size-base) * 2);
+	margin: 0;
+	margin-top: var(--spacing-2);
+	margin-bottom: var(--spacing-2);
+}
+
+
+h3 {
+	font-family: "Outfit";
+	font-size: calc(var(--font-size-base) * 2);
+}
+
+h4,
+h5,
+h5 {
+	font-size: calc(var(--font-size-base) * 1.5);
+}
+
+
+a,
+p,
+li,
+pre,
+input,
+th,
+td {
+	font-family: "Outfit";
+	font-size: var(--font-size-base);
+}
+
+pre {
+	font-size: calc(var(--font-size-base) * 0.75);
+}
+
+
+
+p {
+	margin-top: var(--spacing);
+	margin-bottom: var(--spacing);
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: var(--colors-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+pre,
+input,
+th,
+td {
+	color: var(--colors-text);
+}
+
+hr {
+	display: block;
+	height: 8px;
+	background-color: var(--colors-grey);
+	width: 60px;
+	border: none;
+	border-radius: 5px;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+
+
+img {
+	max-width: 100%;
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+	width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: darkgray;
+}
+
+@media (prefers-color-scheme: dark) {
+	::-webkit-scrollbar-thumb {
+		background: white;
+	}
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+	clip: rect(1px 1px 1px 1px);
+	/* maybe deprecated but we need to support legacy browsers */
+	clip: rect(1px, 1px, 1px, 1px);
+	/* modern browsers, clip-path works inwards from each corner */
+	clip-path: inset(50%);
+	/* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
+	white-space: nowrap;
+}

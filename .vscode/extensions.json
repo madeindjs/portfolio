@@ -1,5 +1,4 @@
 {
-  "recommendations": [
-    "sissel.shopify-liquid"
-  ]
+  "recommendations": ["astro-build.astro-vscode"],
+  "unwantedRecommendations": []
 }
