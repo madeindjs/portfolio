@@ -49,9 +49,8 @@ const { title, description, date, tags } = post.data;
 <style>
   .blog-post__content {
     display: grid;
-    /* background-color: red; */
-    grid-template-columns: auto 80ch auto;
-
+    grid-template-columns: auto minmax(100%, 80ch) auto;
+    margin-top: var(--spacing);
     padding-left: var(--spacing);
     padding-right: var(--spacing);
   }
