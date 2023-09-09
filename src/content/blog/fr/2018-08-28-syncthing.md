@@ -41,7 +41,7 @@ syncthing
 
 Il suffit ensuite de se connecter à l'interface web <http://localhost:8384>.
 
-![Interface principale de Syncthing](/img/blog/syncthing_pi_home.png)
+![Interface principale de Syncthing](../../../assets/img/blog/syncthing_pi_home.png)
 
 ### Raspberry PI
 
@@ -78,21 +78,21 @@ Je vais commencer par configurer le partage de mon dossier _Documents_ de mon Ra
 
 Rien de plus simple, on clique sur le bouton _add folder_ et on spécifier le chemin du dossier à partager.
 
-![Interface principale de Syncthing](/img/blog/syncthing_add_folder.png)
+![Interface principale de Syncthing](../../../assets/img/blog/syncthing_add_folder.png)
 
 ### Couplage des nœuds
 
 Pour commencer il faut coupler nos deux nœuds. Pour cela, il faut se rendre sur un des deux nœud et de cliquer sur _add remote_ et d'ajouter l’identifiant du deuxième nœud que l'on trouve sur l'interface.
 
-![Interface principale de Syncthing](/img/blog/syncthing_add_device.png)
+![Interface principale de Syncthing](../../../assets/img/blog/syncthing_add_device.png)
 
 Quelques secondes plus tard, sur le nœud remote, un pop-up apparaît
 
-![Pop-up du nouveau nœud à accepter](/img/blog/syncthing_new_device.png)
+![Pop-up du nouveau nœud à accepter](../../../assets/img/blog/syncthing_new_device.png)
 
 Et un autre popup nous signale qu'il est possible de synchroniser un dossier en spécifiant l'URL du dossier à créer. Quelques secondes plus tard, la synchronisation commence.
 
-![la synchronisation commence](/img/blog/syncthing_syncing.png)
+![la synchronisation commence](../../../assets/img/blog/syncthing_syncing.png)
 
 ## Conclusion
 

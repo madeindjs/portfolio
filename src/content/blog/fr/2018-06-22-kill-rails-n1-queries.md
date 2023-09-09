@@ -87,6 +87,6 @@ end
 
 Ici j'ai seulement activé une [`window.alert`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert) JavaScript. Il suffit ensuite d'utiliser l'application normalement et lorsque l'on rencontrera une requête N+1:
 
-![Affichage de test.fr/load.php sans mise en cache](/img/blog/bullet_notification.png)
+![Affichage de test.fr/load.php sans mise en cache](../../../assets/img/blog/bullet_notification.png)
 
 [bullet]: https://github.com/flyerhzm/bullet

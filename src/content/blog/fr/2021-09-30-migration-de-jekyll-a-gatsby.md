@@ -48,7 +48,7 @@ On voit donc que mon site répond en 10ms alors que Wordpress en presque une dem
 
 Cette performance se retranscrit très bien avec le résultat de [l'outil PageSpeed de Google](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Frsseau.fr) qui parlent d'eux même:
 
-![Capture d'écran de mon résultat PageSpeed](/img/blog/gastby-pagespeed.png)
+![Capture d'écran de mon résultat PageSpeed](../../../assets/img/blog/gastby-pagespeed.png)
 
 Bref, si ton contenu n'est pas voué a évoluer tous les jours et que tu à la possibilité de l'écrire dans un générateur de site statique est la solution.
 
@@ -90,7 +90,7 @@ A l'heure du [Green IT](https://www.google.com/url?q=https://en.m.wikipedia.org/
 
 Les frameworks web-moderne comme React, Vue.js ou Angular sont de superbes outils pour des applications web mais ils peuvent générer des sites nécessitant de télécharger et d’exécuter **plusieurs méga-octets de JavaScript**. Je trouve que c'est un non-sens pour un simple blog. Les librairies qu'on charge sur un site représentent une grande quantité de données.
 
-![Les librairies JavaScript pèse lourd](/img/blog/node-modules-meme.png)
+![Les librairies JavaScript pèse lourd](../../../assets/img/blog/node-modules-meme.png)
 
 [^3]: C'est d’ailleurs une des raison pour laquelle j'ai choisis de ne pas intégrer de module de tracking et que je [m'appuie sur les logs](./2019-11-07-lire-les-logs-avec-go-access.md) pour analyser les pages les plus consultées.
 
@@ -106,7 +106,7 @@ Google indexes les pages webs avec son robot qui parcourt le web de liens en lie
 
 Les frameworks JavaScript modernes pâtissent de ce problème car sans JavaScript, le contenu HTML ne peut pas être construit. Voici un exemple avec Twitter:
 
-![Capture d'écran de Twitter avec JavaScript désactivé](/img/blog/twitter-need-js.png)
+![Capture d'écran de Twitter avec JavaScript désactivé](../../../assets/img/blog/twitter-need-js.png)
 
 Il y a plusieurs manière de contourner ce problème mais c'est très souvent compliqué à mettre en place.
 
@@ -132,7 +132,7 @@ Ensuite, concernant la migration du contenu est très facile car Jekyll et Gatsb
 
 - d'uniformiser l'en-tête _frontmater_ des fichiers Markdown. Tous les articles doivent comporter les mêmes clés comme `date`, `title`, etc...
 - les liens entre les posts peuvent changer. Gatsby utilise des liens relatifs comme `[title](./other-post)`
-- les URL des images peuvent changer aussi. Dans mon cas j'ai crée un dossier `content/posts/images` et j'utilise ses images en faisant `![alt](/img/blog/dog.png)`
+- les URL des images peuvent changer aussi. Dans mon cas j'ai crée un dossier `content/posts/images` et j'utilise ses images en faisant `![alt](../../../assets/img/blog/dog.png)`
 
 ## Gérer la transition pour le SEO
 

@@ -147,11 +147,11 @@ IN TXT "google-site-verification=XXXXX"
 
 Then you simply need to go in [Google Webmaster settings](https://search.google.com/search-console/settings). There are a section to change domain of a property. Here you'll be able to select the new one.
 
-![Settings to change property domain name](/img/blog/google-webmaster-prepare-update-domain.png)
+![Settings to change property domain name](../../../assets/img/blog/google-webmaster-prepare-update-domain.png)
 
 I had to wait few hours to Google crawl redirection then I was able to submit form
 
-![property domain updated !](/img/blog/google-webmaster-domain-updated.png)
+![property domain updated !](../../../assets/img/blog/google-webmaster-domain-updated.png)
 
 That's it.
 
@@ -171,11 +171,11 @@ So I my opinion you should keep this domains for
 
 So let's connect on [Google Search Console](https://search.google.com/search-console) after few weeks and take a look at traffic evolution of previous domain :
 
-![Google Search Console traffic performance for old website](/img/blog/google-webmaster-old-domain.png)
+![Google Search Console traffic performance for old website](../../../assets/img/blog/google-webmaster-old-domain.png)
 
 Great! We see that traffic start to drop on migration date. So let take a look on traffic evolution of my new domain :
 
-![Google Search Console traffic performance for new website](/img/blog/google-webmaster-new-domain.png)
+![Google Search Console traffic performance for new website](../../../assets/img/blog/google-webmaster-new-domain.png)
 
 Theses informations show that all my traffic was correctly transferred into my new domain ! I get average same amount of clicks on my new domains than my old one. But it show also that even after some weeks, my old domain continue to receive traffic from Google.
 
