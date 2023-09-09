@@ -40,7 +40,7 @@ const { title, description, date, tags } = post.data;
 
   .blog-post__content > pre > code {
     display: block;
-    width: 80ch;
+    width: var(--size-read);
     margin-left: auto;
     margin-right: auto;
   }
@@ -49,7 +49,7 @@ const { title, description, date, tags } = post.data;
 <style>
   .blog-post__content {
     display: grid;
-    grid-template-columns: auto minmax(0, 80ch) auto;
+    grid-template-columns: auto minmax(0, var(--size-read)) auto;
     margin-top: var(--spacing);
     margin-bottom: var(--spacing);
     padding-left: var(--spacing);
