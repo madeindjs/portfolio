@@ -8,10 +8,10 @@ export default defineConfig({
   site: "https://example.com",
   integrations: [mdx(), sitemap()],
   redirects: {
-    "/": "/en",
-    "/blog": "/en/blog",
-    "/books": "/en/books",
-    "/resume": "/en/resume",
+    "/": "/en.html",
+    "/blog": "/en/blog.html",
+    "/books": "/en/books.html",
+    "/resume": "/en/resume.html",
   },
   markdown: {
     remarkPlugins: [remarkToc],
