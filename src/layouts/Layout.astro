@@ -1,9 +1,10 @@
 ---
 import "@fontsource/outfit";
+import {fade} from "astro:transitions";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import type { Langages } from "../i18n/ui";
+import type {Langages} from "../i18n/ui";
 
 type Props = { title: string; description: string; lang: Langages };
 
@@ -18,7 +19,7 @@ const { title, description, lang } = Astro.props;
 
   <body class="layout">
     <Header />
-    <div transition:animate="slide">
+    <div transition:animate={fade()}>
       <slot />
     </div>
     <Footer />

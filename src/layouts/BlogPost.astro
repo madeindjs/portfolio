@@ -2,8 +2,8 @@
 import FormattedDate from "../components/FormattedDate.astro";
 import PageHeader from "../components/PageHeader.astro";
 import PostCardTags from "../components/PostCardTags.astro";
-import type { Post } from "../model";
-import { getPostLanguage } from "../utils/post.utils";
+import type {Post} from "../model";
+import {getPostLanguage} from "../utils/post.utils";
 import Layout from "./Layout.astro";
 
 type Props = { post: Post };
@@ -21,7 +21,7 @@ const { title, description, date, tags } = post.data;
       <FormattedDate date={date} />
     </PageHeader>
 
-    <div class="blog-post__content">
+    <div class="blog-post__content" transition:animate="slide">
       <slot />
     </div>
   </article>
