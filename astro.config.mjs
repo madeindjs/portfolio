@@ -5,7 +5,7 @@ import remarkToc from "remark-toc";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://rsseau.com",
+  site: "https://rsseau.fr",
   integrations: [mdx(), sitemap()],
   redirects: {
     "/": "/en/",
