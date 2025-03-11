@@ -71,3 +71,5 @@ In order to makes Passenger compatible with Apache2, we need to compile the sour
 ```sh
 passenger-install-apache2-module
 ```
+
+Then it will be prompted to update
