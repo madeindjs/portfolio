@@ -11,46 +11,46 @@ translations:
 date: 2025-05-06T01:00:00
 ---
 
-**TL;DR: J'ai utilisé [Mistral][mistral] avec sa fonctionnalité d'OCR et de _structured output_ afin de préremplir un formulaire sur mon SAAS.**
+**TL;DR: I used [Mistral][mistral] with its OCR and structured output functionality to pre-populate a form on my SAAS.**
 
-Je viens d'implémenter une fonctionnalité qui s'appuie sur [Mistral][mistral] dans le but d'automatiser un formulaire sur mon SAAS [iSignif][isignif]. Et je vous promets qu'il ne s'agit pas simplement d'un Chatbot ou d'un serveur MCP.
+I just implemented a feature that leverages [Mistral][mistral] to automate a form on my SAAS [iSignif][isignif]. And I promise you, it's not just a chatbot or an MCP server.
 
-Vous avez entendu parler du protocole MCP qui permet de connecter votre service à un Modèle de Langue (LLM)? Je suppose que oui, et pour dire vrai, j'ai passé beaucoup de temps à essayer de le mettre en place pour mon SAAS [iSignif][isignif].
+Have you heard of the MCP protocol, which allows you to connect your service to a Language Model (LLM)? I guess so, and to be honest, I spent a lot of time trying to implement it for my SAAS [iSignif][isignif].
 
-Ensuite, puis je suis tombé sur cette vidéo : _"Ne vous contentez pas de mettre en place un chatbot : construisez une IA qui fonctionne avant que vous ne le demandiez"_ ([Youtube](https://www.youtube.com/watch?v=2cEGQEllBGc)). Je me suis donc posé la question si l'utilisateur voulait vraiment parler avec un Chatbot au lieu d'utiliser une interface qu'il connait bien.
-Et c'est évident que les nouveaux outils d'IA peuvent tellement apporter plus qu'un simple ChatBot.
+Then I came across this video: "Don't just set up a chatbot: build AI that works before you ask" ([Youtube](https://www.youtube.com/watch?v=2cEGQEllBGc)). So I asked myself if the user really wanted to talk to a chatbot instead of using an interface they were familiar with.
+And it's clear that new AI tools can offer so much more than a simple chatbot.
 
-## Mon produit
+## My product
 
-J'ai créé [iSignif.fr](https://isignif.fr) il y quelques années pour automatiser le processus de signification entre les avocats et les huissiers de justice. Le processus est le suivant :
+I created [iSignif.fr](https://isignif.fr) a few years ago to automate the process of serving documents between lawyers and bailiffs. The process is as follows:
 
-1. Un avocat dépose un acte. Il s'agit en fait d'un document PDF qu'un huissier de justice devra remettre en main propre à un ou plusieurs destinataires
-2. iSignif sélectionne un huissier de justice en fonction du code postal où l'acte doit être signifié
-3. On contacte l'huissier de justice et il prend en charge la demande
+1. A lawyer files a document. It's actually a PDF document that a bailiff must deliver by hand to one or more recipients.
+2. iSignif selects a bailiff based on the postal code where the document is to be served.
+3. The bailiff is contacted and they handle the request.
 
-La première étape est manuelle : l'avocat doit remplir un formulaire, renseigner les destinataires et charger ses fichiers. Il s'agit de la partie ingrate où l'utilisateur doit recopier les informations sur sa lettre et de renseigner les informations sur le formulaire [iSignif][isignif]. Certains utilisateurs font cela plusieurs fois par jour, et un acte peut regrouper plus d'une dizaine de destinataires...
+The first step is manual: the lawyer must fill out a form, specify the recipients, and upload their files. This is the laborious part where the user must copy the information from their letter and enter the information on the [iSignif][isignif] form. Some users do this several times a day, and a document can include more than a dozen recipients...
 
-![Formulaire de création d'un acte sur iSignif](../../../assets/img/blog/isignif-act-new.png)
+![Form for creating a document on iSignif](../../../assets/img/blog/isignif-act-new.png)
 
-Peut-être que vous me voyez venir, mais les outils LLM peuvent très bien faire ce travail à la place de l'utilisateur. Donc mon idée était de mettre en place une fonctionnalité qui va simplement préremplir le formulaire à partir du PDF.
+Perhaps you see where I'm going with this, but LLM tools can do this job perfectly well for the user. So my idea was to implement a feature that would simply pre-populate the form from the PDF.
 
-En termes techniques, il s'agirait de :
+In technical terms, this would involve:
 
-1. Extraire le contenu du document de l'utilisateur. Je vais utiliser une API de _Reconnaissance optique de caractères_ (OCR) afin de convertir le document en text
-2. Envoyer le contenu du document à un LLM dans le but de récupérer les informations dans un format donné
-3. Créer les ressources demandées en base de données
+1. Extracting the content of the user's document. I'm going to use an Optical Character Recognition (OCR) API to convert the document to text.
+2. Send the document content to an LLM to retrieve the information in a given format.
+3. Create the requested database resources.
 
 ## Proof of concept
 
-J'ai directement pensé à [Mistral][mistral] qui est un leader français / européen dans l'intelligence artificielle et les modèle de langues (LLM). Je l'ai choisi car
+I immediately thought of [Mistral][mistral], a French/European leader in artificial intelligence and language models (LLM). I chose them because:
 
-– C'est une entreprise française et cela rassure les utilisateurs sur le traitement de leurs données
-– Il possède [une librairie JavaScript][mistralNpm] qui permet de tout faire
-– Les prix sont très abordables
+– It's a French company, which reassures users about the processing of their data.
+– It has a [JavaScript library][mistralNpm] that allows you to do everything.
+– The prices are very affordable.
 
-Avant de me lancer dans quelque chose de compliqué, je me suis dit que j'allais commencer par mettre en place un simple script qui devra prendre un fichier et faire les appels API à `isignif.fr/api/v1`.
+Before getting into anything complicated, I thought I'd start by setting up a simple script that would take a file and make API calls to `isignif.fr/api/v1`.
 
-Allez, j'initialise un projet Node.js afin d'essayer ça :
+Okay, I'll initialize a Node.js project to try this out:
 
 ```sh
 mkdir /tmp/isignif-pdf
@@ -58,9 +58,9 @@ cd /tmp/isignif-pdf
 npm init -y
 ```
 
-Extraire les informations d'un document porte un nom : _Reconnaissance optique de caractères_ (OCR). Il s'agit de l'action de reconnaitre les caractères d'un document, ou d'extraire le texte encodé et de renvoyer le contenu formaté.
+Extracting information from a document has a name: Optical Character Recognition (OCR). This is the action of recognizing characters in a document, or extracting the encoded text and returning the formatted content.
 
-[Mistral][mistralOcr] permet de faire ça. Testons vite fait :
+[Mistral][mistralOcr] allows you to do this. Let's give it a quick test:
 
 ```sh
 npm install @mistralai/mistralai
@@ -99,7 +99,7 @@ const ocrRes = await mistral.ocr.process({
 console.log(ocrRes.pages);
 ```
 
-Cela renvoie un tableau de pages avec le contenu du PDF sous forme de Markdown!
+This returns a table of pages with the PDF content in Markdown format!
 
 ```json
 [
@@ -112,15 +112,15 @@ Cela renvoie un tableau de pages avec le contenu du PDF sous forme de Markdown!
 ]
 ```
 
-Maintenant que nous avons le contenu du document, nous devons demander au LLM de nous extraire les informations sous forme de JSON qui contient les données qui nous intéresse. Dans le jargon, cela s'appelle un _Structured Output_.
+Now that we have the document content, we need to ask the LLM to extract the information in [JSON schema](https://json-schema.org/), containing the data we're interested in. In jargon, this is called a Structured Output.
 
-L'étape clé est de définir ce qu'on veut obtenir sous grâce à un [JSON schema](https://json-schema.org/). Afin de déclarer le JSON schema de manière plus élégante, il est recommandé d'utiliser la libraire [Zod](https://www.npmjs.com/package/zod)
+The key step is to define what we want to obtain using a JSON schema. To declare the JSON schema more elegantly, it's recommended to use the [Zod](https://www.npmjs.com/package/zod) library.
 
 ```sh
 npm i zod
 ```
 
-On va déclarer un objet `ResponseFormat` qui contient notre format.
+We'll declare a `ResponseFormat` object that contains our format.
 
 ```js
 // main.mjs
@@ -129,38 +129,36 @@ import { z } from "zod";
 // ... code before
 
 const ResponseFormat = z.object({
-  significations: z.array(
+  meanings: z.array(
     z
       .object({
         zipCode: z
           .string()
-          .describe(
-            "le code postal de la signification (il s'agit souvent de 5 chiffres)",
-          ),
+          .describe("the postal code of the service (often 5 digits)"),
         name: z
           .string()
           .describe(
-            "le nom de la signification qui permet à l'utilisateur de la retrouver facilement. Il s'agit souvent du lieu qui indique à l'huissier ou signifier l'acte (exemple: 'Carrefour Meyzieu' )",
+            "the name of the service, which allows the user to easily find it. This is often the location that tells the bailiff where to serve the document (example: 'Carrefour Meyzieu')",
           ),
       })
-      .describe("La signification à signifier"),
+      .describe("The service to be served"),
   ),
   actType: z.string(),
   reference: z
     .string()
     .optional()
     .describe(
-      "Une référence noté sur le document afin d'indentifier la demande et de la retrouver facilement",
+      "A reference noted on the document to identify the request and make it easy to find",
     ),
 });
 ```
 
-La partie à ne pas négliger est de bien spécifier les `.describe()`. C'est ce qui va permettre au LLM de comprendre notre schema.
+The important part is to properly specify the `.describe()` statements. This is what will allow the LLM to understand our schema.
 
-Maintenant, nous pouvons utiliser la méthode `mistral.chat.parse` afin d'extraire les informations et de les transformer en `ResponseFormat`. La encore, essayons de créer une conversation qui permette au LLM d'avoir le maximum de contexte. On crée deux messages :
+Now, we can use the `mistral.chat.parse` method to extract the information and transform it into a `ResponseFormat`. Here again, let's try to create a conversation that allows the LLM to have as much context as possible. We create two messages:
 
-1. `"system"`, qui va influer sur le comportement de notre LLM
-2. `"user"`, qui va formaliser la demande sous forme de texte, et va ensuite contenir le contenu du fichier
+1. `"system"`, which will influence the behavior of our LLM
+2. `"user"`, which will formalize the request in text form and will then contain the contents of the file
 
 ```js
 // main.mjs
@@ -172,14 +170,14 @@ const res = await mistral.chat.parse({
   messages: [
     {
       role: "system",
-      content: `Tu gère une plateforme du nom de iSignif. Nous simplifions le processus de signification entre les avocats et les huissiers. Le principe est que:
-1. une signification est une demande auprès d'un huissier de justice afin qu'il signifie une lettre auprès d'un destinataire. Une signification a seulement besoin d'un code postal afin qu'iSIgnif puisse trouver un huissier de justice compétent dans le département.
-2. un acte regroupe plusieurs demandes de significations sous le même type d'acte
-Par exemple, l'utilisateur va faire une demande que sont acte "Assignation en justice" soit signifié à Lyon (69), à Marseille (13), et à Toulouse (31). Trois huissiers de justice différents seront contacté. Lorsque les trois huissiers de justice auront remis l'assignation à leur destinataire, l'acte sera marqué comme complet..`,
+      content: `You manage a platform called iSignif. We simplify the process of serving documents between lawyers and bailiffs. The principle is that:
+1. a service is a request to a bailiff to serve a letter to a recipient. A service only requires a postal code so that iSIgnif can find a competent bailiff in the department.
+2. a document groups several service requests under the same document type.
+For example, the user will request that their document "Court Summons" be served in Lyon (69), Marseille (13), and Toulouse (31). Three different bailiffs will be contacted. When the three bailiffs have delivered the summons to their recipient, the document will be marked as complete..`,
     },
     {
       role: "user",
-      content: `Bonjour, je souhaiterais créer un acte sur iSignif, voici le contenu de mon document qui contient les information de mon acte et des significations (il peut il y en avoir qu'une seule). Peux-tu t'occupper d'extraire les information afin que je puisse créer l'acte moi même ?\n\n\n${ocrFileContent}`,
+      content: `Hello, I would like to create a document on iSignif. Here is the content of my document, which contains the information for my document and the notifications (there can only be one). Can you extract the information so I can create the document myself? \n\n\n${ocrFileContent}`,
     },
   ],
   responseFormat: ResponseFormat,
@@ -200,25 +198,25 @@ console.log(data);
 }
 ```
 
-Oura! Je tiens à préciser que je n'ai pas beaucoup d'expérience en ingénierie de _prompt_, mais le résultat est très satisfaisant.
+Oh my! I should point out that I don't have much experience in _prompt_ engineering, but the result is very satisfying.
 
-À présent que nous avons les données, il suffit d'exécuter les actions sur [l'API d'iSignif][isignifSwagger]. Je ne vais pas détailler cette partie ici, car elle est sans importance pour le sujet de cet article, mais vous pouvez consulter le code [dans le repository du projet](https://github.com/isignif/pdf-ai/blob/16d5d8bdcdb386a7a91032a990d018aaba7c5cd3/src/ocr.ts#L93-L129).
+Now that we have the data, we just need to run the actions on the [iSignif API][isignifSwagger]. I won't go into detail about this part here, as it's irrelevant to the topic of this article, but you can view the code [in the project repository](https://github.com/isignif/pdf-ai/blob/16d5d8bdcdb386a7a91032a990d018aaba7c5cd3/src/ocr.ts#L93-L129).
 
-## Mise en place d'une HTTP API
+## Setting up an HTTP API
 
-Tout fonctionne correctement, le _Proof of Concept_ est prometteur, il ne reste plus qu'à le mettre en place sur mon projet en ... [Ruby on Rails](/fr/blog/still-love-rails)!
+Everything is working correctly, the _Proof of Concept_ is promising, all that's left is to implement it on my project in... [Ruby on Rails](/fr/blog/still-love-rails)!
 
-OK, je viens de faire mon _POC_ en Node.js, Mistral ne propose pas de SDK pour Ruby, et je ne veux pas me compliquer la vie.
+OK, I've just completed my _POC_ in Node.js. Mistral doesn't offer an SDK for Ruby, and I don't want to complicate things.
 
-A mon sens, il est tout à fait possible de mixer les technologies grâce à des petits micro-services. Dans certains cas, cela peut compliquer l'infrastructure, mais j'ai le sentiment que l'exercice s'y prête plutôt bien ici.
+In my opinion, it's entirely possible to mix technologies using small microservices. In some cases, this can complicate the infrastructure, but I feel like it's a pretty good fit here.
 
-Je pensais à mettre en place une route sur mon API qui prend en paramètre:
+I was thinking of setting up a route on my API that takes as parameters:
 
-- `file`, le fichier de l'utilisateur
-- `iSignifApiUrl`, l'URL de l'API à appeler
-- `iSignifToken`, le jeton JWT qui permet de s'authentifier à iSignif
+- `file`, the file of the
+- `iSignifApiUrl`, the URL of the API to call
+- `iSignifToken`, the JWT token used to authenticate with iSignif
 
-J'ai donc factorisé mon _POC_ afin d'avoir une méthode plus générique
+So I refactored my _POC_ to have a more generic method
 
 ```ts
 // ocr.ts
@@ -245,7 +243,7 @@ export function useIsignifOCR(
 }
 ```
 
-Je me suis dit que j'allais mettre en place un petit serveur avec [Hono](https://hono.dev/).
+I told myself that I would set up a small server with [Hono](https://hono.dev/).
 
 ```ts
 import { serve } from "@hono/node-server";
@@ -289,7 +287,7 @@ serve({ fetch: app.fetch, port: 4000 }, (info) => {
 });
 ```
 
-Le principe est très basique, mais surtout, il peut être connecté à un simple formulaire HTML. La méthode `c.redirect()` permettra de rediriger l'utilisateur sur l'URL de l'acte une fois qu'il a été créé.
+The principle is very basic, but more importantly, it can be connected to a simple HTML form. The `c.redirect()` method will redirect the user to the action URL once it has been created.
 
 ```html
 <form
@@ -308,19 +306,19 @@ Le principe est très basique, mais surtout, il peut être connecté à un simpl
 </form>
 ```
 
-...et voici le résultat en production !
+...and here is the result in production!
 
-![Capture d'écran de la création d'un acte avec l'IA](../../../assets/img/blog/isignif-pdf-ai.gif)
+![Screenshot of creating a document with AI](../../../assets/img/blog/isignif-pdf-ai.gif)
 
 ## Conclusion
 
-Selon moi, l'IA ne doit pas complètement remplacer notre façon d'interagir avec un service, mais plutôt la faciliter. Cet exemple de fonctionnalité le montre très bien : l'IA ne remplace pas le formulaire, elle aide l'utilisateur à le remplir.
+In my opinion, AI shouldn't completely replace the way we interact with a service, but rather facilitate it. This example demonstrates this very well: AI doesn't replace the form; it helps the user fill it out.
 
-Cela me permet aussi de continuer de proposer l'ancienne expérience à l'utilisateur, et donc de lui laisser le choix. C'est très important dans le cas où l'utilisateur ne veut pas utiliser cette fonctionnalité.
+This also allows me to continue offering the old experience to the user, and therefore give them a choice. This is very important in cases where the user doesn't want to use this feature.
 
-Je suis très content du résultat et je pense le pousser encore plus loin.
+I'm very happy with the result and I plan to take it even further.
 
-Si vous êtes curieux, vous pouvez jeter un coup d'œil au projet : <https://github.com/isignif/pdf-ai>.
+If you're curious, you can take a look at the project: <https://github.com/isignif/pdf-ai>.
 
 [mistral]: https://mistral.ai
 [mistralNpm]: https://www.npmjs.com/package/@mistralai/mistralai
