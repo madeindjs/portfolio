@@ -1,13 +1,13 @@
 ---
-title: Adding little touches of AI to your projects
-description: I used Mistral with its OCR and structured output functionality to pre-fill a form on my SAAS.
+title: Ajouter des petites touches d'IA dans vos projets
+description: J’ai utilisé Mistral avec sa fonctionnalité d’OCR et de structured output afin de préremplir un formulaire sur mon SAAS.
 tags:
   - ai
   - node.js
   - devops
-lang: en
+lang: fr
 translations:
-  fr: use-ai-to-automatise-form
+  en: use-ai-to-automatise-form
 date: 2025-05-06T01:00:00
 ---
 
