@@ -56,4 +56,10 @@ const { title, description, date, tags } = post.data;
     padding-left: var(--spacing);
     padding-right: var(--spacing);
   }
+
+@media (max-width: 800px) {
+  .blog-post__content {
+    grid-template-columns: auto 1fr auto;
+  }
+}
 </style>
