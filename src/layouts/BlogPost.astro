@@ -37,6 +37,9 @@ const { title, description, date, tags } = post.data;
     padding-top: var(--spacing);
     padding-bottom: var(--spacing);
     grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: subgrid;
   }
 
   .blog-post__content > pre > code {
@@ -44,6 +47,7 @@ const { title, description, date, tags } = post.data;
     width: var(--size-read);
     margin-left: auto;
     margin-right: auto;
+    grid-column: 2;
   }
 </style>
 
