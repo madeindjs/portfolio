@@ -7,8 +7,8 @@ export async function getStaticPaths() {
   const pages = await getCollection("blog");
 
   return pages
-    .filter((page) => page.slug.startsWith("en/"))
-    .map((page) => getPostSlug(page.slug))
+    .filter((page) => page.id.startsWith("en/"))
+    .map((page) => getPostSlug(page.id))
     .filter(Boolean)
     .map((slug) => ({ params: { slug } }));
 }

@@ -13,7 +13,7 @@ export async function getStaticPaths() {
   const pages = await getCollection("blog");
 
   const langTag = pages.reduce<Set<[Langages, String]>>((acc, page) => {
-    page.data.tags.forEach((tag) => acc.add([getPostLanguage(page.slug), tag]));
+    page.data.tags.forEach((tag) => acc.add([getPostLanguage(page.id), tag]));
     return acc;
   }, new Set());
 
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
     },
     props: {
       posts: pages
-        .filter((p) => p.slug.startsWith(`${lang}/`) && p.data.tags.includes(tag as any))
+        .filter((p) => p.id.startsWith(`${lang}/`) && p.data.tags.includes(tag as any))
         .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
     },
   }));

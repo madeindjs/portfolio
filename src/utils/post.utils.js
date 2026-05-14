@@ -51,6 +51,6 @@ export function getSimilarPosts(post, allPosts) {
   }
 
   return allPosts
-    .filter((p) => p.slug !== post.slug && getCommonTags(post, p).length)
+    .filter((p) => p.id !== post.id && getCommonTags(post, p).length)
     .sort((p) => getCommonTags(post, p).length);
 }

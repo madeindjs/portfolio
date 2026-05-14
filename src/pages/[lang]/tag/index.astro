@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const pages = await getCollection("blog");
 
   const tags = pages.reduce<Set<[Langages, String]>>((acc, page) => {
-    page.data.tags.forEach((tag) => acc.add([getPostLanguage(page.slug), tag]));
+    page.data.tags.forEach((tag) => acc.add([getPostLanguage(page.id), tag]));
     return acc;
   }, new Set());
 

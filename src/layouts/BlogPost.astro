@@ -13,7 +13,7 @@ const { post } = Astro.props;
 const { title, description, date, tags } = post.data;
 ---
 
-<Layout title={title} description={description ?? ""} lang={getPostLanguage(post.slug)}>
+<Layout title={title} description={description ?? ""} lang={getPostLanguage(post.id)}>
   <article class="blog-post">
     <PageHeader>
       <h1>{title}</h1>

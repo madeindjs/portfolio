@@ -14,9 +14,9 @@ export async function getStaticPaths() {
   const pages = await getCollection("blog");
 
   const paths = pages.map((page) => {
-    const [lang] = page.slug.split("/");
+    const [lang] = page.id.split("/");
 
-    const postsInSameLang = pages.filter((p) => getPostLanguage(p.slug) === lang);
+    const postsInSameLang = pages.filter((p) => getPostLanguage(p.id) === lang);
 
     let shouldPromoteApiOnRails = false;
     let shouldPromoteRestApiTs = false;
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
     }
 
     return {
-      params: { lang, slug: getPostSlug(page.slug) },
+      params: { lang, slug: getPostSlug(page.id) },
       props: {
         post: page,
         similarPosts: getSimilarPosts(page, postsInSameLang).slice(0, 2),
@@ -45,12 +45,14 @@ export async function getStaticPaths() {
 }
 type Props = { post: Post; similarPosts: Post[]; shouldPromoteApiOnRails: boolean; shouldPromoteRestApiTs: boolean };
 
+import { render } from "astro:content";
+
 const { post, similarPosts, shouldPromoteApiOnRails, shouldPromoteRestApiTs } = Astro.props;
 
 const { translations } = post.data;
 const hasNotices = translations?.fr || post.data.translations?.en || shouldPromoteApiOnRails || shouldPromoteRestApiTs;
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const lang = (Astro.params.lang ?? defaultLang) as Langages;
 const t = useTranslationsObject(lang, {

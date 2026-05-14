@@ -20,7 +20,7 @@ export async function getStaticPaths() {
     },
     props: {
       posts: pages
-        .filter((p) => p.slug.startsWith(`${lang}/`))
+        .filter((p) => p.id.startsWith(`${lang}/`))
         .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
     },
   }));
