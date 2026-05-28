@@ -1,6 +1,6 @@
 # Portfolio
 
-My portfolio build [Jekyll](https://jekyllrb.com/). See me in action at <https://rsseau.fr>.
+My portfolio built with [Astro](https://astro.build/). See me in action at <https://rsseau.fr>.
 
 ![screenshot](./public/screenshot.png)
 
