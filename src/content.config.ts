@@ -24,6 +24,8 @@ const blog = defineCollection({
         en: z.string().optional(),
       })
       .optional(),
+    // Set to true if the post was written with the help of an LLM
+    ai: z.boolean().optional(),
   }),
 });
 

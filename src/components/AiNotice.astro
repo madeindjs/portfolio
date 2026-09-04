@@ -1,0 +1,25 @@
+---
+import Card from "./Card.astro";
+
+type Props = { lang: string };
+
+const { lang } = Astro.props;
+
+const flag = "🤖";
+const title = lang === "en" ? "This post was written with a little help from AI" : "Cet article a été écrit avec un peu d'aide de l'IA";
+const description =
+  lang === "en"
+    ? "An LLM helped me write this article: drafting, translating and proofreading. The ideas, the project and the code are mine — so no, it is not 100% AI slop."
+    : "Un LLM m'a aidé à écrire cet article : rédaction, traduction et relecture. Les idées, le projet et le code sont les miens — donc non, ce n'est pas du 100% AI slop.";
+---
+
+<Card>
+  <p slot="title" class="ai-notice__title">{flag}&nbsp;{title}</p>
+  <p slot="content">{description}</p>
+</Card>
+
+<style>
+  .ai-notice__title {
+    margin: 0;
+  }
+</style>
