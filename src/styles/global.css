@@ -17,6 +17,7 @@
 
   --spacing: var(--font-size-base);
   --spacing-0_5: calc(var(--spacing) / 2);
+  --spacing-0_25: calc(var(--spacing) / 4);
   --spacing-2: calc(var(--spacing) * 2);
 }
 
@@ -88,9 +89,11 @@ p {
 }
 
 a {
-  text-decoration: none;
   font-weight: bold;
   color: var(--colors-primary);
+}
+a code {
+  color: var(--colors-primary) !important;
 }
 
 h1,
@@ -123,6 +126,24 @@ img {
   max-width: 100%;
   width: auto;
   height: auto;
+}
+
+table {
+  border: 1px dashed var(--colors-grey);
+  border-collapse: collapse;
+}
+table th {
+  text-align: left;
+  color: var(--colors-secondary);
+}
+table tr td,
+table tr th {
+  border: 1px dashed var(--colors-grey);
+  padding: var(--spacing-0_25);
+}
+
+p code {
+  color: var(--colors-secondary);
 }
 
 /* scrollbar */
@@ -165,4 +186,3 @@ img {
   /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
-
