@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import AiNotice from "../../../components/AiNotice.astro";
 import ArticleExistsInOtherLang from "../../../components/ArticleExistsInOtherLang.astro";
 import PostCards from "../../../components/PostCards.astro";
 import PromoteBookApiOnRails from "../../../components/PromoteBookApiOnRails.astro";
@@ -73,6 +74,7 @@ const t = useTranslationsObject(lang, {
     )
   }
   <Content />
+  {post.data.ai && <AiNotice lang={lang} />}
   {
     similarPosts.length > 0 && (
       <>
